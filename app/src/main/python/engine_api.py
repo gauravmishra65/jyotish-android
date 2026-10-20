@@ -32,6 +32,10 @@ def _chart_args(r):
             "--horizon-years", str(r.get("horizon_years", 0))]
     if r.get("now"):
         args += ["--now", r["now"]]
+    if r.get("ayanamsa"):
+        args += ["--ayanamsa", r["ayanamsa"]]
+    if r.get("node"):
+        args += ["--node", r["node"]]
     if r.get("place"):
         args += ["--place", r["place"]]
     if r.get("name_correction"):
@@ -59,6 +63,11 @@ def find_muhurta(request_json, *chart_jsons):
     res = muhurta.find(r["event"], r["from"], r["to"], r["lat"], r["lon"], r["tz"], people,
                        r.get("step", 10), r.get("top", 12), r.get("weekday_rule", "soft"))
     return json.dumps(res, ensure_ascii=False)
+
+
+def engine_version():
+    p = os.path.join(HERE, "ENGINE_VERSION.txt")
+    return open(p).read().strip() if os.path.exists(p) else "unknown"
 
 
 def names(name, dob, gender=None):

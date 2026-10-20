@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jyotish</string>
+    <string name="home_title">Jyotish</string>
+
+    <!-- Welcome -->
+    <string name="welcome_title">Your chart, worked out with care</string>
+    <string name="welcome_body">Kundali, matching, muhurta and numerology from the same tested calculations as the full reading. Birth details stay on this phone.</string>
+    <string name="welcome_language">Choose your language / भाषा चुनें</string>
+    <string name="welcome_continue">Add the first birth chart</string>
+    <string name="welcome_disclaimer">For reflection and guidance. Not medical, legal or financial advice.</string>
+
+    <!-- Home -->
+    <string name="profiles">Profiles</string>
+    <string name="add_profile">+ Add profile</string>
+    <string name="no_profiles">No birth charts yet. Add one to begin.</string>
+    <string name="now_running">%1$s, right now</string>
+    <string name="dasha_line">%1$s mahadasha, %2$s antardasha</string>
+    <string name="dasha_detail">%1$s period runs to %2$s%3$s. %4$s mahadasha to %5$s.</string>
+    <string name="dasha_then">, then %1$s</string>
+    <string name="calculating">Calculating…</string>
+    <string name="chart_failed">Could not calculate: %1$s</string>
+    <string name="lagna_moon">%1$s lagna, Moon in %2$s</string>
+    <string name="time_label">Time: %1$s</string>
+    <string name="feature_kundali">Kundali</string>
+    <string name="feature_kundali_sub">Chart, dashas, yogas</string>
+    <string name="feature_milan">Kundali Milan</string>
+    <string name="feature_milan_sub">Match two charts</string>
+    <string name="feature_muhurta">Muhurta</string>
+    <string name="feature_muhurta_sub">Find a good time</string>
+    <string name="feature_numerology">Numerology</string>
+    <string name="feature_numerology_sub">Numbers and Loshu grid</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_kundali">Kundali</string>
+    <string name="nav_milan">Milan</string>
+    <string name="nav_muhurta">Muhurta</string>
+    <string name="nav_numbers">Numbers</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="delete_profile_title">Delete %1$s?</string>
+    <string name="delete_profile_body">The birth details and saved chart are removed from this phone.</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="profile_actions">Actions for %1$s</string>
+
+    <!-- Add profile -->
+    <string name="new_chart">New birth chart</string>
+    <string name="edit_chart">Edit birth chart</string>
+    <string name="name">Name</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="date_hint">DD-MM-YYYY</string>
+    <string name="pick_date">Choose date</string>
+    <string name="time_of_birth">Time</string>
+    <string name="time_hint">HH:MM (24-hour)</string>
+    <string name="pick_time">Choose time</string>
+    <string name="how_sure">How sure is the time?</string>
+    <string name="conf_certificate">Certificate</string>
+    <string name="conf_reliable">Reliable</string>
+    <string name="conf_approximate">Approximate</string>
+    <string name="conf_unknown">Not known</string>
+    <string name="birthplace">Birthplace</string>
+    <string name="place_hint">Type a town or city</string>
+    <string name="place_help">Works offline. Small village? Pick the nearest town or enter latitude and longitude.</string>
+    <string name="place_loading">Loading places…</string>
+    <string name="place_none">No match. Try another spelling, or enter coordinates.</string>
+    <string name="change_place">Change</string>
+    <string name="enter_coordinates">Enter latitude and longitude instead</string>
+    <string name="search_places">Search places instead</string>
+    <string name="latitude">Latitude (north +)</string>
+    <string name="longitude">Longitude (east +)</string>
+    <string name="tz_from_nearest">Time zone %1$s, from %2$s (%3$d km away)</string>
+    <string name="save_show">Save chart</string>
+    <string name="err_name">Enter a name</string>
+    <string name="err_date">Enter a real date as DD-MM-YYYY, between 1800 and today</string>
+    <string name="err_time">Enter the time as HH:MM, for example 14:35</string>
+    <string name="err_place">Choose a birthplace</string>
+    <string name="err_coords">Latitude -90 to 90, longitude -180 to 180</string>
+
+    <!-- Settings -->
+    <string name="display">Display</string>
+    <string name="language">Language</string>
+    <string name="chart_style">Chart style</string>
+    <string name="north_indian">North Indian</string>
+    <string name="south_indian">South Indian</string>
+    <string name="calculation">Calculation</string>
+    <string name="ayanamsa">Ayanamsa</string>
+    <string name="nodes">Rahu and Ketu</string>
+    <string name="mean_node">Mean node</string>
+    <string name="true_node">True node</string>
+    <string name="weekday_hard">Reject Tuesday and Saturday for marriage</string>
+    <string name="weekday_hard_sub">Off: they are shown with a caution</string>
+    <string name="your_data">Your data</string>
+    <string name="data_note">Birth details are stored only on this phone. Nothing is sent anywhere.</string>
+    <string name="about">About</string>
+    <string name="engine_version">Engine: %1$s</string>
+    <string name="engine_starting">Engine: starting…</string>
+    <string name="licences">Licences</string>
+    <string name="licences_body">Planetary positions: Swiss Ephemeris by Astrodienst AG. Place names and time zones: GeoNames (CC BY 4.0), packaged by geonamescache (MIT). Python on Android: Chaquopy (MIT).</string>
+
+    <!-- Placeholders for later milestones -->
+    <string name="coming_title">%1$s</string>
+    <string name="coming_body">This screen arrives in a later milestone. The calculations already run on this phone:</string>
+    <string name="pick_profile_first">Add a birth chart first.</string>
+    <string name="speed_test">Run speed test (5 charts, matching, muhurta)</string>
+    <string name="speed_running">Running… this can take a minute</string>
+</resources>

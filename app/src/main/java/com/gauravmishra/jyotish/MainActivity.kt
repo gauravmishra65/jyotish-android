@@ -1,96 +1,105 @@
 package com.gauravmishra.jyotish
 
-import android.app.Activity
-import android.graphics.Typeface
+import android.content.res.Configuration
 import android.os.Bundle
-import android.os.SystemClock
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
-import com.chaquo.python.Python
-import org.json.JSONObject
-import kotlin.concurrent.thread
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.gauravmishra.jyotish.engine.Engine
+import com.gauravmishra.jyotish.ui.AddProfileScreen
+import com.gauravmishra.jyotish.ui.Feature
+import com.gauravmishra.jyotish.ui.FeatureScreen
+import com.gauravmishra.jyotish.ui.HomeScreen
+import com.gauravmishra.jyotish.ui.JyotishTheme
+import com.gauravmishra.jyotish.ui.Routes
+import com.gauravmishra.jyotish.ui.SettingsScreen
+import com.gauravmishra.jyotish.ui.WelcomeScreen
+import java.util.Locale
 
-/**
- * Spike screen: proves the Python engine runs on the phone and shows how long each step takes.
- * The real interface (Jetpack Compose, the designed screens) starts in milestone M1.
- */
-class MainActivity : Activity() {
-    private lateinit var out: TextView
-    private val buttons = mutableListOf<Button>()
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pad = (16 * resources.displayMetrics.density).toInt()
-        val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad * 2, pad, pad) }
-        col.addView(TextView(this).apply { text = "Jyotish engine spike"; textSize = 22f; setTypeface(typeface, Typeface.BOLD) })
-        col.addView(TextView(this).apply { text = "Python started in ${JyotishApp.pythonStartMs} ms"; textSize = 15f })
-        col.addView(button("Compute sample chart") { sampleChart() })
-        col.addView(button("Run timing suite (5 charts, match, muhurta, names)") { timingSuite() })
-        out = TextView(this).apply { typeface = Typeface.MONOSPACE; textSize = 13f; setTextIsSelectable(true) }
-        col.addView(out)
-        setContentView(ScrollView(this).apply { addView(col, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)) })
+        enableEdgeToEdge()
+        setContent { App() }
     }
+}
 
-    private fun button(label: String, action: () -> Unit) = Button(this).apply {
-        text = label
-        minHeight = (48 * resources.displayMetrics.density).toInt()
-        setOnClickListener { action() }
-        buttons += this
-    }
+/** Applies the chosen language to everything below it without restarting the activity. */
+@Composable
+private fun Localized(lang: String, content: @Composable () -> Unit) {
+    val base = LocalContext.current
+    val config = remember(lang) { Configuration(base.resources.configuration).apply { setLocale(Locale.forLanguageTag(lang)) } }
+    val ctx = remember(lang) { base.createConfigurationContext(config) }
+    CompositionLocalProvider(LocalContext provides ctx, LocalConfiguration provides config) { content() }
+}
 
-    private fun busy(on: Boolean, msg: String = "") = runOnUiThread {
-        buttons.forEach { it.isEnabled = !on }
-        if (on) out.text = msg
-    }
-
-    private fun sampleChart() {
-        busy(true, "Computing...")
-        thread {
-            val text = try {
-                val t0 = SystemClock.elapsedRealtime()
-                val api = Python.getInstance().getModule("engine_api")
-                val tImport = SystemClock.elapsedRealtime() - t0
-                val req = JSONObject(mapOf("name" to "Ravi Shankar Tiwari", "date" to "1988-07-14", "time" to "14:35",
-                    "lat" to 25.3176, "lon" to 82.9739, "tz" to "Asia/Kolkata", "gender" to "M")).toString()
-                val t1 = SystemClock.elapsedRealtime()
-                val chart = JSONObject(api.callAttr("chart", req).toString())
-                val tChart = SystemClock.elapsedRealtime() - t1
-                val v = chart.getJSONObject("vedic")
-                val lagna = v.getJSONObject("lagna")
-                val sb = StringBuilder("import ${tImport} ms, chart ${tChart} ms\n\n")
-                sb.append("Lagna ${lagna.getString("sign")} ${lagna.getString("dms")}\n")
-                val pl = v.getJSONObject("planets")
-                for (p in pl.keys()) {
-                    val x = pl.getJSONObject(p)
-                    sb.append("%-8s %-12s %-12s %s %d\n".format(p, x.getString("sign"), x.getString("dms"), x.getString("nakshatra"), x.getInt("pada")))
+@Composable
+fun App(vm: AppViewModel = viewModel()) {
+    val chosen by vm.language.collectAsStateWithLifecycle()
+    var welcomeLang by remember { mutableStateOf(chosen ?: if (Locale.getDefault().language == "hi") "hi" else "en") }
+    val lang = chosen ?: welcomeLang
+    Localized(lang) {
+        JyotishTheme {
+            val nav = rememberNavController()
+            val profiles by vm.profiles.collectAsStateWithLifecycle()
+            val charts by vm.charts.collectAsStateWithLifecycle()
+            NavHost(nav, startDestination = if (chosen == null) Routes.WELCOME else Routes.HOME) {
+                composable(Routes.WELCOME) {
+                    WelcomeScreen(lang = welcomeLang, onLanguage = { welcomeLang = it }, onContinue = {
+                        vm.setLanguage(welcomeLang)
+                        nav.navigate(Routes.add()) { popUpTo(Routes.WELCOME) { inclusive = true } }
+                    })
                 }
-                val cur = v.getJSONObject("dashas").getJSONObject("vimshottari").getJSONObject("current")
-                sb.append("\nDasha ${cur.getJSONObject("mahadasha").getString("lord")} / ${cur.getJSONObject("antardasha").getString("lord")}\n")
-                sb.append("Yogas found: ${v.getJSONObject("yoga_library").getJSONArray("found").length()}\n")
-                sb.toString()
-            } catch (e: Throwable) {
-                "Failed: $e"
+                composable(Routes.HOME) {
+                    HomeScreen(
+                        profiles = profiles, charts = charts,
+                        onAdd = { nav.navigate(Routes.add()) },
+                        onEdit = { nav.navigate(Routes.add(it.id)) },
+                        onDelete = { vm.delete(it.id) },
+                        onSettings = { nav.navigate(Routes.SETTINGS) },
+                        onFeature = { nav.navigate(Routes.feature(it.route)) },
+                    )
+                }
+                composable(Routes.ADD, arguments = listOf(navArgument("id") { type = NavType.StringType; nullable = true })) { entry ->
+                    val id = entry.arguments?.getString("id")
+                    AddProfileScreen(
+                        existing = profiles.firstOrNull { it.id == id },
+                        loadPlaces = { vm.places() },
+                        onBack = { nav.goHome() },
+                        onSave = { vm.addOrUpdate(it); nav.goHome() },
+                    )
+                }
+                composable(Routes.SETTINGS) {
+                    var version by remember { mutableStateOf<String?>(null) }
+                    LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
+                    SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() },
+                        onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.FEATURE) { entry ->
+                    val f = Feature.entries.first { it.route == entry.arguments?.getString("name") }
+                    val p = profiles.firstOrNull()
+                    FeatureScreen(f, p, p?.let { charts[it.id] }, onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.feature(it.route)) { popUpTo(Routes.HOME) } })
+                }
             }
-            runOnUiThread { out.text = text }
-            busy(false)
-        }
-    }
-
-    private fun timingSuite() {
-        busy(true, "Running the suite (this takes a while)...")
-        thread {
-            val text = try {
-                val api = Python.getInstance().getModule("engine_api")
-                JSONObject(api.callAttr("timings").toString()).toString(2)
-            } catch (e: Throwable) {
-                "Failed: $e"
-            }
-            runOnUiThread { out.text = "Seconds per step\n$text" }
-            busy(false)
         }
     }
 }
+
+private fun NavHostController.goHome() = navigate(Routes.HOME) { popUpTo(graph.id) { inclusive = true } }

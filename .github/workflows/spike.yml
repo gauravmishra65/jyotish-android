@@ -1,4 +1,4 @@
-name: spike
+name: build-and-test
 
 on:
   push:
@@ -77,7 +77,7 @@ jobs:
       - name: Build debug APK and test APK
         run: |
           set -o pipefail
-          gradle :app:assembleDebug :app:assembleDebugAndroidTest --stacktrace 2>&1 | tee build.log || {
+          gradle :app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest --stacktrace 2>&1 | tee build.log || {
             # Turn the error section into annotations so it can be read through the API.
             python3 tools/ci_annotate.py build.log
             exit 1

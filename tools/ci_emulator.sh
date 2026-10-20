@@ -30,7 +30,8 @@ print("::error title=Device error log::" + body.replace("%", "%25").replace("\n"
 EOF
 fi
 
-# Cold start of the app (Python start happens in Application.onCreate, so it is included).
+# Cold start of the app. The test run uninstalls it, so install the debug APK again first.
+adb install -r app/build/outputs/apk/debug/app-debug.apk > /dev/null || true
 for i in 1 2; do
   adb shell am force-stop com.gauravmishra.jyotish || true
   sleep 2

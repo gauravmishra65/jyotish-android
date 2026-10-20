@@ -2,25 +2,23 @@
 
 Android app built on the astrology-numerology-reading engine. This repository is at milestone **M0, the spike**: proving that the tested Python engine runs on a phone before any real interface is built. The plan and screen designs are in the "Astrology Android App: Plan" doc and the "Astrology App: v1 Screens" design.
 
-## What the spike proves
+## Status
 
-| Question | How it is answered |
-|---|---|
-| Does pyswisseph build for Android? | CI builds it with cibuildwheel 4.3.1 for arm64 (phones) and x86_64 (emulator), and runs a Swiss Ephemeris smoke test on the emulator |
-| Does the engine give the same numbers on a phone? | `SpikeTest` runs 5 charts in 5 time zones, a Kundali Milan, a 3-month muhurta search and name options, and must match `snapshot.json` (made on the desktop) exactly |
-| Is it fast enough? | The test and the app's "Run timing suite" button time every step; CI also records the app's cold start |
-| How big is the app? | CI writes a size breakdown of the APK to the run summary |
+- **M0 spike: done.** The tested Python engine runs on Android through Chaquopy and reproduces the desktop results exactly.
+- **M1 foundation: in progress.** Jetpack Compose app: Welcome with English or Hindi, Home with saved profiles and the current dasha, Add profile with offline place search (69,000 GeoNames places, searchable in Hindi for India and Nepal) or typed coordinates, Settings (language, chart style, ayanamsa, nodes, muhurta weekday rule, speed test). The Kundali, Milan, Muhurta and Numerology screens are placeholders until M2 to M5.
 
-Each push runs `.github/workflows/spike.yml`. Results are in the run's summary page; the debug APK is attached to the run as an artifact.
+Every push runs `.github/workflows/spike.yml`: it builds pyswisseph for Android (cached), runs the unit tests, builds the app, and runs the instrumented tests on an Android 14 emulator (the engine snapshot test and a first-launch-to-chart flow in English and Hindi). Results, timings, APK size and cold start are written to the run summary and as annotations; the debug APK is attached to the run.
 
 ## Layout
 
 ```
 app/src/main/python/        engine_api.py (the app's bridge) + the engine, copied from the skill
-app/src/main/java/...       JyotishApp (starts Python, timed) and the spike screen
+app/src/main/java/...       engine/ (Python bridge), data/ (profiles, places, settings), ui/ (Compose screens)
+app/src/main/assets/        places.tsv, the offline place list (tools/make_places.py)
 app/src/androidTest/        SpikeTest and the desktop snapshot it compares against
 tools/sync_engine.py        copy a new engine version from the skill folder
 tools/make_snapshot.py      regenerate the snapshot after a sync
+tools/make_places.py        rebuild the place list from GeoNames (pip install geonamescache==3.0.2)
 tools/ci_emulator.sh        what CI runs on the emulator
 ```
 
