@@ -52,6 +52,10 @@ object Engine {
     /** Chart JSON for a request (see engine_api.chart). */
     suspend fun chart(request: JSONObject): String = call { it.callAttr("chart", request.toString()).toString() }
 
+    /** Kundali Milan for two chart JSONs; [bride] is "A" or "B" (directional kootas depend on it). */
+    suspend fun match(chartA: String, chartB: String, bride: String = "B"): String =
+        call { it.callAttr("match", chartA, chartB, bride).toString() }
+
     /** Seconds per step of the fixed timing suite (5 charts, a match, a 3-month muhurta, names). */
     suspend fun timings(): String = call { it.callAttr("timings").toString() }
 

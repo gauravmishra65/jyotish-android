@@ -29,6 +29,7 @@ import com.gauravmishra.jyotish.ui.FeatureScreen
 import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
+import com.gauravmishra.jyotish.ui.MilanScreen
 import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
@@ -103,6 +104,18 @@ fun App(vm: AppViewModel = viewModel()) {
                     KundaliScreen(
                         profiles = profiles, profile = p, chart = p?.let { charts[it.id] }, style = style,
                         onSelect = { vm.select(it.id) }, onStyle = { vm.setChartStyle(it) },
+                        onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
+                    )
+                }
+                composable(Routes.MILAN) {
+                    val pairState by vm.pair.collectAsStateWithLifecycle()
+                    val match by vm.match.collectAsStateWithLifecycle()
+                    val (g, b) = remember(pairState, profiles) { vm.defaultPair(profiles) }
+                    MilanScreen(
+                        profiles = profiles, groom = profiles.firstOrNull { it.id == g }, bride = profiles.firstOrNull { it.id == b },
+                        charts = charts, match = match,
+                        onPair = { gid, bid -> vm.setPair(gid, bid) }, onRequest = { gid, bid -> vm.requestMatch(gid, bid) },
+                        onAdd = { nav.navigate(Routes.add()) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }

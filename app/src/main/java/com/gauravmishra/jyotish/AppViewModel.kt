@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.gauravmishra.jyotish.data.AppSettings
 import com.gauravmishra.jyotish.data.ChartModel
+import com.gauravmishra.jyotish.data.MatchModel
 import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.ProfileStore
@@ -32,6 +33,13 @@ data class ChartSummary(
     val warnings: List<String>,
 )
 
+sealed interface MatchState {
+    data object Waiting : MatchState          // one of the two charts is still being calculated
+    data object Calculating : MatchState
+    data class Ready(val model: MatchModel) : MatchState
+    data class Failed(val message: String) : MatchState
+}
+
 sealed interface ChartState {
     data object Calculating : ChartState
     data class Ready(val summary: ChartSummary, val model: ChartModel, val json: String) : ChartState
@@ -56,6 +64,43 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     private val _chartStyle = MutableStateFlow(settings.chartStyle)
     val chartStyle: StateFlow<String> = _chartStyle.asStateFlow()
     fun setChartStyle(style: String) { settings.chartStyle = style; _chartStyle.value = style }
+
+    private val _pair = MutableStateFlow<Pair<String?, String?>>(null to null)
+    /** Groom and bride for Kundali Milan; by default the first man and the first woman among the profiles. */
+    val pair: StateFlow<Pair<String?, String?>> = _pair.asStateFlow()
+    fun setPair(groom: String?, bride: String?) { _pair.value = groom to bride }
+
+    fun defaultPair(list: List<Profile>): Pair<String?, String?> {
+        val (g, b) = _pair.value
+        val groom = g?.takeIf { id -> list.any { it.id == id } } ?: list.firstOrNull { it.gender == "M" }?.id ?: list.getOrNull(0)?.id
+        val bride = b?.takeIf { id -> list.any { it.id == id } && id != groom }
+            ?: list.firstOrNull { it.gender == "F" && it.id != groom }?.id ?: list.firstOrNull { it.id != groom }?.id
+        return groom to bride
+    }
+
+    private val _match = MutableStateFlow<MatchState>(MatchState.Waiting)
+    val match: StateFlow<MatchState> = _match.asStateFlow()
+    private var matchKey: String? = null
+
+    /** Match two profiles once both charts are ready; repeated calls with the same inputs reuse the result. */
+    fun requestMatch(groomId: String, brideId: String) {
+        val a = _charts.value[groomId] as? ChartState.Ready
+        val b = _charts.value[brideId] as? ChartState.Ready
+        if (a == null || b == null) { _match.value = MatchState.Waiting; matchKey = null; return }
+        val key = "$groomId|$brideId|${a.json.hashCode()}|${b.json.hashCode()}"
+        if (key == matchKey && _match.value !is MatchState.Failed) return
+        matchKey = key
+        _match.value = MatchState.Calculating
+        viewModelScope.launch {
+            val state = try {
+                val json = Engine.match(a.json, b.json, "B")
+                MatchState.Ready(withContext(Dispatchers.Default) { MatchModel.parse(json) })
+            } catch (e: Throwable) {
+                MatchState.Failed(e.message ?: e.toString())
+            }
+            if (matchKey == key) _match.value = state
+        }
+    }
 
     private val _language = MutableStateFlow(settings.language)
     val language: StateFlow<String?> = _language.asStateFlow()

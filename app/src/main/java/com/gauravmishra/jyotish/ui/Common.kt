@@ -36,11 +36,16 @@ object Routes {
     fun add(id: String? = null) = if (id == null) "add" else "add?id=$id"
     const val SETTINGS = "settings"
     const val KUNDALI = "kundali"
+    const val MILAN = "milan"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 
     /** Kundali has its own screen from M2; the other features are still placeholders. */
-    fun of(f: Feature) = if (f == Feature.KUNDALI) KUNDALI else feature(f.route)
+    fun of(f: Feature) = when (f) {
+        Feature.KUNDALI -> KUNDALI
+        Feature.MILAN -> MILAN
+        else -> feature(f.route)
+    }
 }
 
 enum class Feature(val route: String, val label: Int, val title: Int, val icon: ImageVector) {
