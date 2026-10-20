@@ -136,13 +136,13 @@
     <string name="key_planets">Key planets</string>
     <string name="note_label">Note</string>
     <string name="strength_label">Strength</string>
-    <string name="strength_heuristic">The grade is a heuristic from the key planets' Shadbala and placement.</string>
-    <string name="no_yogas">None of the library's yogas is present.</string>
+    <string name="strength_heuristic">The grade is a heuristic from the key planets\' Shadbala and placement.</string>
+    <string name="no_yogas">None of the library\'s yogas is present.</string>
     <string name="rare_first">Rarer yogas are listed first: a yoga found in most charts says little about one person.</string>
     <string name="shadbala_title">Shadbala (six-fold strength)</string>
     <string name="shadbala_line">%1$s of %2$s rupas needed</string>
     <string name="sav_title">Ashtakavarga points by house</string>
-    <string name="sav_note">28 is average; more points support that house's matters.</string>
+    <string name="sav_note">28 is average; more points support that house\'s matters.</string>
     <string name="sign_label">Sign</string>
     <string name="nakshatra_label">Nakshatra</string>
     <string name="nak_lord">Nakshatra lord</string>
