@@ -1,0 +1,6 @@
+// Versions pinned for the M0 spike. Chaquopy 17.1 is tested with AGP 7.3 to 9.4.
+plugins {
+    id("com.android.application") version "8.13.2" apply false
+    id("org.jetbrains.kotlin.android") version "2.2.21" apply false
+    id("com.chaquo.python") version "17.1.0" apply false
+}

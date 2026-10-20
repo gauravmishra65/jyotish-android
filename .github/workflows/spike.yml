@@ -1,0 +1,119 @@
+name: spike
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  wheels:
+    name: Build pyswisseph for Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Enable KVM for the test emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Fetch the pyswisseph source and use its bundled libraries
+        run: |
+          pip install cibuildwheel==4.3.1
+          pip download --no-binary :all: --no-deps pyswisseph==2.10.3.2 -d sdist
+          tar xzf sdist/pyswisseph-2.10.3.2.tar.gz -C sdist
+          # Do not let setup.py find the build machine's libswe or sqlite3 through pkg-config:
+          # Android has neither, so the bundled sources must be compiled in.
+          sed -i 's/^swe_detection = True/swe_detection = False/; s/^sqlite3_detection = True/sqlite3_detection = False/' sdist/pyswisseph-2.10.3.2/setup.py
+          grep -n "_detection = " sdist/pyswisseph-2.10.3.2/setup.py
+      - name: Build wheels (arm64 for phones, x86_64 for the emulator)
+        run: cibuildwheel --platform android sdist/pyswisseph-2.10.3.2 --output-dir wheelhouse
+        env:
+          CIBW_BUILD: "cp313-*"
+          CIBW_ARCHS: "arm64_v8a x86_64"
+          CIBW_BUILD_FRONTEND: build
+          CIBW_TEST_COMMAND: >-
+            python -c "import swisseph as s; jd = s.julday(2000, 1, 1, 12.0); assert abs(jd - 2451545.0) < 1e-9;
+            sun = s.calc_ut(jd, s.SUN)[0][0]; assert abs(sun - 280.37) < 0.05, sun; print('swisseph', s.version, 'Sun', sun)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels
+          path: wheelhouse/*.whl
+
+  app:
+    name: Build the app and test it on an emulator
+    needs: wheels
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/download-artifact@v4
+        with:
+          name: wheels
+          path: wheels
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.14.3"
+      - name: Build debug APK and test APK
+        run: gradle :app:assembleDebug :app:assembleDebugAndroidTest --stacktrace
+      - name: Size report
+        run: |
+          APK=app/build/outputs/apk/debug/app-debug.apk
+          {
+            echo "## APK size"
+            echo
+            echo "Whole debug APK (both ABIs): $(du -h $APK | cut -f1)"
+            echo
+            echo '```'
+            unzip -l $APK | awk 'NR>3 && $4 != "" {split($4, p, "/"); k = p[1] "/" p[2]; s[k] += $1} END {for (k in s) printf "%8.1f MB  %s\n", s[k]/1048576, k}' | sort -rn | head -15
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Run the spike test on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: bash tools/ci_emulator.sh
+      - name: Spike results
+        if: always()
+        run: |
+          {
+            echo "## Spike results (emulator)"
+            echo
+            echo '```'
+            sed 's/^.*SPIKE *: //' spike.log 2>/dev/null || echo "no SPIKE log"
+            echo '```'
+            echo
+            echo "## Cold start"
+            echo '```'
+            grep -E "TotalTime|WaitTime|Status" coldstart.log 2>/dev/null || echo "not measured"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spike-logs
+          path: |
+            spike.log
+            coldstart.log
+            app/build/outputs/androidTest-results

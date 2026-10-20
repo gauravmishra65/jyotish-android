@@ -1,0 +1,13 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+__pycache__/
+*.pyc
+/wheels/
+/sdist/
+/wheelhouse/
+spike.log
+coldstart.log

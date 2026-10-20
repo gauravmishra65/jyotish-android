@@ -1,0 +1,787 @@
+{
+"sample_size": 3000,
+"seed": 20261020,
+"method": "births uniform over 1930-2010, uniform time of day, latitudes 40S to 60N, longitudes 120W to 150E, seeded so the table is reproducible.",
+"rates": {
+"rajju": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"musala": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"nala": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"mala": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"sarpa": {
+"present": 0.011,
+"found_incl_cancelled": 0.011
+},
+"gada_1": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"gada_4": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"gada_7": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"gada_10": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"shakata_nab": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"vihaga": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"shringataka": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"hala": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"vajra": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"yava": {
+"present": 0.0013,
+"found_incl_cancelled": 0.0013
+},
+"kamala": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"vapi": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"yupa": {
+"present": 0.005,
+"found_incl_cancelled": 0.005
+},
+"ishu": {
+"present": 0.0053,
+"found_incl_cancelled": 0.0053
+},
+"shakti": {
+"present": 0.0057,
+"found_incl_cancelled": 0.0057
+},
+"danda": {
+"present": 0.0077,
+"found_incl_cancelled": 0.0077
+},
+"nauka": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"kuta": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"chhatra": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"chapa_nab": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"ardhachandra": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"chakra": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"samudra": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"sankhya_7": {
+"present": 0.0193,
+"found_incl_cancelled": 0.0193
+},
+"sankhya_6": {
+"present": 0.2213,
+"found_incl_cancelled": 0.2213
+},
+"sankhya_5": {
+"present": 0.425,
+"found_incl_cancelled": 0.425
+},
+"sankhya_4": {
+"present": 0.282,
+"found_incl_cancelled": 0.282
+},
+"sankhya_3": {
+"present": 0.0487,
+"found_incl_cancelled": 0.0487
+},
+"sankhya_2": {
+"present": 0.0037,
+"found_incl_cancelled": 0.0037
+},
+"sankhya_1": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"vesi": {
+"present": 0.617,
+"found_incl_cancelled": 0.617
+},
+"vasi": {
+"present": 0.62,
+"found_incl_cancelled": 0.62
+},
+"ubhayachari": {
+"present": 0.3427,
+"found_incl_cancelled": 0.3427
+},
+"budha_aditya": {
+"present": 0.201,
+"found_incl_cancelled": 0.504
+},
+"sunapha": {
+"present": 0.2293,
+"found_incl_cancelled": 0.2293
+},
+"anapha": {
+"present": 0.2203,
+"found_incl_cancelled": 0.2203
+},
+"durudhara": {
+"present": 0.1023,
+"found_incl_cancelled": 0.1023
+},
+"kemadruma": {
+"present": 0.0003,
+"found_incl_cancelled": 0.313
+},
+"chandra_mangala": {
+"present": 0.0817,
+"found_incl_cancelled": 0.0817
+},
+"adhi": {
+"present": 0.0123,
+"found_incl_cancelled": 0.0123
+},
+"gaja_kesari": {
+"present": 0.115,
+"found_incl_cancelled": 0.3447
+},
+"amala_lagna": {
+"present": 0.1867,
+"found_incl_cancelled": 0.1867
+},
+"amala_moon": {
+"present": 0.1263,
+"found_incl_cancelled": 0.1263
+},
+"vasumati": {
+"present": 0.0723,
+"found_incl_cancelled": 0.0723
+},
+"shakata": {
+"present": 0.0737,
+"found_incl_cancelled": 0.244
+},
+"subha_kartari": {
+"present": 0.0183,
+"found_incl_cancelled": 0.0183
+},
+"papa_kartari": {
+"present": 0.0807,
+"found_incl_cancelled": 0.0807
+},
+"subha_lagna": {
+"present": 0.144,
+"found_incl_cancelled": 0.144
+},
+"asubha_lagna": {
+"present": 0.1973,
+"found_incl_cancelled": 0.1973
+},
+"mahapurusha_mars": {
+"present": 0.0593,
+"found_incl_cancelled": 0.069
+},
+"mahapurusha_mercury": {
+"present": 0.0313,
+"found_incl_cancelled": 0.051
+},
+"mahapurusha_jupiter": {
+"present": 0.0833,
+"found_incl_cancelled": 0.09
+},
+"mahapurusha_venus": {
+"present": 0.0783,
+"found_incl_cancelled": 0.0883
+},
+"mahapurusha_saturn": {
+"present": 0.0803,
+"found_incl_cancelled": 0.0873
+},
+"guru_mangala": {
+"present": 0.1867,
+"found_incl_cancelled": 0.1867
+},
+"parvata": {
+"present": 0.075,
+"found_incl_cancelled": 0.075
+},
+"kahala": {
+"present": 0.245,
+"found_incl_cancelled": 0.245
+},
+"kahala_2": {
+"present": 0.0237,
+"found_incl_cancelled": 0.0237
+},
+"chamara": {
+"present": 0.006,
+"found_incl_cancelled": 0.006
+},
+"chamara_2": {
+"present": 0.0697,
+"found_incl_cancelled": 0.0697
+},
+"shankha": {
+"present": 0.245,
+"found_incl_cancelled": 0.245
+},
+"shankha_2": {
+"present": 0.0157,
+"found_incl_cancelled": 0.0157
+},
+"bheri": {
+"present": 0.0297,
+"found_incl_cancelled": 0.0297
+},
+"bheri_2": {
+"present": 0.1157,
+"found_incl_cancelled": 0.1157
+},
+"mridanga": {
+"present": 0.1433,
+"found_incl_cancelled": 0.1433
+},
+"sreenatha": {
+"present": 0.0027,
+"found_incl_cancelled": 0.0027
+},
+"matsya": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"kurma": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"khadga": {
+"present": 0.0033,
+"found_incl_cancelled": 0.0033
+},
+"kusuma": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"kalanidhi": {
+"present": 0.0187,
+"found_incl_cancelled": 0.0187
+},
+"kalpadruma": {
+"present": 0.2013,
+"found_incl_cancelled": 0.2013
+},
+"lagnadhi": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"hari": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"hara": {
+"present": 0.001,
+"found_incl_cancelled": 0.001
+},
+"brahma": {
+"present": 0.0033,
+"found_incl_cancelled": 0.0033
+},
+"brahma_2": {
+"present": 0.1463,
+"found_incl_cancelled": 0.1463
+},
+"vishnu": {
+"present": 0.0063,
+"found_incl_cancelled": 0.0063
+},
+"shiva": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"trilochana": {
+"present": 0.0557,
+"found_incl_cancelled": 0.0557
+},
+"gauri": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"chandika": {
+"present": 0.0017,
+"found_incl_cancelled": 0.0017
+},
+"lakshmi": {
+"present": 0.0343,
+"found_incl_cancelled": 0.0343
+},
+"sarada": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"bharathi": {
+"present": 0.0167,
+"found_incl_cancelled": 0.0167
+},
+"saraswati": {
+"present": 0.098,
+"found_incl_cancelled": 0.098
+},
+"amsavatara": {
+"present": 0.0027,
+"found_incl_cancelled": 0.0027
+},
+"devendra": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"indra": {
+"present": 0.003,
+"found_incl_cancelled": 0.003
+},
+"ravi": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"bhaskara": {
+"present": 0.0033,
+"found_incl_cancelled": 0.0033
+},
+"kulavardhana": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"gandharva": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"go": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"vidyut": {
+"present": 0.0017,
+"found_incl_cancelled": 0.0017
+},
+"chapa": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"pushkala": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"makuta": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"jaya": {
+"present": 0.003,
+"found_incl_cancelled": 0.003
+},
+"chatussagara": {
+"present": 0.0503,
+"found_incl_cancelled": 0.0503
+},
+"rajalakshana": {
+"present": 0.01,
+"found_incl_cancelled": 0.01
+},
+"vanchana": {
+"present": 0.4817,
+"found_incl_cancelled": 0.4817
+},
+"mahabhagya": {
+"present": 0.0617,
+"found_incl_cancelled": 0.0617
+},
+"parijata": {
+"present": 0.8647,
+"found_incl_cancelled": 0.8647
+},
+"garuda": {
+"present": 0.0187,
+"found_incl_cancelled": 0.0187
+},
+"sareera_soukhya": {
+"present": 0.6513,
+"found_incl_cancelled": 0.6513
+},
+"dehapushti": {
+"present": 0.117,
+"found_incl_cancelled": 0.117
+},
+"sada_sanchara": {
+"present": 0.5183,
+"found_incl_cancelled": 0.5183
+},
+"malika_1": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_2": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_3": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"malika_4": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_5": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_6": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_7": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_8": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_9": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_10": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"malika_11": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"malika_12": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"dharma_karmadhipati": {
+"present": 0.18,
+"found_incl_cancelled": 0.226
+},
+"raja_L4_L5": {
+"present": 0.2217,
+"found_incl_cancelled": 0.2217
+},
+"raja_L4_L9": {
+"present": 0.154,
+"found_incl_cancelled": 0.154
+},
+"raja_L7_L5": {
+"present": 0.2447,
+"found_incl_cancelled": 0.2447
+},
+"raja_L7_L9": {
+"present": 0.2403,
+"found_incl_cancelled": 0.2403
+},
+"raja_L10_L5": {
+"present": 0.155,
+"found_incl_cancelled": 0.155
+},
+"raja_L10_L9": {
+"present": 0.226,
+"found_incl_cancelled": 0.226
+},
+"raja_L1_L5": {
+"present": 0.202,
+"found_incl_cancelled": 0.202
+},
+"raja_L1_L9": {
+"present": 0.2073,
+"found_incl_cancelled": 0.2073
+},
+"dhana_L2_L11": {
+"present": 0.1323,
+"found_incl_cancelled": 0.168
+},
+"dhana_L2_L5": {
+"present": 0.149,
+"found_incl_cancelled": 0.1807
+},
+"dhana_L2_L9": {
+"present": 0.1203,
+"found_incl_cancelled": 0.1513
+},
+"dhana_L5_L11": {
+"present": 0.1297,
+"found_incl_cancelled": 0.171
+},
+"dhana_L9_L11": {
+"present": 0.1967,
+"found_incl_cancelled": 0.2437
+},
+"dhana_L1_L2": {
+"present": 0.184,
+"found_incl_cancelled": 0.2283
+},
+"dhana_L1_L11": {
+"present": 0.1987,
+"found_incl_cancelled": 0.2443
+},
+"dhana_L5_L9": {
+"present": 0.162,
+"found_incl_cancelled": 0.2043
+},
+"viparita_harsha": {
+"present": 0.0943,
+"found_incl_cancelled": 0.0943
+},
+"viparita_sarala": {
+"present": 0.079,
+"found_incl_cancelled": 0.079
+},
+"viparita_vimala": {
+"present": 0.0893,
+"found_incl_cancelled": 0.0893
+},
+"viparita_raja": {
+"present": 0.095,
+"found_incl_cancelled": 0.095
+},
+"dhana_123": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"dhana_124": {
+"present": 0.0013,
+"found_incl_cancelled": 0.0013
+},
+"dhana_125": {
+"present": 0.001,
+"found_incl_cancelled": 0.001
+},
+"dhana_126": {
+"present": 0.0003,
+"found_incl_cancelled": 0.0003
+},
+"dhana_127": {
+"present": 0.0027,
+"found_incl_cancelled": 0.0027
+},
+"dhana_128": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"dhana_118": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"dhana_119": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"dhana_120": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"dhana_121": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"dhana_122": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"bahudravyarjana": {
+"present": 0.0007,
+"found_incl_cancelled": 0.0007
+},
+"madhya_vayasi_dhana": {
+"present": 0.164,
+"found_incl_cancelled": 0.164
+},
+"amarananta_dhana": {
+"present": 0.0723,
+"found_incl_cancelled": 0.0723
+},
+"ayatna_dhana": {
+"present": 0.0243,
+"found_incl_cancelled": 0.0243
+},
+"dhur": {
+"present": 0.2453,
+"found_incl_cancelled": 0.2453
+},
+"daridra_11": {
+"present": 0.2563,
+"found_incl_cancelled": 0.2563
+},
+"daridra_147": {
+"present": 0.0423,
+"found_incl_cancelled": 0.0423
+},
+"neecha_bhanga_sun": {
+"present": 0.0633,
+"found_incl_cancelled": 0.0633
+},
+"neecha_bhanga_moon": {
+"present": 0.0697,
+"found_incl_cancelled": 0.0697
+},
+"neecha_bhanga_mars": {
+"present": 0.102,
+"found_incl_cancelled": 0.102
+},
+"neecha_bhanga_mercury": {
+"present": 0.0773,
+"found_incl_cancelled": 0.0773
+},
+"neecha_bhanga_jupiter": {
+"present": 0.081,
+"found_incl_cancelled": 0.081
+},
+"neecha_bhanga_venus": {
+"present": 0.067,
+"found_incl_cancelled": 0.067
+},
+"neecha_bhanga_saturn": {
+"present": 0.0817,
+"found_incl_cancelled": 0.0817
+},
+"maha_parivartana": {
+"present": 0.2863,
+"found_incl_cancelled": 0.2863
+},
+"khala_parivartana": {
+"present": 0.132,
+"found_incl_cancelled": 0.132
+},
+"dainya_parivartana": {
+"present": 0.2943,
+"found_incl_cancelled": 0.2943
+},
+"bhratruvriddhi": {
+"present": 0.589,
+"found_incl_cancelled": 0.589
+},
+"parakrama": {
+"present": 0.1767,
+"found_incl_cancelled": 0.1767
+},
+"uttama_griha": {
+"present": 0.017,
+"found_incl_cancelled": 0.017
+},
+"ayatna_griha_189": {
+"present": 0.0197,
+"found_incl_cancelled": 0.0197
+},
+"ayatna_griha_190": {
+"present": 0.0807,
+"found_incl_cancelled": 0.0807
+},
+"vahana_209": {
+"present": 0.2633,
+"found_incl_cancelled": 0.2633
+},
+"vahana_210": {
+"present": 0.0433,
+"found_incl_cancelled": 0.0433
+},
+"bandhu_pujya_194": {
+"present": 0.511,
+"found_incl_cancelled": 0.511
+},
+"nishkapata_205": {
+"present": 0.703,
+"found_incl_cancelled": 0.703
+},
+"matru_sneha": {
+"present": 0.7743,
+"found_incl_cancelled": 0.7743
+},
+"buddhimaturya": {
+"present": 0.3807,
+"found_incl_cancelled": 0.3807
+},
+"satkalatra": {
+"present": 0.7073,
+"found_incl_cancelled": 0.7073
+},
+"bhagya_241": {
+"present": 0.2957,
+"found_incl_cancelled": 0.2957
+},
+"dhatrutwa": {
+"present": 0.006,
+"found_incl_cancelled": 0.006
+},
+"apakeerti": {
+"present": 0.002,
+"found_incl_cancelled": 0.002
+},
+"sumukha": {
+"present": 0.2767,
+"found_incl_cancelled": 0.2767
+},
+"parihasaka": {
+"present": 0.104,
+"found_incl_cancelled": 0.104
+},
+"marud": {
+"present": 0.0027,
+"found_incl_cancelled": 0.0027
+},
+"budha_yoga": {
+"present": 0.0,
+"found_incl_cancelled": 0.0
+},
+"bhojana_soukhya": {
+"present": 0.1537,
+"found_incl_cancelled": 0.1537
+},
+"guru_chandal": {
+"present": 0.0737,
+"found_incl_cancelled": 0.0737
+}
+}
+}

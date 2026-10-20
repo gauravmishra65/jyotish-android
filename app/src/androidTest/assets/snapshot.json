@@ -1,0 +1,411 @@
+{
+ "results": {
+  "Ravi Shankar Tiwari": {
+   "lagna": 210.99082,
+   "planets": {
+    "Sun": 88.43684,
+    "Moon": 93.70968,
+    "Mars": 336.55242,
+    "Mercury": 69.2611,
+    "Jupiter": 34.94641,
+    "Venus": 51.96058,
+    "Saturn": 243.86814,
+    "Rahu": 323.12443,
+    "Ketu": 143.12443
+   },
+   "nakshatras": {
+    "Sun": "Punarvasu 3",
+    "Moon": "Pushya 1",
+    "Mars": "Uttara Bhadrapada 1",
+    "Mercury": "Ardra 1",
+    "Jupiter": "Krittika 3",
+    "Venus": "Rohini 4",
+    "Saturn": "Mula 2",
+    "Rahu": "Purva Bhadrapada 1",
+    "Ketu": "Purva Phalguni 3"
+   },
+   "dasha": [
+    "Ketu",
+    "Mars",
+    "2030-12-31"
+   ],
+   "yogas": [
+    "anapha",
+    "buddhimaturya",
+    "budha_aditya",
+    "chamara_2",
+    "daridra_11",
+    "dhur",
+    "kalpadruma",
+    "mahapurusha_venus",
+    "matru_sneha",
+    "mridanga",
+    "parijata",
+    "raja_L7_L5",
+    "sankhya_5",
+    "sareera_soukhya",
+    "satkalatra",
+    "vasi",
+    "viparita_sarala"
+   ],
+   "tajika_year_lord": {
+    "planet": "Mercury",
+    "role": "Dina-ratri pati",
+    "pancha_vargiya": 13.25,
+    "house": 11,
+    "chosen_because": "strongest office-bearer aspecting the Varsha Lagna",
+    "friendly_aspect_preference_would_give": "Mercury",
+    "agrees_with_friendly_preference": true
+   },
+   "western_asc": null,
+   "numbers": [
+    5,
+    2,
+    44
+   ],
+   "tz": null
+  },
+  "Neha Agarwal": {
+   "lagna": 6.3869,
+   "planets": {
+    "Sun": 317.31413,
+    "Moon": 154.92237,
+    "Mars": 50.46899,
+    "Mercury": 317.35352,
+    "Jupiter": 101.07756,
+    "Venus": 345.82947,
+    "Saturn": 278.81748,
+    "Rahu": 272.21106,
+    "Ketu": 92.21106
+   },
+   "nakshatras": {
+    "Sun": "Shatabhisha 4",
+    "Moon": "Uttara Phalguni 3",
+    "Mars": "Rohini 4",
+    "Mercury": "Shatabhisha 4",
+    "Jupiter": "Pushya 3",
+    "Venus": "Uttara Bhadrapada 4",
+    "Saturn": "Uttara Ashadha 4",
+    "Rahu": "Uttara Ashadha 2",
+    "Ketu": "Punarvasu 4"
+   },
+   "dasha": [
+    "Rahu",
+    "Moon",
+    "2028-06-13"
+   ],
+   "yogas": [
+    "bandhu_pujya_194",
+    "bhojana_soukhya",
+    "budha_aditya",
+    "dhana_L9_L11",
+    "dharma_karmadhipati",
+    "kemadruma",
+    "mahapurusha_jupiter",
+    "mahapurusha_saturn",
+    "nishkapata_205",
+    "parijata",
+    "raja_L10_L9",
+    "sankhya_6",
+    "sareera_soukhya",
+    "satkalatra",
+    "ubhayachari",
+    "vanchana",
+    "vasi",
+    "vesi"
+   ],
+   "tajika_year_lord": {
+    "planet": "Jupiter",
+    "role": "Muntha lord",
+    "pancha_vargiya": 9.92,
+    "house": 4,
+    "chosen_because": "strongest office-bearer aspecting the Varsha Lagna",
+    "friendly_aspect_preference_would_give": null,
+    "agrees_with_friendly_preference": true
+   },
+   "western_asc": null,
+   "numbers": [
+    2,
+    7,
+    33
+   ],
+   "tz": null
+  },
+  "Mei Lin Tan": {
+   "lagna": 115.2265,
+   "planets": {
+    "Sun": 217.2026,
+    "Moon": 265.9299,
+    "Mars": 128.09994,
+    "Mercury": 209.29652,
+    "Jupiter": 134.98412,
+    "Venus": 240.31103,
+    "Saturn": 151.72536,
+    "Rahu": 130.35126,
+    "Ketu": 310.35126
+   },
+   "nakshatras": {
+    "Sun": "Anuradha 2",
+    "Moon": "Purva Ashadha 4",
+    "Mars": "Magha 3",
+    "Mercury": "Vishakha 3",
+    "Jupiter": "Purva Phalguni 1",
+    "Venus": "Mula 1",
+    "Saturn": "Uttara Phalguni 2",
+    "Rahu": "Magha 4",
+    "Ketu": "Shatabhisha 2"
+   },
+   "dasha": [
+    "Jupiter",
+    "Mercury",
+    "2037-12-31"
+   ],
+   "yogas": [
+    "bandhu_pujya_194",
+    "bhratruvriddhi",
+    "daridra_11",
+    "dhana_L1_L11",
+    "dhana_L2_L5",
+    "dhana_L5_L9",
+    "dharma_karmadhipati",
+    "guru_chandal",
+    "guru_mangala",
+    "maha_parivartana",
+    "matru_sneha",
+    "nishkapata_205",
+    "parijata",
+    "raja_L10_L9",
+    "sankhya_5",
+    "satkalatra",
+    "shankha",
+    "sumukha",
+    "ubhayachari",
+    "vanchana",
+    "vasi",
+    "vesi"
+   ],
+   "tajika_year_lord": {
+    "planet": "Jupiter",
+    "role": "Dina-ratri pati",
+    "pancha_vargiya": 16.13,
+    "house": 3,
+    "chosen_because": "strongest office-bearer aspecting the Varsha Lagna",
+    "friendly_aspect_preference_would_give": "Jupiter",
+    "agrees_with_friendly_preference": true
+   },
+   "western_asc": null,
+   "numbers": [
+    5,
+    6,
+    29
+   ],
+   "tz": null
+  },
+  "Arjun Mehta": {
+   "lagna": 11.4909,
+   "planets": {
+    "Sun": 74.69795,
+    "Moon": 238.4952,
+    "Mars": 48.5056,
+    "Mercury": 61.5782,
+    "Jupiter": 259.52572,
+    "Venus": 48.06703,
+    "Saturn": 343.29081,
+    "Rahu": 169.04259,
+    "Ketu": 349.04259
+   },
+   "nakshatras": {
+    "Sun": "Ardra 3",
+    "Moon": "Jyeshtha 4",
+    "Mars": "Rohini 3",
+    "Mercury": "Mrigashira 3",
+    "Jupiter": "Purva Ashadha 2",
+    "Venus": "Rohini 3",
+    "Saturn": "Uttara Bhadrapada 3",
+    "Rahu": "Hasta 3",
+    "Ketu": "Revati 1"
+   },
+   "dasha": [
+    "Sun",
+    "Rahu",
+    "2031-06-01"
+   ],
+   "yogas": [
+    "amarananta_dhana",
+    "bhratruvriddhi",
+    "budha_aditya",
+    "daridra_11",
+    "dhana_L1_L2",
+    "dhana_L5_L9",
+    "dhur",
+    "matru_sneha",
+    "neecha_bhanga_moon",
+    "nishkapata_205",
+    "parakrama",
+    "parihasaka",
+    "parijata",
+    "sankhya_5",
+    "shakata",
+    "shankha",
+    "sumukha",
+    "sunapha",
+    "vasi"
+   ],
+   "tajika_year_lord": {
+    "planet": "Mars",
+    "role": "Janma Lagna lord",
+    "pancha_vargiya": 8.97,
+    "house": 7,
+    "chosen_because": "strongest office-bearer aspecting the Varsha Lagna",
+    "friendly_aspect_preference_would_give": "Mercury",
+    "agrees_with_friendly_preference": false
+   },
+   "western_asc": null,
+   "numbers": [
+    3,
+    7,
+    34
+   ],
+   "tz": null
+  },
+  "Priya Nair": {
+   "lagna": 323.45944,
+   "planets": {
+    "Sun": 328.50826,
+    "Moon": 288.03771,
+    "Mars": 26.87879,
+    "Mercury": 346.607,
+    "Jupiter": 252.02446,
+    "Venus": 12.51226,
+    "Saturn": 37.63782,
+    "Rahu": 279.37646,
+    "Ketu": 99.37646
+   },
+   "nakshatras": {
+    "Sun": "Purva Bhadrapada 3",
+    "Moon": "Shravana 3",
+    "Mars": "Krittika 1",
+    "Mercury": "Uttara Bhadrapada 4",
+    "Jupiter": "Mula 4",
+    "Venus": "Ashwini 4",
+    "Saturn": "Krittika 4",
+    "Rahu": "Uttara Ashadha 4",
+    "Ketu": "Pushya 2"
+   },
+   "dasha": [
+    "Saturn",
+    "Venus",
+    "2036-03-02"
+   ],
+   "yogas": [
+    "anapha",
+    "asubha_lagna",
+    "bandhu_pujya_194",
+    "bhagya_241",
+    "bhratruvriddhi",
+    "buddhimaturya",
+    "dharma_karmadhipati",
+    "matru_sneha",
+    "neecha_bhanga_mercury",
+    "nishkapata_205",
+    "parijata",
+    "raja_L10_L9",
+    "sada_sanchara",
+    "sankhya_6",
+    "sareera_soukhya",
+    "satkalatra",
+    "sumukha",
+    "vahana_209",
+    "vanchana",
+    "vesi"
+   ],
+   "tajika_year_lord": {
+    "planet": "Jupiter",
+    "role": "Varsha Lagna lord",
+    "pancha_vargiya": 9.92,
+    "house": 7,
+    "chosen_because": "strongest office-bearer aspecting the Varsha Lagna",
+    "friendly_aspect_preference_would_give": "Sun",
+    "agrees_with_friendly_preference": false
+   },
+   "western_asc": null,
+   "numbers": [
+    3,
+    7,
+    22
+   ],
+   "tz": null
+  },
+  "match": {
+   "total_36": 28.0,
+   "range": [
+    27.5,
+    29.0
+   ]
+  },
+  "muhurta": [
+   "2027-01-14 21:16",
+   "2027-01-14 22:06",
+   "2027-01-19 07:56",
+   "2027-01-19 08:26",
+   "2027-01-19 10:56",
+   "2027-01-19 13:36",
+   "2027-01-19 16:16",
+   "2027-01-19 17:06",
+   "2027-01-27 00:14",
+   "2027-01-27 04:04",
+   "2027-01-27 04:34",
+   "2027-01-27 06:04",
+   "2027-01-27 06:44",
+   "2027-01-27 07:54",
+   "2027-01-27 09:34",
+   "2027-01-27 13:34",
+   "2027-01-27 14:24",
+   "2027-01-27 16:34",
+   "2027-01-27 18:54",
+   "2027-01-27 21:14",
+   "2027-01-27 23:24",
+   "2027-02-11 03:07",
+   "2027-03-09 10:45",
+   "2027-03-09 11:45",
+   "2027-03-09 13:55",
+   "2027-03-09 16:35",
+   "2027-03-09 18:25",
+   "2027-03-09 20:45",
+   "2027-03-10 01:15",
+   "2027-03-10 03:25",
+   "2027-03-10 05:05",
+   "2027-03-10 06:14",
+   "2027-03-10 06:34",
+   "2027-03-10 09:44",
+   "2027-03-14 18:10",
+   "2027-03-14 20:20",
+   "2027-03-15 01:00",
+   "2027-03-15 03:00",
+   "2027-03-15 04:50",
+   "2027-03-15 06:19"
+  ],
+  "names": [
+   "Ravvi Shankar Tiwari",
+   "Raavvi Shankar Tiwari",
+   "Raavi Shankar Tiwari",
+   "Ravey Shankar Tiwari",
+   "Ravvee Shankar Tiwari",
+   "Ravvey Shankar Tiwari",
+   "Ravee Shankar Tiwari",
+   "Raavee Shankar Tiwari",
+   "Raveee Shankar Tiwari"
+  ]
+ },
+ "desktop_timings_s": {
+  "chart_0": 0.448,
+  "chart_1": 0.487,
+  "chart_2": 0.43,
+  "chart_3": 0.596,
+  "chart_4": 0.566,
+  "match": 0.002,
+  "muhurta_3_months": 1.301,
+  "names": 0.001
+ },
+ "python": "3.13.16"
+}
