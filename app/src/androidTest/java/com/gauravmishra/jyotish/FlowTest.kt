@@ -1,13 +1,6 @@
 package com.gauravmishra.jyotish
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.util.Base64
-import android.util.Log
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.test.captureToImage
-import androidx.compose.ui.test.onRoot
-import java.io.ByteArrayOutputStream
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -35,18 +28,6 @@ class FlowTest {
 
     private val ctx: Context get() = InstrumentationRegistry.getInstrumentation().targetContext
 
-    /** A small JPEG of the screen, logged as base64 under SHOT so CI can return it as text. */
-    private fun shot(name: String) {
-        rule.waitForIdle()
-        val bmp = rule.onRoot().captureToImage().asAndroidBitmap()
-        val w = 360
-        val small = Bitmap.createScaledBitmap(bmp, w, bmp.height * w / bmp.width, true)
-        val out = ByteArrayOutputStream()
-        small.compress(Bitmap.CompressFormat.JPEG, 70, out)
-        val b64 = Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP)
-        val parts = b64.chunked(3000)
-        parts.forEachIndexed { i, c -> Log.i("SHOT", "$name ${i + 1}/${parts.size} $c") }
-    }
 
     @Before
     fun freshInstall() {
@@ -81,18 +62,18 @@ class FlowTest {
             // Kundali: chart, both styles, tabs and a yoga's details.
             rule.onNodeWithText("Ravi Shankar Tiwari").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("chart"), timeoutMillis = 20_000)
-            shot("kundali_north")
+            rule.shot("kundali_north")
             rule.onNodeWithTag("planet_Moon").performScrollTo().assertExists()
             rule.onNodeWithText("South Indian").performScrollTo().performClick()
             rule.onNodeWithTag("chart").performScrollTo().assertExists()
-            shot("kundali_south")
+            rule.shot("kundali_south")
             rule.onNodeWithText("Dashas").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Now"), timeoutMillis = 5_000)
             rule.onNodeWithText("Yogas").performScrollTo().performClick()
             rule.onNodeWithTag("yoga_mahapurusha_venus").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Venus in its own or exaltation sign in a kendra from the Lagna"), timeoutMillis = 5_000)
             rule.waitUntilAtLeastOneExists(hasText("In 8% of charts"), timeoutMillis = 5_000)
-            shot("yoga_sheet")
+            rule.shot("yoga_sheet")
             rule.onNodeWithText("Close").performClick()
         }
     }
@@ -115,7 +96,7 @@ class FlowTest {
             rule.waitUntilAtLeastOneExists(hasTestTag("chart"), timeoutMillis = 20_000)
             rule.onNodeWithText("योग").performScrollTo().performClick()
             rule.onNodeWithText("मालव्य (पंच महापुरुष)").performScrollTo().assertExists()
-            shot("kundali_hindi_yogas")
+            rule.shot("kundali_hindi_yogas")
         }
     }
 }

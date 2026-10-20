@@ -2,7 +2,11 @@ name: build-and-test
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write   # to publish logs and screenshots to the ci-results branch
 
 jobs:
   wheels:
@@ -138,3 +142,16 @@ jobs:
             coldstart.log
             connected.log
             app/build/outputs/androidTest-results
+      - name: Publish logs and screenshots to the ci-results branch
+        if: always()
+        run: |
+          mkdir -p out
+          cp -r shots out/ 2>/dev/null || true
+          cp build.log connected.log spike.log coldstart.log strings.log errors.log out/ 2>/dev/null || true
+          mkdir -p out/test-results && cp -r app/build/test-results/* app/build/outputs/androidTest-results/* out/test-results/ 2>/dev/null || true
+          echo "${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
+          cd out
+          git init -q -b ci-results
+          git -c user.name=ci -c user.email=ci@localhost add -A
+          git -c user.name=ci -c user.email=ci@localhost commit -qm "CI results for ${GITHUB_SHA}"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}" HEAD:refs/heads/ci-results
