@@ -3,9 +3,25 @@
 # Everything worth reading is also printed as a GitHub annotation, which can be read through the checks API.
 set -u
 adb logcat -c
+adb logcat -G 16M || true
 gradle :app:connectedDebugAndroidTest --stacktrace 2>&1 | tee connected.log
 status=${PIPESTATUS[0]}
 adb logcat -d -s SPIKE:I > spike.log || true
+adb logcat -d -s SHOT:I > shots.log || true
+python3 - <<'EOF'
+import re, collections
+parts = collections.defaultdict(dict)
+for l in open("shots.log", errors="replace"):
+    m = re.search(r"SHOT\s*:\s*(\S+) (\d+)/(\d+) (\S+)", l)
+    if m:
+        parts[m.group(1)][int(m.group(2))] = (int(m.group(3)), m.group(4))
+for name, d in parts.items():
+    n = next(iter(d.values()))[0]
+    if len(d) == n:
+        b64 = "".join(d[i][1] for i in range(1, n + 1))
+        for k in range(0, len(b64), 60000):
+            print(f"::notice title=SHOT {name} {k // 60000}::{b64[k:k + 60000]}")
+EOF
 adb logcat -d -t 400 '*:E' > errors.log || true
 
 python3 - <<'EOF'

@@ -44,6 +44,7 @@ fun SettingsScreen(
     engineVersion: String?,
     onLanguage: (String) -> Unit,
     onCalculationChanged: () -> Unit,
+    onChartStyle: (String) -> Unit,
     onSpeedTest: suspend () -> String,
     onBack: () -> Unit,
 ) {
@@ -68,8 +69,8 @@ fun SettingsScreen(
                 }
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 Setting(stringResource(R.string.chart_style)) {
-                    Pick(stringResource(R.string.north_indian), chartStyle == "north") { chartStyle = "north"; settings.chartStyle = "north" }
-                    Pick(stringResource(R.string.south_indian), chartStyle == "south") { chartStyle = "south"; settings.chartStyle = "south" }
+                    Pick(stringResource(R.string.north_indian), chartStyle == "north") { chartStyle = "north"; onChartStyle("north") }
+                    Pick(stringResource(R.string.south_indian), chartStyle == "south") { chartStyle = "south"; onChartStyle("south") }
                 }
             }
 

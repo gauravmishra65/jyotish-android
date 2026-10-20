@@ -1,1 +1,1 @@
-astrology-numerology-reading db0d955 2026-10-20 Events layer is its own module (included in --modules all); time-error model kept for every Vedic run
+astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2

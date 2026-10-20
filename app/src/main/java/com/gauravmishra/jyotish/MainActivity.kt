@@ -28,6 +28,7 @@ import com.gauravmishra.jyotish.ui.Feature
 import com.gauravmishra.jyotish.ui.FeatureScreen
 import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
+import com.gauravmishra.jyotish.ui.KundaliScreen
 import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
@@ -74,9 +75,10 @@ fun App(vm: AppViewModel = viewModel()) {
                         profiles = profiles, charts = charts,
                         onAdd = { nav.navigate(Routes.add()) },
                         onEdit = { nav.navigate(Routes.add(it.id)) },
+                        onOpenProfile = { vm.select(it.id); nav.navigate(Routes.KUNDALI) },
                         onDelete = { vm.delete(it.id) },
                         onSettings = { nav.navigate(Routes.SETTINGS) },
-                        onFeature = { nav.navigate(Routes.feature(it.route)) },
+                        onFeature = { nav.navigate(Routes.of(it)) },
                     )
                 }
                 composable(Routes.ADD, arguments = listOf(navArgument("id") { type = NavType.StringType; nullable = true })) { entry ->
@@ -91,13 +93,23 @@ fun App(vm: AppViewModel = viewModel()) {
                 composable(Routes.SETTINGS) {
                     var version by remember { mutableStateOf<String?>(null) }
                     LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
-                    SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() },
+                    SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() }, onChartStyle = { vm.setChartStyle(it) },
                         onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.KUNDALI) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val style by vm.chartStyle.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    KundaliScreen(
+                        profiles = profiles, profile = p, chart = p?.let { charts[it.id] }, style = style,
+                        onSelect = { vm.select(it.id) }, onStyle = { vm.setChartStyle(it) },
+                        onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
+                    )
                 }
                 composable(Routes.FEATURE) { entry ->
                     val f = Feature.entries.first { it.route == entry.arguments?.getString("name") }
                     val p = profiles.firstOrNull()
-                    FeatureScreen(f, p, p?.let { charts[it.id] }, onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.feature(it.route)) { popUpTo(Routes.HOME) } })
+                    FeatureScreen(f, p, p?.let { charts[it.id] }, onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } })
                 }
             }
         }

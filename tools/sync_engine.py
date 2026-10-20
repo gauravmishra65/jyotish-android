@@ -39,6 +39,14 @@ def main():
         if f.endswith(".json"):
             shutil.copy2(os.path.join(src, f), APP_PY)
     shutil.copytree(os.path.join(src, "ephe"), os.path.join(APP_PY, "ephe"))
+    # Hindi names the app shows (signs, planets, nakshatras, dignities, yogas), taken from the skill's report code.
+    hindi = subprocess.check_output([sys.executable, "-c", (
+        "import json, render_report as R, hindi_shell as HS;"
+        "print(json.dumps({'sign': HS.SIGN, 'planet': HS.PLANET, 'nakshatra': HS.NAK, 'tag': HS.TAGS,"
+        " 'yoga': R.YOGA_NAME_HI, 'yoga_category': R.YOGA_CAT_HI}, ensure_ascii=False))")], cwd=src, text=True)
+    assets = os.path.join(APP_PY, "..", "assets")
+    os.makedirs(assets, exist_ok=True)
+    open(os.path.join(assets, "hindi_names.json"), "w", encoding="utf-8").write(hindi)
     try:
         rev = subprocess.check_output(["git", "-C", skill, "log", "-1", "--format=%h %cs %s"], text=True).strip()
     except Exception:

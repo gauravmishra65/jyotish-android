@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.gauravmishra.jyotish.data.AppSettings
+import com.gauravmishra.jyotish.data.ChartModel
 import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.ProfileStore
@@ -33,7 +34,7 @@ data class ChartSummary(
 
 sealed interface ChartState {
     data object Calculating : ChartState
-    data class Ready(val summary: ChartSummary, val json: String) : ChartState
+    data class Ready(val summary: ChartSummary, val model: ChartModel, val json: String) : ChartState
     data class Failed(val message: String) : ChartState
 }
 
@@ -46,6 +47,15 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _charts = MutableStateFlow<Map<String, ChartState>>(emptyMap())
     val charts: StateFlow<Map<String, ChartState>> = _charts.asStateFlow()
+
+    private val _selected = MutableStateFlow(_profiles.value.firstOrNull()?.id)
+    /** The profile the Kundali and other feature screens show. */
+    val selected: StateFlow<String?> = _selected.asStateFlow()
+    fun select(id: String) { _selected.value = id }
+
+    private val _chartStyle = MutableStateFlow(settings.chartStyle)
+    val chartStyle: StateFlow<String> = _chartStyle.asStateFlow()
+    fun setChartStyle(style: String) { settings.chartStyle = style; _chartStyle.value = style }
 
     private val _language = MutableStateFlow(settings.language)
     val language: StateFlow<String?> = _language.asStateFlow()
@@ -69,12 +79,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun addOrUpdate(p: Profile) {
         _profiles.update { list -> if (list.any { it.id == p.id }) list.map { if (it.id == p.id) p else it } else list + p }
+        if (_selected.value == null) _selected.value = p.id
         persist()
         compute(p)
     }
 
     fun delete(id: String) {
         _profiles.update { list -> list.filterNot { it.id == id } }
+        if (_selected.value == id) _selected.value = _profiles.value.firstOrNull()?.id
         _charts.update { it - id }
         persist()
         viewModelScope.launch(Dispatchers.IO) { store.deleteChart(id) }
@@ -97,7 +109,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 val json = withContext(Dispatchers.IO) { store.cachedChart(p.id, key) } ?: Engine.chart(request).also {
                     withContext(Dispatchers.IO) { store.cacheChart(p.id, key, it) }
                 }
-                ChartState.Ready(withContext(Dispatchers.Default) { summarize(json) }, json)
+                withContext(Dispatchers.Default) { ChartState.Ready(summarize(json), ChartModel.parse(json), json) }
             } catch (e: Throwable) {
                 ChartState.Failed(e.message ?: e.toString())
             }

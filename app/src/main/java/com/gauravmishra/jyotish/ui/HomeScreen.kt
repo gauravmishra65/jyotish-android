@@ -50,6 +50,7 @@ fun HomeScreen(
     charts: Map<String, ChartState>,
     onAdd: () -> Unit,
     onEdit: (Profile) -> Unit,
+    onOpenProfile: (Profile) -> Unit,
     onDelete: (Profile) -> Unit,
     onSettings: () -> Unit,
     onFeature: (Feature) -> Unit,
@@ -84,7 +85,7 @@ fun HomeScreen(
                 } else {
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         items(profiles, key = { it.id }) { p ->
-                            ProfileCard(p, charts[p.id], lang, onOpen = { onFeature(Feature.KUNDALI) }, onLongPress = { actionsFor = p })
+                            ProfileCard(p, charts[p.id], lang, onOpen = { onOpenProfile(p) }, onLongPress = { actionsFor = p })
                         }
                     }
                 }
