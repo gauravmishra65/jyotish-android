@@ -35,7 +35,7 @@ python tools/make_snapshot.py          # needs pyswisseph and tzdata
 
 ## Building locally
 
-Android Studio with JDK 17. There is no Gradle wrapper yet: run `gradle wrapper --gradle-version 8.14.3` once, or let Android Studio use Gradle 8.14.3. Put the pyswisseph Android wheels from a CI run's `wheels` artifact into `./wheels` first.
+Android Studio with JDK 17, and Python 3.13 on the computer (Chaquopy uses it to install the app's Python packages). There is no Gradle wrapper yet: run `gradle wrapper --gradle-version 8.14.3` once, or let Android Studio use Gradle 8.14.3. Put the pyswisseph Android wheels from a CI run's `wheels` artifact into `./wheels` first.
 
 Pinned versions: Android Gradle Plugin 8.13.2, Gradle 8.14.3, Kotlin 2.2.21, Chaquopy 17.1.0 (Python 3.13), compileSdk and targetSdk 36, minSdk 26.
 

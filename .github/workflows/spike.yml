@@ -64,6 +64,9 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"   # Chaquopy's build step runs pip with the same Python version as the app
       - uses: actions/download-artifact@v4
         with:
           name: wheels
