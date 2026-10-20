@@ -137,7 +137,8 @@ private fun PersonPicker(label: String, chosen: Profile?, profiles: List<Profile
         ) {
             Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                 Text(label, style = MaterialTheme.typography.labelMedium, color = Palette.Muted)
-                Text(chosen?.name ?: stringResource(R.string.choose_person), style = MaterialTheme.typography.titleMedium, maxLines = 1)
+                Text(chosen?.name ?: stringResource(R.string.choose_person), style = MaterialTheme.typography.titleMedium, maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             }
         }
         DropdownMenu(expanded = open, onDismissRequest = { open = false }) {

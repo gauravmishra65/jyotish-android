@@ -30,7 +30,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
@@ -88,7 +88,7 @@ fun KundaliScreen(
         topBar = {
             BackBar(
                 profile?.name ?: stringResource(R.string.feature_kundali), onHome,
-                subtitle = model?.let { stringResource(R.string.kundali_subtitle, Names.of(it.lagna.sign, lang), degMin(it.lagna.dms), ayanamsaLabel(it.ayanamsa)) },
+                subtitle = model?.let { stringResource(R.string.kundali_subtitle, Names.of(it.lagna.sign, lang), degMin(it.lagna.dms), ayanamsaLabel(it.ayanamsa, lang)) },
             )
         },
         bottomBar = { BottomNav(current = Feature.KUNDALI, onHome = onHome, onFeature = onFeature) },
@@ -123,12 +123,13 @@ fun KundaliScreen(
 
             if (model != null) {
                 val titles = listOf(R.string.tab_planets, R.string.tab_dashas, R.string.tab_yogas, R.string.tab_strength)
-                TabRow(
+                ScrollableTabRow(
                     selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background, modifier = Modifier.padding(top = 10.dp),
+                    edgePadding = 12.dp,
                     indicator = { pos -> TabRowDefaults.SecondaryIndicator(Modifier.tabIndicatorOffset(pos[tab]), color = Palette.Accent) },
                 ) {
                     titles.forEachIndexed { i, t ->
-                        Tab(selected = tab == i, onClick = { tab = i }, text = { Text(stringResource(t), fontWeight = if (tab == i) FontWeight.SemiBold else FontWeight.Normal) },
+                        Tab(selected = tab == i, onClick = { tab = i }, text = { Text(stringResource(t), maxLines = 1, fontWeight = if (tab == i) FontWeight.SemiBold else FontWeight.Normal) },
                             selectedContentColor = Palette.Ink, unselectedContentColor = Palette.Muted)
                     }
                 }
@@ -161,7 +162,9 @@ fun KundaliScreen(
 /** 0°59'27" as 0°59′. */
 fun degMin(dms: String): String = Regex("^(\\d+°\\d+)").find(dms)?.groupValues?.get(1)?.plus("′") ?: dms
 
-private fun ayanamsaLabel(a: String) = when (a) {
+private fun ayanamsaLabel(a: String, lang: String) = if (lang == "hi") when (a) {
+    "lahiri" -> "लाहिरी"; "raman" -> "रमन"; "krishnamurti" -> "कृष्णमूर्ति"; "true_chitra" -> "ट्रू चित्रा"; else -> a
+} else when (a) {
     "lahiri" -> "Lahiri"; "raman" -> "Raman"; "krishnamurti" -> "KP"; "true_chitra" -> "True Chitra"; else -> a
 }
 

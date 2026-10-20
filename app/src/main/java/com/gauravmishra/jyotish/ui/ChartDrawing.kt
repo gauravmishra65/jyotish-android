@@ -110,10 +110,11 @@ private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer) {
         val x0 = col * c; val y0 = r * c
         if (sign == m.lagna.signIndex) {
             drawRect(Palette.AccentSoft, topLeft = Offset(x0 + line, y0 + line), size = Size(c - 2 * line, c - 2 * line))
-            drawLine(Palette.Accent, Offset(x0, y0 + c * 0.28f), Offset(x0 + c * 0.28f, y0), strokeWidth = px(1.5))
+            // Lagna mark: a diagonal across the top-right corner, clear of the sign name.
+            drawLine(Palette.Accent, Offset(x0 + c * 0.72f, y0), Offset(x0 + c, y0 + c * 0.28f), strokeWidth = px(1.5))
         }
         val name = Names.of(SIGNS[sign], lang)
-        drawText(tm, name, Offset(x0 + c * 0.06f, y0 + c * 0.04f + (if (sign == m.lagna.signIndex) c * 0.08f else 0f)), small)
+        drawText(tm, name, Offset(x0 + c * 0.06f, y0 + c * 0.04f), small)
         val labels = buildList {
             if (sign == m.lagna.signIndex) add(if (lang == "hi") "लग्न" else "Asc")
             m.planets.filter { it.signIndex == sign }.forEach { add(Abbrev.of(it, lang)) }
