@@ -59,7 +59,9 @@ import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.DMY
 import com.gauravmishra.jyotish.data.parseDmy
 import com.gauravmishra.jyotish.data.parseHm
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -91,7 +93,8 @@ fun AddProfileScreen(
     var results by remember { mutableStateOf(emptyList<Place>()) }
     LaunchedEffect(query, places) {
         delay(150)
-        results = places?.search(query) ?: emptyList()
+        val p = places
+        results = if (p == null) emptyList() else withContext(Dispatchers.Default) { p.search(query) }
     }
 
     val date = parseDmy(dateText)

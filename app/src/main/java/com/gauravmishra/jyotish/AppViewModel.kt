@@ -58,6 +58,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     suspend fun places(): Places = placesJob.await()
 
     init {
+        placesJob.start()   // parse the place list in the background now, so the search is ready when needed
         _profiles.value.forEach { compute(it) }
     }
 

@@ -60,7 +60,9 @@ fun App(vm: AppViewModel = viewModel()) {
             val nav = rememberNavController()
             val profiles by vm.profiles.collectAsStateWithLifecycle()
             val charts by vm.charts.collectAsStateWithLifecycle()
-            NavHost(nav, startDestination = if (chosen == null) Routes.WELCOME else Routes.HOME) {
+            // Decided once: choosing a language later must not rebuild the graph and jump back to Home.
+            val start = remember { if (chosen == null) Routes.WELCOME else Routes.HOME }
+            NavHost(nav, startDestination = start) {
                 composable(Routes.WELCOME) {
                     WelcomeScreen(lang = welcomeLang, onLanguage = { welcomeLang = it }, onContinue = {
                         vm.setLanguage(welcomeLang)

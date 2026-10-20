@@ -99,7 +99,10 @@ class Places(lines: Sequence<String>) {
     }
 
     companion object {
+        private val MARKS = Regex("\\p{Mn}+")
+
+        /** Lower case without accents ("São" to "sao"). Plain ASCII skips the Unicode work: most names are ASCII. */
         fun fold(s: String): String =
-            Normalizer.normalize(s, Normalizer.Form.NFD).replace(Regex("\\p{Mn}+"), "").lowercase()
+            if (s.all { it.code < 128 }) s.lowercase() else Normalizer.normalize(s, Normalizer.Form.NFD).replace(MARKS, "").lowercase()
     }
 }
