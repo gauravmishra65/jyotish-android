@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,10 +31,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Tab
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -123,16 +121,7 @@ fun KundaliScreen(
 
             if (model != null) {
                 val titles = listOf(R.string.tab_planets, R.string.tab_dashas, R.string.tab_yogas, R.string.tab_strength)
-                ScrollableTabRow(
-                    selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background, modifier = Modifier.padding(top = 10.dp),
-                    edgePadding = 12.dp,
-                    indicator = { pos -> TabRowDefaults.SecondaryIndicator(Modifier.tabIndicatorOffset(pos[tab]), color = Palette.Accent) },
-                ) {
-                    titles.forEachIndexed { i, t ->
-                        Tab(selected = tab == i, onClick = { tab = i }, text = { Text(stringResource(t), maxLines = 1, fontWeight = if (tab == i) FontWeight.SemiBold else FontWeight.Normal) },
-                            selectedContentColor = Palette.Ink, unselectedContentColor = Palette.Muted)
-                    }
-                }
+                TabBar(titles.map { stringResource(it) }, tab) { tab = it }
                 Column(Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
                     when (tab) {
                         0 -> PlanetsTab(model, lang) { detail = Detail.OfPlanet(it) }
@@ -156,6 +145,28 @@ fun KundaliScreen(
                 OutlinedButton(onClick = { detail = null }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(stringResource(R.string.close)) }
             }
         }
+    }
+}
+
+/** Four equal tabs with an underline; no inner padding, so labels fit on narrow phones. */
+@Composable
+private fun TabBar(labels: List<String>, selected: Int, onSelect: (Int) -> Unit) {
+    Column(Modifier.padding(top = 10.dp)) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp).selectableGroup()) {
+            labels.forEachIndexed { i, label ->
+                Column(
+                    Modifier.weight(1f).heightIn(min = 48.dp)
+                        .selectable(selected = i == selected, role = Role.Tab, onClick = { onSelect(i) }),
+                    horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center,
+                ) {
+                    Text(label, maxLines = 1, style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = if (i == selected) FontWeight.SemiBold else FontWeight.Normal,
+                        color = if (i == selected) Palette.Ink else Palette.Muted, modifier = Modifier.padding(vertical = 12.dp))
+                    Box(Modifier.fillMaxWidth(0.7f).height(3.dp).background(if (i == selected) Palette.Accent else Color.Transparent, RoundedCornerShape(2.dp)))
+                }
+            }
+        }
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
     }
 }
 
