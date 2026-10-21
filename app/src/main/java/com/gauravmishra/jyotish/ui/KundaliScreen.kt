@@ -298,7 +298,7 @@ private fun YogasTab(m: ChartModel, lang: String, onOpen: (Yoga) -> Unit) {
     Text(stringResource(R.string.rare_first), style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.padding(vertical = 6.dp))
     m.yogas.forEach { y ->
         Column(
-            Modifier.fillMaxWidth().clickable(role = Role.Button) { onOpen(y) }.padding(vertical = 10.dp).testTag("yoga_${y.id}"),
+            Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable(role = Role.Button) { onOpen(y) }.padding(vertical = 10.dp).testTag("yoga_${y.id}"),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Text(Names.yoga(y.name, lang), style = MaterialTheme.typography.titleMedium)

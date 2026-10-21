@@ -54,4 +54,26 @@ for i in 1 2; do
   adb shell am start -W -n com.gauravmishra.jyotish/.MainActivity | tee -a coldstart.log || true
 done
 echo "::notice title=Cold start::$(grep -E 'TotalTime|WaitTime' coldstart.log | tr '\n' ' ')"
+
+# Release smoke test: the R8-minified build must start and bring the Python engine up.
+adb uninstall com.gauravmishra.jyotish > /dev/null || true
+if adb install app/build/outputs/apk/release/app-release.apk > release.log 2>&1; then
+  adb logcat -c
+  adb shell am start -W -n com.gauravmishra.jyotish/.MainActivity | tee -a release.log || true
+  ok=""
+  for i in $(seq 1 30); do
+    if adb logcat -d -s ENGINE:I | grep -q "ready in"; then ok=1; break; fi
+    sleep 1
+  done
+  adb logcat -d -s ENGINE:* AndroidRuntime:E >> release.log || true
+  if [ -n "$ok" ] && ! grep -q "FATAL EXCEPTION" release.log; then
+    echo "::notice title=Release smoke test::$(grep 'ready in' release.log | sed 's/^.*ENGINE *: //' | head -1); $(grep -E 'TotalTime' release.log | tr '\n' ' ')"
+  else
+    echo "::error title=Release smoke test::$(tail -c 3000 release.log | tr '\n' ' ')"
+    status=1
+  fi
+else
+  echo "::error title=Release install::$(cat release.log | tr '\n' ' ')"
+  status=1
+fi
 exit $status

@@ -2,6 +2,7 @@ package com.gauravmishra.jyotish.engine
 
 import android.app.Application
 import android.os.SystemClock
+import android.util.Log
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -35,8 +36,10 @@ object Engine {
                 if (!Python.isStarted()) Python.start(AndroidPlatform(app))
                 val api = Python.getInstance().getModule("engine_api")
                 startMs = SystemClock.elapsedRealtime() - t0
+                Log.i("ENGINE", "ready in $startMs ms, engine ${api.callAttr("engine_version")}")
                 ready.complete(api)
             } catch (e: Throwable) {
+                Log.e("ENGINE", "failed to start", e)
                 ready.completeExceptionally(e)
             }
         }

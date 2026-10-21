@@ -182,7 +182,7 @@ private fun MatchBody(m: MatchModel, onKoota: (Koota) -> Unit, onPorutham: () ->
     Column {
         m.kootas.forEach { k ->
             Row(
-                Modifier.fillMaxWidth().heightIn(min = 44.dp).clickable(role = Role.Button) { onKoota(k) }.testTag("koota_${k.key}"),
+                Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable(role = Role.Button) { onKoota(k) }.testTag("koota_${k.key}"),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(stringResource(kootaName(k.key)), modifier = Modifier.width(110.dp), style = MaterialTheme.typography.bodyMedium)

@@ -15,13 +15,40 @@ android {
         applicationId = "com.gauravmishra.jyotish"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.2-m1"
+        versionCode = 10
+        versionName = "1.0.0-rc1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             // Phones are arm64; x86_64 is for the emulator. Python 3.12+ is 64-bit only.
             abiFilters += listOf("arm64-v8a", "x86_64")
         }
+    }
+
+    // Release signing comes from the environment (a CI secret or the developer's machine), never from the repository:
+    //   JYOTISH_KEYSTORE (path), JYOTISH_KEYSTORE_PASSWORD, JYOTISH_KEY_ALIAS, JYOTISH_KEY_PASSWORD.
+    // Without them the release build is signed with the debug key so CI can install and smoke-test it; such a
+    // build must never be uploaded to Play.
+    val keystore = System.getenv("JYOTISH_KEYSTORE")?.let { file(it) }?.takeIf { it.exists() }
+    signingConfigs {
+        if (keystore != null) create("upload") {
+            storeFile = keystore
+            storePassword = System.getenv("JYOTISH_KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("JYOTISH_KEY_ALIAS")
+            keyPassword = System.getenv("JYOTISH_KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
+        }
+    }
+
+    bundle {
+        language { enableSplit = false }   // English and Hindi switch inside the app, so both must always be installed
     }
 
     buildFeatures {
