@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.MeaningsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-21T00:44:46.548Z" hostname="runnervmxehtw" time="0.017">
+  <properties/>
+  <testcase name="noLineReadsAsAPrediction" classname="com.gauravmishra.jyotish.MeaningsTest" time="0.011"/>
+  <testcase name="everyYogaInTheChartHasAMeaningAndAHindiName" classname="com.gauravmishra.jyotish.MeaningsTest" time="0.005"/>
+  <testcase name="everyPlanetHouseKootaAndNumberHasBothLanguages" classname="com.gauravmishra.jyotish.MeaningsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

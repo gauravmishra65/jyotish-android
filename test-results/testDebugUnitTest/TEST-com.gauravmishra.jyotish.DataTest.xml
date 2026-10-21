@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.DataTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-21T00:44:45.913Z" hostname="runnervmxehtw" time="0.562">
+  <properties/>
+  <testcase name="hindiSearchUsesDevanagariNames" classname="com.gauravmishra.jyotish.DataTest" time="0.228"/>
+  <testcase name="nearestPlaceGivesTheTimeZoneForTypedCoordinates" classname="com.gauravmishra.jyotish.DataTest" time="0.104"/>
+  <testcase name="placeListLoadsAndFindsIndianTowns" classname="com.gauravmishra.jyotish.DataTest" time="0.113"/>
+  <testcase name="datesAndTimesAreParsedStrictly" classname="com.gauravmishra.jyotish.DataTest" time="0.01"/>
+  <testcase name="searchIgnoresAccentsAndCase" classname="com.gauravmishra.jyotish.DataTest" time="0.071"/>
+  <testcase name="homeSummaryReadsARealEngineChart" classname="com.gauravmishra.jyotish.DataTest" time="0.028"/>
+  <testcase name="profilesAndChartCacheRoundTrip" classname="com.gauravmishra.jyotish.DataTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

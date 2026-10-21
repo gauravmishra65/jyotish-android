@@ -1,0 +1,11 @@
+Performing Streamed Install
+Success
+Starting: Intent { cmp=com.gauravmishra.jyotish/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.gauravmishra.jyotish/.MainActivity
+TotalTime: 886
+WaitTime: 889
+Complete
+--------- beginning of main
+10-21 00:49:13.698  6175  6191 I ENGINE  : ready in 1193 ms, engine astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2

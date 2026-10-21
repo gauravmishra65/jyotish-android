@@ -1,0 +1,28 @@
+--------- beginning of main
+10-21 00:48:58.934  4347  4467 I SPIKE   : {
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "ok": true,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "mismatches": [],
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "timings_s": {
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_0": 0.501,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_1": 0.339,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_2": 0.324,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_3": 0.567,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_4": 0.811,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "match": 0.003,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "muhurta_3_months": 1.551,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "names": 0.001
+10-21 00:48:58.934  4347  4467 I SPIKE   :  },
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "import_s": 0.969,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "python": "3.13.16",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "engine_version": "astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "ephe_files": [
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "seas_18.se1",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "sefstars.txt",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "semo_18.se1",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "sepl_18.se1"
+10-21 00:48:58.934  4347  4467 I SPIKE   :  ],
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "base_rates_present": true,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "tempdir": "\/data\/user\/0\/com.gauravmishra.jyotish\/cache\/chaquopy\/tmp",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "python_start_ms": 3476,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "waited_for_engine_ms": 0
+10-21 00:48:58.934  4347  4467 I SPIKE   : }

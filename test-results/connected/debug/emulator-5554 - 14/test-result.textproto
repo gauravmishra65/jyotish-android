@@ -1,0 +1,413 @@
+# proto-message: google.testing.platform.proto.api.core.TestSuiteResult
+# 2026-10-21T00:49:00.857925322Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 7
+  device {
+    id: "emulator-5554"
+    friendly_name: "primary"
+  }
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "AccessibilityTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "mainScreensHaveLabelledFullSizeTargets"
+    start_time {
+      seconds: 1792543684
+      nanos: 16000000
+    }
+    end_time {
+      seconds: 1792543698
+      nanos: 555000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.AccessibilityTest-mainScreensHaveLabelledFullSizeTargets.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FlowTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "welcomeAddProfileAndSeeTheChartOnHome"
+    start_time {
+      seconds: 1792543698
+      nanos: 575000000
+    }
+    end_time {
+      seconds: 1792543711
+      nanos: 545000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.FlowTest-welcomeAddProfileAndSeeTheChartOnHome.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FlowTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "hindiInterfaceShowsHindiNames"
+    start_time {
+      seconds: 1792543711
+      nanos: 556000000
+    }
+    end_time {
+      seconds: 1792543720
+      nanos: 394000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.FlowTest-hindiInterfaceShowsHindiNames.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "MilanTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "milanShowsTheEngineScore"
+    start_time {
+      seconds: 1792543720
+      nanos: 405000000
+    }
+    end_time {
+      seconds: 1792543725
+      nanos: 707000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.MilanTest-milanShowsTheEngineScore.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "MuhurtaTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "findsTheSameDaysAsTheDesktop"
+    start_time {
+      seconds: 1792543725
+      nanos: 710000000
+    }
+    end_time {
+      seconds: 1792543732
+      nanos: 41000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.MuhurtaTest-findsTheSameDaysAsTheDesktop.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "NumerologyTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "numbersGridAndNameOptions"
+    start_time {
+      seconds: 1792543732
+      nanos: 71000000
+    }
+    end_time {
+      seconds: 1792543735
+      nanos: 13000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.NumerologyTest-numbersGridAndNameOptions.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "SpikeTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "engineMatchesDesktopSnapshot"
+    start_time {
+      seconds: 1792543735
+      nanos: 15000000
+    }
+    end_time {
+      seconds: 1792543739
+      nanos: 115000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.SpikeTest-engineMatchesDesktopSnapshot.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/emulator-5554 - 14/testlog/test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

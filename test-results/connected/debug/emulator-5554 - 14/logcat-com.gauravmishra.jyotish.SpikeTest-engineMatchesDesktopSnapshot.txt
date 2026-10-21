@@ -1,0 +1,1349 @@
+10-21 00:48:54.820  4347  4467 I TestRunner: started: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)
+10-21 00:48:54.826  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_CORE_RELAXED_REFRESH_TASK.
+10-21 00:48:54.828  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task MDD_MAINTENANCE_TASK.
+10-21 00:48:54.839  1662  2368 I A       : Using proto config with mendel
+10-21 00:48:54.849  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task NGA_PRIORITY_DOWNLOAD_TASK.
+10-21 00:48:54.872  1093  1093 D SearchTargetUtil:  query= size=15
+10-21 00:48:54.872  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=arc raiders pve test results,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=arc raiders pve test results searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 49b1dbec-b750-4ce1-83f4-89757cd7c365
+10-21 00:48:54.873  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=fedex truck stolen trading cards psa,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=fedex truck stolen trading cards psa searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 4b4b5ebd-2285-40c9-af88-33253950efba
+10-21 00:48:54.873  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=orionid meteor shower,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=orionid meteor shower searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: b568bcf2-166d-4d99-a374-3bc7862c7c17
+10-21 00:48:54.873  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=today wordle hints,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=today wordle hints searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 8c043627-6b71-4a39-af60-51b433cbc08b
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=minnesota vikings trade deadline targets,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=minnesota vikings trade deadline targets searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 62986f89-21f1-432e-9ec3-c1af4b477359
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=eagles concert tour announcements 2027,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=eagles concert tour announcements 2027 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 1149deea-2ed8-4e2b-9010-04f5def4af26
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=person regrets surrendering stray dog,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=person regrets surrendering stray dog searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: f07ecdeb-9e43-46ef-a0d2-8dc58c5d2d98
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=mechanics tool set,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=mechanics tool set searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: e73fa78a-e78b-40f9-9cbd-3f61af078aab
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=arizona weather,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=arizona weather searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 260e6192-bab1-4f76-b8a3-0d43b413545a
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=apple iphone duo,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=apple iphone duo searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: ccbec4f1-e455-49cb-987d-2f6c53263c71
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIADAAMAMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAFBgcEAwEA/8QALRAAAgEDAgUDAwQDAAAAAAAAAQIDBAURACEGEhMxQSJRYVKRwQcycfAWI4H/xAAXAQEBAQEAAAAAAAAAAAAAAAAEAwIF/8QAIREAAQQCAgIDAAAAAAAAAAAAAQACAxESQSExInEEEzL/2gAMAwEAAhEDEQA/AE+xXiJ6aRplQzK2zEZONaurc6m4QxmPlhl2TPnS1TxPDOiPH012z86bIq+Cl6UkrORH6kBPn21GmiQGkryMZRe4WmgsdJ1amuWOpYEJvjJ/OlSmvMAjiin5pXYnnIblxj30wW3hb/Lad7pd6mdeoxFOqEBUj8HG/fvrJV/pkYeXoXjm9w0OPzrTp2lxtZbBJiKSxcqtHq1Fri5gxA5c5OdaamwtTJMlxISvKho1ztjQyrpJrTeHp5JcyQOMSY2Ye5++nfjOiWToSSyMrCMFJD3xq32PkZjfpSxDHWQjnEdqtF5oUqLc6LOg/annU5kpq2evjt7BjG8gUNjtk99PLWkcPXWupjPI4jOIy4w3Kff58f8ANBL7WQU6RsW/2iQHmHcDO+oGr4VW3XPSabXSXGhuUvSrg1uWLCJjcHso/p19QXavrKt4q+m6aKxAYqRn586WU4kucZaSnVRT+kKjQu3U339QBAP86bqe6wyW1KllOTGWKnGRj30NwI7XQaW6U14npnn4rrI4kL+oeR+3A0SvldLU2WiNVIJJo35DjvjxnW25Xe1FeakVZblKOWVRCSY2yN+Y7eCABoaLVG9sqblcGdJMZjj7ffTvjyYm3aQJ4gfybtOv6yyCKro7jb58wVEQMhD/AFbocHuCA3b28bal8lwM0MkE7svUAXqqfGQTqp8ZU1dV8E1VFTU807RTKY4YlZ3jTqKWjwM7IwcA/TyajjoylkdSrDYqwwQdKiPiiu5RCOtrqOZQVYmMYV4zjmUfI0fs9dX1lvcSx9OihyxPmQ/ToBZauWknjKDnZT6F9/jR3iq6VMVOKaWCanlPp6TKVbJ+P40OSMhwFJcbwRZPWl7Y0tD21K55JlqGJ9YB7/I8a4T1/XWWCdmZJBgHQCGeSgpEpo29XOXkHcA9gPtrpBVsNnww8500wszDiOdozJnBhb3a/9k=,suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=true,is_personal=false,suggest_raw_text=winnipeg jets connor hellebuyck,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=Connor Hellebuyck searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 76ad1120-9d7d-4996-b948-227978c6500e
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=visionquest disney+ series villains,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=visionquest disney+ series villains searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 881d8942-d524-46e3-8a99-08057bcf86d0
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=california great white shark breach,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=california great white shark breach searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: f787334b-db20-4025-ac9e-5d2bac34aad5
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=chocolate lays potato chips,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=chocolate lays potato chips searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 39ffe438-3f51-441d-a628-3bbc2f541b23
+10-21 00:48:54.874  1093  1093 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=sony playstation,group_id=web35544,response_id=5c54826e-2f9a-42fe-bbdf-129405c3a9e5,support_query_builder=false,} searchAction=sony playstation searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 73cb2931-9126-430d-b0c0-e1319629b686
+10-21 00:48:54.889  1662  2368 I A       : Using proto config with mendel
+10-21 00:48:54.891  1662  2312 I A       : group apa_head_suggest not present without account in *
+10-21 00:48:54.892  1662  2342 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.032S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT1M20.143S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT58.647S (THIRTY_SECONDS_TO_ONE_MINUTE))
+10-21 00:48:54.905  1662  2342 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+10-21 00:48:54.921  1662  5725 I A       : Attempting to cache the data for corpora [21].
+10-21 00:48:54.946  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task NGA_READ_ONLY_LOGS_BASED_TOP_CONTACTS_NGA_PUSH.
+10-21 00:48:54.948  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task CONTACT_AFFINITY_MODEL_CONTACTS_CHANGE_REFRESH.
+10-21 00:48:54.971  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task PCP_V1_BACKGROUND_REFRESH.
+10-21 00:48:54.990  1662  5729 E PCP.BackgroundTask: Missing PCP TNG entry point binding, or zero state response to PCP is not enabled.
+10-21 00:48:55.004  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task REFRESH_NOW_CONFIGURATION.
+10-21 00:48:55.015  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task RESTORE_SPEAKER_MODEL.
+10-21 00:48:55.016  1662  2368 I A       : Using proto config with mendel
+10-21 00:48:55.016  1662  2368 I A       : Using proto config with mendel
+10-21 00:48:55.019  1662  5722 I A       : Canceling restore - user account is null
+10-21 00:48:55.027  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task SYNC_TAPAS_ZERO_PREFIX_CACHE.
+10-21 00:48:55.049  4578  4578 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@b9fbfca
+10-21 00:48:55.052   518   995 W InputManager-JNI: Input channel object '7fb4cad com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+10-21 00:48:55.068  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_MINUS_ONE_SYNC.
+10-21 00:48:55.070  1662  2368 I TngMinusOneSync: Syncing TNG:-1
+10-21 00:48:55.071  1662  2368 W TngMinusOneSync: TNG state changed: FIRST_ENROLLED
+10-21 00:48:55.082  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task UPDATE_GSERVICES_CONFIG.
+10-21 00:48:55.084  1662  5722 I A       : Updating Gservices keys
+10-21 00:48:55.096  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task UPLOAD_HOTWORD_SETTINGS.
+10-21 00:48:55.101  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task UPDATE_LAUNCHER_SHORTCUT.
+10-21 00:48:55.114  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task DOODLE_SCHEDULE_SYNC_TASK.
+10-21 00:48:55.118  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_OPA_REFRESH_TASK.
+10-21 00:48:55.119  1662  2075 I A       : Attempting to cache the data for corpora [81, 22, 55, 49, 33, 32, 12].
+10-21 00:48:55.122  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task FETCH_ADVERTISING_INFO.
+10-21 00:48:55.128  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_PKG_ENTITIES_REFRESH_TASK.
+10-21 00:48:55.129  1662  5724 I A       : No accounts found for [PKG_ENTITIES], not syncing anything.
+10-21 00:48:55.132  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_PKG_REFRESH_TASK.
+10-21 00:48:55.133  1662  2075 I A       : Attempting to cache the data for corpora [].
+10-21 00:48:55.135  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_ASSISTANT_ACTION_HISTORY_SYNC_TASK.
+10-21 00:48:55.136  1662  2075 I A       : Attempting to cache the data for corpora [14].
+10-21 00:48:55.139  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_REFRESH_TASK.
+10-21 00:48:55.142  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task GELLER_CORE_REFRESH_TASK.
+10-21 00:48:55.144  1662  5722 I A       : Attempting to cache the data for corpora [21].
+10-21 00:48:55.148  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task LEGACY_NOW_SYNC.
+10-21 00:48:55.150  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task MDD_CELLULAR_CHARGING_TASK.
+10-21 00:48:55.150  1662  5724 I A       : #fetchAndUpdateConfigurationInternal
+10-21 00:48:55.152  1662  2075 E SingleDataFileGroupPop: Failed to add file group
+10-21 00:48:55.156  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task MDD_CHARGING_TASK.
+10-21 00:48:55.156  1662  5722 E SingleDataFileGroupPop: Failed to add file group
+10-21 00:48:55.164  1662  2312 I A       : NGA Sync: MDD Task: MDD.MAINTENANCE.PERIODIC.GCM.TASK done.
+10-21 00:48:55.165  1662  2312 I A       : NGA Sync: isNgaSyncEnabled: false; enableFileGroupPopulator: false; requiresMddAssets: false
+10-21 00:48:55.165  1662  2139 I A       : Refresh account policy.
+10-21 00:48:55.168  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task MDD_WIFI_CHARGING_TASK.
+10-21 00:48:55.169  1662  5724 E SingleDataFileGroupPop: Failed to add file group
+10-21 00:48:55.190  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task REFRESH_SEARCH_HISTORY.
+10-21 00:48:55.191  1662  5720 W LocationOracle: getBestLocation(): no location is available
+10-21 00:48:55.252  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.253  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.253  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.254  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.255  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.255  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.255  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.255  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.257  1662  5724 E d       : RuntimeException while executing runnable cb{com.google.apps.tiktok.tracing.ej@9550323} with executor MoreExecutors.directExecutor()
+10-21 00:48:55.257  1662  5724 E d       : java.lang.NullPointerException: Attempt to read from field 'java.lang.String com.google.android.libraries.mdi.download.ae.b' on a null object reference in method 'void com.google.android.libraries.mdi.download.h.bq.gH(java.lang.Object)'
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.mdi.download.h.bq.gH(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.apps.tiktok.tracing.ej.gH(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.cb.run(PG:7)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.d.i(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.d.iq(PG:5)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.ci.t(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.mdi.download.h.bu.b(PG:26)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.mdi.download.gs.p(PG:3)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.mdi.download.gs.s(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.mdi.download.gs.g(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.apps.gsa.staticplugins.bw.a.a(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.gsa.k.a.i.apply(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.h.e(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.common.util.concurrent.j.run(PG:9)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:55.257  1662  5724 E d       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:55.257  1662  5724 E d       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.i.i.run(PG:2)
+10-21 00:48:55.257  1662  5724 E d       : 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:55.257  1662  5724 E d       : 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:55.258  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.258  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.258  1662  5724 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.259  1662  5729 I A       : Starting new batch; batchId=1 corpus=1004
+10-21 00:48:55.264  1662  5723 I A       : Joining existing batch; batchId=1 corpus=1015
+10-21 00:48:55.264  1662  5726 I A       : Joining existing batch; batchId=1 corpus=1014
+10-21 00:48:55.265  1662  5722 E d       : RuntimeException while executing runnable cb{com.google.apps.tiktok.tracing.ej@6d8a0dd} with executor MoreExecutors.directExecutor()
+10-21 00:48:55.265  1662  5722 E d       : java.lang.NullPointerException: Attempt to read from field 'java.lang.String com.google.android.libraries.mdi.download.ae.b' on a null object reference in method 'void com.google.android.libraries.mdi.download.h.bq.gH(java.lang.Object)'
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.mdi.download.h.bq.gH(PG:2)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.apps.tiktok.tracing.ej.gH(PG:2)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.cb.run(PG:7)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.d.i(PG:1)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.d.iq(PG:5)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.ci.t(PG:1)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.mdi.download.h.bu.b(PG:26)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.mdi.download.gs.p(PG:3)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.mdi.download.gs.g(PG:4)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.apps.gsa.staticplugins.bw.a.a(PG:1)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.gsa.k.a.i.apply(PG:2)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.h.e(PG:2)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.common.util.concurrent.j.run(PG:9)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:55.265  1662  5722 E d       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:55.265  1662  5722 E d       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.i.i.run(PG:2)
+10-21 00:48:55.265  1662  5722 E d       : 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:55.265  1662  5722 E d       : 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:55.265  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.265  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.265  1662  5722 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.266  1662  2586 I A       : Joining existing batch; batchId=1 corpus=1015
+10-21 00:48:55.266  1662  5726 I A       : Joining existing batch; batchId=1 corpus=1004
+10-21 00:48:55.266  1662  5723 I A       : Joining existing batch; batchId=1 corpus=1008
+10-21 00:48:55.266  1662  5729 I A       : Joining existing batch; batchId=1 corpus=1014
+10-21 00:48:55.267  1662  5722 I A       : Download file group for language pack: en-US
+10-21 00:48:55.267  1662  5724 I A       : Download file group for language pack: en-US
+10-21 00:48:55.267  1662  5724 W A       : Locale en-US is not compatible, please check manifest exists
+10-21 00:48:55.268  1662  5722 W A       : Locale en-US is not compatible, please check manifest exists
+10-21 00:48:55.268  1662  2621 I A       : Joining existing batch; batchId=1 corpus=1008
+10-21 00:48:55.268  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.269  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.269  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.270  1662  5724 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.270  1662  5724 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.270  1662  5724 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.270  1662  5724 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.270  1662  5724 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.271  1662  5724 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.271  1662  5724 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.272  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.272  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.272  1662  5724 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.272  1662  5724 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.273  1662  5724 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.273  1662  5724 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.273  1662  5724 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.273  1662  5724 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.273  1662  5724 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.274  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.274  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.274  1662  5724 I A       : Using proto config with mendel
+10-21 00:48:55.274  1662  5724 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.274  1662  5724 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.274  1662  5724 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.275  1662  5724 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.275  1662  5724 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.275  1662  5724 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.275  1662  5724 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.275  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.275  1662  5722 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.275  1662  5722 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.276  1662  5722 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.276  1662  5722 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.276  1662  5722 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.276  1662  5722 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.276  1662  5722 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.276  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.276  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.276  1662  5722 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.277  1662  5722 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.277  1662  5722 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.277  1662  5722 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.277  1662  5722 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.277  1662  5722 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.277  1662  5722 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.281  1662  5722 I A       : Using proto config with mendel
+10-21 00:48:55.281  1662  5722 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.281  1662  5722 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.281  1662  5722 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.281  1662  5722 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.281  1662  5722 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.281  1662  5722 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.282  1662  5722 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.284  1662  2075 E d       : RuntimeException while executing runnable cb{com.google.apps.tiktok.tracing.ej@ece7f49} with executor MoreExecutors.directExecutor()
+10-21 00:48:55.284  1662  2075 E d       : java.lang.NullPointerException: Attempt to read from field 'java.lang.String com.google.android.libraries.mdi.download.ae.b' on a null object reference in method 'void com.google.android.libraries.mdi.download.h.bq.gH(java.lang.Object)'
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.mdi.download.h.bq.gH(PG:2)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.apps.tiktok.tracing.ej.gH(PG:2)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.cb.run(PG:7)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.bf.execute(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.d.i(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.d.iq(PG:5)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.ci.t(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.mdi.download.h.bu.b(PG:26)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.mdi.download.gs.p(PG:3)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.mdi.download.gs.s(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.mdi.download.gs.g(PG:3)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.apps.gsa.staticplugins.bw.a.a(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.gsa.k.a.i.apply(PG:2)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.h.e(PG:2)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.common.util.concurrent.j.run(PG:9)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:55.284  1662  2075 E d       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:55.284  1662  2075 E d       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.i.i.run(PG:2)
+10-21 00:48:55.284  1662  2075 E d       : 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:55.284  1662  2075 E d       : 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:55.285  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.285  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.285  1662  2075 E PhFileGroupPop: Failed to add file group
+10-21 00:48:55.285  1662  5724 I A       : Joining existing batch; batchId=1 corpus=1008
+10-21 00:48:55.286  1662  2621 I A       : Joining existing batch; batchId=1 corpus=1014
+10-21 00:48:55.286  1662  5729 I A       : Joining existing batch; batchId=1 corpus=1015
+10-21 00:48:55.287  1662  5722 I A       : Joining existing batch; batchId=1 corpus=1004
+10-21 00:48:55.287  1662  2075 I A       : Download file group for language pack: en-US
+10-21 00:48:55.287  1662  2075 W A       : Locale en-US is not compatible, please check manifest exists
+10-21 00:48:55.288  1662  5728 D PhFileGroupPop: Added file groups assistant_appintegration_appactions_config
+10-21 00:48:55.293  1662  2312 I sb.r.PDSWriter: Updating TNG suggest bootstrap data
+10-21 00:48:55.298  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.301  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task REFRESH_AUTH_TOKENS.
+10-21 00:48:55.301  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.302  1662  2140 I sb.r.PDSWriter: Updated TNG suggest bootstrap data
+10-21 00:48:55.303  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.303  1662  2075 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.303  1662  2075 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.303  1662  2075 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.304  1662  2075 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.304  1662  2075 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.304  1662  2075 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.310  1662  2075 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.310  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.311  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.311  1662  2075 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.312  1662  2075 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.312  1662  2075 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.312  1662  5728 D PhFileGroupPop: Added file groups fedass_policy_config_group
+10-21 00:48:55.312  1662  5728 D PhFileGroupPop: Added file groups assistant_appintegration_appactions_config
+10-21 00:48:55.313  1662  5728 D PhFileGroupPop: Added file groups fedass_policy_config_group
+10-21 00:48:55.314  1662  2075 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.314  1662  2075 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.314  1662  2075 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.314  1662  2075 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.314  1662  5728 D PhFileGroupPop: Added file groups assistant_appintegration_appactions_config
+10-21 00:48:55.315  1662  2075 I A       : Using proto config with mendel
+10-21 00:48:55.315  1662  2075 I A       : Merging legacy hotword config map with new proto.
+10-21 00:48:55.316  1662  2075 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.316  1662  2075 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+10-21 00:48:55.316  1662  2075 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+10-21 00:48:55.316  1662  2075 I A       : Skipping. Expected model: 2 Found: 1
+10-21 00:48:55.316  1662  2075 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+10-21 00:48:55.316  1662  2075 I HotwordModelPopulator: #updateHotwordFileGroup group name: hotword_model_en-US_okhey, raw locale: en-US, locale: en-US
+10-21 00:48:55.316  1662  5728 D PhFileGroupPop: Added file groups fedass_policy_config_group
+10-21 00:48:55.318  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_DISCOVER_CLEANUP.
+10-21 00:48:55.321  1662  2368 I TngDiscoverClean: Trying to cleanup TNG:Discover flag change
+10-21 00:48:55.321  1662  2368 I TngDiscoverClean: Starting FeedSync in TNG:Discover
+10-21 00:48:55.329  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task TNG_VOICE_SEARCH_SYNC.
+10-21 00:48:55.330  1662  2368 I TngVoiceSearchSync: Syncing TNG:VoiceSearch
+10-21 00:48:55.335  1662  5728 D PhFileGroupPop: Added file groups tapas_cortex
+10-21 00:48:55.336  1662  5728 D PhFileGroupPop: Added file groups tapas_cortex
+10-21 00:48:55.337  1662  5728 D PhFileGroupPop: Added file groups tapas_cortex
+10-21 00:48:55.338  1662  1662 I BgTaskExecutorImpl: Starting PERIODIC background task UPDATE_LANGUAGE_PACKS.
+10-21 00:48:55.342  1662  2075 I A       : Skip LanguagePack auto-update because controller is uninitialized.
+10-21 00:48:55.347  1662  2140 I LanguagePackUpdateContr: Queuing language pack download for: en-US
+10-21 00:48:55.349  1662  2139 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.350  1662  2082 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.350  1662  1662 I LanguagePackUpdateContr: #finishInitRunnable run
+10-21 00:48:55.350  1662  2140 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.351  1662  2140 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.352  1662  2140 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.352  1662  2082 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.352  1662  2082 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.352  1662  2139 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.352  1662  2139 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.357  1662  2139 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.357  1662  2419 I LanguagePackUpdateContr: Proceeding with download, not active: soda-en-US-v1001
+10-21 00:48:55.358  1662  2082 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.358  1662  2082 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.358  1662  2139 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.364  1662  2082 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.365  1662  2082 I MicroModelsUtil: #getHotwordModelFromMobstore [mobstoreUri: android://com.google.android.googlequicksearchbox/files/datadownload/shared/public/datadownloadfile_1792543677176]
+10-21 00:48:55.365  1662  2139 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.365  1662  2140 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.368  1662  2082 I HotwordModelPopulator: Updated file group for locale 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/975058821313279e27b2c3f04de0beef/hotword.data. Download already finished.
+10-21 00:48:55.429  2045  5736 D DownloadManager: [13] Starting
+10-21 00:48:55.443   335  5737 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 10086 0}
+10-21 00:48:55.446   335  5739 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-21 00:48:55.446   335  5739 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71ea13324f90
+10-21 00:48:55.446   335  5739 I resolv  : doQuery: rcode=0, ancount=4, return value=95
+10-21 00:48:55.447   335  5738 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-21 00:48:55.448   335  5738 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71e8e3320fd0
+10-21 00:48:55.448   335  5738 I resolv  : doQuery: rcode=0, ancount=4, return value=143
+10-21 00:48:55.449  2045  5736 D TrafficStats: tagSocket(76) with statsTag=0xffffff01, statsUid=10132
+10-21 00:48:55.641   835   859 I PermissionControllerServiceImpl: Updating user sensitive for uid 10132
+10-21 00:48:55.643  1049  1049 D CarrierSvcBindHelper: onPackageModified: com.google.android.googlequicksearchbox
+10-21 00:48:55.644  1049  1049 D CarrierSvcBindHelper: No carrier app for: 0
+10-21 00:48:55.645   518   623 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+10-21 00:48:55.645  1025  1025 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-21 00:48:55.647  1025  1025 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-21 00:48:55.647   834   834 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-21 00:48:55.654   834   906 D StylusManager: Stylus InputDevice changed: 13 virtio_input_multi_touch_10
+10-21 00:48:55.656   834   906 D StylusManager: Stylus InputDevice changed: 12 virtio_input_multi_touch_9
+10-21 00:48:55.657   518   610 I RoleService: Granting default roles...
+10-21 00:48:55.658   834   906 D StylusManager: Stylus InputDevice changed: 11 virtio_input_multi_touch_8
+10-21 00:48:55.660   834   906 D StylusManager: Stylus InputDevice changed: 10 virtio_input_multi_touch_7
+10-21 00:48:55.661  1049  1326 D ImsResolver: maybeAddedImsService, packageName: com.google.android.googlequicksearchbox
+10-21 00:48:55.671   834   906 D StylusManager: Stylus InputDevice changed: 4 virtio_input_multi_touch_1
+10-21 00:48:55.671   834   906 D StylusManager: Stylus InputDevice changed: 6 virtio_input_multi_touch_3
+10-21 00:48:55.674   834   906 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+10-21 00:48:55.677   835  5741 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+10-21 00:48:55.677   835  5741 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMinTargetSdkVersion=1, mFlags='0', mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0, mMetaData=[]}
+10-21 00:48:55.677   835  5741 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+10-21 00:48:55.678   835  5741 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+10-21 00:48:55.679   834   906 D StylusManager: Stylus InputDevice changed: 14 virtio_input_multi_touch_11
+10-21 00:48:55.680   834   906 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+10-21 00:48:55.684   834   906 D StylusManager: Stylus InputDevice changed: 5 virtio_input_multi_touch_2
+10-21 00:48:55.686   834   906 D StylusManager: Stylus InputDevice changed: 9 virtio_input_multi_touch_6
+10-21 00:48:55.764  1539  1539 I AiAiEcho: AppFetcherImpl onPackageChanged com.google.android.googlequicksearchbox.
+10-21 00:48:55.769  1539  2710 I AiAiEcho: AppIndexer Package:[com.google.android.googlequicksearchbox] UserProfile:[0] Enabled:[true].
+10-21 00:48:55.769  1539  2710 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.googlequicksearchbox], userId:[0], reason:[package is updated.].
+10-21 00:48:55.776  5226  5232 I .gms.persistent: Background concurrent copying GC freed 232209(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 13MB/27MB, paused 24us,13us total 144.928ms
+10-21 00:48:55.883  5300  5422 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+10-21 00:48:55.893  1662  2075 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+10-21 00:48:55.894  1662  1662 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 352 seconds.
+10-21 00:48:55.897  5226  5252 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+10-21 00:48:55.997  5300  5422 I Icing   : updateResources: need to parse arkh{com.google.android.gms}
+10-21 00:48:56.074  5226  5285 I HeterodyneSyncer: Removed 0 invalid users [CONTEXT service_id=51 ]
+10-21 00:48:56.124  1662  5728 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+10-21 00:48:56.150  5226  5439 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+10-21 00:48:56.155  5226  5439 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+10-21 00:48:56.189  3875  3889 I ogle.android.gm: CollectorTransition concurrent copying GC freed 33537(1765KB) AllocSpace objects, 1(32KB) LOS objects, 49% free, 3869KB/7739KB, paused 561us,17us total 120.820ms
+10-21 00:48:56.261  1662  2075 I A       : Scheduled one-off task for batch; batchId=1 taskId=-1000006 corpora=[1004,1008,1014,1015]
+10-21 00:48:56.261  1662  2075 I A       : Pending callbacks: 1
+10-21 00:48:56.322  5226  5232 I .gms.persistent: Background young concurrent copying GC freed 210499(10MB) AllocSpace objects, 10(312KB) LOS objects, 36% free, 17MB/27MB, paused 15us,29us total 124.755ms
+10-21 00:48:56.366  5226  5231 I .gms.persistent: Compiler allocated 4919KB to compile void bwhy.D(java.util.Set, java.util.List, dmtw, java.lang.String, boolean, dzew, bwhx, java.util.LinkedHashMap, dhlq, boolean, edam)
+10-21 00:48:56.413  5226  5259 E bwfc    : Phenotype API error. Event # edax@53de7c87, EventCode: 5 [CONTEXT service_id=51 ]
+10-21 00:48:56.413  5226  5259 E bwfc    : bwdx: 29501: Stale snapshot for com.google.android.gms.trustagent.activeunlock.primary#com.google.android.gms(change count changed - expected 1  but was 0)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at bwfg.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):16)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at bwff.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-21 00:48:56.413  5226  5259 E bwfc    : 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+10-21 00:48:56.426  5226  5259 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.gms.trustagent.activeunlock.primary#com.google.android.gms(change count changed - expected 1  but was 0), resolution=null}]
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at bwfc.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at bwfc.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at avsy.eo(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at avtf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+10-21 00:48:56.426  5226  5259 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:56.438  5300  5334 W MobStoreFlagStore: Failed to commit due to stale snapshot for com.google.android.gms.trustagent.activeunlock.primary#com.google.android.gms, triggering flag update. Experiments may be delayed til next app start.
+10-21 00:48:56.446  5226  5431 W .gms.persistent: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.phenotype.UPDATE (5450) at void hjm.run()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in void hjm.run() for 5.993s
+10-21 00:48:56.478  5226  5256 W BpBinder: Large outgoing transaction of 329636 bytes, interface descriptor , code 4
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+10-21 00:48:56.479  1662  2140 W A       : Can't format flag bindle_flags__velour_jar to integer.
+10-21 00:48:56.490  5300  5300 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10129; state: ENABLED
+10-21 00:48:56.492  1662  2139 I FedAssExpListener: Fed-ass not supported for signed out users.
+10-21 00:48:56.492  1662  2139 I FedAssExpListener: Successfully processed experiments changed.
+10-21 00:48:56.493  1662  2139 I A       : NGA enabled in interactor.
+10-21 00:48:56.493  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.494  1662  2128 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+10-21 00:48:56.496  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.497  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:56.499  1662  2128 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:56.501  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.501  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.502  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.502  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.503  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.504  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.505  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.505  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.506  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.506  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.506  5300  5334 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+10-21 00:48:56.506  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.507  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.508  5300  5408 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+10-21 00:48:56.508  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.518  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:56.520  5300  5359 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+10-21 00:48:56.570  1662  5728 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+10-21 00:48:56.575  1662  1662 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+10-21 00:48:56.575  5226  5286 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+10-21 00:48:56.579   335  5750 I resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10129 0}
+10-21 00:48:56.579   335  5751 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-21 00:48:56.579   335  5751 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71e873324490
+10-21 00:48:56.579   335  5751 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+10-21 00:48:56.585  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.585  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.587   335  5752 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-21 00:48:56.587  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.587   335  5752 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x71e9b3327f50
+10-21 00:48:56.587   335  5752 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+10-21 00:48:56.588  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.588  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.588  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.589  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.589  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.589  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.591  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.592  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.593  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.593  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.594  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.594  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.594  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.594  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.594  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.595  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.595  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.595  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.597  1662  1662 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 359 seconds.
+10-21 00:48:56.597  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.599  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.601  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.602  5226  5557 D TrafficStats: tagSocket(205) with statsTag=0x1203, statsUid=10129
+10-21 00:48:56.606  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.606  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.607  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.607  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.607  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.607  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.607  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.608  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.608  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.609  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.609  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.609  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.609  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.610  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.610  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.610  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.612  1662  1662 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 359 seconds.
+10-21 00:48:56.631  1662  1662 I SearchWidgetFlow: GsaWidgetProvider:onReceive(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) started
+10-21 00:48:56.633  1662  2368 I SearchWidgetFlow: GsaWidgetSessionController:handleGenericClientEvent
+10-21 00:48:56.635  1662  2368 I SearchWidgetFlow: SearchWidgetWorker:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) started
+10-21 00:48:56.636  1662  1662 I SearchWidgetFlow: SearchWidget:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider })
+10-21 00:48:56.637  1662  2342 I SearchWidgetFlow: SearchWidgetWorker:handleIntent(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) done
+10-21 00:48:56.637  1662  2312 I SearchWidgetFlow: GsaWidgetProvider:onReceive(Intent { act=update-widget-intent flg=0x10 cmp=com.google.android.googlequicksearchbox/.SearchWidgetProvider }) done
+10-21 00:48:56.644  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.645  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.645  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.645  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.646  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.646  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.646  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.646  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.647  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.647  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.648  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.648  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.648  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.648  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.649  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.649  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.651  5300  5410 I Icing   : Usage reports ok 1, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:56.654  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:56.661  5300  5410 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:56.680  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.680  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.680  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.680  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.681  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.681  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.681  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.682  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.682  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.683  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.683  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.683  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.684  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.684  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.684  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.684  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.701  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.702  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.703  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.703  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.703  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.704  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.704  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.705  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.708  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.709  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.709  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.710  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.710  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.711  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.711  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.711  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.716  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.716  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.716  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.717  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.717  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.717  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.718  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.718  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.719  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.719  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.719  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.719  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.720  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.720  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.720  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.721  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.738  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.738  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.738  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.739  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.739  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.740  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.740  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.740  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.741  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.742  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.742  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.742  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.743  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.743  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.743  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.743  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.750  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.750  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.751  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.751  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.752  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.753  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.753  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.754  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.755  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.756  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.757  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.757  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.758  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.759  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.759  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.760  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.781  5226  5431 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.782  5226  5431 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.782  5226  5431 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.782  5226  5431 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.783  5226  5431 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.783  5226  5431 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.783  5226  5431 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.784  5226  5431 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.785  5226  5431 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.785  5226  5431 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.786  5226  5431 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.786  5226  5431 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.786  5226  5431 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.787  5226  5431 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.787  5226  5431 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.787  5226  5431 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.792  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.792  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.793  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.793  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.793  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.794  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.794  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.794  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.795  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.796  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.796  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.797  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.797  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.797  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.798  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.798  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.808  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.808  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.809  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.809  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.809  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.810  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.810  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.811  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.812  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.813  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.813  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.813  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.814  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.814  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.815  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.815  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.851  1662  1662 V ClearcutMetricXmitter: Transmission is done.
+10-21 00:48:56.863  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.863  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.864  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.864  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.865  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.865  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.865  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.866  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.867  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.867  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.868  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.868  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.869  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.869  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.869  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.870  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.882  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.882  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.883  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.883  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.883  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.884  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.884  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.884  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.885  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.885  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.886  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.886  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.886  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.887  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.887  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.887  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.901  1662  1662 V ClearcutMetricXmitter: Transmission is done.
+10-21 00:48:56.916  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.917  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.918  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.919  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.920  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.920  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.921  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.922  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.926  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.926  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.926  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.927  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.927  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.927  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.928  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.928  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.934  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.934  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.934  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.935  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.935  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.936  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.936  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.936  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.937  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.937  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.938  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.938  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.938  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.939  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.939  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.940  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.944  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.945  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.945  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.945  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.946  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.946  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.946  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.947  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:56.948  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:56.948  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:56.949  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.949  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:56.949  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:56.950  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:56.950  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:56.950  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.024  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+10-21 00:48:57.025  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+10-21 00:48:57.025  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+10-21 00:48:57.026  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+10-21 00:48:57.027  1662  2082 W A       : Can't format flag bindle_flags__velour_jar to integer.
+10-21 00:48:57.036  1662  2128 I FedAssExpListener: Fed-ass not supported for signed out users.
+10-21 00:48:57.037  1662  2128 I FedAssExpListener: Successfully processed experiments changed.
+10-21 00:48:57.037  1662  2139 I A       : NGA enabled in interactor.
+10-21 00:48:57.038  1662  2140 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:57.043  1662  2140 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:57.050  5300  5394 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+10-21 00:48:57.050  5300  5408 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+10-21 00:48:57.051  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.052  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.053  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.053  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:57.053  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.054  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.054  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.055  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.056  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.057  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.057  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.057  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.057  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.058  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.058  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.058  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.058  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.061  5300  5410 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:57.070  1461  1520 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdownVoiceInternal():95 shutdownVoiceInternal()
+10-21 00:48:57.074  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:57.075  5226  5393 W BpBinder: Large outgoing transaction of 329636 bytes, interface descriptor , code 4
+10-21 00:48:57.081  5300  5410 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:57.092  5226  5232 I .gms.persistent: Background concurrent copying GC freed 358903(12MB) AllocSpace objects, 5(100KB) LOS objects, 49% free, 17MB/34MB, paused 327us,17us total 255.269ms
+10-21 00:48:57.108  5226  5255 W CCTFlatFileLogStore: Excessive logging: 128 events, 139750 bytes from log source PHENOTYPE last 12s
+10-21 00:48:57.135  1662  2075 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+10-21 00:48:57.144  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.144  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.145  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.145  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.145  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.145  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.146  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.146  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.147  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.147  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.148  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.148  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.149  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.149  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.149  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.149  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.185  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.186  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.186  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.187  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.187  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.187  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.188  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.188  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.189  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.190  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.190  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.190  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.190  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.191  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.191  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.191  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.212  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.213  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.213  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.214  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.214  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.215  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.215  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.215  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.216  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.217  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.217  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.217  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.218  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.218  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.218  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.219  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.228  5300  5410 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-21 00:48:57.241  5300  5410 I Icing   : Indexing done com.google.android.gms-apps
+10-21 00:48:57.252  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+10-21 00:48:57.252  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+10-21 00:48:57.252  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+10-21 00:48:57.253  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+10-21 00:48:57.254  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+10-21 00:48:57.254  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+10-21 00:48:57.254  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+10-21 00:48:57.254  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+10-21 00:48:57.255  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+10-21 00:48:57.255  1662  2128 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+10-21 00:48:57.255  1662  2128 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+10-21 00:48:57.255  1662  2128 W A       : Can't format flag bindle_flags__velour_jar to integer.
+10-21 00:48:57.263  5226  5393 W BpBinder: Large outgoing transaction of 329636 bytes, interface descriptor , code 4
+10-21 00:48:57.264  1662  2082 I FedAssExpListener: Fed-ass not supported for signed out users.
+10-21 00:48:57.265  1662  2082 I FedAssExpListener: Successfully processed experiments changed.
+10-21 00:48:57.265  5300  5410 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-21 00:48:57.266  1662  2140 I A       : NGA enabled in interactor.
+10-21 00:48:57.266  1662  2139 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+10-21 00:48:57.270  1662  2139 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+10-21 00:48:57.277  5300  5410 I Icing   : Indexing done com.google.android.gms-apps
+10-21 00:48:57.279  5300  5408 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+10-21 00:48:57.279  5300  5394 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+10-21 00:48:57.283  5300  5410 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+10-21 00:48:57.289  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:57.309  5300  5410 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:57.323   335   372 I netd    : tetherGetStats() -> {[]} <0.30ms>
+10-21 00:48:57.324  5300  5410 W Icing   : No valid account for uploading user actions
+10-21 00:48:57.330   335   372 I netd    : bandwidthSetGlobalAlert(2097152) <0.17ms>
+10-21 00:48:57.334   335   372 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.39ms>
+10-21 00:48:57.334   335   372 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.37ms>
+10-21 00:48:57.339  5300  5410 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+10-21 00:48:57.340  5300  5410 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+10-21 00:48:57.343  5300  5410 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-21 00:48:57.345  5300  5410 I Icing   : Indexing done com.google.android.gms-apps
+10-21 00:48:57.385  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.385  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.386  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.386  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.386  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.387  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.388  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.388  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.389  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.389  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.390  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.390  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.390  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.391  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.391  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.391  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.403  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.403  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.403  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.404  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.404  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.404  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.404  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.404  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.405  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.405  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.406  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.406  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.406  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.407  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.407  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.407  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.412  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.412  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.413  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.413  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.413  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.413  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.414  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.414  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.415  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.415  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.415  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.415  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.416  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.416  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.416  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.416  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.424  5300  5410 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+10-21 00:48:57.425  5300  5410 I Icing   : Indexing done com.google.android.gms-apps
+10-21 00:48:57.434  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.435  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.435  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.436  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.436  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.436  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.436  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.437  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.437  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.438  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.438  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.438  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.439  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.439  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.439  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.440  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.450  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.450  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.450  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.451  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.451  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.451  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.452  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.452  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.452  5226  5438 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.453  5226  5438 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.453  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.453  5226  5438 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.454  5226  5438 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.454  5226  5438 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.454  5226  5438 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.454  5226  5438 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.456  5300  5410 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+10-21 00:48:57.457  5300  5410 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+10-21 00:48:57.461  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.462  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.462  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.462  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.463  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.463  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.463  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.463  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.464  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.464  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.464  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.465  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.465  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.465  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.465  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.466  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.477  1539  2806 I AiAiEcho: Settings changed for uri: content://settings/secure/show_qr_code_scanner_setting
+10-21 00:48:57.477  1539  1910 I AiAiEcho: Predicting[0]:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: EchoTargets:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: Filtered by AiAi flag check:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: Predicting[0]:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: EchoTargets:
+10-21 00:48:57.478  1539  1910 I AiAiEcho: Filtered by AiAi flag check:
+10-21 00:48:57.479  1539  1910 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+10-21 00:48:57.479  1539  1910 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+10-21 00:48:57.481  1539  1910 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+10-21 00:48:57.481   834   834 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+10-21 00:48:57.487  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.487  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.488  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.488  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.488  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.488  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.489  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.489  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.490  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.490  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.490  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.491  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.491  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.491  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.491  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.492  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.509  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.510  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.510  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.510  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.510  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.511  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.511  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.511  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.512  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.512  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.512  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.513  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.513  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.513  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.513  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.514  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.516  5226  5430 I bwir    : updateFromConfigurations using legacy put method [CONTEXT service_id=204 ]
+10-21 00:48:57.525   518   535 I GnssBlocklistHelper: Update GNSS satellite blocklist:
+10-21 00:48:57.570  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.570  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.571  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.571  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.572  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.572  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.572  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.573  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.574  5226  5430 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.575  5226  5430 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.576  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.576  5226  5430 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.577  5226  5430 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.577  5226  5430 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.577  5226  5430 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.578  5226  5430 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.593  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.593  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.594  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.594  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.594  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.595  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.595  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.595  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.596  5226  5446 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.596  5226  5446 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.597  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.597  5226  5446 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.597  5226  5446 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.598  5226  5446 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.598  5226  5446 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.598  5226  5446 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.602  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.602  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.602  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.603  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.603  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.603  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.603  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.604  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.604  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.605  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.605  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.605  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.605  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.605  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.606  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.606  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.612  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.612  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.612  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.612  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.613  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.613  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.613  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.614  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.614  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.615  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.615  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.615  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.615  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.616  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.616  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.616  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.625  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.625  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.626  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.626  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.626  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.627  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.627  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.627  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.628  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.629  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.629  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.629  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.630  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.630  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.630  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.631  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.643  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.643  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.643  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.644  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.644  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.644  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.645  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.645  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.646  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.646  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.647  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.647  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.647  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.648  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.648  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.648  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.652  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.653  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.653  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.654  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.654  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.654  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.655  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.655  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.656  5226  5667 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.656  5226  5667 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.656  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.656  5226  5667 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.657  5226  5667 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.657  5226  5667 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.657  5226  5667 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.657  5226  5667 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.672  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.672  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.673  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.673  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.673  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.674  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.674  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.674  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.675  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.675  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.676  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.676  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.676  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.677  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.677  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.677  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.732  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.733  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.733  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.733  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.734  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.734  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.735  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.735  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:57.735  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:57.736  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:57.736  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.737  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:57.737  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:57.737  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:57.737  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:57.737  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.067  5226  5232 I .gms.persistent: Background young concurrent copying GC freed 296792(11MB) AllocSpace objects, 13(2304KB) LOS objects, 30% free, 24MB/34MB, paused 75us,24us total 216.774ms
+10-21 00:48:58.080  5226  5231 I .gms.persistent: Compiler allocated 5020KB to compile void bwhy.C(java.util.Set, long, dmuh, dmui, java.util.List, java.util.LinkedHashMap, dzew, bwhx, boolean)
+10-21 00:48:58.145  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.146  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.146  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.147  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.147  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.148  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.148  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.148  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.151  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.151  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.151  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.152  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.152  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.152  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.152  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.152  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.614  1491  1491 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+10-21 00:48:58.615  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.616  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.616  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.616  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.617  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.617  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.617  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.618  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.622  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.623  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.623  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.623  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.624  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.625  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.626  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.626  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.638   335   372 I netd    : tetherGetStats() -> {[]} <0.22ms>
+10-21 00:48:58.642   335   372 I netd    : bandwidthSetGlobalAlert(2097152) <0.07ms>
+10-21 00:48:58.662  2628  2808 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.tts#com.google.android.tts
+10-21 00:48:58.664  2628  2628 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.search.transcription.device#com.google.android.tts which doesn't use ProcessStable flags.
+10-21 00:48:58.671  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.673  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.674  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.674  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.676  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.681  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.684  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.685  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.691  5226  5439 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.691  5226  5439 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.691  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.692  5226  5439 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.692  5226  5439 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.693  5226  5439 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.693  5226  5439 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.693  5226  5439 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.701   135   135 I lowmemorykiller: lmkd data connection established
+10-21 00:48:58.706  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.707  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.707  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.707  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.707  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.708  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.708  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.708  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.709  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.709  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.709  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.709  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.710  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.710  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.710  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.710  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.730   135   135 I lowmemorykiller: Using psi monitors for memory pressure detection
+10-21 00:48:58.730   135   135 I lowmemorykiller: Properties reinitilized
+10-21 00:48:58.730  5797  5797 I lowmemorykiller: lmkd updated properties successfully
+10-21 00:48:58.730   135   135 I lowmemorykiller: lmkd data connection dropped
+10-21 00:48:58.730   135   135 I lowmemorykiller: closing lmkd data connection
+10-21 00:48:58.731  4215  4279 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-21 00:48:58.732  4215  4278 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+10-21 00:48:58.733  4215  4348 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of bdxy@ffcd06
+10-21 00:48:58.735  4215  4348 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@b02de90
+10-21 00:48:58.825  1491  1773 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+10-21 00:48:58.832  1491  2088 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.wellbeing
+10-21 00:48:58.849  4395  4395 I PhenotypeBackgroundRecv: Skipping assistant_auto_tng_libraries_device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+10-21 00:48:58.851  4395  4395 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.search.assistant.device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+10-21 00:48:58.853  4395  4395 I PhenotypeBackgroundRecv: Skipping com.google.android.libraries.search.googleapp.user#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+10-21 00:48:58.853  4395  4395 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.search.assistant.mobile.user#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+10-21 00:48:58.854  4395  4395 I PhenotypeBackgroundRecv: Skipping com.google.android.libraries.search.googleapp.device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+10-21 00:48:58.861  5226  5285 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1792543738861) [CONTEXT service_id=51 ]
+10-21 00:48:58.901  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.901  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.901  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.901  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.902  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.902  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.902  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.903  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.903  5226  5450 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+10-21 00:48:58.903  5226  5450 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+10-21 00:48:58.903  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.904  5226  5450 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+10-21 00:48:58.904  5226  5450 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+10-21 00:48:58.904  5226  5450 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+10-21 00:48:58.904  5226  5450 I NamespaceManager: Package com.android.media name not found! Using module version.
+10-21 00:48:58.904  5226  5450 I NamespaceManager: Package 1 name not found! Using module version.
+10-21 00:48:58.907  5226  5285 I HeterodyneSyncScheduler: Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+10-21 00:48:58.928  2822  2822 I PhenotypeBackgroundRecv: Skipping com.google.android.dialer which doesn't use ProcessStable flags.
+10-21 00:48:58.932  4347  4467 W python.stderr: /data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/engine_api.py:162: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/ENGINE_VERSION.txt' mode='r' encoding='utf-8'>
+10-21 00:48:58.932  4347  4467 W python.stderr: ResourceWarning: Enable tracemalloc to get the object allocation traceback
+10-21 00:48:58.934  4347  4467 I SPIKE   : {
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "ok": true,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "mismatches": [],
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "timings_s": {
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_0": 0.501,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_1": 0.339,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_2": 0.324,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_3": 0.567,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "chart_4": 0.811,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "match": 0.003,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "muhurta_3_months": 1.551,
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "names": 0.001
+10-21 00:48:58.934  4347  4467 I SPIKE   :  },
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "import_s": 0.969,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "python": "3.13.16",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "engine_version": "astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "ephe_files": [
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "seas_18.se1",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "sefstars.txt",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "semo_18.se1",
+10-21 00:48:58.934  4347  4467 I SPIKE   :   "sepl_18.se1"
+10-21 00:48:58.934  4347  4467 I SPIKE   :  ],
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "base_rates_present": true,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "tempdir": "\/data\/user\/0\/com.gauravmishra.jyotish\/cache\/chaquopy\/tmp",
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "python_start_ms": 3476,
+10-21 00:48:58.934  4347  4467 I SPIKE   :  "waited_for_engine_ms": 0
+10-21 00:48:58.934  4347  4467 I SPIKE   : }
+10-21 00:48:58.934  4347  4467 I TestRunner: finished: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)

@@ -1,0 +1,7 @@
+--------- beginning of main
+10-21 00:49:00.851  5902  5902 E externalstorage: Not starting debugger since process cannot load the jdwp agent.
+10-21 00:49:01.020  5300  5389 E WorkSourceUtil: Could not find package: com.gauravmishra.jyotish
+10-21 00:49:01.249   518  1095 E AtomicFile: Failed to rename /data/system/cachequota.xml.new to /data/system/cachequota.xml
+10-21 00:49:01.570  5300  5394 E WorkSourceUtil: Could not find package: com.gauravmishra.jyotish.test
+10-21 00:49:01.831   835  5741 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+10-21 00:49:01.851   835  5741 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
