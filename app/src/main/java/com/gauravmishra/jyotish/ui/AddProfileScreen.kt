@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -150,7 +151,7 @@ fun AddProfileScreen(
                 singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 isError = showErrors && date == null,
                 supportingText = if (showErrors && date == null) ({ Text(stringResource(R.string.err_date)) }) else ({ Text(stringResource(R.string.date_hint)) }),
-                trailingIcon = { IconButton(onClick = { showDate = true }) { Icon(Icons.Filled.DateRange, stringResource(R.string.pick_date)) } },
+                trailingIcon = { IconButton(onClick = { showDate = true }, modifier = Modifier.size(48.dp)) { Icon(Icons.Filled.DateRange, stringResource(R.string.pick_date)) } },
                 modifier = Modifier.fillMaxWidth().testTag("date"),
             )
             OutlinedTextField(
@@ -159,7 +160,7 @@ fun AddProfileScreen(
                 singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 isError = showErrors && time == null,
                 supportingText = if (showErrors && time == null) ({ Text(stringResource(R.string.err_time)) }) else ({ Text(stringResource(R.string.time_hint)) }),
-                trailingIcon = { TextButton(onClick = { showTime = true }) { Text(stringResource(R.string.pick_time)) } },
+                trailingIcon = { TextButton(onClick = { showTime = true }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.pick_time)) } },
                 modifier = Modifier.fillMaxWidth().testTag("time"),
             )
 
@@ -182,7 +183,7 @@ fun AddProfileScreen(
                                 Text(c.label, style = MaterialTheme.typography.titleMedium)
                                 Text("%.3f, %.3f · %s".format(c.lat, c.lon, c.tz), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
-                            TextButton(onClick = { chosen = null }) { Text(stringResource(R.string.change_place)) }
+                            TextButton(onClick = { chosen = null }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.change_place)) }
                         }
                     }
                 } else {
@@ -210,7 +211,7 @@ fun AddProfileScreen(
                     }
                     Text(stringResource(R.string.place_help), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                TextButton(onClick = { useCoords = true }) { Text(stringResource(R.string.enter_coordinates)) }
+                TextButton(onClick = { useCoords = true }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.enter_coordinates)) }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     OutlinedTextField(latText, { latText = it }, label = { Text(stringResource(R.string.latitude)) }, singleLine = true,
@@ -225,7 +226,7 @@ fun AddProfileScreen(
                     Text(stringResource(R.string.tz_from_nearest, nearest.tz, nearest.label, places!!.distanceKm(lat, lon, nearest.lat, nearest.lon).toInt()),
                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                TextButton(onClick = { useCoords = false }) { Text(stringResource(R.string.search_places)) }
+                TextButton(onClick = { useCoords = false }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.search_places)) }
             }
         }
     }
@@ -241,7 +242,7 @@ fun AddProfileScreen(
                     showDate = false
                 }) { Text(stringResource(R.string.ok)) }
             },
-            dismissButton = { TextButton(onClick = { showDate = false }) { Text(stringResource(R.string.cancel)) } },
+            dismissButton = { TextButton(onClick = { showDate = false }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.cancel)) } },
         ) { DatePicker(state = state) }
     }
     if (showTime) {
@@ -249,8 +250,8 @@ fun AddProfileScreen(
         val state = rememberTimePickerState(initialHour = h, initialMinute = m, is24Hour = true)
         AlertDialog(
             onDismissRequest = { showTime = false },
-            confirmButton = { TextButton(onClick = { timeText = "%02d:%02d".format(state.hour, state.minute); showTime = false }) { Text(stringResource(R.string.ok)) } },
-            dismissButton = { TextButton(onClick = { showTime = false }) { Text(stringResource(R.string.cancel)) } },
+            confirmButton = { TextButton(onClick = { timeText = "%02d:%02d".format(state.hour, state.minute); showTime = false }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.ok)) } },
+            dismissButton = { TextButton(onClick = { showTime = false }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.cancel)) } },
             text = { TimePicker(state = state) },
         )
     }
@@ -260,7 +261,7 @@ fun AddProfileScreen(
 private fun Choice(label: String, selected: Boolean, onClick: () -> Unit) {
     FilterChip(
         selected = selected, onClick = onClick, label = { Text(label) },
-        modifier = Modifier.heightIn(min = 40.dp).semantics { role = Role.RadioButton },
+        modifier = Modifier.heightIn(min = 48.dp).semantics { role = Role.RadioButton },
         colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep),
     )
 }

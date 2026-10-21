@@ -88,7 +88,7 @@ fun NumerologyScreen(
             if (profiles.size > 1) {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     profiles.forEach { p ->
-                        FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) },
+                        FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) }, modifier = Modifier.heightIn(min = 48.dp),
                             colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
                     }
                 }

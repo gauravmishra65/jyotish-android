@@ -1,5 +1,7 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,7 +46,7 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
                     Text(chosen.label, style = MaterialTheme.typography.titleMedium)
                     Text("%.3f, %.3f · %s".format(chosen.lat, chosen.lon, chosen.tz), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
                 }
-                TextButton(onClick = { onChoose(null) }) { Text(stringResource(R.string.change_place)) }
+                TextButton(onClick = { onChoose(null) }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.change_place)) }
             }
         }
         return

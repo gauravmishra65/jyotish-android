@@ -97,7 +97,7 @@ fun KundaliScreen(
                 if (profiles.size > 1) {
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         profiles.forEach { p ->
-                            FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) },
+                            FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) }, modifier = Modifier.heightIn(min = 48.dp),
                                 colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
                         }
                     }
@@ -185,7 +185,7 @@ private fun StyleButton(label: String, selected: Boolean, modifier: Modifier, on
     Surface(
         onClick = onClick, shape = RoundedCornerShape(9.dp),
         color = if (selected) MaterialTheme.colorScheme.surface else Color.Transparent,
-        modifier = modifier.heightIn(min = 40.dp),
+        modifier = modifier.heightIn(min = 48.dp),
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,

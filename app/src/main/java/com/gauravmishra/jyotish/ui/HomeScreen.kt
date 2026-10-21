@@ -72,13 +72,13 @@ fun HomeScreen(
                     Text(longToday(lang), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(stringResource(R.string.home_title), style = MaterialTheme.typography.headlineMedium)
                 }
-                IconButton(onClick = onSettings) { Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings)) }
+                IconButton(onClick = onSettings, modifier = Modifier.size(48.dp)) { Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings)) }
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(R.string.profiles), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                    TextButton(onClick = onAdd) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
+                    TextButton(onClick = onAdd, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
                 }
                 if (profiles.isEmpty()) {
                     Text(stringResource(R.string.no_profiles), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -110,8 +110,8 @@ fun HomeScreen(
         AlertDialog(
             onDismissRequest = { actionsFor = null },
             title = { Text(stringResource(R.string.profile_actions, p.name)) },
-            confirmButton = { TextButton(onClick = { actionsFor = null; onEdit(p) }) { Text(stringResource(R.string.edit)) } },
-            dismissButton = { TextButton(onClick = { actionsFor = null; confirmDelete = p }) { Text(stringResource(R.string.delete)) } },
+            confirmButton = { TextButton(onClick = { actionsFor = null; onEdit(p) }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.edit)) } },
+            dismissButton = { TextButton(onClick = { actionsFor = null; confirmDelete = p }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.delete)) } },
         )
     }
     confirmDelete?.let { p ->
@@ -119,8 +119,8 @@ fun HomeScreen(
             onDismissRequest = { confirmDelete = null },
             title = { Text(stringResource(R.string.delete_profile_title, p.name)) },
             text = { Text(stringResource(R.string.delete_profile_body)) },
-            confirmButton = { TextButton(onClick = { confirmDelete = null; onDelete(p) }) { Text(stringResource(R.string.delete)) } },
-            dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text(stringResource(R.string.cancel)) } },
+            confirmButton = { TextButton(onClick = { confirmDelete = null; onDelete(p) }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.delete)) } },
+            dismissButton = { TextButton(onClick = { confirmDelete = null }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.cancel)) } },
         )
     }
 }

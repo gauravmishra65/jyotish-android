@@ -94,13 +94,13 @@ fun MilanScreen(
         ) {
             if (profiles.size < 2) {
                 Text(stringResource(R.string.need_two), style = MaterialTheme.typography.bodyLarge)
-                TextButton(onClick = onAdd) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
+                TextButton(onClick = onAdd, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
                 return@Column
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 PersonPicker(stringResource(R.string.groom), groom, profiles, Modifier.weight(1f).testTag("pick_groom")) { onPair(it.id, bride?.id) }
                 val swap = stringResource(R.string.swap)
-                IconButton(onClick = { onPair(bride?.id, groom?.id) }, modifier = Modifier.semantics { contentDescription = swap }) {
+                IconButton(onClick = { onPair(bride?.id, groom?.id) }, modifier = Modifier.size(48.dp).semantics { contentDescription = swap }) {
                     Text("⇄", color = Palette.Accent, fontSize = 22.sp)
                 }
                 PersonPicker(stringResource(R.string.bride), bride, profiles, Modifier.weight(1f).testTag("pick_bride")) { onPair(groom?.id, it.id) }
