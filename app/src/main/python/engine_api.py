@@ -57,11 +57,22 @@ def match(chart_a_json, chart_b_json, bride="B"):
 
 
 def find_muhurta(request_json, *chart_jsons):
-    """{"event","from","to","lat","lon","tz","weekday_rule"?,"top"?} plus zero or more chart JSON strings."""
+    """{"event","from","to","lat","lon","tz","weekday_rule"?,"top"?,"lang"?} plus zero or more chart JSON strings.
+
+    With "lang": "hi" every window's weekday, nakshatra, lagna, reasons and cautions are also given in Hindi
+    (fields ending in _hi), using the same translator as the skill's muhurta report.
+    """
     r = json.loads(request_json)
     people = [muhurta.person_from_chart(json.loads(c)) for c in chart_jsons]
     res = muhurta.find(r["event"], r["from"], r["to"], r["lat"], r["lon"], r["tz"], people,
                        r.get("step", 10), r.get("top", 12), r.get("weekday_rule", "soft"))
+    if r.get("lang") == "hi":
+        import muhurta_report as MR
+        for w in res["all_windows"]:
+            for k in ("weekday", "nakshatra", "lagna"):
+                w[k + "_hi"] = MR._hi_text(w[k])
+            w["supports_hi"] = [MR._hi_text(x) for x in w["supports"]]
+            w["weaknesses_hi"] = [MR._hi_text(x) for x in w["weaknesses"]]
     return json.dumps(res, ensure_ascii=False)
 
 

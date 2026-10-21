@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.gauravmishra.jyotish.data.AppSettings
 import com.gauravmishra.jyotish.data.ChartModel
 import com.gauravmishra.jyotish.data.MatchModel
+import com.gauravmishra.jyotish.data.MuhurtaResult
 import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.ProfileStore
@@ -31,6 +32,20 @@ data class ChartSummary(
     val antardashaEnd: String,
     val nextAntardasha: String?,
     val warnings: List<String>,
+)
+
+sealed interface MuhurtaState {
+    data object Idle : MuhurtaState
+    data object Searching : MuhurtaState
+    data class Ready(val result: MuhurtaResult) : MuhurtaState
+    data class Failed(val message: String) : MuhurtaState
+}
+
+/** What the Muhurta form asks for. Dates are YYYY-MM-DD. */
+data class MuhurtaQuery(
+    val event: String, val from: String, val to: String,
+    val place: String, val lat: Double, val lon: Double, val tz: String,
+    val people: List<String>,
 )
 
 sealed interface MatchState {
@@ -99,6 +114,29 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 MatchState.Failed(e.message ?: e.toString())
             }
             if (matchKey == key) _match.value = state
+        }
+    }
+
+    private val _muhurta = MutableStateFlow<MuhurtaState>(MuhurtaState.Idle)
+    val muhurta: StateFlow<MuhurtaState> = _muhurta.asStateFlow()
+    private val _muhurtaQuery = MutableStateFlow<MuhurtaQuery?>(null)
+    /** The last search, so the form keeps its values when the user comes back to the screen. */
+    val muhurtaQuery: StateFlow<MuhurtaQuery?> = _muhurtaQuery.asStateFlow()
+
+    fun findMuhurta(q: MuhurtaQuery, lang: String) {
+        _muhurtaQuery.value = q
+        val charts = q.people.mapNotNull { (_charts.value[it] as? ChartState.Ready)?.json }
+        _muhurta.value = MuhurtaState.Searching
+        viewModelScope.launch {
+            _muhurta.value = try {
+                val req = JSONObject().put("event", q.event).put("from", q.from).put("to", q.to)
+                    .put("lat", q.lat).put("lon", q.lon).put("tz", q.tz).put("top", 2000).put("lang", lang)
+                    .put("weekday_rule", if (settings.weekdayHard) "hard" else "soft")
+                val json = Engine.muhurta(req, charts)
+                MuhurtaState.Ready(withContext(Dispatchers.Default) { MuhurtaResult.parse(json) })
+            } catch (e: Throwable) {
+                MuhurtaState.Failed(e.message ?: e.toString())
+            }
         }
     }
 

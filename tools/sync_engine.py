@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 SKIP = {"render_report.py", "book.py", "verify_engine.py", "golden_regression.py", "yoga_base_rates.py",
-        "muhurta_report.py", "hindi_shell.py", "setup_env.sh"}
+        "setup_env.sh"}
 APP_PY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "app", "src", "main", "python")
 
 

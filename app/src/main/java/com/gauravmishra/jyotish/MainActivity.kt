@@ -30,6 +30,7 @@ import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
 import com.gauravmishra.jyotish.ui.MilanScreen
+import com.gauravmishra.jyotish.ui.MuhurtaScreen
 import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
@@ -116,6 +117,15 @@ fun App(vm: AppViewModel = viewModel()) {
                         charts = charts, match = match,
                         onPair = { gid, bid -> vm.setPair(gid, bid) }, onRequest = { gid, bid -> vm.requestMatch(gid, bid) },
                         onAdd = { nav.navigate(Routes.add()) },
+                        onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
+                    )
+                }
+                composable(Routes.MUHURTA) {
+                    val state by vm.muhurta.collectAsStateWithLifecycle()
+                    val last by vm.muhurtaQuery.collectAsStateWithLifecycle()
+                    MuhurtaScreen(
+                        profiles = profiles, last = last, state = state, loadPlaces = { vm.places() },
+                        onFind = { vm.findMuhurta(it, lang) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }

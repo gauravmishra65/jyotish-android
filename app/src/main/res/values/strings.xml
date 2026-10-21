@@ -207,4 +207,33 @@
     <string name="matching">Matching…</string>
     <string name="waiting_charts">Waiting for both charts…</string>
     <string name="match_failed">Could not match: %1$s</string>
+    <!-- Muhurta -->
+    <string name="mu_event">Event</string>
+    <string name="event_marriage">Marriage</string>
+    <string name="event_griha_pravesh">New home (griha pravesh)</string>
+    <string name="event_vehicle">Vehicle</string>
+    <string name="event_business">Opening a business</string>
+    <string name="mu_from">From</string>
+    <string name="mu_to">To</string>
+    <string name="mu_place">Where the event happens</string>
+    <string name="mu_use_birthplace">Use %1$s</string>
+    <string name="mu_people">Check against the charts of</string>
+    <string name="mu_people_help">Tarabala and Chandrabala are checked for each person chosen. Choose up to two.</string>
+    <string name="mu_find">Find good times</string>
+    <string name="mu_searching">Searching. A range of a few months can take a minute on a phone.</string>
+    <string name="mu_found">%1$d days pass every rule.</string>
+    <string name="mu_none">No time in this range passes every rule. Try a longer range or fewer people.</string>
+    <string name="mu_view_best">Strongest</string>
+    <string name="mu_view_days">By day</string>
+    <string name="mu_confirm">Confirm with your family\'s panchang; Chaturmas is not applied. A good muhurta supports a beginning; it does not guarantee results.</string>
+    <string name="mu_err_dates">Enter both dates as DD-MM-YYYY. The range can be up to 13 months.</string>
+    <string name="mu_err_place">Choose where the event happens.</string>
+    <string name="mu_window_line">%1$s · %2$s %3$d · %4$s lagna</string>
+    <string name="shukla">Shukla</string>
+    <string name="krishna">Krishna</string>
+    <string name="mu_why">Why it works</string>
+    <string name="mu_cautions">Cautions</string>
+    <string name="mu_no_cautions">No cautions</string>
+    <string name="mu_time_range">%1$s to %2$s</string>
+    <string name="mu_edit">Change search</string>
 </resources>

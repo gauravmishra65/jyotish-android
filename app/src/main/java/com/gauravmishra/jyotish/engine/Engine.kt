@@ -56,6 +56,10 @@ object Engine {
     suspend fun match(chartA: String, chartB: String, bride: String = "B"): String =
         call { it.callAttr("match", chartA, chartB, bride).toString() }
 
+    /** Muhurta search (see engine_api.find_muhurta); [charts] are the chart JSONs of the people to check. */
+    suspend fun muhurta(request: JSONObject, charts: List<String>): String =
+        call { api -> api.callAttr("find_muhurta", request.toString(), *charts.toTypedArray()).toString() }
+
     /** Seconds per step of the fixed timing suite (5 charts, a match, a 3-month muhurta, names). */
     suspend fun timings(): String = call { it.callAttr("timings").toString() }
 

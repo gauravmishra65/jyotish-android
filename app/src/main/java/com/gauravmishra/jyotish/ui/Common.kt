@@ -37,6 +37,7 @@ object Routes {
     const val SETTINGS = "settings"
     const val KUNDALI = "kundali"
     const val MILAN = "milan"
+    const val MUHURTA = "muhurta"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 
@@ -44,6 +45,7 @@ object Routes {
     fun of(f: Feature) = when (f) {
         Feature.KUNDALI -> KUNDALI
         Feature.MILAN -> MILAN
+        Feature.MUHURTA -> MUHURTA
         else -> feature(f.route)
     }
 }
