@@ -38,6 +38,7 @@ object Routes {
     const val KUNDALI = "kundali"
     const val MILAN = "milan"
     const val MUHURTA = "muhurta"
+    const val NUMBERS = "numbers"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 
@@ -46,7 +47,7 @@ object Routes {
         Feature.KUNDALI -> KUNDALI
         Feature.MILAN -> MILAN
         Feature.MUHURTA -> MUHURTA
-        else -> feature(f.route)
+        Feature.NUMBERS -> NUMBERS
     }
 }
 

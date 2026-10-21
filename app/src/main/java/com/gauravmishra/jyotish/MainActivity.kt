@@ -31,6 +31,7 @@ import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
 import com.gauravmishra.jyotish.ui.MilanScreen
 import com.gauravmishra.jyotish.ui.MuhurtaScreen
+import com.gauravmishra.jyotish.ui.NumerologyScreen
 import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
@@ -126,6 +127,15 @@ fun App(vm: AppViewModel = viewModel()) {
                     MuhurtaScreen(
                         profiles = profiles, last = last, state = state, loadPlaces = { vm.places() },
                         onFind = { vm.findMuhurta(it, lang) },
+                        onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
+                    )
+                }
+                composable(Routes.NUMBERS) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    NumerologyScreen(
+                        profiles = profiles, profile = p, chart = p?.let { charts[it.id] },
+                        onSelect = { vm.select(it.id) }, loadNames = { Engine.names(it.name, it.date, it.gender) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }

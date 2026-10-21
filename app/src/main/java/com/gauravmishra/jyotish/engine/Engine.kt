@@ -60,6 +60,10 @@ object Engine {
     suspend fun muhurta(request: JSONObject, charts: List<String>): String =
         call { api -> api.callAttr("find_muhurta", request.toString(), *charts.toTypedArray()).toString() }
 
+    /** Name spelling options for a name and date of birth (YYYY-MM-DD); gender "F" turns off the final-a edits. */
+    suspend fun names(name: String, dob: String, gender: String): String =
+        call { it.callAttr("names", name, dob, gender).toString() }
+
     /** Seconds per step of the fixed timing suite (5 charts, a match, a 3-month muhurta, names). */
     suspend fun timings(): String = call { it.callAttr("timings").toString() }
 
