@@ -284,4 +284,7 @@
     <string name="fit_enemy">enemy</string>
     <string name="nu_with_mulank">with Mulank: %1$s</string>
     <string name="nu_calculating">Working out the spelling options…</string>
+    <string name="meaning_in_house">House %1$d is about %2$s.</string>
+    <string name="meaning_number">%1$d: %2$s</string>
+    <string name="nu_meaning_note">Numerology describes tendencies; it does not decide outcomes.</string>
 </resources>

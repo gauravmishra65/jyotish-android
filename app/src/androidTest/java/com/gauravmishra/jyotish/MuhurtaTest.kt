@@ -48,7 +48,7 @@ class MuhurtaTest {
             // Wait for both charts on Home before searching, so Tarabala and Chandrabala are applied for both people.
             rule.waitUntilAtLeastOneExists(hasText("Ketu mahadasha", substring = true), timeoutMillis = 120_000)
             rule.waitUntilAtLeastOneExists(hasText("Aries lagna, Moon in Virgo"), timeoutMillis = 60_000)   // Neha's chart
-            rule.onAllNodesWithText("Muhurta").onFirst().performClick()
+            rule.onNodeWithTag("nav_muhurta").performClick()   // the Home tile may be below the fold
             rule.onNodeWithTag("mu_from").performTextClearance()
             rule.onNodeWithTag("mu_from").performTextInput("01-01-2027")
             rule.onNodeWithTag("mu_to").performTextClearance()

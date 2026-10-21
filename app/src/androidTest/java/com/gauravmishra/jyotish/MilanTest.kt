@@ -49,6 +49,7 @@ class MilanTest {
             rule.shot("milan")
             rule.onNodeWithTag("koota_nadi").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("8 / 8"), timeoutMillis = 5_000)
+            rule.onNodeWithTag("koota_meaning").assertExists()   // M6: what Nadi is about
             rule.onNodeWithText("Close").performClick()
             rule.onNodeWithTag("porutham").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Partly"), timeoutMillis = 5_000)   // Rasi Adhipati

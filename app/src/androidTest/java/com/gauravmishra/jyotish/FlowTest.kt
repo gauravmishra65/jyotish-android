@@ -73,6 +73,7 @@ class FlowTest {
             rule.onNodeWithTag("yoga_mahapurusha_venus").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Venus in its own or exaltation sign in a kendra from the Lagna"), timeoutMillis = 5_000)
             rule.waitUntilAtLeastOneExists(hasText("In 8% of charts"), timeoutMillis = 5_000)
+            rule.onNodeWithTag("yoga_meaning").assertExists()   // M6: Malavya's meaning
             rule.shot("yoga_sheet")
             rule.onNodeWithText("Close").performClick()
         }

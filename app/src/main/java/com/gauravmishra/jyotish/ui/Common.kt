@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -90,7 +92,7 @@ fun BottomNav(current: Feature?, onHome: () -> Unit, onFeature: (Feature) -> Uni
         )
         Feature.entries.forEach { f ->
             NavigationBarItem(
-                selected = current == f, onClick = { onFeature(f) }, colors = itemColors,
+                selected = current == f, onClick = { onFeature(f) }, colors = itemColors, modifier = Modifier.testTag("nav_${f.route}"),
                 icon = { Icon(f.icon, contentDescription = null, modifier = Modifier.size(22.dp)) },
                 label = { Text(stringResource(f.label), maxLines = 1) },
             )
@@ -102,5 +104,14 @@ fun BottomNav(current: Feature?, onHome: () -> Unit, onFeature: (Feature) -> Uni
 fun SectionLabel(text: String) {
     Row(Modifier.padding(top = 8.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(text.uppercase(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+/** Plain-words meaning paragraphs from assets/meanings.json, with the "traditionally" caveat built into the wording. */
+@Composable
+fun Meaning(lines: List<String>, tag: String) {
+    if (lines.isEmpty()) return
+    Column(Modifier.testTag(tag), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        lines.forEach { Text(it, style = MaterialTheme.typography.bodyLarge) }
     }
 }

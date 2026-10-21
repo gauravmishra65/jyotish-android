@@ -41,6 +41,10 @@ class NumerologyTest {
             rule.waitUntilAtLeastOneExists(hasText("44/8"), timeoutMillis = 120_000)
             rule.onNodeWithText("Mercury").assertExists()                   // Mulank 5
             rule.onNodeWithText("11 by total digits").assertExists()       // Life Path 2, or 11 by the other method
+            rule.onNodeWithTag("tile_mulank").performClick()
+            rule.waitUntilAtLeastOneExists(hasText("Change, travel, communication and trade (Mercury)."), timeoutMillis = 5_000)
+            rule.shot("number_sheet")
+            rule.onNodeWithText("Close").performClick()
             rule.onNodeWithTag("loshu").performScrollTo()
             rule.onNodeWithText("Missing: 3, 6").assertExists()
             rule.shot("numerology")

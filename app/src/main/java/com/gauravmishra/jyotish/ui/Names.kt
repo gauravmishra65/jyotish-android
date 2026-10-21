@@ -37,7 +37,8 @@ object Names {
         if (lang == "hi") tables["sign"]?.get(english) ?: tables["planet"]?.get(english) ?: english else english
 
     fun nakshatra(english: String, lang: String) = lookup("nakshatra", english, lang)
-    fun yoga(english: String, lang: String) = lookup("yoga", english, lang)
+    fun yoga(english: String, lang: String): String =
+        if (lang == "hi") tables["yoga"]?.get(english) ?: com.gauravmishra.jyotish.data.Meanings.yogaNameHi(english) ?: english else english
     fun yogaCategory(english: String, lang: String) = lookup("yoga_category", english, lang)
 
     /** Dignity labels from the engine ("own sign", "friend's sign"); "n/a" for the nodes becomes a dash. */

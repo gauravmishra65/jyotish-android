@@ -51,6 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.gauravmishra.jyotish.ChartState
 import com.gauravmishra.jyotish.R
+import com.gauravmishra.jyotish.data.Meanings
 import com.gauravmishra.jyotish.data.ChartModel
 import com.gauravmishra.jyotish.data.Planet
 import com.gauravmishra.jyotish.data.Profile
@@ -377,6 +378,10 @@ private fun PlanetDetail(p: Planet, m: ChartModel?, lang: String) {
         if (p.vargottama) add(stringResource(R.string.vargottama))
     }
     if (flags.isNotEmpty()) Text(flags.joinToString(" · "), color = Palette.AccentDeep, style = MaterialTheme.typography.labelLarge)
+    Meaning(listOfNotNull(
+        Meanings.planet(p.name, lang),
+        Meanings.house(p.house, lang)?.let { stringResource(R.string.meaning_in_house, p.house, it) },
+    ), "planet_meaning")
     Facts(listOf(
         stringResource(R.string.sign_label) to "${Names.of(p.sign, lang)} ${p.dms}",
         stringResource(R.string.house_label) to "${p.house}",
@@ -399,6 +404,7 @@ private fun YogaDetail(y: Yoga, lang: String) {
         Pill(toneLabel(y.tone), false)
         y.baseRate?.let { Pill(rateLabel(it), false) }
     }
+    Meaning(Meanings.yoga(y.id, y.category, lang), "yoga_meaning")
     Facts(buildList {
         add(stringResource(R.string.rule_label) to y.rule)
         if (y.keyPlanets.isNotEmpty()) add(stringResource(R.string.key_planets) to y.keyPlanets.joinToString(", ") { Names.of(it, lang) })

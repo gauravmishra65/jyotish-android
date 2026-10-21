@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.sp
 import com.gauravmishra.jyotish.ChartState
 import com.gauravmishra.jyotish.MatchState
 import com.gauravmishra.jyotish.R
+import com.gauravmishra.jyotish.data.Meanings
 import com.gauravmishra.jyotish.data.Koota
 import com.gauravmishra.jyotish.data.MatchModel
 import com.gauravmishra.jyotish.data.PoruthamItem
@@ -238,6 +239,7 @@ private fun poruthamName(k: String) = when (k) {
 private fun KootaDetail(k: Koota) {
     Text(stringResource(kootaName(k.key)), style = MaterialTheme.typography.headlineMedium)
     Text("${fmt(k.score)} / ${k.max}", style = MaterialTheme.typography.titleLarge, color = Palette.AccentDeep)
+    Meaning(listOfNotNull(Meanings.koota(k.key, currentLang())), "koota_meaning")
     Text(stringResource(R.string.koota_facts), style = MaterialTheme.typography.labelMedium, color = Palette.Muted)
     Column(Modifier.fillMaxWidth().background(Palette.Ground, RoundedCornerShape(12.dp)).padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         k.facts.forEach { (key, v) ->
@@ -264,6 +266,7 @@ private fun PoruthamDetail(items: List<PoruthamItem>) {
                 }
                 Text(label, color = color, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelLarge)
             }
+            Meanings.porutham(p.key, currentLang())?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
             Text(p.rule, style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
         }
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)

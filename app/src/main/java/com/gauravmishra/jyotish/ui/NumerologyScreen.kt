@@ -1,5 +1,10 @@
 package com.gauravmishra.jyotish.ui
 
+import com.gauravmishra.jyotish.data.Meanings
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -57,7 +62,7 @@ private val KUA_HI = mapOf("growth" to "वृद्धि", "health" to "स्
 private val PLANE_HI = mapOf("mental" to "मानसिक", "emotional" to "भावनात्मक", "practical" to "व्यावहारिक", "thought" to "विचार",
     "will" to "इच्छा", "action" to "कर्म", "golden diagonal" to "स्वर्ण विकर्ण", "silver diagonal" to "रजत विकर्ण")
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun NumerologyScreen(
     profiles: List<Profile>,
@@ -70,6 +75,7 @@ fun NumerologyScreen(
 ) {
     val lang = currentLang()
     val model = remember((chart as? ChartState.Ready)?.json) { (chart as? ChartState.Ready)?.json?.let { runCatching { NumerologyModel.parse(it) }.getOrNull() } }
+    var info by remember { mutableStateOf<NumberInfo?>(null) }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { BackBar(stringResource(R.string.feature_numerology), onHome, subtitle = profile?.name) },
@@ -93,20 +99,21 @@ fun NumerologyScreen(
                 model == null -> { Text(stringResource(R.string.calculating)); return@Column }
             }
             val m = model!!
+            val open: (NumberInfo) -> Unit = { info = it }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Tile(stringResource(R.string.nu_mulank), "${m.mulank}", Names.of(m.mulankPlanet, lang), dark = true, modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_bhagyank), "${m.bhagyank}", Names.of(m.bhagyankPlanet, lang), dark = true, modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_name), "${m.chaldeanCompound}/${m.chaldeanRoot}", "", dark = true, modifier = Modifier.weight(1f))
+                Tile(stringResource(R.string.nu_mulank), "${m.mulank}", Names.of(m.mulankPlanet, lang), dark = true, modifier = Modifier.weight(1f), key = "mulank", number = m.mulank, onOpen = open)
+                Tile(stringResource(R.string.nu_bhagyank), "${m.bhagyank}", Names.of(m.bhagyankPlanet, lang), dark = true, modifier = Modifier.weight(1f), key = "bhagyank", number = m.bhagyank, onOpen = open)
+                Tile(stringResource(R.string.nu_name), "${m.chaldeanCompound}/${m.chaldeanRoot}", "", dark = true, modifier = Modifier.weight(1f), key = "name", number = m.chaldeanRoot, onOpen = open)
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Tile(stringResource(R.string.nu_life_path), "${m.lifePath}", m.lifePathAlt?.let { stringResource(R.string.nu_life_alt, it) } ?: "", modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_destiny), "${m.destiny}", "", modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_personal_year), "${m.personalYear}", stringResource(R.string.nu_month, m.personalMonth), modifier = Modifier.weight(1f))
+                Tile(stringResource(R.string.nu_life_path), "${m.lifePath}", m.lifePathAlt?.let { stringResource(R.string.nu_life_alt, it) } ?: "", modifier = Modifier.weight(1f), key = "life_path", number = m.lifePath, onOpen = open)
+                Tile(stringResource(R.string.nu_destiny), "${m.destiny}", "", modifier = Modifier.weight(1f), key = "destiny", number = m.destiny, onOpen = open)
+                Tile(stringResource(R.string.nu_personal_year), "${m.personalYear}", stringResource(R.string.nu_month, m.personalMonth), modifier = Modifier.weight(1f), key = "personal_year", number = m.personalYear, onOpen = open)
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Tile(stringResource(R.string.nu_soul), "${m.soulUrge}", "", modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_personality), "${m.personality}", "", modifier = Modifier.weight(1f))
-                Tile(stringResource(R.string.nu_maturity), "${m.maturity}", "", modifier = Modifier.weight(1f))
+                Tile(stringResource(R.string.nu_soul), "${m.soulUrge}", "", modifier = Modifier.weight(1f), key = "soul", number = m.soulUrge, onOpen = open)
+                Tile(stringResource(R.string.nu_personality), "${m.personality}", "", modifier = Modifier.weight(1f), key = "personality", number = m.personality, onOpen = open)
+                Tile(stringResource(R.string.nu_maturity), "${m.maturity}", "", modifier = Modifier.weight(1f), key = "maturity", number = m.maturity, onOpen = open)
             }
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 if (m.karmicDebt.isNotEmpty()) Text(stringResource(R.string.nu_karmic_debt, m.karmicDebt.joinToString(", ")), style = MaterialTheme.typography.bodyMedium)
@@ -162,13 +169,32 @@ fun NumerologyScreen(
             NameOptionsCard(profile!!, lang, loadNames)
         }
     }
+
+    info?.let { i ->
+        ModalBottomSheet(onDismissRequest = { info = null }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            containerColor = MaterialTheme.colorScheme.surface) {
+            Column(Modifier.padding(horizontal = 22.dp).padding(bottom = 28.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                Text(i.label, style = MaterialTheme.typography.labelMedium, color = Palette.Muted)
+                Text("${i.number}", style = MaterialTheme.typography.displaySmall, color = Palette.AccentDeep)
+                Meaning(listOfNotNull(Meanings.numberType(i.key, lang), Meanings.number(i.number, lang)), "number_meaning")
+                Text(stringResource(R.string.nu_meaning_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+                OutlinedButton(onClick = { info = null }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(stringResource(R.string.close)) }
+            }
+        }
+    }
 }
 
+/** A tapped number tile: its label, the meanings key and the number (a compound shows its root). */
+data class NumberInfo(val label: String, val key: String, val number: Int)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Tile(label: String, value: String, sub: String, modifier: Modifier, dark: Boolean = false) {
+private fun Tile(label: String, value: String, sub: String, modifier: Modifier, dark: Boolean = false,
+                 key: String, number: Int, onOpen: (NumberInfo) -> Unit) {
     Surface(
+        onClick = { onOpen(NumberInfo(label, key, number)) },
         shape = RoundedCornerShape(14.dp), color = if (dark) Palette.Night else MaterialTheme.colorScheme.surface,
-        border = if (dark) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant), modifier = modifier,
+        border = if (dark) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant), modifier = modifier.testTag("tile_$key"),
     ) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = if (dark) Palette.SaffronText else Palette.Muted, maxLines = 2)

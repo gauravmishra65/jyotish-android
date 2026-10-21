@@ -275,4 +275,7 @@
     <string name="fit_enemy">शत्रु</string>
     <string name="nu_with_mulank">मूलांक से: %1$s</string>
     <string name="nu_calculating">वर्तनी के विकल्प निकाले जा रहे हैं…</string>
+    <string name="meaning_in_house">भाव %1$d: %2$s।</string>
+    <string name="meaning_number">%1$d: %2$s</string>
+    <string name="nu_meaning_note">अंक ज्योतिष प्रवृत्तियाँ बताता है; यह परिणाम तय नहीं करता।</string>
 </resources>
