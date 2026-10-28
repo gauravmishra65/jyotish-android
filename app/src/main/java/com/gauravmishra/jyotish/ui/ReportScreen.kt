@@ -119,14 +119,16 @@ fun ReportScreen(
                             webView = this
                         }
                     },
-                    update = { wv ->
-                        if (html != null && wv.tag != html.hashCode()) {
-                            wv.tag = html.hashCode()
-                            wv.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
-                        }
-                    },
                     modifier = Modifier.fillMaxSize().testTag("report_view"),
                 )
+            }
+            // Load explicitly whenever the page or the WebView changes (the English and Hindi pages share one WebView).
+            LaunchedEffect(html, webView) {
+                val wv = webView
+                if (html != null && wv != null && wv.tag != html.hashCode()) {
+                    wv.tag = html.hashCode()
+                    wv.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
+                }
             }
         }
     }
