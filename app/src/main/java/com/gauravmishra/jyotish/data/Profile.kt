@@ -17,16 +17,25 @@ data class Profile(
     val lat: Double,
     val lon: Double,
     val tz: String,
+    /** Where the person lives now, if different from the birthplace (optional). Used for transits and the report. */
+    val residence: String = "",
+    val resLat: Double? = null,
+    val resLon: Double? = null,
 ) {
     fun toJson(): JSONObject = JSONObject()
         .put("id", id).put("name", name).put("gender", gender).put("date", date).put("time", time)
         .put("confidence", confidence).put("place", place).put("lat", lat).put("lon", lon).put("tz", tz)
+        .put("residence", residence).put("res_lat", resLat ?: JSONObject.NULL).put("res_lon", resLon ?: JSONObject.NULL)
+
+    val hasResidence: Boolean get() = residence.isNotBlank() && resLat != null && resLon != null
 
     /** Request for engine_api.chart. Only the modules the v1 screens use are computed. */
     fun chartRequest(now: String, ayanamsa: String, node: String): JSONObject = JSONObject()
         .put("name", name).put("date", date).put("time", time).put("lat", lat).put("lon", lon).put("tz", tz)
         .put("gender", gender).put("time_confidence", confidence).put("place", place).put("now", now)
         .put("ayanamsa", ayanamsa).put("node", node)
+        .put("v", 2)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab)
+        .apply { if (hasResidence) put("residence", residence).put("current_lat", resLat).put("current_lon", resLon) }
 
     val initials: String
         get() = name.trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.let { w ->
@@ -42,6 +51,9 @@ data class Profile(
             id = o.getString("id"), name = o.getString("name"), gender = o.optString("gender", "M"),
             date = o.getString("date"), time = o.getString("time"), confidence = o.optString("confidence", "reliable"),
             place = o.optString("place", ""), lat = o.getDouble("lat"), lon = o.getDouble("lon"), tz = o.getString("tz"),
+            residence = o.optString("residence", ""),
+            resLat = if (o.has("res_lat") && !o.isNull("res_lat")) o.getDouble("res_lat") else null,
+            resLon = if (o.has("res_lon") && !o.isNull("res_lon")) o.getDouble("res_lon") else null,
         )
     }
 }

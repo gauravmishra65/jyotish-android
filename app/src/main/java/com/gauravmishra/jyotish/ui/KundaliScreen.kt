@@ -53,6 +53,7 @@ import com.gauravmishra.jyotish.ChartState
 import com.gauravmishra.jyotish.R
 import com.gauravmishra.jyotish.data.Meanings
 import com.gauravmishra.jyotish.data.ChartModel
+import com.gauravmishra.jyotish.data.DetailsModel
 import com.gauravmishra.jyotish.data.Planet
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.SIGNS
@@ -79,6 +80,7 @@ fun KundaliScreen(
 ) {
     val lang = currentLang()
     val model = (chart as? ChartState.Ready)?.model
+    val details = remember((chart as? ChartState.Ready)?.json) { (chart as? ChartState.Ready)?.json?.let { runCatching { DetailsModel.parse(it) }.getOrNull() } }
     var tab by rememberSaveable { mutableStateOf(0) }
     var detail by remember { mutableStateOf<Detail?>(null) }
 
@@ -121,14 +123,15 @@ fun KundaliScreen(
             }
 
             if (model != null) {
-                val titles = listOf(R.string.tab_planets, R.string.tab_dashas, R.string.tab_yogas, R.string.tab_strength)
+                val titles = listOf(R.string.tab_planets, R.string.tab_dashas, R.string.tab_yogas, R.string.tab_strength, R.string.tab_more)
                 TabBar(titles.map { stringResource(it) }, tab) { tab = it }
                 Column(Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
                     when (tab) {
                         0 -> PlanetsTab(model, lang) { detail = Detail.OfPlanet(it) }
                         1 -> DashasTab(model, lang)
                         2 -> YogasTab(model, lang) { detail = Detail.OfYoga(it) }
-                        else -> StrengthTab(model, lang)
+                        3 -> StrengthTab(model, lang)
+                        else -> MoreTab(model, details, style, lang, profile?.takeIf { it.hasResidence }?.residence)
                     }
                 }
             }

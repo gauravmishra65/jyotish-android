@@ -313,4 +313,18 @@
     <string name="report_failed">विश्लेषण तैयार नहीं हो सका: %1$s</string>
     <string name="report_pdf">PDF सहेजें</string>
     <string name="report_share">भेजें</string>
+    <!-- Residence, report settings, chart details -->
+    <string name="residence_title">वर्तमान निवास (वैकल्पिक)</string>
+    <string name="residence_help">यदि जन्म-स्थान से अलग हो। वर्तमान गोचर के लिए उपयोग होता है और संपूर्ण विश्लेषण में दिखाया जाता है।</string>
+    <string name="report_settings">संपूर्ण विश्लेषण</string>
+    <string name="report_by">द्वारा तैयार</string>
+    <string name="report_site">वेबसाइट</string>
+    <string name="report_settings_note">हर संपूर्ण विश्लेषण के आवरण और शीर्ष पर छपता है।</string>
+    <string name="tab_more">और</string>
+    <string name="vargas_title">वर्ग कुंडलियाँ</string>
+    <string name="d9_label">नवमांश (D9)</string>
+    <string name="d10_label">दशमांश (D10)</string>
+    <string name="d9_note">D9: विवाह, साझेदारी और आंतरिक बल।</string>
+    <string name="d10_note">D10: करियर और सार्वजनिक जीवन।</string>
+    <string name="residence_label">निवास: %1$s</string>
 </resources>

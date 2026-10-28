@@ -322,4 +322,18 @@
     <string name="report_failed">The reading could not be written: %1$s</string>
     <string name="report_pdf">Save as PDF</string>
     <string name="report_share">Share</string>
+    <!-- Residence, report settings, chart details -->
+    <string name="residence_title">Where you live now (optional)</string>
+    <string name="residence_help">If different from the birthplace. Used for current transits and shown in the full reading.</string>
+    <string name="report_settings">Full reading</string>
+    <string name="report_by">Prepared by</string>
+    <string name="report_site">Website</string>
+    <string name="report_settings_note">Printed on the cover and header of every full reading.</string>
+    <string name="tab_more">More</string>
+    <string name="vargas_title">Divisional charts</string>
+    <string name="d9_label">Navamsa (D9)</string>
+    <string name="d10_label">Dashamsa (D10)</string>
+    <string name="d9_note">D9: marriage, partnership and inner strength.</string>
+    <string name="d10_note">D10: career and public life.</string>
+    <string name="residence_label">Lives in %1$s</string>
 </resources>

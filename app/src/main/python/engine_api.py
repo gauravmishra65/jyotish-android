@@ -40,6 +40,8 @@ def _chart_args(r):
         args += ["--place", r["place"]]
     if r.get("name_correction"):
         args.append("--name-correction")
+    if r.get("current_lat") is not None and r.get("current_lon") is not None:
+        args += ["--current-lat", str(r["current_lat"]), "--current-lon", str(r["current_lon"])]
     return chart_engine.build_parser().parse_args(args)
 
 
@@ -48,8 +50,12 @@ def chart_obj(r):
 
 
 def chart(request_json):
-    """{"name","date":"YYYY-MM-DD","time":"HH:MM","lat","lon","tz","gender"?,"modules"?,"now"?} -> chart JSON."""
-    return json.dumps(chart_obj(json.loads(request_json)), ensure_ascii=False)
+    """{"name","date":"YYYY-MM-DD","time":"HH:MM","lat","lon","tz","gender"?,"modules"?,"now"?,"current_lat"?,"current_lon"?}
+    -> chart JSON, with "details": the display-ready extra sections (app_details) for the Kundali screen's More tab."""
+    import app_details
+    c = chart_obj(json.loads(request_json))
+    c["details"] = app_details.build(c)
+    return json.dumps(c, ensure_ascii=False)
 
 
 def match(chart_a_json, chart_b_json, bride="B"):
@@ -166,6 +172,8 @@ def report(request_json):
     r = json.loads(request_json)
     r = dict(r, modules=FORECAST_MODULES, horizon_years=int(r.get("years", 3)))
     c = chart_obj(r)
+    import app_details
+    c["details"] = app_details.build(c)
     fc = app_forecast.build(c, birth_date=r["date"])
     page = app_report.build(c, fc, r, lang=r.get("lang", "en"), by=r.get("by", "Gaurav Mishra"), site=r.get("site", "authorgaurav.com"))
     return json.dumps({"html": page}, ensure_ascii=False)

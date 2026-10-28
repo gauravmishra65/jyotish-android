@@ -2,8 +2,10 @@
 import os, json, re, sys, html, collections
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "app", "src", "main", "python"))
 import engine_api as E
-BANNED = re.compile(r"\b(death|die|dies|dying|disease|illness|cancer|divorce|accident|surgery|guarantee[ds]?|will cure)\b|मृत्यु|तलाक|रोग|दुर्घटना|बीमारी")
-people = [dict(p, place=pl) for p, pl in zip(E.CASES, ["Varanasi, India", "New Delhi, India", "Singapore", "London, UK", "Kochi, India"])] + [
+BANNED = re.compile(r"\b(death|die|dies|dying|disease|illness|cancer|divorce|accident|surgery|guarantee[ds]?|will cure|leper)\b|(?<![\u0900-\u097F])(?:मृत्यु|मौत|तलाक|रोग|दुर्घटना|बीमार|विधवा)")
+people = [dict(p, place=pl) for p, pl in zip(E.CASES, ["Varanasi, India", "New Delhi, India", "Singapore", "London, UK", "Kochi, India"])]
+people[0].update(residence="Singapore", current_lat=1.3521, current_lon=103.8198)   # one person living away from the birthplace
+people += [
     {"name": "Asha Kumari", "date": "2012-05-05", "time": "07:15", "lat": 26.8467, "lon": 80.9462, "tz": "Asia/Kolkata", "gender": "F", "place": "Lucknow"},
     {"name": "Leap Day", "date": "1992-02-29", "time": "12:00", "lat": -33.8688, "lon": 151.2093, "tz": "Australia/Sydney", "gender": "M", "place": "Sydney"},
     {"name": "No Time", "date": "1975-09-09", "time": "12:00", "lat": 34.0522, "lon": -118.2437, "tz": "America/Los_Angeles", "gender": "F", "time_confidence": "unknown"},
@@ -24,6 +26,10 @@ for p in people:
         if BANNED.search(text): issues["banned"].append(f"{tag}: {BANNED.search(text).group(0)}")
         for k in range(1, 9):
             if f'id="sec{k}"' not in page: issues["missing section"].append(f"{tag} sec{k}")
+        for k in ("2.7", "2.8", "2.9", "2.10", "2.11", "2.12", "3.6"):
+            if f">{k}&nbsp;" not in page: issues["missing subsection"].append(f"{tag} {k}")
+        if lang == "en" and not re.search(r"Lal Kitab and its remedies", page): issues["missing Lal Kitab"].append(tag)
+        if p.get("residence") and p["residence"] not in text: issues["missing residence"].append(tag)
         for bad in ("None", "nan", "{", "}", "[", "]"):
             for m in re.finditer(r"\b" + re.escape(bad) + r"\b" if bad.isalpha() else re.escape(bad), text):
                 ctx = text[max(0, m.start() - 40): m.end() + 40].replace("\n", " ")
@@ -32,7 +38,7 @@ for p in people:
         if lang == "hi":
             # English words left in Hindi text, ignoring the person's own name/place, pinyin and fixed labels.
             allowed = set(re.findall(r"[A-Za-z]+", p["name"] + " " + p.get("place", ""))) | {"Gaurav", "Mishra", "authorgaurav", "com", "BVR", "Asia", "Kolkata", "Singapore",
-                       "Europe", "London", "Australia", "Sydney", "America", "Los_Angeles", "Los", "Angeles", "UK", "India", "New", "Delhi", "Kochi", "Lucknow", "GM", "D9", "D10", "D1"}
+                       "Europe", "London", "Australia", "KP", "SAV", "Ithasala", "Ishrafa", "Sydney", "America", "Los_Angeles", "Los", "Angeles", "UK", "India", "New", "Delhi", "Kochi", "Lucknow", "GM", "D9", "D10", "D1"}
             for w in re.findall(r"\b[A-Za-z]{3,}\b", text):
                 if w not in allowed and not re.fullmatch(r"(Wu|Chen|Ji|Wei|Geng|Gui|Xin|You|Ren|Xu|Jia|Zi|Yi|Chou|Bing|Yin|Ding|Mao|Si|Shen|Hai|Wu|Yang|Xu|Jia)", w):
                     eng_in_hi[w] += 1

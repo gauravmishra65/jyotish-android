@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -55,6 +56,8 @@ fun SettingsScreen(
     var ayanamsa by remember { mutableStateOf(settings.ayanamsa) }
     var node by remember { mutableStateOf(settings.node) }
     var weekdayHard by remember { mutableStateOf(settings.weekdayHard) }
+    var reportBy by remember { mutableStateOf(settings.reportBy) }
+    var reportSite by remember { mutableStateOf(settings.reportSite) }
 
     Scaffold(containerColor = MaterialTheme.colorScheme.background, topBar = { BackBar(stringResource(R.string.settings), onBack) }) { pad ->
         Column(
@@ -98,6 +101,17 @@ fun SettingsScreen(
                         Text(stringResource(R.string.weekday_hard_sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Switch(checked = weekdayHard, onCheckedChange = null, colors = SwitchDefaults.colors(checkedTrackColor = Palette.Accent))
+                }
+            }
+
+            SectionLabel(stringResource(R.string.report_settings))
+            Group {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    androidx.compose.material3.OutlinedTextField(reportBy, { reportBy = it.take(60); settings.reportBy = reportBy.ifBlank { "Gaurav Mishra" } },
+                        label = { Text(stringResource(R.string.report_by)) }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("report_by"))
+                    androidx.compose.material3.OutlinedTextField(reportSite, { reportSite = it.take(60); settings.reportSite = reportSite.ifBlank { "authorgaurav.com" } },
+                        label = { Text(stringResource(R.string.report_site)) }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("report_site"))
+                    Text(stringResource(R.string.report_settings_note), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
 

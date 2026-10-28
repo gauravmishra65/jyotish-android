@@ -13,6 +13,7 @@ import html
 import json
 import os
 
+import app_details as AD
 import app_forecast as AF
 import hindi_shell as HS
 from app_report_style import CSS, JS
@@ -337,6 +338,7 @@ def sec1(r, c, ctx):
     rows = [(t("Full name", "पूरा नाम"), E(ctx["name"])), (t("Date of birth", "जन्म तिथि"), r.date(ctx["date"])),
             (t("Time of birth", "जन्म समय"), f"{hh}:{mm} ({E(ctx['tz'])}) &mdash; {conf_txt}"),
             (t("Place of birth", "जन्म स्थान"), (E(ctx["place"]) + " " if ctx["place"] else "") + f"({coord})"),
+            *([(t("Current residence", "वर्तमान निवास"), E(ctx["residence"]))] if ctx.get("residence") else []),
             (t("Gender", "लिंग"), t("Male", "पुरुष") if ctx["gender"] == "M" else t("Female", "स्त्री")),
             (t(f"Age (on {r.date(ctx['now'])})", f"वर्तमान आयु ({r.date(ctx['now'])} तक)"), t(f"{ctx['age']} years", f"{ctx['age']} वर्ष"))]
     fn = first_name(ctx["name"])
@@ -555,7 +557,12 @@ def sec2(r, c, ctx):
             a += t(f" &middot; Ashtakavarga {pts} ({band})", f" &middot; अष्टकवर्ग {pts} ({band})")
         hrows.append((f"{x['house']} ({r.S(x['sign'])})", HOUSE_THEME[x["house"]][1 if r.hi else 0], a))
     s26 = sub("2.6", t("House by house", "भावानुसार विश्लेषण")) + table([t("House", "भाव"), t("Signifies", "कारकत्व"), t("Analysis", "विश्लेषण")], hrows)
-    return section(2, t("Vedic Astrology", "वैदिक ज्योतिष"), para(intro) + s21 + s22 + s23 + s24 + s25 + s26, tinted=True)
+    extra = ""
+    secs = {x["key"]: x for x in ctx.get("details", {}).get("sections", [])}
+    for i, key in enumerate(("panchang", "ashtakavarga", "yogini", "jaimini", "varshaphal", "kp")):
+        if key in secs:
+            extra += detail_html(r, secs[key], f"2.{7 + i}")
+    return section(2, t("Vedic Astrology", "वैदिक ज्योतिष"), para(intro) + s21 + s22 + s23 + s24 + s25 + s26 + extra, tinted=True)
 
 
 def sec3(r, c, ctx):
@@ -618,7 +625,9 @@ def sec3(r, c, ctx):
     s35 = sub("3.5", t("Synastry (two-person readings only)", "सिनास्ट्री (केवल द्वि-व्यक्ति विश्लेषण हेतु)")) + para(t(
         "This is a single-person reading, so synastry does not apply. Use Kundali Milan in the app with a partner's details for compatibility.",
         "यह एकल-व्यक्ति विश्लेषण है, इसलिए सिनास्ट्री यहाँ लागू नहीं होती। अनुकूलता के लिए ऐप में साथी के विवरण के साथ कुंडली मिलान देखें।"))
-    return section(3, t("Western Astrology (Tropical)", "पाश्चात्य ज्योतिष (ट्रॉपिकल)"), para(intro) + s31 + s32 + s33 + s34 + s35)
+    wt = next((x for x in ctx.get("details", {}).get("sections", []) if x["key"] == "western_timing"), None)
+    s36 = detail_html(r, wt, "3.6") if wt else ""
+    return section(3, t("Western Astrology (Tropical)", "पाश्चात्य ज्योतिष (ट्रॉपिकल)"), para(intro) + s31 + s32 + s33 + s34 + s36 + s35)
 
 
 def sec4(r, c, ctx, F):
@@ -849,6 +858,7 @@ def needs_support(v):
 def sec7(r, c, ctx, fc):
     t = r.t
     v, b = c["vedic"], c["bazi"]
+    lk = next((x for x in ctx.get("details", {}).get("sections", []) if x["key"] == "lalkitab"), None)
     dos = v["doshas"]
     pl = v["planets"]
     SEV = {"none": t("Not present", "नहीं है"), "mild": t("Mild", "हल्का"), "moderate": t("Moderate", "मध्यम")}
@@ -952,6 +962,7 @@ def sec7(r, c, ctx, fc):
                            f"{a['title']['hi']}: {r.month(best['from'])} से {r.month(best['to'])} सबसे अच्छा वर्ष। {best['summary']['hi']}"))
     inner = (s_table + f'<h2 class="sub">{t("Traditional remedies", "पारंपरिक उपाय")}</h2>' + bullets(rem)
              + f'<h2 class="sub">{t("Timed, practical steps", "समयबद्ध, व्यावहारिक उपाय")}</h2>' + bullets(timed[:5])
+             + (f'<h2 class="sub">{t("Lal Kitab and its remedies", "लाल किताब और उसके उपाय")}</h2>' + detail_html(r, lk) if lk else "")
              + callout(t("A note on clarity", "स्पष्टता संबंधी टिप्पणी"),
                        t("Remedies are optional practices that support attention and steadiness. No remedy can promise a result; "
                          "for health, money or legal matters, consult a qualified professional.",
@@ -1012,6 +1023,24 @@ def sec8(r, c, ctx, fc):
     return section(8, t("Final Summary", "अंतिम सारांश"), inner, tinted=True)
 
 
+def detail_html(r, sec, num=None, title=None):
+    """One app_details section as report HTML (subsection heading, intro, tables, paragraphs, lists, note)."""
+    k = r.lang_key()
+    out = [sub(num, title or sec["title"][k]) if num else ""]
+    if sec.get("intro"):
+        out.append(f'<p class="guidance">{E(sec["intro"][k])}</p>')
+    for b in sec["blocks"]:
+        if b["type"] == "table":
+            out.append(table([E(h[k]) for h in b["head"]], [[E(c[k]) for c in row] for row in b["rows"]]))
+        elif b["type"] == "para":
+            out.append(f"<p>{E(b['text'][k])}</p>")
+        else:
+            out.append(bullets([E(i[k]) for i in b["items"]]))
+    if sec.get("note") and sec["note"][k]:
+        out.append(f'<p class="guidance">{E(sec["note"][k])}</p>')
+    return "".join(out)
+
+
 def initials(s):
     w = [x for x in (s or "").split() if x]
     return (w[0][0] + (w[-1][0] if len(w) > 1 else "")).upper() if w else "X"
@@ -1024,9 +1053,10 @@ def build(c, fc, req, lang="en", by="Gaurav Mishra", site="authorgaurav.com"):
     now = c["meta"]["generated_for_date"]
     ctx = {"name": req["name"], "date": req["date"], "time": req["time"], "tz": req["tz"], "place": req.get("place", ""),
            "lat": float(req["lat"]), "lon": float(req["lon"]), "gender": req.get("gender", "M"), "now": now,
-           "age": age_on(req["date"], now), "by": by, "site": site,
+           "age": age_on(req["date"], now), "by": by, "site": site, "residence": req.get("residence", ""),
            "ref": f"{initials(by)}/{now[:4]}/{initials(req['name'])}-{req['date'][:4]}"}
     F = c.get("forecast")
+    ctx["details"] = c.get("details") or AD.build(c)
     nav = [(1, t("Birth details", "जन्म विवरण")), (2, t("Vedic", "वैदिक")), (3, t("Western", "पाश्चात्य")), (4, t("BaZi", "बाज़ी")),
            (5, t("Numerology", "अंकशास्त्र")), (6, t("Comparison", "तुलना")), (7, t("Remedies", "उपाय")), (8, t("Summary", "सारांश"))]
     title = (f"{E(ctx['name'])} — " + t("Astrological and Numerological Life Analysis", "ज्योतिषीय एवं अंकशास्त्रीय जीवन विश्लेषण"))
