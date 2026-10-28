@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -57,6 +58,7 @@ fun HomeScreen(
     onSettings: () -> Unit,
     onFeature: (Feature) -> Unit,
     onForecast: () -> Unit = {},
+    onReport: () -> Unit = {},
 ) {
     val lang = currentLang()
     var actionsFor by remember { mutableStateOf<Profile?>(null) }
@@ -106,6 +108,7 @@ fun HomeScreen(
                     FeatureTile(Feature.NUMBERS, R.string.feature_numerology_sub, Modifier.weight(1f), onFeature)
                 }
                 ForecastTile(onForecast)
+                ReportTile(onReport)
             }
         }
     }
@@ -208,6 +211,25 @@ private fun ForecastTile(onClick: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.Ground)
                 Text(stringResource(R.string.forecast_sub), style = MaterialTheme.typography.bodySmall, color = Palette.NightText)
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReportTile(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        modifier = Modifier.fillMaxWidth().heightIn(min = 88.dp).testTag("home_report"),
+    ) {
+        Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.Info, contentDescription = null, tint = Palette.Accent, modifier = Modifier.size(28.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.report_title), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.report_sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }

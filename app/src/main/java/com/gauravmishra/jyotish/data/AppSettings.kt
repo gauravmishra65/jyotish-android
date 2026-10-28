@@ -21,4 +21,11 @@ class AppSettings(context: Context) {
     var weekdayHard: Boolean
         get() = prefs.getBoolean("weekday_hard", false)
         set(v) = prefs.edit().putBoolean("weekday_hard", v).apply()
+    /** Name and website printed on the full report's cover and header. */
+    var reportBy: String
+        get() = prefs.getString("report_by", "Gaurav Mishra") ?: "Gaurav Mishra"
+        set(v) = prefs.edit().putString("report_by", v).apply()
+    var reportSite: String
+        get() = prefs.getString("report_site", "authorgaurav.com") ?: "authorgaurav.com"
+        set(v) = prefs.edit().putString("report_site", v).apply()
 }

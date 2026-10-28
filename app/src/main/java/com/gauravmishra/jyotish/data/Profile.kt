@@ -89,6 +89,8 @@ class ProfileStore(private val dir: File) {
     fun deleteChart(id: String) {
         File(chartDir, "$id.json").delete()
         File(chartDir, "$id.forecast.json").delete()
+        File(chartDir, "$id.report.en.json").delete()
+        File(chartDir, "$id.report.hi.json").delete()
     }
 
     private fun writeAtomic(target: File, text: String) {

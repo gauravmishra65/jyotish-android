@@ -156,6 +156,21 @@ def run_suite():
     return out, t
 
 
+def report(request_json):
+    """The chart request plus "lang" ("en" or "hi"), "by" and "site" -> the full multi-system reading as one HTML page.
+
+    Runs the same layers as forecast() and returns {"html": ..., "forecast": ...} so the app can cache both.
+    """
+    import app_forecast
+    import app_report
+    r = json.loads(request_json)
+    r = dict(r, modules=FORECAST_MODULES, horizon_years=int(r.get("years", 3)))
+    c = chart_obj(r)
+    fc = app_forecast.build(c, birth_date=r["date"])
+    page = app_report.build(c, fc, r, lang=r.get("lang", "en"), by=r.get("by", "Gaurav Mishra"), site=r.get("site", "authorgaurav.com"))
+    return json.dumps({"html": page}, ensure_ascii=False)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()

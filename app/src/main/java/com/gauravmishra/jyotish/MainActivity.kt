@@ -27,6 +27,7 @@ import com.gauravmishra.jyotish.ui.AddProfileScreen
 import com.gauravmishra.jyotish.ui.Feature
 import com.gauravmishra.jyotish.ui.FeatureScreen
 import com.gauravmishra.jyotish.ui.ForecastScreen
+import com.gauravmishra.jyotish.ui.ReportScreen
 import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
@@ -84,6 +85,17 @@ fun App(vm: AppViewModel = viewModel()) {
                         onSettings = { nav.navigate(Routes.SETTINGS) },
                         onFeature = { nav.navigate(Routes.of(it)) },
                         onForecast = { nav.navigate(Routes.FORECAST) },
+                        onReport = { nav.navigate(Routes.REPORT) },
+                    )
+                }
+                composable(Routes.REPORT) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val reports by vm.reports.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    ReportScreen(
+                        profiles = profiles, profile = p, reports = reports,
+                        onSelect = { vm.select(it.id) }, onRequest = { prof, l -> vm.requestReport(prof, l) },
+                        onBack = { nav.popBackStack() },
                     )
                 }
                 composable(Routes.FORECAST) {

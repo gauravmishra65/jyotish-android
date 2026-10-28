@@ -66,6 +66,9 @@ object Engine {
     /** Three-year forecast by life area (see engine_api.forecast): the chart request plus "years" and "now". */
     suspend fun forecast(request: JSONObject): String = call { it.callAttr("forecast", request.toString()).toString() }
 
+    /** The full multi-system reading as one HTML page (see engine_api.report); returns {"html": ...}. */
+    suspend fun report(request: JSONObject): String = call { it.callAttr("report", request.toString()).toString() }
+
     /** Name spelling options for a name and date of birth (YYYY-MM-DD); gender "F" turns off the final-a edits. */
     suspend fun names(name: String, dob: String, gender: String): String =
         call { it.callAttr("names", name, dob, gender).toString() }

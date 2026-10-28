@@ -315,4 +315,11 @@
     <string name="fc_lean_quiet">Quiet</string>
     <string name="fc_active">Active</string>
     <string name="fc_how">How this works</string>
+    <!-- Full reading -->
+    <string name="report_title">Full reading</string>
+    <string name="report_sub">All four systems, remedies and summary, as one report to save or share</string>
+    <string name="report_working">Writing the full reading: Vedic, Western, BaZi and numerology, with the three-year outlook. This takes a few seconds.</string>
+    <string name="report_failed">The reading could not be written: %1$s</string>
+    <string name="report_pdf">Save as PDF</string>
+    <string name="report_share">Share</string>
 </resources>

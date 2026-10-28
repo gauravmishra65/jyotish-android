@@ -78,6 +78,11 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.14.3"
+      - name: Verify the Python layer (ephemeris cross-check, forecast and report rules)
+        run: |
+          python3 -m pip install --quiet pyswisseph==2.10.3.2 tzdata
+          python3 tools/verify/run_all.py 2>&1 | tee verify.log
+          test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=Python verification::$(grep -E 'ISSUE|problems|FAILED' verify.log | tr '\n' ' ')"; exit 1; }
       - name: Check string resources
         run: python3 tools/check_strings.py | tee strings.log || { echo "::error title=Strings::$(cat strings.log | tr '\n' ' ')"; exit 1; }
       - name: Build debug APK and test APK
@@ -164,7 +169,7 @@ jobs:
         run: |
           mkdir -p out
           cp -r shots out/ 2>/dev/null || true
-          cp build.log connected.log spike.log coldstart.log release.log strings.log errors.log out/ 2>/dev/null || true
+          cp build.log connected.log spike.log coldstart.log release.log strings.log verify.log errors.log out/ 2>/dev/null || true
           mkdir -p out/test-results && cp -r app/build/test-results/* app/build/outputs/androidTest-results/* out/test-results/ 2>/dev/null || true
           echo "${GITHUB_SHA} run ${GITHUB_RUN_ID} $(date -u +%FT%TZ)" > out/RUN.txt
           cd out

@@ -306,4 +306,11 @@
     <string name="fc_lean_quiet">शांत</string>
     <string name="fc_active">सक्रिय</string>
     <string name="fc_how">यह कैसे काम करता है</string>
+    <!-- Full reading -->
+    <string name="report_title">संपूर्ण विश्लेषण</string>
+    <string name="report_sub">चारों पद्धतियाँ, उपाय और सारांश, सहेजने या भेजने योग्य एक रिपोर्ट में</string>
+    <string name="report_working">संपूर्ण विश्लेषण तैयार हो रहा है: वैदिक, पाश्चात्य, बाज़ी और अंकशास्त्र, तीन वर्ष के रुझान के साथ। इसमें कुछ सेकंड लगते हैं।</string>
+    <string name="report_failed">विश्लेषण तैयार नहीं हो सका: %1$s</string>
+    <string name="report_pdf">PDF सहेजें</string>
+    <string name="report_share">भेजें</string>
 </resources>

@@ -12,6 +12,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "app", "src", "main", "assets", "meanings.json")
+OUT_PY = os.path.join(HERE, "..", "app", "src", "main", "python", "app_meanings.json")
 sys.path.insert(0, os.path.join(HERE, "..", "app", "src", "main", "python"))
 
 PLANETS = {
@@ -310,6 +311,9 @@ def main():
         "number_type": {k: pair(v) for k, v in NUMBER_TYPES.items()},
     }
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    # The same meanings for the Python side (the full report is written in Python), with every yoga's Hindi name.
+    py = dict(out, yoga_name_hi={**existing, **names_hi})
+    json.dump(py, open(OUT_PY, "w", encoding="utf-8"), ensure_ascii=False)
     print(f"wrote {OUT}: {len(names_hi)} more Hindi yoga names (all 195 covered), {len(YOGAS)} yoga meanings, "
           f"{len(YOGA_CATEGORIES)} categories, {os.path.getsize(OUT) // 1024} KB")
 

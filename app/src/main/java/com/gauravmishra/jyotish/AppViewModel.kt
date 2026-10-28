@@ -62,6 +62,12 @@ sealed interface ForecastState {
     data class Failed(val message: String) : ForecastState
 }
 
+sealed interface ReportState {
+    data object Calculating : ReportState
+    data class Ready(val html: String, val file: java.io.File) : ReportState
+    data class Failed(val message: String) : ReportState
+}
+
 sealed interface ChartState {
     data object Calculating : ChartState
     data class Ready(val summary: ChartSummary, val model: ChartModel, val json: String) : ChartState
@@ -172,6 +178,40 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private val _reports = MutableStateFlow<Map<String, ReportState>>(emptyMap())
+    /** Full readings by "profileId|lang". Worked out on request (a few seconds), cached for the day. */
+    val reports: StateFlow<Map<String, ReportState>> = _reports.asStateFlow()
+    private val reportKeys = mutableMapOf<String, String>()
+
+    fun requestReport(p: Profile, lang: String) {
+        val slot = "${p.id}|$lang"
+        val request = p.chartRequest(LocalDate.now().toString(), settings.ayanamsa, settings.node)
+            .put("years", 3).put("lang", lang).put("by", settings.reportBy).put("site", settings.reportSite)
+        val key = request.toString()
+        if (reportKeys[slot] == key && _reports.value[slot] !is ReportState.Failed) return
+        reportKeys[slot] = key
+        _reports.update { it + (slot to ReportState.Calculating) }
+        viewModelScope.launch {
+            val cacheId = "${p.id}.report.$lang"
+            val state = try {
+                val json = withContext(Dispatchers.IO) { store.cachedChart(cacheId, key) } ?: Engine.report(request).also {
+                    withContext(Dispatchers.IO) { store.cacheChart(cacheId, key, it) }
+                }
+                val html = JSONObject(json).getString("html")
+                // A copy in the cache folder, named after the person, for sharing.
+                val file = withContext(Dispatchers.IO) {
+                    val dir = java.io.File(getApplication<Application>().cacheDir, "reports").apply { mkdirs() }
+                    val safe = p.name.replace(Regex("[^A-Za-z0-9]+"), "_").trim('_').ifEmpty { "Reading" }
+                    java.io.File(dir, "${safe}_Astrology_Reading${if (lang == "hi") "_Hindi" else ""}.html").apply { writeText(html) }
+                }
+                ReportState.Ready(html, file)
+            } catch (e: Throwable) {
+                ReportState.Failed(e.message ?: e.toString())
+            }
+            if (reportKeys[slot] == key) _reports.update { it + (slot to state) }
+        }
+    }
+
     private val _language = MutableStateFlow(settings.language)
     val language: StateFlow<String?> = _language.asStateFlow()
 
@@ -204,6 +244,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         if (_selected.value == id) _selected.value = _profiles.value.firstOrNull()?.id
         _charts.update { it - id }
         _forecasts.update { it - id }
+        _reports.update { m -> m.filterKeys { !it.startsWith("$id|") } }
         forecastKeys.remove(id)
         persist()
         viewModelScope.launch(Dispatchers.IO) { store.deleteChart(id) }

@@ -26,7 +26,7 @@ def main():
     os.makedirs(APP_PY, exist_ok=True)
     for f in os.listdir(APP_PY):  # remove engine files from a previous sync, keep the app's own
         p = os.path.join(APP_PY, f)
-        if (f.endswith(".py") and f != "engine_api.py" and not f.startswith("app_")) or f.endswith(".json"):
+        if (f.endswith(".py") or f.endswith(".json")) and f != "engine_api.py" and not f.startswith("app_"):
             os.remove(p)
     if os.path.isdir(os.path.join(APP_PY, "ephe")):
         shutil.rmtree(os.path.join(APP_PY, "ephe"))
