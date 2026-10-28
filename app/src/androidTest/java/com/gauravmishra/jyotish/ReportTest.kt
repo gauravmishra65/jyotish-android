@@ -77,6 +77,7 @@ class ReportTest {
             assertTrue(en, en.contains("Your rising sign (lagna) is Scorpio"))
             rule.shot("report_en")
             rule.onNodeWithTag("report_lang_hi").performClick()
+            rule.waitUntilDoesNotExist(hasTestTag("report_view"), timeoutMillis = 10_000)      // the English page goes while Hindi is written
             rule.waitUntilAtLeastOneExists(hasTestTag("report_view"), timeoutMillis = 180_000)
             var hi = ""
             for (i in 0 until 40) {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.print.PrintAttributes
 import android.print.PrintManager
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -92,8 +94,6 @@ fun ReportScreen(
                     }
                 }
             }
-            // One WebView for the whole screen: switching language loads the other page into it, so no second
-            // WebView is ever created over the controls. While a page is being written, the progress shows above it.
             when (state) {
                 null, ReportState.Calculating -> Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     if (profile == null) Text(stringResource(R.string.pick_profile_first)) else {
@@ -105,29 +105,27 @@ fun ReportScreen(
                     Text(stringResource(R.string.report_failed, state.message))
                     OutlinedButton(onClick = { profile?.let { onRequest(it, lang) } }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.fc_retry)) }
                 }
-                is ReportState.Ready -> Unit
-            }
-            val html = (state as? ReportState.Ready)?.html
-            if (html != null || webView != null) {
-                AndroidView(
-                    factory = { c ->
-                        WebView(c).apply {
-                            settings.javaScriptEnabled = true      // only the report's own section-nav script
-                            settings.allowFileAccess = false
-                            settings.allowContentAccess = false
-                            webViewClient = WebViewClient()
-                            webView = this
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize().testTag("report_view"),
-                )
-            }
-            // Load explicitly whenever the page or the WebView changes (the English and Hindi pages share one WebView).
-            LaunchedEffect(html, webView) {
-                val wv = webView
-                if (html != null && wv != null && wv.tag != html.hashCode()) {
-                    wv.tag = html.hashCode()
-                    wv.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
+                is ReportState.Ready -> key(state.html) {
+                    // A fresh WebView per page; the previous one is destroyed when it leaves, so nothing stale is drawn.
+                    AndroidView(
+                        factory = { c ->
+                            WebView(c).apply {
+                                settings.javaScriptEnabled = true      // only the report's own section-nav script
+                                settings.allowFileAccess = false
+                                settings.allowContentAccess = false
+                                webViewClient = WebViewClient()
+                                loadDataWithBaseURL(null, state.html, "text/html", "utf-8", null)
+                                webView = this
+                            }
+                        },
+                        onRelease = { wv ->
+                            if (webView === wv) webView = null
+                            wv.stopLoading()
+                            (wv.parent as? ViewGroup)?.removeView(wv)
+                            wv.destroy()
+                        },
+                        modifier = Modifier.fillMaxSize().testTag("report_view"),
+                    )
                 }
             }
         }
