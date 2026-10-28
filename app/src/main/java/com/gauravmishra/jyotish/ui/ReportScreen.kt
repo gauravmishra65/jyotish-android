@@ -92,6 +92,8 @@ fun ReportScreen(
                     }
                 }
             }
+            // One WebView for the whole screen: switching language loads the other page into it, so no second
+            // WebView is ever created over the controls. While a page is being written, the progress shows above it.
             when (state) {
                 null, ReportState.Calculating -> Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     if (profile == null) Text(stringResource(R.string.pick_profile_first)) else {
@@ -103,7 +105,11 @@ fun ReportScreen(
                     Text(stringResource(R.string.report_failed, state.message))
                     OutlinedButton(onClick = { profile?.let { onRequest(it, lang) } }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.fc_retry)) }
                 }
-                is ReportState.Ready -> AndroidView(
+                is ReportState.Ready -> Unit
+            }
+            val html = (state as? ReportState.Ready)?.html
+            if (html != null || webView != null) {
+                AndroidView(
                     factory = { c ->
                         WebView(c).apply {
                             settings.javaScriptEnabled = true      // only the report's own section-nav script
@@ -114,9 +120,9 @@ fun ReportScreen(
                         }
                     },
                     update = { wv ->
-                        if (wv.tag != state.html.hashCode()) {
-                            wv.tag = state.html.hashCode()
-                            wv.loadDataWithBaseURL(null, state.html, "text/html", "utf-8", null)
+                        if (html != null && wv.tag != html.hashCode()) {
+                            wv.tag = html.hashCode()
+                            wv.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
                         }
                     },
                     modifier = Modifier.fillMaxSize().testTag("report_view"),
