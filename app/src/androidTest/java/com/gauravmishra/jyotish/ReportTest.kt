@@ -85,6 +85,9 @@ class ReportTest {
                 Thread.sleep(500)
             }
             assertTrue(hi.take(200), hi.startsWith("hi|") && hi.contains("आपकी लग्न वृश्चिक है"))
+            rule.waitUntilAtLeastOneExists(hasTestTag("report_pdf"), timeoutMillis = 10_000)
+            rule.waitForIdle()
+            Thread.sleep(1_000)   // let the WebView finish painting before the screenshot
             rule.shot("report_hi")
         }
     }
