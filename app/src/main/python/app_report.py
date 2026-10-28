@@ -178,6 +178,15 @@ class R:
         words = [ORD_EN.get(h, f"{h}th") for h in hs]
         return (" and ".join(words) if len(words) < 3 else ", ".join(words[:-1]) + " and " + words[-1]) + (" houses" if len(words) > 1 else " house")
 
+    def length(self, a, b):
+        """Length of a period from its dates: "19 years", "3 years 1 month" (the first dasha is only the balance left at birth)."""
+        da, db = dt.date.fromisoformat(a[:10]), dt.date.fromisoformat(b[:10])
+        months = round((db - da).days / 30.4375)
+        y, m = divmod(months, 12)
+        if self.hi:
+            return " ".join(x for x in (f"{y} वर्ष" if y else "", f"{m} माह" if m else "") if x)
+        return " ".join(x for x in (f"{y} year{'s' if y != 1 else ''}" if y else "", f"{m} month{'s' if m != 1 else ''}" if m else "") if x)
+
     def count(self, n, en_one, en_many, hi_word):
         return f"{n} {hi_word}" if self.hi else f"{n} {en_one if n == 1 else en_many}"
 
@@ -446,7 +455,8 @@ def sec2(r, c, ctx):
     for y in found[:7]:
         m = MEAN["yoga"].get(y["id"], MEAN["yoga_category"].get(y["category"], {})).get(r.lang_key(), "")
         rate = y.get("base_rate_present")
-        rtxt = t(f" Found in {round(rate * 100)}% of charts.", f" लगभग {round(rate * 100)}% कुंडलियों में मिलता है।") if rate is not None else ""
+        pct = "&lt;1" if rate is not None and rate < 0.005 else (round(rate * 100) if rate is not None else None)
+        rtxt = t(f" Found in {pct}% of charts.", f" लगभग {pct}% कुंडलियों में मिलता है।") if rate is not None else ""
         yitems.append(f"<strong>{E(r.yoga_name(y['name']))}</strong> &mdash; {E(m)}{rtxt}")
     dos = v["doshas"]
     md = dos["mangal_dosha"]
@@ -455,10 +465,10 @@ def sec2(r, c, ctx):
     soft = mars["sign"] in ("Aries", "Scorpio", "Capricorn")
     REFN = {"from_lagna": t("the lagna", "लग्न"), "from_moon": t("the Moon", "चंद्र"), "from_venus": t("Venus", "शुक्र")}
     if refs:
-        mtext = t(f"Mangal dosha check: Mars is in a dosha house counted from {', '.join(REFN[x] for x in refs)}. "
+        mtext = t(f"Mangal dosha check: Mars is in a dosha house counted from {' and '.join(REFN[x] for x in refs)}. "
                   + ("Mars is in its own or exaltation sign, which classically calms the dosha a great deal." if soft else
                      "For matching, the other person's chart is checked for the same; classical cancellations then apply."),
-                  f"मंगल दोष की जाँच: {', '.join(REFN[x] for x in refs)} से गिनने पर मंगल दोष वाले भाव में है। "
+                  f"मंगल दोष की जाँच: {' और '.join(REFN[x] for x in refs)} से गिनने पर मंगल दोष वाले भाव में है। "
                   + ("मंगल स्वराशि या उच्च राशि में है, जो शास्त्रीय रूप से दोष को काफ़ी हद तक शांत करता है।" if soft else
                      "कुंडली मिलान में दूसरे व्यक्ति की कुंडली में भी यही देखा जाता है; तब शास्त्रीय परिहार लागू होते हैं।"))
     else:
@@ -490,7 +500,7 @@ def sec2(r, c, ctx):
         what = r.theme(m["lord"]) + t(f"; sits in the {r.house(pl[m['lord']]['house'])}", f"; {r.house(pl[m['lord']]['house'])} में") + \
             (t(f", rules the {r.houses(lordof)}", f", {r.houses(lordof)} का स्वामी") if lordof else "")
         span_ = f"{m['start'][:4]}&ndash;{m['end'][:4]}"
-        drows.append(((span_, r.P(m["lord"]), "&mdash;", t(f"{m.get('years', '')} years", f"{m.get('years', '')} वर्ष") + (t(" (current)", " (चालू)") if is_now else ""), what),
+        drows.append(((span_, r.P(m["lord"]), "&mdash;", r.length(m["start"], m["end"]) + (t(" (current)", " (चालू)") if is_now else ""), what),
                       {"cls": "now" if is_now else ""}))
         if is_now:
             for a in m.get("antardashas", []):
