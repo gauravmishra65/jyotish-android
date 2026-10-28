@@ -76,6 +76,20 @@ def find_muhurta(request_json, *chart_jsons):
     return json.dumps(res, ensure_ascii=False)
 
 
+FORECAST_MODULES = "vedic,western,bazi,numerology,events"
+
+
+def forecast(request_json):
+    """The chart request plus "years" (default 3) and "now" -> the app's forecast by life area (app_forecast.build).
+
+    Runs the forecast and life-event layers, which the ordinary chart call leaves out; about 2 s on a desktop.
+    """
+    import app_forecast
+    r = json.loads(request_json)
+    r = dict(r, modules=FORECAST_MODULES, horizon_years=int(r.get("years", 3)))
+    return json.dumps(app_forecast.build(chart_obj(r)), ensure_ascii=False)
+
+
 def engine_version():
     p = os.path.join(HERE, "ENGINE_VERSION.txt")
     return open(p).read().strip() if os.path.exists(p) else "unknown"
@@ -142,9 +156,18 @@ def run_suite():
     return out, t
 
 
+def _time_forecast(t):
+    """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
+    t0 = time.perf_counter()
+    forecast(json.dumps(dict(CASES[0], now="2027-01-14", years=3)))
+    t["forecast_3_years"] = round(time.perf_counter() - t0, 3)
+    return t
+
+
 def timings():
     """Run the suite and return only the timings, as JSON (for the spike screen)."""
     _, t = run_suite()
+    _time_forecast(t)
     return json.dumps({"timings_s": t, "import_s": round(IMPORT_SECONDS, 3)})
 
 
@@ -152,6 +175,7 @@ def selftest(snapshot_json):
     """Compare this device's results with the desktop snapshot. Returns a JSON report."""
     expected = json.loads(snapshot_json)
     got, timings = run_suite()
+    _time_forecast(timings)
     mismatches = []
     for k, v in expected["results"].items():
         if got.get(k) != v:

@@ -3,8 +3,8 @@
 Usage:  python tools/sync_engine.py /path/to/astrology-numerology-reading
 
 Copies the skill's scripts (minus report, book and test tooling), its ephemeris files and the yoga base
-rates into app/src/main/python, and records the skill's git commit in ENGINE_VERSION.txt. engine_api.py is
-the app's own file and is never overwritten.
+rates into app/src/main/python, and records the skill's git commit in ENGINE_VERSION.txt. engine_api.py and
+app_*.py are the app's own files and are never overwritten.
 """
 import os
 import shutil
@@ -26,7 +26,7 @@ def main():
     os.makedirs(APP_PY, exist_ok=True)
     for f in os.listdir(APP_PY):  # remove engine files from a previous sync, keep the app's own
         p = os.path.join(APP_PY, f)
-        if (f.endswith(".py") and f != "engine_api.py") or f.endswith(".json"):
+        if (f.endswith(".py") and f != "engine_api.py" and not f.startswith("app_")) or f.endswith(".json"):
             os.remove(p)
     if os.path.isdir(os.path.join(APP_PY, "ephe")):
         shutil.rmtree(os.path.join(APP_PY, "ephe"))

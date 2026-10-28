@@ -42,6 +42,7 @@ object Routes {
     const val MILAN = "milan"
     const val MUHURTA = "muhurta"
     const val NUMBERS = "numbers"
+    const val FORECAST = "forecast"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 

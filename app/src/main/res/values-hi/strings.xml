@@ -278,4 +278,32 @@
     <string name="meaning_in_house">भाव %1$d: %2$s।</string>
     <string name="meaning_number">%1$d: %2$s</string>
     <string name="nu_meaning_note">अंक ज्योतिष प्रवृत्तियाँ बताता है; यह परिणाम तय नहीं करता।</string>
+    <!-- Forecast -->
+    <string name="forecast_title">3 वर्ष का भविष्यफल</string>
+    <string name="forecast_sub">विवाह, कार्य, स्वास्थ्य और परिवार, वर्ष-दर-वर्ष</string>
+    <string name="fc_working">तीन वर्षों की दशाओं और गोचर की गणना हो रही है। हर दिन पहली बार इसमें कुछ सेकंड लगते हैं।</string>
+    <string name="fc_failed">भविष्यफल की गणना नहीं हो सकी: %1$s</string>
+    <string name="fc_retry">फिर से कोशिश करें</string>
+    <string name="fc_window">%1$s से %2$s तक</string>
+    <string name="fc_outlook">तीन वर्ष का रुझान</string>
+    <string name="fc_best">सबसे अच्छा वर्ष: %1$s</string>
+    <string name="fc_care">सावधानी का वर्ष: %1$s</string>
+    <string name="fc_no_best">कोई वर्ष स्पष्ट रूप से आगे नहीं</string>
+    <string name="fc_no_care">कोई वर्ष विशेष रूप से कठिन नहीं</string>
+    <string name="fc_windows">समय की खिड़कियाँ</string>
+    <string name="fc_year_span">वर्ष %1$d: %2$s से %3$s</string>
+    <string name="fc_why">क्यों</string>
+    <string name="fc_more">%1$d और देखें, तकनीकी विवरण के साथ</string>
+    <string name="fc_less">कम दिखाएँ</string>
+    <string name="fc_signal">%2$d में से %1$d पद्धतियाँ सहमत</string>
+    <string name="fc_signal_none">इस वर्ष कोई पद्धति संकेत नहीं देती</string>
+    <string name="fc_conv_strong">स्पष्ट संकेत</string>
+    <string name="fc_conv_moderate">मध्यम संकेत</string>
+    <string name="fc_conv_weak">क्षीण संकेत</string>
+    <string name="fc_lean_supportive">अनुकूल</string>
+    <string name="fc_lean_demanding">प्रयास चाहिए</string>
+    <string name="fc_lean_mixed">मिश्रित</string>
+    <string name="fc_lean_quiet">शांत</string>
+    <string name="fc_active">सक्रिय</string>
+    <string name="fc_how">यह कैसे काम करता है</string>
 </resources>

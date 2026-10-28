@@ -26,6 +26,7 @@ import com.gauravmishra.jyotish.engine.Engine
 import com.gauravmishra.jyotish.ui.AddProfileScreen
 import com.gauravmishra.jyotish.ui.Feature
 import com.gauravmishra.jyotish.ui.FeatureScreen
+import com.gauravmishra.jyotish.ui.ForecastScreen
 import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
@@ -82,6 +83,17 @@ fun App(vm: AppViewModel = viewModel()) {
                         onDelete = { vm.delete(it.id) },
                         onSettings = { nav.navigate(Routes.SETTINGS) },
                         onFeature = { nav.navigate(Routes.of(it)) },
+                        onForecast = { nav.navigate(Routes.FORECAST) },
+                    )
+                }
+                composable(Routes.FORECAST) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val forecasts by vm.forecasts.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    ForecastScreen(
+                        profiles = profiles, profile = p, state = p?.let { forecasts[it.id] },
+                        onSelect = { vm.select(it.id) }, onRequest = { vm.requestForecast(it) },
+                        onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }
                 composable(Routes.ADD, arguments = listOf(navArgument("id") { type = NavType.StringType; nullable = true })) { entry ->

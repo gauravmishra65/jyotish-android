@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.gauravmishra.jyotish.data.AppSettings
 import com.gauravmishra.jyotish.data.ChartModel
+import com.gauravmishra.jyotish.data.ForecastModel
 import com.gauravmishra.jyotish.data.MatchModel
 import com.gauravmishra.jyotish.data.MuhurtaResult
 import com.gauravmishra.jyotish.data.Places
@@ -53,6 +54,12 @@ sealed interface MatchState {
     data object Calculating : MatchState
     data class Ready(val model: MatchModel) : MatchState
     data class Failed(val message: String) : MatchState
+}
+
+sealed interface ForecastState {
+    data object Calculating : ForecastState
+    data class Ready(val model: ForecastModel) : ForecastState
+    data class Failed(val message: String) : ForecastState
 }
 
 sealed interface ChartState {
@@ -140,6 +147,31 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private val _forecasts = MutableStateFlow<Map<String, ForecastState>>(emptyMap())
+    /** Three-year forecasts by profile id. Worked out only when asked for (a few seconds), then cached for the day. */
+    val forecasts: StateFlow<Map<String, ForecastState>> = _forecasts.asStateFlow()
+    private val forecastKeys = mutableMapOf<String, String>()
+
+    fun requestForecast(p: Profile) {
+        val request = p.chartRequest(LocalDate.now().toString(), settings.ayanamsa, settings.node).put("years", 3)
+        val key = request.toString()
+        if (forecastKeys[p.id] == key && _forecasts.value[p.id] !is ForecastState.Failed) return
+        forecastKeys[p.id] = key
+        _forecasts.update { it + (p.id to ForecastState.Calculating) }
+        viewModelScope.launch {
+            val cacheId = "${p.id}.forecast"
+            val state = try {
+                val json = withContext(Dispatchers.IO) { store.cachedChart(cacheId, key) } ?: Engine.forecast(request).also {
+                    withContext(Dispatchers.IO) { store.cacheChart(cacheId, key, it) }
+                }
+                ForecastState.Ready(withContext(Dispatchers.Default) { ForecastModel.parse(json) })
+            } catch (e: Throwable) {
+                ForecastState.Failed(e.message ?: e.toString())
+            }
+            if (forecastKeys[p.id] == key) _forecasts.update { it + (p.id to state) }
+        }
+    }
+
     private val _language = MutableStateFlow(settings.language)
     val language: StateFlow<String?> = _language.asStateFlow()
 
@@ -171,6 +203,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         _profiles.update { list -> list.filterNot { it.id == id } }
         if (_selected.value == id) _selected.value = _profiles.value.firstOrNull()?.id
         _charts.update { it - id }
+        _forecasts.update { it - id }
+        forecastKeys.remove(id)
         persist()
         viewModelScope.launch(Dispatchers.IO) { store.deleteChart(id) }
     }

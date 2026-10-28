@@ -1,5 +1,7 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -54,6 +56,7 @@ fun HomeScreen(
     onDelete: (Profile) -> Unit,
     onSettings: () -> Unit,
     onFeature: (Feature) -> Unit,
+    onForecast: () -> Unit = {},
 ) {
     val lang = currentLang()
     var actionsFor by remember { mutableStateOf<Profile?>(null) }
@@ -102,6 +105,7 @@ fun HomeScreen(
                     FeatureTile(Feature.MUHURTA, R.string.feature_muhurta_sub, Modifier.weight(1f), onFeature)
                     FeatureTile(Feature.NUMBERS, R.string.feature_numerology_sub, Modifier.weight(1f), onFeature)
                 }
+                ForecastTile(onForecast)
             }
         }
     }
@@ -187,6 +191,24 @@ private fun FeatureTile(f: Feature, sub: Int, modifier: Modifier, onFeature: (Fe
             Icon(f.icon, contentDescription = null, tint = Palette.Accent, modifier = Modifier.size(28.dp))
             Text(stringResource(f.title), style = MaterialTheme.typography.titleMedium)
             Text(stringResource(sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun ForecastTile(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Palette.Night),
+        modifier = Modifier.fillMaxWidth().heightIn(min = 88.dp).testTag("home_forecast"),
+    ) {
+        Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.DateRange, contentDescription = null, tint = Palette.Saffron, modifier = Modifier.size(28.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.Ground)
+                Text(stringResource(R.string.forecast_sub), style = MaterialTheme.typography.bodySmall, color = Palette.NightText)
+            }
         }
     }
 }

@@ -287,4 +287,32 @@
     <string name="meaning_in_house">House %1$d is about %2$s.</string>
     <string name="meaning_number">%1$d: %2$s</string>
     <string name="nu_meaning_note">Numerology describes tendencies; it does not decide outcomes.</string>
+    <!-- Forecast -->
+    <string name="forecast_title">3-year forecast</string>
+    <string name="forecast_sub">Marriage, work, health and family, year by year</string>
+    <string name="fc_working">Working out three years of planetary periods and transits. This takes a few seconds the first time each day.</string>
+    <string name="fc_failed">The forecast could not be worked out: %1$s</string>
+    <string name="fc_retry">Try again</string>
+    <string name="fc_window">From %1$s to %2$s</string>
+    <string name="fc_outlook">Three-year outlook</string>
+    <string name="fc_best">Strongest year: %1$s</string>
+    <string name="fc_care">Year needing care: %1$s</string>
+    <string name="fc_no_best">No year clearly ahead of the others</string>
+    <string name="fc_no_care">No year stands out as hard</string>
+    <string name="fc_windows">Timing windows</string>
+    <string name="fc_year_span">Year %1$d: %2$s to %3$s</string>
+    <string name="fc_why">Why</string>
+    <string name="fc_more">Show %1$d more, with technical details</string>
+    <string name="fc_less">Show less</string>
+    <string name="fc_signal">%1$d of %2$d systems agree</string>
+    <string name="fc_signal_none">No system flags this year</string>
+    <string name="fc_conv_strong">clear signal</string>
+    <string name="fc_conv_moderate">moderate signal</string>
+    <string name="fc_conv_weak">faint signal</string>
+    <string name="fc_lean_supportive">Supportive</string>
+    <string name="fc_lean_demanding">Needs effort</string>
+    <string name="fc_lean_mixed">Mixed</string>
+    <string name="fc_lean_quiet">Quiet</string>
+    <string name="fc_active">Active</string>
+    <string name="fc_how">How this works</string>
 </resources>

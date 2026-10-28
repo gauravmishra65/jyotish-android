@@ -63,6 +63,9 @@ object Engine {
     suspend fun muhurta(request: JSONObject, charts: List<String>): String =
         call { api -> api.callAttr("find_muhurta", request.toString(), *charts.toTypedArray()).toString() }
 
+    /** Three-year forecast by life area (see engine_api.forecast): the chart request plus "years" and "now". */
+    suspend fun forecast(request: JSONObject): String = call { it.callAttr("forecast", request.toString()).toString() }
+
     /** Name spelling options for a name and date of birth (YYYY-MM-DD); gender "F" turns off the final-a edits. */
     suspend fun names(name: String, dob: String, gender: String): String =
         call { it.callAttr("names", name, dob, gender).toString() }
