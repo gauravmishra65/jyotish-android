@@ -50,7 +50,7 @@ Pinned versions: Android Gradle Plugin 8.13.2, Gradle 8.14.3, Kotlin 2.2.21, Cha
 
 ## Release build
 
-`gradle :app:bundleRelease` (or `assembleRelease`). Signing comes from `JYOTISH_KEYSTORE`, `JYOTISH_KEYSTORE_PASSWORD`, `JYOTISH_KEY_ALIAS` and `JYOTISH_KEY_PASSWORD`; without them the release is signed with the debug key for testing and must not be uploaded. Keep `mapping.txt` from each uploaded build.
+`gradle :app:bundleRelease` (or `assembleRelease`). Signing comes from `JYOTISH_KEYSTORE`, `JYOTISH_KEYSTORE_PASSWORD`, `JYOTISH_KEY_ALIAS` and `JYOTISH_KEY_PASSWORD`; without them the release is signed with the committed test key (`keystore/README.md`), so test builds install over each other, and must not be uploaded. Keep `mapping.txt` from each uploaded build.
 
 ## Licence note
 

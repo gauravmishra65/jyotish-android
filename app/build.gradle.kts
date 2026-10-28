@@ -26,10 +26,16 @@ android {
 
     // Release signing comes from the environment (a CI secret or the developer's machine), never from the repository:
     //   JYOTISH_KEYSTORE (path), JYOTISH_KEYSTORE_PASSWORD, JYOTISH_KEY_ALIAS, JYOTISH_KEY_PASSWORD.
-    // Without them the release build is signed with the debug key so CI can install and smoke-test it; such a
-    // build must never be uploaded to Play.
+    // Without them, debug and release builds are signed with the committed test key (keystore/README.md), so every CI
+    // build installs over the last one on a test phone. A test-signed build must never be uploaded to Play.
     val keystore = System.getenv("JYOTISH_KEYSTORE")?.let { file(it) }?.takeIf { it.exists() }
     signingConfigs {
+        create("test") {
+            storeFile = rootProject.file("keystore/test-signing.jks")
+            storePassword = "jyotish-test"
+            keyAlias = "jyotish-test"
+            keyPassword = "jyotish-test"
+        }
         if (keystore != null) create("upload") {
             storeFile = keystore
             storePassword = System.getenv("JYOTISH_KEYSTORE_PASSWORD")
@@ -43,7 +49,10 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("test")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("test")
         }
     }
 

@@ -72,7 +72,7 @@ Permissions requested: none. Third-party SDKs: none (no analytics, crash reporti
 
 1. Create the upload key and keep it outside the repository; set `JYOTISH_KEYSTORE`, `JYOTISH_KEYSTORE_PASSWORD`,
    `JYOTISH_KEY_ALIAS` and `JYOTISH_KEY_PASSWORD` (as CI secrets or locally) and run `gradle :app:bundleRelease`.
-   Without them the release is signed with the debug key and must not be uploaded.
+   Without them the release is signed with the committed test key and must not be uploaded.
 2. Enrol in Play App Signing.
 3. Upload `mapping.txt` from the same build, so crash reports are readable.
 4. Screenshots: the CI run's `ci-results` branch has current ones (Home, Kundali, Milan, Muhurta, Numerology in
