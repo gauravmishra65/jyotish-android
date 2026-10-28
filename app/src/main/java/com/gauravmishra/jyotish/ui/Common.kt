@@ -81,14 +81,14 @@ fun BackBar(title: String, onBack: () -> Unit, subtitle: String? = null) {
 
 /** Bottom navigation shown on Home and the feature screens. [current] is null on Home. */
 @Composable
-fun BottomNav(current: Feature?, onHome: () -> Unit, onFeature: (Feature) -> Unit) {
+fun BottomNav(current: Feature?, onHome: () -> Unit, onFeature: (Feature) -> Unit, homeSelected: Boolean = current == null) {
     NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
         val itemColors = NavigationBarItemDefaults.colors(
             selectedIconColor = Palette.AccentDeep, selectedTextColor = Palette.AccentDeep, indicatorColor = Palette.AccentSoft,
             unselectedIconColor = Palette.Muted, unselectedTextColor = Palette.Muted,
         )
         NavigationBarItem(
-            selected = current == null, onClick = onHome, colors = itemColors,
+            selected = homeSelected, onClick = onHome, colors = itemColors,
             icon = { Icon(Icons.Filled.Home, contentDescription = null, modifier = Modifier.size(22.dp)) },
             label = { Text(stringResource(R.string.nav_home)) },
         )

@@ -48,4 +48,18 @@ class ForecastModelTest {
         val banned = Regex("\\b(death|die|dies|disease|illness|cancer|divorce|accident|surgery|guarantee)\\b|मृत्यु|तलाक|रोग|दुर्घटना")
         assertFalse(banned.find(raw)?.value ?: "", banned.containsMatchIn(raw))
     }
+
+    /** forecast_minor.json: Asha Kumari (fictional), born 2012-05-05, now = 2027-01-14. */
+    @Test
+    fun underEighteenGetsNoWeddingTalkAndNoMarriageWindows() {
+        val f = ForecastModel.parse(javaClass.classLoader!!.getResource("forecast_minor.json")!!.readText())
+        val m = f.area("marriage")
+        assertTrue(m.subtitle.en.contains("18th birthday"))
+        m.years.filter { it.from < "2030-05-05" }.forEach { y ->
+            assertFalse(y.summary.en, Regex("wedding|marriage").containsMatchIn(y.summary.en))
+            assertFalse(y.summary.hi, y.summary.hi.contains("विवाह"))
+        }
+        f.areas.flatMap { it.windows }.filter { it.kind in setOf("marriage", "kn_rao", "children") }
+            .forEach { assertTrue("${it.kind} ${it.from}", it.from >= "2030-05-05") }
+    }
 }

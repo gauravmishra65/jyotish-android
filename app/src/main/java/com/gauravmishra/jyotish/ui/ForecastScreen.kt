@@ -78,7 +78,7 @@ fun ForecastScreen(
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { BackBar(stringResource(R.string.forecast_title), onHome, subtitle = profile?.name) },
-        bottomBar = { BottomNav(current = null, onHome = onHome, onFeature = onFeature) },
+        bottomBar = { BottomNav(current = null, onHome = onHome, onFeature = onFeature, homeSelected = false) },
     ) { pad ->
         Column(
             Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 4.dp),

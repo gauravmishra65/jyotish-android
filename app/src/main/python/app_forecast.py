@@ -112,6 +112,16 @@ SUMMARY = {
         "quiet": ("A quiet year for home and family, without strong signals.",
                   "घर और परिवार के लिए शांत वर्ष, कोई बड़ा संकेत नहीं।")},
 }
+YOUNG = {  # the Marriage area for a year that starts before the 18th birthday
+    "supportive": ("A good year for friendships and social life.", "मित्रता और मेल-जोल के लिए अच्छा वर्ष।"),
+    "demanding": ("Friendships may need patience this year; lean on family and trusted adults.",
+                  "इस वर्ष मित्रता में धैर्य चाहिए; परिवार और भरोसेमंद बड़ों का साथ लें।"),
+    "mixed": ("Friendships have ups and downs this year; keep close to the people you trust.",
+              "इस वर्ष मित्रता में उतार-चढ़ाव; जिन पर भरोसा है उनके साथ रहें।"),
+    "quiet": ("A quiet year for friendships.", "मित्रता के लिए शांत वर्ष।"),
+}
+ADULT_ONLY = {"marriage", "children"}   # windows never shown before the 18th birthday
+
 OUTLOOK = {
     "mostly_supportive": ("Mostly supportive", "अधिकतर अनुकूल"),
     "mostly_demanding": ("Mostly demanding: steady effort needed", "अधिकतर चुनौतीपूर्ण: लगातार प्रयास चाहिए"),
@@ -338,7 +348,18 @@ def _next_month(ym):
     return f"{y + (m == 12)}-{(m % 12) + 1:02d}"
 
 
-def build(c, max_drivers=5):
+def adult_from(birth_date):
+    """The 18th birthday (28 Feb for a 29 Feb birthday), ISO."""
+    if not birth_date:
+        return None
+    y, m, d = int(birth_date[:4]), birth_date[5:7], birth_date[8:10]
+    return f"{y + 18}-{m}-{'28' if (m, d) == ('02', '29') else d}"
+
+
+def build(c, max_drivers=5, birth_date=None):
+    """birth_date (YYYY-MM-DD) lets the forecast treat years before the 18th birthday as a young person's: no wedding talk
+    and no marriage or children windows before that date."""
+    adult = adult_from(birth_date)
     F = c["forecast"]
     ev = (c.get("vedic") or {}).get("events") or {}
     la = F["life_areas"]
@@ -379,7 +400,8 @@ def build(c, max_drivers=5):
             drivers = first + rest
             for d in drivers:
                 d.pop("_t")
-            se, sh = SUMMARY[A["key"]][lean]
+            young = adult is not None and sl["from"] < adult
+            se, sh = (YOUNG if young and A["key"] == "marriage" else SUMMARY[A["key"]])[lean]
             years.append({"id": sl["id"], "from": sl["from"], "to": sl["to"], "lean": lean, "convergence": conv,
                           "supportive": plus, "demanding": minus, "active": act,
                           "summary": {"en": se, "hi": sh},
@@ -392,6 +414,8 @@ def build(c, max_drivers=5):
             rate = aw["base_rate_ages_18_70"]["dasha+transit"]
             for wd in aw["windows"]:
                 a, b = max(wd["from"], w0), min(wd["to"], w1)
+                if adult and k in ADULT_ONLY:
+                    a = max(a, adult)
                 if a > b:
                     continue
                 ne, nh = WINDOW_NAME.get(k, (k, k))
@@ -400,7 +424,8 @@ def build(c, max_drivers=5):
                                 "hi": f"{nh} के लिए समय की खिड़की: {span(a, b, True)}" + (" (जैमिनी दशा भी अनुकूल)" if wd.get("with_sign_dasha") else ""),
                                 "meaning": {"en": event_meaning(rate), "hi": event_meaning(rate, True)}})
         if A["key"] == "marriage" and ev.get("marriage_kn_rao"):
-            months = [x["month"] for x in ev["marriage_kn_rao"].get("months", []) if x.get("all_steps") and w0[:7] <= x["month"] <= w1[:7]]
+            months = [x["month"] for x in ev["marriage_kn_rao"].get("months", []) if x.get("all_steps") and w0[:7] <= x["month"] <= w1[:7]
+                      and (adult is None or x["month"] >= adult[:7])]
             for a, b in _months_runs(months):
                 windows.append({"kind": "kn_rao", "from": a + "-01", "to": b + "-28", "base_rate": None, "jaimini": False,
                                 "en": f"All of K.N. Rao's marriage transit steps hold: {month(a + '-01')}" + ("" if a == b else f" – {month(b + '-01')}"),
@@ -408,8 +433,12 @@ def build(c, max_drivers=5):
                                 "meaning": {"en": "The narrowest classical marriage timing in this method.",
                                             "hi": "इस पद्धति में विवाह का सबसे सटीक शास्त्रीय समय।"}})
         windows.sort(key=lambda x: x["from"])
+        sub_en, sub_hi = A["sub"]
+        if A["key"] == "marriage" and adult and w0 < adult:
+            sub_en, sub_hi = (f"Before the 18th birthday ({day(adult)}) read this for friendships; marriage timing starts from then.",
+                              f"18वें जन्मदिन ({day(adult, True)}) से पहले इसे मित्रता के लिए पढ़ें; विवाह का समय तभी से गिना गया है।")
         out["areas"].append({"key": A["key"], "title": {"en": A["title"][0], "hi": A["title"][1]},
-                             "subtitle": {"en": A["sub"][0], "hi": A["sub"][1]},
+                             "subtitle": {"en": sub_en, "hi": sub_hi},
                              "outlook": outlook(years), "years": years, "windows": windows})
     out["method"] = {
         "en": ("Classical Vedic timing (planetary periods, Jupiter and Saturn transits, the birthday-year chart) is checked against "

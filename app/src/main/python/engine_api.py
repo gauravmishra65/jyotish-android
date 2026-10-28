@@ -87,7 +87,7 @@ def forecast(request_json):
     import app_forecast
     r = json.loads(request_json)
     r = dict(r, modules=FORECAST_MODULES, horizon_years=int(r.get("years", 3)))
-    return json.dumps(app_forecast.build(chart_obj(r)), ensure_ascii=False)
+    return json.dumps(app_forecast.build(chart_obj(r), birth_date=r["date"]), ensure_ascii=False)
 
 
 def engine_version():
