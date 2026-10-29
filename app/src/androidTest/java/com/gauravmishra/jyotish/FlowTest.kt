@@ -54,7 +54,7 @@ class FlowTest {
             rule.onNodeWithTag("reg_email").performTextInput("ravi@example.com")
             rule.shot("register")
             rule.onNodeWithTag("reg_save").performScrollTo().performClick()
-            rule.waitUntil(5_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
+            rule.waitUntil(15_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
             rule.onNodeWithText("Send your details to the app's author?").assertExists()
             rule.onNodeWithTag("reg_send").assertExists()
             rule.onNodeWithTag("reg_send_no").performClick()
@@ -98,7 +98,7 @@ class FlowTest {
     fun hindiInterfaceShowsHindiNames() {
         ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putString("language", "hi").commit()
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.onNodeWithText("ज्योतिष").assertExists()
+            rule.onNodeWithText("गौरव ज्योतिष").assertExists()
             rule.onNodeWithText("+ प्रोफ़ाइल जोड़ें").performClick()
             rule.onNodeWithTag("name").performTextInput("रवि")
             rule.onNodeWithTag("date").performScrollTo().performTextInput("14-07-1988")

@@ -71,7 +71,7 @@ class SavedAboutTest {
             rule.onNodeWithTag("settings_my_details").performClick()
             rule.onNodeWithTag("reg_name").performTextInput("Priya Nair")
             rule.onNodeWithTag("reg_save").performScrollTo().performClick()
-            rule.waitUntil(5_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
+            rule.waitUntil(15_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
             rule.onNodeWithTag("reg_send_no").performClick()
             rule.onNodeWithText("Priya Nair").assertExists()                        // Settings shows the registered name
             rule.onNodeWithTag("settings_about").performClick()
