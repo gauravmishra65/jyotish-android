@@ -374,4 +374,8 @@
     <string name="reg_send_body">आपका ईमेल ऐप %1$s के पते के साथ खुलेगा, जिसमें आपका नाम, ईमेल और फ़ोन भरा होगा। जब तक आप वहाँ भेजें नहीं दबाते, कुछ नहीं जाता।</string>
     <string name="reg_send_yes">ईमेल खोलें</string>
     <string name="reg_send_no">अभी नहीं</string>
+    <string name="person_label">व्यक्ति</string>
+    <string name="person_new">नया</string>
+    <string name="pick_person_title">सहेजी गई कुंडली चुनें</string>
+    <string name="add_new_person">+ नया व्यक्ति जोड़ें</string>
 </resources>

@@ -69,6 +69,7 @@ fun MuhurtaScreen(
     state: MuhurtaState,
     loadPlaces: suspend () -> Places,
     onFind: (MuhurtaQuery) -> Unit,
+    onAdd: () -> Unit,
     onHome: () -> Unit,
     onFeature: (Feature) -> Unit,
 ) {
@@ -126,6 +127,9 @@ fun MuhurtaScreen(
                         }
                     }
                     Text(stringResource(R.string.mu_people_help), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+                }
+                TextButton(onClick = onAdd, modifier = Modifier.heightIn(min = 48.dp).testTag("mu_add_person")) {
+                    Text(stringResource(R.string.add_new_person), color = Palette.Accent)
                 }
                 error?.let { Text(stringResource(it), color = MaterialTheme.colorScheme.error) }
                 Button(

@@ -71,7 +71,7 @@ fun MilanScreen(
     match: MatchState,
     onPair: (String?, String?) -> Unit,
     onRequest: (String, String) -> Unit,
-    onAdd: () -> Unit,
+    onAdd: (slot: String) -> Unit,
     onHome: () -> Unit,
     onFeature: (Feature) -> Unit,
 ) {
@@ -94,16 +94,16 @@ fun MilanScreen(
         ) {
             if (profiles.size < 2) {
                 Text(stringResource(R.string.need_two), style = MaterialTheme.typography.bodyLarge)
-                TextButton(onClick = onAdd, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
+                TextButton(onClick = { onAdd("") }, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.add_profile), color = Palette.Accent) }
                 return@Column
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                PersonPicker(stringResource(R.string.groom), groom, profiles, Modifier.weight(1f).testTag("pick_groom")) { onPair(it.id, bride?.id) }
+                PersonPicker(stringResource(R.string.groom), groom, profiles, Modifier.weight(1f).testTag("pick_groom"), onAdd = { onAdd("groom") }) { onPair(it.id, bride?.id) }
                 val swap = stringResource(R.string.swap)
                 IconButton(onClick = { onPair(bride?.id, groom?.id) }, modifier = Modifier.size(48.dp).semantics { contentDescription = swap }) {
                     Text("⇄", color = Palette.Accent, fontSize = 22.sp)
                 }
-                PersonPicker(stringResource(R.string.bride), bride, profiles, Modifier.weight(1f).testTag("pick_bride")) { onPair(groom?.id, it.id) }
+                PersonPicker(stringResource(R.string.bride), bride, profiles, Modifier.weight(1f).testTag("pick_bride"), onAdd = { onAdd("bride") }) { onPair(groom?.id, it.id) }
             }
             if (groom != null && groom.id == bride?.id) { Text(stringResource(R.string.same_person), color = MaterialTheme.colorScheme.error); return@Column }
 
@@ -129,24 +129,12 @@ fun MilanScreen(
 }
 
 @Composable
-private fun PersonPicker(label: String, chosen: Profile?, profiles: List<Profile>, modifier: Modifier, onPick: (Profile) -> Unit) {
+private fun PersonPicker(label: String, chosen: Profile?, profiles: List<Profile>, modifier: Modifier, onAdd: () -> Unit, onPick: (Profile) -> Unit) {
     var open by remember { mutableStateOf(false) }
-    Box(modifier) {
-        Surface(
-            onClick = { open = true }, shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surface,
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline), modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-        ) {
-            Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                Text(label, style = MaterialTheme.typography.labelMedium, color = Palette.Muted)
-                Text(chosen?.name ?: stringResource(R.string.choose_person), style = MaterialTheme.typography.titleMedium, maxLines = 1,
-                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
-            }
-        }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
-            profiles.forEach { p ->
-                DropdownMenuItem(text = { Text(p.name) }, onClick = { open = false; onPick(p) })
-            }
-        }
+    PersonField(label, chosen, modifier) { open = true }
+    if (open) {
+        ProfilePickerDialog(label, profiles, chosen?.id, onPick = { open = false; onPick(it) }, onAdd = { open = false; onAdd() },
+            onDismiss = { open = false })
     }
 }
 

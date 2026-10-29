@@ -91,9 +91,9 @@ fun App(vm: AppViewModel = viewModel()) {
                     SavedScreen(
                         profiles = profiles,
                         onOpen = { vm.select(it.id); nav.navigate(Routes.KUNDALI) },
-                        onEdit = { nav.navigate(Routes.add(it.id)) },
+                        onEdit = { nav.navigate(Routes.add(it.id, ret = "back")) },
                         onDelete = { vm.delete(it.id) },
-                        onAdd = { nav.navigate(Routes.add()) },
+                        onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onBack = { nav.popBackStack() },
                     )
                 }
@@ -123,7 +123,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     ReportScreen(
                         profiles = profiles, profile = p, reports = reports,
-                        onSelect = { vm.select(it.id) }, onRequest = { prof, l -> vm.requestReport(prof, l) },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onRequest = { prof, l -> vm.requestReport(prof, l) },
                         onBack = { nav.popBackStack() },
                     )
                 }
@@ -133,17 +133,32 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     ForecastScreen(
                         profiles = profiles, profile = p, state = p?.let { forecasts[it.id] },
-                        onSelect = { vm.select(it.id) }, onRequest = { vm.requestForecast(it) },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onRequest = { vm.requestForecast(it) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }
-                composable(Routes.ADD, arguments = listOf(navArgument("id") { type = NavType.StringType; nullable = true })) { entry ->
-                    val id = entry.arguments?.getString("id")
+                composable(Routes.ADD, arguments = listOf(
+                    navArgument("id") { type = NavType.StringType; nullable = true; defaultValue = null },
+                    navArgument("ret") { type = NavType.StringType; defaultValue = "" },
+                )) { entry ->
+                    val id = entry.arguments?.getString("id")?.takeIf { it.isNotEmpty() }
+                    val ret = entry.arguments?.getString("ret").orEmpty()
+                    val existing = profiles.firstOrNull { it.id == id }
+                    val leave = { if (ret.isEmpty() || !nav.popBackStack()) nav.goHome() }
                     AddProfileScreen(
-                        existing = profiles.firstOrNull { it.id == id },
+                        existing = existing,
                         loadPlaces = { vm.places() },
-                        onBack = { nav.goHome() },
-                        onSave = { vm.addOrUpdate(it); nav.goHome() },
+                        onBack = { leave() },
+                        onSave = { p ->
+                            val (g, b) = vm.defaultPair(profiles)
+                            vm.addOrUpdate(p)
+                            if (existing == null) when (ret) {          // a new person becomes the one in use
+                                "groom" -> vm.setPair(p.id, b)
+                                "bride" -> vm.setPair(g, p.id)
+                                else -> vm.select(p.id)
+                            }
+                            leave()
+                        },
                     )
                 }
                 composable(Routes.SETTINGS) {
@@ -159,7 +174,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     KundaliScreen(
                         profiles = profiles, profile = p, chart = p?.let { charts[it.id] }, style = style,
-                        onSelect = { vm.select(it.id) }, onStyle = { vm.setChartStyle(it) },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onStyle = { vm.setChartStyle(it) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }
@@ -171,7 +186,7 @@ fun App(vm: AppViewModel = viewModel()) {
                         profiles = profiles, groom = profiles.firstOrNull { it.id == g }, bride = profiles.firstOrNull { it.id == b },
                         charts = charts, match = match,
                         onPair = { gid, bid -> vm.setPair(gid, bid) }, onRequest = { gid, bid -> vm.requestMatch(gid, bid) },
-                        onAdd = { nav.navigate(Routes.add()) },
+                        onAdd = { slot -> nav.navigate(Routes.add(ret = slot.ifEmpty { "back" })) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }
@@ -180,7 +195,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     val last by vm.muhurtaQuery.collectAsStateWithLifecycle()
                     MuhurtaScreen(
                         profiles = profiles, last = last, state = state, loadPlaces = { vm.places() },
-                        onFind = { vm.findMuhurta(it, lang) },
+                        onFind = { vm.findMuhurta(it, lang) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }
@@ -189,7 +204,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     NumerologyScreen(
                         profiles = profiles, profile = p, chart = p?.let { charts[it.id] },
-                        onSelect = { vm.select(it.id) }, loadNames = { Engine.names(it.name, it.date, it.gender) },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, loadNames = { Engine.names(it.name, it.date, it.gender) },
                         onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } },
                     )
                 }

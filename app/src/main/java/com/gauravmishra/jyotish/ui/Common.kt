@@ -35,8 +35,9 @@ import com.gauravmishra.jyotish.R
 object Routes {
     const val WELCOME = "welcome"
     const val HOME = "home"
-    const val ADD = "add?id={id}"
-    fun add(id: String? = null) = if (id == null) "add" else "add?id=$id"
+    const val ADD = "add?id={id}&ret={ret}"
+    /** ret: "" goes Home after saving; "back" returns to the screen that opened it; "groom"/"bride" also fill that Milan slot. */
+    fun add(id: String? = null, ret: String = "") = "add?id=${id ?: ""}&ret=$ret"
     const val SETTINGS = "settings"
     const val KUNDALI = "kundali"
     const val MILAN = "milan"

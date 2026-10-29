@@ -74,6 +74,7 @@ fun KundaliScreen(
     chart: ChartState?,
     style: String,
     onSelect: (Profile) -> Unit,
+    onAdd: () -> Unit,
     onStyle: (String) -> Unit,
     onHome: () -> Unit,
     onFeature: (Feature) -> Unit,
@@ -96,14 +97,7 @@ fun KundaliScreen(
     ) { pad ->
         Column(Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState())) {
             Column(Modifier.padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                if (profiles.size > 1) {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        profiles.forEach { p ->
-                            FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) }, modifier = Modifier.heightIn(min = 48.dp),
-                                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
-                        }
-                    }
-                }
+                ProfileBar(profiles, profile, onSelect, onAdd)
                 when {
                     profile == null -> { Text(stringResource(R.string.pick_profile_first), style = MaterialTheme.typography.bodyLarge); return@Column }
                     chart is ChartState.Failed -> { Text(stringResource(R.string.chart_failed, chart.message)); return@Column }

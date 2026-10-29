@@ -383,4 +383,8 @@
     <string name="reg_send_body">Your email app will open addressed to %1$s with your name, email and phone filled in. Nothing is sent unless you tap Send there.</string>
     <string name="reg_send_yes">Open email</string>
     <string name="reg_send_no">Not now</string>
+    <string name="person_label">Person</string>
+    <string name="person_new">New</string>
+    <string name="pick_person_title">Choose a saved Kundli</string>
+    <string name="add_new_person">+ Add a new person</string>
 </resources>

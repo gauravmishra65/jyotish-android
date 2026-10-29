@@ -53,6 +53,7 @@ fun ReportScreen(
     profile: Profile?,
     reports: Map<String, ReportState>,
     onSelect: (Profile) -> Unit,
+    onAdd: () -> Unit,
     onRequest: (Profile, String) -> Unit,
     onBack: () -> Unit,
 ) {
@@ -69,15 +70,7 @@ fun ReportScreen(
     ) { pad ->
         Column(Modifier.fillMaxSize().padding(pad)) {
             Column(Modifier.padding(horizontal = 16.dp, vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                if (profiles.size > 1) {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        profiles.forEach { p ->
-                            FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) },
-                                modifier = Modifier.heightIn(min = 48.dp),
-                                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
-                        }
-                    }
-                }
+                ProfileBar(profiles, profile, onSelect, onAdd)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf("en" to "English", "hi" to "हिंदी").forEach { (k, label) ->
                         FilterChip(selected = lang == k, onClick = { lang = k }, label = { Text(label) },

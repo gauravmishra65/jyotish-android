@@ -67,6 +67,7 @@ fun ForecastScreen(
     profile: Profile?,
     state: ForecastState?,
     onSelect: (Profile) -> Unit,
+    onAdd: () -> Unit,
     onRequest: (Profile) -> Unit,
     onHome: () -> Unit,
     onFeature: (Feature) -> Unit,
@@ -84,15 +85,7 @@ fun ForecastScreen(
             Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 4.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            if (profiles.size > 1) {
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    profiles.forEach { p ->
-                        FilterChip(selected = p.id == profile?.id, onClick = { onSelect(p) }, label = { Text(p.name) },
-                            modifier = Modifier.heightIn(min = 48.dp),
-                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
-                    }
-                }
-            }
+            ProfileBar(profiles, profile, onSelect, onAdd)
             when (state) {
                 null, ForecastState.Calculating -> {
                     if (profile == null) Text(stringResource(R.string.pick_profile_first)) else {
