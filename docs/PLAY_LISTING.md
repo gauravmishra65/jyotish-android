@@ -85,9 +85,10 @@ Permissions requested: none in the demo and full editions. The Play edition adds
 
 ## Before uploading
 
-1. Create the upload key and keep it outside the repository; set `JYOTISH_KEYSTORE`, `JYOTISH_KEYSTORE_PASSWORD`,
-   `JYOTISH_KEY_ALIAS` and `JYOTISH_KEY_PASSWORD` (as CI secrets or locally) and run `gradle :app:bundleRelease`.
-   Without them the release is signed with the committed test key and must not be uploaded.
+1. The Play edition is signed with the private upload key when the repository secrets
+   `JYOTISH_UPLOAD_KEYSTORE_B64`, `JYOTISH_UPLOAD_KEYSTORE_PASSWORD` and `JYOTISH_UPLOAD_KEY_ALIAS` are set (the CI log
+   says "signed with the private upload key"). Without them it falls back to the committed test key. The demo and
+   full APKs always use the test key so they install over earlier copies. Raise `versionCode` for every upload.
 2. Enrol in Play App Signing.
 3. Upload `mapping.txt` from the same build, so crash reports are readable.
 4. Screenshots: the CI run's `ci-results` branch has current ones (Home, Kundali, Milan, Muhurta, Numerology in

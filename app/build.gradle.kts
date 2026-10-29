@@ -15,12 +15,14 @@ android {
         applicationId = "com.gauravmishra.jyotish"
         minSdk = 26
         targetSdk = 36
-        versionCode = 10
+        versionCode = 11
         versionName = "1.0.0-rc1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             // Phones are arm64; x86_64 is for the emulator. Python 3.12+ is 64-bit only.
             abiFilters += listOf("arm64-v8a", "x86_64")
+            // Put the native symbol tables in the App Bundle, so Play can read native crash reports.
+            debugSymbolLevel = "SYMBOL_TABLE"
         }
     }
 
@@ -49,7 +51,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("test")
+            signingConfig = signingConfigs.getByName("test")   // the Play release is re-signed below when the upload key is set
         }
         debug {
             signingConfig = signingConfigs.getByName("test")
@@ -86,6 +88,14 @@ android {
     }
 }
 
+// Only the Play edition's release goes to Google Play, so only it is signed with the private upload key. The demo and
+// full APKs keep the test key, so they keep installing over the copies people already have.
+androidComponents {
+    onVariants(selector().withBuildType("release").withFlavor("edition" to "play")) { variant ->
+        android.signingConfigs.findByName("upload")?.let { variant.signingConfig.setConfig(it) }
+    }
+}
+
 kotlin {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
@@ -118,7 +128,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    "playImplementation"("com.android.billingclient:billing-ktx:7.1.1")
+    "playImplementation"("com.android.billingclient:billing-ktx:8.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 

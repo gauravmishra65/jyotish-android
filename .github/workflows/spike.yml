@@ -85,7 +85,22 @@ jobs:
           test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=Python verification::$(grep -E 'ISSUE|problems|FAILED' verify.log | tr '\n' ' ')"; exit 1; }
       - name: Check string resources
         run: python3 tools/check_strings.py | tee strings.log || { echo "::error title=Strings::$(cat strings.log | tr '\n' ' ')"; exit 1; }
+      - name: Upload key for the Play edition (from repository secrets, when set)
+        env:
+          KEY_B64: ${{ secrets.JYOTISH_UPLOAD_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KEY_B64" ]; then
+            echo "$KEY_B64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+            echo "JYOTISH_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
+            echo "::notice title=Play signing::The Play edition is signed with the private upload key."
+          else
+            echo "::warning title=Play signing::No upload key secret; the Play edition is signed with the test key."
+          fi
       - name: Build debug APK and test APK
+        env:
+          JYOTISH_KEYSTORE_PASSWORD: ${{ secrets.JYOTISH_UPLOAD_KEYSTORE_PASSWORD }}
+          JYOTISH_KEY_ALIAS: ${{ secrets.JYOTISH_UPLOAD_KEY_ALIAS }}
+          JYOTISH_KEY_PASSWORD: ${{ secrets.JYOTISH_UPLOAD_KEYSTORE_PASSWORD }}
         run: |
           set -o pipefail
           gradle :app:testFullDebugUnitTest :app:assembleFullDebug :app:assembleFullDebugAndroidTest :app:assembleDemoDebug :app:assembleDemoDebugAndroidTest :app:assembleDemoRelease :app:assembleFullRelease :app:assemblePlayRelease :app:bundlePlayRelease --stacktrace 2>&1 | tee build.log || {

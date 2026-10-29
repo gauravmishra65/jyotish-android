@@ -27,7 +27,8 @@ class PlayStore(context: Context) : Store, PurchasesUpdatedListener {
 
     private val main = Handler(Looper.getMainLooper())
     private val client = BillingClient.newBuilder(context).setListener(this)
-        .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build()).build()
+        .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+        .enableAutoServiceReconnection().build()
     private var details: ProductDetails? = null
     private var pending: ((Store.Purchase) -> Unit)? = null
 
@@ -47,7 +48,8 @@ class PlayStore(context: Context) : Store, PurchasesUpdatedListener {
         val q = QueryProductDetailsParams.newBuilder().setProductList(listOf(
             QueryProductDetailsParams.Product.newBuilder().setProductId(PRODUCT).setProductType(BillingClient.ProductType.INAPP).build(),
         )).build()
-        client.queryProductDetailsAsync(q) { _, list -> details = list.firstOrNull(); then(details) }
+        // Billing 8: the result carries the found products (and any that could not be fetched).
+        client.queryProductDetailsAsync(q) { _, result -> details = result.productDetailsList.firstOrNull(); then(details) }
     }
 
     override fun price(onPrice: (String?) -> Unit) = loadDetails { d -> main.post { onPrice(d?.oneTimePurchaseOfferDetails?.formattedPrice) } }
