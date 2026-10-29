@@ -88,14 +88,14 @@ jobs:
       - name: Build debug APK and test APK
         run: |
           set -o pipefail
-          gradle :app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest :app:assembleRelease :app:bundleRelease --stacktrace 2>&1 | tee build.log || {
+          gradle :app:testFullDebugUnitTest :app:assembleFullDebug :app:assembleFullDebugAndroidTest :app:assembleDemoDebug :app:assembleDemoDebugAndroidTest :app:assembleDemoRelease :app:assembleFullRelease :app:assemblePlayRelease :app:bundlePlayRelease --stacktrace 2>&1 | tee build.log || {
             # Turn the error section into annotations so it can be read through the API.
             python3 tools/ci_annotate.py build.log
             exit 1
           }
       - name: Size report
         run: |
-          APK=app/build/outputs/apk/debug/app-debug.apk
+          APK=app/build/outputs/apk/full/debug/app-full-debug.apk
           {
             echo "## APK size"
             echo
@@ -108,8 +108,8 @@ jobs:
           echo "::notice title=APK size::$(du -h $APK | cut -f1) total; $(unzip -l $APK | awk 'NR>3 && $4 != "" {split($4, p, "/"); k = p[1] "/" p[2]; s[k] += $1} END {for (k in s) printf "%.1f MB %s; ", s[k]/1048576, k}')"
       - name: Release size
         run: |
-          REL=app/build/outputs/apk/release/app-release.apk
-          AAB=app/build/outputs/bundle/release/app-release.aab
+          REL=app/build/outputs/apk/full/release/app-full-release.apk
+          AAB=app/build/outputs/bundle/playRelease/app-play-release.aab
           {
             echo "## Release build (R8, shrunk resources)"
             echo
@@ -118,15 +118,23 @@ jobs:
           echo "::notice title=Release size::APK $(du -h $REL | cut -f1), AAB $(du -h $AAB | cut -f1)"
       - uses: actions/upload-artifact@v4
         with:
-          name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: demo-apk
+          path: app/build/outputs/apk/demo/release/app-demo-release.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: release
+          name: full-apk
+          path: app/build/outputs/apk/full/release/app-full-release.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: play-store
           path: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/bundle/release/app-release.aab
-            app/build/outputs/mapping/release/mapping.txt
+            app/build/outputs/bundle/playRelease/app-play-release.aab
+            app/build/outputs/apk/play/release/app-play-release.apk
+            app/build/outputs/mapping/playRelease/mapping.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/full/debug/app-full-debug.apk
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules

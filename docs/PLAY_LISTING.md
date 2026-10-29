@@ -32,7 +32,7 @@ Calculations use the Swiss Ephemeris, with Lahiri ayanamsa and whole-sign houses
 describe what each factor is traditionally associated with; they are not predictions, and the app never
 forecasts death, illness or divorce. Confirm important dates with your family's astrologer or panchang.
 
-**Category:** Lifestyle. **Content rating:** Everyone. **Ads:** none. **In-app purchases:** none.
+**Category:** Lifestyle. **Content rating:** Everyone. **Ads:** none. **In-app purchases:** yes (one-time full version, Play edition).
 
 ## Listing (Hindi)
 
@@ -59,6 +59,18 @@ forecasts death, illness or divorce. Confirm important dates with your family's 
 कि परंपरा से किस योग या स्थिति को किससे जोड़ा जाता है; ये भविष्यवाणी नहीं हैं, और ऐप कभी मृत्यु, रोग या
 तलाक़ की बात नहीं करता। महत्वपूर्ण तिथियाँ अपने पारिवारिक ज्योतिषी या पंचांग से अवश्य मिला लें।
 
+## Editions and selling
+
+| Edition | File | How it opens fully |
+|---|---|---|
+| Demo | `app-demo-release.apk` (shared directly) | Unlock code for the buyer's email (`tools/licence/`) |
+| Full | `app-full-release.apk` (sent to buyers directly) | Already open |
+| Play | `app-play-release.aab` (upload to Play) | In-app product `full_unlock`, bought through Google Play |
+
+All three share the application ID `com.gauravmishra.jyotish` and the signing key, so one installs over another and
+keeps saved Kundlis. In Play Console: create a one-time in-app product with the ID `full_unlock`, set its price,
+and add licence testers to try a purchase before release. The Play listing must say "In-app purchases: yes".
+
 ## Data safety form
 
 | Question | Answer | Why |
@@ -69,7 +81,7 @@ forecasts death, illness or divorce. Confirm important dates with your family's 
 | Can users request that data be deleted? | Yes, on the device | Deleting a profile removes it and its cached chart; uninstalling removes everything. |
 | Backups | Excluded | `allowBackup="false"` and data extraction rules exclude cloud backup and device transfer. |
 
-Permissions requested: none. Third-party SDKs: none (no analytics, crash reporting or ads).
+Permissions requested: none in the demo and full editions. The Play edition adds Google Play Billing (the BILLING permission); Play itself handles payment and keeps the purchase history, which the data-safety form should list as "Purchase history, collected, not shared, required for the purchase". Other third-party SDKs: none (no analytics, crash reporting or ads).
 
 ## Before uploading
 

@@ -56,6 +56,17 @@ android {
         }
     }
 
+    // Three editions of the same app (same applicationId, so one installs over another and keeps saved Kundlis):
+    //   demo - one profile; opens fully with an unlock code (shared as an APK)
+    //   full - everything open (for buyers who are sent the APK directly)
+    //   play - for Google Play: one profile until the "full_unlock" in-app product is bought through Play Billing
+    flavorDimensions += "edition"
+    productFlavors {
+        create("demo") { dimension = "edition"; versionNameSuffix = "-demo"; buildConfigField("String", "EDITION", "\"demo\"") }
+        create("full") { dimension = "edition"; buildConfigField("String", "EDITION", "\"full\"") }
+        create("play") { dimension = "edition"; buildConfigField("String", "EDITION", "\"play\"") }
+    }
+
     bundle {
         language { enableSplit = false }   // English and Hindi switch inside the app, so both must always be installed
     }
@@ -107,6 +118,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    "playImplementation"("com.android.billingclient:billing-ktx:7.1.1")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 

@@ -11,3 +11,4 @@ __pycache__/
 /wheelhouse/
 spike.log
 coldstart.log
+*.pem

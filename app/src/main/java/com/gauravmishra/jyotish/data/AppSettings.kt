@@ -26,6 +26,16 @@ class AppSettings(context: Context) {
     val reportBy: String get() = "Gaurav Mishra"
     val reportSite: String get() = "authorgaurav.com"
     /** On-phone registration: the app's user, kept only in this phone's private settings. */
+    /** Unlock of the demo: "code" (an unlock code for unlockEmail) or "play" (a Google Play purchase); "" = not unlocked. */
+    var unlockedVia: String
+        get() = prefs.getString("unlocked_via", "") ?: ""
+        set(v) = prefs.edit().putString("unlocked_via", v).apply()
+    var unlockEmail: String
+        get() = prefs.getString("unlock_email", "") ?: ""
+        set(v) = prefs.edit().putString("unlock_email", v).apply()
+    var unlockCode: String
+        get() = prefs.getString("unlock_code", "") ?: ""
+        set(v) = prefs.edit().putString("unlock_code", v).apply()
     var registered: Boolean
         get() = prefs.getBoolean("registered", false)
         set(v) = prefs.edit().putBoolean("registered", v).apply()

@@ -40,6 +40,8 @@ import com.gauravmishra.jyotish.ui.NumerologyScreen
 import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
+import com.gauravmishra.jyotish.ui.UpgradeScreen
+import com.gauravmishra.jyotish.store.Sales
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +72,7 @@ fun App(vm: AppViewModel = viewModel()) {
             val profiles by vm.profiles.collectAsStateWithLifecycle()
             val charts by vm.charts.collectAsStateWithLifecycle()
             val userName by vm.userName.collectAsStateWithLifecycle()
+            val full by vm.full.collectAsStateWithLifecycle()
             // Decided once: choosing a language later must not rebuild the graph and jump back to Home.
             val start = remember { if (chosen == null) Routes.WELCOME else Routes.HOME }
             NavHost(nav, startDestination = start) {
@@ -96,6 +99,11 @@ fun App(vm: AppViewModel = viewModel()) {
                         onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onBack = { nav.popBackStack() },
                     )
+                }
+                composable(Routes.UPGRADE) {
+                    UpgradeScreen(vm.settings, vm.shop, full, limitReached = false,
+                        onUnlockCode = { e, c -> vm.unlockWithCode(e, c) }, onPlayPurchase = { vm.markPlayPurchase() },
+                        onBack = { nav.popBackStack() })
                 }
                 composable(Routes.ABOUT) {
                     var version by remember { mutableStateOf<String?>(null) }
@@ -145,6 +153,14 @@ fun App(vm: AppViewModel = viewModel()) {
                     val ret = entry.arguments?.getString("ret").orEmpty()
                     val existing = profiles.firstOrNull { it.id == id }
                     val leave = { if (ret.isEmpty() || !nav.popBackStack()) nav.goHome() }
+                    // Demo edition: past the free limit, adding a person shows the upgrade screen instead; once
+                    // unlocked there, this same page turns into the form.
+                    if (existing == null && !full && profiles.size >= Sales.FREE_PROFILES) {
+                        UpgradeScreen(vm.settings, vm.shop, full = false, limitReached = true,
+                            onUnlockCode = { e, c -> vm.unlockWithCode(e, c) }, onPlayPurchase = { vm.markPlayPurchase() },
+                            onBack = { leave() })
+                        return@composable
+                    }
                     AddProfileScreen(
                         existing = existing,
                         loadPlaces = { vm.places() },
@@ -166,7 +182,8 @@ fun App(vm: AppViewModel = viewModel()) {
                     LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
                     SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() }, onChartStyle = { vm.setChartStyle(it) },
                         onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() },
-                        onMyDetails = { nav.navigate(Routes.register(edit = true)) }, onAbout = { nav.navigate(Routes.ABOUT) })
+                        onMyDetails = { nav.navigate(Routes.register(edit = true)) }, onAbout = { nav.navigate(Routes.ABOUT) },
+                        full = full, onUpgrade = { nav.navigate(Routes.UPGRADE) })
                 }
                 composable(Routes.KUNDALI) {
                     val selected by vm.selected.collectAsStateWithLifecycle()

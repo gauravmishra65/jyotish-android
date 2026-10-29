@@ -4,8 +4,11 @@
 set -u
 adb logcat -c
 adb logcat -G 16M || true
-gradle :app:connectedDebugAndroidTest --stacktrace 2>&1 | tee connected.log
+gradle :app:connectedFullDebugAndroidTest --stacktrace 2>&1 | tee connected.log
 status=${PIPESTATUS[0]}
+# The demo edition: only its own test (one profile, then the unlock), so the full suite is not run twice.
+gradle :app:connectedDemoDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.gauravmishra.jyotish.DemoTest --stacktrace 2>&1 | tee -a connected.log
+[ "${PIPESTATUS[0]}" -eq 0 ] || status=1
 adb logcat -d -s SPIKE:I > spike.log || true
 adb logcat -d -s SHOT:I > shots.log || true
 python3 - <<'EOF'
@@ -47,7 +50,7 @@ EOF
 fi
 
 # Cold start of the app. The test run uninstalls it, so install the debug APK again first.
-adb install -r app/build/outputs/apk/debug/app-debug.apk > /dev/null || true
+adb install -r app/build/outputs/apk/full/debug/app-full-debug.apk > /dev/null || true
 for i in 1 2; do
   adb shell am force-stop com.gauravmishra.jyotish || true
   sleep 2
@@ -55,25 +58,30 @@ for i in 1 2; do
 done
 echo "::notice title=Cold start::$(grep -E 'TotalTime|WaitTime' coldstart.log | tr '\n' ' ')"
 
-# Release smoke test: the R8-minified build must start and bring the Python engine up.
-adb uninstall com.gauravmishra.jyotish > /dev/null || true
-if adb install app/build/outputs/apk/release/app-release.apk > release.log 2>&1; then
-  adb logcat -c
-  adb shell am start -W -n com.gauravmishra.jyotish/.MainActivity | tee -a release.log || true
-  ok=""
-  for i in $(seq 1 30); do
-    if adb logcat -d -s ENGINE:I | grep -q "ready in"; then ok=1; break; fi
-    sleep 1
-  done
-  adb logcat -d -s ENGINE:* AndroidRuntime:E >> release.log || true
-  if [ -n "$ok" ] && ! grep -q "FATAL EXCEPTION" release.log; then
-    echo "::notice title=Release smoke test::$(grep 'ready in' release.log | sed 's/^.*ENGINE *: //' | head -1); $(grep -E 'TotalTime' release.log | tr '\n' ' ')"
+# Release smoke test: each R8-minified edition must start and bring the Python engine up.
+for ed in demo full play; do
+  APK=app/build/outputs/apk/$ed/release/app-$ed-release.apk
+  adb uninstall com.gauravmishra.jyotish > /dev/null || true
+  if adb install $APK > release-$ed.log 2>&1; then
+    adb logcat -c
+    adb shell am start -W -n com.gauravmishra.jyotish/.MainActivity | tee -a release-$ed.log || true
+    ok=""
+    for i in $(seq 1 30); do
+      if adb logcat -d -s ENGINE:I | grep -q "ready in"; then ok=1; break; fi
+      sleep 1
+    done
+    sleep 3   # give the Play edition time to try (and fail) to reach Play, which this emulator does not have
+    adb logcat -d -s ENGINE:* AndroidRuntime:E >> release-$ed.log || true
+    if [ -n "$ok" ] && ! grep -q "FATAL EXCEPTION" release-$ed.log; then
+      echo "::notice title=Release smoke test ($ed)::$(grep 'ready in' release-$ed.log | sed 's/^.*ENGINE *: //' | head -1); $(grep -E 'TotalTime' release-$ed.log | tr '\n' ' ')"
+    else
+      echo "::error title=Release smoke test ($ed)::$(tail -c 3000 release-$ed.log | tr '\n' ' ')"
+      status=1
+    fi
   else
-    echo "::error title=Release smoke test::$(tail -c 3000 release.log | tr '\n' ' ')"
+    echo "::error title=Release install ($ed)::$(cat release-$ed.log | tr '\n' ' ')"
     status=1
   fi
-else
-  echo "::error title=Release install::$(cat release.log | tr '\n' ' ')"
-  status=1
-fi
+  cat release-$ed.log >> release.log
+done
 exit $status

@@ -49,6 +49,7 @@ object Routes {
     fun register(edit: Boolean = false) = "register?edit=$edit"
     const val SAVED = "saved"
     const val ABOUT = "about"
+    const val UPGRADE = "upgrade"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 

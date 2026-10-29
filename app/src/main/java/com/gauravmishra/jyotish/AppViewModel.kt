@@ -12,6 +12,10 @@ import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.ProfileStore
 import com.gauravmishra.jyotish.engine.Engine
+import com.gauravmishra.jyotish.store.Licence
+import com.gauravmishra.jyotish.store.Sales
+import com.gauravmishra.jyotish.store.Store
+import com.gauravmishra.jyotish.store.createStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -88,6 +92,39 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     /** The profile the Kundali and other feature screens show. */
     val selected: StateFlow<String?> = _selected.asStateFlow()
     fun select(id: String) { _selected.value = id }
+
+    // ---- Edition: demo (one profile until unlocked), full, or play (unlocked by a Google Play purchase) ----
+    val shop: Store = createStore(app)
+    private fun unlockedNow(): Boolean = BuildConfig.EDITION == "full" || when (settings.unlockedVia) {
+        "code" -> Licence.verify(settings.unlockEmail, settings.unlockCode)
+        "play" -> BuildConfig.EDITION == "play"
+        else -> false
+    }
+    private val _full = MutableStateFlow(unlockedNow())
+    /** True when every feature is open: the full edition, or a demo unlocked by a code or a Play purchase. */
+    val full: StateFlow<Boolean> = _full.asStateFlow()
+    /** A new profile is allowed: always in the full version, and while the demo is under its limit. */
+    fun canAddProfile(): Boolean = _full.value || _profiles.value.size < Sales.FREE_PROFILES
+
+    /** Checks an unlock code for an email; saves it and opens the full version when it matches. */
+    fun unlockWithCode(email: String, code: String): Boolean {
+        if (!Licence.verify(email, code)) return false
+        settings.unlockEmail = Licence.normalize(email); settings.unlockCode = code.trim(); settings.unlockedVia = "code"
+        _full.value = true
+        return true
+    }
+
+    fun markPlayPurchase() { settings.unlockedVia = "play"; _full.value = true }
+
+    init {
+        // Play edition: restore a purchase after a reinstall, and close it again if Play reports it refunded.
+        if (shop.available) shop.owned { owned ->
+            when {
+                owned == true -> markPlayPurchase()
+                owned == false && settings.unlockedVia == "play" -> { settings.unlockedVia = ""; _full.value = unlockedNow() }
+            }
+        }
+    }
 
     private val _chartStyle = MutableStateFlow(settings.chartStyle)
     val chartStyle: StateFlow<String> = _chartStyle.asStateFlow()

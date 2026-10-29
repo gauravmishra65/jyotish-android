@@ -51,6 +51,8 @@ fun SettingsScreen(
     onBack: () -> Unit,
     onMyDetails: () -> Unit = {},
     onAbout: () -> Unit = {},
+    full: Boolean = true,
+    onUpgrade: () -> Unit = {},
 ) {
     var speed by remember { mutableStateOf<String?>(null) }
     var running by remember { mutableStateOf(false) }
@@ -70,6 +72,12 @@ fun SettingsScreen(
                 NavRow(if (settings.registered) settings.userName else stringResource(R.string.reg_not_yet), stringResource(R.string.reg_settings_sub), "settings_my_details", onMyDetails)
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 NavRow(stringResource(R.string.about_title), stringResource(R.string.about_settings_sub), "settings_about", onAbout)
+                if (com.gauravmishra.jyotish.BuildConfig.EDITION != "full") {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                    NavRow(stringResource(if (full) R.string.up_edition_full else R.string.settings_unlock),
+                        stringResource(R.string.settings_edition) + ": " + stringResource(if (full) R.string.up_edition_full else R.string.up_edition_demo),
+                        "settings_upgrade", onUpgrade)
+                }
             }
 
             SectionLabel(stringResource(R.string.display))
