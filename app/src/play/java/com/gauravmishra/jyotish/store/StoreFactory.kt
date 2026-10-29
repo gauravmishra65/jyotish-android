@@ -81,7 +81,7 @@ class PlayStore(context: Context) : Store, PurchasesUpdatedListener {
     }
 
     override fun owned(onOwned: (Boolean?) -> Unit) = connect { ok ->
-        if (!ok) return@connect main.post { onOwned(null) }
+        if (!ok) { main.post { onOwned(null) }; return@connect }
         client.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()) { r, list ->
             val mine = list.filter { PRODUCT in it.products && it.purchaseState == Purchase.PurchaseState.PURCHASED }
             mine.forEach(::acknowledge)
