@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jyotish</string>
-    <string name="home_title">Jyotish</string>
+    <string name="app_name">Gaurav Jyotish</string>
+    <string name="app_by">by AuthorGaurav</string>
+    <string name="app_full_name">Gaurav Jyotish by AuthorGaurav</string>
+    <string name="home_title">Gaurav Jyotish</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Your chart, worked out with care</string>
@@ -371,7 +373,7 @@
     <string name="contact_made_by">Made by</string>
     <string name="contact_website">Website</string>
     <string name="contact_email">Email</string>
-    <string name="contact_subject">Jyotish app %1$s</string>
+    <string name="contact_subject">Gaurav Jyotish app %1$s</string>
     <string name="contact_note">Tap the website or email to open them. For a personal consultation, write by email.</string>
     <string name="about_methods_title">How it is calculated</string>
     <string name="about_methods">Planetary positions from the Swiss Ephemeris. Vedic: sidereal zodiac (Lahiri by default), whole-sign houses, Vimshottari and Yogini dashas, Shadbala, Ashtakavarga, Jaimini, KP, Tajika Varshaphal and Lal Kitab (1952). Western: tropical zodiac with aspects, transits, progressions, solar return and zodiacal releasing. Chinese BaZi on the solar calendar. Numerology: Pythagorean, Chaldean and Indian. Forecasts count only where several systems agree.</string>

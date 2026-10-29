@@ -49,7 +49,13 @@ fun AboutScreen(engineVersion: String?, onBack: () -> Unit) {
             Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                AppMark(size = 64.dp)
+                Column {
+                    Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
+                    Text(stringResource(R.string.app_by), style = MaterialTheme.typography.bodyMedium, color = Palette.Muted)
+                }
+            }
             Text(stringResource(R.string.about_tagline), style = MaterialTheme.typography.bodyLarge)
             Text(stringResource(R.string.about_version, BuildConfig.VERSION_NAME), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
 

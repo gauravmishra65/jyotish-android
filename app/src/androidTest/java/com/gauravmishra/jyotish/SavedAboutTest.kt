@@ -66,7 +66,7 @@ class SavedAboutTest {
     @Test
     fun myDetailsAndAboutFromSettings() {
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasText("Jyotish"), timeoutMillis = 30_000)
+            rule.waitUntilAtLeastOneExists(hasText("Gaurav Jyotish"), timeoutMillis = 30_000)
             rule.onNodeWithContentDescription("Settings").performClick()
             rule.onNodeWithTag("settings_my_details").performClick()
             rule.onNodeWithTag("reg_name").performTextInput("Priya Nair")

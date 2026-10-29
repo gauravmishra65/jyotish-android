@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.gauravmishra.jyotish.R
 
 /** First launch: choose English or Hindi, then add the first chart. Choosing switches the screen's language at once. */
@@ -41,7 +40,14 @@ fun WelcomeScreen(lang: String, onLanguage: (String) -> Unit, onContinue: () -> 
             .padding(horizontal = 28.dp, vertical = 40.dp),
         verticalArrangement = Arrangement.spacedBy(28.dp),
     ) {
-        Text("☉", color = Palette.Saffron, fontSize = 64.sp)
+        androidx.compose.foundation.layout.Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+            AppMark(size = 64.dp)
+            Column {
+                Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge, color = Palette.Saffron)
+                Text(stringResource(R.string.app_by), style = MaterialTheme.typography.bodyMedium, color = Palette.NightText)
+            }
+        }
         Text(stringResource(R.string.welcome_title), style = MaterialTheme.typography.headlineLarge, color = Palette.Ground)
         Text(stringResource(R.string.welcome_body), style = MaterialTheme.typography.bodyLarge, color = Palette.NightText)
         Spacer(Modifier.heightIn(min = 24.dp))

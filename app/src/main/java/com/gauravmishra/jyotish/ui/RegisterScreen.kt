@@ -136,9 +136,9 @@ fun RegisterScreen(settings: AppSettings, editing: Boolean, onDone: () -> Unit, 
 
 /** Subject and body of the registration email: registration details only, never birth data. */
 fun registrationEmail(name: String, email: String, phone: String, lang: String, version: String, date: String): Pair<String, String> {
-    val subject = "Jyotish app registration: $name"
+    val subject = "Gaurav Jyotish registration: $name"
     val body = listOf(
-        "Jyotish app registration",
+        "Gaurav Jyotish by AuthorGaurav: new registration",
         "",
         "Name: $name",
         "Email: ${email.ifBlank { "-" }}",

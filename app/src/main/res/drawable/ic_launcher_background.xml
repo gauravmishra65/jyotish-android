@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Night-sky indigo with a few faint stars. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M0,0 L108,0 L108,108 L0,108 Z">
+        <aapt:attr name="android:fillColor"><gradient android:type="radial" android:centerX="54" android:centerY="48" android:gradientRadius="80">
+            <item android:offset="0" android:color="#FF36207A"/><item android:offset="1" android:color="#FF0E0A2E"/></gradient></aapt:attr>
+    </path>
+    <path android:fillColor="#99FFFFFF" android:pathData="M23.10,26.00 a0.9,0.9 0 1,0 1.8,0 a0.9,0.9 0 1,0 -1.8,0 Z M85.30,22.00 a0.7,0.7 0 1,0 1.4,0 a0.7,0.7 0 1,0 -1.4,0 Z M89.20,82.00 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0 Z M19.30,84.00 a0.7,0.7 0 1,0 1.4,0 a0.7,0.7 0 1,0 -1.4,0 Z "/>
+</vector>

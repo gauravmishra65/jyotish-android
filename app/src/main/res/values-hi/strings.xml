@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ज्योतिष</string>
-    <string name="home_title">ज्योतिष</string>
+    <string name="app_name">गौरव ज्योतिष</string>
+    <string name="app_by">AuthorGaurav द्वारा</string>
+    <string name="app_full_name">गौरव ज्योतिष, AuthorGaurav द्वारा</string>
+    <string name="home_title">गौरव ज्योतिष</string>
 
     <string name="welcome_title">आपकी कुंडली, सावधानी से गणना की हुई</string>
     <string name="welcome_body">कुंडली, मिलान, मुहूर्त और अंक ज्योतिष, उसी जाँची हुई गणना से जो पूरे फलादेश में है। जन्म का विवरण इसी फ़ोन पर रहता है।</string>
@@ -362,7 +364,7 @@
     <string name="contact_made_by">निर्माता</string>
     <string name="contact_website">वेबसाइट</string>
     <string name="contact_email">ईमेल</string>
-    <string name="contact_subject">ज्योतिष ऐप %1$s</string>
+    <string name="contact_subject">गौरव ज्योतिष ऐप %1$s</string>
     <string name="contact_note">वेबसाइट या ईमेल पर टैप करके खोलें। व्यक्तिगत परामर्श के लिए ईमेल करें।</string>
     <string name="about_methods_title">गणना कैसे होती है</string>
     <string name="about_methods">ग्रह-स्थितियाँ स्विस एफ़ेमेरिस से। वैदिक: सायन-रहित (निरयण) राशिचक्र (सामान्यतः लाहिड़ी), संपूर्ण-राशि भाव, विंशोत्तरी और योगिनी दशा, षड्बल, अष्टकवर्ग, जैमिनी, केपी, ताजिक वर्षफल और लाल किताब (1952)। पाश्चात्य: सायन राशिचक्र, दृष्टियाँ, गोचर, प्रोग्रेशन, सोलर रिटर्न और ज़ोडिएकल रिलीज़िंग। चीनी बाज़ी सौर पंचांग पर। अंक ज्योतिष: पाइथागोरियन, कैल्डियन और भारतीय। भविष्यफल में वही बात गिनी जाती है जिस पर कई पद्धतियाँ सहमत हों।</string>

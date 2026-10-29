@@ -1,4 +1,4 @@
-# Jyotish for Android
+# Gaurav Jyotish by AuthorGaurav (Android)
 
 Android app built on the astrology-numerology-reading engine: Kundali, Kundali milan, Muhurta and Numerology in English and Hindi, calculated on the phone with no account and no internet permission. The plan and screen designs are in the "Astrology Android App: Plan" doc and the "Astrology App: v1 Screens" design.
 

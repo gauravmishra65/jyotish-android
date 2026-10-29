@@ -1,18 +1,21 @@
 # Play Store listing and data safety (draft for 1.0)
 
 The app is not published yet. Before it is: choose the Swiss Ephemeris licence (AGPL, which means publishing this
-app's source, or Astrodienst's professional licence), create the upload key, and replace the working name
-"Jyotish" if it is taken on Play.
+app's source, or Astrodienst's professional licence), and create the upload key.
 
 ## Listing (English)
 
-**App name:** Jyotish: Kundali, Milan, Muhurta
+**App name (30 characters, the Play maximum):** Gaurav Jyotish by AuthorGaurav
+
+**Launcher label:** Gaurav Jyotish (long labels are cut off under the icon)
+
+**Store icon:** `docs/store/icon-512.png` (512 x 512, made from the same vector as the launcher icon)
 
 **Short description (80 characters max):** Kundali, matching, muhurta and numerology, worked out on your phone.
 
 **Full description:**
 
-Jyotish works out a Vedic birth chart, kundali matching, muhurta and numerology on your phone, with no account
+Gaurav Jyotish works out a Vedic birth chart, kundali matching, muhurta and numerology on your phone, with no account
 and no internet connection.
 
 - **Kundali.** North or South Indian chart, planets with nakshatra and pada, Vimshottari dashas with the
@@ -33,13 +36,13 @@ forecasts death, illness or divorce. Confirm important dates with your family's 
 
 ## Listing (Hindi)
 
-**ऐप का नाम:** ज्योतिष: कुंडली, मिलान, मुहूर्त
+**ऐप का नाम:** गौरव ज्योतिष, AuthorGaurav द्वारा
 
 **संक्षिप्त विवरण:** कुंडली, गुण मिलान, मुहूर्त और अंक ज्योतिष, आपके फ़ोन पर ही।
 
 **पूरा विवरण:**
 
-ज्योतिष आपके फ़ोन पर ही वैदिक जन्म कुंडली, कुंडली मिलान, मुहूर्त और अंक ज्योतिष की गणना करता है। न खाता
+गौरव ज्योतिष आपके फ़ोन पर ही वैदिक जन्म कुंडली, कुंडली मिलान, मुहूर्त और अंक ज्योतिष की गणना करता है। न खाता
 बनाना पड़ता है, न इंटरनेट चाहिए।
 
 - **कुंडली।** उत्तर या दक्षिण भारतीय चार्ट, नक्षत्र और पद के साथ ग्रह, चालू अवधि के साथ विंशोत्तरी दशा, योग

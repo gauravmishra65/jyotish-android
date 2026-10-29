@@ -11,7 +11,7 @@ class RegistrationEmailTest {
     @Test
     fun registrationDetailsOnly() {
         val (subject, body) = registrationEmail("Priya Nair", "priya@example.com", "", "hi", "1.0.0-rc1", "2026-10-29")
-        assertEquals("Jyotish app registration: Priya Nair", subject)
+        assertEquals("Gaurav Jyotish registration: Priya Nair", subject)
         assertTrue(body.contains("Name: Priya Nair"))
         assertTrue(body.contains("Email: priya@example.com"))
         assertTrue(body.contains("Phone: -"))
