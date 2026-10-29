@@ -110,7 +110,7 @@ fun SavedScreen(
                                 Text(p.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                                 Text(listOfNotNull(prettyDate(p.date, lang) + " · " + p.time, p.place.substringBefore(",").takeIf { it.isNotBlank() },
                                     GROUPS.firstOrNull { it.first == p.group }?.let { stringResource(it.second) }).joinToString(" · "),
-                                    style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
+                                    style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 3)
                             }
                             IconButton(onClick = { onEdit(p) }, modifier = Modifier.size(48.dp)) {
                                 Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit) + " " + p.name)
