@@ -212,6 +212,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private val _userName = MutableStateFlow(settings.userName.takeIf { settings.registered } ?: "")
+    /** The registered user's name for the Home greeting ("" when not registered). */
+    val userName: StateFlow<String> = _userName.asStateFlow()
+    fun refreshUser() { _userName.value = settings.userName.takeIf { settings.registered } ?: "" }
+
     private val _language = MutableStateFlow(settings.language)
     val language: StateFlow<String?> = _language.asStateFlow()
 

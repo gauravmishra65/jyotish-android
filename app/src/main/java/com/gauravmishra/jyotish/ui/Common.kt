@@ -44,6 +44,10 @@ object Routes {
     const val NUMBERS = "numbers"
     const val FORECAST = "forecast"
     const val REPORT = "report"
+    const val REGISTER = "register?edit={edit}"
+    fun register(edit: Boolean = false) = "register?edit=$edit"
+    const val SAVED = "saved"
+    const val ABOUT = "about"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 

@@ -28,4 +28,17 @@ class AppSettings(context: Context) {
     var reportSite: String
         get() = prefs.getString("report_site", "authorgaurav.com") ?: "authorgaurav.com"
         set(v) = prefs.edit().putString("report_site", v).apply()
+    /** On-phone registration: the app's user, kept only in this phone's private settings. */
+    var registered: Boolean
+        get() = prefs.getBoolean("registered", false)
+        set(v) = prefs.edit().putBoolean("registered", v).apply()
+    var userName: String
+        get() = prefs.getString("user_name", "") ?: ""
+        set(v) = prefs.edit().putString("user_name", v).apply()
+    var userEmail: String
+        get() = prefs.getString("user_email", "") ?: ""
+        set(v) = prefs.edit().putString("user_email", v).apply()
+    var userPhone: String
+        get() = prefs.getString("user_phone", "") ?: ""
+        set(v) = prefs.edit().putString("user_phone", v).apply()
 }

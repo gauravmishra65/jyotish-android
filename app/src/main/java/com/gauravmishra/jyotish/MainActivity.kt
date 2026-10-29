@@ -28,6 +28,9 @@ import com.gauravmishra.jyotish.ui.Feature
 import com.gauravmishra.jyotish.ui.FeatureScreen
 import com.gauravmishra.jyotish.ui.ForecastScreen
 import com.gauravmishra.jyotish.ui.ReportScreen
+import com.gauravmishra.jyotish.ui.RegisterScreen
+import com.gauravmishra.jyotish.ui.SavedScreen
+import com.gauravmishra.jyotish.ui.AboutScreen
 import com.gauravmishra.jyotish.ui.HomeScreen
 import com.gauravmishra.jyotish.ui.JyotishTheme
 import com.gauravmishra.jyotish.ui.KundaliScreen
@@ -66,14 +69,38 @@ fun App(vm: AppViewModel = viewModel()) {
             val nav = rememberNavController()
             val profiles by vm.profiles.collectAsStateWithLifecycle()
             val charts by vm.charts.collectAsStateWithLifecycle()
+            val userName by vm.userName.collectAsStateWithLifecycle()
             // Decided once: choosing a language later must not rebuild the graph and jump back to Home.
             val start = remember { if (chosen == null) Routes.WELCOME else Routes.HOME }
             NavHost(nav, startDestination = start) {
                 composable(Routes.WELCOME) {
                     WelcomeScreen(lang = welcomeLang, onLanguage = { welcomeLang = it }, onContinue = {
                         vm.setLanguage(welcomeLang)
-                        nav.navigate(Routes.add()) { popUpTo(Routes.WELCOME) { inclusive = true } }
+                        val next = if (vm.settings.registered) Routes.add() else Routes.register()
+                        nav.navigate(next) { popUpTo(Routes.WELCOME) { inclusive = true } }
                     })
+                }
+                composable(Routes.REGISTER, arguments = listOf(navArgument("edit") { type = NavType.BoolType; defaultValue = false })) { entry ->
+                    val editing = entry.arguments?.getBoolean("edit") ?: false
+                    val afterFirstRun = { nav.navigate(Routes.add()) { popUpTo(Routes.REGISTER) { inclusive = true } } }
+                    RegisterScreen(vm.settings, editing,
+                        onDone = { vm.refreshUser(); if (editing) nav.popBackStack() else afterFirstRun() },
+                        onSkip = { vm.refreshUser(); if (editing) nav.popBackStack() else afterFirstRun() })
+                }
+                composable(Routes.SAVED) {
+                    SavedScreen(
+                        profiles = profiles,
+                        onOpen = { vm.select(it.id); nav.navigate(Routes.KUNDALI) },
+                        onEdit = { nav.navigate(Routes.add(it.id)) },
+                        onDelete = { vm.delete(it.id) },
+                        onAdd = { nav.navigate(Routes.add()) },
+                        onBack = { nav.popBackStack() },
+                    )
+                }
+                composable(Routes.ABOUT) {
+                    var version by remember { mutableStateOf<String?>(null) }
+                    LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
+                    AboutScreen(version, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.HOME) {
                     HomeScreen(
@@ -86,6 +113,8 @@ fun App(vm: AppViewModel = viewModel()) {
                         onFeature = { nav.navigate(Routes.of(it)) },
                         onForecast = { nav.navigate(Routes.FORECAST) },
                         onReport = { nav.navigate(Routes.REPORT) },
+                        onSaved = { nav.navigate(Routes.SAVED) },
+                        userName = userName,
                     )
                 }
                 composable(Routes.REPORT) {
@@ -121,7 +150,8 @@ fun App(vm: AppViewModel = viewModel()) {
                     var version by remember { mutableStateOf<String?>(null) }
                     LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
                     SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() }, onChartStyle = { vm.setChartStyle(it) },
-                        onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() })
+                        onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() },
+                        onMyDetails = { nav.navigate(Routes.register(edit = true)) }, onAbout = { nav.navigate(Routes.ABOUT) })
                 }
                 composable(Routes.KUNDALI) {
                     val selected by vm.selected.collectAsStateWithLifecycle()

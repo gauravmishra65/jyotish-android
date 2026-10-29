@@ -21,11 +21,14 @@ data class Profile(
     val residence: String = "",
     val resLat: Double? = null,
     val resLon: Double? = null,
+    /** Group on the Saved Kundlis screen: family, friends, clients or other ("" = not set). */
+    val group: String = "",
 ) {
     fun toJson(): JSONObject = JSONObject()
         .put("id", id).put("name", name).put("gender", gender).put("date", date).put("time", time)
         .put("confidence", confidence).put("place", place).put("lat", lat).put("lon", lon).put("tz", tz)
         .put("residence", residence).put("res_lat", resLat ?: JSONObject.NULL).put("res_lon", resLon ?: JSONObject.NULL)
+        .put("group", group)
 
     val hasResidence: Boolean get() = residence.isNotBlank() && resLat != null && resLon != null
 
@@ -54,6 +57,7 @@ data class Profile(
             residence = o.optString("residence", ""),
             resLat = if (o.has("res_lat") && !o.isNull("res_lat")) o.getDouble("res_lat") else null,
             resLon = if (o.has("res_lon") && !o.isNull("res_lon")) o.getDouble("res_lon") else null,
+            group = o.optString("group", ""),
         )
     }
 }

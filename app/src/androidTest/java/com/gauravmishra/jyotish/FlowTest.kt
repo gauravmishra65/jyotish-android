@@ -11,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -45,6 +46,15 @@ class FlowTest {
             rule.onNodeWithText("English").performClick()
             rule.onNodeWithText("Add the first birth chart").performScrollTo().performClick()
 
+            // On-phone registration comes next; a bad email is refused, then the details are saved.
+            rule.onNodeWithTag("reg_name").performTextInput("Ravi Shankar Tiwari")
+            rule.onNodeWithTag("reg_email").performTextInput("ravi@")
+            rule.onNodeWithText("That does not look like an email address.").assertExists()
+            rule.onNodeWithTag("reg_email").performTextClearance()
+            rule.onNodeWithTag("reg_email").performTextInput("ravi@example.com")
+            rule.shot("register")
+            rule.onNodeWithTag("reg_save").performScrollTo().performClick()
+
             rule.onNodeWithTag("name").performTextInput("Ravi Shankar Tiwari")
             rule.onNodeWithTag("date").performScrollTo().performTextInput("14-07-1988")
             rule.onNodeWithTag("time").performScrollTo().performTextInput("14:35")
@@ -58,6 +68,7 @@ class FlowTest {
             rule.waitUntilAtLeastOneExists(hasText("Ravi Shankar Tiwari"), timeoutMillis = 10_000)
             rule.waitUntilAtLeastOneExists(hasText("Scorpio lagna, Moon in Cancer"), timeoutMillis = 120_000)
             rule.waitUntilAtLeastOneExists(hasText("Ketu mahadasha", substring = true), timeoutMillis = 10_000)
+            rule.onNodeWithText("Namaste, Ravi").assertExists()
 
             // Kundali: chart, both styles, tabs and a yoga's details.
             rule.onNodeWithText("Ravi Shankar Tiwari").performClick()

@@ -59,6 +59,8 @@ fun HomeScreen(
     onFeature: (Feature) -> Unit,
     onForecast: () -> Unit = {},
     onReport: () -> Unit = {},
+    onSaved: () -> Unit = {},
+    userName: String = "",
 ) {
     val lang = currentLang()
     var actionsFor by remember { mutableStateOf<Profile?>(null) }
@@ -75,7 +77,8 @@ fun HomeScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(longToday(lang), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(stringResource(R.string.home_title), style = MaterialTheme.typography.headlineMedium)
+                    Text(if (userName.isNotBlank()) stringResource(R.string.home_greeting, userName.trim().split(" ").first()) else stringResource(R.string.home_title),
+                        style = MaterialTheme.typography.headlineMedium)
                 }
                 IconButton(onClick = onSettings, modifier = Modifier.size(48.dp)) { Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings)) }
             }
@@ -93,6 +96,12 @@ fun HomeScreen(
                             ProfileCard(p, charts[p.id], lang, onOpen = { onOpenProfile(p) }, onLongPress = { actionsFor = p })
                         }
                     }
+                }
+            }
+
+            if (profiles.isNotEmpty()) {
+                TextButton(onClick = onSaved, modifier = Modifier.heightIn(min = 48.dp).testTag("home_saved")) {
+                    Text(stringResource(R.string.saved_open, profiles.size), color = Palette.Accent)
                 }
             }
 

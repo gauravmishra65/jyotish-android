@@ -83,6 +83,7 @@ fun AddProfileScreen(
     var query by rememberSaveable { mutableStateOf("") }
     var chosen by remember { mutableStateOf(existing?.let { Place(it.place, "", "", it.lat, it.lon, it.tz, 0, emptyList()) }) }
     var useCoords by rememberSaveable { mutableStateOf(false) }
+    var group by rememberSaveable { mutableStateOf(existing?.group ?: "") }
     var residence by remember { mutableStateOf(existing?.takeIf { it.hasResidence }?.let { Place(it.residence, "", "", it.resLat!!, it.resLon!!, "", 0, emptyList()) }) }
     var latText by rememberSaveable { mutableStateOf("") }
     var lonText by rememberSaveable { mutableStateOf("") }
@@ -121,7 +122,7 @@ fun AddProfileScreen(
                             id = existing?.id ?: java.util.UUID.randomUUID().toString(),
                             name = name.trim(), gender = gender, date = date.toString(), time = time!!, confidence = confidence,
                             place = place!!.label, lat = place.lat, lon = place.lon, tz = place.tz,
-                            residence = residence?.label ?: "", resLat = residence?.lat, resLon = residence?.lon,
+                            residence = residence?.label ?: "", resLat = residence?.lat, resLon = residence?.lon, group = group,
                         ))
                     },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp).heightIn(min = 56.dp).testTag("save"),
@@ -233,6 +234,14 @@ fun AddProfileScreen(
             Text(stringResource(R.string.residence_title), style = MaterialTheme.typography.titleMedium)
             Text(stringResource(R.string.residence_help), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             PlaceField(residence, loadPlaces, { residence = it }, tag = "residence")
+            Text(stringResource(R.string.group_title), style = MaterialTheme.typography.titleMedium)
+            androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                GROUPS.forEach { (k, label) ->
+                    androidx.compose.material3.FilterChip(selected = group == k, onClick = { group = if (group == k) "" else k },
+                        label = { Text(stringResource(label)) }, modifier = Modifier.heightIn(min = 48.dp).testTag("pgroup_$k"),
+                        colors = androidx.compose.material3.FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
+                }
+            }
         }
     }
 

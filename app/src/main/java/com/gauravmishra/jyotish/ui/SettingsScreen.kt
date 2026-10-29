@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +49,8 @@ fun SettingsScreen(
     onChartStyle: (String) -> Unit,
     onSpeedTest: suspend () -> String,
     onBack: () -> Unit,
+    onMyDetails: () -> Unit = {},
+    onAbout: () -> Unit = {},
 ) {
     var speed by remember { mutableStateOf<String?>(null) }
     var running by remember { mutableStateOf(false) }
@@ -64,6 +67,13 @@ fun SettingsScreen(
             Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
+            SectionLabel(stringResource(R.string.reg_title))
+            Group {
+                NavRow(if (settings.registered) settings.userName else stringResource(R.string.reg_not_yet), stringResource(R.string.reg_settings_sub), "settings_my_details", onMyDetails)
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                NavRow(stringResource(R.string.about_title), stringResource(R.string.about_settings_sub), "settings_about", onAbout)
+            }
+
             SectionLabel(stringResource(R.string.display))
             Group {
                 Setting(stringResource(R.string.language)) {
@@ -157,4 +167,18 @@ private fun Pick(label: String, selected: Boolean, onClick: () -> Unit) {
         selected = selected, onClick = onClick, label = { Text(label) }, modifier = Modifier.heightIn(min = 48.dp),
         colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep),
     )
+}
+
+@Composable
+private fun NavRow(title: String, sub: String, tag: String, onClick: () -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().heightIn(min = 64.dp).clickable(role = Role.Button, onClick = onClick).padding(horizontal = 16.dp, vertical = 8.dp).testTag(tag),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(sub, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Text("›", style = MaterialTheme.typography.titleLarge, color = Palette.Accent)
+    }
 }
