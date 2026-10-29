@@ -1,5 +1,12 @@
 package com.gauravmishra.jyotish.ui
 
+import java.time.LocalDate
+import com.gauravmishra.jyotish.BuildConfig
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.AlertDialog
+import android.net.Uri
+import android.content.Intent
+import android.content.ActivityNotFoundException
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,6 +50,9 @@ fun RegisterScreen(settings: AppSettings, editing: Boolean, onDone: () -> Unit, 
     var email by rememberSaveable { mutableStateOf(settings.userEmail) }
     var phone by rememberSaveable { mutableStateOf(settings.userPhone) }
     var tried by rememberSaveable { mutableStateOf(false) }
+    var askSend by rememberSaveable { mutableStateOf(false) }
+    val ctx = LocalContext.current
+    val lang = currentLang()
     val emailOk = email.isBlank() || EMAIL.matches(email.trim())
     val phoneOk = phone.isBlank() || phone.count { it.isDigit() } in 6..15
     val ok = name.isNotBlank() && emailOk && phoneOk
@@ -77,7 +87,7 @@ fun RegisterScreen(settings: AppSettings, editing: Boolean, onDone: () -> Unit, 
                     if (!ok) return@Button
                     settings.userName = name.trim(); settings.userEmail = email.trim(); settings.userPhone = phone.trim()
                     settings.registered = true
-                    onDone()
+                    askSend = true          // offer to email the details to the app's author; the user decides
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("reg_save"), shape = RoundedCornerShape(28.dp),
             ) { Text(stringResource(if (editing) R.string.reg_save_edit else R.string.reg_save)) }
@@ -94,4 +104,48 @@ fun RegisterScreen(settings: AppSettings, editing: Boolean, onDone: () -> Unit, 
             }
         }
     }
+
+    if (askSend) {
+        AlertDialog(
+            onDismissRequest = { askSend = false; onDone() },
+            title = { Text(stringResource(R.string.reg_send_title)) },
+            text = { Text(stringResource(R.string.reg_send_body, CONTACT_NAME)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    askSend = false
+                    val (subject, body) = registrationEmail(settings.userName, settings.userEmail, settings.userPhone, lang,
+                        BuildConfig.VERSION_NAME, LocalDate.now().toString())
+                    try {
+                        ctx.startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
+                            .putExtra(Intent.EXTRA_EMAIL, arrayOf(CONTACT_EMAIL))
+                            .putExtra(Intent.EXTRA_SUBJECT, subject).putExtra(Intent.EXTRA_TEXT, body))
+                    } catch (e: ActivityNotFoundException) {
+                        // No mail app on this phone: nothing is sent; the registration stays saved on the phone.
+                    }
+                    onDone()
+                }, modifier = Modifier.heightIn(min = 48.dp).testTag("reg_send")) { Text(stringResource(R.string.reg_send_yes)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { askSend = false; onDone() }, modifier = Modifier.heightIn(min = 48.dp).testTag("reg_send_no")) {
+                    Text(stringResource(R.string.reg_send_no))
+                }
+            },
+        )
+    }
+}
+
+/** Subject and body of the registration email: registration details only, never birth data. */
+fun registrationEmail(name: String, email: String, phone: String, lang: String, version: String, date: String): Pair<String, String> {
+    val subject = "Jyotish app registration: $name"
+    val body = listOf(
+        "Jyotish app registration",
+        "",
+        "Name: $name",
+        "Email: ${email.ifBlank { "-" }}",
+        "Phone: ${phone.ifBlank { "-" }}",
+        "Language: ${if (lang == "hi") "Hindi" else "English"}",
+        "App version: $version",
+        "Registered on: $date",
+    ).joinToString("\n")
+    return subject to body
 }

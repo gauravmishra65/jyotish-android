@@ -70,6 +70,11 @@ class DetailsTest {
             rule.onNodeWithContentDescription("Settings").performClick()
             rule.onNodeWithTag("report_by").performScrollTo().assertExists()
             rule.onNodeWithTag("report_site").assertExists()
+            rule.onNodeWithTag("report_by").assert(androidx.compose.ui.test.hasAnyDescendant(hasText("Gaurav Mishra")))
+            rule.onNodeWithTag("report_site").assert(androidx.compose.ui.test.hasAnyDescendant(hasText("authorgaurav.com")))
+            // Read-only: neither row is a text field.
+            rule.onAllNodes(androidx.compose.ui.test.hasSetTextAction() and androidx.compose.ui.test.hasTestTag("report_by")).fetchSemanticsNodes().let { check(it.isEmpty()) { "credit must not be editable" } }
+            rule.onAllNodes(androidx.compose.ui.test.hasSetTextAction() and androidx.compose.ui.test.hasTestTag("report_site")).fetchSemanticsNodes().let { check(it.isEmpty()) { "credit must not be editable" } }
             rule.onNodeWithText("Gaurav Mishra").assertExists()
         }
     }

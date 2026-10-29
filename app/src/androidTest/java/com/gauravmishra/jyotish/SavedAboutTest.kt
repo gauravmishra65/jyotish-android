@@ -5,6 +5,7 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -70,6 +71,8 @@ class SavedAboutTest {
             rule.onNodeWithTag("settings_my_details").performClick()
             rule.onNodeWithTag("reg_name").performTextInput("Priya Nair")
             rule.onNodeWithTag("reg_save").performScrollTo().performClick()
+            rule.waitUntil(5_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
+            rule.onNodeWithTag("reg_send_no").performClick()
             rule.onNodeWithText("Priya Nair").assertExists()                        // Settings shows the registered name
             rule.onNodeWithTag("settings_about").performClick()
             rule.onNodeWithText("gaurav.mishra65@gmail.com").assertExists()

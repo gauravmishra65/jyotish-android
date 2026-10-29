@@ -60,7 +60,7 @@ forecasts death, illness or divorce. Confirm important dates with your family's 
 
 | Question | Answer | Why |
 |---|---|---|
-| Does the app collect or share any of the required user data types? | **No** | Birth details, names and places, and the optional registration (name, email, phone), are stored only in the app's private storage on the phone. Play counts data as collected only when it leaves the device; none does. |
+| Does the app collect or share any of the required user data types? | **No** | Birth details, names and places, and the optional registration (name, email, phone), are stored only in the app's private storage on the phone. After registering, the person may choose to open their own email app with their name, email and phone filled in, addressed to the author; they send it themselves, and the app transmits nothing. |
 | Is data sent off the device? | No | The app has no INTERNET permission; the engine and the place list are bundled. |
 | Is data encrypted in transit? | Not applicable | Nothing is transmitted. |
 | Can users request that data be deleted? | Yes, on the device | Deleting a profile removes it and its cached chart; uninstalling removes everything. |

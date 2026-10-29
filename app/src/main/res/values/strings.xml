@@ -344,7 +344,7 @@
     <string name="reg_email_bad">That does not look like an email address.</string>
     <string name="reg_phone">Phone (optional)</string>
     <string name="reg_phone_bad">Enter 6 to 15 digits.</string>
-    <string name="reg_privacy">Stored only on this phone. There is no account and nothing is sent anywhere.</string>
+    <string name="reg_privacy">Stored on this phone. There is no account; after registering you can choose to email these details to the app\'s author.</string>
     <string name="reg_save">Register and continue</string>
     <string name="reg_save_edit">Save</string>
     <string name="reg_skip">Skip for now</string>
@@ -377,4 +377,8 @@
     <string name="about_methods">Planetary positions from the Swiss Ephemeris. Vedic: sidereal zodiac (Lahiri by default), whole-sign houses, Vimshottari and Yogini dashas, Shadbala, Ashtakavarga, Jaimini, KP, Tajika Varshaphal and Lal Kitab (1952). Western: tropical zodiac with aspects, transits, progressions, solar return and zodiacal releasing. Chinese BaZi on the solar calendar. Numerology: Pythagorean, Chaldean and Indian. Forecasts count only where several systems agree.</string>
     <string name="about_disclaimer_title">Please note</string>
     <string name="about_disclaimer">Readings describe traditional tendencies, not certainties. They are not medical, legal, financial or psychological advice; for health, always see a doctor. Remedies are optional and promise no result.</string>
+    <string name="reg_send_title">Send your details to the app\'s author?</string>
+    <string name="reg_send_body">Your email app will open addressed to %1$s with your name, email and phone filled in. Nothing is sent unless you tap Send there.</string>
+    <string name="reg_send_yes">Open email</string>
+    <string name="reg_send_no">Not now</string>
 </resources>

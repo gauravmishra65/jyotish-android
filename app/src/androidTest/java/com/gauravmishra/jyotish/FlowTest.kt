@@ -54,6 +54,10 @@ class FlowTest {
             rule.onNodeWithTag("reg_email").performTextInput("ravi@example.com")
             rule.shot("register")
             rule.onNodeWithTag("reg_save").performScrollTo().performClick()
+            rule.waitUntil(5_000) { rule.onAllNodesWithTag("reg_send_no").fetchSemanticsNodes().isNotEmpty() }
+            rule.onNodeWithText("Send your details to the app's author?").assertExists()
+            rule.onNodeWithTag("reg_send").assertExists()
+            rule.onNodeWithTag("reg_send_no").performClick()
 
             rule.onNodeWithTag("name").performTextInput("Ravi Shankar Tiwari")
             rule.onNodeWithTag("date").performScrollTo().performTextInput("14-07-1988")
