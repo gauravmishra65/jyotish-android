@@ -44,7 +44,7 @@ class ProfilePickerTest {
 
     private fun pickerShows(name: String) =
         rule.waitUntil(10_000) { rule.onAllNodesWithTag("person_picker").fetchSemanticsNodes().isNotEmpty() }.also {
-            rule.onNodeWithTag("person_picker").assert(hasAnyDescendant(hasText(name)))
+            rule.onNodeWithTag("person_picker").assert(hasText(name))
         }
 
     @Test

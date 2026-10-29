@@ -71,7 +71,7 @@ class DemoTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("nav_kundali"), timeoutMillis = 60_000)
             rule.onNodeWithContentDescription("Settings").performClick()
-            rule.onNodeWithTag("settings_upgrade").performScrollTo().assert(hasAnyDescendant(hasText("Edition: Full version")))
+            rule.onNodeWithTag("settings_upgrade").performScrollTo().assert(hasText("Edition: Full version"))
         }
     }
 }
