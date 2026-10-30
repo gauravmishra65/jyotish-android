@@ -161,6 +161,7 @@ jobs:
           api-level: 34
           arch: x86_64
           target: google_apis
+          profile: pixel_6            # 1080 x 2400, so store screenshots are full size
           disable-animations: true
           script: bash tools/ci_emulator.sh
       - name: Spike results
