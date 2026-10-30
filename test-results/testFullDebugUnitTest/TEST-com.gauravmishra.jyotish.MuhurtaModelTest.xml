@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.MuhurtaModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-30T06:50:15.740Z" hostname="runnervm48cm3" time="0.01">
+  <properties/>
+  <testcase name="strongestFirstAndTithiInPaksha" classname="com.gauravmishra.jyotish.MuhurtaModelTest" time="0.005"/>
+  <testcase name="hindiFieldsAreFilled" classname="com.gauravmishra.jyotish.MuhurtaModelTest" time="0.002"/>
+  <testcase name="windowsGroupIntoDays" classname="com.gauravmishra.jyotish.MuhurtaModelTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

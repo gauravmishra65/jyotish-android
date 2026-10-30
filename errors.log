@@ -1,0 +1,19 @@
+--------- beginning of main
+10-30 06:57:56.985  5702  5774 E WakeLock: DG:service ** IS FORCE-RELEASED ON TIMEOUT **
+--------- beginning of system
+10-30 06:57:58.596   518  1849 E ActivityManager: Unable to freeze binder for 6723: -11
+10-30 06:57:58.874   518   549 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+10-30 06:57:58.874   518   549 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+10-30 06:57:58.959   518  3392 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+10-30 06:57:58.968   518   766 E AppOps  : attributionTag VCN not declared in manifest of android
+10-30 06:57:59.088   518   549 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+10-30 06:57:59.090   834  6508 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+10-30 06:57:59.094   834  6508 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+10-30 06:57:59.096   518   549 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+10-30 06:57:59.115   400   400 E BpTransactionCompletedListener: Failed to transact (-32)
+10-30 06:57:59.115   400   400 E BpTransactionCompletedListener: Failed to transact (-32)
+10-30 06:57:59.263   518  3392 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+10-30 06:57:59.413   518  3392 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+10-30 06:57:59.537   518   766 E AppOps  : attributionTag VCN not declared in manifest of android
+10-30 06:58:00.011   834  6508 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+10-30 06:58:00.012   834  6508 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING

@@ -1,0 +1,77 @@
+# proto-message: google.testing.platform.proto.api.core.TestSuiteResult
+# 2026-10-30T06:57:59.721925017Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 1
+  device {
+    id: "emulator-5554"
+    friendly_name: "primary"
+  }
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "DemoTest"
+    test_package: "com.gauravmishra.jyotish"
+    test_method: "secondProfileNeedsUnlock"
+    start_time {
+      seconds: 1793343470
+      nanos: 23000000
+    }
+    end_time {
+      seconds: 1793343478
+      nanos: 759000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/flavors/demo/emulator-5554 - 14/logcat-com.gauravmishra.jyotish.DemoTest-secondProfileNeedsUnlock.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/flavors/demo/emulator-5554 - 14/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/flavors/demo/emulator-5554 - 14/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/flavors/demo/emulator-5554 - 14/cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/androidTest-results/connected/debug/flavors/demo/emulator-5554 - 14/testlog/test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

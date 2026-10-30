@@ -1,0 +1,14 @@
+Starting: Intent { cmp=com.gauravmishra.jyotish/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.gauravmishra.jyotish/.MainActivity
+TotalTime: 1356
+WaitTime: 1361
+Complete
+Starting: Intent { cmp=com.gauravmishra.jyotish/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.gauravmishra.jyotish/.MainActivity
+TotalTime: 1368
+WaitTime: 1380
+Complete

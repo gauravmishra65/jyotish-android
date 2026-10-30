@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.gauravmishra.jyotish.AccessibilityTest" tests="15" failures="0" errors="0" skipped="0" time="122.4" timestamp="2026-10-30T06:57:41" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 14" />
+    <property name="flavor" value="full" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="mainScreensHaveLabelledFullSizeTargets" classname="com.gauravmishra.jyotish.AccessibilityTest" time="12.65" />
+  <testcase name="settingsHaveReportCredits" classname="com.gauravmishra.jyotish.DetailsTest" time="4.984" />
+  <testcase name="moreTabShowsAllSections" classname="com.gauravmishra.jyotish.DetailsTest" time="8.357" />
+  <testcase name="welcomeAddProfileAndSeeTheChartOnHome" classname="com.gauravmishra.jyotish.FlowTest" time="16.413" />
+  <testcase name="hindiInterfaceShowsHindiNames" classname="com.gauravmishra.jyotish.FlowTest" time="12.335" />
+  <testcase name="fourAreasYearByYear" classname="com.gauravmishra.jyotish.ForecastTest" time="11.153" />
+  <testcase name="hindiForecast" classname="com.gauravmishra.jyotish.ForecastTest" time="6.262" />
+  <testcase name="milanShowsTheEngineScore" classname="com.gauravmishra.jyotish.MilanTest" time="7.274" />
+  <testcase name="findsTheSameDaysAsTheDesktop" classname="com.gauravmishra.jyotish.MuhurtaTest" time="7.421" />
+  <testcase name="numbersGridAndNameOptions" classname="com.gauravmishra.jyotish.NumerologyTest" time="5.023" />
+  <testcase name="pickSavedAndAddNew" classname="com.gauravmishra.jyotish.ProfilePickerTest" time="6.956" />
+  <testcase name="fullReadingInEnglishAndHindi" classname="com.gauravmishra.jyotish.ReportTest" time="9.378" />
+  <testcase name="savedKundlisSearchGroupsAndOpen" classname="com.gauravmishra.jyotish.SavedAboutTest" time="4.468" />
+  <testcase name="myDetailsAndAboutFromSettings" classname="com.gauravmishra.jyotish.SavedAboutTest" time="4.149" />
+  <testcase name="engineMatchesDesktopSnapshot" classname="com.gauravmishra.jyotish.SpikeTest" time="4.065" />
+</testsuite>

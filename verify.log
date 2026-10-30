@@ -1,0 +1,23 @@
+
+===== independent.py
+Jupiter independent: [('Leo', '2027-01-14', '2027-01-24'), ('Cancer', '2027-01-25', '2027-06-25'), ('Leo', '2027-06-26', '2027-11-26'), ('Virgo', '2027-11-27', '2028-02-28'), ('Leo', '2028-02-29', '2028-07-24'), ('Virgo', '2028-07-25', '2028-12-26'), ('Libra', '2028-12-27', '2029-03-29'), ('Virgo', '2029-03-30', '2029-08-24'), ('Libra', '2029-08-25', '2030-01-13')]
+Saturn independent: [('Pisces', '2027-01-14', '2027-06-02'), ('Aries', '2027-06-03', '2027-10-20'), ('Pisces', '2027-10-21', '2028-02-23'), ('Aries', '2028-02-24', '2029-08-08'), ('Taurus', '2029-08-09', '2029-10-05'), ('Aries', '2029-10-06', '2030-01-13')]
+Rahu independent: [('Capricorn', '2027-01-14', '2028-06-23'), ('Sagittarius', '2028-06-24', '2030-01-10'), ('Scorpio', '2030-01-11', '2030-01-13')]
+  Ketu-Rahu: independent 2026-11-30 – 2027-12-19 | engine 2026-11-30 – 2027-12-19
+  Ketu-Jupiter: independent 2027-12-19 – 2028-11-23 | engine 2027-12-19 – 2028-11-24
+  Ketu-Saturn: independent 2028-11-23 – 2030-01-02 | engine 2028-11-24 – 2030-01-03
+  Ketu-Mercury: independent 2030-01-02 – 2030-12-30 | engine 2030-01-03 – 2030-12-31
+
+926 checks, 0 problems
+
+===== layer.py
+MINOR Asha Kumari @2026-10-28: marriage windows []; Y1: A good year for friendships and social life. | Before the 18th birthday (5 May 2030) read this for friendships; marriage timing starts from then.
+MINOR Asha Kumari @2028-02-29: marriage windows [('marriage', '2030-05-05', '2031-02-27'), ('kn_rao', '2030-11-01', '2030-12-28')]; Y1: A good year for friendships and social life. | Before the 18th birthday (5 May 2030) read this for friendships; marriage timing starts from then.
+20 forecasts built
+English words left in Hindi driver text: []
+
+===== report_check.py
+people x languages: 18
+English words in Hindi: []
+
+all verification passed

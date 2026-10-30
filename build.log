@@ -1,0 +1,513 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preFullDebugBuild UP-TO-DATE
+> Task :app:generateFullDebugBuildConfig
+> Task :app:findFullDebugPythonCommand
+> Task :app:extractFullDebugPythonBuildPackages
+
+> Task :app:installFullDebugPythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_arm64_v8a.whl
+Collecting tzdata
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, pyswisseph
+
+Successfully installed pyswisseph-2.10.3.2 tzdata-2026.6
+
+Chaquopy: Installing for x86_64
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_x86_64.whl
+Installing collected packages: pyswisseph
+Successfully installed pyswisseph-2.10.3.2
+
+> Task :app:mergeFullDebugPythonSources
+> Task :app:generateFullDebugPythonProxies
+> Task :app:checkFullDebugAarMetadata
+> Task :app:processFullDebugNavigationResources
+> Task :app:generateFullDebugResValues
+> Task :app:compileFullDebugNavigationResources
+> Task :app:mapFullDebugSourceSetPaths
+> Task :app:generateFullDebugResources
+> Task :app:packageFullDebugResources
+> Task :app:mergeFullDebugResources
+> Task :app:createFullDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksFullDebug
+> Task :app:parseFullDebugLocalResources
+> Task :app:processFullDebugMainManifest
+> Task :app:processFullDebugManifest
+> Task :app:processFullDebugManifestForPackage
+> Task :app:javaPreCompileFullDebug
+> Task :app:preFullDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileFullDebugUnitTest
+> Task :app:processFullDebugResources
+> Task :app:generateFullDebugPythonJniLibs
+> Task :app:mergeFullDebugJniLibFolders
+> Task :app:mergeFullDebugShaders
+> Task :app:compileFullDebugShaders NO-SOURCE
+> Task :app:generateFullDebugAssets UP-TO-DATE
+> Task :app:mergeFullDebugNativeLibs
+> Task :app:generateFullDebugPythonMiscAssets
+
+> Task :app:stripFullDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libchaquopy_java.so, libcrypto_chaquopy.so, libcrypto_python.so, libpython3.13.so, libpython3.so, libsqlite3_chaquopy.so, libsqlite3_python.so, libssl_chaquopy.so, libssl_python.so. Run with --info option to learn more.
+
+> Task :app:generateFullDebugPythonRequirementsAssets
+> Task :app:extractFullDebugNativeSymbolTables
+> Task :app:generateFullDebugPythonSourceAssets
+> Task :app:mergeFullDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateFullDebugPythonBuildAssets
+> Task :app:mergeFullDebugAssets
+> Task :app:checkFullDebugDuplicateClasses
+> Task :app:compressFullDebugAssets
+> Task :app:mergeLibDexFullDebug
+> Task :app:validateSigningFullDebug
+> Task :app:writeFullDebugAppMetadata
+> Task :app:writeFullDebugSigningConfigVersions
+> Task :app:preFullDebugAndroidTestBuild SKIPPED
+> Task :app:processFullDebugAndroidTestManifest
+> Task :app:generateFullDebugAndroidTestBuildConfig
+> Task :app:checkFullDebugAndroidTestAarMetadata
+> Task :app:processFullDebugAndroidTestNavigationResources
+> Task :app:compileFullDebugAndroidTestNavigationResources
+> Task :app:generateFullDebugAndroidTestResValues
+> Task :app:mapFullDebugAndroidTestSourceSetPaths
+> Task :app:generateFullDebugAndroidTestResources
+> Task :app:javaPreCompileFullDebugAndroidTest
+> Task :app:mergeFullDebugAndroidTestShaders
+> Task :app:compileFullDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateFullDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestAssets
+> Task :app:compressFullDebugAndroidTestAssets
+> Task :app:mergeFullDebugAndroidTestResources
+> Task :app:checkFullDebugAndroidTestDuplicateClasses
+> Task :app:desugarFullDebugAndroidTestFileDependencies
+> Task :app:processFullDebugAndroidTestResources
+> Task :app:desugarFullDebugFileDependencies
+> Task :app:mergeLibDexFullDebugAndroidTest
+> Task :app:mergeFullDebugAndroidTestJniLibFolders
+> Task :app:mergeFullDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripFullDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningFullDebugAndroidTest
+> Task :app:writeFullDebugAndroidTestSigningConfigVersions
+> Task :app:generateDemoDebugPythonJniLibs
+> Task :app:preDemoDebugBuild UP-TO-DATE
+> Task :app:mergeDemoDebugJniLibFolders
+> Task :app:mergeExtDexFullDebugAndroidTest
+> Task :app:generateDemoDebugBuildConfig
+> Task :app:mergeDemoDebugNativeLibs
+> Task :app:findDemoDebugPythonCommand
+
+> Task :app:stripDemoDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libchaquopy_java.so, libcrypto_chaquopy.so, libcrypto_python.so, libpython3.13.so, libpython3.so, libsqlite3_chaquopy.so, libsqlite3_python.so, libssl_chaquopy.so, libssl_python.so. Run with --info option to learn more.
+
+> Task :app:extractDemoDebugPythonBuildPackages
+> Task :app:extractDemoDebugNativeSymbolTables
+
+> Task :app:installDemoDebugPythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_arm64_v8a.whl
+Collecting tzdata
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, pyswisseph
+
+Successfully installed pyswisseph-2.10.3.2 tzdata-2026.6
+
+Chaquopy: Installing for x86_64
+
+> Task :app:mergeExtDexFullDebug
+
+> Task :app:installDemoDebugPythonRequirements
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_x86_64.whl
+Installing collected packages: pyswisseph
+Successfully installed pyswisseph-2.10.3.2
+
+> Task :app:mergeDemoDebugNativeDebugMetadata NO-SOURCE
+> Task :app:mergeDemoDebugPythonSources
+> Task :app:generateDemoDebugPythonProxies
+> Task :app:checkDemoDebugAarMetadata
+> Task :app:processDemoDebugNavigationResources
+> Task :app:compileDemoDebugNavigationResources
+> Task :app:generateDemoDebugResValues
+> Task :app:mapDemoDebugSourceSetPaths
+> Task :app:generateDemoDebugResources
+> Task :app:packageDemoDebugResources
+> Task :app:createDemoDebugCompatibleScreenManifests
+> Task :app:parseDemoDebugLocalResources
+> Task :app:extractDeepLinksDemoDebug
+> Task :app:processDemoDebugMainManifest
+> Task :app:processDemoDebugManifest
+> Task :app:processDemoDebugManifestForPackage
+> Task :app:javaPreCompileDemoDebug
+> Task :app:mergeDemoDebugShaders
+> Task :app:compileDemoDebugShaders NO-SOURCE
+> Task :app:generateDemoDebugAssets UP-TO-DATE
+> Task :app:mergeDemoDebugResources
+> Task :app:generateDemoDebugPythonMiscAssets
+> Task :app:processDemoDebugResources
+> Task :app:generateDemoDebugPythonRequirementsAssets
+> Task :app:generateDemoDebugPythonSourceAssets
+> Task :app:generateDemoDebugPythonBuildAssets
+> Task :app:mergeDemoDebugAssets
+> Task :app:compressDemoDebugAssets
+> Task :app:checkDemoDebugDuplicateClasses
+> Task :app:mergeLibDexDemoDebug
+> Task :app:validateSigningDemoDebug
+> Task :app:writeDemoDebugAppMetadata
+> Task :app:writeDemoDebugSigningConfigVersions
+> Task :app:preDemoDebugAndroidTestBuild SKIPPED
+> Task :app:processDemoDebugAndroidTestManifest
+> Task :app:generateDemoDebugAndroidTestBuildConfig
+> Task :app:checkDemoDebugAndroidTestAarMetadata
+> Task :app:processDemoDebugAndroidTestNavigationResources
+> Task :app:compileDemoDebugAndroidTestNavigationResources
+> Task :app:generateDemoDebugAndroidTestResValues
+> Task :app:mapDemoDebugAndroidTestSourceSetPaths
+> Task :app:generateDemoDebugAndroidTestResources
+> Task :app:desugarDemoDebugFileDependencies
+> Task :app:mergeDemoDebugAndroidTestResources
+> Task :app:mergeExtDexDemoDebug
+> Task :app:javaPreCompileDemoDebugAndroidTest
+> Task :app:mergeDemoDebugAndroidTestShaders
+> Task :app:compileDemoDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateDemoDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestAssets
+> Task :app:compressDemoDebugAndroidTestAssets
+> Task :app:desugarDemoDebugAndroidTestFileDependencies
+> Task :app:checkDemoDebugAndroidTestDuplicateClasses
+> Task :app:processDemoDebugAndroidTestResources
+> Task :app:mergeLibDexDemoDebugAndroidTest
+> Task :app:mergeExtDexDemoDebugAndroidTest
+> Task :app:mergeDemoDebugAndroidTestJniLibFolders
+> Task :app:mergeDemoDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDemoDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDemoDebugAndroidTest
+> Task :app:writeDemoDebugAndroidTestSigningConfigVersions
+> Task :app:generateDemoReleasePythonJniLibs
+> Task :app:preDemoReleaseBuild UP-TO-DATE
+> Task :app:mergeDemoReleaseJniLibFolders
+> Task :app:mergeDemoReleaseNativeLibs
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkDemoReleaseDuplicateClasses
+> Task :app:generateDemoReleaseBuildConfig
+
+> Task :app:stripDemoReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libchaquopy_java.so, libcrypto_chaquopy.so, libcrypto_python.so, libpython3.13.so, libpython3.so, libsqlite3_chaquopy.so, libsqlite3_python.so, libssl_chaquopy.so, libssl_python.so. Run with --info option to learn more.
+
+> Task :app:findDemoReleasePythonCommand
+> Task :app:extractDemoReleaseNativeSymbolTables
+> Task :app:compileFullDebugKotlin
+> Task :app:extractDemoReleasePythonBuildPackages
+> Task :app:mergeDemoReleaseNativeDebugMetadata NO-SOURCE
+
+> Task :app:installDemoReleasePythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_arm64_v8a.whl
+Collecting tzdata
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, pyswisseph
+
+Successfully installed pyswisseph-2.10.3.2 tzdata-2026.6
+
+Chaquopy: Installing for x86_64
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_x86_64.whl
+Installing collected packages: pyswisseph
+Successfully installed pyswisseph-2.10.3.2
+
+> Task :app:mergeDemoReleasePythonSources
+> Task :app:generateDemoReleasePythonProxies
+> Task :app:checkDemoReleaseAarMetadata
+> Task :app:processDemoReleaseNavigationResources
+> Task :app:compileDemoReleaseNavigationResources
+> Task :app:generateDemoReleaseResValues
+> Task :app:mapDemoReleaseSourceSetPaths
+> Task :app:generateDemoReleaseResources
+> Task :app:packageDemoReleaseResources
+> Task :app:parseDemoReleaseLocalResources
+> Task :app:createDemoReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksDemoRelease
+> Task :app:processDemoReleaseMainManifest
+> Task :app:processDemoReleaseManifest
+> Task :app:processDemoReleaseManifestForPackage
+> Task :app:javaPreCompileDemoRelease
+> Task :app:mergeDemoReleaseResources
+> Task :app:mergeDemoReleaseArtProfile
+> Task :app:extractProguardFiles
+> Task :app:mergeDemoReleaseStartupProfile
+> Task :app:mergeDemoReleaseShaders
+> Task :app:compileDemoReleaseShaders NO-SOURCE
+> Task :app:generateDemoReleaseAssets UP-TO-DATE
+> Task :app:processDemoReleaseResources
+> Task :app:generateDemoReleasePythonMiscAssets
+> Task :app:generateDemoReleasePythonRequirementsAssets
+> Task :app:generateDemoReleasePythonSourceAssets
+> Task :app:generateDemoReleasePythonBuildAssets
+> Task :app:mergeDemoReleaseAssets
+> Task :app:compressDemoReleaseAssets
+> Task :app:extractDemoReleaseVersionControlInfo
+> Task :app:collectDemoReleaseDependencies
+> Task :app:sdkDemoReleaseDependencyData
+> Task :app:validateSigningDemoRelease
+> Task :app:writeDemoReleaseAppMetadata
+> Task :app:writeDemoReleaseSigningConfigVersions
+> Task :app:generateFullReleasePythonJniLibs
+> Task :app:preFullReleaseBuild UP-TO-DATE
+> Task :app:mergeFullReleaseJniLibFolders
+> Task :app:mergeFullReleaseNativeLibs
+
+> Task :app:stripFullReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libchaquopy_java.so, libcrypto_chaquopy.so, libcrypto_python.so, libpython3.13.so, libpython3.so, libsqlite3_chaquopy.so, libsqlite3_python.so, libssl_chaquopy.so, libssl_python.so. Run with --info option to learn more.
+
+> Task :app:extractFullReleaseNativeSymbolTables
+> Task :app:mergeFullReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:checkFullReleaseDuplicateClasses
+> Task :app:generateFullReleaseBuildConfig
+> Task :app:findFullReleasePythonCommand
+> Task :app:extractFullReleasePythonBuildPackages
+
+> Task :app:installFullReleasePythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_arm64_v8a.whl
+Collecting tzdata
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, pyswisseph
+
+Successfully installed pyswisseph-2.10.3.2 tzdata-2026.6
+
+Chaquopy: Installing for x86_64
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_x86_64.whl
+Installing collected packages: pyswisseph
+Successfully installed pyswisseph-2.10.3.2
+
+> Task :app:mergeFullReleasePythonSources
+> Task :app:generateFullReleasePythonProxies
+> Task :app:checkFullReleaseAarMetadata
+> Task :app:processFullReleaseNavigationResources
+> Task :app:compileFullReleaseNavigationResources
+> Task :app:generateFullReleaseResValues
+> Task :app:mapFullReleaseSourceSetPaths
+> Task :app:generateFullReleaseResources
+> Task :app:mergeFullReleaseResources
+> Task :app:packageFullReleaseResources
+> Task :app:parseFullReleaseLocalResources
+> Task :app:createFullReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksFullRelease
+> Task :app:compileDemoDebugKotlin
+> Task :app:processFullReleaseMainManifest
+> Task :app:compileFullDebugJavaWithJavac
+> Task :app:processFullDebugJavaRes
+> Task :app:bundleFullDebugClassesToRuntimeJar
+> Task :app:bundleFullDebugClassesToCompileJar
+> Task :app:compileDemoReleaseKotlin
+> Task :app:dexBuilderFullDebug
+> Task :app:mergeFullDebugGlobalSynthetics
+> Task :app:mergeProjectDexFullDebug
+> Task :app:compileDemoDebugJavaWithJavac
+> Task :app:mergeFullDebugJavaResource
+> Task :app:compileFullDebugAndroidTestKotlin
+> Task :app:compileFullDebugUnitTestKotlin
+> Task :app:dexBuilderDemoDebug
+> Task :app:compileFullDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processFullDebugUnitTestJavaRes
+> Task :app:testFullDebugUnitTest
+> Task :app:compileFullDebugAndroidTestJavaWithJavac
+> Task :app:dexBuilderFullDebugAndroidTest
+> Task :app:mergeFullDebugAndroidTestGlobalSynthetics
+> Task :app:processFullDebugAndroidTestJavaRes
+> Task :app:mergeDemoDebugGlobalSynthetics
+> Task :app:mergeProjectDexFullDebugAndroidTest
+> Task :app:processDemoDebugJavaRes
+> Task :app:mergeFullDebugAndroidTestJavaResource
+> Task :app:packageFullDebug
+> Task :app:createFullDebugApkListingFileRedirect
+> Task :app:assembleFullDebug
+> Task :app:mergeProjectDexDemoDebug
+> Task :app:packageFullDebugAndroidTest
+> Task :app:createFullDebugAndroidTestApkListingFileRedirect
+> Task :app:assembleFullDebugAndroidTest
+> Task :app:bundleDemoDebugClassesToCompileJar
+> Task :app:mergeDemoDebugJavaResource
+> Task :app:compileDemoReleaseJavaWithJavac
+> Task :app:mergeDemoReleaseGeneratedProguardFiles
+> Task :app:processDemoReleaseJavaRes
+> Task :app:mergeDemoReleaseJavaResource
+> Task :app:expandDemoReleaseArtProfileWildcards
+> Task :app:generateDemoReleaseLintVitalReportModel
+> Task :app:packageDemoDebug
+> Task :app:createDemoDebugApkListingFileRedirect
+> Task :app:assembleDemoDebug
+> Task :app:processFullReleaseManifest
+> Task :app:processFullReleaseManifestForPackage
+> Task :app:compileDemoDebugAndroidTestKotlin
+> Task :app:processFullReleaseResources
+> Task :app:compileDemoDebugAndroidTestJavaWithJavac
+> Task :app:dexBuilderDemoDebugAndroidTest
+> Task :app:mergeDemoDebugAndroidTestGlobalSynthetics
+> Task :app:processDemoDebugAndroidTestJavaRes
+> Task :app:mergeProjectDexDemoDebugAndroidTest
+> Task :app:mergeDemoDebugAndroidTestJavaResource
+> Task :app:packageDemoDebugAndroidTest
+> Task :app:createDemoDebugAndroidTestApkListingFileRedirect
+> Task :app:assembleDemoDebugAndroidTest
+> Task :app:javaPreCompileFullRelease
+> Task :app:mergeFullReleaseArtProfile
+> Task :app:mergeFullReleaseStartupProfile
+> Task :app:mergeFullReleaseShaders
+> Task :app:compileFullReleaseShaders NO-SOURCE
+> Task :app:generateFullReleaseAssets UP-TO-DATE
+> Task :app:generateFullReleasePythonMiscAssets
+> Task :app:generateFullReleasePythonRequirementsAssets
+> Task :app:generateFullReleasePythonSourceAssets
+> Task :app:generateFullReleasePythonBuildAssets
+> Task :app:mergeFullReleaseAssets
+> Task :app:compressFullReleaseAssets
+> Task :app:extractFullReleaseVersionControlInfo
+> Task :app:collectFullReleaseDependencies
+> Task :app:sdkFullReleaseDependencyData
+> Task :app:validateSigningFullRelease
+> Task :app:writeFullReleaseAppMetadata
+> Task :app:writeFullReleaseSigningConfigVersions
+> Task :app:generatePlayReleasePythonJniLibs
+> Task :app:prePlayReleaseBuild UP-TO-DATE
+> Task :app:mergePlayReleaseJniLibFolders
+> Task :app:mergePlayReleaseNativeLibs
+
+> Task :app:stripPlayReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libchaquopy_java.so, libcrypto_chaquopy.so, libcrypto_python.so, libpython3.13.so, libpython3.so, libsqlite3_chaquopy.so, libsqlite3_python.so, libssl_chaquopy.so, libssl_python.so. Run with --info option to learn more.
+
+> Task :app:extractPlayReleaseNativeSymbolTables
+> Task :app:mergePlayReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:checkPlayReleaseDuplicateClasses
+> Task :app:generatePlayReleaseBuildConfig
+> Task :app:findPlayReleasePythonCommand
+> Task :app:extractPlayReleasePythonBuildPackages
+
+> Task :app:installPlayReleasePythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_arm64_v8a.whl
+Collecting tzdata
+  Using cached tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, pyswisseph
+
+Successfully installed pyswisseph-2.10.3.2 tzdata-2026.6
+
+Chaquopy: Installing for x86_64
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Looking in links: /home/runner/work/jyotish-android/jyotish-android/wheels
+Processing /home/runner/work/jyotish-android/jyotish-android/wheels/pyswisseph-2.10.3.2-cp313-cp313-android_24_x86_64.whl
+Installing collected packages: pyswisseph
+Successfully installed pyswisseph-2.10.3.2
+
+> Task :app:mergePlayReleasePythonSources
+> Task :app:generatePlayReleasePythonProxies
+> Task :app:checkPlayReleaseAarMetadata
+> Task :app:processPlayReleaseNavigationResources
+> Task :app:compilePlayReleaseNavigationResources
+> Task :app:generatePlayReleaseResValues
+> Task :app:mapPlayReleaseSourceSetPaths
+> Task :app:generatePlayReleaseResources
+> Task :app:mergePlayReleaseResources
+> Task :app:packagePlayReleaseResources
+> Task :app:parsePlayReleaseLocalResources
+> Task :app:createPlayReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksPlayRelease
+> Task :app:processPlayReleaseMainManifest
+> Task :app:processPlayReleaseManifest
+> Task :app:processPlayReleaseManifestForPackage
+> Task :app:compileFullReleaseKotlin
+> Task :app:processPlayReleaseResources
+> Task :app:compileFullReleaseJavaWithJavac
+> Task :app:mergeFullReleaseGeneratedProguardFiles
+> Task :app:processFullReleaseJavaRes
+> Task :app:mergeFullReleaseJavaResource
+> Task :app:generateFullReleaseLintVitalReportModel
+> Task :app:expandFullReleaseArtProfileWildcards
+> Task :app:minifyDemoReleaseWithR8
+> Task :app:lintVitalAnalyzeDemoRelease
+> Task :app:compilePlayReleaseKotlin
+> Task :app:javaPreCompilePlayRelease
+> Task :app:compilePlayReleaseJavaWithJavac
+> Task :app:mergePlayReleaseArtProfile
+> Task :app:expandPlayReleaseArtProfileWildcards
+> Task :app:mergePlayReleaseGeneratedProguardFiles
+> Task :app:processPlayReleaseJavaRes
+> Task :app:mergePlayReleaseJavaResource
+> Task :app:mergePlayReleaseStartupProfile
+> Task :app:mergePlayReleaseShaders
+> Task :app:compilePlayReleaseShaders NO-SOURCE
+> Task :app:generatePlayReleaseAssets UP-TO-DATE
+> Task :app:generatePlayReleasePythonMiscAssets
+> Task :app:generatePlayReleasePythonRequirementsAssets
+> Task :app:generatePlayReleasePythonSourceAssets
+> Task :app:generatePlayReleasePythonBuildAssets
+> Task :app:mergePlayReleaseAssets
+> Task :app:lintVitalAnalyzeFullRelease
+> Task :app:compressPlayReleaseAssets
+> Task :app:extractPlayReleaseVersionControlInfo
+> Task :app:generatePlayReleaseLintVitalReportModel
+> Task :app:lintVitalReportDemoRelease
+> Task :app:lintVitalDemoRelease
+> Task :app:lintVitalReportFullRelease
+> Task :app:collectPlayReleaseDependencies
+> Task :app:lintVitalFullRelease
+> Task :app:sdkPlayReleaseDependencyData
+> Task :app:validateSigningPlayRelease
+> Task :app:writePlayReleaseAppMetadata
+> Task :app:writePlayReleaseSigningConfigVersions
+> Task :app:configurePlayReleaseDependencies
+> Task :app:parsePlayReleaseIntegrityConfig
+> Task :app:lintVitalAnalyzePlayRelease
+> Task :app:lintVitalReportPlayRelease
+> Task :app:lintVitalPlayRelease
+> Task :app:convertShrunkResourcesToBinaryDemoRelease
+> Task :app:optimizeDemoReleaseResources
+> Task :app:compileDemoReleaseArtProfile
+> Task :app:packageDemoRelease
+> Task :app:createDemoReleaseApkListingFileRedirect
+> Task :app:assembleDemoRelease
+> Task :app:minifyFullReleaseWithR8
+> Task :app:convertShrunkResourcesToBinaryFullRelease
+> Task :app:compileFullReleaseArtProfile
+> Task :app:optimizeFullReleaseResources
+> Task :app:packageFullRelease
+> Task :app:createFullReleaseApkListingFileRedirect
+> Task :app:assembleFullRelease
+> Task :app:minifyPlayReleaseWithR8
+> Task :app:compilePlayReleaseArtProfile
+> Task :app:buildPlayReleasePreBundle
+> Task :app:convertShrunkResourcesToBinaryPlayRelease
+> Task :app:optimizePlayReleaseResources
+> Task :app:packagePlayRelease
+> Task :app:createPlayReleaseApkListingFileRedirect
+> Task :app:assemblePlayRelease
+> Task :app:packagePlayReleaseBundle
+> Task :app:signPlayReleaseBundle
+> Task :app:producePlayReleaseBundleIdeListingFile
+> Task :app:createPlayReleaseBundleListingFileRedirect
+> Task :app:bundlePlayRelease
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1793342936025.json
+
+BUILD SUCCESSFUL in 4m 36s
+353 actionable tasks: 353 executed

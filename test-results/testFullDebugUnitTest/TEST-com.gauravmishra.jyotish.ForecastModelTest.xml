@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.ForecastModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-30T06:50:15.538Z" hostname="runnervm48cm3" time="0.08">
+  <properties/>
+  <testcase name="marriageHasWindowsAndKnRaoMonths" classname="com.gauravmishra.jyotish.ForecastModelTest" time="0.007"/>
+  <testcase name="fourAreasThreeYears" classname="com.gauravmishra.jyotish.ForecastModelTest" time="0.009"/>
+  <testcase name="underEighteenGetsNoWeddingTalkAndNoMarriageWindows" classname="com.gauravmishra.jyotish.ForecastModelTest" time="0.004"/>
+  <testcase name="noForbiddenPredictionAnywhere" classname="com.gauravmishra.jyotish.ForecastModelTest" time="0.056"/>
+  <testcase name="healthNeverNamesIllnessAndPointsToADoctor" classname="com.gauravmishra.jyotish.ForecastModelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

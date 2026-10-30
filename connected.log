@@ -1,0 +1,211 @@
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preFullDebugBuild UP-TO-DATE
+> Task :app:generateFullDebugBuildConfig UP-TO-DATE
+> Task :app:findFullDebugPythonCommand
+> Task :app:extractFullDebugPythonBuildPackages UP-TO-DATE
+> Task :app:installFullDebugPythonRequirements UP-TO-DATE
+> Task :app:mergeFullDebugPythonSources UP-TO-DATE
+> Task :app:generateFullDebugPythonProxies UP-TO-DATE
+> Task :app:checkFullDebugAarMetadata UP-TO-DATE
+> Task :app:processFullDebugNavigationResources UP-TO-DATE
+> Task :app:compileFullDebugNavigationResources UP-TO-DATE
+> Task :app:generateFullDebugResValues UP-TO-DATE
+> Task :app:mapFullDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateFullDebugResources UP-TO-DATE
+> Task :app:mergeFullDebugResources UP-TO-DATE
+> Task :app:packageFullDebugResources UP-TO-DATE
+> Task :app:parseFullDebugLocalResources UP-TO-DATE
+> Task :app:createFullDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksFullDebug UP-TO-DATE
+> Task :app:processFullDebugMainManifest UP-TO-DATE
+> Task :app:processFullDebugManifest UP-TO-DATE
+> Task :app:processFullDebugManifestForPackage UP-TO-DATE
+> Task :app:processFullDebugResources UP-TO-DATE
+> Task :app:compileFullDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileFullDebug UP-TO-DATE
+> Task :app:compileFullDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleFullDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preFullDebugAndroidTestBuild SKIPPED
+> Task :app:processFullDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateFullDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:checkFullDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:processFullDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:compileFullDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:generateFullDebugAndroidTestResValues UP-TO-DATE
+> Task :app:mapFullDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateFullDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestResources UP-TO-DATE
+> Task :app:processFullDebugAndroidTestResources UP-TO-DATE
+> Task :app:compileFullDebugAndroidTestKotlin UP-TO-DATE
+> Task :app:javaPreCompileFullDebugAndroidTest UP-TO-DATE
+> Task :app:compileFullDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:mergeFullDebugShaders UP-TO-DATE
+> Task :app:compileFullDebugShaders NO-SOURCE
+> Task :app:generateFullDebugAssets UP-TO-DATE
+> Task :app:generateFullDebugPythonMiscAssets UP-TO-DATE
+> Task :app:generateFullDebugPythonRequirementsAssets UP-TO-DATE
+> Task :app:generateFullDebugPythonSourceAssets UP-TO-DATE
+> Task :app:generateFullDebugPythonBuildAssets UP-TO-DATE
+> Task :app:mergeFullDebugAssets UP-TO-DATE
+> Task :app:compressFullDebugAssets UP-TO-DATE
+> Task :app:checkFullDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarFullDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexFullDebug UP-TO-DATE
+> Task :app:dexBuilderFullDebug UP-TO-DATE
+> Task :app:mergeFullDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processFullDebugJavaRes UP-TO-DATE
+> Task :app:mergeFullDebugJavaResource UP-TO-DATE
+> Task :app:mergeLibDexFullDebug UP-TO-DATE
+> Task :app:mergeProjectDexFullDebug UP-TO-DATE
+> Task :app:generateFullDebugPythonJniLibs UP-TO-DATE
+> Task :app:mergeFullDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeFullDebugNativeLibs UP-TO-DATE
+> Task :app:stripFullDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningFullDebug UP-TO-DATE
+> Task :app:writeFullDebugAppMetadata UP-TO-DATE
+> Task :app:writeFullDebugSigningConfigVersions UP-TO-DATE
+> Task :app:packageFullDebug UP-TO-DATE
+> Task :app:createFullDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestShaders UP-TO-DATE
+> Task :app:compileFullDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateFullDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressFullDebugAndroidTestAssets UP-TO-DATE
+> Task :app:checkFullDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:desugarFullDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexFullDebugAndroidTest UP-TO-DATE
+> Task :app:dexBuilderFullDebugAndroidTest UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processFullDebugAndroidTestJavaRes UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:mergeLibDexFullDebugAndroidTest UP-TO-DATE
+> Task :app:mergeProjectDexFullDebugAndroidTest UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeFullDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripFullDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningFullDebugAndroidTest UP-TO-DATE
+> Task :app:writeFullDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:packageFullDebugAndroidTest UP-TO-DATE
+> Task :app:createFullDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+[EmulatorConsole]: Failed to start Emulator console for 5554
+
+> Task :app:connectedFullDebugAndroidTest
+Starting 15 tests on emulator-5554 - 14
+
+emulator-5554 - 14 Tests 0/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 2/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 3/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 4/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 5/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 6/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 8/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 9/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 11/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 12/15 completed. (0 skipped) (0 failed)
+emulator-5554 - 14 Tests 14/15 completed. (0 skipped) (0 failed)
+Finished 15 tests on emulator-5554 - 14
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__reactivecircus_android-emulator-runner-1793343316859.json
+
+BUILD SUCCESSFUL in 2m 27s
+81 actionable tasks: 2 executed, 79 up-to-date
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDemoDebugBuild UP-TO-DATE
+> Task :app:generateDemoDebugBuildConfig UP-TO-DATE
+> Task :app:findDemoDebugPythonCommand
+> Task :app:extractDemoDebugPythonBuildPackages UP-TO-DATE
+> Task :app:installDemoDebugPythonRequirements UP-TO-DATE
+> Task :app:mergeDemoDebugPythonSources UP-TO-DATE
+> Task :app:generateDemoDebugPythonProxies UP-TO-DATE
+> Task :app:checkDemoDebugAarMetadata UP-TO-DATE
+> Task :app:processDemoDebugNavigationResources UP-TO-DATE
+> Task :app:compileDemoDebugNavigationResources UP-TO-DATE
+> Task :app:generateDemoDebugResValues UP-TO-DATE
+> Task :app:mapDemoDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDemoDebugResources UP-TO-DATE
+> Task :app:mergeDemoDebugResources UP-TO-DATE
+> Task :app:packageDemoDebugResources UP-TO-DATE
+> Task :app:parseDemoDebugLocalResources UP-TO-DATE
+> Task :app:createDemoDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDemoDebug UP-TO-DATE
+> Task :app:processDemoDebugMainManifest UP-TO-DATE
+> Task :app:processDemoDebugManifest UP-TO-DATE
+> Task :app:processDemoDebugManifestForPackage UP-TO-DATE
+> Task :app:processDemoDebugResources UP-TO-DATE
+> Task :app:compileDemoDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDemoDebug UP-TO-DATE
+> Task :app:compileDemoDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDemoDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDemoDebugAndroidTestBuild SKIPPED
+> Task :app:processDemoDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateDemoDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:checkDemoDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:processDemoDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:compileDemoDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:generateDemoDebugAndroidTestResValues UP-TO-DATE
+> Task :app:mapDemoDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateDemoDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestResources UP-TO-DATE
+> Task :app:processDemoDebugAndroidTestResources UP-TO-DATE
+> Task :app:compileDemoDebugAndroidTestKotlin UP-TO-DATE
+> Task :app:javaPreCompileDemoDebugAndroidTest UP-TO-DATE
+> Task :app:compileDemoDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:mergeDemoDebugShaders UP-TO-DATE
+> Task :app:compileDemoDebugShaders NO-SOURCE
+> Task :app:generateDemoDebugAssets UP-TO-DATE
+> Task :app:generateDemoDebugPythonMiscAssets UP-TO-DATE
+> Task :app:generateDemoDebugPythonRequirementsAssets UP-TO-DATE
+> Task :app:generateDemoDebugPythonSourceAssets UP-TO-DATE
+> Task :app:generateDemoDebugPythonBuildAssets UP-TO-DATE
+> Task :app:mergeDemoDebugAssets UP-TO-DATE
+> Task :app:compressDemoDebugAssets UP-TO-DATE
+> Task :app:desugarDemoDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDemoDebug UP-TO-DATE
+> Task :app:mergeDemoDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processDemoDebugJavaRes UP-TO-DATE
+> Task :app:mergeDemoDebugJavaResource UP-TO-DATE
+> Task :app:checkDemoDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDemoDebug UP-TO-DATE
+> Task :app:mergeLibDexDemoDebug UP-TO-DATE
+> Task :app:mergeProjectDexDemoDebug UP-TO-DATE
+> Task :app:generateDemoDebugPythonJniLibs UP-TO-DATE
+> Task :app:mergeDemoDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDemoDebugNativeLibs UP-TO-DATE
+> Task :app:stripDemoDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDemoDebug UP-TO-DATE
+> Task :app:writeDemoDebugAppMetadata UP-TO-DATE
+> Task :app:writeDemoDebugSigningConfigVersions UP-TO-DATE
+> Task :app:packageDemoDebug UP-TO-DATE
+> Task :app:createDemoDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestShaders UP-TO-DATE
+> Task :app:compileDemoDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateDemoDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressDemoDebugAndroidTestAssets UP-TO-DATE
+> Task :app:desugarDemoDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDemoDebugAndroidTest UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processDemoDebugAndroidTestJavaRes UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:checkDemoDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDemoDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexDemoDebugAndroidTest UP-TO-DATE
+> Task :app:mergeProjectDexDemoDebugAndroidTest UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeDemoDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDemoDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDemoDebugAndroidTest UP-TO-DATE
+> Task :app:writeDemoDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:packageDemoDebugAndroidTest UP-TO-DATE
+> Task :app:createDemoDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+[EmulatorConsole]: Failed to start Emulator console for 5554
+
+> Task :app:connectedDemoDebugAndroidTest
+Starting 1 tests on emulator-5554 - 14
+
+Finished 1 tests on emulator-5554 - 14
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__reactivecircus_android-emulator-runner-1793343463276.json
+
+BUILD SUCCESSFUL in 17s
+81 actionable tasks: 2 executed, 79 up-to-date

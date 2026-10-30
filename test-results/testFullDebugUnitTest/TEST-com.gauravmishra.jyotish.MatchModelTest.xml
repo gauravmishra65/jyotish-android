@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.MatchModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-30T06:50:15.708Z" hostname="runnervm48cm3" time="0.009">
+  <properties/>
+  <testcase name="totalRangeAndBand" classname="com.gauravmishra.jyotish.MatchModelTest" time="0.005"/>
+  <testcase name="eightKootasInOrderAddUpToTheTotal" classname="com.gauravmishra.jyotish.MatchModelTest" time="0.001"/>
+  <testcase name="poruthamAndMangal" classname="com.gauravmishra.jyotish.MatchModelTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
