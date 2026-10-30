@@ -3,7 +3,7 @@
 # Everything worth reading is also printed as a GitHub annotation, which can be read through the checks API.
 set -u
 adb logcat -c
-adb logcat -G 16M || true
+adb logcat -G 64M || true
 gradle :app:connectedFullDebugAndroidTest --stacktrace 2>&1 | tee connected.log
 status=${PIPESTATUS[0]}
 # The demo edition: only its own test (one profile, then the unlock), so the full suite is not run twice.
