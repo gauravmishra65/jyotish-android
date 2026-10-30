@@ -69,6 +69,24 @@ fun UpgradeScreen(
     var price by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(play) { if (play) shop.price { price = it } }
 
+    // Unlock-code entry: the demo's step 2, and in the Play edition a discreet option for access codes
+    // (for example the one given to Google's reviewers). No payment link is shown in the Play edition.
+    val codeEntry: @Composable () -> Unit = {
+        OutlinedTextField(email, { email = it.take(120) }, label = { Text(stringResource(R.string.reg_email)) }, singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email), modifier = Modifier.fillMaxWidth().testTag("up_email"))
+        OutlinedTextField(code, { code = it.take(200); message = null }, label = { Text(stringResource(R.string.up_code)) },
+            minLines = 2, modifier = Modifier.fillMaxWidth().testTag("up_code"))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = {
+                val clip = (ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).primaryClip
+                clip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(ctx)?.toString()?.let { code = it.trim() }
+            }, modifier = Modifier.heightIn(min = 52.dp)) { Text(stringResource(R.string.up_paste)) }
+            Button(onClick = { if (!onUnlockCode(email, code)) { message = R.string.up_bad_code } },
+                modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("up_unlock")) { Text(stringResource(R.string.up_unlock)) }
+        }
+    }
+    var showCode by rememberSaveable { mutableStateOf(false) }
+
     Scaffold(containerColor = MaterialTheme.colorScheme.background, topBar = { BackBar(stringResource(R.string.up_title), onBack) }) { pad ->
         Column(
             Modifier.fillMaxSize().padding(pad).imePadding().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
@@ -113,6 +131,10 @@ fun UpgradeScreen(
                 }
                 TextButton(onClick = { shop.owned { if (it == true) { onPlayPurchase() } else { message = R.string.up_play_none } } },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(stringResource(R.string.up_restore)) }
+                TextButton(onClick = { showCode = !showCode }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("up_have_code")) {
+                    Text(stringResource(R.string.up_have_code))
+                }
+                if (showCode) codeEntry()
             } else {
                 SectionLabel(stringResource(R.string.up_step1))
                 if (Sales.PRICE_TEXT.isNotBlank()) Text(stringResource(R.string.up_price, Sales.PRICE_TEXT), style = MaterialTheme.typography.titleMedium)
@@ -129,18 +151,7 @@ fun UpgradeScreen(
                 Text(stringResource(R.string.up_step1_help, CONTACT_NAME), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
 
                 SectionLabel(stringResource(R.string.up_step2))
-                OutlinedTextField(email, { email = it.take(120) }, label = { Text(stringResource(R.string.reg_email)) }, singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email), modifier = Modifier.fillMaxWidth().testTag("up_email"))
-                OutlinedTextField(code, { code = it.take(200); message = null }, label = { Text(stringResource(R.string.up_code)) },
-                    minLines = 2, modifier = Modifier.fillMaxWidth().testTag("up_code"))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedButton(onClick = {
-                        val clip = (ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).primaryClip
-                        clip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(ctx)?.toString()?.let { code = it.trim() }
-                    }, modifier = Modifier.heightIn(min = 52.dp)) { Text(stringResource(R.string.up_paste)) }
-                    Button(onClick = { if (!onUnlockCode(email, code)) { message = R.string.up_bad_code } },
-                        modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("up_unlock")) { Text(stringResource(R.string.up_unlock)) }
-                }
+                codeEntry()
             }
             message?.let { Text(stringResource(it), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("up_message")) }
         }

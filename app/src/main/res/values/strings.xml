@@ -415,4 +415,5 @@
     <string name="up_request_subject">Gaurav Jyotish: full version unlock code</string>
     <string name="settings_edition">Edition</string>
     <string name="settings_unlock">Unlock the full version</string>
+    <string name="up_have_code">Have an access code?</string>
 </resources>
