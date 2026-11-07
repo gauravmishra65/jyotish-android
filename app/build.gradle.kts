@@ -15,8 +15,8 @@ android {
         applicationId = "com.gauravmishra.jyotish"
         minSdk = 26
         targetSdk = 36
-        versionCode = 12
-        versionName = "1.0.0-rc1"
+        versionCode = 13
+        versionName = "1.0.0-rc2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             // Phones are arm64; x86_64 is for the emulator. Python 3.12+ is 64-bit only.
@@ -129,6 +129,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     "playImplementation"("com.android.billingclient:billing-ktx:8.0.0")
+    "playImplementation"("com.google.android.play:review:2.0.2")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 

@@ -20,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -69,6 +71,8 @@ fun AboutScreen(engineVersion: String?, onBack: () -> Unit) {
                     .putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.contact_subject, BuildConfig.VERSION_NAME)))
             }
             Text(stringResource(R.string.contact_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+            ActionRow(Icons.Filled.Share, stringResource(R.string.share_app), stringResource(R.string.share_app_sub), "about_share") { shareApp(ctx) }
+            ActionRow(Icons.Filled.Star, stringResource(R.string.rate_app), stringResource(R.string.rate_app_sub), "about_rate") { openPlayPage(ctx) }
 
             SectionLabel(stringResource(R.string.about_methods_title))
             Text(stringResource(R.string.about_methods), style = MaterialTheme.typography.bodyMedium)

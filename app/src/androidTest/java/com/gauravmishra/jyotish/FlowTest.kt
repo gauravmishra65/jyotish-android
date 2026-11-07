@@ -46,6 +46,16 @@ class FlowTest {
             rule.onNodeWithText("English").performClick()
             rule.onNodeWithText("Add the first birth chart").performScrollTo().performClick()
 
+            // A short walkthrough comes first on a new install: Next moves through the cards, the last says Start.
+            rule.waitUntilAtLeastOneExists(hasTestTag("tour_page_0"), timeoutMillis = 10_000)
+            rule.onNodeWithText("Your Kundli in seconds").assertExists()
+            rule.onNodeWithTag("tour_skip").assertExists()
+            rule.shot("tour")
+            repeat(3) { rule.onNodeWithTag("tour_next").performClick(); rule.waitForIdle() }
+            rule.waitUntilAtLeastOneExists(hasTestTag("tour_start"), timeoutMillis = 5_000)
+            rule.onNodeWithText("Switch person any time").assertExists()
+            rule.onNodeWithTag("tour_start").performClick()
+
             // On-phone registration comes next; a bad email is refused, then the details are saved.
             rule.onNodeWithTag("reg_name").performTextInput("Ravi Shankar Tiwari")
             rule.onNodeWithTag("reg_email").performTextInput("ravi@")

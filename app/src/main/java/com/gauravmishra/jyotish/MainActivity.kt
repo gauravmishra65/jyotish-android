@@ -3,10 +3,12 @@ package com.gauravmishra.jyotish
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +43,10 @@ import com.gauravmishra.jyotish.ui.Routes
 import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
 import com.gauravmishra.jyotish.ui.UpgradeScreen
+import com.gauravmishra.jyotish.ui.HelpScreen
+import com.gauravmishra.jyotish.ui.TourScreen
+import com.gauravmishra.jyotish.ui.ReviewPolicy
+import com.gauravmishra.jyotish.store.askForReview
 import com.gauravmishra.jyotish.store.Sales
 import java.util.Locale
 
@@ -79,9 +85,24 @@ fun App(vm: AppViewModel = viewModel()) {
                 composable(Routes.WELCOME) {
                     WelcomeScreen(lang = welcomeLang, onLanguage = { welcomeLang = it }, onContinue = {
                         vm.setLanguage(welcomeLang)
-                        val next = if (vm.settings.registered) Routes.add() else Routes.register()
+                        val next = when {
+                            !vm.settings.tourSeen -> Routes.tour()
+                            vm.settings.registered -> Routes.add()
+                            else -> Routes.register()
+                        }
                         nav.navigate(next) { popUpTo(Routes.WELCOME) { inclusive = true } }
                     })
+                }
+                composable(Routes.TOUR, arguments = listOf(navArgument("replay") { type = NavType.BoolType; defaultValue = false })) { entry ->
+                    val replay = entry.arguments?.getBoolean("replay") ?: false
+                    TourScreen(onDone = {
+                        vm.settings.tourSeen = true
+                        if (replay) nav.popBackStack()
+                        else nav.navigate(if (vm.settings.registered) Routes.add() else Routes.register()) { popUpTo(Routes.TOUR) { inclusive = true } }
+                    })
+                }
+                composable(Routes.HELP) {
+                    HelpScreen(onTour = { nav.navigate(Routes.tour(replay = true)) }, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.REGISTER, arguments = listOf(navArgument("edit") { type = NavType.BoolType; defaultValue = false })) { entry ->
                     val editing = entry.arguments?.getBoolean("edit") ?: false
@@ -126,6 +147,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     )
                 }
                 composable(Routes.REPORT) {
+                    Milestone(vm)
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val reports by vm.reports.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
@@ -136,6 +158,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     )
                 }
                 composable(Routes.FORECAST) {
+                    Milestone(vm)
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val forecasts by vm.forecasts.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
@@ -183,7 +206,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() }, onChartStyle = { vm.setChartStyle(it) },
                         onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() },
                         onMyDetails = { nav.navigate(Routes.register(edit = true)) }, onAbout = { nav.navigate(Routes.ABOUT) },
-                        full = full, onUpgrade = { nav.navigate(Routes.UPGRADE) })
+                        full = full, onUpgrade = { nav.navigate(Routes.UPGRADE) }, onHelp = { nav.navigate(Routes.HELP) })
                 }
                 composable(Routes.KUNDALI) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
@@ -230,6 +253,27 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull()
                     FeatureScreen(f, p, p?.let { charts[it.id] }, onHome = { nav.goHome() }, onFeature = { nav.navigate(Routes.of(it)) { popUpTo(Routes.HOME) } })
                 }
+            }
+        }
+    }
+}
+
+/**
+ * Leaving a forecast or a reading counts as a finished task. After a few of them, and only at that calm moment,
+ * the Google Play edition may offer Google's own rating card (see [ReviewPolicy]); other editions do nothing.
+ */
+@Composable
+private fun Milestone(vm: AppViewModel) {
+    val activity = LocalActivity.current
+    DisposableEffect(Unit) {
+        onDispose {
+            val s = vm.settings
+            s.moments = s.moments + 1
+            val now = System.currentTimeMillis()
+            if (activity != null && !activity.isFinishing && ReviewPolicy.shouldAsk(s.moments, s.reviewAsks, s.lastReviewAsk, now)) {
+                s.reviewAsks = s.reviewAsks + 1
+                s.lastReviewAsk = now
+                askForReview(activity)
             }
         }
     }

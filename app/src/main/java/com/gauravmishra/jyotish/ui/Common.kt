@@ -50,6 +50,10 @@ object Routes {
     const val SAVED = "saved"
     const val ABOUT = "about"
     const val UPGRADE = "upgrade"
+    const val HELP = "help"
+    /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
+    const val TOUR = "tour?replay={replay}"
+    fun tour(replay: Boolean = false) = "tour?replay=$replay"
     const val FEATURE = "feature/{name}"
     fun feature(name: String) = "feature/$name"
 

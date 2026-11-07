@@ -53,7 +53,9 @@ fun SettingsScreen(
     onAbout: () -> Unit = {},
     full: Boolean = true,
     onUpgrade: () -> Unit = {},
+    onHelp: () -> Unit = {},
 ) {
+    val ctx = androidx.compose.ui.platform.LocalContext.current
     var speed by remember { mutableStateOf<String?>(null) }
     var running by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -78,6 +80,15 @@ fun SettingsScreen(
                         stringResource(R.string.settings_edition) + ": " + stringResource(if (full) R.string.up_edition_full else R.string.up_edition_demo),
                         "settings_upgrade", onUpgrade)
                 }
+            }
+
+            SectionLabel(stringResource(R.string.settings_help_group))
+            Group {
+                NavRow(stringResource(R.string.help_title), stringResource(R.string.help_settings_sub), "settings_help", onHelp)
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                NavRow(stringResource(R.string.share_app), stringResource(R.string.share_app_sub), "settings_share") { shareApp(ctx) }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                NavRow(stringResource(R.string.rate_app), stringResource(R.string.rate_app_sub), "settings_rate") { openPlayPage(ctx) }
             }
 
             SectionLabel(stringResource(R.string.display))

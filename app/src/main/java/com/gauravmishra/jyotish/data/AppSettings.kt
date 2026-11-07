@@ -48,4 +48,18 @@ class AppSettings(context: Context) {
     var userPhone: String
         get() = prefs.getString("user_phone", "") ?: ""
         set(v) = prefs.edit().putString("user_phone", v).apply()
+    /** The first-launch walkthrough has been seen or skipped. */
+    var tourSeen: Boolean
+        get() = prefs.getBoolean("tour_seen", false)
+        set(v) = prefs.edit().putBoolean("tour_seen", v).apply()
+    /** Forecasts and readings the user has finished viewing; used only to time the optional rating card. */
+    var moments: Int
+        get() = prefs.getInt("moments", 0)
+        set(v) = prefs.edit().putInt("moments", v).apply()
+    var reviewAsks: Int
+        get() = prefs.getInt("review_asks", 0)
+        set(v) = prefs.edit().putInt("review_asks", v).apply()
+    var lastReviewAsk: Long
+        get() = prefs.getLong("last_review_ask", 0L)
+        set(v) = prefs.edit().putLong("last_review_ask", v).apply()
 }
