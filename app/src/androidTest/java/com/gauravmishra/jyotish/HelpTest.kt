@@ -51,7 +51,7 @@ class HelpTest {
 
             // A question opens to show its answer.
             rule.onNodeWithText("Why does the exact birth time matter?", useUnmergedTree = true).performScrollTo().performClick()
-            rule.onNodeWithTag("faq_0_answer").assertExists()
+            rule.onNodeWithTag("faq_0_answer", useUnmergedTree = true).assertExists()
             rule.onNodeWithTag("faq_5").performScrollTo().performClick()
             rule.onNodeWithText("No internet is needed", substring = true, useUnmergedTree = true).assertExists()
             rule.onNodeWithTag("help_share").performScrollTo().assertExists()
@@ -82,7 +82,7 @@ class HelpTest {
             rule.onNodeWithText("ऐप साझा करें", useUnmergedTree = true).performScrollTo().assertExists()
             rule.onNodeWithTag("settings_help").performScrollTo().performClick()
             rule.onNodeWithText("जन्म का सही समय क्यों ज़रूरी है?", useUnmergedTree = true).performScrollTo().performClick()
-            rule.onNodeWithTag("faq_0_answer").assertExists()
+            rule.onNodeWithTag("faq_0_answer", useUnmergedTree = true).assertExists()
             rule.shot("help_hi")
         }
     }
