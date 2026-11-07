@@ -13,7 +13,7 @@ app's source, or Astrodienst's professional licence), and create the upload key.
 
 **Short description (80 characters max, 79 used):** Kundli, Kundli Milan, forecasts, Muhurat & numerology. Vedic astrology, offline
 
-**Full description (v13, keyword-rich; tester feedback, Nov 2026):**
+**Full description (v13 draft).** The version saved in Play Console on 7 Nov 2026 is the source of truth: it keeps the earlier live text (Lal Kitab, BaZi, in-depth sections) with these keywords, ★ headings and an "Easy to start" section added.
 
 Gaurav Jyotish makes your Kundli (Janam Kundali, the Vedic birth horoscope), checks Kundli Milan, finds a good Muhurat and reads your numerology, all on your phone, in English or Hindi. No account and no internet needed.
 
