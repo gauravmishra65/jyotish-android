@@ -44,6 +44,8 @@ import com.gauravmishra.jyotish.ui.SettingsScreen
 import com.gauravmishra.jyotish.ui.WelcomeScreen
 import com.gauravmishra.jyotish.ui.UpgradeScreen
 import com.gauravmishra.jyotish.ui.HelpScreen
+import com.gauravmishra.jyotish.ui.TodayScreen
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.gauravmishra.jyotish.ui.TourScreen
 import com.gauravmishra.jyotish.ui.ReviewPolicy
 import com.gauravmishra.jyotish.store.askForReview
@@ -131,8 +133,31 @@ fun App(vm: AppViewModel = viewModel()) {
                     LaunchedEffect(Unit) { version = runCatching { Engine.engineVersion() }.getOrNull() }
                     AboutScreen(version, onBack = { nav.popBackStack() })
                 }
+                composable(Routes.TODAY) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val custom by vm.todayPlace.collectAsStateWithLifecycle()
+                    val today by vm.today.collectAsStateWithLifecycle()
+                    var date by rememberSaveable { mutableStateOf(java.time.LocalDate.now().toString()) }
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    val place = vm.placeFor(p)
+                    val chartReady = p != null && charts[p.id] is ChartState.Ready
+                    LaunchedEffect(date, place, p?.id, chartReady) { vm.requestToday(java.time.LocalDate.parse(date), place, p) }
+                    TodayScreen(
+                        profiles = profiles, profile = p, place = place, customPlace = custom != null, state = today,
+                        date = java.time.LocalDate.parse(date), onDate = { date = it.toString() },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
+                        onPlace = { vm.setTodayPlace(it) }, loadPlaces = { vm.places() }, onBack = { nav.popBackStack() },
+                    )
+                }
                 composable(Routes.HOME) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val today by vm.today.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    val place = vm.placeFor(p)
+                    val chartReady = p != null && charts[p.id] is ChartState.Ready
+                    LaunchedEffect(place, p?.id, chartReady) { vm.requestToday(java.time.LocalDate.now(), place, p) }
                     HomeScreen(
+                        today = if (place == null) null else today, onToday = { nav.navigate(Routes.TODAY) },
                         profiles = profiles, charts = charts,
                         onAdd = { nav.navigate(Routes.add()) },
                         onEdit = { nav.navigate(Routes.add(it.id)) },

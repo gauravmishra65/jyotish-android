@@ -11,6 +11,7 @@ import com.gauravmishra.jyotish.data.MuhurtaResult
 import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
 import com.gauravmishra.jyotish.data.ProfileStore
+import com.gauravmishra.jyotish.data.TodayModel
 import com.gauravmishra.jyotish.engine.Engine
 import com.gauravmishra.jyotish.store.Licence
 import com.gauravmishra.jyotish.store.Sales
@@ -38,6 +39,22 @@ data class ChartSummary(
     val nextAntardasha: String?,
     val warnings: List<String>,
 )
+
+/** The city the Today screen works for. */
+data class TodayPlace(val name: String, val lat: Double, val lon: Double, val tz: String) {
+    fun encode() = listOf(name.replace("|", " "), lat, lon, tz).joinToString("|")
+    companion object {
+        fun decode(s: String): TodayPlace? = s.split("|").takeIf { it.size == 4 }?.let {
+            runCatching { TodayPlace(it[0], it[1].toDouble(), it[2].toDouble(), it[3]) }.getOrNull()
+        }
+    }
+}
+
+sealed interface TodayState {
+    data object Calculating : TodayState
+    data class Ready(val model: TodayModel) : TodayState
+    data class Failed(val message: String) : TodayState
+}
 
 sealed interface MuhurtaState {
     data object Idle : MuhurtaState
@@ -247,6 +264,55 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             }
             if (reportKeys[slot] == key) _reports.update { it + (slot to state) }
         }
+    }
+
+    private val _todayPlace = MutableStateFlow(TodayPlace.decode(settings.todayPlace))
+    /** The Today screen's chosen city; null = the person's residence, else their birthplace. */
+    val todayPlace: StateFlow<TodayPlace?> = _todayPlace.asStateFlow()
+    fun setTodayPlace(p: TodayPlace?) { settings.todayPlace = p?.encode() ?: ""; _todayPlace.value = p }
+
+    /** The city used for a person on the Today screen. */
+    fun placeFor(p: Profile?): TodayPlace? = _todayPlace.value ?: p?.let {
+        if (it.hasResidence) TodayPlace(it.residence, it.resLat!!, it.resLon!!, it.tz) else TodayPlace(it.place, it.lat, it.lon, it.tz)
+    }
+
+    private val _today = MutableStateFlow<TodayState>(TodayState.Calculating)
+    val today: StateFlow<TodayState> = _today.asStateFlow()
+    private var todayKey = ""
+
+    /**
+     * The day's panchang for [date] at [place], and the day for [p] once their chart is ready. Sub-second; the result
+     * is kept until the date, place, person or settings change.
+     */
+    fun requestToday(date: LocalDate, place: TodayPlace?, p: Profile?) {
+        if (place == null) { _today.value = TodayState.Failed("no-place"); return }
+        val chartJson = p?.let { (_charts.value[it.id] as? ChartState.Ready)?.json }
+        val request = JSONObject().put("date", date.toString()).put("lat", place.lat).put("lon", place.lon).put("tz", place.tz)
+            .put("place", place.name).put("ayanamsa", settings.ayanamsa).put("festival_days", 45)
+        if (date == LocalDate.now()) request.put("now", java.time.LocalDateTime.now(java.time.ZoneId.of(place.tz)).withSecond(0).withNano(0).toString())
+        if (p != null && chartJson != null) request.put("person", personFor(p, chartJson))
+        val key = request.toString().replace(Regex("\"now\":\"[^\"]*\""), "") + (chartJson != null)
+        if (key == todayKey && _today.value is TodayState.Ready) return
+        todayKey = key
+        if (_today.value !is TodayState.Ready) _today.value = TodayState.Calculating
+        viewModelScope.launch {
+            val state = try {
+                val json = Engine.today(request)
+                TodayState.Ready(withContext(Dispatchers.Default) { TodayModel.parse(json) })
+            } catch (e: Throwable) {
+                TodayState.Failed(e.message ?: e.toString())
+            }
+            if (todayKey == key) _today.value = state
+        }
+    }
+
+    private fun personFor(p: Profile, chartJson: String): JSONObject {
+        val v = JSONObject(chartJson).getJSONObject("vedic")
+        val cur = v.getJSONObject("dashas").getJSONObject("vimshottari").optJSONObject("current")
+        return JSONObject().put("name", p.name)
+            .put("moon_lon", v.getJSONObject("planets").getJSONObject("Moon").getDouble("lon"))
+            .put("lagna_lon", v.getJSONObject("lagna").getDouble("lon"))
+            .put("dasha", cur ?: JSONObject.NULL)
     }
 
     private val _userName = MutableStateFlow(settings.userName.takeIf { settings.registered } ?: "")

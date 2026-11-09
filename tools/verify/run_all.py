@@ -5,7 +5,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 failed = []
-for name in ("independent.py", "layer.py", "report_check.py"):
+for name in ("independent.py", "layer.py", "report_check.py", "today_check.py"):
     print(f"\n===== {name}", flush=True)
     if subprocess.call([sys.executable, os.path.join(HERE, name)]) != 0:
         failed.append(name)

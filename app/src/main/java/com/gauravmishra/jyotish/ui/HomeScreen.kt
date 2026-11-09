@@ -61,6 +61,8 @@ fun HomeScreen(
     onReport: () -> Unit = {},
     onSaved: () -> Unit = {},
     userName: String = "",
+    today: com.gauravmishra.jyotish.TodayState? = null,
+    onToday: () -> Unit = {},
 ) {
     val lang = currentLang()
     var actionsFor by remember { mutableStateOf<Profile?>(null) }
@@ -82,6 +84,8 @@ fun HomeScreen(
                 }
                 IconButton(onClick = onSettings, modifier = Modifier.size(48.dp)) { Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings)) }
             }
+
+            if (profiles.isNotEmpty()) TodayTile(today, onToday)
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {

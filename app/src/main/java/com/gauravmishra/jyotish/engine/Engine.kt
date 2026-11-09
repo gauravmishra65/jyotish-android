@@ -76,5 +76,8 @@ object Engine {
     /** Seconds per step of the fixed timing suite (5 charts, a match, a 3-month muhurta, names). */
     suspend fun timings(): String = call { it.callAttr("timings").toString() }
 
+    /** The Today dashboard for a date and place, with the person's day when "person" is given (see app_today.py). */
+    suspend fun today(request: JSONObject): String = call { it.callAttr("today", request.toString()).toString() }
+
     suspend fun engineVersion(): String = call { it.callAttr("engine_version").toString() }
 }

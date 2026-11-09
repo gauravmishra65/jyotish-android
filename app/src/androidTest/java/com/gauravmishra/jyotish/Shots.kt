@@ -22,7 +22,7 @@ fun ComposeTestRule.shot(name: String) {
     if (name in STORE) log("store_$name", bmp, 92)
 }
 
-private val STORE = setOf(
+private val STORE = setOf("today", "today_hi", 
     "kundali_north", "milan", "forecast_marriage", "report_en", "numerology", "muhurta_best", "kundali_hindi_yogas",
     "forecast_hindi", "saved",
 )

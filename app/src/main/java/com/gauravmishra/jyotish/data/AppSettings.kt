@@ -62,4 +62,12 @@ class AppSettings(context: Context) {
     var lastReviewAsk: Long
         get() = prefs.getLong("last_review_ask", 0L)
         set(v) = prefs.edit().putLong("last_review_ask", v).apply()
+    /** The Today screen's city: "name|lat|lon|tz", or "" to use the person's residence or birthplace. */
+    var todayPlace: String
+        get() = prefs.getString("today_place", "") ?: ""
+        set(v) = prefs.edit().putString("today_place", v).apply()
+    /** Daily reminder time "HH:MM", or "" when the reminder is off (the default). */
+    var reminderTime: String
+        get() = prefs.getString("reminder_time", "") ?: ""
+        set(v) = prefs.edit().putString("reminder_time", v).apply()
 }

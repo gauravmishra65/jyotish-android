@@ -218,3 +218,10 @@ def make_snapshot():
     """Run on the desktop to produce the expected results (tools/make_snapshot.py)."""
     got, timings = run_suite()
     return {"results": got, "desktop_timings_s": timings, "python": sys.version.split()[0]}
+
+
+def today(request_json):
+    """The Today dashboard: the day's panchang and periods for a place, festivals ahead, and the person's day
+    (see app_today.today for the request)."""
+    import app_today
+    return app_today.today(request_json)
