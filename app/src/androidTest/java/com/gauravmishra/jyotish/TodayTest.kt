@@ -38,11 +38,21 @@ class TodayTest {
         ))
     }
 
+    /** The tithi line sits inside the tappable Home tile, whose contents are merged; look in the unmerged tree. */
+    private fun homeShowsToday() {
+        rule.waitUntil(180_000) {
+            rule.onAllNodesWithTag("home_today_tithi", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() ||
+                rule.onAllNodesWithTag("home_today_failed", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+        }
+        val failed = rule.onAllNodesWithTag("home_today_failed", useUnmergedTree = true).fetchSemanticsNodes()
+        check(failed.isEmpty()) { "Today failed: " + failed.first().config.toString() }
+    }
+
     @Test
     fun todayDashboard() {
         setUp("en")
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
+            homeShowsToday()
             rule.onNodeWithTag("home_today").performClick()
 
             rule.waitUntilAtLeastOneExists(hasTestTag("today_panchang"), timeoutMillis = 30_000)
@@ -82,7 +92,7 @@ class TodayTest {
     fun todayInHindi() {
         setUp("hi")
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
+            homeShowsToday()
             rule.onNodeWithTag("home_today").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("today_panchang"), timeoutMillis = 30_000)
             rule.waitUntilAtLeastOneExists(hasText("पंचांग"), timeoutMillis = 10_000)
@@ -97,7 +107,7 @@ class TodayTest {
         setUp("en")
         ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putString("theme", "dark").commit()
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
+            homeShowsToday()
             rule.shot("home_dark")
             rule.onNodeWithTag("home_today").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("today_guidance"), timeoutMillis = 120_000)

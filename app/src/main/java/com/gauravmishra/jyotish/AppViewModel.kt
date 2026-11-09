@@ -304,6 +304,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 val json = Engine.today(request)
                 TodayState.Ready(withContext(Dispatchers.Default) { TodayModel.parse(json) })
             } catch (e: Throwable) {
+                android.util.Log.e("TODAY", "could not work out the day", e)
                 TodayState.Failed(e.message ?: e.toString())
             }
             if (todayKey == key) _today.value = state
