@@ -356,7 +356,10 @@ fun TodayTile(state: TodayState?, onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth().heightIn(min = 88.dp).testTag("home_today")) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(stringResource(R.string.today_title) + (m?.place?.substringBefore(",")?.let { " · $it" } ?: ""), style = MaterialTheme.typography.labelMedium, color = Palette.AccentDeep)
-            if (m == null) {
+            if (state is TodayState.Failed && state.message != "no-place") {
+                Text(stringResource(R.string.today_failed, state.message.take(120)), style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("home_today_failed"))
+            } else if (m == null) {
                 Text(stringResource(R.string.today_sub), style = MaterialTheme.typography.titleMedium)
             } else {
                 Text("${m.tithi.name.of(lang)} · ${m.nakshatra.name.of(lang)}", style = MaterialTheme.typography.titleMedium, modifier = Modifier.testTag("home_today_tithi"))

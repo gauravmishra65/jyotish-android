@@ -71,7 +71,12 @@ class MainActivity : ComponentActivity() {
 private fun Localized(lang: String, content: @Composable () -> Unit) {
     val base = LocalContext.current
     val config = remember(lang) { Configuration(base.resources.configuration).apply { setLocale(Locale.forLanguageTag(lang)) } }
-    val ctx = remember(lang) { base.createConfigurationContext(config) }
+    // A wrapper around the activity with the chosen language's resources: anything that needs the activity (opening
+    // another app, the notification permission prompt) still finds it, while every string comes in the chosen language.
+    val ctx = remember(lang) {
+        val res = base.createConfigurationContext(config).resources
+        object : android.content.ContextWrapper(base) { override fun getResources(): android.content.res.Resources = res }
+    }
     CompositionLocalProvider(LocalContext provides ctx, LocalConfiguration provides config) { content() }
 }
 

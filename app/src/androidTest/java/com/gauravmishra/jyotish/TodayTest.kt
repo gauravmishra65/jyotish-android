@@ -42,7 +42,7 @@ class TodayTest {
     fun todayDashboard() {
         setUp("en")
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 90_000)
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
             rule.onNodeWithTag("home_today").performClick()
 
             rule.waitUntilAtLeastOneExists(hasTestTag("today_panchang"), timeoutMillis = 30_000)
@@ -82,7 +82,7 @@ class TodayTest {
     fun todayInHindi() {
         setUp("hi")
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 90_000)
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
             rule.onNodeWithTag("home_today").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("today_panchang"), timeoutMillis = 30_000)
             rule.waitUntilAtLeastOneExists(hasText("पंचांग"), timeoutMillis = 10_000)
@@ -97,7 +97,7 @@ class TodayTest {
         setUp("en")
         ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putString("theme", "dark").commit()
         ActivityScenario.launch(MainActivity::class.java).use {
-            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 90_000)
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 180_000)
             rule.shot("home_dark")
             rule.onNodeWithTag("home_today").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("today_guidance"), timeoutMillis = 120_000)

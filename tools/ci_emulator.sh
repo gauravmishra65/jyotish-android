@@ -26,6 +26,7 @@ for name, d in parts.items():
 print("screenshots:", sorted(os.listdir("shots")))
 EOF
 adb logcat -d -t 400 '*:E' > errors.log || true
+echo '----- last app errors (logcat) -----'; grep -iE 'jyotish|python|Traceback|Exception' errors.log | tail -40 || true
 
 python3 - <<'EOF'
 import glob, re, xml.etree.ElementTree as ET

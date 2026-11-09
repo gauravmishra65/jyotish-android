@@ -52,13 +52,13 @@ class DetailsTest {
             rule.onNodeWithText("Lives in Singapore").assertExists()
             rule.onNodeWithTag("varga_chart").performScrollTo().assertExists()
             rule.shot("more_d9")
+            rule.onNodeWithTag("varga_picker").performScrollToNode(hasTestTag("varga_D10"))
             rule.onNodeWithTag("varga_D10").performClick()
             rule.onNodeWithText("D10: career and public life.").assertExists()
             // all sixteen divisional charts can be picked
             rule.onNodeWithTag("varga_picker").performScrollToNode(hasTestTag("varga_D60"))
             rule.onNodeWithTag("varga_D60").performClick()
             rule.onNodeWithTag("varga_note").assertTextContains("past karma", substring = true)
-            rule.onNodeWithTag("varga_picker").performScrollToNode(hasTestTag("varga_D10"))
             for (k in listOf("panchang", "doshas", "avakahada", "pratyantar", "sensitivity", "chara", "narayana", "arudhas", "bhava_chalit",
                     "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing")) {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
