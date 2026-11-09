@@ -50,8 +50,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-private val Rust = Color(0xFF9A3B1B)
-private val Amber = Color(0xFF8A5A07)
+private val Rust: Color get() = Palette.Bad
+private val Amber: Color get() = if (Palette.dark) Color(0xFFF2C46B) else Color(0xFF8A5A07)
 
 /** "Oct 2026" or the Hindi month name. */
 fun monthYear(iso: String, lang: String): String = try {
@@ -129,7 +129,7 @@ private fun AreaView(a: ForecastArea, lang: String) {
         Surface(shape = RoundedCornerShape(14.dp), color = Palette.Night, modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(stringResource(R.string.fc_outlook), style = MaterialTheme.typography.labelMedium, color = Palette.SaffronText)
-                Text(a.outlook.of(lang), style = MaterialTheme.typography.titleMedium, color = Palette.Ground, modifier = Modifier.testTag("fc_outlook"))
+                Text(a.outlook.of(lang), style = MaterialTheme.typography.titleMedium, color = Palette.NightTitle, modifier = Modifier.testTag("fc_outlook"))
                 val best = a.years.firstOrNull { it.id == a.best }
                 val care = a.years.firstOrNull { it.id == a.care }
                 Text(if (best != null) stringResource(R.string.fc_best, yearLabel(best, lang)) else stringResource(R.string.fc_no_best),
@@ -194,10 +194,10 @@ private fun signal(y: ForecastYear): String = when {
 @Composable
 private fun LeanPill(lean: String) {
     val (label, fg, bg) = when (lean) {
-        "supportive" -> Triple(R.string.fc_lean_supportive, Palette.Good, Color(0xFFE6F2E8))
-        "demanding" -> Triple(R.string.fc_lean_demanding, Rust, Color(0xFFF9ECE7))
-        "mixed" -> Triple(R.string.fc_lean_mixed, Amber, Color(0xFFF9EEDA))
-        else -> Triple(R.string.fc_lean_quiet, Palette.Muted, Color(0xFFEFEBE4))
+        "supportive" -> Triple(R.string.fc_lean_supportive, Palette.Good, Palette.ChipGood)
+        "demanding" -> Triple(R.string.fc_lean_demanding, Rust, Palette.AccentSoft)
+        "mixed" -> Triple(R.string.fc_lean_mixed, Amber, Palette.CautionBg)
+        else -> Triple(R.string.fc_lean_quiet, Palette.Muted, Palette.Track)
     }
     Text(stringResource(label), style = MaterialTheme.typography.labelLarge, color = fg, fontWeight = FontWeight.SemiBold,
         modifier = Modifier.background(bg, RoundedCornerShape(10.dp)).padding(horizontal = 10.dp, vertical = 4.dp))

@@ -527,4 +527,17 @@
     <string name="today_no_festivals">No festivals in the next weeks.</string>
     <string name="today_next_festival">Next: %1$s, %2$s</string>
     <string name="today_utc">Times in %1$s (UTC%2$s).</string>
+    <string name="varga_use">Read for %1$s.</string>
+    <string name="theme_label">Theme</string>
+    <string name="theme_system">Same as phone</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="east_indian">East Indian</string>
+    <string name="chart_time_line">Worked out for %1$s %2$s (UTC%3$s), that is %4$s UTC · %5$s ayanamsa · Swiss Ephemeris</string>
+    <string name="reminder_label">Daily panchang reminder</string>
+    <string name="reminder_off">Off</string>
+    <string name="reminder_note">One notification a day with the tithi, nakshatra, Rahu Kaal and any festival, for the Today city. Worked out on the phone.</string>
+    <string name="reminder_denied">Notifications are turned off for this app. Turn them on in the phone\'s settings to get the reminder.</string>
+    <string name="reminder_title">%1$s (%2$s)</string>
+    <string name="reminder_channel">Daily panchang</string>
 </resources>

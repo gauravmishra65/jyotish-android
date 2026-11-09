@@ -188,7 +188,7 @@ private fun Day(
         Column(Modifier.fillMaxWidth().background(Palette.Night, RoundedCornerShape(18.dp)).padding(16.dp).testTag("today_person"),
             verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(stringResource(R.string.today_your_day, p.name.trim().substringBefore(" ")), style = MaterialTheme.typography.labelMedium, color = Palette.SaffronText)
-            Text(p.guidance.of(lang), style = MaterialTheme.typography.titleMedium, color = Palette.Ground, modifier = Modifier.testTag("today_guidance"))
+            Text(p.guidance.of(lang), style = MaterialTheme.typography.titleMedium, color = Palette.NightTitle, modifier = Modifier.testTag("today_guidance"))
             NightLine(stringResource(R.string.today_tarabala), p.tara.of(lang) + " · " + stringResource(if (p.taraOk) R.string.today_ok else R.string.today_not_ok) +
                 (p.taraChanges?.takeIf { isToday }?.let { " · " + stringResource(R.string.today_changes_at, it) } ?: ""))
             NightLine(stringResource(R.string.today_chandrabala), stringResource(R.string.today_house_from_moon, p.chandraHouse) + " · " +

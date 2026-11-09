@@ -13,7 +13,10 @@ sealed interface DetailBlock {
 data class DetailSection(val key: String, val title: Bi, val intro: Bi?, val blocks: List<DetailBlock>, val note: Bi?)
 
 /** The chart's "details" (app_details.build): extra sections for the Kundali screen's More tab, and D9/D10 sign maps. */
-data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<String, Map<String, String>>) {
+/** A divisional chart's name and what it is read for. */
+data class VargaMeta(val key: String, val name: Bi, val use: Bi)
+
+data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<String, Map<String, String>>, val vargaMeta: List<VargaMeta> = emptyList()) {
     companion object {
         private fun bi(o: JSONObject?) = o?.let { Bi(it.optString("en"), it.optString("hi")) }
         private fun bis(a: JSONArray?) = (0 until (a?.length() ?: 0)).map { Bi.parse(a!!.getJSONObject(it)) }
@@ -47,7 +50,10 @@ data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<Strin
                 val m = v.getJSONObject(k)
                 m.keys().asSequence().associateWith { m.getString(it) }
             }
-            return DetailsModel(sections, vargas)
+            val vm = d.optJSONArray("varga_meta") ?: JSONArray()
+            val meta = (0 until vm.length()).map { vm.getJSONObject(it) }
+                .map { VargaMeta(it.getString("key"), Bi.parse(it.getJSONObject("name")), Bi.parse(it.getJSONObject("use"))) }
+            return DetailsModel(sections, vargas, meta)
         }
     }
 }

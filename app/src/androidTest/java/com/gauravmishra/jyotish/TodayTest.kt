@@ -91,4 +91,17 @@ class TodayTest {
             rule.shot("today_hi")
         }
     }
+
+    @Test
+    fun darkThemeAndTheNewChartSections() {
+        setUp("en")
+        ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putString("theme", "dark").commit()
+        ActivityScenario.launch(MainActivity::class.java).use {
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_today_tithi"), timeoutMillis = 90_000)
+            rule.shot("home_dark")
+            rule.onNodeWithTag("home_today").performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("today_guidance"), timeoutMillis = 120_000)
+            rule.shot("today_dark")
+        }
+    }
 }

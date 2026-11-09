@@ -37,7 +37,7 @@ data class Profile(
         .put("name", name).put("date", date).put("time", time).put("lat", lat).put("lon", lon).put("tz", tz)
         .put("gender", gender).put("time_confidence", confidence).put("place", place).put("now", now)
         .put("ayanamsa", ayanamsa).put("node", node)
-        .put("v", 2)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab)
+        .put("v", 3)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas)
         .apply { if (hasResidence) put("residence", residence).put("current_lat", resLat).put("current_lon", resLon) }
 
     val initials: String

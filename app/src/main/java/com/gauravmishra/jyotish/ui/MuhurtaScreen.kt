@@ -223,9 +223,9 @@ private fun WindowCard(w: MuhurtaWindow, lang: String, showDate: Boolean) {
             val supports = (if (hi) w.supportsHi else null) ?: w.supports
             val cautions = (if (hi) w.cautionsHi else null) ?: w.cautions
             FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                supports.forEach { Tag(it, Color(0xFFE6F2E8), Color(0xFF24502C)) }
-                if (cautions.isEmpty()) Tag(stringResource(R.string.mu_no_cautions), Color(0xFFEFEBE4), Color(0xFF3F3B35))
-                cautions.forEach { Tag(it, Palette.CautionBg, Color(0xFF6B4A00)) }
+                supports.forEach { Tag(it, Palette.ChipGood, Palette.ChipGoodText) }
+                if (cautions.isEmpty()) Tag(stringResource(R.string.mu_no_cautions), Palette.Track, Palette.ChipText)
+                cautions.forEach { Tag(it, Palette.CautionBg, Palette.CautionText) }
             }
         }
     }

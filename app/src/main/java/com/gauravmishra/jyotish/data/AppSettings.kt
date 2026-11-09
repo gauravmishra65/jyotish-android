@@ -70,4 +70,8 @@ class AppSettings(context: Context) {
     var reminderTime: String
         get() = prefs.getString("reminder_time", "") ?: ""
         set(v) = prefs.edit().putString("reminder_time", v).apply()
+    /** "system" (default), "light" or "dark". */
+    var theme: String
+        get() = prefs.getString("theme", "system") ?: "system"
+        set(v) = prefs.edit().putString("theme", v).apply()
 }

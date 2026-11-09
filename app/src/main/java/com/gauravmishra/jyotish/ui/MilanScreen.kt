@@ -148,7 +148,7 @@ private fun MatchBody(m: MatchModel, onKoota: (Koota) -> Unit, onPorutham: () ->
                     val w = 10.dp.toPx()
                     val inset = w / 2
                     val arc = Size(size.width - w, size.height - w)
-                    drawArc(Color(0xFFEFEBE4), 0f, 360f, false, Offset(inset, inset), arc, style = Stroke(w))
+                    drawArc(Palette.Track, 0f, 360f, false, Offset(inset, inset), arc, style = Stroke(w))
                     drawArc(Palette.Accent, -90f, (360f * m.total / m.outOf).toFloat(), false, Offset(inset, inset), arc, style = Stroke(w, cap = StrokeCap.Round))
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -174,7 +174,7 @@ private fun MatchBody(m: MatchModel, onKoota: (Koota) -> Unit, onPorutham: () ->
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(stringResource(kootaName(k.key)), modifier = Modifier.width(110.dp), style = MaterialTheme.typography.bodyMedium)
-                Box(Modifier.weight(1f).height(8.dp).background(Color(0xFFEFEBE4), RoundedCornerShape(4.dp))) {
+                Box(Modifier.weight(1f).height(8.dp).background(Palette.Track, RoundedCornerShape(4.dp))) {
                     Box(Modifier.fillMaxWidth((k.score / k.max).toFloat().coerceIn(0.02f, 1f)).height(8.dp).background(Palette.Accent, RoundedCornerShape(4.dp)))
                 }
                 Text("${fmt(k.score)}/${k.max}", modifier = Modifier.width(52.dp).padding(start = 8.dp), style = MaterialTheme.typography.labelLarge)
@@ -250,7 +250,7 @@ private fun PoruthamDetail(items: List<PoruthamItem>) {
                 val (label, color) = when {
                     p.ok && !p.partial -> stringResource(R.string.agrees) to Palette.Good
                     p.partial -> stringResource(R.string.partly) to Palette.AccentDeep
-                    else -> stringResource(R.string.does_not) to Color(0xFF9A3B1B)
+                    else -> stringResource(R.string.does_not) to Palette.Bad
                 }
                 Text(label, color = color, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelLarge)
             }

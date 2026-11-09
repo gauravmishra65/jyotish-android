@@ -107,12 +107,17 @@ fun KundaliScreen(
                 Row(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp)).padding(4.dp)) {
                     StyleButton(stringResource(R.string.north_indian), style == "north", Modifier.weight(1f)) { onStyle("north") }
                     StyleButton(stringResource(R.string.south_indian), style == "south", Modifier.weight(1f)) { onStyle("south") }
+                    StyleButton(stringResource(R.string.east_indian), style == "east", Modifier.weight(1f)) { onStyle("east") }
                 }
                 KundliChart(
                     m, style, lang,
                     chartDescription(m, lang, stringResource(R.string.house_word), stringResource(R.string.empty_word)),
                     Modifier.padding(horizontal = 4.dp).testTag("chart"),
                 )
+                (chart as? ChartState.Ready)?.json?.let { j -> timeLine(j)?.let { (local, tz, offset, utc) ->
+                    Text(stringResource(R.string.chart_time_line, local, tz, offset, utc, ayanamsaName(m.ayanamsa, lang)),
+                        style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.testTag("chart_time_line"))
+                } }
                 Warnings(m)
             }
 
@@ -202,7 +207,7 @@ private fun Warnings(m: ChartModel) {
         }
     }
     lines.forEach { text ->
-        Surface(shape = RoundedCornerShape(12.dp), color = Palette.CautionBg, border = BorderStroke(1.dp, Color(0xFFE8C98E))) {
+        Surface(shape = RoundedCornerShape(12.dp), color = Palette.CautionBg, border = BorderStroke(1.dp, Palette.CautionBorder)) {
             Text("⚠  $text", style = MaterialTheme.typography.bodySmall, color = Palette.CautionText, modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp))
         }
     }
@@ -232,7 +237,7 @@ private fun PlanetsTab(m: ChartModel, lang: String, onOpen: (Planet) -> Unit) {
             val good = p.dignity in setOf("exalted", "own sign", "moolatrikona")
             val bad = p.dignity in setOf("debilitated", "enemy's sign")
             Text(Names.dignity(p.dignity, lang), style = MaterialTheme.typography.labelMedium,
-                color = when { good -> Palette.Good; bad -> Color(0xFF9A3B1B); else -> Palette.Muted },
+                color = when { good -> Palette.Good; bad -> Palette.Bad; else -> Palette.Muted },
                 fontWeight = if (good || bad) FontWeight.SemiBold else FontWeight.Normal, modifier = Modifier.widthIn(max = 96.dp))
         }
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
@@ -324,8 +329,8 @@ private fun toneLabel(t: String) = stringResource(when (t) { "supportive" -> R.s
 
 @Composable
 private fun Pill(text: String, good: Boolean) {
-    Text(text, style = MaterialTheme.typography.labelMedium, color = if (good) Color(0xFF24502C) else Color(0xFF3F3B35),
-        modifier = Modifier.background(if (good) Color(0xFFE6F2E8) else Color(0xFFEFEBE4), RoundedCornerShape(10.dp)).padding(horizontal = 8.dp, vertical = 3.dp))
+    Text(text, style = MaterialTheme.typography.labelMedium, color = if (good) Palette.ChipGoodText else Palette.ChipText,
+        modifier = Modifier.background(if (good) Palette.ChipGood else Palette.Track, RoundedCornerShape(10.dp)).padding(horizontal = 8.dp, vertical = 3.dp))
 }
 
 @Composable
@@ -337,7 +342,7 @@ private fun StrengthTab(m: ChartModel, lang: String) {
                 Text(Names.of(s.planet, lang), fontWeight = FontWeight.SemiBold, modifier = Modifier.width(84.dp))
                 Text(stringResource(R.string.shadbala_line, "%.2f".format(s.rupas), "%.1f".format(s.required)), style = MaterialTheme.typography.bodySmall,
                     color = Palette.Muted, modifier = Modifier.weight(1f))
-                Text("%.2f×".format(s.ratio), style = MaterialTheme.typography.labelLarge, color = if (s.ratio >= 1) Palette.Good else Color(0xFF9A3B1B))
+                Text("%.2f×".format(s.ratio), style = MaterialTheme.typography.labelLarge, color = if (s.ratio >= 1) Palette.Good else Palette.Bad)
             }
             Bar(fraction = (s.ratio / 2.0).toFloat(), mark = 0.5f, good = s.ratio >= 1)
         }
@@ -360,7 +365,7 @@ private fun StrengthTab(m: ChartModel, lang: String) {
 /** A horizontal bar with a reference mark (1.0 for Shadbala, 28 for Ashtakavarga). */
 @Composable
 private fun Bar(fraction: Float, mark: Float, good: Boolean) {
-    Box(Modifier.fillMaxWidth().height(8.dp).background(Color(0xFFEFEBE4), RoundedCornerShape(4.dp))) {
+    Box(Modifier.fillMaxWidth().height(8.dp).background(Palette.Track, RoundedCornerShape(4.dp))) {
         Box(Modifier.fillMaxWidth(fraction.coerceIn(0.02f, 1f)).height(8.dp).background(if (good) Palette.Good else Palette.Accent, RoundedCornerShape(4.dp)))
         Box(Modifier.fillMaxWidth(mark).height(8.dp)) { Box(Modifier.align(Alignment.CenterEnd).width(2.dp).height(8.dp).background(Palette.Ink)) }
     }
@@ -423,3 +428,25 @@ private fun Facts(rows: List<Pair<String, String>>) {
         }
     }
 }
+
+/** "14:35", "IST", "+5:30", "09:05" from the chart's time pipeline: shown under the chart so anyone can check the time zone used. */
+private fun timeLine(json: String): List<String>? = runCatching {
+    val t = org.json.JSONObject(json).getJSONObject("time_pipeline")
+    val h = t.getDouble("utc_offset_hours")
+    val sign = if (h < 0) "-" else "+"
+    val a = kotlin.math.abs(h)
+    val off = "$sign${a.toInt()}:" + "%02d".format(((a - a.toInt()) * 60).roundToIntSafe())
+    listOf(t.getString("local_civil").substring(11, 16), t.optString("tz_abbreviation").ifBlank { t.getString("timezone") }, off,
+        t.getString("utc").substring(11, 16))
+}.getOrNull()
+
+private fun Double.roundToIntSafe(): Int = kotlin.math.round(this).toInt()
+
+private fun ayanamsaName(key: String, lang: String): String = when (key.lowercase()) {
+    "lahiri" -> if (lang == "hi") "लाहिरी" else "Lahiri"
+    "raman" -> if (lang == "hi") "रमन" else "Raman"
+    "krishnamurti" -> if (lang == "hi") "केपी" else "KP"
+    "true_chitra" -> if (lang == "hi") "ट्रू चित्रा" else "True Chitra"
+    else -> key
+}
+

@@ -364,5 +364,7 @@ def build(c):
             s = None   # a section the engine did not compute for this chart is simply left out
         if s:
             out.append(s)
-    vargas = {k: v["divisional_charts"][k] for k in ("D9", "D10") if k in v.get("divisional_charts", {})}
-    return {"sections": out, "vargas": vargas}
+    import app_details_more as M
+    out = out[:1] + M.build_more(c) + out[1:]          # birth panchang, then doshas and the new sections, then the rest
+    vargas = {k: m for k, m in v.get("divisional_charts", {}).items()}
+    return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta()}

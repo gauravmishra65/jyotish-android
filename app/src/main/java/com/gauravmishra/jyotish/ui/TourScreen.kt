@@ -70,9 +70,9 @@ fun TourScreen(onDone: () -> Unit) {
             Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(vertical = 24.dp).testTag("tour_page_$i"),
                 verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically)) {
                 Box(Modifier.size(88.dp).background(Palette.Saffron, CircleShape), contentAlignment = Alignment.Center) {
-                    Icon(s.icon, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(44.dp))
+                    Icon(s.icon, contentDescription = null, tint = Palette.InkFixed, modifier = Modifier.size(44.dp))
                 }
-                Text(stringResource(s.title), style = MaterialTheme.typography.headlineMedium, color = Palette.Ground)
+                Text(stringResource(s.title), style = MaterialTheme.typography.headlineMedium, color = Palette.NightTitle)
                 Text(stringResource(s.body), style = MaterialTheme.typography.bodyLarge, color = Palette.NightText)
             }
         }
@@ -88,7 +88,7 @@ fun TourScreen(onDone: () -> Unit) {
             onClick = { if (last) onDone() else scope.launch { pager.animateScrollToPage(pager.currentPage + 1) } },
             modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag(if (last) "tour_start" else "tour_next"),
             shape = RoundedCornerShape(28.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Palette.Saffron, contentColor = Palette.Ink),
+            colors = ButtonDefaults.buttonColors(containerColor = Palette.Saffron, contentColor = Palette.InkFixed),
         ) { Text(stringResource(if (last) R.string.tour_start else R.string.tour_next), style = MaterialTheme.typography.labelLarge) }
     }
 }

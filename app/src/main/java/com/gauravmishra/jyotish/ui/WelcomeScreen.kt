@@ -48,7 +48,7 @@ fun WelcomeScreen(lang: String, onLanguage: (String) -> Unit, onContinue: () -> 
                 Text(stringResource(R.string.app_by), style = MaterialTheme.typography.bodyMedium, color = Palette.NightText)
             }
         }
-        Text(stringResource(R.string.welcome_title), style = MaterialTheme.typography.headlineLarge, color = Palette.Ground)
+        Text(stringResource(R.string.welcome_title), style = MaterialTheme.typography.headlineLarge, color = Palette.NightTitle)
         Text(stringResource(R.string.welcome_body), style = MaterialTheme.typography.bodyLarge, color = Palette.NightText)
         Spacer(Modifier.heightIn(min = 24.dp))
         Column(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -60,7 +60,7 @@ fun WelcomeScreen(lang: String, onLanguage: (String) -> Unit, onContinue: () -> 
             onClick = onContinue,
             modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
             shape = RoundedCornerShape(28.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Palette.Saffron, contentColor = Palette.Ink),
+            colors = ButtonDefaults.buttonColors(containerColor = Palette.Saffron, contentColor = Palette.InkFixed),
         ) { Text(stringResource(R.string.welcome_continue), style = MaterialTheme.typography.labelLarge) }
         Text(
             stringResource(R.string.welcome_disclaimer), style = MaterialTheme.typography.labelMedium,
@@ -73,13 +73,13 @@ fun WelcomeScreen(lang: String, onLanguage: (String) -> Unit, onContinue: () -> 
 private fun LanguageOption(label: String, selected: Boolean, onClick: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(14.dp),
-        color = if (selected) Palette.Ground else Palette.Night,
+        color = if (selected) Palette.NightTitle else Palette.Night,
         border = if (selected) null else BorderStroke(1.dp, Palette.Muted),
         modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
             .selectable(selected = selected, onClick = onClick, role = Role.RadioButton),
     ) {
         Row(Modifier.padding(horizontal = 18.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text(label, style = MaterialTheme.typography.titleMedium, color = if (selected) Palette.Ink else Palette.Ground, modifier = Modifier.weight(1f))
+            Text(label, style = MaterialTheme.typography.titleMedium, color = if (selected) Palette.InkFixed else Palette.NightTitle, modifier = Modifier.weight(1f))
             RadioButton(selected = selected, onClick = null, colors = RadioButtonDefaults.colors(selectedColor = Palette.Accent, unselectedColor = Palette.NightText))
         }
     }

@@ -518,4 +518,17 @@
     <string name="today_no_festivals">अगले कुछ सप्ताहों में कोई त्योहार नहीं।</string>
     <string name="today_next_festival">अगला: %1$s, %2$s</string>
     <string name="today_utc">समय %1$s (UTC%2$s) में।</string>
+    <string name="varga_use">%1$s के लिए पढ़ा जाता है।</string>
+    <string name="theme_label">थीम</string>
+    <string name="theme_system">फ़ोन जैसी</string>
+    <string name="theme_light">हल्की</string>
+    <string name="theme_dark">गहरी</string>
+    <string name="east_indian">पूर्व भारतीय</string>
+    <string name="chart_time_line">%1$s %2$s (UTC%3$s) यानी %4$s UTC के लिए गणना · %5$s अयनांश · स्विस एफ़ेमेरिस</string>
+    <string name="reminder_label">दैनिक पंचांग सूचना</string>
+    <string name="reminder_off">बंद</string>
+    <string name="reminder_note">दिन में एक सूचना: तिथि, नक्षत्र, राहु काल और कोई त्योहार, आज वाले शहर के लिए। गणना फ़ोन पर ही होती है।</string>
+    <string name="reminder_denied">इस ऐप की सूचनाएँ बंद हैं। सूचना पाने के लिए फ़ोन की सेटिंग्स में इन्हें चालू करें।</string>
+    <string name="reminder_title">%1$s (%2$s)</string>
+    <string name="reminder_channel">दैनिक पंचांग</string>
 </resources>

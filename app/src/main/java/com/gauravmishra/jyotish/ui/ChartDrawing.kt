@@ -58,7 +58,11 @@ fun KundliChart(m: ChartModel, style: String, lang: String, description: String,
     val measurer = rememberTextMeasurer()
     val ink = Palette.Ink
     Canvas(modifier.fillMaxWidth().aspectRatio(1f).semantics { contentDescription = description }) {
-        if (style == "south") drawSouth(m, lang, measurer) else drawNorth(m, lang, measurer)
+        when (style) {
+            "south" -> drawSouth(m, lang, measurer)
+            "east" -> drawEast(m, lang, measurer)
+            else -> drawNorth(m, lang, measurer)
+        }
         drawRect(ink, style = Stroke(width = px(1.5)), size = Size(size.width, size.height))
     }
 }
@@ -121,6 +125,65 @@ private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer) {
         }
         labels.chunked(2).forEachIndexed { i, pair ->
             centred(tm, pair.joinToString(" "), big, Offset(x0 + c / 2, y0 + c * (0.52f + 0.2f * i)))
+        }
+    }
+}
+
+/**
+ * East Indian (Bengali) chart: signs fixed, Aries in the top middle, running anticlockwise; each corner box is cut by a
+ * diagonal into two signs (Taurus/Gemini top left, Leo/Virgo bottom left, Scorpio/Sagittarius bottom right,
+ * Aquarius/Pisces top right). The centre is empty.
+ */
+private fun DrawScope.drawEast(m: ChartModel, lang: String, tm: TextMeasurer) {
+    val s = size.width
+    val c = s / 3f
+    val line = px(1.2)
+    fun pt(x: Float, y: Float) = Offset(x * c, y * c)
+    // region of each sign as a polygon in cell units (0..3), Aries first
+    val regions = listOf(
+        listOf(1f to 0f, 2f to 0f, 2f to 1f, 1f to 1f),           // Aries: top middle
+        listOf(0f to 0f, 1f to 0f, 1f to 1f),                      // Taurus: top-left, upper triangle
+        listOf(0f to 0f, 1f to 1f, 0f to 1f),                      // Gemini: top-left, lower triangle
+        listOf(0f to 1f, 1f to 1f, 1f to 2f, 0f to 2f),           // Cancer: middle left
+        listOf(0f to 2f, 1f to 2f, 0f to 3f),                      // Leo: bottom-left, upper triangle
+        listOf(0f to 3f, 1f to 2f, 1f to 3f),                      // Virgo: bottom-left, lower triangle
+        listOf(1f to 2f, 2f to 2f, 2f to 3f, 1f to 3f),           // Libra: bottom middle
+        listOf(2f to 2f, 3f to 3f, 2f to 3f),                      // Scorpio: bottom-right, lower triangle
+        listOf(2f to 2f, 3f to 2f, 3f to 3f),                      // Sagittarius: bottom-right, upper triangle
+        listOf(2f to 1f, 3f to 1f, 3f to 2f, 2f to 2f),           // Capricorn: middle right
+        listOf(3f to 0f, 3f to 1f, 2f to 1f),                      // Aquarius: top-right, lower triangle
+        listOf(2f to 0f, 3f to 0f, 2f to 1f),                      // Pisces: top-right, upper triangle
+    )
+    val lag = m.lagna.signIndex
+    regions[lag].let { r ->
+        drawPath(Path().apply { moveTo(pt(r[0].first, r[0].second).x, pt(r[0].first, r[0].second).y); r.drop(1).forEach { (x, y) -> lineTo(x * c, y * c) }; close() },
+            Palette.AccentSoft)
+    }
+    for (i in 1..2) {
+        drawLine(Palette.Ink, Offset(0f, c * i), Offset(s, c * i), strokeWidth = line)
+        drawLine(Palette.Ink, Offset(c * i, 0f), Offset(c * i, s), strokeWidth = line)
+    }
+    drawRect(Palette.Ink, topLeft = Offset.Zero, size = Size(s, s), style = Stroke(line))
+    drawLine(Palette.Ink, pt(0f, 0f), pt(1f, 1f), strokeWidth = line)
+    drawLine(Palette.Ink, pt(0f, 3f), pt(1f, 2f), strokeWidth = line)
+    drawLine(Palette.Ink, pt(3f, 3f), pt(2f, 2f), strokeWidth = line)
+    drawLine(Palette.Ink, pt(3f, 0f), pt(2f, 1f), strokeWidth = line)
+    // the centre stays empty
+    drawRect(Palette.Surface, topLeft = Offset(c + line, c + line), size = Size(c - 2 * line, c - 2 * line))
+    val small = TextStyle(fontSize = chartSp(9.5f), color = Palette.Muted)
+    val big = TextStyle(fontSize = chartSp(12f), color = Palette.Ink, fontWeight = FontWeight.SemiBold)
+    for (sign in 0 until 12) {
+        val r = regions[sign]
+        val cx = r.map { it.first }.average().toFloat() * c
+        val cy = r.map { it.second }.average().toFloat() * c
+        val tri = r.size == 3
+        centred(tm, Names.of(SIGNS[sign], lang), small, Offset(cx, cy - c * (if (tri) 0.12f else 0.28f)))
+        val labels = buildList {
+            if (sign == lag) add(if (lang == "hi") "लग्न" else "Asc")
+            m.planets.filter { it.signIndex == sign }.forEach { add(Abbrev.of(it, lang)) }
+        }
+        labels.chunked(if (tri) 2 else 3).forEachIndexed { i, row ->
+            centred(tm, row.joinToString(" "), big, Offset(cx, cy + c * (if (tri) 0.04f else -0.04f) + c * 0.15f * i))
         }
     }
 }

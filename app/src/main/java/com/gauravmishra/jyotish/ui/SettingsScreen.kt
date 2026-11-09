@@ -54,8 +54,21 @@ fun SettingsScreen(
     full: Boolean = true,
     onUpgrade: () -> Unit = {},
     onHelp: () -> Unit = {},
+    theme: String = "system",
+    onTheme: (String) -> Unit = {},
 ) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
+    var reminder by remember { mutableStateOf(settings.reminderTime) }
+    var reminderDenied by remember { mutableStateOf(false) }
+    val permission = androidx.activity.compose.rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.RequestPermission()) { ok ->
+        if (ok) com.gauravmishra.jyotish.Reminders.schedule(ctx, reminder) else { reminderDenied = true }
+    }
+    fun setReminder(t: String) {
+        reminder = t; settings.reminderTime = t; reminderDenied = false
+        if (t.isBlank()) { com.gauravmishra.jyotish.Reminders.cancel(ctx); return }
+        if (com.gauravmishra.jyotish.Reminders.canNotify(ctx)) com.gauravmishra.jyotish.Reminders.schedule(ctx, t)
+        else if (android.os.Build.VERSION.SDK_INT >= 33) permission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+    }
     var speed by remember { mutableStateOf<String?>(null) }
     var running by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -98,9 +111,24 @@ fun SettingsScreen(
                     Pick("हिन्दी", lang == "hi") { onLanguage("hi") }
                 }
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Setting(stringResource(R.string.theme_label)) {
+                    Pick(stringResource(R.string.theme_system), theme == "system") { onTheme("system") }
+                    Pick(stringResource(R.string.theme_light), theme == "light") { onTheme("light") }
+                    Pick(stringResource(R.string.theme_dark), theme == "dark") { onTheme("dark") }
+                }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Setting(stringResource(R.string.reminder_label)) {
+                    Pick(stringResource(R.string.reminder_off), reminder.isBlank()) { setReminder("") }
+                    listOf("06:00", "07:00", "08:00", "09:00", "19:00").forEach { t -> Pick(t, reminder == t) { setReminder(t) } }
+                }
+                Text(stringResource(if (reminderDenied) R.string.reminder_denied else R.string.reminder_note), style = MaterialTheme.typography.bodySmall,
+                    color = if (reminderDenied) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp).testTag("reminder_note"))
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 Setting(stringResource(R.string.chart_style)) {
                     Pick(stringResource(R.string.north_indian), chartStyle == "north") { chartStyle = "north"; onChartStyle("north") }
                     Pick(stringResource(R.string.south_indian), chartStyle == "south") { chartStyle = "south"; onChartStyle("south") }
+                    Pick(stringResource(R.string.east_indian), chartStyle == "east") { chartStyle = "east"; onChartStyle("east") }
                 }
             }
 

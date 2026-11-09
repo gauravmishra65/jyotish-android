@@ -52,11 +52,23 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
         if (details.vargas.isNotEmpty()) {
             var which by rememberSaveable { mutableStateOf("D9") }
             Text(stringResource(R.string.vargas_title), style = MaterialTheme.typography.titleMedium)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf("D9" to R.string.d9_label, "D10" to R.string.d10_label).filter { details.vargas.containsKey(it.first) }.forEach { (k, label) ->
-                    FilterChip(selected = which == k, onClick = { which = k }, label = { Text(stringResource(label)) },
-                        modifier = Modifier.heightIn(min = 48.dp).testTag("varga_$k"),
-                        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
+            // all sixteen Shodashavarga charts the engine computes (older cached charts carry only D9 and D10)
+            val meta = details.vargaMeta.filter { details.vargas.containsKey(it.key) }
+            androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("varga_picker")) {
+                if (meta.isEmpty()) {
+                    items(listOf("D9" to R.string.d9_label, "D10" to R.string.d10_label).filter { details.vargas.containsKey(it.first) }.size) { i ->
+                        val (k, label) = listOf("D9" to R.string.d9_label, "D10" to R.string.d10_label).filter { details.vargas.containsKey(it.first) }[i]
+                        FilterChip(selected = which == k, onClick = { which = k }, label = { Text(stringResource(label)) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("varga_$k"),
+                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
+                    }
+                } else {
+                    items(meta.size) { i ->
+                        val v = meta[i]
+                        FilterChip(selected = which == v.key, onClick = { which = v.key }, label = { Text(v.name.of(lang)) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("varga_${v.key}"),
+                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Palette.AccentSoft, selectedLabelColor = Palette.AccentDeep))
+                    }
                 }
             }
             details.vargas[which]?.let { signs ->
@@ -64,7 +76,13 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
                 KundliChart(vm, style, lang,
                     chartDescription(vm, lang, stringResource(R.string.house_word), stringResource(R.string.empty_word)),
                     Modifier.padding(horizontal = 4.dp).testTag("varga_chart"))
-                Text(stringResource(if (which == "D9") R.string.d9_note else R.string.d10_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+                val use = meta.firstOrNull { it.key == which }?.use?.of(lang)
+                Text(when {
+                    which == "D9" -> stringResource(R.string.d9_note)
+                    which == "D10" -> stringResource(R.string.d10_note)
+                    use != null -> stringResource(R.string.varga_use, use)
+                    else -> ""
+                }, style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.testTag("varga_note"))
             }
         }
         details.sections.forEach { SectionCard(it, lang) }

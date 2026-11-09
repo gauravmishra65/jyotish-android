@@ -10,6 +10,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -52,11 +54,21 @@ class DetailsTest {
             rule.shot("more_d9")
             rule.onNodeWithTag("varga_D10").performClick()
             rule.onNodeWithText("D10: career and public life.").assertExists()
-            for (k in listOf("panchang", "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing")) {
+            // all sixteen divisional charts can be picked
+            rule.onNodeWithTag("varga_picker").performScrollToNode(hasTestTag("varga_D60"))
+            rule.onNodeWithTag("varga_D60").performClick()
+            rule.onNodeWithTag("varga_note").assertTextContains("past karma", substring = true)
+            rule.onNodeWithTag("varga_picker").performScrollToNode(hasTestTag("varga_D10"))
+            for (k in listOf("panchang", "doshas", "avakahada", "pratyantar", "sensitivity", "chara", "narayana", "arudhas", "bhava_chalit",
+                    "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing")) {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
             }
             rule.onNodeWithText("Pratipada (Shukla paksha, tithi 1 of 30)").performScrollTo().assertExists()   // panchang opens by default
             rule.shot("more_panchang")
+            rule.onNodeWithText("Doshas and Sade Sati").performScrollTo().performClick()
+            rule.waitUntilAtLeastOneExists(hasText("Kaal Sarp"), timeoutMillis = 5_000)
+            rule.onNodeWithText("Doshas and Sade Sati").performScrollTo()
+            rule.shot("more_doshas")
             rule.onNodeWithText("Lal Kitab").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("How to do a remedy:"), timeoutMillis = 5_000)
             rule.onNodeWithText("Lal Kitab").performScrollTo()

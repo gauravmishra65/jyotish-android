@@ -156,7 +156,7 @@ fun NumerologyScreen(
                 Text(stringResource(R.string.nu_kua_line, m.kua, stringResource(if (m.kuaGroup == "West") R.string.nu_west else R.string.nu_east)),
                     style = MaterialTheme.typography.bodyLarge)
                 KuaList(stringResource(R.string.nu_kua_good), m.kuaGood, lang, Palette.Good)
-                KuaList(stringResource(R.string.nu_kua_bad), m.kuaBad, lang, Color(0xFF9A3B1B))
+                KuaList(stringResource(R.string.nu_kua_bad), m.kuaBad, lang, Palette.Bad)
                 Text(stringResource(R.string.nu_kua_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
             }
 
@@ -193,7 +193,7 @@ private fun Tile(label: String, value: String, sub: String, modifier: Modifier, 
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = if (dark) Palette.SaffronText else Palette.Muted, maxLines = 2)
             Text(value, style = if (dark) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.titleLarge,
-                color = if (dark) Palette.Ground else Palette.Ink)
+                color = if (dark) Palette.NightTitle else Palette.Ink)
             if (sub.isNotEmpty()) Text(sub, style = MaterialTheme.typography.labelMedium, color = if (dark) Palette.NightText else Palette.Muted)
         }
     }
@@ -221,9 +221,9 @@ private fun NameOptionsCard(profile: Profile, lang: String, loadNames: suspend (
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.nu_names_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                 Text(stringResource(R.string.nu_optional), style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.background(Color(0xFFEFEBE4), RoundedCornerShape(10.dp)).padding(horizontal = 8.dp, vertical = 3.dp))
+                    modifier = Modifier.background(Palette.Track, RoundedCornerShape(10.dp)).padding(horizontal = 8.dp, vertical = 3.dp))
             }
-            Text(stringResource(R.string.nu_names_intro), style = MaterialTheme.typography.bodySmall, color = Color(0xFF3F3B35))
+            Text(stringResource(R.string.nu_names_intro), style = MaterialTheme.typography.bodySmall, color = Palette.ChipText)
             val o = opts
             when {
                 o == null && !loading -> OutlinedButton(onClick = {
@@ -257,7 +257,7 @@ private fun NameRow(n: NameOption, lang: String, current: Boolean) {
                 color = if (current) Palette.Muted else Palette.Ink, modifier = Modifier.weight(1f))
             Text("${n.compound}/${n.root}", style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(horizontal = 8.dp))
             Text(cls, style = MaterialTheme.typography.labelLarge, textAlign = TextAlign.End,
-                color = when (n.cls) { "favourable" -> Palette.Good; "difficult" -> Color(0xFF9A3B1B); else -> Palette.Muted })
+                color = when (n.cls) { "favourable" -> Palette.Good; "difficult" -> Palette.Bad; else -> Palette.Muted })
         }
         val detail = if (current) stringResource(R.string.nu_now) else n.changes.joinToString(", ") { if (lang == "hi") NameOptions.changeHi(it) else it }
         Text("$detail · ${stringResource(R.string.nu_with_mulank, fit)}", style = MaterialTheme.typography.bodySmall, color = Palette.Muted)

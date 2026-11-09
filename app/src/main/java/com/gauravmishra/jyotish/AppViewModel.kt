@@ -266,6 +266,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private val _theme = MutableStateFlow(settings.theme)
+    val theme: StateFlow<String> = _theme.asStateFlow()
+    fun setTheme(t: String) { settings.theme = t; _theme.value = t }
+
     private val _todayPlace = MutableStateFlow(TodayPlace.decode(settings.todayPlace))
     /** The Today screen's chosen city; null = the person's residence, else their birthplace. */
     val todayPlace: StateFlow<TodayPlace?> = _todayPlace.asStateFlow()

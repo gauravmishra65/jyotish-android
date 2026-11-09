@@ -56,7 +56,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        intent?.getStringExtra(Reminders.EXTRA_OPEN)?.let { Reminders.pendingOpen.value = it }
         setContent { App() }
+    }
+
+    override fun onNewIntent(intent: android.content.Intent) {
+        super.onNewIntent(intent)
+        intent.getStringExtra(Reminders.EXTRA_OPEN)?.let { Reminders.pendingOpen.value = it }
     }
 }
 
@@ -75,7 +81,8 @@ fun App(vm: AppViewModel = viewModel()) {
     var welcomeLang by remember { mutableStateOf(chosen ?: if (Locale.getDefault().language == "hi") "hi" else "en") }
     val lang = chosen ?: welcomeLang
     Localized(lang) {
-        JyotishTheme {
+        val theme by vm.theme.collectAsStateWithLifecycle()
+        JyotishTheme(theme) {
             val nav = rememberNavController()
             val profiles by vm.profiles.collectAsStateWithLifecycle()
             val charts by vm.charts.collectAsStateWithLifecycle()
@@ -83,6 +90,10 @@ fun App(vm: AppViewModel = viewModel()) {
             val full by vm.full.collectAsStateWithLifecycle()
             // Decided once: choosing a language later must not rebuild the graph and jump back to Home.
             val start = remember { if (chosen == null) Routes.WELCOME else Routes.HOME }
+            val open by Reminders.pendingOpen.collectAsStateWithLifecycle()
+            LaunchedEffect(open) {
+                if (open == "today" && chosen != null) { Reminders.pendingOpen.value = null; nav.navigate(Routes.TODAY) { launchSingleTop = true } }
+            }
             NavHost(nav, startDestination = start) {
                 composable(Routes.WELCOME) {
                     WelcomeScreen(lang = welcomeLang, onLanguage = { welcomeLang = it }, onContinue = {
@@ -231,7 +242,8 @@ fun App(vm: AppViewModel = viewModel()) {
                     SettingsScreen(vm.settings, lang, version, onLanguage = { vm.setLanguage(it) }, onCalculationChanged = { vm.recomputeAll() }, onChartStyle = { vm.setChartStyle(it) },
                         onSpeedTest = { org.json.JSONObject(Engine.timings()).toString(1) }, onBack = { nav.popBackStack() },
                         onMyDetails = { nav.navigate(Routes.register(edit = true)) }, onAbout = { nav.navigate(Routes.ABOUT) },
-                        full = full, onUpgrade = { nav.navigate(Routes.UPGRADE) }, onHelp = { nav.navigate(Routes.HELP) })
+                        full = full, onUpgrade = { nav.navigate(Routes.UPGRADE) }, onHelp = { nav.navigate(Routes.HELP) },
+                        theme = theme, onTheme = { vm.setTheme(it) })
                 }
                 composable(Routes.KUNDALI) {
                     val selected by vm.selected.collectAsStateWithLifecycle()

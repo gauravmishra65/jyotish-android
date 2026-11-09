@@ -18,7 +18,8 @@ class DetailsModelTest {
 
     @Test
     fun allSectionsPresentInBothLanguages() {
-        assertEquals(listOf("panchang", "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing"), d.sections.map { it.key })
+        assertEquals(listOf("panchang", "doshas", "avakahada", "pratyantar", "sensitivity", "chara", "narayana", "arudhas", "bhava_chalit",
+            "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing"), d.sections.map { it.key })
         d.sections.forEach { s ->
             assertTrue(s.key, s.title.hi.any { it in '\u0900'..'\u097F' })
             assertTrue(s.key, s.blocks.isNotEmpty())
@@ -26,6 +27,34 @@ class DetailsModelTest {
         val av = d.sections.first { it.key == "ashtakavarga" }.blocks.first() as DetailBlock.Table
         assertEquals(13, av.head.size)                    // planet + 12 houses
         assertEquals("337", av.rows.last().drop(1).sumOf { it.en.toInt() }.toString())
+    }
+
+    @Test
+    fun allSixteenDivisionalChartsWithNames() {
+        assertEquals(16, d.vargas.size)
+        assertEquals(listOf("D1", "D2", "D3", "D4", "D7", "D9", "D10", "D12", "D16", "D20", "D24", "D27", "D30", "D40", "D45", "D60"), d.vargaMeta.map { it.key })
+        d.vargaMeta.forEach { assertTrue(it.key, d.vargas.containsKey(it.key) && it.use.hi.isNotBlank()) }
+    }
+
+    @Test
+    fun avakahadaGivesTheNameSyllable() {
+        val t = d.sections.first { it.key == "avakahada" }.blocks.first() as DetailBlock.Table
+        val syl = t.rows.first { it[0].en.startsWith("Name syllable") }[1]
+        assertTrue(syl.en, syl.en.startsWith("Hu"))        // Moon in Pushya, pada 1
+        assertTrue(syl.hi, syl.hi.startsWith("हू"))
+    }
+
+    @Test
+    fun noSectionShowsForbiddenWords() {
+        val bad = Regex("(?i:\\b(death|dies?|disease|illness|divorce|accident|widow|childless|poverty|blind)\\b)|मृत्यु|मौत|तलाक|बीमार|विधवा")
+        d.sections.forEach { s ->
+            val all = s.blocks.flatMap { b -> when (b) {
+                is DetailBlock.Para -> listOf(b.text)
+                is DetailBlock.Items -> b.items
+                is DetailBlock.Table -> b.rows.flatten() + b.head
+            } } + listOfNotNull(s.title, s.intro, s.note)
+            all.flatMap { listOf(it.en, it.hi) }.forEach { assertFalse("${s.key}: $it", bad.containsMatchIn(it)) }
+        }
     }
 
     @Test

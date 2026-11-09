@@ -183,7 +183,7 @@ private fun NowRunning(p: Profile, state: ChartState?, lang: String) {
             is ChartState.Ready -> {
                 val s = state.summary
                 Text(stringResource(R.string.dasha_line, Names.of(s.mahadasha, lang), Names.of(s.antardasha, lang)),
-                    style = MaterialTheme.typography.headlineSmall, color = Palette.Ground)
+                    style = MaterialTheme.typography.headlineSmall, color = Palette.NightTitle)
                 val then = s.nextAntardasha?.let { stringResource(R.string.dasha_then, Names.of(it, lang)) } ?: ""
                 Text(stringResource(R.string.dasha_detail, Names.of(s.antardasha, lang), prettyDate(s.antardashaEnd, lang), then,
                     Names.of(s.mahadasha, lang), prettyDate(s.mahadashaEnd, lang)), style = MaterialTheme.typography.bodyMedium, color = Palette.NightText)
@@ -222,7 +222,7 @@ private fun ForecastTile(onClick: () -> Unit) {
         Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Filled.DateRange, contentDescription = null, tint = Palette.Saffron, modifier = Modifier.size(28.dp))
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.Ground)
+                Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.NightTitle)
                 Text(stringResource(R.string.forecast_sub), style = MaterialTheme.typography.bodySmall, color = Palette.NightText)
             }
         }
