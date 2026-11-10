@@ -56,8 +56,8 @@ class PlacesTest {
                     rule.onAllNodes(hasTestTag("place_result") and hasText("Moradabad, Uttar Pradesh", substring = true)).fetchSemanticsNodes().isNotEmpty()
                 }
             } catch (e: Throwable) {
-                val shown = rule.onAllNodesWithTag("place_result").fetchSemanticsNodes().map {
-                    it.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Text)?.joinToString(" | ") ?: "?"
+                val shown = rule.onAllNodesWithTag("place_result", useUnmergedTree = true).fetchSemanticsNodes().map { n ->
+                    n.config.getOrElseNullable(androidx.compose.ui.semantics.SemanticsProperties.Text) { null }?.joinToString(" | ") ?: "?"
                 }
                 throw AssertionError("village not listed; results shown: $shown", e)
             }
