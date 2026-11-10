@@ -48,9 +48,13 @@ class PlacesTest {
 
             rule.onNodeWithTag("place").performScrollTo().performTextInput("Bombay")
             rule.waitUntil(30_000) { rule.onAllNodes(hasTestTag("place_result") and hasText("Mumbai (Bombay)", substring = true)).fetchSemanticsNodes().isNotEmpty() }
-
-            rule.onNodeWithTag("place").performTextClearance()
-            rule.onNodeWithTag("place").performTextInput("Rampur, Moradabad")
+        }
+        // a fresh screen for the village, typed in one go as a person would paste it
+        ActivityScenario.launch(MainActivity::class.java).use {
+            rule.waitUntilAtLeastOneExists(hasTestTag("nav_kundali"), timeoutMillis = 60_000)
+            rule.onNodeWithTag("nav_kundali").performClick()
+            rule.onNodeWithTag("person_new").performClick()
+            rule.onNodeWithTag("place").performScrollTo().performTextInput("Rampur, Moradabad")
             try {
                 rule.waitUntil(30_000) {
                     rule.onAllNodes(hasTestTag("place_result") and hasText("Moradabad, Uttar Pradesh", substring = true)).fetchSemanticsNodes().isNotEmpty()
