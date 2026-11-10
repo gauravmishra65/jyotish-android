@@ -1,5 +1,6 @@
 package com.gauravmishra.jyotish.ui
 
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.ui.platform.testTag
@@ -59,6 +60,7 @@ fun HomeScreen(
     onFeature: (Feature) -> Unit,
     onForecast: () -> Unit = {},
     onReport: () -> Unit = {},
+    onTools: () -> Unit = {},
     onSaved: () -> Unit = {},
     userName: String = "",
     today: com.gauravmishra.jyotish.TodayState? = null,
@@ -122,6 +124,7 @@ fun HomeScreen(
                 }
                 ForecastTile(onForecast)
                 ReportTile(onReport)
+                ToolsTile(onTools)
             }
         }
     }
@@ -224,6 +227,25 @@ private fun ForecastTile(onClick: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.NightTitle)
                 Text(stringResource(R.string.forecast_sub), style = MaterialTheme.typography.bodySmall, color = Palette.NightText)
+            }
+        }
+    }
+}
+
+@Composable
+private fun ToolsTile(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        modifier = Modifier.fillMaxWidth().heightIn(min = 76.dp).testTag("home_tools"),
+    ) {
+        Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.Build, contentDescription = null, tint = Palette.Accent, modifier = Modifier.size(28.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.tools_title), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.tools_sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }

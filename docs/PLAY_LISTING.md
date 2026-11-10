@@ -119,7 +119,7 @@ and add licence testers to try a purchase before release. The Play listing must 
 | Is data sent off the device? | No | The app has no INTERNET permission; the engine and the place list are bundled. |
 | Is data encrypted in transit? | Not applicable | Nothing is transmitted. |
 | Can users request that data be deleted? | Yes, on the device | Deleting a profile removes it and its cached chart; uninstalling removes everything. |
-| Backups | Excluded | `allowBackup="false"` and data extraction rules exclude cloud backup and device transfer. |
+| Backups | Excluded | `allowBackup="false"` and data extraction rules exclude cloud backup and device transfer. From v16 the person can make a password-encrypted backup file (AES-256-GCM) and save it themselves through the system file picker; the app uploads nothing. |
 
 Permissions requested: none in the demo and full editions. The Play edition adds Google Play Billing (the BILLING permission); Play itself handles payment and keeps the purchase history, which the data-safety form should list as "Purchase history, collected, not shared, required for the purchase". Other third-party SDKs: none (no analytics, crash reporting or ads).
 

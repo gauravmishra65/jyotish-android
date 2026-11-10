@@ -26,6 +26,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.gauravmishra.jyotish.engine.Engine
 import com.gauravmishra.jyotish.ui.AddProfileScreen
+import com.gauravmishra.jyotish.ui.BirthTimeScreen
+import com.gauravmishra.jyotish.ui.BackupScreen
+import com.gauravmishra.jyotish.ui.TOOLS
+import com.gauravmishra.jyotish.ui.ToolsScreen
 import com.gauravmishra.jyotish.ui.Feature
 import com.gauravmishra.jyotish.ui.FeatureScreen
 import com.gauravmishra.jyotish.ui.ForecastScreen
@@ -183,9 +187,22 @@ fun App(vm: AppViewModel = viewModel()) {
                         onFeature = { nav.navigate(Routes.of(it)) },
                         onForecast = { nav.navigate(Routes.FORECAST) },
                         onReport = { nav.navigate(Routes.REPORT) },
+                        onTools = { nav.navigate(Routes.TOOLS) },
                         onSaved = { nav.navigate(Routes.SAVED) },
                         userName = userName,
                     )
+                }
+                composable(Routes.TOOLS) {
+                    ToolsScreen(TOOLS, onOpen = { nav.navigate(it) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.BIRTH_TIME) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    BirthTimeScreen(profiles, p, vm.settings.ayanamsa, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
+                        onBack = { nav.popBackStack() })
+                }
+                composable(Routes.BACKUP) {
+                    BackupScreen(profiles, onRestore = { vm.restore(it) }, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.REPORT) {
                     Milestone(vm)

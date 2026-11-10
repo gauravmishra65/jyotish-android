@@ -208,6 +208,11 @@ private fun MatchBody(m: MatchModel, onKoota: (Koota) -> Unit, onPorutham: () ->
         }
     }
     Text(stringResource(R.string.mangal_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+    if (m.sections.isNotEmpty()) {
+        Text(stringResource(R.string.milan_western), style = MaterialTheme.typography.titleMedium)
+        val lang = currentLang()
+        m.sections.forEach { SectionCard(it, lang) }
+    }
 }
 
 private fun fmt(v: Double) = if (v % 1.0 == 0.0) v.toInt().toString() else v.toString()

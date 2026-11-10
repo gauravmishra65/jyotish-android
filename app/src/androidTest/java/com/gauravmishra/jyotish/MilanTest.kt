@@ -54,6 +54,10 @@ class MilanTest {
             rule.onNodeWithTag("porutham").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Partly"), timeoutMillis = 5_000)   // Rasi Adhipati
             rule.shot("porutham")
+            rule.onNodeWithText("Close").performClick()
+            // v16: the Western side of the match
+            rule.onNodeWithTag("section_synastry").performScrollTo().performClick()
+            rule.onNodeWithTag("section_composite").performScrollTo().assertExists()
         }
     }
 }

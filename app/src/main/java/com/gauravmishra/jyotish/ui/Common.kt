@@ -52,6 +52,9 @@ object Routes {
     const val UPGRADE = "upgrade"
     const val HELP = "help"
     const val TODAY = "today"
+    const val TOOLS = "tools"
+    const val BIRTH_TIME = "birthtime"
+    const val BACKUP = "backup"
     /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
     const val TOUR = "tour?replay={replay}"
     fun tour(replay: Boolean = false) = "tour?replay=$replay"

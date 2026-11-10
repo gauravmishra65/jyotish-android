@@ -90,7 +90,7 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
 }
 
 @Composable
-private fun SectionCard(s: DetailSection, lang: String) {
+fun SectionCard(s: DetailSection, lang: String) {
     var open by rememberSaveable(s.key) { mutableStateOf(s.key == "panchang") }
     Surface(shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surface,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant), modifier = Modifier.fillMaxWidth().testTag("section_${s.key}")) {

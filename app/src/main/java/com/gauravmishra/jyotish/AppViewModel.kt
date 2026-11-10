@@ -366,6 +366,19 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         compute(p)
     }
 
+    /**
+     * Adds the people from a backup file: one already saved (same id) is replaced by the backup's copy. The demo edition
+     * keeps its limit, so only as many new people as it allows are added. Returns (added or updated, left out).
+     */
+    fun restore(people: List<Profile>): Pair<Int, Int> {
+        var done = 0
+        var skipped = 0
+        people.forEach { p ->
+            if (_profiles.value.any { it.id == p.id } || canAddProfile()) { addOrUpdate(p); done++ } else skipped++
+        }
+        return done to skipped
+    }
+
     fun delete(id: String) {
         _profiles.update { list -> list.filterNot { it.id == id } }
         if (_selected.value == id) _selected.value = _profiles.value.firstOrNull()?.id

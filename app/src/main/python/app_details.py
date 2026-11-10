@@ -365,6 +365,7 @@ def build(c):
         if s:
             out.append(s)
     import app_details_more as M
-    out = out[:1] + M.build_more(c) + out[1:]          # birth panchang, then doshas and the new sections, then the rest
+    import app_details_extra as X
+    out = out[:1] + M.build_more(c) + out[1:] + X.build_extra(c)   # birth panchang, doshas and the v14 sections, the rest, then v16's
     vargas = {k: m for k, m in v.get("divisional_charts", {}).items()}
     return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta()}

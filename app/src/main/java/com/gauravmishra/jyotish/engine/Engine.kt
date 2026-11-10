@@ -69,6 +69,9 @@ object Engine {
     /** The full multi-system reading as one HTML page (see engine_api.report); returns {"html": ...}. */
     suspend fun report(request: JSONObject): String = call { it.callAttr("report", request.toString()).toString() }
 
+    /** Birth time check (see engine_api.rectify): segments of the time window, with life events and their scores. */
+    suspend fun rectify(request: JSONObject): String = call { it.callAttr("rectify", request.toString()).toString() }
+
     /** One of the focused reports (see engine_api.special_report): the chart request plus "kind"; returns {"html": ...}. */
     suspend fun specialReport(request: JSONObject): String = call { it.callAttr("special_report", request.toString()).toString() }
 

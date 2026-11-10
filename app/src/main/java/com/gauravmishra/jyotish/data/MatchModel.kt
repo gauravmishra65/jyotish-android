@@ -32,6 +32,7 @@ data class MatchModel(
     val poruthamOutOf: Int,
     val essentialAllAgree: Boolean,
     val mangal: List<MangalCheck>,
+    val sections: List<DetailSection> = emptyList(),   // the Western side (app_match_more.py)
 ) {
     companion object {
         val KOOTA_ORDER = listOf("varna", "vashya", "tara", "yoni", "graha_maitri", "gana", "bhakoot", "nadi")
@@ -78,6 +79,7 @@ data class MatchModel(
                 poruthamAgree = p.optInt("agree"), poruthamOutOf = p.optInt("out_of", porutham.size),
                 essentialAllAgree = essential != null && essential.keys().asSequence().all { essential.optBoolean(it) },
                 mangal = mangal,
+                sections = parseSections(m.optJSONArray("sections")),
             )
         }
 

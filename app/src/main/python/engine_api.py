@@ -59,7 +59,13 @@ def chart(request_json):
 
 
 def match(chart_a_json, chart_b_json, bride="B"):
-    return json.dumps(chart_engine.match_charts(json.loads(chart_a_json), json.loads(chart_b_json), bride), ensure_ascii=False)
+    m = chart_engine.match_charts(json.loads(chart_a_json), json.loads(chart_b_json), bride)
+    try:
+        import app_match_more
+        m["sections"] = app_match_more.build(m)      # the Western side, worded for the Milan screen
+    except Exception:
+        m["sections"] = []
+    return json.dumps(m, ensure_ascii=False)
 
 
 def find_muhurta(request_json, *chart_jsons):
@@ -200,6 +206,12 @@ def special_report(request_json):
     page = app_reports.build(kind, c, r, lang=r.get("lang", "en"), by=r.get("by", "Gaurav Mishra"),
                              site=r.get("site", "authorgaurav.com"), fc=fc)
     return json.dumps({"html": page}, ensure_ascii=False)
+
+
+def rectify(request_json):
+    """Birth time check (app_rectify): {date, time, lat, lon, tz, gender, ayanamsa, window_min, events: [{kind, date}]}."""
+    import app_rectify
+    return app_rectify.rectify_json(request_json)
 
 
 def _time_forecast(t):
