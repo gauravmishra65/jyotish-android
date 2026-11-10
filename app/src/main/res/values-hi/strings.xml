@@ -309,8 +309,8 @@
     <string name="fc_active">सक्रिय</string>
     <string name="fc_how">यह कैसे काम करता है</string>
     <!-- Full reading -->
-    <string name="report_title">संपूर्ण विश्लेषण</string>
-    <string name="report_sub">चारों पद्धतियाँ, उपाय और सारांश, सहेजने या भेजने योग्य एक रिपोर्ट में</string>
+    <string name="report_title">रिपोर्ट</string>
+    <string name="report_sub">जीवन, दैनिक, मासिक, वार्षिक, महादशा, मंगल दोष, काल सर्प, साढ़े साती और चंद्र राशि रिपोर्ट, सहेजने या भेजने योग्य</string>
     <string name="report_working">संपूर्ण विश्लेषण तैयार हो रहा है: वैदिक, पाश्चात्य, बाज़ी और अंकशास्त्र, तीन वर्ष के रुझान के साथ। इसमें कुछ सेकंड लगते हैं।</string>
     <string name="report_failed">विश्लेषण तैयार नहीं हो सका: %1$s</string>
     <string name="report_pdf">PDF सहेजें</string>
@@ -531,4 +531,23 @@
     <string name="reminder_denied">इस ऐप की सूचनाएँ बंद हैं। सूचना पाने के लिए फ़ोन की सेटिंग्स में इन्हें चालू करें।</string>
     <string name="reminder_title">%1$s (%2$s)</string>
     <string name="reminder_channel">दैनिक पंचांग</string>
+    <string name="report_working_short">रिपोर्ट तैयार हो रही है। इसमें कुछ सेकंड लगते हैं।</string>
+    <string name="rk_life">जीवन रिपोर्ट</string>
+    <string name="rk_daily">दैनिक</string>
+    <string name="rk_monthly">मासिक</string>
+    <string name="rk_annual">वार्षिक</string>
+    <string name="rk_mahadasha">महादशा</string>
+    <string name="rk_mangal">मंगल दोष</string>
+    <string name="rk_kaal_sarp">काल सर्प दोष</string>
+    <string name="rk_sade_sati">साढ़े साती</string>
+    <string name="rk_chandra">चंद्र राशि</string>
+    <string name="rk_life_note">संपूर्ण विश्लेषण: वैदिक, पाश्चात्य, बाज़ी और अंकशास्त्र, उपाय और तीन वर्ष के रुझान के साथ।</string>
+    <string name="rk_daily_note">आज का पंचांग, शुभ और वर्जित समय, और दिन इस कुंडली के साथ कैसा है।</string>
+    <string name="rk_monthly_note">इस माह का हर दिन इस व्यक्ति के लिए, त्योहार, राशि परिवर्तन और दशा अवधियों के साथ।</string>
+    <string name="rk_annual_note">आने वाले बारह महीने: जीवन-क्षेत्र, वर्षफल, प्रमुख गोचर और माह-दर-माह दशा।</string>
+    <string name="rk_mahadasha_note">सभी विंशोत्तरी महादशाएँ, उनकी अंतर्दशाएँ और चालू प्रत्यंतर।</string>
+    <string name="rk_mangal_note">लग्न, चंद्र और शुक्र से मंगल, शास्त्रीय परिहारों के साथ।</string>
+    <string name="rk_kaal_sarp_note">क्या ग्रह राहु और केतु के बीच काल सर्प स्वरूप बनाते हैं।</string>
+    <string name="rk_sade_sati_note">चंद्र राशि पर शनि के साढ़े सात वर्ष: अभी, पिछले और अगले चक्र।</string>
+    <string name="rk_chandra_note">चंद्र राशि, नक्षत्र, नामाक्षर और चंद्र से पढ़ा गया गोचर।</string>
 </resources>

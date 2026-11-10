@@ -83,6 +83,14 @@ sealed interface ForecastState {
     data class Failed(val message: String) : ForecastState
 }
 
+/** The report kinds offered on the Reports screen, in order ("life" is the full multi-system reading). */
+val REPORT_KINDS = listOf("life", "daily", "monthly", "annual", "mahadasha", "mangal", "kaal_sarp", "sade_sati", "chandra")
+private val REPORT_FILE_NAMES = mapOf(
+    "life" to "Astrology_Reading", "daily" to "Daily_Report", "monthly" to "Monthly_Report", "annual" to "Annual_Report",
+    "mahadasha" to "Mahadasha_Report", "mangal" to "Mangal_Dosh_Report", "kaal_sarp" to "Kaal_Sarp_Report",
+    "sade_sati" to "Sade_Sati_Report", "chandra" to "Chandra_Rashi_Report",
+)
+
 sealed interface ReportState {
     data object Calculating : ReportState
     data class Ready(val html: String, val file: java.io.File) : ReportState
@@ -233,33 +241,39 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private val _reports = MutableStateFlow<Map<String, ReportState>>(emptyMap())
-    /** Full readings by "profileId|lang". Worked out on request (a few seconds), cached for the day. */
+    /** Reports by "profileId|lang|kind" (kind "life" is the full reading). Worked out on request, cached for the day. */
     val reports: StateFlow<Map<String, ReportState>> = _reports.asStateFlow()
     private val reportKeys = mutableMapOf<String, String>()
 
-    fun requestReport(p: Profile, lang: String) {
-        val slot = "${p.id}|$lang"
+    fun requestReport(p: Profile, lang: String, kind: String = "life") {
+        val slot = "${p.id}|$lang|$kind"
         val request = p.chartRequest(LocalDate.now().toString(), settings.ayanamsa, settings.node)
-            .put("years", 3).put("lang", lang).put("by", settings.reportBy).put("site", settings.reportSite)
+            .put("years", 3).put("lang", lang).put("by", settings.reportBy).put("site", settings.reportSite).put("kind", kind)
+        if (kind == "daily" || kind == "monthly") placeFor(p)?.let {
+            request.put("today_lat", it.lat).put("today_lon", it.lon).put("today_tz", it.tz).put("today_place", it.name)
+        }
         val key = request.toString()
         if (reportKeys[slot] == key && _reports.value[slot] !is ReportState.Failed) return
         reportKeys[slot] = key
         _reports.update { it + (slot to ReportState.Calculating) }
         viewModelScope.launch {
-            val cacheId = "${p.id}.report.$lang"
+            val cacheId = if (kind == "life") "${p.id}.report.$lang" else "${p.id}.report.$kind.$lang"
             val state = try {
-                val json = withContext(Dispatchers.IO) { store.cachedChart(cacheId, key) } ?: Engine.report(request).also {
-                    withContext(Dispatchers.IO) { store.cacheChart(cacheId, key, it) }
-                }
+                val json = withContext(Dispatchers.IO) { store.cachedChart(cacheId, key) }
+                    ?: (if (kind == "life") Engine.report(request) else Engine.specialReport(request)).also {
+                        withContext(Dispatchers.IO) { store.cacheChart(cacheId, key, it) }
+                    }
                 val html = JSONObject(json).getString("html")
-                // A copy in the cache folder, named after the person, for sharing.
+                // A copy in the cache folder, named after the person and the report, for sharing.
                 val file = withContext(Dispatchers.IO) {
                     val dir = java.io.File(getApplication<Application>().cacheDir, "reports").apply { mkdirs() }
                     val safe = p.name.replace(Regex("[^A-Za-z0-9]+"), "_").trim('_').ifEmpty { "Reading" }
-                    java.io.File(dir, "${safe}_Astrology_Reading${if (lang == "hi") "_Hindi" else ""}.html").apply { writeText(html) }
+                    val what = REPORT_FILE_NAMES[kind] ?: "Astrology_Reading"
+                    java.io.File(dir, "${safe}_$what${if (lang == "hi") "_Hindi" else ""}.html").apply { writeText(html) }
                 }
                 ReportState.Ready(html, file)
             } catch (e: Throwable) {
+                android.util.Log.e("REPORT", "report $kind failed", e)
                 ReportState.Failed(e.message ?: e.toString())
             }
             if (reportKeys[slot] == key) _reports.update { it + (slot to state) }

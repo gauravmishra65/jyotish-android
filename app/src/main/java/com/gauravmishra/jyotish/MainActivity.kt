@@ -194,7 +194,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     ReportScreen(
                         profiles = profiles, profile = p, reports = reports,
-                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onRequest = { prof, l -> vm.requestReport(prof, l) },
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onRequest = { prof, l, k -> vm.requestReport(prof, l, k) },
                         onBack = { nav.popBackStack() },
                     )
                 }

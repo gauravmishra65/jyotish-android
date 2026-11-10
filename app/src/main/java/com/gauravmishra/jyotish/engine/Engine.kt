@@ -69,6 +69,9 @@ object Engine {
     /** The full multi-system reading as one HTML page (see engine_api.report); returns {"html": ...}. */
     suspend fun report(request: JSONObject): String = call { it.callAttr("report", request.toString()).toString() }
 
+    /** One of the focused reports (see engine_api.special_report): the chart request plus "kind"; returns {"html": ...}. */
+    suspend fun specialReport(request: JSONObject): String = call { it.callAttr("special_report", request.toString()).toString() }
+
     /** Name spelling options for a name and date of birth (YYYY-MM-DD); gender "F" turns off the final-a edits. */
     suspend fun names(name: String, dob: String, gender: String): String =
         call { it.callAttr("names", name, dob, gender).toString() }

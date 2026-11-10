@@ -31,6 +31,7 @@ Gaurav Jyotish makes your Kundli (Janam Kundali, the Vedic birth horoscope), che
 ★ 3-YEAR FORECAST AND FULL READING
 • Year-by-year outlook for marriage, work, family and energy
 • A full reading with remedies and a summary, to save as a PDF or share
+• Daily, monthly and annual reports, plus Mahadasha, Mangal Dosh, Kaal Sarp, Sade Sati and Chandra Rashi reports (v15)
 
 ★ MUHURAT
 • Good times for a wedding, griha pravesh, a new venture and more
@@ -77,6 +78,7 @@ Free to try with one Kundli. Unlock the full version with a single in-app purcha
 ★ 3 वर्ष का भविष्यफल और संपूर्ण विश्लेषण
 • विवाह, काम, परिवार और ऊर्जा का साल-दर-साल भविष्यफल
 • उपाय और सारांश के साथ संपूर्ण विश्लेषण, PDF में सहेजें या भेजें
+• दैनिक, मासिक और वार्षिक रिपोर्ट, साथ में महादशा, मंगल दोष, काल सर्प, साढ़े साती और चंद्र राशि रिपोर्ट (v15)
 
 ★ शुभ मुहूर्त
 • विवाह, गृह प्रवेश, नए काम आदि के लिए शुभ समय

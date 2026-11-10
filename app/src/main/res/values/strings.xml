@@ -318,8 +318,8 @@
     <string name="fc_active">Active</string>
     <string name="fc_how">How this works</string>
     <!-- Full reading -->
-    <string name="report_title">Full reading</string>
-    <string name="report_sub">All four systems, remedies and summary, as one report to save or share</string>
+    <string name="report_title">Reports</string>
+    <string name="report_sub">Life, daily, monthly, annual, Mahadasha, Mangal Dosh, Kaal Sarp, Sade Sati and Chandra Rashi reports to save or share</string>
     <string name="report_working">Writing the full reading: Vedic, Western, BaZi and numerology, with the three-year outlook. This takes a few seconds.</string>
     <string name="report_failed">The reading could not be written: %1$s</string>
     <string name="report_pdf">Save as PDF</string>
@@ -540,4 +540,23 @@
     <string name="reminder_denied">Notifications are turned off for this app. Turn them on in the phone\'s settings to get the reminder.</string>
     <string name="reminder_title">%1$s (%2$s)</string>
     <string name="reminder_channel">Daily panchang</string>
+    <string name="report_working_short">Preparing the report. This takes a few seconds.</string>
+    <string name="rk_life">Life report</string>
+    <string name="rk_daily">Daily</string>
+    <string name="rk_monthly">Monthly</string>
+    <string name="rk_annual">Annual</string>
+    <string name="rk_mahadasha">Mahadasha</string>
+    <string name="rk_mangal">Mangal Dosh</string>
+    <string name="rk_kaal_sarp">Kaal Sarp Dosh</string>
+    <string name="rk_sade_sati">Sade Sati</string>
+    <string name="rk_chandra">Chandra Rashi</string>
+    <string name="rk_life_note">The full reading: Vedic, Western, BaZi and numerology, with remedies and the three-year outlook.</string>
+    <string name="rk_daily_note">Today\'s panchang, good and avoided times, and how the day sits with this chart.</string>
+    <string name="rk_monthly_note">Every day of this month rated for this person, with festivals, sign changes and dasha periods.</string>
+    <string name="rk_annual_note">The coming twelve months: life areas, Varshaphal, major transits and month-by-month dashas.</string>
+    <string name="rk_mahadasha_note">All Vimshottari mahadashas with their antardashas, and the current pratyantar.</string>
+    <string name="rk_mangal_note">Mars from the Lagna, Moon and Venus, with the classical cancellations.</string>
+    <string name="rk_kaal_sarp_note">Whether the planets form the Kaal Sarp pattern around Rahu and Ketu.</string>
+    <string name="rk_sade_sati_note">Saturn\'s seven and a half years over the Moon sign: now, past and next cycles.</string>
+    <string name="rk_chandra_note">The Moon sign, nakshatra, name syllable and transits read from the Moon.</string>
 </resources>

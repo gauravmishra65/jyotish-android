@@ -10,6 +10,7 @@ import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -90,6 +91,37 @@ class ReportTest {
             rule.waitForIdle()
             Thread.sleep(1_000)   // let the WebView finish painting before the screenshot
             rule.shot("report_hi")
+        }
+    }
+
+    /** The focused reports: Mangal Dosh and Sade Sati open from the picker, each with its own sections. */
+    @Test
+    fun focusedReports() {
+        ActivityScenario.launch(MainActivity::class.java).use { sc ->
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_report"), timeoutMillis = 60_000)
+            rule.onNodeWithTag("home_report").performScrollTo().performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("report_kinds"), timeoutMillis = 10_000)
+            rule.onNodeWithTag("report_kinds").performScrollToNode(hasTestTag("report_kind_mangal"))
+            rule.onNodeWithTag("report_kind_mangal").performClick()
+            var t = ""
+            for (i in 0 until 60) {
+                rule.waitUntilAtLeastOneExists(hasTestTag("report_view"), timeoutMillis = 180_000)
+                t = JSONArray("[" + eval(sc, "document.title + '|' + (document.getElementById('sec2') || {}).innerText") + "]").getString(0)
+                if (t.contains("Mangal Dosh Report")) break
+                Thread.sleep(500)
+            }
+            assertTrue(t.take(300), t.contains("Mangal Dosh Report") && t.contains("Mangal Dosh is counted when Mars"))
+            rule.shot("report_mangal")
+            rule.onNodeWithTag("report_kinds").performScrollToNode(hasTestTag("report_kind_sade_sati"))
+            rule.onNodeWithTag("report_kind_sade_sati").performClick()
+            for (i in 0 until 60) {
+                rule.waitUntilAtLeastOneExists(hasTestTag("report_view"), timeoutMillis = 180_000)
+                t = JSONArray("[" + eval(sc, "document.title + '|' + (document.getElementById('sec2') || {}).innerText") + "]").getString(0)
+                if (t.contains("Sade Sati Report")) break
+                Thread.sleep(500)
+            }
+            assertTrue(t.take(300), t.contains("Sade Sati Report") && t.contains("Saturn passes through the sign before your Moon sign"))
+            rule.onNodeWithTag("report_share").assertExists()
         }
     }
 }

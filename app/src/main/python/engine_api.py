@@ -179,6 +179,29 @@ def report(request_json):
     return json.dumps({"html": page}, ensure_ascii=False)
 
 
+def special_report(request_json):
+    """The chart request plus "kind" (see app_reports.KINDS, or "life" for the full reading), "lang", "by" and "site"
+    -> {"html": ...}. The Annual report also runs the forecast; the others need only the chart."""
+    import app_reports
+    r = json.loads(request_json)
+    kind = r.get("kind", "life")
+    if kind == "life":
+        return report(request_json)
+    fc = None
+    if kind == "annual":
+        import app_forecast
+        r = dict(r, modules=FORECAST_MODULES, horizon_years=int(r.get("years", 3)))
+        c = chart_obj(r)
+        fc = app_forecast.build(c, birth_date=r["date"])
+    else:
+        c = chart_obj(r)
+    import app_details
+    c["details"] = app_details.build(c)
+    page = app_reports.build(kind, c, r, lang=r.get("lang", "en"), by=r.get("by", "Gaurav Mishra"),
+                             site=r.get("site", "authorgaurav.com"), fc=fc)
+    return json.dumps({"html": page}, ensure_ascii=False)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()
