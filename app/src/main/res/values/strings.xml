@@ -645,4 +645,14 @@
     <string name="nt_vehicle_hint">Vehicle number, e.g. UP 32 AB 1234</string>
     <string name="nt_house_hint">House or flat number</string>
     <string name="nt_run">Work it out</string>
+    <string name="cn_title">Chinese astrology</string>
+    <string name="cn_sub">Zi Wei Dou Shu chart, lunar birth date, Nine Star Ki and Tong Shu good days</string>
+    <string name="cn_grid">Zi Wei Dou Shu: twelve palaces</string>
+    <string name="cn_grid_note">The highlighted palace is the Life palace (命宫); 身 marks the Body palace. Main stars in bold, with 禄 权 科 忌 for the four transformations; the last line gives the stem-branch and the ages of the 10-year period.</string>
+    <string name="cn_activity">Good days for</string>
+    <string name="cn_wedding">Wedding</string>
+    <string name="cn_moving">Moving house</string>
+    <string name="cn_business">Opening a business</string>
+    <string name="cn_travel">A journey</string>
+    <string name="cn_contract">Signing a contract</string>
 </resources>

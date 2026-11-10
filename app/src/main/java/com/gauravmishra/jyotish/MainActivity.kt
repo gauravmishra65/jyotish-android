@@ -29,6 +29,7 @@ import com.gauravmishra.jyotish.ui.AddProfileScreen
 import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
+import com.gauravmishra.jyotish.ui.ChineseScreen
 import com.gauravmishra.jyotish.ui.NumberToolsScreen
 import com.gauravmishra.jyotish.ui.TOOLS
 import com.gauravmishra.jyotish.ui.ToolsScreen
@@ -212,6 +213,12 @@ fun App(vm: AppViewModel = viewModel()) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     NumberToolsScreen(profiles, p, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.CHINESE) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    ChineseScreen(profiles, p, vm.placeFor(p), onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
+                        onBack = { nav.popBackStack() })
                 }
                 composable(Routes.BACKUP) {
                     BackupScreen(profiles, onRestore = { vm.restore(it) }, onBack = { nav.popBackStack() })

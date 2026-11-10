@@ -59,6 +59,7 @@ object Routes {
     const val KP_HORARY = "question/kp"
     const val QUESTION = "question/{method}"
     const val NUMBER_TOOLS = "numbertools"
+    const val CHINESE = "chinese"
     /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
     const val TOUR = "tour?replay={replay}"
     fun tour(replay: Boolean = false) = "tour?replay=$replay"

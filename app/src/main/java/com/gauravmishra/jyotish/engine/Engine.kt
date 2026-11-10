@@ -78,6 +78,9 @@ object Engine {
     /** Numerology tools (see engine_api.number_tools): returns {"sections": [...]} in the details format. */
     suspend fun numberTools(request: JSONObject): String = call { it.callAttr("number_tools", request.toString()).toString() }
 
+    /** Chinese astrology sections (see engine_api.chinese_more): {"sections": [...], "activities": {...}}. */
+    suspend fun chineseMore(request: JSONObject): String = call { it.callAttr("chinese_more", request.toString()).toString() }
+
     /** One of the focused reports (see engine_api.special_report): the chart request plus "kind"; returns {"html": ...}. */
     suspend fun specialReport(request: JSONObject): String = call { it.callAttr("special_report", request.toString()).toString() }
 

@@ -636,4 +636,14 @@
     <string name="nt_vehicle_hint">वाहन नंबर, जैसे UP 32 AB 1234</string>
     <string name="nt_house_hint">मकान या फ़्लैट नंबर</string>
     <string name="nt_run">गणना करें</string>
+    <string name="cn_title">चीनी ज्योतिष</string>
+    <string name="cn_sub">ज़ी वेई दो शू कुंडली, चीनी जन्म तिथि, नौ तारा की और टोंग शू शुभ दिन</string>
+    <string name="cn_grid">ज़ी वेई दो शू: बारह भाव</string>
+    <string name="cn_grid_note">उभरा हुआ भाव जीवन भाव (命宫) है; 身 शरीर भाव दिखाता है। मुख्य तारे गाढ़े अक्षरों में, चार रूपांतरणों के लिए 禄 权 科 忌; अंतिम पंक्ति में तना-शाखा और 10 वर्ष की अवधि की आयु।</string>
+    <string name="cn_activity">इनके लिए शुभ दिन</string>
+    <string name="cn_wedding">विवाह</string>
+    <string name="cn_moving">गृह प्रवेश</string>
+    <string name="cn_business">व्यवसाय आरंभ</string>
+    <string name="cn_travel">यात्रा</string>
+    <string name="cn_contract">अनुबंध पर हस्ताक्षर</string>
 </resources>

@@ -226,6 +226,12 @@ def number_tools(request_json):
     return app_numbers_more.tools(request_json)
 
 
+def chinese_more(request_json):
+    """Chinese screen (chinese_more): lunar birth date, Zi Wei Dou Shu, Nine Star Ki and Tong Shu good days."""
+    import chinese_more as CM
+    return CM.sections_json(request_json)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()

@@ -30,6 +30,7 @@ val TOOLS = listOf(
     Tool("birth_time", R.string.bt_title, R.string.bt_sub, Routes.BIRTH_TIME),
     Tool("prashna", R.string.pr_title, R.string.pr_sub, Routes.PRASHNA),
     Tool("kp", R.string.kp_title, R.string.kp_sub, Routes.KP_HORARY),
+    Tool("chinese", R.string.cn_title, R.string.cn_sub, Routes.CHINESE),
     Tool("numbers", R.string.nt_title, R.string.nt_sub, Routes.NUMBER_TOOLS),
     Tool("backup", R.string.bk_title, R.string.bk_sub, Routes.BACKUP),
 )
