@@ -59,7 +59,13 @@ class PlacesTest {
                 val shown = rule.onAllNodesWithTag("place_result", useUnmergedTree = true).fetchSemanticsNodes().map { n ->
                     n.config.getOrElseNullable(androidx.compose.ui.semantics.SemanticsProperties.Text) { null }?.joinToString(" | ") ?: "?"
                 }
-                throw AssertionError("village not listed; results shown: $shown", e)
+                val field = rule.onAllNodesWithTag("place", useUnmergedTree = true).fetchSemanticsNodes().map { n ->
+                    n.config.getOrElseNullable(androidx.compose.ui.semantics.SemanticsProperties.EditableText) { null }?.text ?: "?"
+                }
+                val none = rule.onAllNodes(hasText("No match", substring = true)).fetchSemanticsNodes().size
+                val again = com.gauravmishra.jyotish.data.Villages.search(ctx, "Rampur, Moradabad", mapOf("IN" to "India")).map { it.label }
+                val log = Runtime.getRuntime().exec(arrayOf("logcat", "-d", "-s", "PLACES:V", "AndroidRuntime:E")).inputStream.bufferedReader().readText().takeLast(1500)
+                throw AssertionError("village not listed; field=$field none=$none results shown: $shown; direct now: $again; log: $log", e)
             }
             rule.shot("places_village")
             rule.onAllNodesWithTag("place_result").onFirst().performScrollTo().performClick()
