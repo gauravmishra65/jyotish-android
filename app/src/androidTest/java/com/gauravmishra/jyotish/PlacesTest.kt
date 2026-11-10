@@ -37,6 +37,10 @@ class PlacesTest {
             Profile(name = "Priya Nair", gender = "F", date = "1990-05-05", time = "05:30", confidence = "reliable",
                 place = "Kochi, India", lat = 9.9312, lon = 76.2673, tz = "Asia/Kolkata"),
         ))
+        // the village database itself, called directly so any error shows in full
+        val direct = com.gauravmishra.jyotish.data.Villages.search(ctx, "Rampur, Moradabad", mapOf("IN" to "India"))
+        check(direct.isNotEmpty()) { "no villages found directly" }
+        check(direct.first().label.contains("Moradabad, Uttar Pradesh")) { direct.first().label }
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("nav_kundali"), timeoutMillis = 60_000)
             rule.onNodeWithTag("nav_kundali").performClick()

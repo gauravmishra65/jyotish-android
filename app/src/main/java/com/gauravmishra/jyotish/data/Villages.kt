@@ -27,6 +27,7 @@ object Villages {
                 try {
                     ctx.assets.open(ASSET).use { a -> GZIPInputStream(a).use { g -> tmp.outputStream().use { g.copyTo(it) } } }
                 } catch (e: java.io.IOException) {
+                    android.util.Log.e("PLACES", "village database Exception: cannot unpack $ASSET", e)
                     missing = true
                     tmp.delete()
                     return null
