@@ -59,14 +59,24 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
     val appCtx = androidx.compose.ui.platform.LocalContext.current.applicationContext
     LaunchedEffect(query, places) {
         delay(150)
-        val p = places
-        results = if (p == null) emptyList() else withContext(Dispatchers.Default) { p.search(query, 6) }
-        // villages and small towns of India and Nepal below the towns ("Rampur, Moradabad" narrows by district)
-        if (p != null && query.trim().length >= 3) {
-            val more = withContext(Dispatchers.IO) { runCatching { Villages.search(appCtx, query, p.countryNames, maxOf(4, 10 - results.size)) }
-                .onFailure { android.util.Log.e("PLACES", "village search Exception", it) }.getOrDefault(emptyList()) }
-            android.util.Log.i("PLACES", "'$query': ${results.size} towns, ${more.size} villages")
-            results = results + more.filter { v -> results.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
+        val p = places ?: run { results = emptyList(); return@LaunchedEffect }
+        val q = query
+        // towns from the bundled list, then villages and small towns of India and Nepal ("Rampur, Moradabad" narrows by
+        // district), worked out together off the main thread and shown in one step
+        results = withContext(Dispatchers.IO) {
+            val towns = p.search(q, 6)
+            val more = if (q.trim().length >= 3) try {
+                Villages.search(appCtx, q, p.countryNames, maxOf(4, 10 - towns.size))
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                android.util.Log.e("PLACES", "village search Exception", e)
+                PlaceSearchDebug.lastError = e.toString()
+                emptyList()
+            } else emptyList()
+            PlaceSearchDebug.last = "'$q': ${towns.size} towns, ${more.size} villages"
+            android.util.Log.i("PLACES", PlaceSearchDebug.last)
+            towns + more.filter { v -> towns.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
         }
     }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -88,4 +98,10 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
             }
         }
     }
+}
+
+/** The last place search, for tests and the log. */
+object PlaceSearchDebug {
+    @Volatile var last: String = ""
+    @Volatile var lastError: String = ""
 }
