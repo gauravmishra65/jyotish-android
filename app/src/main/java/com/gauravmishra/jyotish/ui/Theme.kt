@@ -83,6 +83,7 @@ private val type = Typography(
 @Composable
 fun JyotishTheme(mode: String = "system", content: @Composable () -> Unit) {
     val dark = when (mode) { "dark" -> true; "light" -> false; else -> isSystemInDarkTheme() }
-    if (Palette.dark != dark) Palette.dark = dark
+    // set after the frame is applied, not while composing (a write to state during composition is not supported)
+    androidx.compose.runtime.SideEffect { if (Palette.dark != dark) Palette.dark = dark }
     MaterialTheme(colorScheme = scheme(dark), typography = type, content = content)
 }
