@@ -13,8 +13,15 @@ data class Place(
     val tz: String,
     val population: Int,
     val hindiNames: List<String>,
+    /** Other English spellings and old names (Bombay, Allahabad), searched too. */
+    val otherNames: List<String> = emptyList(),
+    /** The other name the search matched, shown in brackets so "Allahabad" finds "Prayagraj (Allahabad)". */
+    val matchedAs: String? = null,
+    /** District and state, for villages (several share a name). */
+    val region: String = "",
 ) {
-    val label: String get() = if (country.isNotEmpty()) "$name, $country" else name
+    val label: String get() = (if (matchedAs != null) "$name ($matchedAs)" else name) +
+        (if (region.isNotEmpty()) ", $region" else "") + if (country.isNotEmpty()) ", $country" else ""
 }
 
 /**
@@ -24,6 +31,8 @@ data class Place(
 class Places(lines: Sequence<String>) {
     private val places: List<Place>
     private val keys: List<String>
+    private val otherKeys: List<List<String>>
+    private val countryByCode: Map<String, String>
 
     init {
         var zones = emptyList<String>()
@@ -43,13 +52,18 @@ class Places(lines: Sequence<String>) {
                 lat = f[2].toDouble(), lon = f[3].toDouble(), tz = zones.getOrElse(f[4].toInt()) { "UTC" },
                 population = f[5].toInt(),
                 hindiNames = if (f.size > 6 && f[6].isNotEmpty()) f[6].split('|') else emptyList(),
+                otherNames = if (f.size > 7 && f[7].isNotEmpty()) f[7].split('|') else emptyList(),
             )
         }
         places = list
+        countryByCode = countries
         keys = list.map { fold(it.name) }
+        otherKeys = list.map { p -> p.otherNames.map { fold(it) } }
     }
 
     val size: Int get() = places.size
+    /** Country names by code, for the village list. */
+    val countryNames: Map<String, String> get() = countryByCode
 
     /** Up to [limit] places: names starting with the query first, then a word starting with it, then containing it. */
     fun search(query: String, limit: Int = 8): List<Place> {
@@ -58,7 +72,7 @@ class Places(lines: Sequence<String>) {
         val devanagari = query.any { it in 'ऀ'..'ॿ' }
         val buckets = Array(3) { ArrayList<Place>() }
         for (i in places.indices) {
-            val score = if (devanagari) {
+            var score = if (devanagari) {
                 val names = places[i].hindiNames
                 when {
                     names.any { it.startsWith(query.trim()) } -> 0
@@ -74,7 +88,11 @@ class Places(lines: Sequence<String>) {
                     else -> -1
                 }
             }
-            if (score >= 0 && buckets[score].size < limit) buckets[score] += places[i]
+            // an old name or other spelling (Bombay, Allahabad) when the main name did not match
+            var alias: String? = null
+            val other = if (score < 0 && !devanagari && q.length >= 3) otherKeys[i].indexOfFirst { it.startsWith(q) } else -1
+            if (other >= 0) { score = 0; alias = places[i].otherNames[other] }
+            if (score >= 0 && buckets[score].size < limit) buckets[score] += if (alias != null) places[i].copy(matchedAs = alias) else places[i]
             if (buckets[0].size >= limit) break
         }
         return buckets.flatMap { it }.take(limit)

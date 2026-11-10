@@ -27,6 +27,17 @@ class DataTest {
     }
 
     @Test
+    fun oldNamesAndOtherSpellingsFindTheTown() {
+        for ((old, now) in listOf("Bombay" to "Mumbai", "Calcutta" to "Kolkata", "Allahabad" to "Prayagraj", "Gurgaon" to "Gurugram",
+                "Banaras" to "Varanasi", "Madras" to "Chennai", "Baroda" to "Vadodara", "Bangalore" to "Bengaluru")) {
+            val p = places.search(old).first()
+            assertEquals(old, now, p.name)
+            assertEquals(old, p.matchedAs)
+            assertTrue(p.label, p.label.startsWith("$now ($old)"))
+        }
+    }
+
+    @Test
     fun searchIgnoresAccentsAndCase() {
         assertEquals("São Paulo", places.search("sao paulo").first().name)
         assertEquals("Singapore", places.search("SINGAP").first().name)

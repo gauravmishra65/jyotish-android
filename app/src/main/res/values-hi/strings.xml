@@ -64,7 +64,7 @@
     <string name="conf_unknown">ज्ञात नहीं</string>
     <string name="birthplace">जन्म स्थान</string>
     <string name="place_hint">नगर या शहर लिखें (हिंदी या अंग्रेज़ी)</string>
-    <string name="place_help">बिना इंटरनेट काम करता है। छोटा गाँव? पास का नगर चुनें या अक्षांश और देशांतर डालें।</string>
+    <string name="place_help">बिना इंटरनेट काम करता है, भारत और नेपाल के गाँव और बंबई या इलाहाबाद जैसे पुराने नाम भी। सूची में नहीं? पास का नगर चुनें या अक्षांश और देशांतर डालें।</string>
     <string name="place_loading">स्थान लोड हो रहे हैं…</string>
     <string name="place_none">कोई मेल नहीं। दूसरी वर्तनी आज़माएँ या निर्देशांक डालें।</string>
     <string name="change_place">बदलें</string>

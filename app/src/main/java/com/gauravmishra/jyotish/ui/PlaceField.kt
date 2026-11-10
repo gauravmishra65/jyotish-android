@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.gauravmishra.jyotish.R
 import com.gauravmishra.jyotish.data.Place
 import com.gauravmishra.jyotish.data.Places
+import com.gauravmishra.jyotish.data.Villages
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -55,10 +56,16 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
     var places by remember { mutableStateOf<Places?>(null) }
     var results by remember { mutableStateOf(emptyList<Place>()) }
     LaunchedEffect(Unit) { places = loadPlaces() }
+    val appCtx = androidx.compose.ui.platform.LocalContext.current.applicationContext
     LaunchedEffect(query, places) {
         delay(150)
         val p = places
         results = if (p == null) emptyList() else withContext(Dispatchers.Default) { p.search(query, 6) }
+        // villages and small towns of India and Nepal, when the town list has room
+        if (p != null && results.size < 6 && query.trim().length >= 3) {
+            val more = withContext(Dispatchers.IO) { runCatching { Villages.search(appCtx, query, p.countryNames, 8 - results.size) }.getOrDefault(emptyList()) }
+            results = results + more.filter { v -> results.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
+        }
     }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         OutlinedTextField(query, { query = it }, label = { Text(stringResource(R.string.place_hint)) }, singleLine = true,
