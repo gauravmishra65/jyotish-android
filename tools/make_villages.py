@@ -8,7 +8,9 @@ Source: GeoNames (CC BY 4.0, https://www.geonames.org). Every populated place (f
 except sections of cities, historical, abandoned and destroyed places, and those already in places.tsv. Each row
 keeps its district and state so places with the same name can be told apart, and Devanagari names for Hindi search.
 
-Tables:  place(id, name, cc, lat, lon, tz, district, state)   name(key, id)  with an index on name(key).
+Tables (compact: district/state and time zone stored once, coordinates as degrees x 10,000):
+  place(id, name COLLATE NOCASE, cc, lat, lon, tz, region)  region(id, district, state)  tz(id, name)  hindi(key, id)
+  with indexes on place(name) and hindi(key).
 """
 import gzip
 import os
@@ -47,36 +49,43 @@ def main(src):
     if os.path.exists(tmp):
         os.remove(tmp)
     db = sqlite3.connect(tmp)
-    db.execute("CREATE TABLE place(id INTEGER PRIMARY KEY, name TEXT, cc TEXT, lat REAL, lon REAL, tz TEXT, district TEXT, state TEXT)")
-    db.execute("CREATE TABLE name(key TEXT, id INTEGER)")
-    n_places = n_names = 0
+    db.execute("PRAGMA page_size=4096")
+    # compact: district/state and time zone stored once; coordinates as integers (degrees x 10,000)
+    db.execute("CREATE TABLE region(id INTEGER PRIMARY KEY, district TEXT, state TEXT)")
+    db.execute("CREATE TABLE tz(id INTEGER PRIMARY KEY, name TEXT)")
+    db.execute("CREATE TABLE place(id INTEGER PRIMARY KEY, name TEXT COLLATE NOCASE, cc TEXT, lat INTEGER, lon INTEGER, tz INTEGER, region INTEGER)")
+    db.execute("CREATE TABLE hindi(key TEXT, id INTEGER)")
+    regions, zones, rows = {}, {}, []
     counts = {}
     for cc in COUNTRIES:
         for line in open(os.path.join(src, f"{cc}.txt"), encoding="utf-8"):
             f = line.rstrip("\n").split("\t")
             if len(f) < 18 or f[6] != "P" or f[7] in SKIP or f[0] in have or not f[17]:
                 continue
-            gid = int(f[0])
-            name = "".join(c for c in unicodedata.normalize("NFD", f[1]) if unicodedata.category(c) != "Mn")
-            state = adm1.get(f"{cc}.{f[10]}", "")
-            district = adm2.get(f"{cc}.{f[10]}.{f[11]}", "")
-            db.execute("INSERT INTO place VALUES (?,?,?,?,?,?,?,?)",
-                       (gid, name, cc, round(float(f[4]), 4), round(float(f[5]), 4), f[17], district, state))
-            keys = {fold(name), fold(f[2])}
-            keys |= {a.strip() for a in f[3].split(",") if DEV.search(a)}            # Devanagari names as they are
-            for k in keys:
-                if len(k) >= 2:
-                    db.execute("INSERT INTO name VALUES (?,?)", (k, gid))
-                    n_names += 1
-            n_places += 1
+            name = "".join(c for c in unicodedata.normalize("NFD", f[1]) if unicodedata.category(c) != "Mn").strip()
+            if len(name) < 2:
+                continue
+            reg = (adm2.get(f"{cc}.{f[10]}.{f[11]}", ""), adm1.get(f"{cc}.{f[10]}", ""))
+            rid = regions.setdefault(reg, len(regions) + 1)
+            zid = zones.setdefault(f[17], len(zones) + 1)
+            hi = sorted({a.strip() for a in f[3].split(",") if DEV.search(a)})
+            rows.append((name, cc, round(float(f[4]) * 10000), round(float(f[5]) * 10000), zid, rid, hi))
             counts[cc] = counts.get(cc, 0) + 1
-    db.execute("CREATE INDEX name_key ON name(key)")
+    rows.sort(key=lambda r: r[0].lower())          # name order keeps a prefix search on neighbouring pages
+    db.executemany("INSERT INTO region VALUES (?,?,?)", [(i, d, st) for (d, st), i in regions.items()])
+    db.executemany("INSERT INTO tz VALUES (?,?)", [(i, z) for z, i in zones.items()])
+    db.executemany("INSERT INTO place VALUES (?,?,?,?,?,?,?)", [(i + 1,) + r[:6] for i, r in enumerate(rows)])
+    hindi = [(h, i + 1) for i, r in enumerate(rows) for h in r[6]]
+    db.executemany("INSERT INTO hindi VALUES (?,?)", hindi)
+    n_places, n_names = len(rows), len(hindi)
+    db.execute("CREATE INDEX place_name ON place(name COLLATE NOCASE)")
+    db.execute("CREATE INDEX hindi_key ON hindi(key)")
     db.commit()
     db.execute("VACUUM")
     db.close()
     with open(tmp, "rb") as a, gzip.open(OUT, "wb", compresslevel=9) as b:
         shutil.copyfileobj(a, b)
-    print(f"places {n_places} {counts}, names {n_names}, db {os.path.getsize(tmp) // 1024 // 1024} MB, "
+    print(f"places {n_places} {counts}, hindi names {n_names}, regions {len(regions)}, db {os.path.getsize(tmp) // 1024 // 1024} MB, "
           f"gz {os.path.getsize(OUT) // 1024 // 1024} MB")
 
 

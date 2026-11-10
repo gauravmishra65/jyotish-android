@@ -20,8 +20,9 @@ object Villages {
         if (missing) return null
         synchronized(this) {
             db?.let { return it }
-            val file = File(ctx.filesDir, "villages-v1.db")
+            val file = File(ctx.filesDir, "villages-v2.db")
             if (!file.exists()) {
+                ctx.filesDir.listFiles { f -> f.name.startsWith("villages-v") }?.forEach { it.delete() }   // an older layout
                 val tmp = File(ctx.filesDir, "villages.tmp")
                 try {
                     ctx.assets.open(ASSET).use { a -> GZIPInputStream(a).use { g -> tmp.outputStream().use { g.copyTo(it) } } }
@@ -43,15 +44,16 @@ object Villages {
         val key = if (q.any { it in 'ऀ'..'ॿ' }) q else Places.fold(q)
         val d = open(ctx) ?: return emptyList()
         val out = ArrayList<Place>()
-        d.rawQuery(
-            "SELECT p.name, p.cc, p.lat, p.lon, p.tz, p.district, p.state FROM name n JOIN place p ON p.id = n.id " +
-                "WHERE n.key >= ? AND n.key < ? GROUP BY p.id ORDER BY length(n.key), p.name LIMIT ?",
-            arrayOf(key, key + "￿", limit.toString()),
-        ).use { c ->
+        val cols = "SELECT p.name, p.cc, p.lat, p.lon, t.name, r.district, r.state FROM place p JOIN tz t ON t.id = p.tz JOIN region r ON r.id = p.region "
+        val sql = if (key.any { it in 'ऀ'..'ॿ' })
+            cols + "JOIN hindi h ON h.id = p.id WHERE h.key >= ? AND h.key < ? GROUP BY p.id ORDER BY length(h.key), p.name LIMIT ?"
+        else
+            cols + "WHERE p.name >= ? AND p.name < ? ORDER BY length(p.name), p.name LIMIT ?"
+        d.rawQuery(sql, arrayOf(key, key + "\uFFFF", limit.toString())).use { c ->
             while (c.moveToNext()) {
                 val region = listOf(c.getString(5), c.getString(6)).filter { !it.isNullOrBlank() }.joinToString(", ")
-                out += Place(c.getString(0), c.getString(1), countries[c.getString(1)] ?: c.getString(1), c.getDouble(2), c.getDouble(3),
-                    c.getString(4), 0, emptyList(), region = region)
+                out += Place(c.getString(0), c.getString(1), countries[c.getString(1)] ?: c.getString(1), c.getInt(2) / 10000.0,
+                    c.getInt(3) / 10000.0, c.getString(4), 0, emptyList(), region = region)
             }
         }
         return out
