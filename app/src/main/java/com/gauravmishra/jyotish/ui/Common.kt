@@ -60,6 +60,7 @@ object Routes {
     const val QUESTION = "question/{method}"
     const val NUMBER_TOOLS = "numbertools"
     const val CHINESE = "chinese"
+    const val PREDICTIONS = "predictions"
     /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
     const val TOUR = "tour?replay={replay}"
     fun tour(replay: Boolean = false) = "tour?replay=$replay"

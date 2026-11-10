@@ -646,4 +646,18 @@
     <string name="cn_business">व्यवसाय आरंभ</string>
     <string name="cn_travel">यात्रा</string>
     <string name="cn_contract">अनुबंध पर हस्ताक्षर</string>
+    <string name="pred_title">भविष्यफल</string>
+    <string name="pred_sub">आज, यह सप्ताह, माह और वर्ष: करियर, धन, प्रेम, परिवार, ऊर्जा और शिक्षा</string>
+    <string name="pred_day">आज</string>
+    <string name="pred_week">यह सप्ताह</string>
+    <string name="pred_month">यह माह</string>
+    <string name="pred_year">यह वर्ष</string>
+    <string name="pred_three">अगले 3 वर्ष</string>
+    <string name="pred_best_time">आज का शुभ समय</string>
+    <string name="pred_best_days">नई शुरुआत के लिए शुभ दिन</string>
+    <string name="pred_dasha">आपकी दशा</string>
+    <string name="pred_lucky">आज के लिए शुभ</string>
+    <string name="pred_lucky_line">रंग %1$s · अंक %2$d</string>
+    <string name="pred_stars">5 में से %1$d सितारे</string>
+    <string name="pred_more">पूरी रिपोर्ट खोलें</string>
 </resources>

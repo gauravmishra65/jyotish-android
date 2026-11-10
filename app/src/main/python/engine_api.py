@@ -232,6 +232,12 @@ def chinese_more(request_json):
     return CM.sections_json(request_json)
 
 
+def predict(request_json):
+    """Predictions page (app_predict): chart request plus period day|week|month|year|three and the Today place."""
+    import app_predict
+    return app_predict.predict_json(request_json)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()

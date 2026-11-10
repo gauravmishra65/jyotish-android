@@ -655,4 +655,18 @@
     <string name="cn_business">Opening a business</string>
     <string name="cn_travel">A journey</string>
     <string name="cn_contract">Signing a contract</string>
+    <string name="pred_title">Predictions</string>
+    <string name="pred_sub">Today, this week, month and year: career, money, love, family, energy and learning</string>
+    <string name="pred_day">Today</string>
+    <string name="pred_week">This week</string>
+    <string name="pred_month">This month</string>
+    <string name="pred_year">This year</string>
+    <string name="pred_three">Next 3 years</string>
+    <string name="pred_best_time">Best time today</string>
+    <string name="pred_best_days">Best days for new starts</string>
+    <string name="pred_dasha">Your period</string>
+    <string name="pred_lucky">Lucky today</string>
+    <string name="pred_lucky_line">Colour %1$s · number %2$d</string>
+    <string name="pred_stars">%1$d out of 5 stars</string>
+    <string name="pred_more">Open the full reports</string>
 </resources>

@@ -2,6 +2,7 @@ package com.gauravmishra.jyotish.ui
 
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -61,6 +62,7 @@ fun HomeScreen(
     onForecast: () -> Unit = {},
     onReport: () -> Unit = {},
     onTools: () -> Unit = {},
+    onPredictions: () -> Unit = {},
     onSaved: () -> Unit = {},
     userName: String = "",
     today: com.gauravmishra.jyotish.TodayState? = null,
@@ -88,6 +90,7 @@ fun HomeScreen(
             }
 
             if (profiles.isNotEmpty()) TodayTile(today, onToday)
+            if (profiles.isNotEmpty()) PredictionTile(onPredictions)
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -227,6 +230,24 @@ private fun ForecastTile(onClick: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(stringResource(R.string.forecast_title), style = MaterialTheme.typography.titleMedium, color = Palette.NightTitle)
                 Text(stringResource(R.string.forecast_sub), style = MaterialTheme.typography.bodySmall, color = Palette.NightText)
+            }
+        }
+    }
+}
+
+@Composable
+private fun PredictionTile(onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Palette.AccentSoft),
+        modifier = Modifier.fillMaxWidth().heightIn(min = 76.dp).testTag("home_predictions"),
+    ) {
+        Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.Star, contentDescription = null, tint = Palette.AccentDeep, modifier = Modifier.size(28.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(R.string.pred_title), style = MaterialTheme.typography.titleMedium, color = Palette.AccentDeep)
+                Text(stringResource(R.string.pred_sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }

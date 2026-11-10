@@ -30,6 +30,7 @@ import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
 import com.gauravmishra.jyotish.ui.ChineseScreen
+import com.gauravmishra.jyotish.ui.PredictionScreen
 import com.gauravmishra.jyotish.ui.NumberToolsScreen
 import com.gauravmishra.jyotish.ui.TOOLS
 import com.gauravmishra.jyotish.ui.ToolsScreen
@@ -191,6 +192,7 @@ fun App(vm: AppViewModel = viewModel()) {
                         onForecast = { nav.navigate(Routes.FORECAST) },
                         onReport = { nav.navigate(Routes.REPORT) },
                         onTools = { nav.navigate(Routes.TOOLS) },
+                        onPredictions = { nav.navigate(Routes.PREDICTIONS) },
                         onSaved = { nav.navigate(Routes.SAVED) },
                         userName = userName,
                     )
@@ -213,6 +215,13 @@ fun App(vm: AppViewModel = viewModel()) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     NumberToolsScreen(profiles, p, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.PREDICTIONS) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    PredictionScreen(profiles, p, vm.placeFor(p), vm.settings.ayanamsa, vm.settings.node,
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
+                        onReport = { nav.navigate(Routes.REPORT) }, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.CHINESE) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
