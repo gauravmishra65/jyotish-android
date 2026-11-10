@@ -51,8 +51,15 @@ class PlacesTest {
 
             rule.onNodeWithTag("place").performTextClearance()
             rule.onNodeWithTag("place").performTextInput("Rampur, Moradabad")
-            rule.waitUntil(60_000) {     // the first village search unpacks the database
-                rule.onAllNodes(hasTestTag("place_result") and hasText("Moradabad, Uttar Pradesh", substring = true)).fetchSemanticsNodes().isNotEmpty()
+            try {
+                rule.waitUntil(30_000) {
+                    rule.onAllNodes(hasTestTag("place_result") and hasText("Moradabad, Uttar Pradesh", substring = true)).fetchSemanticsNodes().isNotEmpty()
+                }
+            } catch (e: Throwable) {
+                val shown = rule.onAllNodesWithTag("place_result").fetchSemanticsNodes().map {
+                    it.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Text)?.joinToString(" | ") ?: "?"
+                }
+                throw AssertionError("village not listed; results shown: $shown", e)
             }
             rule.shot("places_village")
             rule.onAllNodesWithTag("place_result").onFirst().performScrollTo().performClick()

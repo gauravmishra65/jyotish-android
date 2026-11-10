@@ -65,6 +65,7 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
         if (p != null && query.trim().length >= 3) {
             val more = withContext(Dispatchers.IO) { runCatching { Villages.search(appCtx, query, p.countryNames, maxOf(4, 10 - results.size)) }
                 .onFailure { android.util.Log.e("PLACES", "village search Exception", it) }.getOrDefault(emptyList()) }
+            android.util.Log.i("PLACES", "'$query': ${results.size} towns, ${more.size} villages")
             results = results + more.filter { v -> results.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
         }
     }

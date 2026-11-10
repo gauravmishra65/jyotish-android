@@ -10,6 +10,7 @@ status=${PIPESTATUS[0]}
 gradle :app:connectedDemoDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.gauravmishra.jyotish.DemoTest --stacktrace 2>&1 | tee -a connected.log
 [ "${PIPESTATUS[0]}" -eq 0 ] || status=1
 adb logcat -d -s SPIKE:I > spike.log || true
+echo '----- place search (logcat) -----'; adb logcat -d -s PLACES:I | tail -20 || true
 adb logcat -d -s SHOT:I > shots.log || true
 python3 - <<'EOF'
 import base64, collections, os, re
