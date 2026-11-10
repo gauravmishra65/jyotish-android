@@ -238,6 +238,19 @@ def predict(request_json):
     return app_predict.predict_json(request_json)
 
 
+def feng_shui(request_json):
+    """Flying Stars (fengshui): {today, facing?, built_year?, tz_hours?} -> {"sections": [...], "grid": {...}}."""
+    import fengshui
+    r = json.loads(request_json)
+    out = json.loads(fengshui.sections_json(request_json))
+    import datetime as _dt
+    out["grid"] = fengshui.year_month(_dt.date.fromisoformat(r.get("today") or _dt.date.today().isoformat()), float(r.get("tz_hours", 8.0)))
+    if r.get("facing") is not None and r.get("built_year"):
+        h = fengshui.house_chart(float(r["facing"]), int(r["built_year"]))
+        out["house"] = {"mountain": h["mountain"], "water": h["water"], "base": h["base"], "period": h["period"]}
+    return json.dumps(out, ensure_ascii=False)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()

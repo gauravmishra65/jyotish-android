@@ -30,6 +30,7 @@ import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
 import com.gauravmishra.jyotish.ui.ChineseScreen
+import com.gauravmishra.jyotish.ui.FengShuiScreen
 import com.gauravmishra.jyotish.ui.PredictionScreen
 import com.gauravmishra.jyotish.ui.NumberToolsScreen
 import com.gauravmishra.jyotish.ui.TOOLS
@@ -222,6 +223,11 @@ fun App(vm: AppViewModel = viewModel()) {
                     PredictionScreen(profiles, p, vm.placeFor(p), vm.settings.ayanamsa, vm.settings.node,
                         onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onReport = { nav.navigate(Routes.REPORT) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.FENG_SHUI) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    FengShuiScreen(vm.placeFor(p)?.tz ?: java.time.ZoneId.systemDefault().id, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.CHINESE) {
                     val selected by vm.selected.collectAsStateWithLifecycle()

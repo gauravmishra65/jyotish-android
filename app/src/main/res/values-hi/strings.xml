@@ -660,4 +660,15 @@
     <string name="pred_lucky_line">रंग %1$s · अंक %2$d</string>
     <string name="pred_stars">5 में से %1$d सितारे</string>
     <string name="pred_more">पूरी रिपोर्ट खोलें</string>
+    <string name="fs_title">फ़्लाइंग स्टार्स फेंग शुई</string>
+    <string name="fs_sub">हर दिशा के लिए इस वर्ष और माह के तारे, और आपके घर का तारा चार्ट</string>
+    <string name="fs_intro">श्वान कोंग फ़्लाइंग स्टार्स: हर वर्ष और माह घर के हर भाग में अलग तारा आता है। अच्छे भागों का अधिक उपयोग करें और कठिन भागों को शांत रखें।</string>
+    <string name="fs_grid">दिशा अनुसार इस वर्ष के तारे</string>
+    <string name="fs_grid_note">चीनी कंपास की तरह दक्षिण ऊपर है। छायांकित खानों में 2 या 5 हैं: इस वर्ष उन भागों को शांत रखें।</string>
+    <string name="fs_grid_note_house">दक्षिण ऊपर है। बड़ा अंक: इस वर्ष का तारा; छोटे अंक: आपके घर के पर्वत और जल तारे।</string>
+    <string name="fs_house">आपके घर का तारा चार्ट</string>
+    <string name="fs_facing">सामने की दिशा अंश में (0 से 359)</string>
+    <string name="fs_built">घर बनने या आपके आने का वर्ष</string>
+    <string name="fs_house_note">मुख्य द्वार पर बाहर की ओर मुँह करके खड़े हों और कंपास देखें। उत्तर 0°, पूर्व 90°, दक्षिण 180°, पश्चिम 270°।</string>
+    <string name="fs_run">मेरे घर का चार्ट दिखाएँ</string>
 </resources>

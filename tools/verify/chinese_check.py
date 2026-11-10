@@ -50,6 +50,17 @@ for y, s in ((1965, 8), (2024, 3), (2025, 2), (2026, 1)):
 months = [M.nine_star(dt.date(1965, m, 20), 5.5)["month_star"] for m in range(3, 13)]
 if months != [1, 9, 8, 7, 6, 5, 4, 3, 2, 1]:
     problems.append(f"Nine Star Ki months 1965: {months}")
+# Flying Stars: 2026 annual chart (5 Yellow in the South, 2 Black in the North-west); Period 8 facing Wu (子山午向) has
+# 4-3 in the centre and the double 8 at the facing side (双星会向)
+import fengshui as F
+y26 = F.year_month(dt.date(2026, 6, 1))["year"]
+if y26["S"] != 5 or y26["NW"] != 2 or y26["C"] != 1:
+    problems.append(f"2026 flying stars: {y26}")
+h = F.house_chart(180, 2010)
+if (h["mountain"]["C"], h["water"]["C"]) != (4, 3) or (h["mountain"]["S"], h["water"]["S"]) != (8, 8):
+    problems.append(f"Period 8 facing Wu: centre {h['mountain']['C']}-{h['water']['C']}, south {h['mountain']['S']}-{h['water']['S']}")
+if F.period_of(2010) != 8 or F.period_of(2030) != 9:
+    problems.append("periods")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

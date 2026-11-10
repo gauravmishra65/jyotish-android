@@ -16,6 +16,7 @@ import json
 
 import swisseph as swe
 
+import app_report as AR
 import app_today as AT
 import hindi_shell as HS
 import vedic
@@ -126,14 +127,18 @@ def score(v, period, start):
             good = hm in FAV[p]
             for key, houses, karakas, _, _ in AREAS:
                 wt = 0.0
-                if hl in houses or hm in houses:
-                    wt += w
+                kind = None
+                if hl in houses:
+                    wt += w; kind = "lagna"
+                elif hm in houses:
+                    wt += w; kind = "moon"
                 if p in karakas:
-                    wt += w * 0.5
+                    wt += w * 0.5; kind = kind or "karaka"
                 if wt:
                     val = wt * (1 if good else -1) / len(dates)
                     totals[key] += val
-                    reasons[key].append((abs(val), p, hm, good))
+                    rank = {"lagna": 3, "karaka": 2, "moon": 1}[kind]
+                    reasons[key].append((rank, abs(val), p, hm, hl, good, kind))
     # running dasha lords
     md, ad = _dasha_now(v, start.isoformat())
     for lord, w in ((md, 0.6 if period in ("year", "three") else 0.3), (ad, 0.8 if period in ("month", "year") else 0.4)):
@@ -145,7 +150,7 @@ def score(v, period, start):
         for key, houses, _, _, _ in AREAS:
             if ruled & houses:
                 totals[key] += w * (1 if good else -1)
-                reasons[key].append((w, f"dasha:{lord}", pl["house"], good))
+                reasons[key].append((2.5, w, f"dasha:{lord}", pl["house"], pl["house"], good, "dasha"))
     return totals, reasons, (md, ad)
 
 
@@ -153,17 +158,39 @@ def stars(t):
     return 5 if t >= 1.2 else 4 if t >= 0.4 else 3 if t > -0.4 else 2
 
 
-def _why(reason):
-    if not reason:
+def _pick_reasons(reasons):
+    """One reason per area, the most specific first, and not the same factor twice across areas where avoidable."""
+    used, out = set(), {}
+    for key, *_ in AREAS:
+        cands = sorted(reasons[key], key=lambda r: (r[0], r[1]), reverse=True)
+        pick = next((r for r in cands if (r[2], r[6]) not in used), cands[0] if cands else None)
+        if pick:
+            used.add((pick[2], pick[6]))
+        out[key] = pick
+    return out
+
+
+def _why(r, area_en, area_hi):
+    if not r:
         return bi("Planets are quiet for this area.", "इस क्षेत्र के लिए ग्रह शांत हैं।")
-    _, p, h, good = max(reason)
-    if p.startswith("dasha:"):
+    _, _, p, hm, hl, good, kind = r
+    if kind == "dasha":
         lord = p.split(":")[1]
-        return bi(f"Your running {lord} period, with {lord} in the {_ord_en(h)} house of your chart" + (" (well placed)." if good else " (asks for effort)."),
-                  f"आपकी चल रही {HS.PLANET.get(lord, lord)} दशा, {HS.PLANET.get(lord, lord)} आपकी कुंडली के {ORD_HI[h]} भाव में" +
+        return bi(f"Your running {lord} period, with {lord} in the {_ord_en(hm)} house of your chart" + (" (well placed)." if good else " (asks for effort)."),
+                  f"आपकी चल रही {HS.PLANET.get(lord, lord)} दशा, {HS.PLANET.get(lord, lord)} आपकी कुंडली के {ORD_HI[hm]} भाव में" +
                   (" (अच्छी स्थिति)।" if good else " (प्रयास माँगती है)।"))
-    return bi(f"{p} moves through the {_ord_en(h)} house from your Moon" + (", a helpful position." if good else ", which asks for care."),
-              f"{HS.PLANET.get(p, p)} आपके चंद्र से {ORD_HI[h]} भाव में है" + (", जो सहायक स्थिति है।" if good else ", जो सावधानी माँगती है।"))
+    pe, ph = p, HS.PLANET.get(p, p)
+    tone_en = ", a helpful position." if good else ", which asks for care."
+    tone_hi = ", जो सहायक स्थिति है।" if good else ", जो सावधानी माँगती है।"
+    if kind == "lagna":
+        th = AR.HOUSE_THEME[hl]
+        return bi(f"{pe} moves through your {_ord_en(hl)} house ({th[0]})" + tone_en, f"{ph} आपके {ORD_HI[hl]} भाव ({th[1]}) से गुज़र रहा है" + tone_hi)
+    if kind == "karaka":
+        return bi(f"{pe}, the natural significator of {area_en.lower()}, is in the {_ord_en(hm)} house from your Moon" + tone_en,
+                  f"{area_hi} का नैसर्गिक कारक {ph} आपके चंद्र से {ORD_HI[hm]} भाव में है" + tone_hi)
+    th = AR.HOUSE_THEME[hm]
+    return bi(f"{pe} moves through the {_ord_en(hm)} house from your Moon ({th[0]})" + tone_en,
+              f"{ph} आपके चंद्र से {ORD_HI[hm]} भाव ({th[1]}) में है" + tone_hi)
 
 
 def _level(n):
@@ -201,10 +228,11 @@ def predict(c, period, today_iso, place=None, fc=None):
     p_for = "year" if period == "three" else period
     totals, reasons, (md, ad) = score(v, p_for, start)
     areas = []
+    picked = _pick_reasons(reasons)
     for key, _, _, en, hi in AREAS:
         n = stars(totals[key])
         reading = TEXT[key][_level(n)]
-        why = _why(reasons[key])
+        why = _why(picked[key], en, hi)
         if fc and period in ("year", "three") and key in FC_MAP:
             fa = next((a for a in fc["areas"] if a["key"] == FC_MAP[key]), None)
             if fa:

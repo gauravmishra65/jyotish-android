@@ -669,4 +669,15 @@
     <string name="pred_lucky_line">Colour %1$s · number %2$d</string>
     <string name="pred_stars">%1$d out of 5 stars</string>
     <string name="pred_more">Open the full reports</string>
+    <string name="fs_title">Flying Stars Feng Shui</string>
+    <string name="fs_sub">This year\'s and month\'s stars for each direction, and your home\'s star chart</string>
+    <string name="fs_intro">Xuan Kong Flying Stars: each year and month a different star visits each part of a home. Use the good areas often and keep the difficult ones calm.</string>
+    <string name="fs_grid">This year\'s stars by direction</string>
+    <string name="fs_grid_note">South is at the top, as on a Chinese compass. Shaded squares hold 2 or 5: keep those areas quiet this year.</string>
+    <string name="fs_grid_note_house">South is at the top. Big number: this year\'s star; small numbers: your home\'s mountain and water stars.</string>
+    <string name="fs_house">Your home\'s star chart</string>
+    <string name="fs_facing">Facing direction in degrees (0 to 359)</string>
+    <string name="fs_built">Year the home was built or you moved in</string>
+    <string name="fs_house_note">Stand at the main door facing out and read the compass. North is 0°, east 90°, south 180°, west 270°.</string>
+    <string name="fs_run">Show my home\'s chart</string>
 </resources>

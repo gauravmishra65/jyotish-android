@@ -15,8 +15,8 @@ android {
         applicationId = "com.gauravmishra.jyotish"
         minSdk = 26
         targetSdk = 36
-        versionCode = 18
-        versionName = "1.0.0-rc7"
+        versionCode = 19
+        versionName = "1.0.0-rc8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             // Phones are arm64; x86_64 is for the emulator. Python 3.12+ is 64-bit only.

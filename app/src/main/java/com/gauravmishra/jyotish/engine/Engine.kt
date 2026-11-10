@@ -84,6 +84,9 @@ object Engine {
     /** Predictions for one period by life area (see engine_api.predict). */
     suspend fun predict(request: JSONObject): String = call { it.callAttr("predict", request.toString()).toString() }
 
+    /** Flying Stars Feng Shui (see engine_api.feng_shui). */
+    suspend fun fengShui(request: JSONObject): String = call { it.callAttr("feng_shui", request.toString()).toString() }
+
     /** One of the focused reports (see engine_api.special_report): the chart request plus "kind"; returns {"html": ...}. */
     suspend fun specialReport(request: JSONObject): String = call { it.callAttr("special_report", request.toString()).toString() }
 
