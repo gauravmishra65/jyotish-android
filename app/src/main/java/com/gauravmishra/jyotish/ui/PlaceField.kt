@@ -61,9 +61,9 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
         delay(150)
         val p = places
         results = if (p == null) emptyList() else withContext(Dispatchers.Default) { p.search(query, 6) }
-        // villages and small towns of India and Nepal, when the town list has room
-        if (p != null && results.size < 6 && query.trim().length >= 3) {
-            val more = withContext(Dispatchers.IO) { runCatching { Villages.search(appCtx, query, p.countryNames, 8 - results.size) }.getOrDefault(emptyList()) }
+        // villages and small towns of India and Nepal below the towns ("Rampur, Moradabad" narrows by district)
+        if (p != null && query.trim().length >= 3) {
+            val more = withContext(Dispatchers.IO) { runCatching { Villages.search(appCtx, query, p.countryNames, maxOf(4, 10 - results.size)) }.getOrDefault(emptyList()) }
             results = results + more.filter { v -> results.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
         }
     }

@@ -67,7 +67,7 @@
     <string name="conf_unknown">Not known</string>
     <string name="birthplace">Birthplace</string>
     <string name="place_hint">Type a town or city</string>
-    <string name="place_help">Works offline, including villages in India and Nepal and old names such as Bombay or Allahabad. Not listed? Pick the nearest town or enter latitude and longitude.</string>
+    <string name="place_help">Works offline, including villages in India and Nepal and old names such as Bombay or Allahabad. Many villages share a name: add the district, as in Rampur, Moradabad. Not listed? Pick the nearest town or enter latitude and longitude.</string>
     <string name="place_loading">Loading places…</string>
     <string name="place_none">No match. Try another spelling, or enter coordinates.</string>
     <string name="change_place">Change</string>

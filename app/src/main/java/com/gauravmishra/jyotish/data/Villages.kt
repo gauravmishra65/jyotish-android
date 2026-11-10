@@ -37,23 +37,44 @@ object Villages {
         }
     }
 
-    /** Up to [limit] places whose name starts with [query] (English or Devanagari), with district and state. */
+    /**
+     * Up to [limit] places whose name starts with [query] (English or Devanagari), with district and state. Many villages
+     * share a name, so "Rampur, Moradabad" (or "Rampur Moradabad") narrows by district or state.
+     */
     fun search(ctx: Context, query: String, countries: Map<String, String>, limit: Int = 8): List<Place> {
         val q = query.trim()
         if (q.length < 3) return emptyList()
-        val key = if (q.any { it in 'ऀ'..'ॿ' }) q else Places.fold(q)
         val d = open(ctx) ?: return emptyList()
+        if (q.any { it in 'ऀ'..'ॿ' }) return find(d, q, null, countries, limit, hindi = true)
+        val folded = Places.fold(q)
+        if (folded.contains(',')) {
+            val (name, region) = folded.split(',', limit = 2).map { it.trim() }
+            return if (name.length >= 2) find(d, name, region.ifBlank { null }, countries, limit) else emptyList()
+        }
+        val whole = find(d, folded, null, countries, limit)
+        if (whole.isNotEmpty() || !folded.contains(' ')) return whole
+        val name = folded.substringBeforeLast(' ').trim()
+        return find(d, name, folded.substringAfterLast(' ').trim(), countries, limit)
+    }
+
+    private fun find(d: SQLiteDatabase, key: String, region: String?, countries: Map<String, String>, limit: Int, hindi: Boolean = false): List<Place> {
         val out = ArrayList<Place>()
         val cols = "SELECT p.name, p.cc, p.lat, p.lon, t.name, r.district, r.state FROM place p JOIN tz t ON t.id = p.tz JOIN region r ON r.id = p.region "
-        val sql = if (key.any { it in 'ऀ'..'ॿ' })
+        val byRegion = if (region != null && region.length >= 2) " AND (r.district LIKE ? OR r.state LIKE ?)" else ""
+        val sql = if (hindi)
             cols + "JOIN hindi h ON h.id = p.id WHERE h.key >= ? AND h.key < ? GROUP BY p.id ORDER BY length(h.key), p.name LIMIT ?"
         else
-            cols + "WHERE p.name >= ? AND p.name < ? ORDER BY length(p.name), p.name LIMIT ?"
-        d.rawQuery(sql, arrayOf(key, key + "\uFFFF", limit.toString())).use { c ->
+            cols + "WHERE p.name >= ? AND p.name < ?$byRegion ORDER BY length(p.name), r.state, r.district, p.name LIMIT ?"
+        val args = buildList {
+            add(key); add(key + "\uFFFF")
+            if (byRegion.isNotEmpty()) { add("$region%"); add("$region%") }
+            add(limit.toString())
+        }
+        d.rawQuery(sql, args.toTypedArray()).use { c ->
             while (c.moveToNext()) {
-                val region = listOf(c.getString(5), c.getString(6)).filter { !it.isNullOrBlank() }.joinToString(", ")
+                val reg = listOf(c.getString(5), c.getString(6)).filter { !it.isNullOrBlank() }.joinToString(", ")
                 out += Place(c.getString(0), c.getString(1), countries[c.getString(1)] ?: c.getString(1), c.getInt(2) / 10000.0,
-                    c.getInt(3) / 10000.0, c.getString(4), 0, emptyList(), region = region)
+                    c.getInt(3) / 10000.0, c.getString(4), 0, emptyList(), region = reg)
             }
         }
         return out
