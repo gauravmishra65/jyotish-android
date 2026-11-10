@@ -47,27 +47,30 @@ object Villages {
         val d = open(ctx) ?: return emptyList()
         if (q.any { it in 'ऀ'..'ॿ' }) return find(d, q, null, countries, limit, hindi = true)
         val folded = Places.fold(q)
+        val countryWords = countries.values.map { Places.fold(it) }.toSet() + countries.keys.map { it.lowercase() }
+        fun region(token: String) = Places.STATE_SHORT[token] ?: token
         if (folded.contains(',')) {
-            val (name, region) = folded.split(',', limit = 2).map { it.trim() }
-            return if (name.length >= 2) find(d, name, region.ifBlank { null }, countries, limit) else emptyList()
+            val parts = folded.split(',').map { it.trim() }.filter { it.isNotEmpty() }
+            val filters = parts.drop(1).filter { it !in countryWords }
+            return if (parts.isNotEmpty() && parts[0].length >= 2) find(d, parts[0], filters.firstOrNull()?.let(::region), countries, limit) else emptyList()
         }
         val whole = find(d, folded, null, countries, limit)
         if (whole.isNotEmpty() || !folded.contains(' ')) return whole
         val name = folded.substringBeforeLast(' ').trim()
-        return find(d, name, folded.substringAfterLast(' ').trim(), countries, limit)
+        return find(d, name, region(folded.substringAfterLast(' ').trim()), countries, limit)
     }
 
     private fun find(d: SQLiteDatabase, key: String, region: String?, countries: Map<String, String>, limit: Int, hindi: Boolean = false): List<Place> {
         val out = ArrayList<Place>()
         val cols = "SELECT p.name, p.cc, p.lat, p.lon, t.name, r.district, r.state FROM place p JOIN tz t ON t.id = p.tz JOIN region r ON r.id = p.region "
-        val byRegion = if (region != null && region.length >= 2) " AND (r.district LIKE ? OR r.state LIKE ?)" else ""
+        val byRegion = if (region != null && region.length >= 2) " AND (r.district LIKE ? OR r.state LIKE ? OR r.state LIKE ?)" else ""
         val sql = if (hindi)
             cols + "JOIN hindi h ON h.id = p.id WHERE h.key >= ? AND h.key < ? GROUP BY p.id ORDER BY length(h.key), p.name LIMIT ?"
         else
             cols + "WHERE p.name >= ? AND p.name < ?$byRegion ORDER BY length(p.name), r.state, r.district, p.name LIMIT ?"
         val args = buildList {
             add(key); add(key + "\uFFFF")
-            if (byRegion.isNotEmpty()) { add("$region%"); add("$region%") }
+            if (byRegion.isNotEmpty()) { add("$region%"); add("$region%"); add("% $region%") }
             add(limit.toString())
         }
         d.rawQuery(sql, args.toTypedArray()).use { c ->

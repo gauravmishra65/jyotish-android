@@ -9,7 +9,8 @@ places carry their other English spellings and old names (Bombay, Calcutta, Alla
 
 Format: first line "#tz<TAB>zone1<TAB>zone2...", second line "#cc<TAB>IN=India<TAB>..."; then one place per line:
 name, country code, latitude, longitude, time-zone index, population, Devanagari names (joined by "|"),
-other spellings (joined by "|").
+other spellings (joined by "|"), state or province (South Asia, from GeoNames admin1 codes in
+admin1_south_asia.tsv).
 """
 import json
 import os
@@ -53,6 +54,7 @@ def main():
         if c["countrycode"] in SOUTH_ASIA and k not in world:
             world[k] = c
     cities = world.values()
+    states = dict(l.rstrip("\n").split("\t") for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "admin1_south_asia.tsv"), encoding="utf-8"))
     countries = {c["iso"]: c["name"] for c in json.load(open(os.path.join(DATA, "countries.json"), encoding="utf-8")).values()}
     zones = sorted({c["timezone"] for c in cities if c.get("timezone")})
     zi = {z: i for i, z in enumerate(zones)}
@@ -65,7 +67,8 @@ def main():
         if c["countrycode"] in PLAIN:
             name = plain(name)
         alt = other_spellings(c, name) if c["countrycode"] in SOUTH_ASIA else []
-        rows.append(f'{name}\t{c["countrycode"]}\t{c["latitude"]:.4f}\t{c["longitude"]:.4f}\t{zi[c["timezone"]]}\t{c["population"]}\t{"|".join(hi)}\t{"|".join(alt)}')
+        state = states.get(f'{c["countrycode"]}.{c.get("admin1code", "")}', "") if c["countrycode"] in SOUTH_ASIA else ""
+        rows.append(f'{name}\t{c["countrycode"]}\t{c["latitude"]:.4f}\t{c["longitude"]:.4f}\t{zi[c["timezone"]]}\t{c["population"]}\t{"|".join(hi)}\t{"|".join(alt)}\t{state}')
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write("#tz\t" + "\t".join(zones) + "\n")

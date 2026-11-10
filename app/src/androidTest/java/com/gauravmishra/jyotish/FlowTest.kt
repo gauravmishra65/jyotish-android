@@ -75,7 +75,7 @@ class FlowTest {
             rule.onNodeWithTag("place").performScrollTo().performTextInput("Varan")
             rule.waitUntilAtLeastOneExists(hasTestTag("place_result"), timeoutMillis = 60_000)
             rule.onAllNodesWithTag("place_result").onFirst().performScrollTo().performClick()
-            rule.onNodeWithText("Varanasi, India").assertExists()
+            rule.onNodeWithText("Varanasi, Uttar Pradesh, India").assertExists()
             rule.onNodeWithTag("save").performClick()
 
             // Home shows the profile, and the engine fills in the chart (first run includes Python start-up).

@@ -53,6 +53,7 @@ class Places(lines: Sequence<String>) {
                 population = f[5].toInt(),
                 hindiNames = if (f.size > 6 && f[6].isNotEmpty()) f[6].split('|') else emptyList(),
                 otherNames = if (f.size > 7 && f[7].isNotEmpty()) f[7].split('|') else emptyList(),
+                region = if (f.size > 8) f[8] else "",
             )
         }
         places = list
@@ -65,8 +66,41 @@ class Places(lines: Sequence<String>) {
     /** Country names by code, for the village list. */
     val countryNames: Map<String, String> get() = countryByCode
 
-    /** Up to [limit] places: names starting with the query first, then a word starting with it, then containing it. */
+    /**
+     * Up to [limit] places: names starting with the query first, then a word starting with it, then containing it.
+     * "Sitapur, UP, India" or "Sitapur UP" narrows by state (short forms such as UP and MP work) and country.
+     */
     fun search(query: String, limit: Int = 8): List<Place> {
+        val parts = query.split(',').map { it.trim() }.filter { it.isNotEmpty() }
+        if (parts.size > 1) return searchName(parts[0], limit * 4).filter { p -> parts.drop(1).all { matchesFilter(p, it) } }.take(limit)
+        val whole = searchName(query, limit)
+        val words = query.trim().split(Regex("\\s+"))
+        if (words.size >= 2 && query.none { it in 'ऀ'..'ॿ' }) {
+            val last = words.last()
+            if (isRegionWord(last)) {
+                val narrowed = searchName(words.dropLast(1).joinToString(" "), limit * 4).filter { matchesFilter(it, last) }
+                if (narrowed.isNotEmpty()) return narrowed.take(limit)
+            }
+        }
+        return whole
+    }
+
+    /** Is this word a known state, short form or country name (so "Sitapur UP" means Sitapur in Uttar Pradesh)? */
+    private fun isRegionWord(w: String): Boolean {
+        val f = fold(w)
+        return STATE_SHORT.containsKey(f) || countryByCode.values.any { fold(it) == f } ||
+            places.any { it.region.isNotEmpty() && fold(it.region).startsWith(f) && f.length >= 3 }
+    }
+
+    private fun matchesFilter(p: Place, token: String): Boolean {
+        val t = fold(token)
+        if (t.isEmpty()) return true
+        val state = STATE_SHORT[t] ?: t
+        return fold(p.region).startsWith(state) || fold(p.region).contains(" $state") || fold(p.country).startsWith(t) ||
+            p.countryCode.equals(token, ignoreCase = true)
+    }
+
+    private fun searchName(query: String, limit: Int): List<Place> {
         val q = fold(query.trim())
         if (q.length < 2) return emptyList()
         val devanagari = query.any { it in 'ऀ'..'ॿ' }
@@ -118,6 +152,18 @@ class Places(lines: Sequence<String>) {
 
     companion object {
         private val MARKS = Regex("\\p{Mn}+")
+
+        /** Common short forms of Indian states and union territories, as people write them in addresses. */
+        val STATE_SHORT: Map<String, String> = mapOf(
+            "up" to "uttar pradesh", "mp" to "madhya pradesh", "hp" to "himachal pradesh", "ap" to "andhra pradesh",
+            "uk" to "uttarakhand", "ua" to "uttarakhand", "wb" to "west bengal", "tn" to "tamil nadu", "jk" to "jammu and kashmir",
+            "j&k" to "jammu and kashmir", "mh" to "maharashtra", "gj" to "gujarat", "rj" to "rajasthan", "pb" to "punjab",
+            "hr" to "haryana", "br" to "bihar", "jh" to "jharkhand", "cg" to "chhattisgarh", "ct" to "chhattisgarh",
+            "od" to "odisha", "or" to "odisha", "orissa" to "odisha", "ka" to "karnataka", "kl" to "kerala", "ts" to "telangana",
+            "tg" to "telangana", "as" to "assam", "dl" to "delhi", "ga" to "goa", "ncr" to "delhi", "ar" to "arunachal pradesh",
+            "mn" to "manipur", "ml" to "meghalaya", "mz" to "mizoram", "nl" to "nagaland", "sk" to "sikkim", "tr" to "tripura",
+            "py" to "puducherry", "pondicherry" to "puducherry", "uttaranchal" to "uttarakhand",
+        )
 
         /** Lower case without accents ("São" to "sao"). Plain ASCII skips the Unicode work: most names are ASCII. */
         fun fold(s: String): String =

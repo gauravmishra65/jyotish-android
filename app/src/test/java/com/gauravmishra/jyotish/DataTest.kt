@@ -38,6 +38,16 @@ class DataTest {
     }
 
     @Test
+    fun stateAndCountryNarrowTheSearch() {
+        assertEquals("Uttar Pradesh", places.search("Sitapur, UP, India").single().region)
+        assertEquals("Chhattisgarh", places.search("Sitapur, Chhattisgarh").single().region)
+        assertEquals("Uttar Pradesh", places.search("Sitapur UP").first().region)
+        val both = places.search("Sitapur").filter { it.name == "Sitapur" }.map { it.region }
+        assertEquals(listOf("Uttar Pradesh", "Chhattisgarh"), both)
+        assertEquals("Sitapur, Uttar Pradesh, India", places.search("Sitapur").first().label)
+    }
+
+    @Test
     fun searchIgnoresAccentsAndCase() {
         assertEquals("São Paulo", places.search("sao paulo").first().name)
         assertEquals("Singapore", places.search("SINGAP").first().name)
