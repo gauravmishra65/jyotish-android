@@ -72,6 +72,12 @@ object Engine {
     /** Birth time check (see engine_api.rectify): segments of the time window, with life events and their scores. */
     suspend fun rectify(request: JSONObject): String = call { it.callAttr("rectify", request.toString()).toString() }
 
+    /** Prashna or KP number horary (see engine_api.question). */
+    suspend fun question(request: JSONObject): String = call { it.callAttr("question", request.toString()).toString() }
+
+    /** Numerology tools (see engine_api.number_tools): returns {"sections": [...]} in the details format. */
+    suspend fun numberTools(request: JSONObject): String = call { it.callAttr("number_tools", request.toString()).toString() }
+
     /** One of the focused reports (see engine_api.special_report): the chart request plus "kind"; returns {"html": ...}. */
     suspend fun specialReport(request: JSONObject): String = call { it.callAttr("special_report", request.toString()).toString() }
 

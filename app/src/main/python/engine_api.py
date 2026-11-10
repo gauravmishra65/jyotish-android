@@ -214,6 +214,18 @@ def rectify(request_json):
     return app_rectify.rectify_json(request_json)
 
 
+def question(request_json):
+    """Prashna or KP horary (app_prashna): {method: "prashna"|"kp", question, number?, lat, lon, tz, place, when?, ayanamsa?}."""
+    import app_prashna
+    return app_prashna.ask(request_json)
+
+
+def number_tools(request_json):
+    """Numerology tools (app_numbers_more): {kind: pair|business|phone|vehicle|house|personal, ...} -> {"sections": [...]}."""
+    import app_numbers_more
+    return app_numbers_more.tools(request_json)
+
+
 def _time_forecast(t):
     """Add the three-year forecast for the first test person to a timings dict (not compared with the snapshot)."""
     t0 = time.perf_counter()

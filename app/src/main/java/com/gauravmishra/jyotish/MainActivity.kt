@@ -28,6 +28,8 @@ import com.gauravmishra.jyotish.engine.Engine
 import com.gauravmishra.jyotish.ui.AddProfileScreen
 import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
+import com.gauravmishra.jyotish.ui.QuestionScreen
+import com.gauravmishra.jyotish.ui.NumberToolsScreen
 import com.gauravmishra.jyotish.ui.TOOLS
 import com.gauravmishra.jyotish.ui.ToolsScreen
 import com.gauravmishra.jyotish.ui.Feature
@@ -200,6 +202,16 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     BirthTimeScreen(profiles, p, vm.settings.ayanamsa, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onBack = { nav.popBackStack() })
+                }
+                composable(Routes.QUESTION) { e ->
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    QuestionScreen(e.arguments?.getString("method") ?: "prashna", vm.placeFor(p), vm.settings.ayanamsa, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.NUMBER_TOOLS) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    NumberToolsScreen(profiles, p, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.BACKUP) {
                     BackupScreen(profiles, onRestore = { vm.restore(it) }, onBack = { nav.popBackStack() })
