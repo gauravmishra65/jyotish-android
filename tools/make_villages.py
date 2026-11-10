@@ -1,4 +1,4 @@
-"""Build the offline village and small-town database (app/src/main/assets/villages.db.gz) from the full GeoNames
+"""Build the offline village and small-town database (app/src/main/assets/villages.dbz) from the full GeoNames
 country files, for the places too small for places.tsv.
 
 Usage (GitHub Actions runs this, see .github/workflows/places.yml):
@@ -25,7 +25,7 @@ import geonamescache
 COUNTRIES = ("IN", "NP")
 SKIP = {"PPLX", "PPLH", "PPLQ", "PPLW", "PPLCH"}
 DEV = re.compile(r"[ऀ-ॿ]")
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "app", "src", "main", "assets", "villages.db.gz")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "app", "src", "main", "assets", "villages.dbz")
 
 
 def fold(s):

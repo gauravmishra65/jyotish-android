@@ -19,7 +19,7 @@ jobs:
           curl -fsSLO https://download.geonames.org/export/dump/admin1CodesASCII.txt
           curl -fsSLO https://download.geonames.org/export/dump/admin2Codes.txt
           wc -l IN.txt NP.txt
-      - name: Build villages.db.gz
+      - name: Build villages.dbz
         run: |
           pip install --quiet geonamescache==3.0.2
           python tools/make_villages.py geo | tee villages.log
@@ -28,6 +28,6 @@ jobs:
         run: |
           git config user.name "Gaurav Mishra"
           git config user.email "gaurav.mishra65@gmail.com"
-          git add app/src/main/assets/villages.db.gz
+          git add app/src/main/assets/villages.dbz
           git diff --cached --quiet || git commit -m "Village database from GeoNames (CC BY 4.0)" -m "Built by .github/workflows/places.yml"
           git push

@@ -6,12 +6,12 @@ import java.io.File
 import java.util.zip.GZIPInputStream
 
 /**
- * Villages and small towns of India and Nepal from the full GeoNames files (assets/villages.db.gz, built by
+ * Villages and small towns of India and Nepal from the full GeoNames files (assets/villages.dbz, gzip; not named .gz because the Android build unpacks .gz assets, built by
  * tools/make_villages.py). Unpacked once into the app's private storage on first use; each search is an indexed
  * prefix lookup, so the town list in [Places] stays small and fast. Returns nothing when the asset is absent.
  */
 object Villages {
-    private const val ASSET = "villages.db.gz"
+    private const val ASSET = "villages.dbz"
     @Volatile private var db: SQLiteDatabase? = null
     @Volatile private var missing = false
 
