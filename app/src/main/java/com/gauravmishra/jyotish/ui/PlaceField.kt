@@ -59,34 +59,7 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
     val appCtx = androidx.compose.ui.platform.LocalContext.current.applicationContext
     LaunchedEffect(query, places) {
         delay(150)
-        val p = places ?: run { results = emptyList(); return@LaunchedEffect }
-        val q = query
-        PlaceSearchDebug.note("$tag start '$q'")
-        // towns from the bundled list, then villages and small towns of India and Nepal ("Rampur, Moradabad" narrows by
-        // district), worked out together off the main thread and shown in one step
-        try {
-            val found = withContext(Dispatchers.IO) {
-                val towns = p.search(q, 6)
-                PlaceSearchDebug.note("$tag '$q' towns ${towns.size}")
-                val more = if (q.trim().length >= 3) try {
-                    Villages.search(appCtx, q, p.countryNames, maxOf(4, 10 - towns.size))
-                } catch (e: kotlinx.coroutines.CancellationException) {
-                    throw e
-                } catch (e: Throwable) {
-                    android.util.Log.e("PLACES", "village search Exception", e)
-                    PlaceSearchDebug.note("$tag '$q' error $e")
-                    emptyList()
-                } else emptyList()
-                PlaceSearchDebug.note("$tag '$q' villages ${more.size}")
-                android.util.Log.i("PLACES", "'$q': ${towns.size} towns, ${more.size} villages")
-                towns + more.filter { v -> towns.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
-            }
-            results = found
-            PlaceSearchDebug.note("$tag '$q' shown ${found.size}")
-        } catch (e: kotlinx.coroutines.CancellationException) {
-            PlaceSearchDebug.note("$tag '$q' cancelled")
-            throw e
-        }
+        results = places?.let { searchPlaces(appCtx, it, query) } ?: emptyList()
     }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         OutlinedTextField(query, { query = it }, label = { Text(stringResource(R.string.place_hint)) }, singleLine = true,
@@ -109,9 +82,20 @@ fun PlaceField(chosen: Place?, loadPlaces: suspend () -> Places, onChoose: (Plac
     }
 }
 
-/** The last place search, for tests and the log. */
-object PlaceSearchDebug {
-    private val events = java.util.concurrent.ConcurrentLinkedDeque<String>()
-    fun note(s: String) { events.add("${System.currentTimeMillis() % 100000} $s"); while (events.size > 30) events.pollFirst() }
-    val last: String get() = events.joinToString(" / ")
+/**
+ * Towns from the bundled list, then villages and small towns of India and Nepal ("Rampur, Moradabad" narrows by
+ * district), worked out together off the main thread. Used by every place box (birthplace, residence, Muhurta, Today).
+ */
+suspend fun searchPlaces(ctx: android.content.Context, p: Places, q: String, towns: Int = 6): List<Place> = withContext(Dispatchers.IO) {
+    val found = p.search(q, towns)
+    val more = if (q.trim().length >= 3) try {
+        Villages.search(ctx, q, p.countryNames, maxOf(4, 10 - found.size))
+    } catch (e: kotlinx.coroutines.CancellationException) {
+        throw e
+    } catch (e: Throwable) {
+        android.util.Log.e("PLACES", "village search Exception", e)
+        emptyList()
+    } else emptyList()
+    android.util.Log.i("PLACES", "'$q': ${found.size} towns, ${more.size} villages")
+    found + more.filter { v -> found.none { it.name == v.name && kotlin.math.abs(it.lat - v.lat) < 0.02 } }
 }
