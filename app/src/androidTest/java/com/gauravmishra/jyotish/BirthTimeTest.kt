@@ -36,7 +36,7 @@ class BirthTimeTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
             rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.onNodeWithTag("tool_birth_time").performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("tool_birth_time"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_birth_time").performScrollTo().performClick()
             rule.onNodeWithTag("bt_window_15").performClick()
             rule.onNodeWithTag("bt_kind_marriage").performClick()
             rule.onNodeWithTag("bt_date").performTextInput("14-02-2016")

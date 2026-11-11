@@ -329,6 +329,18 @@ def build(c):
                             para(bi("Parallels within 1°:", "1° के भीतर समांतर:")), items(pars or [bi("none", "कोई नहीं")])],
                  "note": bi("Harmonic 9 multiplies each longitude by 9; the draconic chart counts from the North Node; Fagan-Bradley is the Western sidereal zodiac.",
                             "हार्मोनिक 9 हर देशांतर को 9 से गुणा करता है; ड्रैकोनिक कुंडली उत्तर नोड से गिनती है; फ़ेगन-ब्रैडली पाश्चात्य निरयण राशिचक्र है।")})
+    # secondary, tertiary and minor progressions to today
+    age = (swe.julday(now.year, now.month, now.day, 12.0) - jd)
+    TM = 27.321582
+    sets = (("Secondary (a day for a year)", "द्वितीयक (एक दिन = एक वर्ष)", jd + age / 365.2422),
+            ("Tertiary (a day for a month)", "तृतीयक (एक दिन = एक माह)", jd + age / TM),
+            ("Minor (a month for a year)", "लघु (एक माह = एक वर्ष)", jd + age / 365.2422 * TM))
+    prog = [_positions(x) for _, _, x in sets]
+    rows = [[_p(p)] + [_s(pr[p]["lon"]) for pr in prog] for p in ("Sun", "Moon", "Mercury", "Venus", "Mars")]
+    secs.append({"key": "w_progressions", "title": bi("Western: progressions today", "पाश्चात्य: आज की प्रगति"),
+                 "blocks": [table([bi("Planet", "ग्रह")] + [bi(a, b) for a, b, _ in sets], rows)],
+                 "note": bi("Tertiary uses one day after birth for each tropical month of life (27.32 days); minor uses one month after birth for each year.",
+                            "तृतीयक में जीवन के हर उष्णकटिबंधीय माह (27.32 दिन) के लिए जन्म के बाद का एक दिन; लघु में हर वर्ष के लिए जन्म के बाद का एक माह।")})
     # Aries ingress (mundane) for the current year at the birthplace
     pl = c["meta"]["place"]
     jd_i = swe.solcross_ut(0.0, swe.julday(now.year, 3, 1, 0.0), swe.FLG_SWIEPH) + 0.0007   # a minute after, so the Sun reads Aries 0°

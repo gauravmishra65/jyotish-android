@@ -37,7 +37,7 @@ class NotesTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
             rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.onNodeWithTag("tool_notes").performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("tool_notes"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_notes").performScrollTo().performClick()
             rule.onNodeWithTag("nb_notes").performTextInput("Prefers Hindi reports")
             rule.onNodeWithTag("nb_kind_marriage").performClick()
             rule.onNodeWithTag("nb_date").performTextInput("14-02-2016")
@@ -51,7 +51,7 @@ class NotesTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
             rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.onNodeWithTag("tool_birth_time").performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("tool_birth_time"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_birth_time").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("2016-02-14", substring = true), timeoutMillis = 5_000)
         }
     }
