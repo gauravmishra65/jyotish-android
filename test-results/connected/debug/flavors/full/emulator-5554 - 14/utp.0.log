@@ -1,0 +1,70 @@
+INFO: Constructing runner from config.
+INFO: Configuring Android Instrumentation driver: android_instrumentation_runtime {
+  instrumentation_info {
+    app_package: "com.gauravmishra.jyotish"
+    test_package: "com.gauravmishra.jyotish.test"
+    test_runner_class: "androidx.test.runner.AndroidJUnitRunner"
+  }
+  instrumentation_args {
+    args_map {
+      key: "additionalTestOutputDir"
+      value: "/sdcard/Android/media/com.gauravmishra.jyotish/additional_test_output"
+    }
+  }
+}
+am_instrument_timeout: 31536000
+
+INFO: Configuring AndroidTestApkInstallerPlugin: apks_to_install {
+  apk_paths: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/apk/full/debug/app-full-debug.apk"
+  install_options {
+  }
+  uninstall_after_test: true
+}
+apks_to_install {
+  apk_paths: "/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/apk/androidTest/full/debug/app-full-debug-androidTest.apk"
+  install_options {
+  }
+  uninstall_after_test: true
+}
+instrumentation_target_package_id: "com.gauravmishra.jyotish"
+
+INFO: No installables found in test fixture. Nothing to install.
+INFO: Installing [/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/apk/full/debug/app-full-debug.apk] on device emulator-5554.
+INFO: Installing [/home/runner/work/jyotish-android/jyotish-android/app/build/outputs/apk/androidTest/full/debug/app-full-debug-androidTest.apk] on device emulator-5554.
+INFO: Start logcat streaming.
+INFO: Running Android Instrumentation driver.
+INFO: Copying files from device to host: /sdcard/Android/media/com.gauravmishra.jyotish/additional_test_output to /home/runner/work/jyotish-android/jyotish-android/app/build/outputs/connected_android_test_additional_output/fullDebugAndroidTest/connected/emulator-5554 - 14
+INFO: Stop logcat streaming.
+INFO: Uninstalling com.gauravmishra.jyotish for device emulator-5554.
+INFO: Uninstalling com.gauravmishra.jyotish.test for device emulator-5554.
+INFO: Execute com.gauravmishra.jyotish.AccessibilityTest.mainScreensHaveLabelledFullSizeTargets: PASSED
+INFO: Execute com.gauravmishra.jyotish.BackupTest.csvExport: PASSED
+INFO: Execute com.gauravmishra.jyotish.BackupTest.roundTripAndWrongPassword: PASSED
+INFO: Execute com.gauravmishra.jyotish.BirthTimeTest.spansWithEvents: PASSED
+INFO: Execute com.gauravmishra.jyotish.ChineseTest.ziWeiNineStarTongShu: PASSED
+INFO: Execute com.gauravmishra.jyotish.DetailsTest.settingsHaveReportCredits: PASSED
+INFO: Execute com.gauravmishra.jyotish.DetailsTest.moreTabShowsAllSections: PASSED
+INFO: Execute com.gauravmishra.jyotish.FengShuiTest.yearGridAndHouse: PASSED
+INFO: Execute com.gauravmishra.jyotish.FlowTest.welcomeAddProfileAndSeeTheChartOnHome: PASSED
+INFO: Execute com.gauravmishra.jyotish.FlowTest.hindiInterfaceShowsHindiNames: PASSED
+INFO: Execute com.gauravmishra.jyotish.ForecastTest.fourAreasYearByYear: PASSED
+INFO: Execute com.gauravmishra.jyotish.ForecastTest.hindiForecast: PASSED
+INFO: Execute com.gauravmishra.jyotish.HelpTest.helpShareRateAndTourReplay: PASSED
+INFO: Execute com.gauravmishra.jyotish.HelpTest.hindiHelp: PASSED
+INFO: Execute com.gauravmishra.jyotish.MilanTest.milanShowsTheEngineScore: PASSED
+INFO: Execute com.gauravmishra.jyotish.MuhurtaTest.findsTheSameDaysAsTheDesktop: PASSED
+INFO: Execute com.gauravmishra.jyotish.NotesTest.notesAndEventsReachBirthTimeCheck: PASSED
+INFO: Execute com.gauravmishra.jyotish.NumerologyTest.numbersGridAndNameOptions: PASSED
+INFO: Execute com.gauravmishra.jyotish.PlacesTest.oldNamesAndVillages: PASSED
+INFO: Execute com.gauravmishra.jyotish.PredictionTest.todayAndYear: PASSED
+INFO: Execute com.gauravmishra.jyotish.ProfilePickerTest.pickSavedAndAddNew: PASSED
+INFO: Execute com.gauravmishra.jyotish.QuestionTest.numberTools: PASSED
+INFO: Execute com.gauravmishra.jyotish.QuestionTest.prashnaAndKp: PASSED
+INFO: Execute com.gauravmishra.jyotish.ReportTest.focusedReports: PASSED
+INFO: Execute com.gauravmishra.jyotish.ReportTest.fullReadingInEnglishAndHindi: PASSED
+INFO: Execute com.gauravmishra.jyotish.SavedAboutTest.savedKundlisSearchGroupsAndOpen: PASSED
+INFO: Execute com.gauravmishra.jyotish.SavedAboutTest.myDetailsAndAboutFromSettings: PASSED
+INFO: Execute com.gauravmishra.jyotish.SpikeTest.engineMatchesDesktopSnapshot: PASSED
+INFO: Execute com.gauravmishra.jyotish.TodayTest.todayInHindi: PASSED
+INFO: Execute com.gauravmishra.jyotish.TodayTest.todayDashboard: PASSED
+INFO: Execute com.gauravmishra.jyotish.TodayTest.darkThemeAndTheNewChartSections: PASSED

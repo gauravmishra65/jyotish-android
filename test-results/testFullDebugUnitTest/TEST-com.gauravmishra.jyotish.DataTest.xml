@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.DataTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-11T05:55:32.847Z" hostname="runnervmwuk1x" time="1.195">
+  <properties/>
+  <testcase name="hindiSearchUsesDevanagariNames" classname="com.gauravmishra.jyotish.DataTest" time="0.357"/>
+  <testcase name="nearestPlaceGivesTheTimeZoneForTypedCoordinates" classname="com.gauravmishra.jyotish.DataTest" time="0.198"/>
+  <testcase name="placeListLoadsAndFindsIndianTowns" classname="com.gauravmishra.jyotish.DataTest" time="0.177"/>
+  <testcase name="oldNamesAndOtherSpellingsFindTheTown" classname="com.gauravmishra.jyotish.DataTest" time="0.221"/>
+  <testcase name="datesAndTimesAreParsedStrictly" classname="com.gauravmishra.jyotish.DataTest" time="0.014"/>
+  <testcase name="searchIgnoresAccentsAndCase" classname="com.gauravmishra.jyotish.DataTest" time="0.084"/>
+  <testcase name="stateAndCountryNarrowTheSearch" classname="com.gauravmishra.jyotish.DataTest" time="0.088"/>
+  <testcase name="homeSummaryReadsARealEngineChart" classname="com.gauravmishra.jyotish.DataTest" time="0.039"/>
+  <testcase name="profilesAndChartCacheRoundTrip" classname="com.gauravmishra.jyotish.DataTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

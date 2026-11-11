@@ -1,0 +1,251 @@
+11-11 06:06:31.118  4782  4864 I TestRunner: started: notesAndEventsReachBirthTimeCheck(com.gauravmishra.jyotish.NotesTest)
+11-11 06:06:31.131  4782  4864 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@3dd549d]
+11-11 06:06:31.164  4782  4864 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:06:31.171  3011  6343 I DialerTaskExecutor: com.android.voicemail.impl.scheduling.TaskExecutor$WorkerThreadHandler.handleMessage:221 executing task com.android.voicemail.impl.ActivationTask@68724f2 [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.172  3011  3011 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:41 Impression: VVM_ACTIVATION_STARTED
+11-11 06:06:31.181   846   919 D SplashScreenView: Build android.window.SplashScreenView{e5df4e7 V.E...... ......ID 0,0-0,0}
+11-11 06:06:31.181   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:06:31.181   846   919 D SplashScreenView: Branding: view: android.view.View{49d894 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:06:31.186  3011  6343 I DialerPreOMigrationHandler: com.android.voicemail.impl.PreOMigrationHandler.migrate:76 ComponentInfo{com.android.phone/com.android.services.telephony.TelephonyConnectionService}, 1, UserHandle{0} already migrated [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.190  3011  6343 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-11 06:06:31.191  3011  6343 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-11 06:06:31.284  3011  6343 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-11 06:06:31.365   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:31.385   521   543 W ziparchive: Unable to open '/data/app/~~WAUgnRklORx1_NlYsUDpzA==/com.gauravmishra.jyotish.test-lRJO1KqOqfCbMaWSoMYjAg==/base.dm': No such file or directory
+11-11 06:06:31.387   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +1s53ms
+11-11 06:06:31.401  3011  6483 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 23]" ]
+11-11 06:06:31.401  3011  6483 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 11]" ]
+11-11 06:06:31.410  5177  5177 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-11 06:06:31.489  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: PRE_ON_CREATE
+11-11 06:06:31.490  4782  4782 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-11 06:06:31.498  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: CREATED
+11-11 06:06:31.499  4782  4782 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.gauravmishra.jyotish.MainActivity@fbba536
+11-11 06:06:31.502  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: STARTED
+11-11 06:06:31.502  4782  4782 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.gauravmishra.jyotish.MainActivity@fbba536
+11-11 06:06:31.504  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: RESUMED
+11-11 06:06:31.507  4782  4782 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.gauravmishra.jyotish.MainActivity@fbba536
+11-11 06:06:31.543  3011  6483 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:06:31.544  3011  6483 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-11 06:06:31.551  3011  6343 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:292 VVM content provider configured - vvm_type_cvvm PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.551  3011  6343 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.updateVoicemailsWithIccId:477 conversion disabled [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.554  3011  6343 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_ACTIVATING PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.560  3011  6343 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-11 06:06:31.571  3011  6343 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-11 06:06:31.608  4782  4782 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-11 06:06:31.821   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@92f51cc
+11-11 06:06:31.828   521  2156 W InputManager-JNI: Input channel object '1a27548 Splash Screen com.gauravmishra.jyotish.test (client)' was disposed without first being removed with the input manager!
+11-11 06:06:31.867  3011  3033 I .android.dialer: Background young concurrent copying GC freed 104198(4212KB) AllocSpace objects, 2(104KB) LOS objects, 44% free, 5183KB/9317KB, paused 46us,20us total 310.696ms
+11-11 06:06:31.925  3011  6482 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:06:31.925  3011  6482 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-11 06:06:31.932  3011  6343 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:339 sending an activation request [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:31.948  1059  1090 D SmsNumberUtils: enter filterDestAddr. destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-11 06:06:31.961  1059  1090 D SmsNumberUtils: destAddr is not formatted.
+11-11 06:06:31.962  1059  1090 D SmsNumberUtils: leave filterDestAddr, new destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-11 06:06:31.983  3011  6343 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:46 Impression: CVVM_SEND_VVM_SMS
+11-11 06:06:32.129   521   543 W ziparchive: Unable to open '/data/app/~~H1xBk1PBmtdzV0FArQeqDQ==/com.gauravmishra.jyotish-MmBuy4mdSCvZB4XBNgH-tg==/base.dm': No such file or directory
+11-11 06:06:32.130   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish/.MainActivity for user 0: +957ms
+11-11 06:06:32.153   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@dbd107e
+11-11 06:06:32.154   521  2156 W InputManager-JNI: Input channel object '9778e9a Splash Screen com.gauravmishra.jyotish (client)' was disposed without first being removed with the input manager!
+11-11 06:06:32.166  5177  5177 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@9c4886
+11-11 06:06:32.268   521  1988 W InputManager-JNI: Input channel object '4d396ea com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:06:32.501  3011  3011 I DialerStatusSmsFetcher: com.android.voicemail.impl.sms.StatusSmsFetcher.onReceive:106 Request SMS successfully sent [CONTEXT enable_persistent_logger=true ]
+11-11 06:06:32.640  4782  4782 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-11 06:06:32.640  4782  4782 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-11 06:06:33.212  4782  4782 I ImeTracker: com.gauravmishra.jyotish:f0c9158f: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-11 06:06:33.212  4782  4782 D InsetsController: show(ime(), fromIme=false)
+11-11 06:06:33.212  4782  4782 I ImeTracker: com.gauravmishra.jyotish:f0c9158f: onFailed at PHASE_CLIENT_REQUEST_IME_SHOW
+11-11 06:06:33.217  4782  4782 I AssistStructure: Flattened final assist data: 640 bytes, containing 1 windows, 4 views
+11-11 06:06:33.217  4782  4790 I vmishra.jyotish: Background young concurrent copying GC freed 619459(16MB) AllocSpace objects, 11(496KB) LOS objects, 9% free, 61MB/68MB, paused 8.566ms,135us total 426.079ms
+11-11 06:06:33.451  4782  4901 D EGL_emulation: app_time_stats: avg=148.18ms min=79.87ms max=328.84ms count=9
+11-11 06:06:33.471   846   846 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+11-11 06:06:33.709  5360  5360 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+11-11 06:06:33.809  4782  4782 I AssistStructure: Flattened final assist data: 660 bytes, containing 1 windows, 4 views
+11-11 06:06:33.928  4782  4782 I ImeTracker: com.gauravmishra.jyotish:74cc46d6: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-11 06:06:33.928  4782  4782 D InsetsController: show(ime(), fromIme=false)
+11-11 06:06:33.929  4782  4782 I ImeTracker: com.gauravmishra.jyotish:74cc46d6: onFailed at PHASE_CLIENT_REQUEST_IME_SHOW
+11-11 06:06:34.454  4782  4901 D EGL_emulation: app_time_stats: avg=82.20ms min=25.37ms max=298.31ms count=12
+11-11 06:06:34.590   846   919 D SplashScreenView: Build android.window.SplashScreenView{426f463 V.E...... ......ID 0,0-0,0}
+11-11 06:06:34.590   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:06:34.590   846   919 D SplashScreenView: Branding: view: android.view.View{a9e6860 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:06:34.617  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: PAUSED
+11-11 06:06:34.618  4782  4782 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.gauravmishra.jyotish.MainActivity@fbba536
+11-11 06:06:34.625   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:35.008   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:35.135  5177  5195 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-11 06:06:35.142  1782  2547 I WorkerManager: dispose()
+11-11 06:06:35.142  1782  2547 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-11 06:06:35.368   846   864 I ndroid.systemui: NativeAlloc concurrent copying GC freed 67821(3866KB) AllocSpace objects, 3(60KB) LOS objects, 50% free, 18MB/36MB, paused 49us,40us total 531.295ms
+11-11 06:06:35.479   521  1716 W AppSearchIcing: icing-search-engine.cc:283: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-11 06:06:35.484  1095  2062 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=z1{delegate=s1{logId=53, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=X1.T@e9bdd71
+11-11 06:06:35.486  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:35.486  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:35.505  1696  2036 I AiAiEcho: Predicting[0]:
+11-11 06:06:35.505  1696  2036 I AiAiEcho: EchoTargets:
+11-11 06:06:35.505  1696  2036 I AiAiEcho: Filtered by AiAi flag check:
+11-11 06:06:35.505  1696  2036 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-11 06:06:35.506  1696  2036 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+11-11 06:06:35.507  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: STOPPED
+11-11 06:06:35.507  4782  4782 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.gauravmishra.jyotish.MainActivity@fbba536
+11-11 06:06:35.590  1782  1782 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-11 06:06:35.814  4782  4790 I vmishra.jyotish: Background concurrent copying GC freed 1251402(37MB) AllocSpace objects, 10(1384KB) LOS objects, 32% free, 48MB/72MB, paused 386us,40us total 2.365s
+11-11 06:06:35.821  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:35.832  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:35.881  4782  4782 D AutofillManager: onActivityFinishing(): calling cancelLocked()
+11-11 06:06:35.882  1616  1616 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:215448260
+11-11 06:06:35.887  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@fbba536 in: DESTROYED
+11-11 06:06:35.887  4782  4782 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-11 06:06:35.912  4782  4864 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:06:35.914  4782  4782 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@2142d20
+11-11 06:06:36.071   521  2358 W InputManager-JNI: Input channel object 'b6a58f9 com.gauravmishra.jyotish/com.gauravmishra.jyotish.MainActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(PG:5)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(PG:16)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(PG:14)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.x.<init>(PG:7)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.akd.b(PG:15)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at dagger.a.e.b(PG:1)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.a.a.a(PG:3)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.f(Unknown Source:2541)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.ok.b(PG:1)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(PG:2)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.f.a(PG:2)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dx.a(PG:1)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.common.util.concurrent.cv.run(PG:4)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.common.util.concurrent.dz.run(PG:1)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:06:36.073  1782  2498 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:06:36.093  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.098  4782  4782 I Choreographer: Skipped 34 frames!  The application may be doing too much work on its main thread.
+11-11 06:06:36.138  1095  1095 D SearchTargetUtil:  query= size=15
+11-11 06:06:36.157  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=sams club seiko chronograph discount,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=sams club seiko chronograph discount searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: faaa15d2-4104-4263-b235-23bcfb057470
+11-11 06:06:36.157  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=ann lawani ice detention louisiana,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=ann lawani ice detention louisiana searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 8dd827ce-ce8f-4abc-9c2c-bdb4e31f6220
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=michigan state duke basketball,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=michigan state duke basketball searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 44daef20-3f6d-41f6-bdd8-6760a89a5dc8
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=sza coachella 2027,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=sza coachella 2027 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: a3d30951-e239-4fe4-a783-a7fdce9638d1
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=glorybound roblox codes,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=glorybound roblox codes searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 915323d4-1a39-4238-a981-b69159a4b38c
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=vitamin k deficiency bleeding,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=vitamin k deficiency bleeding searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 76827004-bd18-4b8d-b3f5-6c3d4d2086d9
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=spacex stock price forecast 2027,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=spacex stock price forecast 2027 searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 58a5efb3-6b51-4462-b3c9-02a657d5b44f
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=colts trade deadline jonathan taylor,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=colts trade deadline jonathan taylor searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: f10dac9a-5df5-45d4-b0c2-6b6c6d6c12ff
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=emily hanson miller,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=emily hanson miller searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 14fd0a45-9149-4422-b43a-692f9bc0e0d5
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=sofia franklyn alex cooper,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=sofia franklyn alex cooper searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 311e9299-5ff2-4a6d-bf48-aa254e617dd5
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=bioware,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=bioware searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: a07cb399-01a2-413b-80bd-7dd2473d0dee
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=walmart black friday sale,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=walmart black friday sale searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: c5cc6234-3243-40a5-a9b1-bc379dc11ff4
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=thunder vs trail blazers prediction,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=thunder vs trail blazers prediction searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 45016995-484e-43d0-b2b1-39a2a237e228
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=scott laux blue angels removal,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=scott laux blue angels removal searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 4b417ca2-2383-48f5-a439-d5bb69bcba82
+11-11 06:06:36.158  1095  1095 D SearchTargetUtil: layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=soul train awards red carpet,group_id=web257462,response_id=5b10cd9e-d32e-40fd-b89a-911bc3799f10,support_query_builder=false,} searchAction=soul train awards red carpet searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: b5906c6d-a47d-4c53-9207-af1e3aac5871
+11-11 06:06:36.181  4782  4782 I ImeTracker: com.gauravmishra.jyotish:31f4a7f1: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+11-11 06:06:36.211  4782  4782 I ImeTracker: com.gauravmishra.jyotish:31f4a7f1: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-11 06:06:36.214  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.219  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.221  1782  2547 I A       : Merging legacy hotword config map with new proto.
+11-11 06:06:36.246  1782  2547 I A       : Adding from config to map. Locale: cmn-Hant-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-11 06:06:36.401   521   547 W system_server: Long monitor contention with owner binder:521_12 (1940) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1133) waiters=2 in void com.android.server.wm.WindowAnimator.lambda$new$1(long) for 162ms
+11-11 06:06:36.439  1782  2547 I A       : Adding from config to map. Locale: id-ID modelPrefix: x_google Location:cfffcc1a4c1c084c003c8eb27f73d770 isSpeakerIdSupported: true
+11-11 06:06:36.439  1782  2547 I A       : Adding from config to map. Locale: ko-KR modelPrefix: x_google Location:0b132163a2eb2c1194b202067475724b isSpeakerIdSupported: true
+11-11 06:06:36.443  1095  1107 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 29920(2139KB) AllocSpace objects, 1(16KB) LOS objects, 49% free, 5807KB/11MB, paused 76us,21us total 605.774ms
+11-11 06:06:36.452  1782  2547 I A       : Skipping. Expected model: 2 Found: 1
+11-11 06:06:36.452  1782  2547 I A       : Adding from config to map. Locale: zh-TW modelPrefix: x_google Location:4e7cae00daee30ec565c34e3aa67a51f isSpeakerIdSupported: true
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.452  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.453  1095  1109 W System  : A resource failed to call release.
+11-11 06:06:36.454  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.455   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@e2b41ea
+11-11 06:06:36.461   521  2156 W InputManager-JNI: Input channel object '5db8a76 Splash Screen com.gauravmishra.jyotish.test (client)' was disposed without first being removed with the input manager!
+11-11 06:06:36.471  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.493  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.511  5177  5177 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@4eeae37
+11-11 06:06:36.513   521  2166 W InputManager-JNI: Input channel object '5997d26 com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:06:36.570  1782  2444 I A       : Creating in-process transport to InProcessServerAddress[com.google.android.googlequicksearchbox/OnDeviceServer[Hash:133877624]]
+11-11 06:06:36.639  1782  2498 I A       : group apa_head_suggest present without account in *
+11-11 06:06:36.640  1782  2498 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.069S, appVersion = 13.17.16.23, status = OK, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT4M22.276S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT2M25.247S (ONE_TO_FIVE_MINUTES))
+11-11 06:06:36.755   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:36.758  1782  2547 I MicroDetectionState: Should stop hotword detection immediately - true
+11-11 06:06:36.761  1782  2547 I MicroDetectionState: Should stop hotword detection immediately - true
+11-11 06:06:36.761  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.762  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:36.831  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: PRE_ON_CREATE
+11-11 06:06:36.833  4782  4782 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-11 06:06:36.864   846   919 D SplashScreenView: Build android.window.SplashScreenView{c384955 V.E...... ......ID 0,0-0,0}
+11-11 06:06:36.864   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:06:36.864   846   919 D SplashScreenView: Branding: view: android.view.View{70d4f6a G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:06:36.933  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: CREATED
+11-11 06:06:36.935  4782  4782 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.gauravmishra.jyotish.MainActivity@cfe38a5
+11-11 06:06:36.941  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: STARTED
+11-11 06:06:36.942  4782  4782 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.gauravmishra.jyotish.MainActivity@cfe38a5
+11-11 06:06:36.945  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: RESUMED
+11-11 06:06:36.947  4782  4782 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.gauravmishra.jyotish.MainActivity@cfe38a5
+11-11 06:06:37.149  4782  4782 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-11 06:06:37.575   521   534 I system_server: NativeAlloc concurrent copying GC freed 189736(5858KB) AllocSpace objects, 4(80KB) LOS objects, 47% free, 26MB/50MB, paused 11.704ms,295us total 967.946ms
+11-11 06:06:37.717   521   543 W ziparchive: Unable to open '/data/app/~~H1xBk1PBmtdzV0FArQeqDQ==/com.gauravmishra.jyotish-MmBuy4mdSCvZB4XBNgH-tg==/base.dm': No such file or directory
+11-11 06:06:37.719   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish/.MainActivity for user 0: +1s102ms
+11-11 06:06:37.751  4782  5251 I OpenGLRenderer: Davey! duration=803ms; Flags=1, FrameTimelineVsyncId=46946, IntendedVsync=315580745902, Vsync=315730745896, InputEventId=0, HandleInputStart=315751523302, AnimationStart=315751610713, PerformTraversalsStart=315751618791, DrawStart=316296196879, FrameDeadline=315597412568, FrameInterval=315742802592, FrameStartTime=16666666, SyncQueued=316340298885, SyncStart=316340681103, IssueDrawCommandsStart=316340929712, SwapBuffers=316342953775, FrameCompleted=316384825366, DequeueBufferDuration=3788, QueueBufferDuration=317488, GpuCompleted=316384825366, SwapBuffersCompleted=316367141475, DisplayPresentTime=0, CommandSubmissionCompleted=316342953775,
+11-11 06:06:37.786  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:37.786  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:37.802   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@8125d1
+11-11 06:06:37.805   521  2358 W InputManager-JNI: Input channel object '4906010 Splash Screen com.gauravmishra.jyotish (client)' was disposed without first being removed with the input manager!
+11-11 06:06:37.838  1095  1148 I ImeTracker: com.google.android.apps.nexuslauncher:747205fd: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+11-11 06:06:37.838  1095  1148 I ImeTracker: com.google.android.apps.nexuslauncher:747205fd: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-11 06:06:37.855  1782  3253 I PBSessionCacheImpl: Deleted sessionId[7839113259728431] from persistence.
+11-11 06:06:37.860  1095  2062 D OneSearchSuggestProvider: Shut down the binder channel
+11-11 06:06:37.861  1095  2003 I IPCThreadState: oneway function results for code 2 on binder at 0x72cef142a1e0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-11 06:06:37.914  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:37.919  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:37.920  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:06:37.921  1782  2547 I MicroDetectionState: Should stop hotword detection immediately - true
+11-11 06:06:37.921  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:37.921  1782  2547 I A       : Using proto config with mendel
+11-11 06:06:38.289  4782  4782 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-11 06:06:38.289  4782  4782 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-11 06:06:38.838   846   919 D SplashScreenView: Build android.window.SplashScreenView{a3d106c V.E...... ......ID 0,0-0,0}
+11-11 06:06:38.838   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:06:38.838   846   919 D SplashScreenView: Branding: view: android.view.View{6891635 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:06:38.870  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: PAUSED
+11-11 06:06:38.872  4782  4782 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.gauravmishra.jyotish.MainActivity@cfe38a5
+11-11 06:06:38.875   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:39.319  4782  4790 W vmishra.jyotish: Suspending all threads took: 19.128ms
+11-11 06:06:39.346   521   521 I ResourceTimer: GetResourceValue count=10622 pvalues=2000,13000,37000,110000
+11-11 06:06:39.354   521   521 I ResourceTimer: RetrieveAttributes count=17542 pvalues=1000,2000,6000,40000
+11-11 06:06:39.399  5177  5195 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-11 06:06:39.452  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: STOPPED
+11-11 06:06:39.453  4782  4782 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.gauravmishra.jyotish.MainActivity@cfe38a5
+11-11 06:06:39.456   846   846 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+11-11 06:06:39.686   521   543 W ziparchive: Unable to open '/data/app/~~WAUgnRklORx1_NlYsUDpzA==/com.gauravmishra.jyotish.test-lRJO1KqOqfCbMaWSoMYjAg==/base.dm': No such file or directory
+11-11 06:06:39.729   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +854ms
+11-11 06:06:39.741   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:06:39.749   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@88db917
+11-11 06:06:39.754   521  1936 W InputManager-JNI: Input channel object 'c2fade9 Splash Screen com.gauravmishra.jyotish.test (client)' was disposed without first being removed with the input manager!
+11-11 06:06:39.869   521  1716 W AppSearchIcing: icing-search-engine.cc:283: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-11 06:06:39.896  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:39.896  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:06:39.939  1095  2062 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=z1{delegate=s1{logId=57, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=X1.T@9a700cb
+11-11 06:06:39.964   521   546 W system_server: Long monitor contention with owner binder:521_19 (2161) at int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, long, java.lang.String, boolean, int, java.lang.String, android.app.IApplicationThread, java.lang.String, int)(ActivityManagerService.java:13404) waiters=0 in void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean) for 210ms
+11-11 06:06:40.066  1696  2036 I AiAiEcho: Predicting[0]:
+11-11 06:06:40.070  1696  2036 I AiAiEcho: EchoTargets:
+11-11 06:06:40.070  1696  2036 I AiAiEcho: Filtered by AiAi flag check:
+11-11 06:06:40.070  1696  2036 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-11 06:06:40.071  1696  2036 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+11-11 06:06:40.077  4782  4790 I vmishra.jyotish: Background young concurrent copying GC freed 809010(22MB) AllocSpace objects, 28(6948KB) LOS objects, 21% free, 57MB/72MB, paused 106us,19.589ms total 1.496s
+11-11 06:06:40.132  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@cfe38a5 in: DESTROYED
+11-11 06:06:40.133  4782  4782 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-11 06:06:40.135  4782  4782 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@bffe57
+11-11 06:06:40.218  1782  1782 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-11 06:06:40.232  4782  4864 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@3dd549d]
+11-11 06:06:40.248   521  2107 W InputManager-JNI: Input channel object '4036d3c com.gauravmishra.jyotish/com.gauravmishra.jyotish.MainActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:06:40.256  4782  4782 I Choreographer: Skipped 47 frames!  The application may be doing too much work on its main thread.
+11-11 06:06:40.314  4782  4864 I TestRunner: finished: notesAndEventsReachBirthTimeCheck(com.gauravmishra.jyotish.NotesTest)

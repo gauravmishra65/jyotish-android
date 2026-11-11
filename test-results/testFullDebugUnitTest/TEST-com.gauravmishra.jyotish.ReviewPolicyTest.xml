@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.ReviewPolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-11T05:55:34.557Z" hostname="runnervmwuk1x" time="0.0">
+  <properties/>
+  <testcase name="notBeforeThreeFinishedTasks" classname="com.gauravmishra.jyotish.ReviewPolicyTest" time="0.0"/>
+  <testcase name="atMostThreeAsksEver" classname="com.gauravmishra.jyotish.ReviewPolicyTest" time="0.0"/>
+  <testcase name="thirtyDaysBetweenAsks" classname="com.gauravmishra.jyotish.ReviewPolicyTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

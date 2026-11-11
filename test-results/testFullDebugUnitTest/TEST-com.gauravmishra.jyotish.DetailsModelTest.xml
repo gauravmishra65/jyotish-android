@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.DetailsModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-11T05:55:34.046Z" hostname="runnervmwuk1x" time="0.167">
+  <properties/>
+  <testcase name="lalKitabNeverShowsForbiddenWords" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.024"/>
+  <testcase name="residenceGoesToTheEngineOnlyWhenSet" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.0"/>
+  <testcase name="allSixteenDivisionalChartsWithNames" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.015"/>
+  <testcase name="noSectionShowsForbiddenWords" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.032"/>
+  <testcase name="oldCachedChartHasNoDetails" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.043"/>
+  <testcase name="allSectionsPresentInBothLanguages" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.011"/>
+  <testcase name="navamsaChartMovesPlanetsToTheirD9Signs" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.03"/>
+  <testcase name="avakahadaGivesTheNameSyllable" classname="com.gauravmishra.jyotish.DetailsModelTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

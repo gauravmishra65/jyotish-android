@@ -1,0 +1,53 @@
+11-11 06:08:02.606  4782  4864 I TestRunner: started: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)
+11-11 06:08:02.742  5422  7118 I ChimeraConfigurator: Detected pending changes for urgent request: [vision.ocr]. Pending module sets: container:2318189190800+mlkit.ocr.common,tflite_dynamite:2640104055100800+tflite_dynamite,vision_ocr:2316024025100000+vision.ocr
+11-11 06:08:02.792  5422  7118 I GmsDebugLogger: [73] 1801
+11-11 06:08:02.819  5422  7118 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+11-11 06:08:02.819  5422  7118 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800]
+11-11 06:08:02.833  5422  7118 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-11 06:08:02.834  5422  7118 I GmsDebugLogger: [83] 1 [vision.ocr]
+11-11 06:08:02.839  5422  7116 W Vision  : Request for optional module download of ocr failed. Request again.
+11-11 06:08:02.840  5422  7116 W Vision  : Would have logged:
+11-11 06:08:02.840  5422  7116 W Vision  : # dsae@37884fe7
+11-11 06:08:02.840  5422  7116 I Vision  : Schedule retrying download ocr at 401496 with backoff 80 seconds
+11-11 06:08:03.059  4782  4790 I vmishra.jyotish: Background concurrent copying GC freed 1008206(28MB) AllocSpace objects, 25(3608KB) LOS objects, 23% free, 79MB/103MB, paused 129us,23us total 2.927s
+11-11 06:08:03.242   521   534 I system_server: NativeAlloc concurrent copying GC freed 131292(4320KB) AllocSpace objects, 13(260KB) LOS objects, 47% free, 26MB/50MB, paused 52us,51us total 203.787ms
+11-11 06:08:04.229   846   846 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+11-11 06:08:07.235   846   846 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+11-11 06:08:07.723   335  7124 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10131 0}
+11-11 06:08:07.725   335  7125 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-11 06:08:07.727   335  7126 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-11 06:08:07.729   335  7125 I resolv  : res_nsend: used send_dg 269 terrno: 0
+11-11 06:08:07.729   335  7125 I resolv  : doQuery: rcode=0, ancount=8, return value=269
+11-11 06:08:07.734   335  7126 I resolv  : res_nsend: used send_dg 173 terrno: 0
+11-11 06:08:07.735   335  7126 I resolv  : doQuery: rcode=0, ancount=8, return value=173
+11-11 06:08:08.183  4782  4864 W python.stderr: /data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/engine_api.py:294: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/ENGINE_VERSION.txt' mode='r' encoding='utf-8'>
+11-11 06:08:08.183  4782  4864 W python.stderr: ResourceWarning: Enable tracemalloc to get the object allocation traceback
+11-11 06:08:08.185  4782  4864 I SPIKE   : {
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "ok": true,
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "mismatches": [],
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "timings_s": {
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "chart_0": 0.782,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "chart_1": 0.413,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "chart_2": 0.374,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "chart_3": 0.458,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "chart_4": 0.466,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "match": 0.001,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "muhurta_3_months": 1.088,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "names": 0.001,
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "forecast_3_years": 1.95
+11-11 06:08:08.185  4782  4864 I SPIKE   :  },
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "import_s": 0.071,
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "python": "3.13.16",
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "engine_version": "astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2",
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "ephe_files": [
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "seas_18.se1",
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "sefstars.txt",
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "semo_18.se1",
+11-11 06:08:08.185  4782  4864 I SPIKE   :   "sepl_18.se1"
+11-11 06:08:08.185  4782  4864 I SPIKE   :  ],
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "base_rates_present": true,
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "tempdir": "\/data\/user\/0\/com.gauravmishra.jyotish\/cache\/chaquopy\/tmp",
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "python_start_ms": 3814,
+11-11 06:08:08.185  4782  4864 I SPIKE   :  "waited_for_engine_ms": 3
+11-11 06:08:08.185  4782  4864 I SPIKE   : }
+11-11 06:08:08.186  4782  4864 I TestRunner: finished: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)

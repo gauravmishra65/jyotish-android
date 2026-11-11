@@ -1,0 +1,1030 @@
+11-11 06:04:02.638  4782  4864 I TestRunner: started: ziWeiNineStarTongShu(com.gauravmishra.jyotish.ChineseTest)
+11-11 06:04:02.650  4782  4864 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@7410482]
+11-11 06:04:02.763  3011  5359 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.isCarrierAppInstalled:637 carrier app not installed in this device [CONTEXT ratelimit_period="1 MINUTES [skipped: 4]" ]
+11-11 06:04:02.763  3011  5359 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-11 06:04:02.792  3011  5359 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-11 06:04:02.817  4782  4864 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:04:02.840   846   919 D SplashScreenView: Build android.window.SplashScreenView{4abb9dd V.E...... ......ID 0,0-0,0}
+11-11 06:04:02.840   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:04:02.840   846   919 D SplashScreenView: Branding: view: android.view.View{dada952 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:04:02.891   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:04:02.996  5422  5422 W gle.android.gms: Long monitor contention with owner queued-work-looper (5486) at void android.app.QueuedWork.processPendingWork()(QueuedWork.java:273) waiters=0 in void android.app.QueuedWork.processPendingWork() for 193ms
+11-11 06:04:03.025  3377  5157 W DG      : [flow devicekey] DroidGuardRunner.newVmProcessForFastSignalCollection(): Fast program not found [CONTEXT service_id=25 ]
+11-11 06:04:03.090  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: PRE_ON_CREATE
+11-11 06:04:03.207  5360  5389 W BpBinder: Large outgoing transaction of 323796 bytes, interface descriptor , code 4
+11-11 06:04:03.269  5422  5534 I SnapshotHandler: Unable to retrieve flag snapshot for com.google.android.gms.esim#com.google.android.gms, using defaults.
+11-11 06:04:03.272  1012  1018 I rkstack.process: Background young concurrent copying GC freed 39455(2485KB) AllocSpace objects, 0(0B) LOS objects, 46% free, 3010KB/5610KB, paused 121us,12us total 291.805ms
+11-11 06:04:03.276  4782  4782 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-11 06:04:03.292  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: CREATED
+11-11 06:04:03.293  4782  4782 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.gauravmishra.jyotish.MainActivity@7fe77e7
+11-11 06:04:03.296  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: STARTED
+11-11 06:04:03.297  4782  4782 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.gauravmishra.jyotish.MainActivity@7fe77e7
+11-11 06:04:03.301  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: RESUMED
+11-11 06:04:03.302  4782  4782 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.gauravmishra.jyotish.MainActivity@7fe77e7
+11-11 06:04:03.310  5422  5534 I EsimModuleInit: onHandleIntent action: com.google.android.gms.chimera.container.CONTAINER_UPDATED [CONTEXT service_id=333 ]
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-11 06:04:03.357  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-11 06:04:03.358  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-11 06:04:03.359  1782  2223 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-11 06:04:03.367  4782  4782 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-11 06:04:03.374  5360  5444 I SemanticLocation: [MDD] ModelBundleMetadata: File not found [CONTEXT service_id=173 ]
+11-11 06:04:03.374  5360  5444 I SemanticLocation: java.io.FileNotFoundException: /data/user/0/com.google.android.gms/files/model_bundle_metadata.pb: open failed: ENOENT (No such file or directory)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at android.app.ContextImpl.openFileInput(ContextImpl.java:745)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at bzxt.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at bzxd.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at bzxd.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at cadn.j(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at cadn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):36)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at cadn.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at com.google.android.gms.semanticlocation.service.SemanticLocationChimeraService.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at cacs.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):68)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.Linux.open(Native Method)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:8063)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-11 06:04:03.374  5360  5444 I SemanticLocation: 	... 22 more
+11-11 06:04:03.435  5422  5422 D BoundBrokerSvc: onBind: Intent { act=com.google.android.mdd.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-11 06:04:03.435  5422  5422 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.mdd.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-11 06:04:03.440  1782  2259 I BlobLobber: Canceling downloads: []
+11-11 06:04:03.446  5422  5482 I Icing   : 6 corpora need re-polling
+11-11 06:04:03.466  5422  5485 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=32
+11-11 06:04:03.467  5422  5606 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=36
+11-11 06:04:03.470  1782  2259 I ModelDownloadListener: Schdedule model download
+11-11 06:04:03.471  1782  2257 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-11 06:04:03.494  1782  2257 I FedAssExpListener: Successfully processed experiments changed.
+11-11 06:04:03.495   335  5645 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10131 0}
+11-11 06:04:03.496   335  5646 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-11 06:04:03.496   335  5646 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7956efcf10
+11-11 06:04:03.497   335  5646 I resolv  : doQuery: rcode=0, ancount=8, return value=260
+11-11 06:04:03.505   335  5647 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-11 06:04:03.505   335  5647 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7916efa430
+11-11 06:04:03.505   335  5647 I resolv  : doQuery: rcode=0, ancount=8, return value=164
+11-11 06:04:03.512  3377  3990 D TrafficStats: tagSocket(111) with statsTag=0x1803, statsUid=10131
+11-11 06:04:03.516  5422  5482 I Icing   : Post-init done
+11-11 06:04:03.519  5422  5530 I EnterpriseLoader: [ConditionsChecker] ZT config not present. [CONTEXT service_id=225 ]
+11-11 06:04:03.530  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:03.536  5360  5360 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-11 06:04:03.541  5422  5540 I MlBenchmarkInstaller: Intent: com.google.android.gms.chimera.container.CONTAINER_UPDATED [CONTEXT service_id=340 ]
+11-11 06:04:03.564  5360  5360 I NearbySharing: ReceiveSurfaceService started [CONTEXT service_id=194 ]
+11-11 06:04:03.569  5422  5553 W libc    : Access denied finding property "ro.hardware.chipname"
+11-11 06:04:03.571  5422  5553 W ChipsetHelper: Unknown chipset! [CONTEXT service_id=301 ]
+11-11 06:04:03.572  5422  5553 I NnApiDriverManager: Registering application with chipset 'unknown' [CONTEXT service_id=301 ]
+11-11 06:04:03.576  5422  5422 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+11-11 06:04:03.577  5422  5422 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+11-11 06:04:03.579  5422  5538 I ChimeraConfigurator: Detected pending changes for urgent request: [mlkit.barcode.ui]. Pending module sets: container:2318189190800+mlkit.barcode.ui+vision.barcode,tflite_dynamite:2640104055100800+tflite_dynamite
+11-11 06:04:03.581  3011  5333 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:51 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 35]" ]
+11-11 06:04:03.581  5422  5540 I NearbySharing: Runtime state initialization complete. Sharing is enabled. [CONTEXT service_id=194 ]
+11-11 06:04:03.583  3011  5333 I DialerCvvmEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.omtp.protocol.cvvm.CvvmEnabledFn.isEnabled:37 disabled by flag [CONTEXT ratelimit_period="1 MINUTES [skipped: 17]" ]
+11-11 06:04:03.583  5422  5422 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+11-11 06:04:03.590  5422  5606 I NearbySharing: onBindSlice failed since shareTargets is empty [CONTEXT service_id=194 ]
+11-11 06:04:03.605  5422  5427 I gle.android.gms: Compiler allocated 4750KB to compile boolean zec.j(int, zdr, java.util.List, zeb)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: DiscoveryNearbyMessagesManager failed to background subscribe [CONTEXT service_id=265 ]
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at bbhk.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):25)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at bbhe.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at dtjy.handleMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at avye.ll(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at avye.dispatchMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at android.os.Looper.loop(Looper.java:294)
+11-11 06:04:03.622  5360  5503 I NearbyDiscovery: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-11 06:04:03.646  5422  5590 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-11 06:04:03.659   521  1763 I RemoteProvisionSysSvc: getRegistration(android.hardware.security.keymint.IRemotelyProvisionedComponent/default)
+11-11 06:04:03.663  1782  2259 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-11 06:04:03.663  5360  5490 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-11 06:04:03.666  5360  5490 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-11 06:04:03.667  5360  5490 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:03.667  5360  5490 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-11 06:04:03.671  5360  5490 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+11-11 06:04:03.671  5360  5490 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-11 06:04:03.673  5360  5490 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:03.676  5360  5490 I NamespaceManager: Package 1 name not found! Using module version.
+11-11 06:04:03.686  5360  5495 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-11 06:04:03.686  5360  5495 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:03.687  5360  5495 I NamespaceManager: Package 1 name not found! Using module version.
+11-11 06:04:03.700  5422  5536 W gle.android.gms: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.nnapi.drivermanager.service.NnApiDriverManagerModuleInitIntentOperation for action com.google.android.gms.chimera.container.CONTAINER_UPDATED (5553) at cvdh cvdh.a(android.content.ContentResolver, android.net.Uri, java.lang.Runnable)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=2 in cvdh cvdh.a(android.content.ContentResolver, android.net.Uri, java.lang.Runnable) for 105ms
+11-11 06:04:03.703  1782  2547 I MicroDetectionWorker: Removing hotword detection due to no account being used.
+11-11 06:04:03.705  1782  2547 I A       : isOpaHotwordEnabled: false
+11-11 06:04:03.705  1782  2547 I A       : Disabling the hotword detector.
+11-11 06:04:03.709  1782  2547 I MicroDetectionState: Should stop hotword detection immediately - true
+11-11 06:04:03.712  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:03.713  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:03.714  5422  5606 I NearbySharing: Granted slice and Uri permissions to android [CONTEXT service_id=194 ]
+11-11 06:04:03.715   521   521 I RegistrationProxy: onServiceConnected: com.android.rkpdapp.service.RemoteProvisioningService
+11-11 06:04:03.718  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:03.720  1782  2547 I MicroDetectionState: Should stop hotword detection immediately - true
+11-11 06:04:03.731   521  1763 I RegistrationProxy: IGetRegistrationCallback.onSuccess
+11-11 06:04:03.737   521  2327 I RemoteProvisionSysSvc: Fetching key 10131 for client 113688885
+11-11 06:04:03.737   521  2327 I RegistrationProxy: getKeyAsync operation started with callback 92051914
+11-11 06:04:03.738  3911  4024 I RkpdRegistrationBinder: Key requested for : android.hardware.security.keymint.IRemotelyProvisionedComponent/default, clientUid: 1017, keyId: 10131, callback: 115239125
+11-11 06:04:03.739  3911  4024 I RkpdRegistrationBinder: Key successfully assigned to client
+11-11 06:04:03.745   521   521 I RemoteProvisionSysSvc: Successfully fetched key for client 113688885
+11-11 06:04:03.752  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:03.763  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:03.773  5422  5553 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-11 06:04:03.811  1782  2227 I A       : NGA enabled in interactor.
+11-11 06:04:03.812  1782  2227 I A       : Nga state changed to NgaStateDetails{state=ENABLED, isSpecialExperience=false}
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:03.824  1782  2259 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:03.830  1782  2227 I A       : NGA enabled in interactor.
+11-11 06:04:03.831   335  5654 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10131 0}
+11-11 06:04:03.838  3377  5157 D TrafficStats: tagSocket(113) with statsTag=0x1809, statsUid=-1
+11-11 06:04:03.857  3377  5157 D TrafficStats: tagSocket(113) with statsTag=0x1809, statsUid=-1
+11-11 06:04:03.886  3377  5157 D TrafficStats: tagSocket(113) with statsTag=0x1809, statsUid=-1
+11-11 06:04:03.959  5422  5553 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-11 06:04:03.961  5422  5553 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-11 06:04:04.017  5422  5482 E native  : E0000 00:00:1794377044.017784    5482 document-store.cc:1358] Failed to update per-doc-data with usage report
+11-11 06:04:04.057  4782  4782 I Choreographer: Skipped 39 frames!  The application may be doing too much work on its main thread.
+11-11 06:04:04.088  4782  4795 I OpenGLRenderer: Davey! duration=763ms; Flags=1, FrameTimelineVsyncId=14911, IntendedVsync=161947418714, Vsync=161997418712, InputEventId=0, HandleInputStart=162000053418, AnimationStart=162000057163, PerformTraversalsStart=162000060361, DrawStart=162580698449, FrameDeadline=161964085380, FrameInterval=162000028871, FrameStartTime=16666666, SyncQueued=162690678839, SyncStart=162690928035, IssueDrawCommandsStart=162691084986, SwapBuffers=162693661274, FrameCompleted=162711319760, DequeueBufferDuration=5057, QueueBufferDuration=697166, GpuCompleted=162711262940, SwapBuffersCompleted=162711319760, DisplayPresentTime=0, CommandSubmissionCompleted=162693661274,
+11-11 06:04:04.106   521   543 W ziparchive: Unable to open '/data/app/~~H1xBk1PBmtdzV0FArQeqDQ==/com.gauravmishra.jyotish-MmBuy4mdSCvZB4XBNgH-tg==/base.dm': No such file or directory
+11-11 06:04:04.114   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish/.MainActivity for user 0: +1s275ms
+11-11 06:04:04.135  5360  5478 W .gms.persistent: Long monitor contention with owner NearbyMessages (5414) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:600) waiters=0 in android.os.Message android.os.MessageQueue.next() for 142ms
+11-11 06:04:04.167  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:04:04.211  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 1, indexed 0, rejected 0
+11-11 06:04:04.249  1782  3255 I PBSessionCacheImpl: Deleted sessionId[7839113259728292] from persistence.
+11-11 06:04:04.250   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@d0bab4c
+11-11 06:04:04.257  1095  2062 D OneSearchSuggestProvider: Shut down the binder channel
+11-11 06:04:04.257  1095  2431 I IPCThreadState: oneway function results for code 2 on binder at 0x72cef143dfb0 will be dropped but finished with status UNKNOWN_TRANSACTION
+11-11 06:04:04.265  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:04.266  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:04.266  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.267  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.267  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.267  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.267  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.267  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.268  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.268  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.268  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.268  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.268  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.271  1095  1148 I ImeTracker: com.google.android.apps.nexuslauncher:12dab010: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+11-11 06:04:04.272  1703  3660 D CompatibilityChangeReporter: Compat change id reported: 183155436; UID 10132; state: DISABLED
+11-11 06:04:04.272   521   602 I ImeTracker: com.google.android.apps.nexuslauncher:12dab010: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-11 06:04:04.287   521  2145 W InputManager-JNI: Input channel object 'f7fd668 Splash Screen com.gauravmishra.jyotish (client)' was disposed without first being removed with the input manager!
+11-11 06:04:04.300  5422  5538 I GmsDebugLogger: [73] 1801
+11-11 06:04:04.301  5422  5482 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-11 06:04:04.306  5422  5606 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-11 06:04:04.306  5422  5470 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-11 06:04:04.307  5422  5485 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=AMBIENT_ASSISTANT serviceId=32
+11-11 06:04:04.308  3377  5157 W SystemServiceRegistry: No service published for: persistent_data_block
+11-11 06:04:04.367  3011  5333 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:04:04.367  3011  5333 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-11 06:04:04.373  3011  5359 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:292 VVM content provider configured - vvm_type_cvvm PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-11 06:04:04.374  3011  5359 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.updateVoicemailsWithIccId:477 conversion disabled [CONTEXT enable_persistent_logger=true ]
+11-11 06:04:04.384  3011  5359 I DialerOmtpVvmCarrierConfigHelper: com.android.voicemail.impl.OmtpVvmCarrierConfigHelper.handleEvent:527 OmtpEvent:CONFIG_ACTIVATING PhoneAccountHandle: [ComponentName: com.android.phone/com.android.services.telephony.TelephonyConnectionService subId: 1] [CONTEXT enable_persistent_logger=true ]
+11-11 06:04:04.384  3011  5359 I DialerVoicemailStatus: com.android.voicemail.impl.VoicemailStatus$Editor.apply:112 enter
+11-11 06:04:04.434  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.487  5422  5659 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-11 06:04:04.542  5360  5385 W .gms.persistent: Long monitor contention with owner netscheduler-queue-handler (5477) at void bytb.o(int)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4) waiters=0 in void bytb.u(byps, int) for 733ms
+11-11 06:04:04.592  3011  5359 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.insertOrUpdateVoicemailStatus:196 enter
+11-11 06:04:04.604  5360  5478 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+11-11 06:04:04.605  5360  5478 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= LOW_LATENCY, filters size = 5 [CONTEXT service_id=49 ]
+11-11 06:04:04.607  5360  5478 D BluetoothAdapter: isLeEnabled(): ON
+11-11 06:04:04.614  1782  5279 E BistoWorker: Couldn't get logged in Google account.
+11-11 06:04:04.615  1035  1055 D BtGatt.GattService: registerScanner() - UUID=9345ea7c-ab77-4a6a-bade-86830c97d210
+11-11 06:04:04.617  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.619  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.619  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.620  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.621  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.623  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:04.653  5422  5553 I NnApiDriverManager: Registering application with GPU 'Android Emulator OpenGL ES Translator (Google SwiftShader)' by 'Google (Google Inc.)' [CONTEXT service_id=301 ]
+11-11 06:04:04.659  5422  5538 W ZappDownloader: No successful module downloads for requested features [mlkit.barcode.ui].
+11-11 06:04:04.660  5422  5538 I GmsDebugLogger: [30] [VisionBarcode.optional:231818100800],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitBarcodeUi.optional:231818100000]
+11-11 06:04:04.667  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.668  1035  1055 I bt_stack: [INFO:le_scanning_manager.cc(155)] RegisterScanner in shim layer
+11-11 06:04:04.669  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.670  1782  2550 I A       : Merging legacy hotword config map with new proto.
+11-11 06:04:04.670  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.670  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.670  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.670  1782  2550 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-11 06:04:04.670  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.670  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.671  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.671  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.671  1782  2550 I A       : Merging legacy hotword config map with new proto.
+11-11 06:04:04.671  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.671  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.671  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.671  1782  2550 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-11 06:04:04.671  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.672  1782  2550 I A       : hasHotwordEverywhere-true
+11-11 06:04:04.672  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.672  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.672  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.672  1782  2550 I A       : Merging legacy hotword config map with new proto.
+11-11 06:04:04.672  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.672  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.672  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.672  1782  2550 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-11 06:04:04.673  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.674  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.674  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.675  1782  5292 E MicroModelsUtil: Hotword file group is null with group name: hotword_model_en-US_okg, locale: en-US
+11-11 06:04:04.679  1035  1294 D BtGatt.GattService: onScannerRegistered() - UUID=9345ea7c-ab77-4a6a-bade-86830c97d210, scannerId=2, status=0
+11-11 06:04:04.680  5360  5642 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=2 mScannerId=0
+11-11 06:04:04.695  1035  1055 D BtGatt.GattService: start scan with filters
+11-11 06:04:04.698  1035  1055 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=224, mManufacturerData=[0, 0, 0], mManufacturerDataMask=[0, 0, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fef3-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000feaa-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fea0-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=76, mManufacturerData=[2, 21], mManufacturerDataMask=[-1, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null]])
+11-11 06:04:04.731  1059  1059 D CarrierSvcBindHelper: onPackageModified: com.google.android.googlequicksearchbox
+11-11 06:04:04.731  1059  1059 D CarrierSvcBindHelper: No carrier app for: 0
+11-11 06:04:04.731   847  4689 I PermissionControllerServiceImpl: Updating user sensitive for uid 10132
+11-11 06:04:04.736   521   633 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+11-11 06:04:04.741  1035  1035 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-11 06:04:04.741  1035  1055 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10131]]
+11-11 06:04:04.742  1035  1035 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-11 06:04:04.743  1035  1353 D BtGatt.ScanManager: handling starting scan
+11-11 06:04:04.743   846   928 D StylusManager: Stylus InputDevice changed: 14 virtio_input_multi_touch_11
+11-11 06:04:04.743  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(268)] ScanFilterEnable in shim layer
+11-11 06:04:04.744  1035  1294 D BtGatt.GattService: onScanFilterEnableDisabled() - clientIf=2, status=0, action=1
+11-11 06:04:04.747  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.748  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(243)] ScanFilterAdd in shim layer
+11-11 06:04:04.751  1035  1294 D BtGatt.GattService: onScanFilterConfig() - clientIf=2, action = 0 status = 0, filterType=0, availableSpace=0
+11-11 06:04:04.751  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.752  1035  1055 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-11 06:04:04.752  1035  1055 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:829 get_profile_interface: get_profile_interface: id = activity_attribution
+11-11 06:04:04.755  1035  1353 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+11-11 06:04:04.755  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:04.755  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:04.755  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.755  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(243)] ScanFilterAdd in shim layer
+11-11 06:04:04.756  1035  1294 D BtGatt.GattService: onScanFilterConfig() - clientIf=2, action = 0 status = 0, filterType=0, availableSpace=0
+11-11 06:04:04.756  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.756  1035  1353 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+11-11 06:04:04.756  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:04.756  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:04.756  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(243)] ScanFilterAdd in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterConfig() - clientIf=2, action = 0 status = 0, filterType=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(243)] ScanFilterAdd in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterConfig() - clientIf=2, action = 0 status = 0, filterType=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(243)] ScanFilterAdd in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterConfig() - clientIf=2, action = 0 status = 0, filterType=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 D BtGatt.ScanManager: configureFilterParamter 500 10000 1 0
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:04.757  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:04.757  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:04.757  1035  1353 D BtGatt.ScanManager: start gattClientScanNative from startRegularScan()
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(168)] Scan in shim layer started
+11-11 06:04:04.757  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:588 stop_scan: Scanning already stopped, return!
+11-11 06:04:04.757  1035  1353 D BtGatt.ScanManager: configureRegularScanParams() - queue=2
+11-11 06:04:04.757  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(168)] Scan in shim layer stopped
+11-11 06:04:04.758  1035  1353 D BtGatt.ScanManager: Start gattClientScanNative with old scanMode -1 new scanMode 2 ( in MS: 100 / 100, in scan unit: 160 / 160 ) [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10131]]
+11-11 06:04:04.758  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(346)] SetScanParameters in shim layer
+11-11 06:04:04.758  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(168)] Scan in shim layer started
+11-11 06:04:04.758  1035  1353 D BtGatt.ScanManager: apply scan timeout (600000)to scannerId 2
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Scheduled address rotation for first client registered
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:178 register_client: Client registered
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:193 unregister_client: Client unregistered
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:197 unregister_client: Cancelled address rotation alarm
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:588 stop_scan: Scanning already stopped, return!
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Scheduled address rotation for first client registered
+11-11 06:04:04.758  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:178 register_client: Client registered
+11-11 06:04:04.758  1035  1294 D BtGatt.GattService: onScanParamSetupCompleted : 0
+11-11 06:04:04.759  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1369 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+11-11 06:04:04.760   846   928 D StylusManager: Stylus InputDevice changed: 13 virtio_input_multi_touch_10
+11-11 06:04:04.762   846   928 D StylusManager: Stylus InputDevice changed: 12 virtio_input_multi_touch_9
+11-11 06:04:04.762  1059  1390 D ImsResolver: maybeAddedImsService, packageName: com.google.android.googlequicksearchbox
+11-11 06:04:04.765   846   846 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-11 06:04:04.766   846   928 D StylusManager: Stylus InputDevice changed: 4 virtio_input_multi_touch_1
+11-11 06:04:04.769  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1369 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+11-11 06:04:04.790  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.790  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.791  1782  2550 I HotwordService: Model ID:
+11-11 06:04:04.803   846   928 D StylusManager: Stylus InputDevice changed: 9 virtio_input_multi_touch_6
+11-11 06:04:04.806   846   928 D StylusManager: Stylus InputDevice changed: 10 virtio_input_multi_touch_7
+11-11 06:04:04.808   846   928 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+11-11 06:04:04.810  1782  2550 I HotwordService: hotwordModelLocation is null true, locale is en-US, re-mapped Chinese locale
+11-11 06:04:04.816  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1369 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+11-11 06:04:04.824   521   621 I RoleService: Granting default roles...
+11-11 06:04:04.826  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1369 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+11-11 06:04:04.835  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:1369 on_advertising_filter_complete: Got a Command complete LE_ADV_FILTER, status UNKNOWN_CONNECTION
+11-11 06:04:04.837   847  1029 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+11-11 06:04:04.842   847  1029 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMinTargetSdkVersion=1, mFlags='0', mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0, mMetaData=[]}
+11-11 06:04:04.842   847  1029 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+11-11 06:04:04.843   847  1029 W Role    : Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+11-11 06:04:04.855  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.855  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.913   846   928 D StylusManager: Stylus InputDevice changed: 6 virtio_input_multi_touch_3
+11-11 06:04:04.916  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:04.916  1782  2550 I A       : Merging legacy hotword config map with new proto.
+11-11 06:04:04.916  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.916  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.916  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.917  1782  2550 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-11 06:04:04.917  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:04.934  5422  5504 W gle.android.gms: Long monitor contention with owner GoogleApiHandler (5476) at java.util.Map cvdh.c()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6) waiters=0 in java.util.Map cvdh.c() for 443ms
+11-11 06:04:04.934   846   928 D StylusManager: Stylus InputDevice changed: 11 virtio_input_multi_touch_8
+11-11 06:04:04.941  5422  5538 W gle.android.gms: Long monitor contention with owner GoogleApiHandler (5476) at java.util.Map cvdh.c()(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6) waiters=1 in java.util.Map cvdh.c() for 277ms
+11-11 06:04:04.941  5422  5538 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-11 06:04:04.942  5422  5538 I GmsDebugLogger: [83] 1 [mlkit.barcode.ui]
+11-11 06:04:04.975   846   928 D StylusManager: Stylus InputDevice changed: 5 virtio_input_multi_touch_2
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: DiscoveryNearbyMessagesManager failed to background subscribe [CONTEXT service_id=265 ]
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at bbhk.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):25)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at bbhe.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at dtjy.handleMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at avye.ll(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at avye.dispatchMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at android.os.Looper.loop(Looper.java:294)
+11-11 06:04:05.007  5360  5503 I NearbyDiscovery: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-11 06:04:05.007  5360  5385 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator started execution. cause:7 exec_start_elapsed_seconds: 162 [CONTEXT service_id=218 ]
+11-11 06:04:05.015  5360  5445 I SemanticLocation: [MDD] ModelBundleMetadata: File not found [CONTEXT service_id=173 ]
+11-11 06:04:05.015  5360  5445 I SemanticLocation: java.io.FileNotFoundException: /data/user/0/com.google.android.gms/files/model_bundle_metadata.pb: open failed: ENOENT (No such file or directory)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at android.app.ContextImpl.openFileInput(ContextImpl.java:745)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at android.content.ContextWrapper.openFileInput(ContextWrapper.java:249)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at bzxt.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at bzxd.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at cadb.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.Linux.open(Native Method)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:8063)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-11 06:04:05.015  5360  5445 I SemanticLocation: 	... 14 more
+11-11 06:04:05.026   846   928 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+11-11 06:04:05.041  5360  5503 W NearbyDiscovery: Runnable[processBackgroundSubscribeQueue] ran for 00:05.074 [CONTEXT service_id=265 ]
+11-11 06:04:05.041  5360  5503 W NearbyDiscovery: Runnable[processBackgroundSubscribeQueue] was delayed for 00:05.377 [CONTEXT service_id=265 ]
+11-11 06:04:05.065  1782  2227 I BistoWorker: Performing LockscreenPersonalResponseSetting migration.
+11-11 06:04:05.095  5360  5503 W NearbyDiscovery: Runnable[processBackgroundSubscribeQueue] was delayed for 00:05.316 [CONTEXT service_id=265 ]
+11-11 06:04:05.100  5360  5503 W NearbyDiscovery: Runnable[processBackgroundSubscribeQueue] was delayed for 00:05.229 [CONTEXT service_id=265 ]
+11-11 06:04:05.105  5360  5503 W NearbyDiscovery: Runnable[updateUi] was delayed for 00:04.128 [CONTEXT service_id=265 ]
+11-11 06:04:05.163  1703  3660 I A       : Initializing all components
+11-11 06:04:05.175   521  2327 W system_server: Long monitor contention with owner CachedAppOptimizerThread (618) at void com.android.server.am.CachedAppOptimizer$FreezeHandler.handleMessage(android.os.Message)(CachedAppOptimizer.java:2144) waiters=0 in boolean com.android.server.am.ActivityManagerService.stopServiceToken(android.content.ComponentName, android.os.IBinder, int) for 396ms
+11-11 06:04:05.175   521  1756 W system_server: Long monitor contention with owner CachedAppOptimizerThread (618) at void com.android.server.am.CachedAppOptimizer$FreezeHandler.handleMessage(android.os.Message)(CachedAppOptimizer.java:2144) waiters=1 in void com.android.server.am.ActivityManagerService.serviceDoneExecuting(android.os.IBinder, int, int, int) for 393ms
+11-11 06:04:05.179   521   555 W system_server: Long monitor contention with owner CachedAppOptimizerThread (618) at void com.android.server.am.CachedAppOptimizer$FreezeHandler.handleMessage(android.os.Message)(CachedAppOptimizer.java:2144) waiters=2 in void com.android.server.am.BroadcastQueueModernImpl.updateRunningList() for 377ms
+11-11 06:04:05.181   521   601 W system_server: Long monitor contention with owner CachedAppOptimizerThread (618) at void com.android.server.am.CachedAppOptimizer$FreezeHandler.handleMessage(android.os.Message)(CachedAppOptimizer.java:2144) waiters=7 in int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, long, java.lang.String, boolean, int, java.lang.String, android.app.IApplicationThread, java.lang.String, int) for 247ms
+11-11 06:04:05.193  5360  5414 W NearbyMessages: Runnable[subscribe] ran for 00:05.955 [CONTEXT service_id=62 ]
+11-11 06:04:05.261  1703  2113 I A       : onIsEnabledChanged, isEnabled: false
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 I A       : onOpaVisibilityChanged: false
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.261  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 I A       : Setting session to type: NO_SESSION
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.262  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-11 06:04:05.263  1703  2113 I A       : onDisabled. Registered: false
+11-11 06:04:05.266  1703  3660 I A       : APA or Classic session decision: SessionDecision(sessionVariance=CLASSIC, platformVariance=CLASSIC, justification=CURRENT_PLATFORM_VARIANCE).
+11-11 06:04:05.266  1703  3660 I A       : [Memory] NGA configuration not yet available
+11-11 06:04:05.284  1703  2113 I NgaEntryPointEventSendr: setupConnection
+11-11 06:04:05.290  4782  4790 W vmishra.jyotish: Suspending all threads took: 6.128ms
+11-11 06:04:05.295  1782  2547 I BistoSessionController: onStart no extra context
+11-11 06:04:05.296  1782  2547 I BistoSessionController: handleGenericClientEvent ID = 455
+11-11 06:04:05.301  1782  2547 E BistoWorker: Couldn't get logged in Google account.
+11-11 06:04:05.314  1782  1782 I A       : Creating pss binder().
+11-11 06:04:05.326  1703  2113 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.326  1703  2113 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.m.get(Unknown Source:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.nga.shared.v.a.o.b(PG:1)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.nga.shared.v.f.a.d.apply(Unknown Source:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at j$.util.Optional.map(Unknown Source:16)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.nga.shared.v.f.a.g.a(PG:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.aj.c.b.p.apply(Unknown Source:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at j$.util.Optional.map(Unknown Source:16)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.aj.c.b.q.b(PG:10)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.aj.c.b.c.run(PG:17)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.326  1703  2113 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.326  1703  2113 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.326  1703  2113 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.332  1703  2112 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.332  1703  2112 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.z.m.gV(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.a(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.P(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.T(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.gX(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.at.b.a(Unknown Source:4)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.g.a(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.k.a(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.libraries.gsa.k.a.j.call(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.332  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.332  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.332  1703  2112 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.332  1703  2112 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.341  4782  4782 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-11 06:04:05.341  4782  4782 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-11 06:04:05.344  1703  2113 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-11 06:04:05.346  1703  2113 I NgaEntryPointEventSendr: onServiceConnected
+11-11 06:04:05.347  1782  1893 I A       : Calling beginBinderSession().
+11-11 06:04:05.349  1703  2112 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.349  1703  2112 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.j.gV(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.a(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.P(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.T(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.gX(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.at.b.a(Unknown Source:4)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.g.a(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.k.a(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.libraries.gsa.k.a.j.call(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.349  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.349  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.349  1703  2112 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.349  1703  2112 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.351  1703  2112 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.351  1703  2112 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.education.a.y.gV(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.a(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.P(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.T(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.gX(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.at.b.a(Unknown Source:4)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.g.a(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.k.a(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.libraries.gsa.k.a.j.call(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.351  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.351  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.351  1703  2112 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.351  1703  2112 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.376  1703  2112 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.376  1703  2112 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.p.e.bj.gV(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.a(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.P(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.T(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.gX(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.at.b.a(Unknown Source:4)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.g.a(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.k.a(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.libraries.gsa.k.a.j.call(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.376  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.376  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.376  1703  2112 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.376  1703  2112 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.376  1703  2112 I A       : [Memory] NGA configuration not yet available
+11-11 06:04:05.377  1703  2112 E A       : Calling getConfiguration() before NgaConfigurationManager is initialized.
+11-11 06:04:05.377  1703  2112 E A       : com.google.common.f.s: MEDIUM
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aq.b(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.education.pie.d.a.gV(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.a(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.f.P(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.T(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.v.o.gX(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.engine.at.b.a(Unknown Source:4)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.g.a(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.apps.gsa.nga.shared.s.k.a(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.libraries.gsa.k.a.j.call(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.common.util.concurrent.dn.run(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.common.util.concurrent.do.run(PG:4)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.libraries.i.ae.run(PG:1)
+11-11 06:04:05.377  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:05.377  1703  2112 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.libraries.i.k.run(PG:2)
+11-11 06:04:05.377  1703  2112 E A       : 	at com.google.android.libraries.i.p.run(PG:4)
+11-11 06:04:05.377  1703  2112 E A       : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:05.378  1703  2112 I A       : Disconnecting from SysUi, flag disabled [IVR]
+11-11 06:04:05.378  1703  2112 I A       : Disconnecting from SysUi, eligibilityNotifier absent [IVR]
+11-11 06:04:05.396  1782  1893 I A       : beginBinderSession(): calling binder
+11-11 06:04:05.398  1703  2113 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-11 06:04:05.400  1703  2113 I A       : on opa visibility changed false
+11-11 06:04:05.403  1703  2113 I A       : on opa visibility changed false
+11-11 06:04:05.444  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:05.444  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:05.452  5422  5538 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: tflite_dynamite:-1
+11-11 06:04:05.452  1782  2550 I A       : Using proto config with mendel
+11-11 06:04:05.452  1782  2550 I A       : Merging legacy hotword config map with new proto.
+11-11 06:04:05.453  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:05.453  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:05.453  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:05.453  1782  2550 I A       : Adding from config to map. Locale: ro-RO modelPrefix: okgoogle Location:b051c93dce7bb4dcb5d9ddcbbb2ca760Test isSpeakerIdSupported: false
+11-11 06:04:05.453  1782  2550 I A       : Skipping. Expected model: 1 Found: 2
+11-11 06:04:05.476  5360  5494 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-11 06:04:05.491  5360  5385 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.languageprofile.GcmTaskService started execution. cause:7 exec_start_elapsed_seconds: 162 [CONTEXT service_id=218 ]
+11-11 06:04:05.495  5360  5495 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-11 06:04:05.543  5422  5538 I ChimeraConfigurator: Detected pending changes for urgent request: [tflite_dynamite]. Pending module sets: container:2318189190800,tflite_dynamite:2640104055100800+tflite_dynamite
+11-11 06:04:05.552  5422  5536 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-11 06:04:05.573  5422  5536 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-11 06:04:05.599  5360  5383 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-11 06:04:05.612  3011  5333 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-11 06:04:05.613  3011  5333 I DialerVoicemailStatusDataServiceImpl: com.android.dialer.voicemailstatus.dataservice.impl.VoicemailStatusDataServiceImpl.lambda$insertOrUpdateVoicemailStatus$5:213 merged status: # kee@6600c263
+11-11 06:04:05.620  5422  5485 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=36
+11-11 06:04:05.636  5422  5536 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:05.636  5422  5536 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-11 06:04:05.639  5422  5536 I NamespaceManager: Package com.android.appsearch name not found! Using module version.
+11-11 06:04:05.640  5422  5536 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-11 06:04:05.641  5422  5536 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-11 06:04:05.646  5422  5536 I NamespaceManager: Package 1 name not found! Using module version.
+11-11 06:04:05.695  3377  5157 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-11 06:04:05.695  3377  5157 W libc    : Access denied finding property "service.adb.tls.port"
+11-11 06:04:05.690  3377  3377 W binder:3377_7: type=1400 audit(0.0:211): avc:  denied  { read } for  name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=292 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-11 06:04:05.718  5422  5538 I GmsDebugLogger: [73] 1801
+11-11 06:04:05.694  3377  3377 W binder:3377_7: type=1400 audit(0.0:212): avc:  denied  { read } for  name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=60 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-11 06:04:05.736  1703  2111 E GsaVoiceInteractionSrv: modelLocation is null: true isAlwaysOnEnabled is false: true isFromAnyScreenEnabled is false: true
+11-11 06:04:05.738  3011  5359 I DialerActivationTask: com.android.voicemail.impl.ActivationTask.onExecuteInBackgroundThread:339 sending an activation request [CONTEXT enable_persistent_logger=true ]
+11-11 06:04:05.741  5422  5538 W ZappDownloader: No successful module downloads for requested features [tflite_dynamite].
+11-11 06:04:05.743  5422  5538 I GmsDebugLogger: [30] [TfliteDynamiteDynamite.integ:264010405100800]
+11-11 06:04:05.755  5422  5538 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-11 06:04:05.755  5422  5538 I GmsDebugLogger: [83] 1 [tflite_dynamite]
+11-11 06:04:05.759  1703  2111 I HwDetectorWithState: Updating detector.
+11-11 06:04:05.779  5360  5503 I Nearby  : is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+11-11 06:04:05.780  5360  5503 I NearbyDiscovery: DiscoveryController, showNotification, itemSize=0 [CONTEXT service_id=265 ]
+11-11 06:04:05.780  5360  5503 I NearbyDiscovery: Show notifications: 0 total, no changes since last shown, no-op. [CONTEXT service_id=265 ]
+11-11 06:04:05.780  5360  5445 I NearbyShared: FastPairSlice: enableBindServiceForDiscoveryItem called, isBind = false
+11-11 06:04:05.787  5422  5538 E IPCThreadState: Binder transaction failure: 495952/29189/-22
+11-11 06:04:05.787  5422  5538 E ChimeraUPLUtils: Failed to invoke updateComplete: android.os.DeadObjectException
+11-11 06:04:05.796  5422  5538 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+11-11 06:04:05.799  1059  1089 D SmsNumberUtils: enter filterDestAddr. destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-11 06:04:05.799  1059  1089 D SmsNumberUtils: destAddr is not formatted.
+11-11 06:04:05.800  1059  1089 D SmsNumberUtils: leave filterDestAddr, new destAddr="[BajqU4K5_YhSYbs-7QUn0dOwcmI]"
+11-11 06:04:05.814  5422  5433 I FastPair: ServiceBindHelper.onSlicePinned, slice already pinned, uri = content://com.google.android.gms.nearby.fastpair/method_bind_service_for_discovery_item?is_bind=false
+11-11 06:04:05.835  4782  4901 D EGL_emulation: app_time_stats: avg=296.69ms min=127.21ms max=498.65ms count=6
+11-11 06:04:05.862  3011  5359 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:46 Impression: CVVM_SEND_VVM_SMS
+11-11 06:04:05.865  1703  2111 I BistoHotwordHelper: getHotwordActive::active query: null, watch: false, devices connected: []
+11-11 06:04:05.865  1703  2111 E HwDetectorWithState: a: 3
+11-11 06:04:05.865  1703  2111 I GsaVoiceInteractionSrv: #checkDspStatus
+11-11 06:04:05.866  1703  2111 I BistoHotwordHelper: setting speaker id present: false
+11-11 06:04:05.866  1703  2111 I BistoHotwordHelper: setting hotword model of size: 0 bytes
+11-11 06:04:05.866  1703  2111 I BistoHotwordHelper: setting modeltype: Ok Google
+11-11 06:04:05.866  1703  2111 I BistoHotwordHelper: setHotwordVoiceLocale: prev: en-US, new: en-US
+11-11 06:04:05.885  1782  2227 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.googlequicksearchbox/shared_prefs/GEL.GSAPrefs.xml: [<1: 0, <2: 1, <4: 1, <8: 1, <16: 2, <32: 1, <64: 0, <128: 2, <256: 0, <512: 0, <1024: 1, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+11-11 06:04:05.886  1782  2579 W earchbox:search: Long monitor contention with owner BG Thread #1 (2227) at void android.app.SharedPreferencesImpl$2.run()(SharedPreferencesImpl.java:673) waiters=0 in void android.app.SharedPreferencesImpl$2.run() for 579ms
+11-11 06:04:05.892  5422  5538 I ChimeraConfigurator: Detected pending changes for urgent request: [vision.ocr]. Pending module sets: container:2318189190800+mlkit.ocr.common,tflite_dynamite:2640104055100800+tflite_dynamite,vision_ocr:2316024025100000+vision.ocr
+11-11 06:04:05.900  5422  5538 I GmsDebugLogger: [73] 1801
+11-11 06:04:05.901  5422  5538 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+11-11 06:04:05.901  5422  5538 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[TfliteDynamiteDynamite.integ:264010405100800],[MlkitOcrCommon.optional:231818100800]
+11-11 06:04:05.905  5422  5538 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-11 06:04:05.905  5422  5538 I GmsDebugLogger: [83] 1 [vision.ocr]
+11-11 06:04:05.907  5422  5529 W Vision  : Request for optional module download of ocr failed. Request again.
+11-11 06:04:05.908  5422  5529 W Vision  : Would have logged:
+11-11 06:04:05.908  5422  5529 W Vision  : # dsae@37884fe7
+11-11 06:04:05.909  5422  5529 I Vision  : Schedule retrying download ocr at 164565 with backoff 10 seconds
+11-11 06:04:05.913  5422  5546 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: tflite_dynamite:-1
+11-11 06:04:05.929  5422  5546 I ChimeraConfigurator: Detected pending changes for urgent request: [tflite_dynamite]. Pending module sets: container:2318189190800,tflite_dynamite:2640104055100800+tflite_dynamite
+11-11 06:04:05.935  5422  5546 I GmsDebugLogger: [73] 1801
+11-11 06:04:05.936  5422  5546 W ZappDownloader: No successful module downloads for requested features [tflite_dynamite].
+11-11 06:04:05.937  5422  5546 I GmsDebugLogger: [30] [TfliteDynamiteDynamite.integ:264010405100800]
+11-11 06:04:05.939  5422  5546 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-11 06:04:05.940  5422  5546 I GmsDebugLogger: [83] 1 [tflite_dynamite]
+11-11 06:04:05.988  1696  1696 I AiAiEcho: AppFetcherImpl onPackageChanged com.google.android.googlequicksearchbox.
+11-11 06:04:05.989  1696  2876 I AiAiEcho: AppIndexer Package:[com.google.android.googlequicksearchbox] UserProfile:[0] Enabled:[true].
+11-11 06:04:05.989  1696  2876 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.googlequicksearchbox], userId:[0], reason:[package is updated.].
+11-11 06:04:05.991  5360  5395 I NearbySharing: FastInitiation warming period has ended [CONTEXT service_id=194 ]
+11-11 06:04:06.023  1059  1084 I m.android.phone: Background young concurrent copying GC freed 71711(3320KB) AllocSpace objects, 0(0B) LOS objects, 44% free, 3964KB/7143KB, paused 45us,21us total 652.879ms
+11-11 06:04:06.099  1703  2112 I A       : Disconnecting from SysUi, VM not enabled [IVR]
+11-11 06:04:06.101  1703  2112 I A       : No binding to unbind [IVR]
+11-11 06:04:06.101  1703  2112 I A       : Disconnected from SysUi [IVR]
+11-11 06:04:06.107  5360  5383 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-11 06:04:06.109  5360  5383 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-11 06:04:06.110  1703  2112 I A       : Subscribed to apa or classic variant change.
+11-11 06:04:06.113  1703  2113 I A       : onVarianceChanged newVariance = CLASSIC
+11-11 06:04:06.119  1703  2112 I A       : [Memory] eligibility: StashEligibility{6}
+11-11 06:04:06.120  1703  2113 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-11 06:04:06.123  1703  2112 I A       : StashOnboardingStateImpl.initialize
+11-11 06:04:06.129  1703  2112 I A       : Initialize
+11-11 06:04:06.130  1703  2112 I A       : Subscribing to eligibility updates [IVR]
+11-11 06:04:06.130  1703  2112 I A       : Disconnecting from SysUi, flag disabled [IVR]
+11-11 06:04:06.130  1703  2112 I A       : Disconnecting from SysUi, eligibilityNotifier absent [IVR]
+11-11 06:04:06.130  1703  2112 I A       : Disconnecting from SysUi, VM not enabled [IVR]
+11-11 06:04:06.130  1703  2112 I A       : No binding to unbind [IVR]
+11-11 06:04:06.130  1703  2112 I A       : Disconnected from SysUi [IVR]
+11-11 06:04:06.162  4782  4790 I vmishra.jyotish: Background concurrent copying GC freed 590422(17MB) AllocSpace objects, 13(580KB) LOS objects, 41% free, 34MB/58MB, paused 99.471ms,6.313ms total 2.389s
+11-11 06:04:06.207  1782  2547 W SessionLifecycleManager: Client : AttachedClient[7839113259728297, ClientConfig[mFlags=[40000088001] mSuggestFlags=[0] mClientId=HOTWORD_SERVICE mSessionType=search publicSearchServiceCallerUid=-1]] has no associated SessionController
+11-11 06:04:06.252  1703  2105 D BluetoothHeadset: Binding service...
+11-11 06:04:06.254  5422  5483 I GmscoreIpa: Using regular flags by method 2 [CONTEXT service_id=255 ]
+11-11 06:04:06.299  1703  2113 I A       : Successfully initialized all components
+11-11 06:04:06.307  1703  2112 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-11 06:04:06.310  5360  5414 W NearbyMessages: Runnable[subscribe] was delayed for 00:02.804 [CONTEXT service_id=62 ]
+11-11 06:04:06.311  1782  2547 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-11 06:04:06.314  1782  2547 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-11 06:04:06.319  1782  3255 I PBSessionCacheImpl: Deleted sessionId[7839113259728306] from persistence.
+11-11 06:04:06.324  1782  2547 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-11 06:04:06.329  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.330  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.330  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.337  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.338  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.338  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.341  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.341  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.341  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.341  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.341  1782  2547 W SearchServiceCore: Abort, client detached.
+11-11 06:04:06.345  5422  5485 I Icing   : Query from package: com.google.android.gms, component: AppsCorpus, restrict package: com.google.android.gms, start: 0, num: 100
+11-11 06:04:06.365  5422  5482 I Icing   : Indexing com.google.android.gms-postals_data_id from com.google.android.gms
+11-11 06:04:06.372  1703  3122 D BluetoothHeadset: Proxy object connected
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: Error locating SCO method
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: java.lang.NoSuchMethodException: android.bluetooth.BluetoothHeadset.startScoUsingVirtualVoiceCall [class android.bluetooth.BluetoothDevice]
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at java.lang.Class.getMethod(Class.java:2937)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at java.lang.Class.getMethod(Class.java:2449)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at com.google.android.apps.gsa.speech.audio.a.l.<clinit>(PG:1)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at com.google.android.apps.gsa.speech.audio.a.i.onServiceConnected(PG:1)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at android.bluetooth.BluetoothProfileConnector$3.handleMessage(BluetoothProfileConnector.java:234)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at android.os.Looper.loop(Looper.java:294)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at java.lang.reflect.Method.invoke(Native Method)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-11 06:04:06.379  1703  1703 E VS.BluetoothShim: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-11 06:04:06.380  3011  3011 I DialerStatusSmsFetcher: com.android.voicemail.impl.sms.StatusSmsFetcher.onReceive:106 Request SMS successfully sent [CONTEXT enable_persistent_logger=true ]
+11-11 06:04:06.382  5422  5482 I Icing   : Indexing done com.google.android.gms-postals_data_id
+11-11 06:04:06.383  5422  5482 I Icing   : Indexing com.google.android.gms-emails_data_id from com.google.android.gms
+11-11 06:04:06.385  5422  5482 I Icing   : Indexing done com.google.android.gms-emails_data_id
+11-11 06:04:06.387  5422  5482 I Icing   : Indexing com.google.android.gms-contacts_contact_id from com.google.android.gms
+11-11 06:04:06.390  5422  5482 I Icing   : Indexing done com.google.android.gms-contacts_contact_id
+11-11 06:04:06.391  5422  5482 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-11 06:04:06.396  1703  2004 I A       : No BT device
+11-11 06:04:06.417  1703  1703 V ClearcutMetricXmitter: Transmission is done.
+11-11 06:04:06.426  5422  5482 I Icing   : Indexing com.google.android.gms-phones_data_id from com.google.android.gms
+11-11 06:04:06.431  5422  5482 I Icing   : Indexing done com.google.android.gms-phones_data_id
+11-11 06:04:06.441  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.449  5360  5445 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.languageprofile.GcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 2247 uptime_millis: 2247 exec_start_elapsed_seconds: 162 [CONTEXT service_id=218 ]
+11-11 06:04:06.450  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.452  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.456  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.458  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.467  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.478  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.492  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.494  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.495  4782  4782 I Choreographer: Skipped 30 frames!  The application may be doing too much work on its main thread.
+11-11 06:04:06.501  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.502  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.510  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.511  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.536  5360  5414 W NearbyMessages: Runnable[subscribe] was delayed for 00:03.031 [CONTEXT service_id=62 ]
+11-11 06:04:06.540  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.568  5360  5393 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:2411
+11-11 06:04:06.575  5360  5393 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 2411
+11-11 06:04:06.604  5422  5482 W Icing   : No valid account for uploading user actions
+11-11 06:04:06.616  5422  5482 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-11 06:04:06.637  5360  5393 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+11-11 06:04:06.661  5360  5414 W NearbyMessages: Runnable[NearbyMessagesService.stopServiceIfIdle] was delayed for 00:02.758 [CONTEXT service_id=62 ]
+11-11 06:04:06.665  5360  5414 W NearbyMessages: Runnable[subscribe] was delayed for 00:02.654 [CONTEXT service_id=62 ]
+11-11 06:04:06.683  5360  5558 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService started execution. cause:5 exec_start_elapsed_seconds: 165 [CONTEXT service_id=218 ]
+11-11 06:04:06.703  5360  5393 D nativeloader: Configuring clns-10 for other apk . target_sdk_version=33, uses_libraries=ALL, library_path=/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.apk!/lib/x86_64:/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+11-11 06:04:06.709   521   601 D ConnectivityService: requestNetwork for uid/pid:10131/5360 activeRequest: null callbackRequest: 148 [NetworkRequest [ REQUEST id=149, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+11-11 06:04:06.713  5360  5393 I cr_CronetLibraryLoader: Cronet version: 113.0.5672.51, arch: x86_64
+11-11 06:04:06.720   521   777 D ConnectivityService: NetReassign [149 : null → 101] [c 0] [a 1] [i 1]
+11-11 06:04:06.720   521   770 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=149, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+11-11 06:04:06.720   521   770 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=149, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+11-11 06:04:06.720   521   770 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=149, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+11-11 06:04:06.721   521   770 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=149, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+11-11 06:04:06.732  5360  5393 W GmsUrlRequestImpl: Content-Type header is overwritten.
+11-11 06:04:06.732   521   777 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 10]
+11-11 06:04:06.766  5360  5406 E bwel    : Phenotype registration failed [CONTEXT service_id=51 ]
+11-11 06:04:06.766  5360  5406 E bwel    : java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-11 06:04:06.766  5360  5406 E bwel    : 	at cfsz.o(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at bwel.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):12)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:06.766  5360  5406 E bwel    : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:06.766   335  5690 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10131 0}
+11-11 06:04:06.771   335  5691 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-11 06:04:06.771   335  5691 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7956efe090
+11-11 06:04:06.771   335  5691 I resolv  : doQuery: rcode=0, ancount=8, return value=264
+11-11 06:04:06.771   335  5692 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-11 06:04:06.771   335  5692 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7916efb610
+11-11 06:04:06.771   335  5692 I resolv  : doQuery: rcode=0, ancount=8, return value=168
+11-11 06:04:06.775  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.779  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.791  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.803  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.808  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.808  5422  5482 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-11 06:04:06.819  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.835  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.841  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.848  5422  5482 I Icing   : Indexing done com.google.android.gms-apps
+11-11 06:04:06.849  5360  5684 D TrafficStats: tagSocket(191) with statsTag=0x401, statsUid=10131
+11-11 06:04:06.893  5360  5559 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService finished executing. cause:5 result: 1 elapsed_millis: 290 uptime_millis: 290 exec_start_elapsed_seconds: 165 [CONTEXT service_id=218 ]
+11-11 06:04:07.424  5360  5393 W GLSUser : [AppCertManager] Exception while requesting key:
+11-11 06:04:07.424  5360  5393 W GLSUser : java.util.concurrent.ExecutionException: avvw: Parse Proto Exception.
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dlnv.s(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dlnv.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at oub.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at otz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at otv.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at otx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at otx.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at abxk.r(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:07.424  5360  5393 W GLSUser : Caused by: avvw: Parse Proto Exception.
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at avxk.onSucceeded(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at jf.onSucceeded(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at ie.run(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):4)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	... 6 more
+11-11 06:04:07.424  5360  5393 W GLSUser : Caused by: dzfz: Protocol message contained an invalid tag (zero).
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzdb.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzha.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):47)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzha.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):45)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzfd.A(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzex.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzcx.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzcx.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at dzcx.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at avwn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-11 06:04:07.424  5360  5393 W GLSUser : 	... 9 more
+11-11 06:04:07.426  5360  5393 W GLSUser : [DeviceKeyStore] Cannot load key: Device key file not found.
+11-11 06:04:07.429  4782  4790 I vmishra.jyotish: Background young concurrent copying GC freed 966451(25MB) AllocSpace objects, 0(0B) LOS objects, 28% free, 41MB/58MB, paused 21us,12us total 251.681ms
+11-11 06:04:07.455   335  5698 I resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10131 0}
+11-11 06:04:07.457   335  5699 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-11 06:04:07.458   335  5699 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7956efc650
+11-11 06:04:07.458   335  5699 I resolv  : doQuery: rcode=0, ancount=8, return value=269
+11-11 06:04:07.461   335  5700 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-11 06:04:07.461   335  5700 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7f7916efb090
+11-11 06:04:07.461   335  5700 I resolv  : doQuery: rcode=0, ancount=8, return value=173
+11-11 06:04:07.482  5360  5559 D TrafficStats: tagSocket(194) with statsTag=0x34000609, statsUid=10125
+11-11 06:04:07.504  5360  5559 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-11 06:04:07.504  5360  5559 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-11 06:04:07.504  5360  5559 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.615  5360  5366 I .gms.persistent: Background concurrent copying GC freed 664834(34MB) AllocSpace objects, 85(2316KB) LOS objects, 49% free, 15MB/31MB, paused 157us,51us total 329.060ms
+11-11 06:04:07.664  5422  5482 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-11 06:04:07.666  5422  5482 I Icing   : Indexing done com.google.android.gms-apps
+11-11 06:04:07.678  5360  5559 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-11 06:04:07.681  5360  5559 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-11 06:04:07.682  5360  5559 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.703  5422  5482 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-11 06:04:07.705  5422  5482 I Icing   : Indexing done com.google.android.gms-apps
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: Voilatile gRPC failure INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header. [CONTEXT service_id=6 ]
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: enms: INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header.
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at enmr.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at abxw.u(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+11-11 06:04:07.714  5360  5393 W GlsClientGrpc: 	at java.lang.Thread.run(Thread.java:1012)
+11-11 06:04:07.874  5422  5482 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-11 06:04:07.875  5422  5482 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-11 06:04:08.191  4782  4901 D EGL_emulation: app_time_stats: avg=785.24ms min=254.19ms max=1664.04ms count=3
+11-11 06:04:08.382  4782  4864 I SHOT    : zi_wei 1/16 /9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAMgAWgDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAMFAgQGAQf/xABOEAACAQMDAgEHBgoHBwQDAAMBAgMABBEFEiETMQYUIkFRYXKxMlJTkZLRFSMzNFRxgZOh0gdCYnOCs8EWJDU2VXSyZIPT4kOU4aJEdf/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QALREBAAIBAgMGBgMBAQAAAAAAAAECEQMSEzFxITJRYcHwM0GRobHhBBTRIvH/2gAMAwEAAhEDEQA/APvVKUrKlKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFK4XU9V1/X/Gd74b8P6kukRaZBHLd3zWizs0r8rGFY42lTnOM5XH66vWNd8WaJpekLrLPHMviOC0NzbRKTfWmG87poWIZsZKgA9gBQfTqV891b+kO3vPB+u3dm2raJfaY0CzLc6ejTwiR12kRuwUhgSOWBA5x2zYat/STpWkazqWknTtXu7zT1R5o7O16nmMgYuDu4VQVBLY5YYzzgOypXI3n9I2i29jplxaR3upzalH1be00+HrT7BnczLngAgg89we+DjyT+kfRRpml3drBqF7NqbOkFla2+6fcn5QMpIAK5559oyOaDr6VyMv9I2hxaHDqKreSzTXBtU06ODN31xjdH088MuRnnHbk5GbXw54msvE1lLPax3NvLBKYbi1u4+nNC49DLzjIwe5+sEALmlcbd/0l6LZ6hdQPa6o1naXHkt1qSWhNrBKDgqz5zwSBwCOR66z1n+kbR9E1O5tJrXUp4rNo1vLy3t98FqXPAds57EE4B7478UHX0r5yv8ASdJH401fTZ9IvPwXYWklwJktvPIjVmLli+3psF8w4GSy+urS0/pL0W80eXVUtNUS1Bijty9qQbyVw2IoQD57hlKnHAI745oOypXzzW/H0eo+CfEU2lrqGl6tpsSNJb3kHSmi3EbWwcjBGf8AXuM2E3jy10i10qylstV1XVJ7CO6kg061MzqhAG9uQMFsjv8AEUHZ0rlrz+kDRbfSdN1C1W81IakX8jt7G3Mk02z5eFOPk+nNadt/Sdo1yIiLPUo9+oxaYwmhVDFO4zhwWyAuCDxwVPfjIdrSqjT/ABFaal4g1bRoI5uvpfS68jBdhMi7gFIOT2OcgciregUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSg+Xf0kf0hJp2qR+FbS/bS5ZgDe6o8Lt5NGRnEQUZZyP6w4Ge4OSm3ov9JH9HWg6Na6VZa7J5PbRhEMlvOzH2k7PX+z1ADiul8UeF016OC7tLhrHWrIl7K+jHnRt81vnIexU8YJq10l9Rk0q2fVobeHUCg66W7low3sJGf2c47ZOMkNylKUHB6lpviHw/wCOL7xBoOlLq9tqtvGl1am7SBklj4VwWGNu3jGSckn1Vo3ei+MtZs9IudWiRp4/EsF8LRJYiLK0XdwWAXewzzgsSMY9NdnFr0f4V1S0uY1gisVDidnyJFCK7nGONu9M9/lCotO8SwXNlbyXsL2lzK7RvAqtL0iJGjG9lXCgspwWwOD6jQcL4r8Ha9qUvj82lh1Bqo08WX46MdXpbd/dvNxg98Z9Ga6PTdC1K38deMdSltttpqMNstrJvU9QpFtbjORg8cgV0T6ps0uC96aP1ZootqOcDfIqZyVB43Z7Dtj21learDYTOLghYlRGyiu7ks+xQFVTnJIHBz7PTQfJdG8CeJNDstA1A6XNd3ENnLYXmn22pm0ljU3EkqyLKjgMMMMrn1frW4fwperY6ZN/sgi7r2e6u4YNVd76CV1AEqXDSKCTtG5dxBIU+vH0VL43lg1xpyLK+SoS43wcg4IbKllPf+r6vXmq628R7dMi1DVIEtYZ4RPE
+11-11 06:04:08.383  4782  4864 I SHOT    : zi_wei 2/16 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
+11-11 06:04:08.384  4782  4864 I SHOT    : zi_wei 3/16 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
+11-11 06:04:08.384  4782  4864 I SHOT    : zi_wei 4/16 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
+11-11 06:04:08.385  4782  4864 I SHOT    : zi_wei 5/16 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
+11-11 06:04:08.385  4782  4864 I SHOT    : zi_wei 6/16 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
+11-11 06:04:08.385  4782  4864 I SHOT    : zi_wei 7/16 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
+11-11 06:04:08.386  4782  4864 I SHOT    : zi_wei 8/16 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
+11-11 06:04:08.386  4782  4864 I SHOT    : zi_wei 9/16 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
+11-11 06:04:08.386  4782  4864 I SHOT    : zi_wei 10/16 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
+11-11 06:04:08.386  4782  4864 I SHOT    : zi_wei 11/16 JOP1nvWVKDWk0+2lMRdGIikMqrvbbuJ3ZIzg88jOcHBFY6D/AMNk/wC8uv8APkrbrU0H/hsn/eXX+fJUjvx0n0We5PWPVZ0pSuziVjJ2X3l+IrKsZOy+8vxFBPSlK0hSlKBSlKBSlKBUc/5vJ7p+FSVHP+bye6fhQaWpazZ6Mlq16xSKeR06nG2PbFJKzMc8DbE3r5xXkWu6ZPKsSzneQGIaJ12ZZ1G/I8zzo3HnY5GO+Kx1jQ7XXbaGG6eVViaRh0yBnfFJEc5B/qysf1gfqMUvhmwnlvXm6si3qRxzRsRtKpLJKB29JlYH2Y7d6Dbs9QsJ5ZIrVh1BKVlRYirK+M+eMZXIwQTjIKkdxmA+IdGaNHN5GUZTIrFTgxjBMo4/JDj8Z8jkc9q90TQLHw/bPBYxoiu259kMcQY5PJWNVXOCBnGcKM571Xt4K09rSK1a6vTBFA9midRcC0YKGt/k/IIVRu/KeaPPoNyfxFpVvqVval2NzcyLCNsLHAKPIpY4+RhHwe2Vb5rYmOvaYqsWuSNkohdTG25HPyVYYypbjbn5W5MZ3LnTvvCWn6heJdTST70jhi2grtZI1mXaQVPDLcSK3sIxgjNeWnhDTLLTfIYF6UZuYbljDDFDueKUSLkIir3VVPGSo755oJ7XxPpl3p9leo84jvYxJApt33tlQ20AA5bad2BnIDEZAJEr+INLRgBcly0jRR9KN36jqGLKm0HeQEbO3OCCDg8VBY+GbSwtdLt0nuXTTJurb7yucCFoVU4UZAR8D08AknnOnYeBdG03Vo9StkZJ47g3CnpxA72SRHy4Tewbqs2GY4IXGAMUF5ZahBfm48nLkQS9JmZCoY7VbKk/KXDDkcGtqtPTtNj0yJ4opZXVihAkx5u2NUAGAPQgPOeSfRgDcoIpPy0Xvf6Gpaik/LRe9/oalqBSlKoVVa3a312LFLJ2TFwTMwlZAE6UgBO0gsAxQ7QecDkdxa0oKSz0i5hsltY9Rv7ZYCUVwY3MqjhT54fHGO23nJ2gECtu30mKOye0upWvoHbdsuYoto5z8lEUd+eR3qwpQUsemX0U0HSnSIdJIpZU27tqxyDAyhzh2Vhk478DkNK2lTO1uk10blUk6jXFwkfVADIwjXaigAsgJJ583HpBW1pQaCR3aSuZpFMBjhCJnJWQMd5zgZBBT6jwK5/wJ/yZp/8A7n+Y1dXP+T/xL8RXKeBP+TNP/wDc/wAxq82p8WvSfzD06fwrdY/EuipSlaYKUpQKUpQKUpQK1NB/4bJ/3l1/nyVt1qaD/wANk/7y6/z5Kle/HSfRbdyeseqzpSldnErGTsvvL8RWVYydl95fiKCelKVpClKUClKUClKUCo5/zeT3T8KkqOf83k90/CgzX5Ir2vF+SK9oFKUoFVlzq1xbXIhGjX8oZ9iSRvBtc4J4zID2B7gVZ1rS288t9DKZoxbxecI+md5fBGd27GMHtt/b6KDRn10W+omzfTrzzWiDTBotgEjbFPy92NwI7Z4renv7e1lCTs0YIz1GUhBwzct2HCMTzxgZxkZob/wvd3urS6gLvTkkd4WQnTyzp0pC6+d1ByeFY8ZAHarm+0q31LqLdF5I3haER5wqbgVZh/aIOMnOBnGMtmDbikWaJJVDBXUMAylTz6weQfYea1m1S0W9SzaRhcPt2oUIzuDkej1RSd/m+0ZjfQ9Ommea5tIbmRpOqDPGr7G2qvm5Hm8Ivb01G2h25lmkDletjqJ04yrna6lipXG4h+T6dqg8Ag0b8n5aL3v9DUtQlQjwKM4BwMkk9j6T3qaoFKUqhSlKBSlKBSlKCOf8n/iX4iuU8Cf8maf/AO5/mNXVz/k/8S/EVyngT/kzT/8A3P8AMavNq/Fr0n8w9On8K3WPxLoqUpWmClKUClKUClKUCtTQf+Gyf95df58lbdamg/8ADZP+8uv8+SpXvx0n0W3cnrHqs6UpXZxKxk7L7y/EVlWLglRjnBB+o5oJ6VH10/t/YP3U66f2/sH7q1lElKj66f2/sH7qddP7f2D91MiSlR9dP7f2D91Oun9v7B+6mRJSo+un9v7B+6nXT+39g/dTIkqOf83k90/CnXT+39g/dWMkiyRuihssCOVIqCVfkivai6hXjYW9WMf606x+if8Ah99MiWlRdY/RP/D76dY/RP8Aw++mRLSousfon/h99Osfon/h99MiWlRdY/RP/D76dY/RP/D76ZEtKi6x+if+H306x+if+H30yEn5aL3v9DUtQEszK+3G05A9Pb/+1l1j9E/8PvoqWlRdY/RP/D76dY/RP/D76ZRLSousfon/AIffTrH6J/4ffTIlpUXWP0T/AMPvp1j9E/8AD76ZEtKi6x+if+H306x+if8Ah99Mj2f8n/iX4iuU8Cf8maf/AO5/mNXUsxkG3YyjIOSR6DmuZ0a2v9A08aWdLuLqO3dxFPDJFiRCxYEhmUg84Ix6O9efVzxK2+WJ9Ho0pjh2r88x6r+laHl97/0O/wD3kH/y08vvf+h3/wC8g/8Alpu8p+km3zj6w36VoeX3v/Q7/wDeQf8Ay08vvf8Aod/+8g/+Wm7yn6SbfOPrDfpWh5fe/wDQ7/8AeQf/AC08vvf+h3/7yD/5abvKfpJt84+sN+laHl97/wBDv/3kH/y08vvf+h3/AO8g/wDlpu8p+km3zj6w361NB/4bJ/3l1/nyVC9/fhGKaDfF8eaGlgAJ9p6hxW3o9pPZaakVyyGdnklk6edoZ3ZyBn0Ddj9lWnbfl8v8S8Ypz+f+t6lKV2cSormV4IGkjt5LhxjEURUM3Po3ED28mpaUFLD4jieITT2V1aQGZoOrO0W0MpYNna5wAUbntVk1/ZpDDM13AIp2VYXMg2yFuwU+kn0YqtXRpTa20UhhbpalJeHOSNrSSOuOPlDcv7R3qvufDuoMymOZChF6kkYdRuWabeo86NhjHDcfqz6Qvr3VLTT5Yku5VhSQM3VkYKi4x3JPHcVnJfW8LzCaVIkhjWV5
+11-11 06:04:08.387  4782  4864 I SHOT    : zi_wei 12/16 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
+11-11 06:04:08.387  4782  4864 I SHOT    : zi_wei 13/16 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
+11-11 06:04:08.387  4782  4864 I SHOT    : zi_wei 14/16 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
+11-11 06:04:08.388  4782  4864 I SHOT    : zi_wei 15/16 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
+11-11 06:04:08.388  4782  4864 I SHOT    : zi_wei 16/16 BqzjiglXckkpAOD+NfIPqPPFbNQYCXvH/wCRCW/WpGPj/AUHjwwxruZ5QP71/vqPYDysN2R6D1iP4Fs1M/N5ED2COce3KjP8T9dTUGns/wDT3f7/AP8AvTZ/6e7/AH//AN63KUwNPZ/6e7/f/wD3r0IAwJtJ2I5G9w2D7MtW3SmBD1pP0WX60/mp1pP0WX60/mqalBD1pP0WX60/mp1pP0WX60/mqalBHHMrsUwyuBkqwwf/AO/sqSobkYWN/wCssi4P6yAf4E1NQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKhufyS/3if+QqasZEEihTnAYNx7Dn/SgyrVv9RtNMt1mu5emjOsaAKWZ3Y4CqoBLE+oCtqtS80+G+ms5Jtx8lm66LxgttZRnI9G4n9YFBjYarZ6m0yW0jGSBgssUkbRuhIyMqwBAI7HGDW7VTeeHrO9lvJHeaNrvodUxMEOYm3KQQMg+gnPYDGK1T4P03pS28b3EVlLcpctZxsohJUcrtx8huCVz3Axig6CojcKLtbbZLuMZk39M7AAQMbu2ee3fg1Q/wCxOktJa9XrTQWss0sVtKVMSiTGU27fkgjIHoPrqSHwlZQ2S2puryRVsZbANJIC3TcgnnHcYAHoAHagv6VQS+ENOeK/jhlurZb+JIrjoy4Mm0k7iSCSzZIYnuCc8kmtrSvD9ho15eXFijRC6EYaEYEabAQNoA4zkk9+TQWtaH4Wg/D/AOBtknlPkvlW7A2bN+3Gc5zn2VCvh3T4tXTVIUkiuw7s7rIT1d4wVfOcqMAgdgQMYqDVfCel61qL3t8jySNaG1CnG1ASTvXI4cZOD/CgvKVQ/wCylmbfUYpLm8kOoQRQTyPIC5Ea7Q2cfKPck55rZbw9p8mrNqcqPJd9RJEkLkGLau3apGDtIzlSSCSeKCwtrhbqASqkqKSwAljKNwSM4PPOMj2YqWqP/ZPTHhghnEs8MInAjkfzX6rh23AAZwQMerAPcAiGXwZptxbwQXM11PHb2fkkIkZSIx9Io24DgYG71AcUHRUqki8L2A1Dy+4kuLu6AhEcs8mWj6YwNpABG4klh2JJ4qa08Pafaai+oIjteNJI5mLkMQ5yVOMblGBgNnGBigtahb89i/u3+K1NWJQGVZOcqpUftx91BG357F/dv8VqasSgMqyc5VSo/bj7qyoNO/1Sy0zyfy2dYvKJlhiyCdznsOO36zxU11cLaW0k7pK6oM7Yoy7H2BRyartY8N2GuyBr8PIFgkhjXC4jL4y65Gd3mjB7D1Vtahpsep6TNp1zLKY5o+m8i4Dn29sZ/ZQbtKpbzwvY3t5LfSS3K3zSI8dyrjfAF7KmQQFPnZGDncc+jEf+yVh9Nc/8U/Cvyl/K/N7fJ9nf20F9SuXXwDoi2kdttnZVuVuXZnBMpUthWBGNvnsMACtmPwjp6QJamW4ksVunufI3ZTDluybcfIU5IXOMnnNBf0rn18IaekTok12N1lJYZMu4iFm3BRkH5OcD1D11eW9vFaW0VtAgSGJBGij+qoGAPqoMbn8kv94n/kKmrGRBIoU5wGDcew5/0rKgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSg/9k=
+11-11 06:04:08.461  5360  5366 I .gms.persistent: Background young concurrent copying GC freed 276099(16MB) AllocSpace objects, 2(268KB) LOS objects, 54% free, 14MB/31MB, paused 48us,48us total 141.712ms
+11-11 06:04:08.524  5422  5422 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.findmydevice.spot.service.management.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-11 06:04:08.526  5422  5422 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.findmydevice.spot.service.locationreport.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+11-11 06:04:09.248  4782  4901 D EGL_emulation: app_time_stats: avg=176.15ms min=88.22ms max=326.90ms count=6
+11-11 06:04:09.290   846   846 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+11-11 06:04:09.449   846   919 D SplashScreenView: Build android.window.SplashScreenView{def6abd V.E...... ......ID 0,0-0,0}
+11-11 06:04:09.449   846   919 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-11 06:04:09.449   846   919 D SplashScreenView: Branding: view: android.view.View{ca438b2 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-11 06:04:09.460  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: PAUSED
+11-11 06:04:09.461  4782  4782 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.gauravmishra.jyotish.MainActivity@7fe77e7
+11-11 06:04:09.474   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:04:09.495  4782  4790 I vmishra.jyotish: Background young concurrent copying GC freed 571562(15MB) AllocSpace objects, 22(3480KB) LOS objects, 30% free, 40MB/58MB, paused 56us,20us total 270.690ms
+11-11 06:04:10.067  5177  5195 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-11 06:04:10.327  5360  5366 I .gms.persistent: Background concurrent copying GC freed 368281(20MB) AllocSpace objects, 7(164KB) LOS objects, 49% free, 11MB/22MB, paused 165us,57us total 593.557ms
+11-11 06:04:10.451   521   543 W ziparchive: Unable to open '/data/app/~~WAUgnRklORx1_NlYsUDpzA==/com.gauravmishra.jyotish.test-lRJO1KqOqfCbMaWSoMYjAg==/base.dm': No such file or directory
+11-11 06:04:10.472   846   864 I ndroid.systemui: NativeAlloc concurrent copying GC freed 187667(10MB) AllocSpace objects, 15(428KB) LOS objects, 49% free, 14MB/28MB, paused 78us,25us total 732.725ms
+11-11 06:04:10.481  5177  5177 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-11 06:04:10.482   521   543 I ActivityTaskManager: Displayed com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +1s16ms
+11-11 06:04:10.487   846   918 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@c16bfac
+11-11 06:04:10.494   521  2168 W InputManager-JNI: Input channel object '6665301 Splash Screen com.gauravmishra.jyotish.test (client)' was disposed without first being removed with the input manager!
+11-11 06:04:10.508   399   399 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-11 06:04:10.532  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode -1
+11-11 06:04:10.533  1035  1353 D BtGatt.ScanManager: uid 10131 isForeground true scanMode 2
+11-11 06:04:10.540   521  1716 W AppSearchIcing: icing-search-engine.cc:283: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-11 06:04:10.580  1095  2062 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=z1{delegate=s1{logId=17, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=X1.T@aa604cb
+11-11 06:04:10.629  5360  5478 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+11-11 06:04:10.630  5360  5478 D BluetoothAdapter: isLeEnabled(): ON
+11-11 06:04:10.721  1696  2036 I AiAiEcho: Predicting[0]:
+11-11 06:04:10.721  1696  2036 I AiAiEcho: EchoTargets:
+11-11 06:04:10.721  1696  2036 I AiAiEcho: Filtered by AiAi flag check:
+11-11 06:04:10.721  1696  2036 I AiAiEcho: Ranked targets strategy: SORT, count: 0, ranking metadata:
+11-11 06:04:10.734  1035  4616 D BtGatt.GattService: stopScan() - queue size =2
+11-11 06:04:10.739  1035  4616 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-11 06:04:10.739  1035  4616 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:829 get_profile_interface: get_profile_interface: id = activity_attribution
+11-11 06:04:10.740  1035  1353 D BtGatt.ScanManager: handling stopping scan  [ScanClient scanModeApp 2 scanModeUsed 2 [appScanStats com.google.uid.shared:10131]]
+11-11 06:04:10.741  1035  1353 D BtGatt.ScanManager: stop gattClientScanNative
+11-11 06:04:10.741  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(168)] Scan in shim layer stopped
+11-11 06:04:10.741  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:10.742  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:10.742  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:10.742  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:10.742  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:10.742  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:10.742  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:10.743  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:10.743  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:10.743  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:10.743  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:10.743  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:10.743  1035  1353 I bt_stack: [INFO:le_scanning_manager.cc(204)] ScanFilterParamSetup in shim layer
+11-11 06:04:10.743  1035  1294 D BtGatt.GattService: onScanFilterParamsConfigured() - clientIf=2, status=0, action=0, availableSpace=0
+11-11 06:04:10.764  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:193 unregister_client: Client unregistered
+11-11 06:04:10.764  1035  1215 I bluetooth: packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:197 unregister_client: Cancelled address rotation alarm
+11-11 06:04:10.765  1035  1294 D BtGatt.ScanManager: callback done for scannerId - 2 status - 0
+11-11 06:04:10.765  1035  1353 D BtGatt.ScanManager: configureRegularScanParams() - queue=1
+11-11 06:04:10.781  1035  1353 D BtGatt.ScanManager: configureRegularScanParams() - queue empty, scan stopped
+11-11 06:04:10.785  1035  1055 D BtGatt.GattService: unregisterScanner() - scannerId=2
+11-11 06:04:10.786  1035  1055 I bt_stack: [INFO:le_scanning_manager.cc(162)] Unregister in shim layer, scanner_id:2
+11-11 06:04:10.787  5360  5478 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= OPPORTUNISTIC, filters size = 5 [CONTEXT service_id=49 ]
+11-11 06:04:10.788  1696  2036 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+11-11 06:04:10.791  5360  5478 D BluetoothAdapter: isLeEnabled(): ON
+11-11 06:04:10.890  1035  1055 D BtGatt.GattService: registerScanner() - UUID=8be5805b-cef7-46cc-af5d-cf4d235952a5
+11-11 06:04:10.890  1035  1055 I bt_stack: [INFO:le_scanning_manager.cc(155)] RegisterScanner in shim layer
+11-11 06:04:10.890  1035  1294 D BtGatt.GattService: onScannerRegistered() - UUID=8be5805b-cef7-46cc-af5d-cf4d235952a5, scannerId=2, status=0
+11-11 06:04:10.891  5360  5581 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=2 mScannerId=0
+11-11 06:04:10.985  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: STOPPED
+11-11 06:04:10.987  4782  4782 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.gauravmishra.jyotish.MainActivity@7fe77e7
+11-11 06:04:10.992  1035  1055 D BtGatt.GattService: start scan with filters
+11-11 06:04:11.003  1035  1055 D BtGatt.GattService: enforcePrivilegedPermissionIfNeeded([BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=224, mManufacturerData=[0, 0, 0], mManufacturerDataMask=[0, 0, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fef3-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000feaa-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=0000fea0-0000-1000-8000-00805f9b34fb, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=-1, mManufacturerData=null, mManufacturerDataMask=null, mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null], BluetoothLeScanFilter [mDeviceName=null, mDeviceAddress=null, mUuid=null, mUuidMask=null, mServiceSolicitationUuid=null, mServiceSolicitationUuidMask=null, mServiceDataUuid=null, mServiceData=null, mServiceDataMask=null, mManufacturerId=76, mManufacturerData=[2, 21], mManufacturerDataMask=[-1, -1], mAdvertisingDataType=-1, mAdvertisingData=null, mAdvertisingDataMask=null, mTransportBlockFilter=null]])
+11-11 06:04:11.020  1035  1055 D BtGatt.ScanManager: startScan()  [ScanClient scanModeApp -1 scanModeUsed -1 [appScanStats com.google.uid.shared:10131]]
+11-11 06:04:11.022  1035  1353 D BtGatt.ScanManager: handling starting scan
+11-11 06:04:11.023  1035  1055 D ActivityAttributionService: notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+11-11 06:04:11.025  1035  1055 I bt_btif : packages/modules/Bluetooth/system/btif/src/bluetooth.cc:829 get_profile_interface: get_profile_interface: id = activity_attribution
+11-11 06:04:11.115  1095  1107 I s.nexuslauncher: NativeAlloc concurrent copying GC freed 37762(1825KB) AllocSpace objects, 8(856KB) LOS objects, 49% free, 5733KB/11MB, paused 33us,23us total 261.262ms
+11-11 06:04:11.198  1095  1109 W System  : A resource failed to call release.
+11-11 06:04:11.239  1095  1109 W System  : A resource failed to call release.
+11-11 06:04:11.239  1095  1109 W System  : A resource failed to call release.
+11-11 06:04:11.239  1782  1782 I A       : Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+11-11 06:04:11.272  1782  2498 I A       : Creating in-process transport to InProcessServerAddress[com.google.android.googlequicksearchbox/OnDeviceServer[Hash:133877624]]
+11-11 06:04:11.307  5177  5177 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@7e9689c
+11-11 06:04:11.311   521  2327 W InputManager-JNI: Input channel object '6a8fe71 com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:04:11.326  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:11.326  1782  2547 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-11 06:04:11.364  1782  2498 I A       : group apa_head_suggest not present without account in *
+11-11 06:04:11.366  1782  2444 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.041S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT1M57.03S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT0.001S (ZERO_TO_TWO_SECONDS))
+11-11 06:04:11.367  1782  2444 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-11 06:04:11.465  4782  4782 D LifecycleMonitor: Lifecycle status change: com.gauravmishra.jyotish.MainActivity@7fe77e7 in: DESTROYED
+11-11 06:04:11.465  4782  4782 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-11 06:04:11.477  4782  4864 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@7410482]
+11-11 06:04:11.478  4782  4782 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@1f35a10
+11-11 06:04:11.501   521   538 W InputManager-JNI: Input channel object 'ab7d30a com.gauravmishra.jyotish/com.gauravmishra.jyotish.MainActivity (client)' was disposed without first being removed with the input manager!
+11-11 06:04:11.513  1782  2547 I A       : Using proto config with mendel
+11-11 06:04:11.523  4782  4782 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-11 06:04:11.592  4782  4864 I TestRunner: finished: ziWeiNineStarTongShu(com.gauravmishra.jyotish.ChineseTest)

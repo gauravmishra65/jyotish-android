@@ -1,0 +1,18 @@
+--------- beginning of system
+11-11 06:08:54.061   521  3258 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-11 06:08:54.749   521  2327 E ActivityManager: Unable to freeze binder for 7473: -11
+--------- beginning of main
+11-11 06:08:55.207   521   555 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+11-11 06:08:55.208   521   555 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+11-11 06:08:55.368   521  3258 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-11 06:08:55.421   521  3258 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-11 06:08:55.466   521   555 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+11-11 06:08:55.471   521   555 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+11-11 06:08:55.508   399   399 E BpTransactionCompletedListener: Failed to transact (-32)
+11-11 06:08:55.508   399   399 E BpTransactionCompletedListener: Failed to transact (-32)
+11-11 06:08:55.688   521   783 E AppOps  : attributionTag VCN not declared in manifest of android
+11-11 06:08:55.706   521  3258 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-11 06:08:55.792   847  7235 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+11-11 06:08:55.794   847  7235 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+11-11 06:08:55.886   521  3258 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-11 06:08:56.043   521   783 E AppOps  : attributionTag VCN not declared in manifest of android

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.gauravmishra.jyotish.AccessibilityTest" tests="31" failures="0" errors="0" skipped="0" time="318.494" timestamp="2026-11-11T06:08:29" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 14" />
+    <property name="flavor" value="full" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="mainScreensHaveLabelledFullSizeTargets" classname="com.gauravmishra.jyotish.AccessibilityTest" time="26.316" />
+  <testcase name="csvExport" classname="com.gauravmishra.jyotish.BackupTest" time="0.014" />
+  <testcase name="roundTripAndWrongPassword" classname="com.gauravmishra.jyotish.BackupTest" time="5.632" />
+  <testcase name="spansWithEvents" classname="com.gauravmishra.jyotish.BirthTimeTest" time="20.651" />
+  <testcase name="ziWeiNineStarTongShu" classname="com.gauravmishra.jyotish.ChineseTest" time="8.848" />
+  <testcase name="settingsHaveReportCredits" classname="com.gauravmishra.jyotish.DetailsTest" time="7.334" />
+  <testcase name="moreTabShowsAllSections" classname="com.gauravmishra.jyotish.DetailsTest" time="22.594" />
+  <testcase name="yearGridAndHouse" classname="com.gauravmishra.jyotish.FengShuiTest" time="11.898" />
+  <testcase name="welcomeAddProfileAndSeeTheChartOnHome" classname="com.gauravmishra.jyotish.FlowTest" time="29.795" />
+  <testcase name="hindiInterfaceShowsHindiNames" classname="com.gauravmishra.jyotish.FlowTest" time="14.987" />
+  <testcase name="fourAreasYearByYear" classname="com.gauravmishra.jyotish.ForecastTest" time="13.537" />
+  <testcase name="hindiForecast" classname="com.gauravmishra.jyotish.ForecastTest" time="10.387" />
+  <testcase name="helpShareRateAndTourReplay" classname="com.gauravmishra.jyotish.HelpTest" time="7.358" />
+  <testcase name="hindiHelp" classname="com.gauravmishra.jyotish.HelpTest" time="4.852" />
+  <testcase name="milanShowsTheEngineScore" classname="com.gauravmishra.jyotish.MilanTest" time="8.692" />
+  <testcase name="findsTheSameDaysAsTheDesktop" classname="com.gauravmishra.jyotish.MuhurtaTest" time="7.285" />
+  <testcase name="notesAndEventsReachBirthTimeCheck" classname="com.gauravmishra.jyotish.NotesTest" time="9.213" />
+  <testcase name="numbersGridAndNameOptions" classname="com.gauravmishra.jyotish.NumerologyTest" time="6.002" />
+  <testcase name="oldNamesAndVillages" classname="com.gauravmishra.jyotish.PlacesTest" time="11.606" />
+  <testcase name="todayAndYear" classname="com.gauravmishra.jyotish.PredictionTest" time="5.748" />
+  <testcase name="pickSavedAndAddNew" classname="com.gauravmishra.jyotish.ProfilePickerTest" time="8.128" />
+  <testcase name="numberTools" classname="com.gauravmishra.jyotish.QuestionTest" time="5.755" />
+  <testcase name="prashnaAndKp" classname="com.gauravmishra.jyotish.QuestionTest" time="9.17" />
+  <testcase name="focusedReports" classname="com.gauravmishra.jyotish.ReportTest" time="11.341" />
+  <testcase name="fullReadingInEnglishAndHindi" classname="com.gauravmishra.jyotish.ReportTest" time="11.639" />
+  <testcase name="savedKundlisSearchGroupsAndOpen" classname="com.gauravmishra.jyotish.SavedAboutTest" time="5.642" />
+  <testcase name="myDetailsAndAboutFromSettings" classname="com.gauravmishra.jyotish.SavedAboutTest" time="6.662" />
+  <testcase name="engineMatchesDesktopSnapshot" classname="com.gauravmishra.jyotish.SpikeTest" time="5.542" />
+  <testcase name="todayInHindi" classname="com.gauravmishra.jyotish.TodayTest" time="4.102" />
+  <testcase name="todayDashboard" classname="com.gauravmishra.jyotish.TodayTest" time="9.635" />
+  <testcase name="darkThemeAndTheNewChartSections" classname="com.gauravmishra.jyotish.TodayTest" time="4.272" />
+</testsuite>
