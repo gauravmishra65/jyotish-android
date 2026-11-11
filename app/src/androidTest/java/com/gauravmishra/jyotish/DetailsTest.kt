@@ -61,7 +61,8 @@ class DetailsTest {
             rule.onNodeWithTag("varga_note").assertTextContains("past karma", substring = true)
             for (k in listOf("panchang", "doshas", "avakahada", "pratyantar", "sensitivity", "chara", "narayana", "arudhas", "bhava_chalit",
                     "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing",
-                    "functional", "avasthas", "upagrahas", "more_dashas", "western_extra", "ayanamsa_compare", "tithi_pravesha")) {
+                    "functional", "avasthas", "upagrahas", "more_dashas", "western_extra", "ayanamsa_compare", "tithi_pravesha",
+                    "w_patterns", "w_dignities", "w_lots", "w_derived", "w_ingress", "w_acg", "bazi_nayin", "bazi_stars", "maya")) {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
             }
             rule.onNodeWithText("Pratipada (Shukla paksha, tithi 1 of 30)").performScrollTo().assertExists()   // panchang opens by default

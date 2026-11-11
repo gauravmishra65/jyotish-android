@@ -61,6 +61,20 @@ if (h["mountain"]["C"], h["water"]["C"]) != (4, 3) or (h["mountain"]["S"], h["wa
     problems.append(f"Period 8 facing Wu: centre {h['mountain']['C']}-{h['water']['C']}, south {h['mountain']['S']}-{h['water']['S']}")
 if F.period_of(2010) != 8 or F.period_of(2030) != 9:
     problems.append("periods")
+# BaZi depth: growth phases (壬 born in 申, peaks in 子; 乙 born in 午, runs backward), Na Yin, Nobleman by Day Master
+import chinese_depth as D
+if D.phase(8, 8)[0] != "长生" or D.phase(8, 0)[0] != "帝旺" or D.phase(1, 6)[0] != "长生" or D.phase(1, 3)[0] != "临官" or D.phase(0, 7)[0] != "墓":
+    problems.append("growth phases")
+if D.NAYIN[D._idx(0, 0) // 2] != "海中金" or D.NAYIN[D._idx(9, 11) // 2] != "大海水" or D.NAYIN[D._idx(2, 6) // 2] != "天河水":
+    problems.append("na yin")
+if set(D.NOBLE[0]) != {1, 7} or set(D.NOBLE[7]) != {6, 2} or set(D.NOBLE[9]) != {3, 5}:
+    problems.append("nobleman")
+# Maya calendar (GMT 584283): 21 Dec 2012 = 13.0.0.0.0 4 Ajaw 3 K'ank'in G9; 1 Jan 2000 = 12.19.6.15.2 11 Ik' 10 K'ank'in
+import maya as MY
+for d, want in ((dt.date(2012, 12, 21), ("13.0.0.0.0", 4, 19, 3, 13)), (dt.date(2000, 1, 1), ("12.19.6.15.2", 11, 1, 10, 13))):
+    m = MY.maya(d)
+    if (m["long_count"], m["tz_num"], m["tz_sign"], m["haab_day"], m["haab_month"]) != want:
+        problems.append(f"maya {d}: {m}")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

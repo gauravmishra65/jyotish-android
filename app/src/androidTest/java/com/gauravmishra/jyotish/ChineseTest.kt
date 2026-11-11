@@ -37,6 +37,7 @@ class ChineseTest {
             rule.onNodeWithTag("tool_chinese").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("zwds_grid"), timeoutMillis = 60_000)
             rule.shot("zi_wei")
+            rule.onNodeWithTag("section_zwds_depth").performScrollTo().assertExists()
             rule.onNodeWithTag("section_nine_star_ki").performScrollTo().assertExists()
             rule.onNodeWithTag("cn_act_business").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("section_tong_shu"), timeoutMillis = 60_000)

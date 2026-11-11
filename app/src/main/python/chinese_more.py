@@ -144,9 +144,14 @@ def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours,
                  "blocks": [table([bi("Palace", "भाव"), bi("Stem-branch", "तना-शाखा"), bi("Main stars", "मुख्य तारे"), bi("Other stars", "अन्य तारे"),
                                    bi("10-year period (age)", "10 वर्ष की अवधि (आयु)")], rows),
                             para(bi("The four transformations of the birth year:", "जन्म वर्ष के चार रूपांतरण:")), items(trans)],
-                 "note": bi("Placements follow the Quanshu rules. Star brightness, yearly overlays and readings are not given here; a Zi Wei "
+                 "note": bi("Placements follow the Quanshu rules. Star brightness and readings are not given here; a Zi Wei "
                             "practitioner reads the chart as a whole.",
-                            "स्थान 'चुआनशू' नियमों के अनुसार। तारों की चमक, वार्षिक परतें और फलादेश यहाँ नहीं दिए गए; ज़ी वेई के जानकार कुंडली को समग्र रूप से पढ़ते हैं।")})
+                            "स्थान 'चुआनशू' नियमों के अनुसार। तारों की चमक और फलादेश यहाँ नहीं दिए गए; ज़ी वेई के जानकार कुंडली को समग्र रूप से पढ़ते हैं।")})
+    try:
+        import chinese_depth as CD
+        secs.append(CD.ziwei_depth(z, today_iso))
+    except (KeyError, TypeError, ValueError, IndexError):
+        pass
     birth = nine_star(d, tz_hours)
     now = nine_star(dt.date.fromisoformat(today_iso), today_tz_hours)
     secs.append({"key": "nine_star_ki", "title": bi("Nine Star Ki", "नौ तारा की"),

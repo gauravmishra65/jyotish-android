@@ -58,6 +58,7 @@ class MilanTest {
             // v16: the Western side of the match
             rule.onNodeWithTag("section_synastry").performScrollTo().performClick()
             rule.onNodeWithTag("section_composite").performScrollTo().assertExists()
+            rule.onNodeWithTag("section_bazi_match").performScrollTo().assertExists()
         }
     }
 }

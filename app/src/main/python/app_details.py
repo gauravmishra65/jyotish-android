@@ -366,6 +366,21 @@ def build(c):
             out.append(s)
     import app_details_more as M
     import app_details_extra as X
-    out = out[:1] + M.build_more(c) + out[1:] + X.build_extra(c)   # birth panchang, doshas and the v14 sections, the rest, then v16's
+    try:
+        import western_more as WM
+        wm = WM.build(c)
+    except Exception:
+        wm = []
+    try:
+        import chinese_depth as CD
+        wm += CD.bazi_sections(c["bazi"]) if c.get("bazi") else []
+    except Exception:
+        pass
+    try:
+        import maya
+        wm.append(maya.section(c["time_pipeline"]["local_civil"][:10]))
+    except Exception:
+        pass
+    out = out[:1] + M.build_more(c) + out[1:] + X.build_extra(c) + wm   # birth panchang, doshas and the v14 sections, the rest, then v16's
     vargas = {k: m for k, m in v.get("divisional_charts", {}).items()}
     return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta()}

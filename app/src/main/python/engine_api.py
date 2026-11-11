@@ -21,7 +21,7 @@ import muhurta  # noqa: E402
 import name_correction  # noqa: E402
 IMPORT_SECONDS = time.perf_counter() - _T_IMPORT
 
-DEFAULT_MODULES = "vedic,western,numerology"
+DEFAULT_MODULES = "vedic,western,bazi,numerology"
 
 
 def _chart_args(r):
@@ -67,10 +67,15 @@ def chart(request_json):
 
 
 def match(chart_a_json, chart_b_json, bride="B"):
-    m = chart_engine.match_charts(json.loads(chart_a_json), json.loads(chart_b_json), bride)
+    fa, fb = json.loads(chart_a_json), json.loads(chart_b_json)
+    m = chart_engine.match_charts(fa, fb, bride)
     try:
         import app_match_more
-        m["sections"] = app_match_more.build(m)      # the Western side, worded for the Milan screen
+        ia, ib = fa.get("match_inputs") or {}, fb.get("match_inputs") or {}
+        if ia.get("bazi_branches") and ib.get("bazi_branches"):
+            m["_bazi_a"], m["_bazi_b"] = ia, ib
+        m["sections"] = app_match_more.build(m)
+        m.pop("_bazi_a", None); m.pop("_bazi_b", None)      # the Western side, worded for the Milan screen
     except Exception:
         m["sections"] = []
     return json.dumps(m, ensure_ascii=False)

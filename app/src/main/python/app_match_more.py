@@ -102,4 +102,10 @@ def build(m):
             s = None
         if s:
             out.append(s)
+    try:
+        import chinese_depth as CD
+        if m.get("_bazi_a") and m.get("_bazi_b"):
+            out.append(CD.bazi_match(m["_bazi_a"], m["_bazi_b"], na.split()[0], nb.split()[0]))
+    except (KeyError, TypeError, ValueError, IndexError):
+        pass
     return out
