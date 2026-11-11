@@ -23,12 +23,16 @@ data class Profile(
     val resLon: Double? = null,
     /** Group on the Saved Kundlis screen: family, friends, clients or other ("" = not set). */
     val group: String = "",
+    /** The user's own notes about this person (v20), kept apart from anything computed. */
+    val notes: String = "",
+    /** Dated life events "YYYY-MM-DD:kind" (marriage, child, job, property, abroad, education), for the Birth time check. */
+    val events: List<String> = emptyList(),
 ) {
     fun toJson(): JSONObject = JSONObject()
         .put("id", id).put("name", name).put("gender", gender).put("date", date).put("time", time)
         .put("confidence", confidence).put("place", place).put("lat", lat).put("lon", lon).put("tz", tz)
         .put("residence", residence).put("res_lat", resLat ?: JSONObject.NULL).put("res_lon", resLon ?: JSONObject.NULL)
-        .put("group", group)
+        .put("group", group).put("notes", notes).put("events", JSONArray(events))
 
     val hasResidence: Boolean get() = residence.isNotBlank() && resLat != null && resLon != null
 
@@ -37,7 +41,8 @@ data class Profile(
         .put("name", name).put("date", date).put("time", time).put("lat", lat).put("lon", lon).put("tz", tz)
         .put("gender", gender).put("time_confidence", confidence).put("place", place).put("now", now)
         .put("ayanamsa", ayanamsa).put("node", node)
-        .put("v", 4)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras)
+        .put("dasha_year", ChartPrefs.dashaYear.toDouble()).put("zi", ChartPrefs.zi).put("bazi_time", ChartPrefs.baziTime)
+        .put("v", 5)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras; 5: ayanamsa table, Tithi Pravesha)
         .apply { if (hasResidence) put("residence", residence).put("current_lat", resLat).put("current_lon", resLon) }
 
     val initials: String
@@ -58,6 +63,8 @@ data class Profile(
             resLat = if (o.has("res_lat") && !o.isNull("res_lat")) o.getDouble("res_lat") else null,
             resLon = if (o.has("res_lon") && !o.isNull("res_lon")) o.getDouble("res_lon") else null,
             group = o.optString("group", ""),
+            notes = o.optString("notes", ""),
+            events = o.optJSONArray("events")?.let { a -> (0 until a.length()).map { a.getString(it) } } ?: emptyList(),
         )
     }
 }

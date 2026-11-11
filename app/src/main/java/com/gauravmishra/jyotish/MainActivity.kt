@@ -31,6 +31,7 @@ import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
 import com.gauravmishra.jyotish.ui.ChineseScreen
 import com.gauravmishra.jyotish.ui.FengShuiScreen
+import com.gauravmishra.jyotish.ui.NotesScreen
 import com.gauravmishra.jyotish.ui.PredictionScreen
 import com.gauravmishra.jyotish.ui.NumberToolsScreen
 import com.gauravmishra.jyotish.ui.TOOLS
@@ -224,6 +225,12 @@ fun App(vm: AppViewModel = viewModel()) {
                         onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
                         onReport = { nav.navigate(Routes.REPORT) }, onBack = { nav.popBackStack() })
                 }
+                composable(Routes.NOTES) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    NotesScreen(profiles, p, onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) },
+                        onSave = { vm.addOrUpdate(it) }, onBack = { nav.popBackStack() })
+                }
                 composable(Routes.FENG_SHUI) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
@@ -236,7 +243,12 @@ fun App(vm: AppViewModel = viewModel()) {
                         onBack = { nav.popBackStack() })
                 }
                 composable(Routes.BACKUP) {
-                    BackupScreen(profiles, onRestore = { vm.restore(it) }, onBack = { nav.popBackStack() })
+                    BackupScreen(profiles, onRestore = { vm.restore(it) }, onBack = { nav.popBackStack() }, chartFacts = { p ->
+                        (charts[p.id] as? ChartState.Ready)?.model?.let { m ->
+                            val moon = m.planets.firstOrNull { it.name == "Moon" }
+                            listOf(m.lagna.sign, moon?.sign ?: "", moon?.let { "${it.nakshatra} ${it.pada}" } ?: "")
+                        }
+                    })
                 }
                 composable(Routes.REPORT) {
                     Milestone(vm)

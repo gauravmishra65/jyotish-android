@@ -44,7 +44,8 @@ import kotlinx.coroutines.withContext
  * like through the system file picker, and come back from it on a new phone. The app itself never goes online.
  */
 @Composable
-fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int, Int>, onBack: () -> Unit) {
+fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int, Int>, onBack: () -> Unit,
+                 chartFacts: (Profile) -> List<String>? = { null }) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     var pass by remember { mutableStateOf("") }
@@ -74,6 +75,18 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
         }
     }
     val open = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> picked = uri; status = null }
+    val okExported = stringResource(R.string.bk_exported)
+    val exportCsv = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            status = try {
+                withContext(Dispatchers.IO) {
+                    ctx.contentResolver.openOutputStream(uri)?.use { it.write(peopleCsv(profiles, chartFacts).toByteArray(Charsets.UTF_8)) } ?: error("cannot write")
+                }
+                okExported.format(profiles.size)
+            } catch (t: Throwable) { failed.format(t.message ?: "") }
+        }
+    }
 
     Scaffold(containerColor = MaterialTheme.colorScheme.background, topBar = { BackBar(stringResource(R.string.bk_title), onBack) }) { pad ->
         Column(Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 8.dp),
@@ -92,6 +105,12 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
             Button(enabled = profiles.isNotEmpty() && pass.length >= Backup.MIN_PASSWORD && pass == pass2,
                 onClick = { create.launch("GauravJyotish_backup_${java.time.LocalDate.now()}.gjb") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_save")) { Text(stringResource(R.string.bk_save)) }
+
+            HorizontalDivider()
+            Text(stringResource(R.string.bk_export_title), style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.bk_export_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
+            OutlinedButton(enabled = profiles.isNotEmpty(), onClick = { exportCsv.launch("GauravJyotish_people_${java.time.LocalDate.now()}.csv") },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_csv")) { Text(stringResource(R.string.bk_export)) }
 
             HorizontalDivider()
             Text(stringResource(R.string.bk_restore_title), style = MaterialTheme.typography.titleMedium)
@@ -123,4 +142,17 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
             Text(stringResource(R.string.bk_privacy), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
         }
     }
+}
+
+/** Saved people as a spreadsheet (UTF-8 CSV with a BOM so Excel shows Hindi correctly); not encrypted, so it says so. */
+fun peopleCsv(profiles: List<Profile>, chartFacts: (Profile) -> List<String>?): String {
+    fun q(s: String) = "\"" + s.replace("\"", "\"\"") + "\""
+    val head = listOf("Name", "Gender", "Birth date", "Birth time", "Time confidence", "Birthplace", "Latitude", "Longitude", "Time zone",
+        "Lives in", "Group", "Lagna", "Moon sign", "Moon nakshatra", "Life events", "Notes")
+    val rows = profiles.map { p ->
+        val f = chartFacts(p) ?: listOf("", "", "")
+        listOf(p.name, p.gender, p.date, p.time, p.confidence, p.place, String.format(java.util.Locale.US, "%.4f", p.lat), String.format(java.util.Locale.US, "%.4f", p.lon), p.tz,
+            p.residence, p.group, f.getOrElse(0) { "" }, f.getOrElse(1) { "" }, f.getOrElse(2) { "" }, p.events.joinToString("; "), p.notes)
+    }
+    return "\uFEFF" + (listOf(head) + rows).joinToString("\r\n") { r -> r.joinToString(",") { q(it) } } + "\r\n"
 }

@@ -62,6 +62,7 @@ object Routes {
     const val CHINESE = "chinese"
     const val PREDICTIONS = "predictions"
     const val FENG_SHUI = "fengshui"
+    const val NOTES = "notes"
     /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
     const val TOUR = "tour?replay={replay}"
     fun tour(replay: Boolean = false) = "tour?replay=$replay"

@@ -27,6 +27,7 @@ data class Tool(val key: String, val title: Int, val sub: Int, val route: String
 
 /** The Tools screen's entries, in order. */
 val TOOLS = listOf(
+    Tool("notes", R.string.nb_title, R.string.nb_sub, Routes.NOTES),
     Tool("birth_time", R.string.bt_title, R.string.bt_sub, Routes.BIRTH_TIME),
     Tool("prashna", R.string.pr_title, R.string.pr_sub, Routes.PRASHNA),
     Tool("kp", R.string.kp_title, R.string.kp_sub, Routes.KP_HORARY),

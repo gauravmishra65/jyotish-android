@@ -99,14 +99,23 @@ def _star(n):
 def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours, today_iso, activity="wedding"):
     d = dt.date.fromisoformat(date_iso)
     lunar = CC.to_lunar(d)
+    jd_b = swe.julday(d.year, d.month, d.day, 12.0 - tz_hours)
+    lc_year = d.year if jd_b >= lichun(d.year) else d.year - 1
+    i60 = (lc_year - 4) % 60
+    lc = {"zh": CC.STEMS[i60 % 10] + CC.BRANCHES[i60 % 12], "py": f"{CC.STEMS_PY[i60 % 10]}-{CC.BRANCHES_PY[i60 % 12]}",
+          "animal": CC.ANIMALS[i60 % 12], "animal_hi": CC.ANIMALS_HI[i60 % 12]}
+    nominal = CC.to_lunar(dt.date.fromisoformat(today_iso))["year"] - lunar["year"] + 1
     secs = []
     secs.append({"key": "cn_lunar", "title": bi("Chinese birth date", "चीनी जन्म तिथि"),
                  "blocks": [table([bi("Item", "विवरण"), bi("Value", "मान")], [
                      [bi("Lunar date", "चंद्र तिथि"), bi(f"{lunar['zh']} (year {lunar['year']}, month {lunar['month']}{' leap' if lunar['leap'] else ''}, day {lunar['day']})",
                                                          f"{lunar['zh']} (वर्ष {lunar['year']}, माह {lunar['month']}{' अधिक' if lunar['leap'] else ''}, दिन {lunar['day']})")],
                      [bi("Year (from Chinese New Year)", "वर्ष (चीनी नववर्ष से)"), bi(f"{lunar['stem_branch']} {lunar['pinyin']}, {lunar['animal']}",
-                                                                                         f"{lunar['stem_branch']} {lunar['pinyin']}, {lunar['animal_hi']}")]])],
-                 "note": bi("BaZi counts the year from Li Chun (about 4 February) instead of New Year, so near the turn of the year the two animals can differ.",
+                                                                                         f"{lunar['stem_branch']} {lunar['pinyin']}, {lunar['animal_hi']}")],
+                     [bi("Year (from Li Chun, used by BaZi)", "वर्ष (ली चुन से, बाज़ी में)"), bi(f"{lc['zh']} {lc['py']}, {lc['animal']}", f"{lc['zh']} {lc['py']}, {lc['animal_hi']}")],
+                     [bi("Nominal age now (虚岁)", "पारंपरिक आयु अभी (虚岁)"), bi(f"{nominal} (age counted from 1 at birth, adding one at each New Year)",
+                                                                              f"{nominal} (जन्म पर 1 से, हर नववर्ष पर एक जोड़कर)")]])],
+                 "note": bi("BaZi counts the year from Li Chun (about 4 February) instead of New Year, so between the two dates the animals differ; both are shown.",
                             "बाज़ी वर्ष को नववर्ष की बजाय ली चुन (लगभग 4 फ़रवरी) से गिनता है, इसलिए वर्ष के मोड़ पर दोनों पशु अलग हो सकते हैं।")})
     z = ZW.chart(date_iso, time_hhmm, gender)
     global LAST_GRID

@@ -30,4 +30,13 @@ class BackupTest {
         val junk = runCatching { Backup.decode("hello world, not a backup at all....".toByteArray(), "x".toCharArray()) }.exceptionOrNull()
         assertEquals(Backup.NotABackup::class, junk!!::class)
     }
+
+    @Test
+    fun csvExport() {
+        val csv = com.gauravmishra.jyotish.ui.peopleCsv(people.map { it.copy(notes = "Line with \"quotes\", comma", events = listOf("2016-02-14:marriage")) }) { listOf("Scorpio", "Cancer", "Pushya 1") }
+        val lines = csv.trimEnd().split("\r\n")
+        assertEquals(3, lines.size)
+        assertEquals(true, lines[1].contains("\"Line with \"\"quotes\"\", comma\""))
+        assertEquals(true, lines[1].contains("\"2016-02-14:marriage\""))
+    }
 }

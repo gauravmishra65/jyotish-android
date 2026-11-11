@@ -38,6 +38,14 @@ def _chart_args(r):
         args += ["--node", r["node"]]
     if r.get("place"):
         args += ["--place", r["place"]]
+    if r.get("dasha_year"):
+        args += ["--dasha-year", str(float(r["dasha_year"]))]
+    if r.get("zi") in ("23", "00"):
+        args += ["--zi", r["zi"]]
+    if r.get("bazi_time") in ("solar", "standard"):
+        args += ["--bazi-time", r["bazi_time"]]
+    if r.get("past_events"):
+        args += ["--past-events", r["past_events"]]
     if r.get("name_correction"):
         args.append("--name-correction")
     if r.get("current_lat") is not None and r.get("current_lon") is not None:

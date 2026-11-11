@@ -671,4 +671,25 @@
     <string name="fs_built">घर बनने या आपके आने का वर्ष</string>
     <string name="fs_house_note">मुख्य द्वार पर बाहर की ओर मुँह करके खड़े हों और कंपास देखें। उत्तर 0°, पूर्व 90°, दक्षिण 180°, पश्चिम 270°।</string>
     <string name="fs_run">मेरे घर का चार्ट दिखाएँ</string>
+    <string name="set_dasha_year">दशा वर्ष की लंबाई</string>
+    <string name="set_dasha_solar">365.25 दिन (सौर)</string>
+    <string name="set_dasha_savana">360 दिन (सावन)</string>
+    <string name="set_zi">बाज़ी: दिन बदलता है</string>
+    <string name="set_zi_23">23:00 पर (ज़ी घड़ी)</string>
+    <string name="set_zi_00">आधी रात को</string>
+    <string name="set_bazi_time">बाज़ी घड़ी का आधार</string>
+    <string name="set_bazi_solar">वास्तविक सौर समय</string>
+    <string name="set_bazi_standard">घड़ी का समय</string>
+    <string name="nb_title">नोट्स और जीवन की घटनाएँ</string>
+    <string name="nb_sub">हर व्यक्ति के बारे में आपके नोट्स और प्रमुख घटनाओं की तिथियाँ</string>
+    <string name="nb_notes">नोट्स</string>
+    <string name="nb_notes_hint">इस कुंडली के बारे में जो भी याद रखना हो</string>
+    <string name="nb_events">जीवन की घटनाएँ</string>
+    <string name="nb_save">सहेजें</string>
+    <string name="nb_saved">सहेजा गया।</string>
+    <string name="nb_privacy">नोट्स और घटनाएँ इसी फ़ोन पर रहती हैं। ये बैकअप फ़ाइल और स्प्रेडशीट में जाती हैं, और जन्म समय जाँच इन्हीं घटनाओं से शुरू होती है।</string>
+    <string name="bk_export_title">स्प्रेडशीट के रूप में निर्यात</string>
+    <string name="bk_export_note">सभी सहेजे गए लोगों की CSV फ़ाइल, लग्न, चंद्र राशि, घटनाओं और नोट्स के साथ, एक्सेल या गूगल शीट्स के लिए। यह एन्क्रिप्टेड नहीं है।</string>
+    <string name="bk_export">स्प्रेडशीट निर्यात करें (CSV)</string>
+    <string name="bk_exported">%1$d लोगों के साथ स्प्रेडशीट सहेजी गई।</string>
 </resources>

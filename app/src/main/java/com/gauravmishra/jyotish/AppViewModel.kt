@@ -104,7 +104,7 @@ sealed interface ChartState {
 }
 
 class AppViewModel(app: Application) : AndroidViewModel(app) {
-    val settings = AppSettings(app)
+    val settings = AppSettings(app).also { it.loadChartPrefs() }
     private val store = ProfileStore(app.filesDir)
 
     private val _profiles = MutableStateFlow(store.load())

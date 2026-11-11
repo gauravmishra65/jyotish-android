@@ -680,4 +680,25 @@
     <string name="fs_built">Year the home was built or you moved in</string>
     <string name="fs_house_note">Stand at the main door facing out and read the compass. North is 0°, east 90°, south 180°, west 270°.</string>
     <string name="fs_run">Show my home\'s chart</string>
+    <string name="set_dasha_year">Dasha year length</string>
+    <string name="set_dasha_solar">365.25 days (solar)</string>
+    <string name="set_dasha_savana">360 days (savana)</string>
+    <string name="set_zi">BaZi: day changes at</string>
+    <string name="set_zi_23">23:00 (Zi hour)</string>
+    <string name="set_zi_00">Midnight</string>
+    <string name="set_bazi_time">BaZi hour from</string>
+    <string name="set_bazi_solar">True solar time</string>
+    <string name="set_bazi_standard">Clock time</string>
+    <string name="nb_title">Notes and life events</string>
+    <string name="nb_sub">Your notes about each person and dates of key events</string>
+    <string name="nb_notes">Notes</string>
+    <string name="nb_notes_hint">Anything you want to remember about this chart</string>
+    <string name="nb_events">Life events</string>
+    <string name="nb_save">Save</string>
+    <string name="nb_saved">Saved.</string>
+    <string name="nb_privacy">Notes and events stay on this phone. They go into the backup file and the spreadsheet export, and the Birth time check starts from these events.</string>
+    <string name="bk_export_title">Export as a spreadsheet</string>
+    <string name="bk_export_note">A CSV file of everyone saved, with the Lagna, Moon sign, life events and notes, for Excel or Google Sheets. It is not encrypted.</string>
+    <string name="bk_export">Export spreadsheet (CSV)</string>
+    <string name="bk_exported">Spreadsheet saved with %1$d people.</string>
 </resources>

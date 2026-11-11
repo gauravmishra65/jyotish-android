@@ -121,6 +121,7 @@ fun AddProfileScreen(
                             name = name.trim(), gender = gender, date = date.toString(), time = time!!, confidence = confidence,
                             place = place!!.label, lat = place.lat, lon = place.lon, tz = place.tz,
                             residence = residence?.label ?: "", resLat = residence?.lat, resLon = residence?.lon, group = group,
+                            notes = existing?.notes ?: "", events = existing?.events ?: emptyList(),
                         ))
                     },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp).heightIn(min = 56.dp).testTag("save"),

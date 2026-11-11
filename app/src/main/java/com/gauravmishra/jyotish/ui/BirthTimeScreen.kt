@@ -66,7 +66,11 @@ fun BirthTimeScreen(profiles: List<Profile>, profile: Profile?, ayanamsa: String
     val lang = currentLang()
     val scope = rememberCoroutineScope()
     var window by remember { mutableStateOf(30) }
-    val events = remember { mutableStateListOf<LifeEvent>() }
+    val events = remember(profile?.id) {
+        mutableStateListOf<LifeEvent>().apply {
+            profile?.events?.forEach { e -> e.split(":").takeIf { it.size == 2 }?.let { add(LifeEvent(it[1], it[0])) } }
+        }
+    }
     var kind by remember { mutableStateOf("marriage") }
     var dateText by remember { mutableStateOf("") }
     var state by remember { mutableStateOf<CheckState>(CheckState.Idle) }

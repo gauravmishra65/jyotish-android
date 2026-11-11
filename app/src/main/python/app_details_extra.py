@@ -126,7 +126,7 @@ def functional(v):
     return {"key": "functional", "title": bi("Functional benefics and malefics", "कार्यात्मक शुभ और पाप ग्रह"),
             "intro": bi("For each Lagna some planets work as friends and some as obstacles, whatever their natural nature. A yogakaraka rules both a kendra and a trikona.",
                         "हर लग्न के लिए कुछ ग्रह मित्र और कुछ बाधक की तरह काम करते हैं, उनका नैसर्गिक स्वभाव कुछ भी हो। योगकारक केंद्र और त्रिकोण दोनों का स्वामी होता है।"),
-            "blocks": blocks, "note": bi(f"Source: {fn.get('source', 'P.V.R. Narasimha Rao')}.", f"स्रोत: {fn.get('source', 'P.V.R. Narasimha Rao')}।")}
+            "blocks": blocks, "note": bi(f"Source: {fn.get('source', 'P.V.R. Narasimha Rao')}.", "स्रोत: " + fn.get("source", "पी.वी.आर. नरसिंह राव").replace("PVR Table", "पी.वी.आर. नरसिंह राव, तालिका") + "।")}
 
 
 # ------------------------------------------------------------------ more sign dashas
@@ -209,12 +209,115 @@ def western_extra(c):
                        "पाश्चात्य स्थितियाँ सायन हैं, इसलिए उनकी राशियाँ ऊपर की वैदिक कुंडली से लगभग 24° अलग हैं।")}
 
 
+# ------------------------------------------------------------------ ayanamsa comparison (v20)
+AYAN_NAMES = {"lahiri": ("Lahiri", "लाहिरी"), "raman": ("Raman", "रमन"), "krishnamurti": ("KP", "केपी"), "true_chitra": ("True Chitra", "ट्रू चित्रा")}
+
+
+def ayanamsa_table(c):
+    import swisseph as swe
+    import vedic
+    jd = c["time_pipeline"]["jd_ut"]
+    pl = c["meta"]["place"]
+    rows = []
+    for a, (en, hi) in AYAN_NAMES.items():
+        if a not in vedic.AYAN:
+            continue
+        pos = vedic.sidereal_positions(jd, a)
+        asc = vedic._asc_at(jd, pl["lat"], pl["lon"], a)
+        swe.set_sid_mode(vedic.AYAN[a])
+        val = swe.get_ayanamsa_ut(jd)
+        m = pos["Moon"]["lon"]
+        nk = vedic.nak_info(m)
+        ls, ms = SIGNS[int(asc // 30)], SIGNS[int(m // 30)]
+        rows.append([bi(en, hi), bi(f"{val:.3f}°"), bi(f"{ls} {asc % 30:.1f}°", f"{SIGN_HI.get(ls, ls)} {asc % 30:.1f}°"),
+                     bi(f"{ms}, {nk['name']} {nk['pada']}", f"{SIGN_HI.get(ms, ms)}, {HS.NAK.get(nk['name'], nk['name'])} {nk['pada']}")])
+    used = (c["vedic"].get("conventions") or {}).get("ayanamsa", "lahiri")
+    return {"key": "ayanamsa_compare", "title": bi("Ayanamsa comparison", "अयनांश तुलना"),
+            "intro": bi(f"The same birth under the four ayanamsas the app offers. This chart uses {AYAN_NAMES.get(used, (used, used))[0]}.",
+                        f"ऐप में उपलब्ध चारों अयनांशों में यही जन्म। यह कुंडली {AYAN_NAMES.get(used, (used, used))[1]} का उपयोग करती है।"),
+            "blocks": [table([bi("Ayanamsa", "अयनांश"), bi("Value", "मान"), bi("Lagna", "लग्न"), bi("Moon and nakshatra", "चंद्र और नक्षत्र")], rows)],
+            "note": bi("If the Lagna or the Moon's nakshatra changes between rows, readings that depend on it differ by school; Settings switches the ayanamsa.",
+                       "अगर पंक्तियों के बीच लग्न या चंद्र का नक्षत्र बदलता है, तो उस पर निर्भर फल परंपरा के अनुसार अलग होंगे; सेटिंग्स में अयनांश बदल सकते हैं।")}
+
+
+# ------------------------------------------------------------------ Tithi Pravesha (v20)
+def tithi_pravesha(c, now):
+    """The annual chart for the moment the Sun-Moon angle of birth recurs while the Sun is in its birth sign (Sanjay Rath's
+    Tithi Pravesha), for the year running now, at the birthplace."""
+    import swisseph as swe
+    import vedic
+    from zoneinfo import ZoneInfo
+    v = c["vedic"]
+    jd0 = c["time_pipeline"]["jd_ut"]
+    pl = c["meta"]["place"]
+    ayan = (v.get("conventions") or {}).get("ayanamsa", "lahiri")
+    swe.set_sid_mode(vedic.AYAN.get(ayan, swe.SIDM_LAHIRI))
+    fl = swe.FLG_SWIEPH | swe.FLG_SIDEREAL
+
+    def lon(jd, b):
+        return swe.calc_ut(jd, b, fl)[0][0]
+
+    def el(jd):
+        return (lon(jd, swe.MOON) - lon(jd, swe.SUN)) % 360
+    e0 = el(jd0)
+    sun_sign = int(lon(jd0, swe.SUN) // 30)
+    today = dt.date.fromisoformat(now)
+    best = None
+    for year in (today.year - 1, today.year):
+        y, m, d = swe.revjul(jd0)[:3]
+        try:
+            guess = swe.julday(year, m, d, 12.0)
+        except Exception:
+            guess = swe.julday(year, 3, 1, 12.0)
+        j = guess - 40
+        while j < guess + 45:
+            a, b = (el(j) - e0 + 180) % 360 - 180, (el(j + 0.5) - e0 + 180) % 360 - 180
+            if a < 0 <= b:
+                lo, hi = j, j + 0.5
+                for _ in range(40):
+                    mid = (lo + hi) / 2
+                    if (el(mid) - e0 + 180) % 360 - 180 < 0:
+                        lo = mid
+                    else:
+                        hi = mid
+                if int(lon(lo, swe.SUN) // 30) == sun_sign:
+                    jy = swe.revjul(lo)
+                    when = dt.datetime(jy[0], jy[1], jy[2], tzinfo=dt.timezone.utc) + dt.timedelta(hours=jy[3])
+                    if when.date() <= today:
+                        best = (lo, when)
+            j += 0.5
+    if not best:
+        return None
+    jd, when = best
+    tz = ZoneInfo(c["time_pipeline"].get("timezone") or "UTC")
+    local = when.astimezone(tz)
+    asc = vedic._asc_at(jd, pl["lat"], pl["lon"], ayan)
+    lag = int(asc // 30)
+    wd_lord = ["Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Sun"][local.weekday()]
+    rows = []
+    for p, b in (("Sun", swe.SUN), ("Moon", swe.MOON), ("Mars", swe.MARS), ("Mercury", swe.MERCURY), ("Jupiter", swe.JUPITER),
+                 ("Venus", swe.VENUS), ("Saturn", swe.SATURN)):
+        L = lon(jd, b)
+        s_ = int(L // 30)
+        rows.append([P(p), bi(f"{SIGNS[s_]} {L % 30:.1f}°", f"{SIGN_HI.get(SIGNS[s_], SIGNS[s_])} {L % 30:.1f}°"), house_word((s_ - lag) % 12 + 1)])
+    yl = next(r for r in rows if r[0]["en"] == wd_lord)
+    return {"key": "tithi_pravesha", "title": bi("Tithi Pravesha (birthday by tithi)", "तिथि प्रवेश (तिथि से जन्मदिन)"),
+            "intro": bi(f"This year began on {local.strftime('%d %b %Y, %H:%M')} at the birthplace, when the Sun-Moon angle of your birth returned. "
+                        f"Lagna {SIGNS[lag]}; the lord of the year is {wd_lord}, the weekday lord, placed in the {yl[2]['en']}.",
+                        f"यह वर्ष {local.strftime('%d/%m/%Y, %H:%M')} को जन्मस्थान पर शुरू हुआ, जब आपके जन्म का सूर्य-चंद्र कोण लौटा। "
+                        f"लग्न {SIGN_HI.get(SIGNS[lag], SIGNS[lag])}; वर्ष का स्वामी वार-स्वामी {HS.PLANET.get(wd_lord, wd_lord)} है, {yl[2]['hi']} में।"),
+            "blocks": [table([bi("Planet", "ग्रह"), bi("Position", "स्थिति"), bi("House", "भाव")], rows)],
+            "note": bi("Tithi Pravesha follows Sanjay Rath's method; the tithi birthday is the traditional day for family celebrations and prayers.",
+                       "तिथि प्रवेश संजय रथ की पद्धति से; तिथि-जन्मदिन पारिवारिक उत्सव और पूजा का पारंपरिक दिन है।")}
+
+
 def build_extra(c):
     v = c["vedic"]
     now = c["meta"].get("generated_for_date", "")
     birth = v["dashas"]["vimshottari"]["mahadashas"][0]["start"]
     out = []
-    for f in ((lambda: functional(v)), (lambda: avasthas(v)), (lambda: upagrahas(v)), (lambda: more_dashas(v, now, birth)), (lambda: western_extra(c))):
+    for f in ((lambda: functional(v)), (lambda: avasthas(v)), (lambda: upagrahas(v)), (lambda: more_dashas(v, now, birth)), (lambda: western_extra(c)),
+              (lambda: ayanamsa_table(c)), (lambda: tithi_pravesha(c, now))):
         try:
             s = f()
         except (KeyError, TypeError, ValueError, IndexError):

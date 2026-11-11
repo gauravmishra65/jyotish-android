@@ -75,6 +75,9 @@ fun SettingsScreen(
     var chartStyle by remember { mutableStateOf(settings.chartStyle) }
     var ayanamsa by remember { mutableStateOf(settings.ayanamsa) }
     var node by remember { mutableStateOf(settings.node) }
+    var dashaYear by remember { mutableStateOf(settings.dashaYear) }
+    var zi by remember { mutableStateOf(settings.zi) }
+    var baziTime by remember { mutableStateOf(settings.baziTime) }
     var weekdayHard by remember { mutableStateOf(settings.weekdayHard) }
 
     Scaffold(containerColor = MaterialTheme.colorScheme.background, topBar = { BackBar(stringResource(R.string.settings), onBack) }) { pad ->
@@ -143,6 +146,24 @@ fun SettingsScreen(
                 Setting(stringResource(R.string.nodes)) {
                     Pick(stringResource(R.string.mean_node), node == "mean") { if (node != "mean") { node = "mean"; settings.node = "mean"; onCalculationChanged() } }
                     Pick(stringResource(R.string.true_node), node == "true") { if (node != "true") { node = "true"; settings.node = "true"; onCalculationChanged() } }
+                }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Setting(stringResource(R.string.set_dasha_year)) {
+                    listOf("365.25" to R.string.set_dasha_solar, "360" to R.string.set_dasha_savana).forEach { (k, label) ->
+                        Pick(stringResource(label), dashaYear == k) { if (dashaYear != k) { dashaYear = k; settings.dashaYear = k; onCalculationChanged() } }
+                    }
+                }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Setting(stringResource(R.string.set_zi)) {
+                    listOf("23" to R.string.set_zi_23, "00" to R.string.set_zi_00).forEach { (k, label) ->
+                        Pick(stringResource(label), zi == k) { if (zi != k) { zi = k; settings.zi = k; onCalculationChanged() } }
+                    }
+                }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Setting(stringResource(R.string.set_bazi_time)) {
+                    listOf("solar" to R.string.set_bazi_solar, "standard" to R.string.set_bazi_standard).forEach { (k, label) ->
+                        Pick(stringResource(label), baziTime == k) { if (baziTime != k) { baziTime = k; settings.baziTime = k; onCalculationChanged() } }
+                    }
                 }
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 Row(

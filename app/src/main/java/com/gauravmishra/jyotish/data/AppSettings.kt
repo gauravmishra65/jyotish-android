@@ -18,6 +18,19 @@ class AppSettings(context: Context) {
     var node: String
         get() = prefs.getString("node", "mean") ?: "mean"
         set(v) = prefs.edit().putString("node", v).apply()
+    /** Vimshottari year length in days: 365.25 (solar, the default) or 360 (savana). */
+    var dashaYear: String
+        get() = prefs.getString("dasha_year", "365.25") ?: "365.25"
+        set(v) { prefs.edit().putString("dasha_year", v).apply(); ChartPrefs.dashaYear = v }
+    /** BaZi day change at the Zi hour: "23" (23:00, the common rule) or "00" (midnight). */
+    var zi: String
+        get() = prefs.getString("zi", "23") ?: "23"
+        set(v) { prefs.edit().putString("zi", v).apply(); ChartPrefs.zi = v }
+    /** BaZi hour pillar from "solar" (true solar time, the default) or "standard" clock time. */
+    var baziTime: String
+        get() = prefs.getString("bazi_time", "solar") ?: "solar"
+        set(v) { prefs.edit().putString("bazi_time", v).apply(); ChartPrefs.baziTime = v }
+    fun loadChartPrefs() { ChartPrefs.dashaYear = dashaYear; ChartPrefs.zi = zi; ChartPrefs.baziTime = baziTime }
     var weekdayHard: Boolean
         get() = prefs.getBoolean("weekday_hard", false)
         set(v) = prefs.edit().putBoolean("weekday_hard", v).apply()
@@ -74,4 +87,11 @@ class AppSettings(context: Context) {
     var theme: String
         get() = prefs.getString("theme", "system") ?: "system"
         set(v) = prefs.edit().putString("theme", v).apply()
+}
+
+/** Calculation choices that every chart request carries (set from AppSettings at start-up and when changed). */
+object ChartPrefs {
+    @Volatile var dashaYear: String = "365.25"
+    @Volatile var zi: String = "23"
+    @Volatile var baziTime: String = "solar"
 }
