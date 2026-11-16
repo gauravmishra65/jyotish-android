@@ -46,7 +46,8 @@ import kotlinx.coroutines.withContext
  */
 @Composable
 fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int, Int>, onBack: () -> Unit,
-                 chartFacts: (Profile) -> List<String>? = { null }) {
+                 chartFacts: (Profile) -> List<String>? = { null },
+                 computeAll: suspend () -> Pair<Int, Int> = { 0 to 0 }) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     var pass by remember { mutableStateOf("") }
@@ -95,6 +96,8 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
     }
     val okExported = stringResource(R.string.bk_exported)
     val okImported = stringResource(R.string.import_done)
+    val okBatch = stringResource(R.string.batch_done)
+    var batching by remember { mutableStateOf(false) }
     val exportCsv = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
         scope.launch {
@@ -130,6 +133,33 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
             Text(stringResource(R.string.bk_export_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted)
             OutlinedButton(enabled = profiles.isNotEmpty(), onClick = { exportCsv.launch("GauravJyotish_people_${java.time.LocalDate.now()}.csv") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_csv")) { Text(stringResource(R.string.bk_export)) }
+
+            HorizontalDivider()
+            Text(stringResource(R.string.batch_title), style = MaterialTheme.typography.titleMedium)
+            OutlinedButton(enabled = profiles.isNotEmpty() && !batching,
+                onClick = {
+                    scope.launch {
+                        batching = true
+                        val (ok, bad) = computeAll()
+                        batching = false
+                        status = okBatch.format(ok, bad)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_batch")) { Text(stringResource(R.string.batch_title)) }
+
+            HorizontalDivider()
+            Text(stringResource(R.string.diag_title), style = MaterialTheme.typography.titleMedium)
+            val log = com.gauravmishra.jyotish.data.Diagnostics.lines()
+            Text(if (log.isEmpty()) stringResource(R.string.diag_empty) else log.takeLast(6).joinToString("\n"),
+                style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.testTag("bk_diag"))
+            OutlinedButton(enabled = log.isNotEmpty(),
+                onClick = {
+                    val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain")
+                        .putExtra(android.content.Intent.EXTRA_TEXT,
+                            com.gauravmishra.jyotish.data.Diagnostics.text(com.gauravmishra.jyotish.BuildConfig.VERSION_NAME))
+                    try { ctx.startActivity(android.content.Intent.createChooser(send, null)) } catch (_: Throwable) {}
+                },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_diag_share")) { Text(stringResource(R.string.diag_share)) }
 
             HorizontalDivider()
             Text(stringResource(R.string.import_title), style = MaterialTheme.typography.titleMedium)

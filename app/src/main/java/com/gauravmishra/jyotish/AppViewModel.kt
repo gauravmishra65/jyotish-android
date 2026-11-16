@@ -398,6 +398,27 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) { store.save(snapshot) }
     }
 
+    /** Works out and caches every saved person's chart in one go (v29); returns how many were done and how many failed. */
+    suspend fun computeAll(): Pair<Int, Int> {
+        var ok = 0
+        var bad = 0
+        for (p in _profiles.value) {
+            val request = p.chartRequest(LocalDate.now().toString(), settings.ayanamsa, settings.node)
+            val key = request.toString()
+            try {
+                if (withContext(Dispatchers.IO) { store.cachedChart(p.id, key) } == null) {
+                    val json = Engine.chart(request)
+                    withContext(Dispatchers.IO) { store.cacheChart(p.id, key, json) }
+                }
+                ok++
+            } catch (t: Throwable) {
+                com.gauravmishra.jyotish.data.Diagnostics.note("batch chart", t)
+                bad++
+            }
+        }
+        return ok to bad
+    }
+
     private fun compute(p: Profile) {
         val request = p.chartRequest(LocalDate.now().toString(), settings.ayanamsa, settings.node)
         val key = request.toString()

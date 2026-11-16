@@ -170,6 +170,17 @@ if not F.house_chart(180, 2010)["in_middle_of_mountain"] or F.house_chart(187, 2
 _rep = F.house_chart(180, 2010, replacement=True)
 if (_rep["mountain"]["C"], _rep["water"]["C"]) != (1, 9):
     problems.append(f"replacement chart centre: {_rep['mountain']['C']}-{_rep['water']['C']}")
+# v29: every detail section says which tradition it is built on
+_det = _p and None
+_full = EA.chart_obj({"name": "Ravi Shankar Tiwari", "date": "1985-03-14", "time": "06:45", "lat": 25.32, "lon": 82.97,
+                      "tz": "Asia/Kolkata", "gender": "M", "now": "2026-11-16"})
+import app_details as _AD
+_secs = _AD.build(_full)["sections"]
+_nosrc = [s["key"] for s in _secs if "Source:" not in (s.get("note") or {}).get("en", "") and s["key"] != "sources"]
+if _nosrc:
+    problems.append(f"sections without a source line: {_nosrc}")
+if not any("\u0938\u094d\u0930\u094b\u0924:" in (s.get("note") or {}).get("hi", "") for s in _secs):
+    problems.append("the source line is not translated")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

@@ -49,7 +49,14 @@ object Engine {
 
     private suspend fun <T> call(block: (PyObject) -> T): T {
         val api = ready.await()
-        return withContext(thread) { block(api) }
+        return withContext(thread) {
+            try {
+                block(api)
+            } catch (t: Throwable) {
+                com.gauravmishra.jyotish.data.Diagnostics.note("engine", t)   // kept for the problem log in Settings
+                throw t
+            }
+        }
     }
 
     /** Chart JSON for a request (see engine_api.chart). */

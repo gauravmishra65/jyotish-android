@@ -105,11 +105,18 @@ fun CustomRulesScreen(profiles: List<Profile>, profile: Profile?, ayanamsa: Stri
             }
             FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 PickChip(stringResource(R.string.cr_in_house), kind == "house") { kind = "house" }
+                PickChip(stringResource(R.string.cr_in_sign), kind == "sign") { kind = "sign" }
                 PickChip(stringResource(R.string.cr_with), kind == "with") { kind = "with" }
                 PickChip(stringResource(R.string.cr_opposite), kind == "aspects") { kind = "aspects" }
             }
             OutlinedTextField(value = value, onValueChange = { value = it.take(12) }, singleLine = true,
-                label = { Text(if (kind == "house") stringResource(R.string.cr_house_no) else stringResource(R.string.cr_other_planet)) },
+                label = {
+                    Text(when (kind) {
+                        "house" -> stringResource(R.string.cr_house_no)
+                        "sign" -> stringResource(R.string.cr_sign_name)
+                        else -> stringResource(R.string.cr_other_planet)
+                    })
+                },
                 modifier = Modifier.fillMaxWidth().testTag("cr_value"))
             OutlinedButton(onClick = { if (conditions.size < 6) conditions.add(Triple(planet, kind, value.trim())) },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("cr_add")) { Text(stringResource(R.string.cr_add)) }

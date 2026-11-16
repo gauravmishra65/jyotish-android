@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -43,6 +44,9 @@ import com.gauravmishra.jyotish.data.varga
 /** The Kundali screen's fifth tab: D9/D10 drawn, then every extra section from app_details as a collapsible card. */
 @Composable
 fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, residence: String?) {
+    val ctx0 = androidx.compose.ui.platform.LocalContext.current
+    val settings = remember { com.gauravmishra.jyotish.data.AppSettings(ctx0) }
+    var pinned by remember { mutableStateOf(settings.pinnedSections) }
     Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.testTag("more_tab")) {
         residence?.let { Text(stringResource(R.string.residence_label, it), style = MaterialTheme.typography.bodyMedium, color = Palette.Muted) }
         if (details == null) {
@@ -91,7 +95,8 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
             androidx.compose.material3.OutlinedButton(
                 onClick = {
                     // Android limits how much text one share can carry, so very long details are cut at a section boundary
-                    var text = com.gauravmishra.jyotish.data.sectionsMarkdown(shareTitle, details.sections, lang)
+                    val chosen = details.sections.filter { pinned.isEmpty() || pinned.contains(it.key) }
+                    var text = com.gauravmishra.jyotish.data.sectionsMarkdown(shareTitle, chosen, lang)
                     if (text.length > 180_000) text = text.substring(0, text.lastIndexOf("\n## ", 180_000).coerceAtLeast(0))
                     val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain")
                         .putExtra(android.content.Intent.EXTRA_SUBJECT, shareTitle).putExtra(android.content.Intent.EXTRA_TEXT, text)
@@ -99,12 +104,22 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("details_share")) { Text(stringResource(R.string.details_share)) }
         }
-        details.sections.forEach { SectionCard(it, lang) }
+        val ordered = details.sections.sortedBy { if (pinned.contains(it.key)) 0 else 1 }
+        if (pinned.isNotEmpty()) {
+            Text(stringResource(R.string.pinned_note), style = MaterialTheme.typography.bodySmall, color = Palette.Muted,
+                modifier = Modifier.testTag("pinned_note"))
+        }
+        ordered.forEach { s ->
+            SectionCard(s, lang, pinned = pinned.contains(s.key), onPin = {
+                pinned = if (pinned.contains(s.key)) pinned - s.key else pinned + s.key
+                settings.pinnedSections = pinned
+            })
+        }
     }
 }
 
 @Composable
-fun SectionCard(s: DetailSection, lang: String, startOpen: Boolean = false) {
+fun SectionCard(s: DetailSection, lang: String, startOpen: Boolean = false, pinned: Boolean = false, onPin: (() -> Unit)? = null) {
     var open by rememberSaveable(s.key) { mutableStateOf(startOpen || s.key == "panchang") }
     Surface(shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surface,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant), modifier = Modifier.fillMaxWidth().testTag("section_${s.key}")) {
@@ -115,6 +130,11 @@ fun SectionCard(s: DetailSection, lang: String, startOpen: Boolean = false) {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(s.title.of(lang), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                onPin?.let {
+                    androidx.compose.material3.TextButton(onClick = it, modifier = Modifier.testTag("pin_${s.key}")) {
+                        Text(if (pinned) "★" else "☆", color = Palette.Accent)
+                    }
+                }
                 Text(if (open) "−" else "+", style = MaterialTheme.typography.titleLarge, color = Palette.Accent)
             }
             if (open) {

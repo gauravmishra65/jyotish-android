@@ -72,6 +72,8 @@ class DetailsTest {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
             }
             rule.onNodeWithTag("details_share").performScrollTo().assertExists()
+            rule.onNodeWithTag("pin_panchang").performScrollTo().performClick()      // pin a section (v29)
+            rule.onNodeWithTag("pinned_note").performScrollTo().assertExists()
             rule.onNodeWithText("Pratipada (Shukla paksha, tithi 1 of 30)").performScrollTo().assertExists()   // panchang opens by default
             rule.shot("more_panchang")
             rule.onNodeWithText("Doshas and Sade Sati").performScrollTo().performClick()

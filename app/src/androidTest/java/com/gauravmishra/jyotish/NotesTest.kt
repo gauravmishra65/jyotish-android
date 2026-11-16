@@ -57,6 +57,9 @@ class NotesTest {
             rule.openTool("tool_backup")
             rule.onNodeWithTag("bk_import_pick").performScrollTo().assertExists()   // CSV import (v25)
             rule.onNodeWithTag("bk_csv").performScrollTo().assertExists()
+            rule.onNodeWithTag("bk_diag").performScrollTo().assertExists()          // problem log (v29)
+            rule.onNodeWithTag("bk_batch").performScrollTo().performClick()         // work out every saved chart
+            rule.waitUntilAtLeastOneExists(hasTestTag("bk_status"), timeoutMillis = 180_000)
         }
     }
 }

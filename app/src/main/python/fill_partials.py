@@ -105,7 +105,7 @@ def versions(c):
     e, v, b = a.get("engine") or {}, a.get("vedic_conventions") or {}, a.get("bazi_conventions") or {}
     rows = [[bi("Swiss Ephemeris", "स्विस एफेमेरिस"), bi(str(e.get("swiss_ephemeris", swe.version)))],
             [bi("Ephemeris data", "एफेमेरिस डेटा"), bi("Swiss Ephemeris data files (JPL-derived)", "स्विस एफेमेरिस डेटा फ़ाइलें (JPL आधारित)")],
-            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("13")]]
+            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("14")]]
     if v:
         rows += [[bi("Ayanamsa", "अयनांश"), bi(f"{str(v.get('ayanamsa', '')).title()} {v.get('ayanamsa_deg', 0):.4f}°", f"{HS_AYAN.get(str(v.get('ayanamsa')), 'चयनित')} {v.get('ayanamsa_deg', 0):.4f}°")],
                  [bi("Lunar node", "चंद्र नोड"), bi("Mean node", "माध्य नोड") if "mean" in str(v.get("rahu")) else bi("True node", "वास्तविक नोड")],

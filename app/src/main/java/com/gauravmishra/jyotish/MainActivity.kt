@@ -266,7 +266,7 @@ fun App(vm: AppViewModel = viewModel()) {
                             val moon = m.planets.firstOrNull { it.name == "Moon" }
                             listOf(m.lagna.sign, moon?.sign ?: "", moon?.let { "${it.nakshatra} ${it.pada}" } ?: "")
                         }
-                    })
+                    }, computeAll = { vm.computeAll() })
                 }
                 composable(Routes.REPORT) {
                     Milestone(vm)

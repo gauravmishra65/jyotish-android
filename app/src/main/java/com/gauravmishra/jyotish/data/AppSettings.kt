@@ -40,6 +40,10 @@ class AppSettings(context: Context) {
     var orbScale: String
         get() = prefs.getString("orb_scale", "1.0") ?: "1.0"
         set(v) { prefs.edit().putString("orb_scale", v).apply(); ChartPrefs.orbScale = v.toDoubleOrNull() ?: 1.0 }
+    /** Detail sections the user pinned (v29): they show first in the More tab and are the ones shared as text. */
+    var pinnedSections: Set<String>
+        get() = prefs.getStringSet("pinned_sections", emptySet()) ?: emptySet()
+        set(v) = prefs.edit().putStringSet("pinned_sections", v).apply()
     var weekdayHard: Boolean
         get() = prefs.getBoolean("weekday_hard", false)
         set(v) = prefs.edit().putBoolean("weekday_hard", v).apply()

@@ -407,5 +407,80 @@ def build(c):
     except Exception:
         pass
     out = out[:1] + M.build_more(c) + out[1:] + X.build_extra(c) + wm   # birth panchang, doshas and the v14 sections, the rest, then v16's
+    _add_sources(out)
     vargas = {k: m for k, m in v.get("divisional_charts", {}).items()}
     return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta()}
+
+
+# Where each family of sections gets its rules from (v29), so every section can say what it is built on.
+SECTION_SOURCE = {
+    "panchang": ("Surya Siddhanta and the Drik Ganita panchang tradition", "सूर्य सिद्धांत और दृक् गणित पंचांग परंपरा"),
+    "doshas": ("Brihat Parashara Hora Shastra; Phaladeepika", "बृहत् पाराशर होरा शास्त्र; फलदीपिका"),
+    "avakahada": ("Brihat Parashara Hora Shastra", "बृहत् पाराशर होरा शास्त्र"),
+    "pratyantar": ("Brihat Parashara Hora Shastra, Vimshottari chapter", "बृहत् पाराशर होरा शास्त्र, विंशोत्तरी अध्याय"),
+    "chara": ("Jaimini Upadesa Sutras", "जैमिनी उपदेश सूत्र"),
+    "narayana": ("Jaimini Upadesa Sutras", "जैमिनी उपदेश सूत्र"),
+    "arudhas": ("Jaimini Upadesa Sutras", "जैमिनी उपदेश सूत्र"),
+    "jaimini": ("Jaimini Upadesa Sutras", "जैमिनी उपदेश सूत्र"),
+    "bhava_chalit": ("Sripati Paddhati", "श्रीपति पद्धति"),
+    "ashtakavarga": ("Brihat Parashara Hora Shastra; Jataka Parijata", "बृहत् पाराशर होरा शास्त्र; जातक पारिजात"),
+    "yogini": ("Brihat Parashara Hora Shastra, Yogini dasha", "बृहत् पाराशर होरा शास्त्र, योगिनी दशा"),
+    "varshaphal": ("Tajika Neelakanthi", "ताजिक नीलकंठी"),
+    "lalkitab": ("Lal Kitab (Pt. Roop Chand Joshi)", "लाल किताब (पं. रूप चंद जोशी)"),
+    "kp": ("Krishnamurti Padhdhati readers", "कृष्णमूर्ति पद्धति रीडर"),
+    "functional": ("Varahamihira's Brihat Jataka; modern functional-benefic practice", "वराहमिहिर कृत बृहज्जातक; आधुनिक कार्यात्मक पद्धति"),
+    "avasthas": ("Brihat Parashara Hora Shastra, avastha chapters", "बृहत् पाराशर होरा शास्त्र, अवस्था अध्याय"),
+    "upagrahas": ("Brihat Parashara Hora Shastra; Phaladeepika", "बृहत् पाराशर होरा शास्त्र; फलदीपिका"),
+    "more_dashas": ("Brihat Parashara Hora Shastra; Jaimini Upadesa Sutras", "बृहत् पाराशर होरा शास्त्र; जैमिनी उपदेश सूत्र"),
+    "tithi_pravesha": ("Tithi Pravesha chakra, Tajika tradition", "तिथि प्रवेश चक्र, ताजिक परंपरा"),
+    "regional_eras": ("Regional panchang practice: Kollam, Bangabda, Bikram Sambat and the Jovian cycle",
+                      "क्षेत्रीय पंचांग प्रथा: कोल्लम, बंगाब्द, विक्रम संवत् और बार्हस्पत्य चक्र"),
+    "western": ("Ptolemy's Tetrabiblos; Valens' Anthology; Paulus Alexandrinus", "टॉलेमी का टेट्राबिब्लोस; वैलेन्स की एंथोलॉजी; पॉलस"),
+    "w_lots": ("Paulus Alexandrinus; Bonatti's Liber Astronomiae", "पॉलस; बोनाटी का लिबर एस्ट्रोनोमिए"),
+    "w_dial": ("Ebertin, The Combination of Stellar Influences", "एबर्टिन, कॉम्बिनेशन ऑफ़ स्टेलर इन्फ़्लुएंसेस"),
+    "w_huber": ("Bruno and Louise Huber, the age point method", "ब्रूनो और लुईस हूबर, आयु बिंदु पद्धति"),
+    "w_hypothetical": ("The Hamburg school (Witte and Sieggrün)", "हैम्बर्ग परंपरा (विट्टे और ज़ीग्रून)"),
+    "bazi": ("Yuan Hai Zi Ping; San Ming Tong Hui", "युआन हाई ज़ी पिंग; सान मिंग तोंग हुई"),
+    "zwds": ("Zi Wei Dou Shu Quan Shu", "ज़ी वेई दो शू चुआन शू"),
+    "cn_": ("Xie Ji Bian Fang Shu; the Chinese almanac tradition", "शिए जी बियान फ़ांग शू; चीनी पंचांग परंपरा"),
+    "nine_star": ("Nine Star Ki, the Japanese Kyusei tradition", "नौ तारा की, जापानी क्यूसेई परंपरा"),
+    "tong_shu": ("Xie Ji Bian Fang Shu", "शिए जी बियान फ़ांग शू"),
+    "sanmeigaku": ("Sanmeigaku and Shichuusuimei practice", "सानमेइगाकु और शिचूसुइमेइ परंपरा"),
+    "saju": ("Saju Palja practice", "साजू पालजा परंपरा"),
+    "thai": ("Thai royal almanac practice", "थाई राजकीय पंचांग प्रथा"),
+    "thirteen_moon": ("The 13 Moon calendar (a modern calendar)", "13 चंद्र पंचांग (एक आधुनिक पंचांग)"),
+    "maya": ("The GMT correlation of the Maya Long Count", "माया लंबी गणना का GMT सहसंबंध"),
+    "num_": ("Cheiro's Book of Numbers; Indian Mulank and Bhagyank practice", "कीरो की बुक ऑफ़ नंबर्स; भारतीय मूलांक और भाग्यांक प्रथा"),
+    "fs_": ("Shen Shi Xuan Kong Xue", "शेन शी शुआन कोंग शुए"),
+    "w_sky": ("Swiss Ephemeris positions for the birthplace", "जन्मस्थान के लिए स्विस एफेमेरिस स्थितियाँ"),
+    "w_perspectives": ("Swiss Ephemeris positions for the birthplace", "जन्मस्थान के लिए स्विस एफेमेरिस स्थितियाँ"),
+    "w_heliacal": ("The Swiss Ephemeris visibility model", "स्विस एफेमेरिस का दृश्यता मॉडल"),
+    "w_local_space": ("Local space practice (Jim Lewis and after)", "स्थानिक दिशा प्रथा (जिम लुईस और उनके बाद)"),
+    "w_acg": ("Astrocartography (Jim Lewis)", "एस्ट्रोकार्टोग्राफ़ी (जिम लुईस)"),
+    "w_lunations": ("Swiss Ephemeris syzygy and eclipse search", "स्विस एफेमेरिस से युति और ग्रहण की खोज"),
+    "sensitivity": ("Computed by this app from the Swiss Ephemeris", "इस ऐप द्वारा स्विस एफेमेरिस से गणित"),
+    "ayanamsa_compare": ("Computed by this app from the Swiss Ephemeris", "इस ऐप द्वारा स्विस एफेमेरिस से गणित"),
+    "time_details": ("The IANA time zone database and the Swiss Ephemeris", "IANA समय क्षेत्र डेटाबेस और स्विस एफेमेरिस"),
+    "settings_compare": ("Computed by this app from the Swiss Ephemeris", "इस ऐप द्वारा स्विस एफेमेरिस से गणित"),
+    "calc_versions": ("Computed by this app from the Swiss Ephemeris", "इस ऐप द्वारा स्विस एफेमेरिस से गणित"),
+    "w_": ("Ptolemy's Tetrabiblos; Valens' Anthology; Paulus Alexandrinus", "टॉलेमी का टेट्राबिब्लोस; वैलेन्स की एंथोलॉजी; पॉलस"),
+}
+
+
+def _add_sources(sections):
+    """Give every section a line saying which tradition's rules it is built on (v29)."""
+    for s in sections:
+        key = s.get("key") or ""
+        src = SECTION_SOURCE.get(key)
+        if not src:
+            src = next((v for k, v in SECTION_SOURCE.items() if key.startswith(k)), None)
+        if not src:
+            continue
+        line_en = f"Source: {src[0]}."
+        line_hi = f"स्रोत: {src[1]}।"
+        note = s.get("note")
+        if note:
+            if "Source:" not in note.get("en", ""):
+                s["note"] = {"en": note["en"] + " " + line_en, "hi": note.get("hi", note["en"]) + " " + line_hi}
+        else:
+            s["note"] = {"en": line_en, "hi": line_hi}

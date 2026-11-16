@@ -62,7 +62,7 @@ data class Profile(
         .put("time_source", timeSource).put("kind", kind).put("fold", fold).put("calendar", calendar)
         .put("house_system", ChartPrefs.houseSystem).put("orb_scale", ChartPrefs.orbScale)
         .apply { if (nameInUse.isNotBlank()) put("name_in_use", nameInUse); if (utcOffset != null) put("utc_offset", utcOffset) }
-        .put("v", 13)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras; 5: ayanamsa table, Tithi Pravesha; 6: Western depth, BaZi)
+        .put("v", 14)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras; 5: ayanamsa table, Tithi Pravesha; 6: Western depth, BaZi)
         .apply { if (hasResidence) put("residence", residence).put("current_lat", resLat).put("current_lon", resLon) }
 
     val initials: String

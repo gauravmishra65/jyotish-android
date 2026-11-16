@@ -88,6 +88,14 @@
     <string name="import_review">%1$d जोड़े जा सकते हैं, %2$d पहले से सहेजे हैं, %3$d पंक्तियाँ पढ़ी नहीं जा सकीं</string>
     <string name="import_do">इन लोगों को जोड़ें</string>
     <string name="import_done">%1$d लोग जोड़े गए</string>
+    <string name="cr_in_sign">राशि में</string>
+    <string name="cr_sign_name">राशि का नाम, जैसे Cancer</string>
+    <string name="pinned_note">पिन किए खंड पहले दिखते हैं और पाठ के रूप में वही साझा होते हैं। पिन करने या हटाने के लिए तारे पर टैप करें।</string>
+    <string name="batch_title">सभी सहेजी कुंडलियाँ अभी बना लें</string>
+    <string name="batch_done">%1$d कुंडलियाँ बनीं; %2$d नहीं बन सकीं</string>
+    <string name="diag_title">समस्या लॉग</string>
+    <string name="diag_empty">ऐप शुरू होने के बाद कुछ गड़बड़ नहीं हुई।</string>
+    <string name="diag_share">समस्या लॉग साझा करें</string>
     <string name="cr_title">आपके अपने नियम</string>
     <string name="cr_sub">किसी भी विभाजन की वर्ग कुंडली, और आपका बनाया योग</string>
     <string name="cr_varga_title">वर्ग कुंडली</string>
