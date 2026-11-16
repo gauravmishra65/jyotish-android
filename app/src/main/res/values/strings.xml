@@ -436,6 +436,8 @@
     <string name="help_faq">Common questions</string>
     <string name="help_more">More</string>
     <string name="help_write">Write to the author</string>
+    <string name="details_share">Share these details as text (Markdown)</string>
+    <string name="details_share_title">Kundali details</string>
     <string name="share_app">Share the app</string>
     <string name="share_app_sub">Send the link to family and friends</string>
     <string name="share_subject">Gaurav Jyotish: Kundli, Milan and Muhurat app</string>

@@ -74,3 +74,27 @@ fun ChartModel.varga(signs: Map<String, String>): ChartModel {
         },
     )
 }
+
+/** The sections as Markdown text (v23), for sharing or saving the details outside the app. */
+fun sectionsMarkdown(title: String, sections: List<DetailSection>, lang: String): String {
+    val sb = StringBuilder("# ").append(title).append("\n")
+    fun cell(b: Bi) = b.of(lang).replace("|", "/").replace("\n", " ")
+    sections.forEach { s ->
+        sb.append("\n## ").append(s.title.of(lang)).append("\n\n")
+        s.intro?.let { sb.append(it.of(lang)).append("\n\n") }
+        s.blocks.forEach { b ->
+            when (b) {
+                is DetailBlock.Para -> sb.append(b.text.of(lang)).append("\n\n")
+                is DetailBlock.Items -> { b.items.forEach { sb.append("- ").append(it.of(lang)).append("\n") }; sb.append("\n") }
+                is DetailBlock.Table -> {
+                    sb.append("| ").append(b.head.joinToString(" | ") { cell(it) }).append(" |\n")
+                    sb.append("|").append(b.head.joinToString("|") { " --- " }).append("|\n")
+                    b.rows.forEach { r -> sb.append("| ").append(r.joinToString(" | ") { cell(it) }).append(" |\n") }
+                    sb.append("\n")
+                }
+            }
+        }
+        s.note?.let { sb.append("_").append(it.of(lang)).append("_\n") }
+    }
+    return sb.toString()
+}

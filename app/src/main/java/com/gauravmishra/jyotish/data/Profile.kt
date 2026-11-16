@@ -42,7 +42,7 @@ data class Profile(
         .put("gender", gender).put("time_confidence", confidence).put("place", place).put("now", now)
         .put("ayanamsa", ayanamsa).put("node", node)
         .put("dasha_year", ChartPrefs.dashaYear.toDouble()).put("zi", ChartPrefs.zi).put("bazi_time", ChartPrefs.baziTime)
-        .put("v", 7)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras; 5: ayanamsa table, Tithi Pravesha; 6: Western depth, BaZi)
+        .put("v", 8)   // bump when the chart's contents change, so cached charts are recomputed (2: details for the More tab; 3: doshas, extra dashas, all 16 vargas; 4: avasthas, upagrahas, more sign dashas, Western extras; 5: ayanamsa table, Tithi Pravesha; 6: Western depth, BaZi)
         .apply { if (hasResidence) put("residence", residence).put("current_lat", resLat).put("current_lon", resLon) }
 
     val initials: String

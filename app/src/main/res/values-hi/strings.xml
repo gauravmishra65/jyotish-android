@@ -427,6 +427,8 @@
     <string name="help_faq">आम सवाल</string>
     <string name="help_more">और</string>
     <string name="help_write">लेखक को लिखें</string>
+    <string name="details_share">ये विवरण पाठ के रूप में साझा करें (मार्कडाउन)</string>
+    <string name="details_share_title">कुंडली विवरण</string>
     <string name="share_app">ऐप साझा करें</string>
     <string name="share_app_sub">परिवार और दोस्तों को लिंक भेजें</string>
     <string name="share_subject">गौरव ज्योतिष: कुंडली, मिलान और मुहूर्त ऐप</string>

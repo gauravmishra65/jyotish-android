@@ -85,6 +85,20 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
                 }, style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.testTag("varga_note"))
             }
         }
+        if (details.sections.isNotEmpty()) {
+            val ctx = androidx.compose.ui.platform.LocalContext.current
+            val shareTitle = stringResource(R.string.details_share_title)
+            androidx.compose.material3.OutlinedButton(
+                onClick = {
+                    // Android limits how much text one share can carry, so very long details are cut at a section boundary
+                    var text = com.gauravmishra.jyotish.data.sectionsMarkdown(shareTitle, details.sections, lang)
+                    if (text.length > 180_000) text = text.substring(0, text.lastIndexOf("\n## ", 180_000).coerceAtLeast(0))
+                    val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain")
+                        .putExtra(android.content.Intent.EXTRA_SUBJECT, shareTitle).putExtra(android.content.Intent.EXTRA_TEXT, text)
+                    try { ctx.startActivity(android.content.Intent.createChooser(send, shareTitle)) } catch (_: android.content.ActivityNotFoundException) {}
+                },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("details_share")) { Text(stringResource(R.string.details_share)) }
+        }
         details.sections.forEach { SectionCard(it, lang) }
     }
 }

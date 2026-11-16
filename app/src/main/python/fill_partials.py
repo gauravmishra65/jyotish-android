@@ -85,16 +85,174 @@ def time_details(c):
 
 def versions(c):
     a = c.get("audit") or {}
-    rows = [[bi("Swiss Ephemeris", "स्विस एफेमेरिस"), bi(str(swe.version))],
-            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("7")]]
-    for k, lab in (("engine_version", ("Calculation engine", "गणना इंजन")), ("ephemeris", ("Ephemeris files", "एफेमेरिस फ़ाइलें")),
-                   ("ayanamsa", ("Ayanamsa", "अयनांश")), ("node", ("Lunar node", "चंद्र नोड"))):
-        v = a.get(k)
-        if isinstance(v, (str, int, float)):
-            rows.append([bi(*lab), bi(str(v))])
-    return {"key": "calc_versions", "title": bi("Calculation versions", "गणना संस्करण"),
-            "blocks": [table([bi("Part", "भाग"), bi("Version", "संस्करण")], rows)],
+    e, v, b = a.get("engine") or {}, a.get("vedic_conventions") or {}, a.get("bazi_conventions") or {}
+    rows = [[bi("Swiss Ephemeris", "स्विस एफेमेरिस"), bi(str(e.get("swiss_ephemeris", swe.version)))],
+            [bi("Ephemeris data", "एफेमेरिस डेटा"), bi("Swiss Ephemeris data files (JPL-derived)", "स्विस एफेमेरिस डेटा फ़ाइलें (JPL आधारित)")],
+            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("8")]]
+    if v:
+        rows += [[bi("Ayanamsa", "अयनांश"), bi(f"{str(v.get('ayanamsa', '')).title()} {v.get('ayanamsa_deg', 0):.4f}°", f"{HS_AYAN.get(str(v.get('ayanamsa')), 'चयनित')} {v.get('ayanamsa_deg', 0):.4f}°")],
+                 [bi("Lunar node", "चंद्र नोड"), bi("Mean node", "माध्य नोड") if "mean" in str(v.get("rahu")) else bi("True node", "वास्तविक नोड")],
+                 [bi("Vedic houses", "वैदिक भाव"), bi("Whole sign; bhava chalit by Sripati midpoints", "पूर्ण राशि; भाव चलित श्रीपति मध्यबिंदुओं से")],
+                 [bi("Vimshottari year", "विंशोत्तरी वर्ष"), bi(f"{v.get('vimshottari_year_days')} days", f"{v.get('vimshottari_year_days')} दिन")]]
+    if b:
+        rows += [[bi("BaZi time basis", "बाज़ी समय आधार"), bi("True solar time", "वास्तविक सौर समय") if "solar" in str(b.get("primary_time_basis")) else bi("Standard time", "मानक समय")],
+                 [bi("Zi hour rule", "ज़ी घड़ी नियम"), bi("Day changes at 23:00", "दिन 23:00 पर बदलता है") if "23" in str(b.get("zi_hour_convention")) else bi("Day changes at midnight", "दिन मध्यरात्रि पर बदलता है")],
+                 [bi("BaZi year and month", "बाज़ी वर्ष और माह"), bi("From Li Chun and the jie solar terms, exact instants", "ली चुन और जिए सौर पदों से, सटीक क्षण")]]
+    return {"key": "calc_versions", "title": bi("Calculation versions and conventions", "गणना संस्करण और परंपराएँ"),
+            "blocks": [table([bi("Part", "भाग"), bi("Value", "मान")], rows)],
             "note": bi("Quote these when comparing this chart with another program.", "किसी अन्य प्रोग्राम से तुलना करते समय ये बताएँ।")}
+
+
+HS_AYAN = {"lahiri": "लाहिड़ी", "raman": "रमन", "krishnamurti": "कृष्णमूर्ति", "kp": "कृष्णमूर्ति", "fagan_bradley": "फ़ेगन-ब्रैडली", "yukteshwar": "युक्तेश्वर"}
+NAK = 360 / 27
+
+
+def settings_compare(c):
+    """What each calculation setting would change for this chart (the ayanamsa has its own table)."""
+    jd = c["time_pipeline"]["jd_ut"]
+    v = c["vedic"]["conventions"] if isinstance(c.get("vedic", {}).get("conventions"), dict) else {}
+    swe.set_sid_mode(swe.SIDM_LAHIRI)
+    ay = (c.get("audit") or {}).get("vedic_conventions", {}).get("ayanamsa_deg") or swe.get_ayanamsa_ut(jd)
+    mean = (swe.calc_ut(jd, swe.MEAN_NODE)[0][0] - ay) % 360
+    true = (swe.calc_ut(jd, swe.TRUE_NODE)[0][0] - ay) % 360
+    same = int(mean // 30) == int(true // 30) and int(mean // NAK) == int(true // NAK)
+    rows = [[bi("Rahu: mean or true node", "राहु: माध्य या वास्तविक नोड"), WM._s(mean), WM._s(true),
+             bi("same sign and nakshatra", "राशि और नक्षत्र वही") if same else bi("sign or nakshatra changes", "राशि या नक्षत्र बदलता है")]]
+    t = c["time_pipeline"]
+    std, sol = dt.datetime.fromisoformat(t["local_standard_time"][:19]), dt.datetime.fromisoformat(t["true_solar_time"][:19])
+    hb = lambda x: ((x.hour + 1) // 2) % 12              # noqa: E731
+    rows.append([bi("BaZi hour: standard or solar time", "बाज़ी घड़ी: मानक या सौर समय"), bi(f"{CH.BRANCHES[hb(std)]} ({std:%H:%M})"), bi(f"{CH.BRANCHES[hb(sol)]} ({sol:%H:%M})"),
+                 bi("same hour pillar", "घड़ी स्तंभ वही") if hb(std) == hb(sol) else bi("hour pillar changes", "घड़ी स्तंभ बदलता है")])
+    late = sol.hour == 23
+    rows.append([bi("Zi hour: day changes at 23:00 or midnight", "ज़ी घड़ी: दिन 23:00 या मध्यरात्रि पर"), bi("23:00"), bi("00:00"),
+                 bi("day pillar differs (born 23:00–24:00)", "दिवस स्तंभ अलग (जन्म 23:00–24:00)") if late else bi("no effect on this chart", "इस कुंडली पर कोई प्रभाव नहीं")])
+    age = c["vedic"].get("age_years_at_now") or 0
+    shift = age * (365.25 - 360) / 365.25
+    rows.append([bi("Dasha year: 365.25 or 360 days", "दशा वर्ष: 365.25 या 360 दिन"), bi("365.25"), bi("360"),
+                 bi(f"dasha dates now fall about {shift * 12:.0f} months earlier with 360", f"360 के साथ दशा तिथियाँ अभी लगभग {shift * 12:.0f} माह पहले पड़ती हैं")])
+    return {"key": "settings_compare", "title": bi("What the settings change", "सेटिंग्स से क्या बदलता है"),
+            "blocks": [table([bi("Setting", "सेटिंग"), bi("Option 1", "विकल्प 1"), bi("Option 2", "विकल्प 2"), bi("Effect on this chart", "इस कुंडली पर प्रभाव")], rows)],
+            "note": bi("The ayanamsa choices have their own table above. Change any of these in Settings.", "अयनांश विकल्पों की अलग तालिका ऊपर है। ये सब सेटिंग्स में बदले जा सकते हैं।")}
+
+
+def relocation(c, pos):
+    r = c["meta"].get("residence_place")
+    if not r:
+        return None
+    jd, pl = c["time_pipeline"]["jd_ut"], c["meta"]["place"]
+
+    def angles(lat, lon):
+        cusps, ascmc = swe.houses(jd, lat, lon, b"P")
+        return cusps, ascmc[0], ascmc[1]
+
+    def house(lon, cusps):
+        for h in range(12):
+            a, b_ = cusps[h], cusps[(h + 1) % 12]
+            if (lon - a) % 360 < (b_ - a) % 360:
+                return h + 1
+        return 12
+    c1, a1, m1 = angles(pl["lat"], pl["lon"])
+    c2, a2, m2 = angles(r["lat"], r["lon"])
+    rows = [[bi("Ascendant", "लग्न"), WM._s(a1), WM._s(a2)], [bi("Midheaven", "दशम"), WM._s(m1), WM._s(m2)]]
+    moved = []
+    for p in WM.TEN:
+        h1, h2 = house(pos[p]["lon"], c1), house(pos[p]["lon"], c2)
+        rows.append([WM._p(p), bi(f"house {h1}", f"भाव {h1}"), bi(f"house {h2}", f"भाव {h2}")])
+        if h1 != h2:
+            moved.append(p)
+    name = r.get("label") or ""
+    return {"key": "w_relocation", "title": bi("Western: relocated chart", "पाश्चात्य: स्थानांतरित कुंडली"),
+            "intro": bi(f"{len(moved)} of 10 planets change house where you live now." if moved else "No planet changes house where you live now.",
+                        f"जहाँ आप अभी रहते हैं वहाँ 10 में से {len(moved)} ग्रह भाव बदलते हैं।" if moved else "जहाँ आप अभी रहते हैं वहाँ कोई ग्रह भाव नहीं बदलता।"),
+            "blocks": [table([bi("Point", "बिंदु"), bi("At the birthplace", "जन्मस्थान पर"), bi("Where you live" + (f" ({name})" if name else ""), "वर्तमान निवास पर")], rows)],
+            "note": bi("The same birth moment cast for your current place: planets keep their signs; the angles and houses move. Placidus houses.",
+                       "वही जन्म क्षण आपके वर्तमान स्थान के लिए: ग्रहों की राशियाँ वही रहती हैं; कोण और भाव बदलते हैं। प्लेसिडस भाव।")}
+
+
+ASPECTS = ((0, "conjunct", "युति"), (60, "sextile", "त्रिएकादश"), (90, "square", "केंद्र"), (120, "trine", "त्रिकोण"), (180, "opposite", "सम्मुख"))
+
+
+def election(c):
+    """Western election screen for the next 30 days: the Moon's phase, speed, void of course and her next aspect."""
+    tz = c["time_pipeline"]["utc_offset_hours"]
+    now = dt.datetime.fromisoformat(c["meta"]["generated_for_date"])
+    j0 = swe.julday(now.year, now.month, now.day, 12.0 - tz)
+    bodies = {"Sun": swe.SUN, "Mercury": swe.MERCURY, "Venus": swe.VENUS, "Mars": swe.MARS, "Jupiter": swe.JUPITER, "Saturn": swe.SATURN}
+    days = []
+    for k in range(1, 31):
+        jd = j0 + k
+        moon = swe.calc_ut(jd, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SPEED)[0]
+        ml, ms = moon[0], moon[3]
+        lon = {n: swe.calc_ut(jd, b, swe.FLG_SWIEPH | swe.FLG_SPEED)[0] for n, b in bodies.items()}
+        left = 30 - ml % 30                      # degrees the Moon still has in her sign
+        nxt = None
+        for n, x in lon.items():
+            for ang, en, _ in ASPECTS:
+                for target in ((x[0] + ang) % 360, (x[0] - ang) % 360):
+                    gap = (target - ml) % 360
+                    if gap < left and (nxt is None or gap < nxt[0]):
+                        nxt = (gap, n, en)
+        waxing = (ml - lon["Sun"][0]) % 360 < 180
+        score, why, why_hi = 0, [], []
+        if waxing:
+            score += 1
+            why.append("Moon waxing")
+            why_hi.append("चंद्र बढ़ता हुआ")
+        if nxt is None:
+            score -= 2
+            why.append("Moon void of course")
+            why_hi.append("चंद्र शून्य मार्ग में")
+        elif nxt[1] in ("Venus", "Jupiter") and nxt[2] in ("conjunct", "sextile", "trine"):
+            score += 2
+            why.append(f"Moon applies to {nxt[1]} by {nxt[2]}")
+            why_hi.append(f"चंद्र {HS.PLANET.get(nxt[1], nxt[1])} की ओर शुभ दृष्टि से")
+        elif nxt[1] in ("Mars", "Saturn") and nxt[2] in ("conjunct", "square", "opposite"):
+            score -= 2
+            why.append(f"Moon applies to {nxt[1]} by {nxt[2]}")
+            why_hi.append(f"चंद्र {HS.PLANET.get(nxt[1], nxt[1])} की ओर कठिन दृष्टि से")
+        if ms >= 13.0:
+            score += 1
+            why.append("Moon fast")
+            why_hi.append("चंद्र तेज़")
+        for n in ("Mercury", "Venus"):
+            if lon[n][3] < 0:
+                score -= 1
+                why.append(f"{n} retrograde")
+                why_hi.append(f"{HS.PLANET.get(n, n)} वक्री")
+        days.append((score, k, _date(jd, tz), why, why_hi, ml))
+    best = sorted(days, key=lambda x: (-x[0], x[1]))[:8]
+    best.sort(key=lambda x: x[1])
+    rows = [[_d(t), WM._s(ml), bi(str(sc)), bi("; ".join(w) or "–", "; ".join(wh) or "–")] for sc, _, t, w, wh, ml in best]
+    return {"key": "w_election", "title": bi("Western election: better days in the next 30", "पाश्चात्य मुहूर्त: अगले 30 में बेहतर दिन"),
+            "blocks": [table([bi("Date (noon)", "तिथि (दोपहर)"), bi("Moon", "चंद्र"), bi("Score", "अंक"), bi("Why", "कारण")], rows)],
+            "note": bi("A general screen by the Moon: waxing, fast, not void of course, applying to Venus or Jupiter and not to Mars or Saturn, with Mercury and Venus direct. "
+                       "It does not look at your chart or the purpose; for a wedding or a move use Muhurta as well.",
+                       "चंद्र के आधार पर सामान्य छानबीन: बढ़ता हुआ, तेज़, शून्य मार्ग में नहीं, शुक्र या गुरु की ओर और मंगल या शनि की ओर नहीं, बुध और शुक्र मार्गी। "
+                       "यह आपकी कुंडली या उद्देश्य नहीं देखता; विवाह या स्थानांतरण के लिए मुहूर्त भी देखें।")}
+
+
+SOURCES = [("Parashari rules, dashas, vargas, shadbala", "पाराशरी नियम, दशाएँ, वर्ग, षड्बल", "Brihat Parashara Hora Shastra", "बृहत् पाराशर होरा शास्त्र"),
+           ("Yogas and results", "योग और फल", "Phaladeepika (Mantreswara); Saravali (Kalyana Varma); Brihat Jataka (Varahamihira)", "फलदीपिका (मंत्रेश्वर); सारावली (कल्याण वर्मा); बृहज्जातक (वराहमिहिर)"),
+           ("Chara karakas, arudhas, rashi dashas", "चर कारक, आरूढ़, राशि दशाएँ", "Jaimini Upadesa Sutras", "जैमिनी उपदेश सूत्र"),
+           ("Varshaphal and Tajika yogas", "वर्षफल और ताजिक योग", "Tajika Neelakanthi (Neelakantha)", "ताजिक नीलकंठी (नीलकंठ)"),
+           ("Muhurta", "मुहूर्त", "Muhurta Chintamani (Rama Daivajna)", "मुहूर्त चिंतामणि (राम दैवज्ञ)"),
+           ("KP star and sub lords, horary numbers", "केपी नक्षत्र और उप स्वामी, प्रश्न अंक", "Krishnamurti Padhdhati readers (K. S. Krishnamurti)", "कृष्णमूर्ति पद्धति रीडर (के. एस. कृष्णमूर्ति)"),
+           ("Lal Kitab", "लाल किताब", "Lal Kitab (Pt. Roop Chand Joshi, 1939–1952)", "लाल किताब (पं. रूप चंद जोशी, 1939–1952)"),
+           ("Western dignities, sect, lots, profections, releasing", "पाश्चात्य ग्रह बल, पक्ष, लॉट, प्रोफ़ेक्शन, रिलीज़िंग", "Tetrabiblos (Ptolemy); Anthology (Vettius Valens); Introduction (Paulus Alexandrinus)", "टेट्राबिब्लोस (टॉलेमी); एंथोलॉजी (वेटियस वैलेन्स); इंट्रोडक्शन (पॉलस)"),
+           ("Firdaria", "फ़िरदारिया", "Liber Astronomiae (Guido Bonatti)", "लिबर एस्ट्रोनोमिए (गुइडो बोनाटी)"),
+           ("BaZi", "बाज़ी", "Yuan Hai Zi Ping (渊海子平); San Ming Tong Hui (三命通会)", "युआन हाई ज़ी पिंग (渊海子平); सान मिंग तोंग हुई (三命通会)"),
+           ("Zi Wei Dou Shu", "ज़ी वेई दो शू", "Zi Wei Dou Shu Quan Shu (紫微斗数全书)", "ज़ी वेई दो शू चुआन शू (紫微斗数全书)"),
+           ("Tong Shu day officers", "टोंग शू दिवस अधिकारी", "Xie Ji Bian Fang Shu (协纪辨方书)", "शिए जी बियान फ़ांग शू (协纪辨方书)"),
+           ("Flying Stars", "उड़ते तारे", "Shen Shi Xuan Kong Xue (沈氏玄空学)", "शेन शी शुआन कोंग शुए (沈氏玄空学)"),
+           ("Chaldean numerology", "कैल्डियन अंक ज्योतिष", "Cheiro's Book of Numbers", "कीरो की 'बुक ऑफ़ नंबर्स'")]
+
+
+def sources(c):
+    rows = [[bi(a, b), bi(x, y)] for a, b, x, y in SOURCES]
+    return {"key": "sources", "title": bi("Classical sources", "शास्त्रीय स्रोत"),
+            "blocks": [table([bi("Technique", "तकनीक"), bi("Main source", "मुख्य स्रोत")], rows)],
+            "note": bi("The books each tradition's rules come from. The app applies the rules; it does not quote the texts.",
+                       "वे ग्रंथ जिनसे हर परंपरा के नियम आते हैं। ऐप नियम लागू करता है; ग्रंथों के उद्धरण नहीं देता।")}
 
 
 # ------------------------------------------------------------------ Western
@@ -494,6 +652,8 @@ def build(c):
         add(house_systems, c)
         add(lunations, c)
         add(ingresses, c)
+        add(election, c)
+        add(relocation, c, pos)
     b = c.get("bazi")
     if b:
         add(bazi_elements, b)
@@ -503,5 +663,8 @@ def build(c):
             add(bazi_hours, b)
     if c.get("numerology"):
         add(numerology_working, c)
+    if c.get("vedic"):
+        add(settings_compare, c)
+    add(sources, c)
     add(versions, c)
     return secs
