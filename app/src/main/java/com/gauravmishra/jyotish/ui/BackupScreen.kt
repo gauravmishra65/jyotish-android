@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.gauravmishra.jyotish.R
 import com.gauravmishra.jyotish.data.Backup
 import com.gauravmishra.jyotish.data.Profile
+import com.gauravmishra.jyotish.data.duplicateOf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -75,7 +76,25 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
         }
     }
     val open = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> picked = uri; status = null }
+    var incoming by remember { mutableStateOf<List<Profile>>(emptyList()) }
+    var alreadyHere by remember { mutableStateOf(0) }
+    var unreadable by remember { mutableStateOf(0) }
+    val importCsv = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            status = try {
+                val text = withContext(Dispatchers.IO) {
+                    ctx.contentResolver.openInputStream(uri)?.use { it.readBytes().toString(Charsets.UTF_8) } ?: error("cannot read")
+                }
+                val (people, bad) = com.gauravmishra.jyotish.data.parsePeopleCsv(text)
+                val fresh = people.filter { profiles.duplicateOf(it) == null }
+                incoming = fresh; alreadyHere = people.size - fresh.size; unreadable = bad
+                null
+            } catch (t: Throwable) { failed.format(t.message ?: "") }
+        }
+    }
     val okExported = stringResource(R.string.bk_exported)
+    val okImported = stringResource(R.string.import_done)
     val exportCsv = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
         scope.launch {
@@ -113,6 +132,22 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_csv")) { Text(stringResource(R.string.bk_export)) }
 
             HorizontalDivider()
+            Text(stringResource(R.string.import_title), style = MaterialTheme.typography.titleMedium)
+            OutlinedButton(onClick = { importCsv.launch(arrayOf("*/*")) },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_import_pick")) { Text(stringResource(R.string.import_pick)) }
+            if (incoming.isNotEmpty() || alreadyHere > 0 || unreadable > 0) {
+                Text(stringResource(R.string.import_review, incoming.size, alreadyHere, unreadable),
+                    style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("bk_import_review"))
+                Button(enabled = incoming.isNotEmpty(),
+                    onClick = {
+                        val (done, left) = onRestore(incoming)
+                        incoming = emptyList()
+                        status = okImported.format(done) + if (left > 0) " " + limited.format(left) else ""
+                    },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_import_do")) { Text(stringResource(R.string.import_do)) }
+            }
+
+            HorizontalDivider()
             Text(stringResource(R.string.bk_restore_title), style = MaterialTheme.typography.titleMedium)
             OutlinedButton(onClick = { open.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("bk_pick")) {
                 Text(if (picked == null) stringResource(R.string.bk_pick) else stringResource(R.string.bk_picked))
@@ -147,11 +182,11 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
 /** Saved people as a spreadsheet (UTF-8 CSV with a BOM so Excel shows Hindi correctly); not encrypted, so it says so. */
 fun peopleCsv(profiles: List<Profile>, chartFacts: (Profile) -> List<String>?): String {
     fun q(s: String) = "\"" + s.replace("\"", "\"\"") + "\""
-    val head = listOf("Name", "Gender", "Birth date", "Birth time", "Time confidence", "Time source", "Birthplace", "Latitude", "Longitude", "Time zone",
+    val head = listOf("Name", "Name used now", "Chart for", "Gender", "Birth date", "Birth time", "Time confidence", "Time source", "Birthplace", "Latitude", "Longitude", "Time zone",
         "Lives in", "Group", "Lagna", "Moon sign", "Moon nakshatra", "Life events", "Notes")
     val rows = profiles.map { p ->
         val f = chartFacts(p) ?: listOf("", "", "")
-        listOf(p.name, p.gender, p.date, p.time, p.confidence, p.timeSource, p.place, String.format(java.util.Locale.US, "%.4f", p.lat), String.format(java.util.Locale.US, "%.4f", p.lon), p.tz,
+        listOf(p.name, p.nameInUse, p.kind, p.gender, p.date, p.time, p.confidence, p.timeSource, p.place, String.format(java.util.Locale.US, "%.4f", p.lat), String.format(java.util.Locale.US, "%.4f", p.lon), p.tz,
             p.residence, p.group, f.getOrElse(0) { "" }, f.getOrElse(1) { "" }, f.getOrElse(2) { "" }, p.events.joinToString("; "), p.notes)
     }
     return "\uFEFF" + (listOf(head) + rows).joinToString("\r\n") { r -> r.joinToString(",") { q(it) } } + "\r\n"

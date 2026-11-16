@@ -85,6 +85,12 @@ def time_details(c):
             "unknown": ("not known", "ज्ञात नहीं")}.get(c["meta"].get("birth_time_confidence"))
     if conf:
         rows.insert(0, [bi("How sure the time is", "समय कितना पक्का है"), bi(*conf)])
+    if t.get("julian_date"):
+        rows.insert(0, [bi("Date as recorded", "जैसी तिथि दर्ज थी"), bi(t["julian_date"], t["julian_date"].replace("(Julian calendar)", "(जूलियन पंचांग)"))])
+    if any("happened twice" in w for w in (t.get("warnings") or [])):
+        rows.append([bi("Clocks went back that day", "उस दिन घड़ी पीछे हुई"),
+                     bi("the second occurrence was used", "दूसरी बार वाला समय लिया गया") if t.get("ambiguous_occurrence")
+                     else bi("the first occurrence was used", "पहली बार वाला समय लिया गया")])
     src = TIME_SOURCE.get(c["meta"].get("time_source"))
     if src:
         rows.insert(0, [bi("Source of the time", "समय का स्रोत"), bi(*src)])
@@ -99,7 +105,7 @@ def versions(c):
     e, v, b = a.get("engine") or {}, a.get("vedic_conventions") or {}, a.get("bazi_conventions") or {}
     rows = [[bi("Swiss Ephemeris", "स्विस एफेमेरिस"), bi(str(e.get("swiss_ephemeris", swe.version)))],
             [bi("Ephemeris data", "एफेमेरिस डेटा"), bi("Swiss Ephemeris data files (JPL-derived)", "स्विस एफेमेरिस डेटा फ़ाइलें (JPL आधारित)")],
-            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("9")]]
+            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("10")]]
     if v:
         rows += [[bi("Ayanamsa", "अयनांश"), bi(f"{str(v.get('ayanamsa', '')).title()} {v.get('ayanamsa_deg', 0):.4f}°", f"{HS_AYAN.get(str(v.get('ayanamsa')), 'चयनित')} {v.get('ayanamsa_deg', 0):.4f}°")],
                  [bi("Lunar node", "चंद्र नोड"), bi("Mean node", "माध्य नोड") if "mean" in str(v.get("rahu")) else bi("True node", "वास्तविक नोड")],
@@ -139,6 +145,8 @@ def settings_compare(c):
                  bi("day pillar differs (born 23:00–24:00)", "दिवस स्तंभ अलग (जन्म 23:00–24:00)") if late else bi("no effect on this chart", "इस कुंडली पर कोई प्रभाव नहीं")])
     age = c["vedic"].get("age_years_at_now") or 0
     shift = age * (365.25 - 360) / 365.25
+    rows.append([bi("Western houses", "पाश्चात्य भाव"), bi(c["western"]["house_system"] if c.get("western") else "–"),
+                 bi("seven systems", "सात पद्धतियाँ"), bi("changes which house each planet falls in", "बदलता है कि कौन सा ग्रह किस भाव में पड़ता है")])
     rows.append([bi("Dasha year: 365.25 or 360 days", "दशा वर्ष: 365.25 या 360 दिन"), bi("365.25"), bi("360"),
                  bi(f"dasha dates now fall about {shift * 12:.0f} months earlier with 360", f"360 के साथ दशा तिथियाँ अभी लगभग {shift * 12:.0f} माह पहले पड़ती हैं")])
     return {"key": "settings_compare", "title": bi("What the settings change", "सेटिंग्स से क्या बदलता है"),

@@ -76,6 +76,8 @@ fun SettingsScreen(
     var ayanamsa by remember { mutableStateOf(settings.ayanamsa) }
     var node by remember { mutableStateOf(settings.node) }
     var dashaYear by remember { mutableStateOf(settings.dashaYear) }
+    var houseSystem by remember { mutableStateOf(settings.houseSystem) }
+    var orbScale by remember { mutableStateOf(settings.orbScale) }
     var zi by remember { mutableStateOf(settings.zi) }
     var baziTime by remember { mutableStateOf(settings.baziTime) }
     var weekdayHard by remember { mutableStateOf(settings.weekdayHard) }
@@ -152,6 +154,18 @@ fun SettingsScreen(
                     listOf("365.25" to R.string.set_dasha_solar, "360" to R.string.set_dasha_savana).forEach { (k, label) ->
                         Pick(stringResource(label), dashaYear == k) { if (dashaYear != k) { dashaYear = k; settings.dashaYear = k; onCalculationChanged() } }
                     }
+                Setting(stringResource(R.string.set_house_system)) {
+                    listOf("placidus" to R.string.hs_placidus, "whole" to R.string.hs_whole, "koch" to R.string.hs_koch,
+                        "equal" to R.string.hs_equal, "regiomontanus" to R.string.hs_regiomontanus,
+                        "campanus" to R.string.hs_campanus, "porphyry" to R.string.hs_porphyry).forEach { (k, label) ->
+                        Pick(stringResource(label), houseSystem == k) { if (houseSystem != k) { houseSystem = k; settings.houseSystem = k; onCalculationChanged() } }
+                    }
+                }
+                Setting(stringResource(R.string.set_orb_scale)) {
+                    listOf("0.75" to R.string.orb_tight, "1.0" to R.string.orb_standard, "1.25" to R.string.orb_wide).forEach { (k, label) ->
+                        Pick(stringResource(label), orbScale == k) { if (orbScale != k) { orbScale = k; settings.orbScale = k; onCalculationChanged() } }
+                    }
+                }
                 }
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 Setting(stringResource(R.string.set_zi)) {

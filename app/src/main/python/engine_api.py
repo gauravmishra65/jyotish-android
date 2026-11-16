@@ -40,6 +40,18 @@ def _chart_args(r):
         args += ["--place", r["place"]]
     if r.get("dasha_year"):
         args += ["--dasha-year", str(float(r["dasha_year"]))]
+    if r.get("fold"):
+        args += ["--fold", "1"]
+    if r.get("calendar") in ("gregorian", "julian"):
+        args += ["--calendar", r["calendar"]]
+    if r.get("house_system"):
+        args += ["--house-system", str(r["house_system"])]
+    if r.get("orb_scale"):
+        args += ["--orb-scale", str(float(r["orb_scale"]))]
+    if r.get("utc_offset") not in (None, ""):
+        args += ["--utc-offset", str(float(r["utc_offset"]))]
+    if r.get("name_in_use"):
+        args += ["--name-in-use", str(r["name_in_use"])]
     if r.get("zi") in ("23", "00"):
         args += ["--zi", r["zi"]]
     if r.get("bazi_time") in ("solar", "standard"):

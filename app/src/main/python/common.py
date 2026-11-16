@@ -64,13 +64,25 @@ def nak_info(lon):
             "lord": VIM_ORDER[i % 9][0], "fraction": (lon % NAK_SPAN) / NAK_SPAN}
 
 
-def resolve_time(date_str, time_str, lat, lon, tz_name=None, utc_offset=None):
+def resolve_time(date_str, time_str, lat, lon, tz_name=None, utc_offset=None, fold=0, calendar="gregorian"):
     """Civil birth time -> UT, Julian day, standard time and true solar time.
 
     Uses the IANA tz database for the historical offset (including LMT eras,
     wartime clocks and DST). A manual utc_offset overrides it.
+    `fold` picks which occurrence of an ambiguous local time was meant (0 = the first, before the clocks went back).
+    `calendar` is "julian" for a date recorded in the old calendar; it is converted to the same instant's Gregorian date.
     """
     y, m, d = [int(v) for v in date_str.split("-")]
+    julian_label = None
+    if calendar == "julian":
+        parts0 = [int(v) for v in time_str.split(":")]
+        hrs = parts0[0] + parts0[1] / 60.0 + (parts0[2] if len(parts0) > 2 else 0) / 3600.0
+        jd_j = swe.julday(y, m, d, hrs, swe.JUL_CAL)
+        gy, gm, gd, _gh = swe.revjul(jd_j, swe.GREG_CAL)
+        julian_label = f"{y:04d}-{m:02d}-{d:02d} (Julian calendar)"
+        y, m, d = gy, gm, gd
+    if y < 1:
+        raise ValueError("Dates before 1 CE are not supported.")
     parts = [int(v) for v in time_str.split(":")]
     hh, mm = parts[0], parts[1]
     ss = parts[2] if len(parts) > 2 else 0
@@ -91,14 +103,15 @@ def resolve_time(date_str, time_str, lat, lon, tz_name=None, utc_offset=None):
             if not tz_name:
                 raise ValueError("Could not infer timezone from coordinates; pass --tz or --utc-offset")
         z = ZoneInfo(tz_name)
-        aware = naive.replace(tzinfo=z)
+        aware = naive.replace(tzinfo=z, fold=1 if fold else 0)
         off = aware.utcoffset()
         dst = aware.dst() or dt.timedelta(0)
         abbr = aware.tzname()
         utc = aware.astimezone(dt.timezone.utc).replace(tzinfo=None)
         tz_label = tz_name
-        if naive.replace(tzinfo=z, fold=1).utcoffset() != off:
-            warnings.append("Ambiguous local time (clocks were turned back). Confirm which occurrence was meant.")
+        if naive.replace(tzinfo=z, fold=1).utcoffset() != naive.replace(tzinfo=z, fold=0).utcoffset():
+            which = "the second (after the clocks went back)" if fold else "the first (before the clocks went back)"
+            warnings.append(f"This local time happened twice that day; {which} occurrence was used.")
         back = utc.replace(tzinfo=dt.timezone.utc).astimezone(z).replace(tzinfo=None)
         if back != naive:
             warnings.append("This local time did not exist (clocks jumped forward). Confirm the recorded time.")
@@ -115,6 +128,8 @@ def resolve_time(date_str, time_str, lat, lon, tz_name=None, utc_offset=None):
     std = naive - dst
     return {
         "local_civil": naive.isoformat(sep=" "),
+        "calendar": "julian" if julian_label else "gregorian", "julian_date": julian_label,
+        "ambiguous_occurrence": int(bool(fold)),
         "timezone": tz_label, "tz_abbreviation": abbr,
         "utc_offset_hours": off.total_seconds() / 3600.0,
         "dst_removed_hours": dst.total_seconds() / 3600.0,

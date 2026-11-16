@@ -70,6 +70,10 @@ class FlowTest {
             rule.onNodeWithTag("reg_send_no").performClick()
 
             rule.onNodeWithTag("name").performTextInput("Ravi Shankar Tiwari")
+            rule.onNodeWithTag("kind").performScrollTo().assertExists()          // person or event (v25)
+            rule.onNodeWithTag("name_in_use").performScrollTo().assertExists()
+            rule.onNodeWithTag("advanced_time").performScrollTo().assertExists() // calendar and clock choices
+            rule.onNodeWithTag("utc_offset").performScrollTo().assertExists()
             rule.onNodeWithTag("date").performScrollTo().performTextInput("14-07-1988")
             rule.onNodeWithTag("time").performScrollTo().performTextInput("14:35")
             rule.onNodeWithTag("place").performScrollTo().performTextInput("Varan")

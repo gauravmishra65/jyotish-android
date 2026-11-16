@@ -57,6 +57,7 @@ import com.gauravmishra.jyotish.R
 import com.gauravmishra.jyotish.data.Place
 import com.gauravmishra.jyotish.data.Places
 import com.gauravmishra.jyotish.data.Profile
+import com.gauravmishra.jyotish.data.duplicateOf
 import com.gauravmishra.jyotish.data.DMY
 import com.gauravmishra.jyotish.data.parseDmy
 import com.gauravmishra.jyotish.data.parseHm
@@ -69,6 +70,7 @@ import java.time.ZoneOffset
 @Composable
 fun AddProfileScreen(
     existing: Profile?,
+    others: List<Profile> = emptyList(),
     loadPlaces: suspend () -> Places,
     onBack: () -> Unit,
     onSave: (Profile) -> Unit,
@@ -79,6 +81,13 @@ fun AddProfileScreen(
     var timeText by rememberSaveable { mutableStateOf(existing?.time ?: "") }
     var confidence by rememberSaveable { mutableStateOf(existing?.confidence ?: "reliable") }
     var timeSource by rememberSaveable { mutableStateOf(existing?.timeSource ?: "") }
+    var kind by rememberSaveable { mutableStateOf(existing?.kind ?: "person") }
+    var nameInUse by rememberSaveable { mutableStateOf(existing?.nameInUse ?: "") }
+    var timeFrom by rememberSaveable { mutableStateOf(existing?.timeFrom ?: "") }
+    var timeTo by rememberSaveable { mutableStateOf(existing?.timeTo ?: "") }
+    var calendar by rememberSaveable { mutableStateOf(existing?.calendar ?: "gregorian") }
+    var fold by rememberSaveable { mutableStateOf(existing?.fold ?: 0) }
+    var utcOffsetText by rememberSaveable { mutableStateOf(existing?.utcOffset?.toString() ?: "") }
     var query by rememberSaveable { mutableStateOf("") }
     var chosen by remember { mutableStateOf(existing?.let { Place(it.place, "", "", it.lat, it.lon, it.tz, 0, emptyList()) }) }
     var useCoords by rememberSaveable { mutableStateOf(false) }
@@ -108,12 +117,21 @@ fun AddProfileScreen(
         Place("%.4f, %.4f".format(lat, lon), n.countryCode, n.country, lat!!, lon!!, n.tz, 0, emptyList())
     } else chosen
     val valid = name.isNotBlank() && date != null && time != null && place != null
+    val duplicate = if (date != null && time != null && place != null) {
+        others.duplicateOf(Profile(id = existing?.id ?: "", name = name, gender = gender, date = date.toString(), time = time,
+            confidence = confidence, place = place.label, lat = place.lat, lon = place.lon, tz = place.tz))
+    } else null
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { BackBar(stringResource(if (existing == null) R.string.new_chart else R.string.edit_chart), onBack) },
         bottomBar = {
             Surface(color = MaterialTheme.colorScheme.surface, shadowElevation = 4.dp) {
+                Column {
+                duplicate?.let {
+                    Text(stringResource(R.string.dup_warning, it.name), style = MaterialTheme.typography.bodySmall,
+                        color = Palette.AccentDeep, modifier = Modifier.padding(horizontal = 20.dp).testTag("duplicate_warning"))
+                }
                 Button(
                     onClick = {
                         if (!valid) { showErrors = true; return@Button }
@@ -123,11 +141,14 @@ fun AddProfileScreen(
                             place = place!!.label, lat = place.lat, lon = place.lon, tz = place.tz,
                             residence = residence?.label ?: "", resLat = residence?.lat, resLon = residence?.lon, group = group,
                             notes = existing?.notes ?: "", events = existing?.events ?: emptyList(), timeSource = timeSource,
+                            kind = kind, nameInUse = nameInUse.trim(), timeFrom = timeFrom.trim(), timeTo = timeTo.trim(),
+                            fold = fold, calendar = calendar, utcOffset = utcOffsetText.trim().toDoubleOrNull(),
                         ))
                     },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp).heightIn(min = 56.dp).testTag("save"),
                     shape = RoundedCornerShape(28.dp),
                 ) { Text(stringResource(R.string.save_show), style = MaterialTheme.typography.labelLarge) }
+                }
             }
         },
     ) { pad ->
@@ -142,10 +163,24 @@ fun AddProfileScreen(
                 modifier = Modifier.fillMaxWidth().testTag("name"),
             )
 
-            Text(stringResource(R.string.gender), style = MaterialTheme.typography.titleMedium)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Choice(stringResource(R.string.male), gender == "M") { gender = "M" }
-                Choice(stringResource(R.string.female), gender == "F") { gender = "F" }
+            Text(stringResource(R.string.kind_label), style = MaterialTheme.typography.titleMedium)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("kind")) {
+                Choice(stringResource(R.string.kind_person), kind == "person") { kind = "person" }
+                Choice(stringResource(R.string.kind_event), kind == "event") { kind = "event" }
+            }
+            if (kind == "person") {
+                OutlinedTextField(
+                    value = nameInUse, onValueChange = { nameInUse = it }, label = { Text(stringResource(R.string.name_in_use)) },
+                    singleLine = true, modifier = Modifier.fillMaxWidth().testTag("name_in_use"),
+                )
+            }
+
+            if (kind == "person") {
+                Text(stringResource(R.string.gender), style = MaterialTheme.typography.titleMedium)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Choice(stringResource(R.string.male), gender == "M") { gender = "M" }
+                    Choice(stringResource(R.string.female), gender == "F") { gender = "F" }
+                }
             }
 
             OutlinedTextField(
@@ -181,6 +216,35 @@ fun AddProfileScreen(
                     Choice(stringResource(label), timeSource == k) { timeSource = if (timeSource == k) "" else k }
                 }
             }
+
+            if (confidence == "approximate" || confidence == "unknown") {
+                Text(stringResource(R.string.time_window), style = MaterialTheme.typography.bodyMedium, color = Palette.Muted)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(value = timeFrom, onValueChange = { timeFrom = it.take(5) }, singleLine = true,
+                        label = { Text(stringResource(R.string.time_from)) },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.weight(1f).testTag("time_from"))
+                    OutlinedTextField(value = timeTo, onValueChange = { timeTo = it.take(5) }, singleLine = true,
+                        label = { Text(stringResource(R.string.time_to)) },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.weight(1f).testTag("time_to"))
+                }
+            }
+
+            Text(stringResource(R.string.advanced_time), style = MaterialTheme.typography.titleMedium)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.testTag("advanced_time")) {
+                Choice(stringResource(R.string.cal_gregorian), calendar == "gregorian") { calendar = "gregorian" }
+                Choice(stringResource(R.string.cal_julian), calendar == "julian") { calendar = "julian" }
+                Choice(stringResource(R.string.fold_first), fold == 0) { fold = 0 }
+                Choice(stringResource(R.string.fold_second), fold == 1) { fold = 1 }
+            }
+            OutlinedTextField(
+                value = utcOffsetText, onValueChange = { utcOffsetText = it.take(6) }, singleLine = true,
+                label = { Text(stringResource(R.string.utc_offset_label)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth().testTag("utc_offset"),
+            )
 
             Text(stringResource(R.string.birthplace), style = MaterialTheme.typography.titleMedium)
             if (!useCoords) {

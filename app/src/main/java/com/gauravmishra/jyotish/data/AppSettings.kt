@@ -30,7 +30,16 @@ class AppSettings(context: Context) {
     var baziTime: String
         get() = prefs.getString("bazi_time", "solar") ?: "solar"
         set(v) { prefs.edit().putString("bazi_time", v).apply(); ChartPrefs.baziTime = v }
-    fun loadChartPrefs() { ChartPrefs.dashaYear = dashaYear; ChartPrefs.zi = zi; ChartPrefs.baziTime = baziTime }
+    fun loadChartPrefs() { ChartPrefs.dashaYear = dashaYear; ChartPrefs.zi = zi; ChartPrefs.baziTime = baziTime
+        ChartPrefs.houseSystem = houseSystem; ChartPrefs.orbScale = orbScale.toDoubleOrNull() ?: 1.0 }
+    /** Western house system for the charts and the detail sections: placidus, whole, koch, equal, regiomontanus, campanus, porphyry. */
+    var houseSystem: String
+        get() = prefs.getString("house_system", "placidus") ?: "placidus"
+        set(v) { prefs.edit().putString("house_system", v).apply(); ChartPrefs.houseSystem = v }
+    /** Scale on the standard Western aspect orbs: "1.0" normal, "0.75" tight, "1.25" wide. */
+    var orbScale: String
+        get() = prefs.getString("orb_scale", "1.0") ?: "1.0"
+        set(v) { prefs.edit().putString("orb_scale", v).apply(); ChartPrefs.orbScale = v.toDoubleOrNull() ?: 1.0 }
     var weekdayHard: Boolean
         get() = prefs.getBoolean("weekday_hard", false)
         set(v) = prefs.edit().putBoolean("weekday_hard", v).apply()
@@ -94,4 +103,6 @@ object ChartPrefs {
     @Volatile var dashaYear: String = "365.25"
     @Volatile var zi: String = "23"
     @Volatile var baziTime: String = "solar"
+    @Volatile var houseSystem: String = "placidus"
+    @Volatile var orbScale: Double = 1.0
 }

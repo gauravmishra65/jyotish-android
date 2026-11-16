@@ -290,6 +290,7 @@ fun App(vm: AppViewModel = viewModel()) {
                     }
                     AddProfileScreen(
                         existing = existing,
+                        others = profiles,
                         loadPlaces = { vm.places() },
                         onBack = { leave() },
                         onSave = { p ->

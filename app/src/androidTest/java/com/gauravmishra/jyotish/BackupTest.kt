@@ -3,6 +3,7 @@ package com.gauravmishra.jyotish
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gauravmishra.jyotish.data.Backup
 import com.gauravmishra.jyotish.data.Profile
+import com.gauravmishra.jyotish.data.duplicateOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -38,5 +39,19 @@ class BackupTest {
         assertEquals(3, lines.size)
         assertEquals(true, lines[1].contains("\"Line with \"\"quotes\"\", comma\""))
         assertEquals(true, lines[1].contains("\"2016-02-14:marriage\""))
+    }
+
+    @Test
+    fun csvImportAndDuplicates() {
+        val csv = com.gauravmishra.jyotish.ui.peopleCsv(people) { listOf("Scorpio", "Cancer", "Pushya 1") } +
+            "\"Bad row\",\"\",\"person\",\"F\",\"not-a-date\",\"25:99\",\"reliable\",\"\",\"\",\"0\",\"0\",\"\"\r\n"
+        val (read, bad) = com.gauravmishra.jyotish.data.parsePeopleCsv(csv)
+        assertEquals(people.size, read.size)
+        assertEquals(1, bad)
+        assertEquals(people[0].name, read[0].name)
+        assertEquals(people[0].date, read[0].date)
+        // the same birth moment and place is seen as the person we already have
+        assertEquals(people[0].name, people.duplicateOf(read[0])?.name)
+        assertEquals(null, people.duplicateOf(read[0].copy(date = "1999-01-01")))
     }
 }

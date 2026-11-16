@@ -94,6 +94,22 @@ if [r[1]["en"] for r in _t[2]["blocks"][0]["rows"]] != ["41", "42"]:
 _l = FP.lunations(_c)["blocks"][0]["rows"]
 if _l[1][1]["en"] != "24 Nov 2026" or _l[5][1]["en"] != "06 Feb 2027":
     problems.append(f"lunations: {_l[1][1]['en']} {_l[5][1]['en']}")
+# v25 input options: Julian calendar conversion, the ambiguous-hour choice, house systems and orb scale
+import common as _CM
+_j = _CM.resolve_time("1582-10-05", "09:30", 25.32, 82.97, "Asia/Kolkata", calendar="julian")
+if _j["local_civil"][:10] != "1582-10-15" or _j["julian_date"] != "1582-10-05 (Julian calendar)":
+    problems.append(f"julian calendar: {_j['local_civil']}")
+_a = _CM.resolve_time("2020-11-01", "01:30", 40.7, -74.0, "America/New_York", fold=0)["utc"]
+_b = _CM.resolve_time("2020-11-01", "01:30", 40.7, -74.0, "America/New_York", fold=1)["utc"]
+if (_a[11:16], _b[11:16]) != ("05:30", "06:30"):
+    problems.append(f"ambiguous hour: {_a} {_b}")
+_p = EA.chart_obj({"name": "R", "date": "1985-03-14", "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M"})
+_k = EA.chart_obj({"name": "R", "date": "1985-03-14", "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M",
+                   "house_system": "koch", "orb_scale": 0.5})
+if _p["western"]["house_system"] != "Placidus" or _k["western"]["house_system"] != "Koch":
+    problems.append("house systems")
+if len(_k["western"]["natal_aspects"]) >= len(_p["western"]["natal_aspects"]):
+    problems.append("orb scale does not tighten the aspect list")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

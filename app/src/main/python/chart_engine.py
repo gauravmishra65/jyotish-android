@@ -47,7 +47,10 @@ def clean(o):
 
 
 def build_chart(a):
-    t = common.resolve_time(a.date, a.time, a.lat, a.lon, a.tz, a.utc_offset)
+    western.HSYS = getattr(a, "house_system", "placidus")
+    western.ORB_SCALE = float(getattr(a, "orb_scale", 1.0) or 1.0)
+    t = common.resolve_time(a.date, a.time, a.lat, a.lon, a.tz, a.utc_offset,
+                            fold=int(getattr(a, "fold", 0) or 0), calendar=getattr(a, "calendar", "gregorian"))
     now = dt.datetime.strptime(a.now, "%Y-%m-%d").replace(hour=12) if a.now else dt.datetime.now(dt.timezone.utc).replace(tzinfo=None, microsecond=0)
     warnings = list(t["warnings"])
     conf = a.time_confidence
@@ -259,6 +262,10 @@ def build_parser():
     c.add_argument("--place", default="")
     c.add_argument("--tz", default=None, help="IANA zone e.g. Asia/Kolkata (inferred from coordinates if omitted)")
     c.add_argument("--utc-offset", type=float, default=None, help="Manual UTC offset in hours; bypasses the tz database")
+    c.add_argument("--fold", type=int, default=0, choices=[0, 1], help="Which occurrence of an ambiguous local time was meant")
+    c.add_argument("--calendar", default="gregorian", choices=["gregorian", "julian"], help="Calendar the birth date was recorded in")
+    c.add_argument("--house-system", default="placidus", choices=list(western.HOUSE_SYSTEMS), help="Western house system")
+    c.add_argument("--orb-scale", type=float, default=1.0, help="Scale on the standard Western aspect orbs (0.5 = half)")
     c.add_argument("--gender", default="M", help="M or F (needed for BaZi luck pillar direction and ZWDS)")
     c.add_argument("--now", default=None, help="Reference date YYYY-MM-DD (default: today UTC)")
     c.add_argument("--ayanamsa", default="lahiri", choices=list(vedic.AYAN))

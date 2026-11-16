@@ -26,14 +26,20 @@ def tropical_positions(jd):
     return out
 
 
-def tropical_angles(jd, lat, lon):
+HOUSE_SYSTEMS = {"placidus": (b"P", "Placidus"), "whole": (b"W", "Whole sign"), "koch": (b"K", "Koch"), "equal": (b"E", "Equal"),
+                 "regiomontanus": (b"R", "Regiomontanus"), "campanus": (b"C", "Campanus"), "porphyry": (b"O", "Porphyry")}
+HSYS = "placidus"          # set from the chart request; the reports and the Hellenistic block always use whole sign
+
+
+def tropical_angles(jd, lat, lon, hsys=None):
     warn = None
+    code, name = HOUSE_SYSTEMS.get(hsys or HSYS, HOUSE_SYSTEMS["placidus"])
     try:
-        cusps, ascmc = swe.houses_ex(jd, lat, lon, b"P")
-        system = "Placidus"
+        cusps, ascmc = swe.houses_ex(jd, lat, lon, code)
+        system = name
     except Exception:
         cusps, ascmc = swe.houses_ex(jd, lat, lon, b"O")
-        system, warn = "Porphyry", "Placidus is undefined at this latitude; Porphyry used"
+        system, warn = "Porphyry", f"{name} is undefined at this latitude; Porphyry used"
     tropical_angles.vertex = ascmc[3]
     return list(cusps), ascmc[0], ascmc[1], system, warn
 
@@ -46,7 +52,10 @@ def _house_by_cusps(l, cusps):
     return 1
 
 
-def aspects_between(A, B, same=False, use_motion=True, max_orb_scale=1.0):
+ORB_SCALE = 1.0            # set from the chart request: 1.0 = the standard orbs, smaller = tighter
+
+
+def aspects_between(A, B, same=False, use_motion=True, max_orb_scale=None):
     """A/B: lists of (name, lon, speed). Returns aspects sorted by orb."""
     out = []
     for i, (na, la, sa) in enumerate(A):
@@ -54,9 +63,10 @@ def aspects_between(A, B, same=False, use_motion=True, max_orb_scale=1.0):
             if same and j <= i:
                 continue
             sep = abs(wrap180(lb - la))
+            scale = ORB_SCALE if max_orb_scale is None else max_orb_scale
             for an, ang, orb in ASPECTS:
                 o = abs(sep - ang)
-                if o <= orb * max_orb_scale:
+                if o <= orb * scale:
                     rec = {"a": na, "b": nb, "aspect": an, "orb": round(o, 3)}
                     if use_motion and (sa or sb):
                         sep2 = abs(wrap180((lb + sb * 0.05) - (la + sa * 0.05)))
@@ -195,7 +205,7 @@ def build_western(jd, birth_utc, now_utc, lat, lon, cur_lat=None, cur_lon=None):
         + [("Ascendant", asc, 0.0), ("Midheaven", mc, 0.0)]
     hits = []
     for tn in ("Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"):
-        scale = 0.375 if tn == "Mars" else 0.4375  # ~3 deg (2 deg for Mars) on the 8-deg base orb
+        scale = (0.375 if tn == "Mars" else 0.4375) * ORB_SCALE  # ~3 deg (2 deg for Mars) on the 8-deg base orb
         for r in aspects_between([(tn, tp[tn]["lon"], tp[tn]["speed"])], natal_targets, use_motion=True, max_orb_scale=scale):
             if r["aspect"] == "quincunx":
                 continue

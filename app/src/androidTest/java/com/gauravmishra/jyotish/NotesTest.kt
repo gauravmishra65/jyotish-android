@@ -52,5 +52,11 @@ class NotesTest {
             rule.openTool("tool_birth_time")
             rule.waitUntilAtLeastOneExists(hasText("2016-02-14", substring = true), timeoutMillis = 5_000)
         }
+        ActivityScenario.launch(MainActivity::class.java).use {
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
+            rule.openTool("tool_backup")
+            rule.onNodeWithTag("bk_import_pick").performScrollTo().assertExists()   // CSV import (v25)
+            rule.onNodeWithTag("bk_csv").performScrollTo().assertExists()
+        }
     }
 }
