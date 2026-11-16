@@ -382,6 +382,16 @@ def build(c):
     except Exception:
         pass
     try:
+        import chinese_schools
+        wm += chinese_schools.build(c)
+    except Exception:
+        pass
+    try:
+        import regional
+        wm += regional.build(c)
+    except Exception:
+        pass
+    try:
         import western_adv
         wm += western_adv.build(c) if c.get("western") else []
     except Exception:

@@ -268,6 +268,18 @@ def group(request_json):
     return group_compare.compare(request_json)
 
 
+def custom_varga(request_json):
+    """A divisional chart for any division (custom_rules): chart request plus "n" and "rule"."""
+    import custom_rules
+    return custom_rules.varga_json(request_json)
+
+
+def custom_rule(request_json):
+    """A yoga the user defined (custom_rules): {"rule": {...}, "people": [chart request, ...]}."""
+    import custom_rules
+    return custom_rules.check(request_json)
+
+
 def predict(request_json):
     """Predictions page (app_predict): chart request plus period day|week|month|year|three and the Today place."""
     import app_predict

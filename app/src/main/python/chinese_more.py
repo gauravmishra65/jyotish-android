@@ -167,6 +167,11 @@ def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours,
         extra = FP.chinese_sections(date_iso, today_iso, today_tz_hours)
     except Exception:
         extra = []
+    try:
+        import chinese_schools as CSch
+        extra = CSch.ziwei_sections(z, today_iso) + extra
+    except Exception:
+        pass
     days = find_days(today_iso, 30, activity, lunar["branch_index"], today_tz_hours)
     good = [x for x in days if x["rating"] == "good"][:10]
     a_en, a_hi = ACTIVITY[activity]

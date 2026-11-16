@@ -64,4 +64,24 @@ class TimeTravelTest {
             rule.shot("group_compare")
         }
     }
+
+    @Test
+    fun ownRules() {
+        ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().clear().putString("language", "en")
+            .putBoolean("registered", true).putBoolean("tour_seen", true).commit()
+        ProfileStore(ctx.filesDir).save(listOf(
+            Profile(name = "Ravi Shankar Tiwari", gender = "M", date = "1988-07-14", time = "14:35",
+                confidence = "reliable", place = "Varanasi, Uttar Pradesh, India", lat = 25.3176, lon = 82.9739, tz = "Asia/Kolkata"),
+        ))
+        ActivityScenario.launch(MainActivity::class.java).use {
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
+            rule.openTool("tool_customrules")
+            rule.onNodeWithTag("cr_varga_go").performScrollTo().performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("section_custom_varga"), timeoutMillis = 150_000)
+            rule.onNodeWithTag("cr_add").performScrollTo().performClick()
+            rule.onNodeWithTag("cr_check").performScrollTo().performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("section_custom_rule"), timeoutMillis = 120_000)
+            rule.shot("custom_rules")
+        }
+    }
 }

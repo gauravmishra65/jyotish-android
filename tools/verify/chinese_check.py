@@ -131,6 +131,24 @@ _g = _json.loads(_GC.compare(_json.dumps({"people": [
 _rows = _g["sections"][0]["blocks"][0]["rows"]
 if len(_rows) != 12 or any(cell["en"] in ("", "-", "\u2013") for r in _rows for cell in r[1:]):
     problems.append("group comparison has empty cells: " + str([r[0]["en"] for r in _rows if any(c["en"] == "\u2013" for c in r[1:])]))
+# v27 judgement layer and regional almanacs, checked against known values
+import chinese_schools as _CSch
+import regional as _RG
+_st = _CSch.structure(_p["bazi"])["blocks"][0]["rows"]
+if "\u4f24\u5b98" not in _st[3][1]["en"]:
+    problems.append(f"bazi structure: {_st[3][1]['en']}")
+_uf = _CSch.useful_elements(_p["bazi"])["blocks"][0]["rows"]
+if [r[2]["en"] for r in _uf][:2] != ["favourable", "favourable"]:
+    problems.append("useful elements for a weak Water Day Master should be Metal and Water")
+for _d, _want in (("1985-03-14", ["Raktakshi (1984\u201385)", "Maasi", "ME 1160", "Kumbham", "BS 1391", "Falgun", "BS 2041"]),
+                  ("2024-08-20", ["Krodhi (2024\u201325)", "Aavani", "ME 1200", "Chingam", "BS 1431", "Bhadro", "BS 2081"]),
+                  ("2026-11-16", ["Parabhava (2026\u201327)", "Aippasi", "ME 1202", "Thulam", "BS 1433", "Kartik", "BS 2083"])):
+    _c = EA.chart_obj({"name": "X", "date": _d, "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M"})
+    _got = [r[1]["en"] for r in _RG.eras(_c)["blocks"][0]["rows"]]
+    if _got != _want:
+        problems.append(f"regional eras {_d}: {_got}")
+if _RG.katapayadi("\u0930\u0935\u093f")["total"] != 6:
+    problems.append("katapayadi")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

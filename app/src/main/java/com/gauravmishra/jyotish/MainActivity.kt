@@ -30,6 +30,7 @@ import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
 import com.gauravmishra.jyotish.ui.ChineseScreen
+import com.gauravmishra.jyotish.ui.CustomRulesScreen
 import com.gauravmishra.jyotish.ui.GroupScreen
 import com.gauravmishra.jyotish.ui.TimeTravelScreen
 import com.gauravmishra.jyotish.ui.FengShuiScreen
@@ -243,6 +244,11 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     TimeTravelScreen(profiles, p, style = vm.settings.chartStyle, ayanamsa = vm.settings.ayanamsa, node = vm.settings.node,
                         onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.CUSTOM_RULES) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    CustomRulesScreen(profiles, p, ayanamsa = vm.settings.ayanamsa, node = vm.settings.node, onBack = { nav.popBackStack() })
                 }
                 composable(Routes.GROUP) {
                     GroupScreen(profiles, ayanamsa = vm.settings.ayanamsa, node = vm.settings.node,

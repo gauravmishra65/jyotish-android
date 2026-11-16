@@ -88,6 +88,10 @@ fun KundaliScreen(
     val details = remember((chart as? ChartState.Ready)?.json) { (chart as? ChartState.Ready)?.json?.let { runCatching { DetailsModel.parse(it) }.getOrNull() } }
     var tab by rememberSaveable { mutableStateOf(0) }
     var detail by remember { mutableStateOf<Detail?>(null) }
+    // kept here, above the early returns below, so these remembers are always reached in the same order
+    val chartLayer = androidx.compose.ui.graphics.rememberGraphicsLayer()
+    val shareScope = androidx.compose.runtime.rememberCoroutineScope()
+    val shareCtx = androidx.compose.ui.platform.LocalContext.current
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -113,10 +117,7 @@ fun KundaliScreen(
                     StyleButton(stringResource(R.string.south_indian), style == "south", Modifier.weight(1f)) { onStyle("south") }
                     StyleButton(stringResource(R.string.east_indian), style == "east", Modifier.weight(1f)) { onStyle("east") }
                 }
-                val chartLayer = androidx.compose.ui.graphics.rememberGraphicsLayer()
                 val chartBg = MaterialTheme.colorScheme.background
-                val shareScope = androidx.compose.runtime.rememberCoroutineScope()
-                val shareCtx = androidx.compose.ui.platform.LocalContext.current
                 KundliChart(
                     m, style, lang,
                     chartDescription(m, lang, stringResource(R.string.house_word), stringResource(R.string.empty_word)),

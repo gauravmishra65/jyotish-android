@@ -35,6 +35,7 @@ val TOOLS = listOf(
     Tool("fengshui", R.string.fs_title, R.string.fs_sub, Routes.FENG_SHUI),
     Tool("timetravel", R.string.tt_title, R.string.tt_sub, Routes.TIME_TRAVEL),
     Tool("group", R.string.grp_title, R.string.grp_sub, Routes.GROUP),
+    Tool("customrules", R.string.cr_title, R.string.cr_sub, Routes.CUSTOM_RULES),
     Tool("numbers", R.string.nt_title, R.string.nt_sub, Routes.NUMBER_TOOLS),
     Tool("backup", R.string.bk_title, R.string.bk_sub, Routes.BACKUP),
 )

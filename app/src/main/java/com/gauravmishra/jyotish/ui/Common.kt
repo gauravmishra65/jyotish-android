@@ -64,6 +64,7 @@ object Routes {
     const val FENG_SHUI = "fengshui"
     const val TIME_TRAVEL = "timetravel"
     const val GROUP = "group"
+    const val CUSTOM_RULES = "customrules"
     const val NOTES = "notes"
     /** replay: opened again from Help, so finishing returns there instead of continuing the first run. */
     const val TOUR = "tour?replay={replay}"
