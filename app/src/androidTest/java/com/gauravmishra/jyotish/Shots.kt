@@ -4,6 +4,10 @@ import android.graphics.Bitmap
 import android.util.Base64
 import android.util.Log
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.junit4.ComposeTestRule
@@ -32,4 +36,15 @@ private fun log(name: String, bmp: Bitmap, quality: Int) {
     bmp.compress(Bitmap.CompressFormat.JPEG, quality, out)
     val parts = Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP).chunked(3000)
     parts.forEachIndexed { i, c -> Log.i("SHOT", "$name ${i + 1}/${parts.size} $c") }
+}
+
+/** Opens Tools from Home and then one tool card, retrying the Home tap until the card shows (a relaunched activity can miss the first tap). */
+fun ComposeTestRule.openTool(tag: String) {
+    val end = System.currentTimeMillis() + 90_000
+    while (onAllNodesWithTag(tag).fetchSemanticsNodes().isEmpty()) {
+        if (System.currentTimeMillis() > end) throw AssertionError("tool card $tag did not open")
+        try { onNodeWithTag("home_tools").performScrollTo().performClick() } catch (_: Throwable) {}
+        try { waitUntil(5_000) { onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty() } } catch (_: Throwable) {}
+    }
+    onNodeWithTag(tag).performScrollTo().performClick()
 }

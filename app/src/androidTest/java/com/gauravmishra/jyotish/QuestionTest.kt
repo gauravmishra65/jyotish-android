@@ -35,8 +35,7 @@ class QuestionTest {
         ))
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
-            rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.waitUntilAtLeastOneExists(hasTestTag("tool_prashna"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_prashna").performScrollTo().performClick()
+            rule.openTool("tool_prashna")
             rule.onNodeWithTag("q_marriage").performClick()
             rule.onNodeWithTag("q_ask").performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("q_lean"), timeoutMillis = 120_000)
@@ -45,8 +44,7 @@ class QuestionTest {
         }
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
-            rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.waitUntilAtLeastOneExists(hasTestTag("tool_kp"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_kp").performScrollTo().performClick()
+            rule.openTool("tool_kp")
             rule.onNodeWithTag("q_job").performClick()
             rule.onNodeWithTag("kp_number").performTextInput("131")
             rule.onNodeWithTag("q_ask").performScrollTo().performClick()
@@ -66,8 +64,7 @@ class QuestionTest {
         ))
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
-            rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.waitUntilAtLeastOneExists(hasTestTag("tool_numbers"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_numbers").performScrollTo().performClick()
+            rule.openTool("tool_numbers")
             rule.onNodeWithTag("nt_vehicle").performClick()
             rule.onNodeWithTag("nt_text").performTextInput("UP 32 AB 1234")
             rule.onNodeWithTag("nt_run").performClick()

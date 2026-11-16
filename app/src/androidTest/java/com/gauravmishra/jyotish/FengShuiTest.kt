@@ -34,8 +34,7 @@ class FengShuiTest {
         ))
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
-            rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.waitUntilAtLeastOneExists(hasTestTag("tool_fengshui"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_fengshui").performScrollTo().performClick()
+            rule.openTool("tool_fengshui")
             rule.waitUntilAtLeastOneExists(hasTestTag("fs_grid"), timeoutMillis = 60_000)
             rule.onNodeWithTag("fs_facing").performScrollTo().performTextInput("180")
             rule.onNodeWithTag("fs_built").performScrollTo().performTextInput("2010")

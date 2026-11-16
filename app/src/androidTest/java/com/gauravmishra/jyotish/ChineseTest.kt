@@ -33,8 +33,7 @@ class ChineseTest {
         ))
         ActivityScenario.launch(MainActivity::class.java).use {
             rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
-            rule.onNodeWithTag("home_tools").performScrollTo().performClick()
-            rule.waitUntilAtLeastOneExists(hasTestTag("tool_chinese"), timeoutMillis = 30_000); rule.onNodeWithTag("tool_chinese").performScrollTo().performClick()
+            rule.openTool("tool_chinese")
             rule.waitUntilAtLeastOneExists(hasTestTag("zwds_grid"), timeoutMillis = 60_000)
             rule.shot("zi_wei")
             rule.onNodeWithTag("section_zwds_depth").performScrollTo().assertExists()
