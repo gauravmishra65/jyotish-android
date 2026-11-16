@@ -96,7 +96,7 @@ def _star(n):
     return bi(STAR[n][0], STAR[n][1])
 
 
-def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours, today_iso, activity="wedding"):
+def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours, today_iso, activity="wedding", zw_school="quanshu"):
     d = dt.date.fromisoformat(date_iso)
     lunar = CC.to_lunar(d)
     jd_b = swe.julday(d.year, d.month, d.day, 12.0 - tz_hours)
@@ -117,7 +117,7 @@ def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours,
                                                                               f"{nominal} (जन्म पर 1 से, हर नववर्ष पर एक जोड़कर)")]])],
                  "note": bi("BaZi counts the year from Li Chun (about 4 February) instead of New Year, so between the two dates the animals differ; both are shown.",
                             "बाज़ी वर्ष को नववर्ष की बजाय ली चुन (लगभग 4 फ़रवरी) से गिनता है, इसलिए वर्ष के मोड़ पर दोनों पशु अलग हो सकते हैं।")})
-    z = ZW.chart(date_iso, time_hhmm, gender)
+    z = ZW.chart(date_iso, time_hhmm, gender, zw_school)
     global LAST_GRID
     LAST_GRID = [{"branch": p["branch"], "branch_zh": p["branch_zh"], "stem_zh": p["stem_zh"], "zh": p["zh"], "en": p["en"], "hi": p["hi"],
                   "body": p["is_body"], "life": p["index"] == 0, "decade": p["decade"],
@@ -196,5 +196,6 @@ def sections_json(request_json):
     r = json.loads(request_json)
     today = r.get("today") or dt.date.today().isoformat()
     secs = person_sections(r.get("name", ""), r["date"], r["time"], r.get("gender", "M"), _offset(r["tz"], dt.date.fromisoformat(r["date"])),
-                           _offset(r.get("today_tz") or r["tz"], dt.date.fromisoformat(today)), today, r.get("activity", "wedding"))
+                           _offset(r.get("today_tz") or r["tz"], dt.date.fromisoformat(today)), today, r.get("activity", "wedding"),
+                           r.get("zw_school", "quanshu"))
     return json.dumps({"sections": secs, "grid": LAST_GRID, "activities": {k: bi(*v) for k, v in ACTIVITY.items()}}, ensure_ascii=False)

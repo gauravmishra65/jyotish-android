@@ -84,4 +84,23 @@ class TimeTravelTest {
             rule.shot("custom_rules")
         }
     }
+
+    @Test
+    fun westernHorary() {
+        ctx.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().clear().putString("language", "en")
+            .putBoolean("registered", true).putBoolean("tour_seen", true).commit()
+        ProfileStore(ctx.filesDir).save(listOf(
+            Profile(name = "Ravi Shankar Tiwari", gender = "M", date = "1988-07-14", time = "14:35",
+                confidence = "reliable", place = "Varanasi, Uttar Pradesh, India", lat = 25.3176, lon = 82.9739, tz = "Asia/Kolkata"),
+        ))
+        ActivityScenario.launch(MainActivity::class.java).use {
+            rule.waitUntilAtLeastOneExists(hasTestTag("home_tools"), timeoutMillis = 60_000)
+            rule.openTool("tool_horary")
+            rule.onNodeWithTag("hor_house_10").performScrollTo().performClick()
+            rule.onNodeWithTag("hor_ask").performScrollTo().performClick()
+            rule.waitUntilAtLeastOneExists(hasTestTag("section_horary_chart"), timeoutMillis = 150_000)
+            rule.onNodeWithTag("section_horary_judgement").performScrollTo().assertExists()
+            rule.shot("horary")
+        }
+    }
 }

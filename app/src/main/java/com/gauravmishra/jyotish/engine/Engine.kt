@@ -88,6 +88,9 @@ object Engine {
     /** Chinese astrology sections (see engine_api.chinese_more): {"sections": [...], "activities": {...}}. */
     suspend fun chineseMore(request: JSONObject): String = call { it.callAttr("chinese_more", request.toString()).toString() }
 
+    /** A Western horary chart for the moment a question is asked (see engine_api.horary). */
+    suspend fun horary(request: JSONObject): String = call { it.callAttr("horary", request.toString()).toString() }
+
     /** A divisional chart for any division (see engine_api.custom_varga). */
     suspend fun customVarga(request: JSONObject): String = call { it.callAttr("custom_varga", request.toString()).toString() }
 

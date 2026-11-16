@@ -44,6 +44,10 @@ class AppSettings(context: Context) {
     var pinnedSections: Set<String>
         get() = prefs.getStringSet("pinned_sections", emptySet()) ?: emptySet()
         set(v) = prefs.edit().putStringSet("pinned_sections", v).apply()
+    /** Zi Wei placement school: "quanshu" (the default) or "traditional"; they differ on the late Zi hour and leap months. */
+    var ziweiSchool: String
+        get() = prefs.getString("ziwei_school", "quanshu") ?: "quanshu"
+        set(v) = prefs.edit().putString("ziwei_school", v).apply()
     var weekdayHard: Boolean
         get() = prefs.getBoolean("weekday_hard", false)
         set(v) = prefs.edit().putBoolean("weekday_hard", v).apply()

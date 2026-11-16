@@ -181,6 +181,17 @@ if _nosrc:
     problems.append(f"sections without a source line: {_nosrc}")
 if not any("\u0938\u094d\u0930\u094b\u0924:" in (s.get("note") or {}).get("hi", "") for s in _secs):
     problems.append("the source line is not translated")
+# v30: Zi Wei school presets change the late-Zi day, and the horary workspace builds both of its sections
+import ziwei as _ZW
+import horary as _HOR
+import json as _j2
+if _ZW.chart("1985-03-14", "23:30", "M")["lunar"]["day"] == _ZW.chart("1985-03-14", "23:30", "M", "traditional")["lunar"]["day"]:
+    problems.append("the Zi Wei school preset does not change the late-Zi day")
+_h = _j2.loads(_HOR.ask(_j2.dumps({"date": "2026-07-04", "time": "12:00", "lat": 1.35, "lon": 103.82, "tz": "Asia/Singapore", "house": 2})))
+if [s["key"] for s in _h["sections"]] != ["horary_chart", "horary_judgement"] or len(_h["houses"]) != 12:
+    problems.append("horary sections")
+if "void of course" not in _j2.dumps(_h, ensure_ascii=False):
+    problems.append("horary: the Moon was void of course on 4 July 2026 at noon and the chart should say so")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

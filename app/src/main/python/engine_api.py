@@ -280,6 +280,12 @@ def custom_rule(request_json):
     return custom_rules.check(request_json)
 
 
+def horary(request_json):
+    """A Western horary chart for the moment a question is asked (horary)."""
+    import horary as H
+    return H.ask(request_json)
+
+
 def predict(request_json):
     """Predictions page (app_predict): chart request plus period day|week|month|year|three and the Today place."""
     import app_predict

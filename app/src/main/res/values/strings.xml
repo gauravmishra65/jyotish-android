@@ -91,6 +91,13 @@
     <string name="import_review">%1$d can be added, %2$d already saved, %3$d rows could not be read</string>
     <string name="import_do">Add these people</string>
     <string name="import_done">Added %1$d people</string>
+    <string name="set_ziwei_school">Zi Wei placements</string>
+    <string name="zw_quanshu">Quanshu rules</string>
+    <string name="zw_traditional">Traditional rules</string>
+    <string name="hor_title">Western horary</string>
+    <string name="hor_sub">The chart of the moment a question is asked</string>
+    <string name="hor_house">Which house does the question belong to?</string>
+    <string name="hor_ask">Cast the chart now</string>
     <string name="cr_in_sign">in sign</string>
     <string name="cr_sign_name">Sign name, e.g. Cancer</string>
     <string name="pinned_note">Pinned sections show first and are the ones shared as text. Tap a star to pin or unpin.</string>

@@ -62,14 +62,16 @@ def ziwei_position(bureau, day):
     return (2 + q - 1 + (x if x % 2 == 0 else -x)) % 12
 
 
-def chart(date_iso, time_hhmm, gender):
+def chart(date_iso, time_hhmm, gender, school="quanshu"):
+    """school: "quanshu" (the late Zi hour belongs to the next day, a leap month from day 16 counts as the next month)
+    or "traditional" (the late Zi hour stays on its own day, a leap month counts wholly as its own month)."""
     d = dt.date.fromisoformat(date_iso)
     hb = hour_branch(time_hhmm)
-    late_zi = int(time_hhmm[:2]) == 23
+    late_zi = int(time_hhmm[:2]) == 23 and school != "traditional"
     lunar = CC.to_lunar(d + dt.timedelta(days=1) if late_zi else d)
     ys, yb = lunar["stem_index"], lunar["branch_index"]
     m = lunar["month"]
-    if lunar["leap"] and lunar["day"] > 15:
+    if lunar["leap"] and lunar["day"] > 15 and school != "traditional":
         m = m % 12 + 1
     day = lunar["day"]
     life = (2 + (m - 1) - hb) % 12
@@ -103,7 +105,7 @@ def chart(date_iso, time_hhmm, gender):
                         "major": [{"zh": s, "en": MAJOR[s][0], "hi": MAJOR[s][1], "transform": sihua.get(s)} for s in stars[b]],
                         "minor": [{"zh": s, "en": MINOR[s][0], "hi": MINOR[s][1], "lucky": s in LUCKY, "transform": sihua.get(s)} for s in minor[b]],
                         "decade": [start, start + 9]})
-    return {"lunar": lunar, "hour_branch": hb, "hour_zh": BRANCHES[hb] + "时", "late_zi": late_zi, "month_used": m,
+    return {"school": school, "lunar": lunar, "hour_branch": hb, "hour_zh": BRANCHES[hb] + "时", "late_zi": late_zi, "month_used": m,
             "life_branch": life, "body_branch": body, "bureau": bureau, "bureau_name": BUREAU_NAME[bureau],
             "life_master": LIFE_MASTER[life], "body_master": BODY_MASTER[yb], "sihua": {v: k for k, v in sihua.items()},
             "forward": forward, "palaces": palaces,

@@ -78,6 +78,7 @@ fun SettingsScreen(
     var dashaYear by remember { mutableStateOf(settings.dashaYear) }
     var houseSystem by remember { mutableStateOf(settings.houseSystem) }
     var orbScale by remember { mutableStateOf(settings.orbScale) }
+    var ziweiSchool by remember { mutableStateOf(settings.ziweiSchool) }
     var zi by remember { mutableStateOf(settings.zi) }
     var baziTime by remember { mutableStateOf(settings.baziTime) }
     var weekdayHard by remember { mutableStateOf(settings.weekdayHard) }
@@ -159,6 +160,11 @@ fun SettingsScreen(
                         "equal" to R.string.hs_equal, "regiomontanus" to R.string.hs_regiomontanus,
                         "campanus" to R.string.hs_campanus, "porphyry" to R.string.hs_porphyry).forEach { (k, label) ->
                         Pick(stringResource(label), houseSystem == k) { if (houseSystem != k) { houseSystem = k; settings.houseSystem = k; onCalculationChanged() } }
+                    }
+                }
+                Setting(stringResource(R.string.set_ziwei_school)) {
+                    listOf("quanshu" to R.string.zw_quanshu, "traditional" to R.string.zw_traditional).forEach { (k, label) ->
+                        Pick(stringResource(label), ziweiSchool == k) { if (ziweiSchool != k) { ziweiSchool = k; settings.ziweiSchool = k; onCalculationChanged() } }
                     }
                 }
                 Setting(stringResource(R.string.set_orb_scale)) {

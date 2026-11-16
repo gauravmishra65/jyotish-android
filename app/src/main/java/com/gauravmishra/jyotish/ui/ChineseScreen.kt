@@ -55,16 +55,18 @@ private val ACTIVITIES = listOf("wedding", "moving", "business", "travel", "cont
 @Composable
 fun ChineseScreen(profiles: List<Profile>, profile: Profile?, place: TodayPlace?, onSelect: (Profile) -> Unit, onAdd: () -> Unit, onBack: () -> Unit) {
     val lang = currentLang()
+    val zwSchool = com.gauravmishra.jyotish.data.AppSettings(androidx.compose.ui.platform.LocalContext.current).ziweiSchool
     var activity by remember { mutableStateOf("wedding") }
     var sections by remember { mutableStateOf<List<DetailSection>>(emptyList()) }
     var grid by remember { mutableStateOf<JSONArray?>(null) }
     var busy by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
-    LaunchedEffect(profile?.id, activity, place) {
+    LaunchedEffect(profile?.id, activity, place, zwSchool) {
         val p = profile ?: return@LaunchedEffect
         busy = true; error = null
         val req = JSONObject().put("name", p.name).put("date", p.date).put("time", p.time).put("gender", p.gender).put("tz", p.tz)
             .put("today_tz", place?.tz ?: p.tz).put("activity", activity)
+            .put("zw_school", zwSchool)
         try {
             val o = JSONObject(Engine.chineseMore(req))
             sections = parseSections(o.optJSONArray("sections"))
