@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.gauravmishra.jyotish.R
+import com.gauravmishra.jyotish.TodayPlace
 import com.gauravmishra.jyotish.data.DetailSection
 import com.gauravmishra.jyotish.data.parseSections
 import com.gauravmishra.jyotish.engine.Engine
