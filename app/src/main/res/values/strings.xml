@@ -60,6 +60,13 @@
     <string name="time_of_birth">Time</string>
     <string name="time_hint">HH:MM (24-hour)</string>
     <string name="pick_time">Choose time</string>
+    <string name="time_source">Where does the time come from? (optional)</string>
+    <string name="src_certificate">Birth certificate</string>
+    <string name="src_hospital">Hospital record</string>
+    <string name="src_family">Family memory</string>
+    <string name="src_horoscope">Old horoscope</string>
+    <string name="src_rectified">Rectified</string>
+    <string name="chart_share">Share the chart as a picture</string>
     <string name="how_sure">How sure is the time?</string>
     <string name="conf_certificate">Certificate</string>
     <string name="conf_reliable">Reliable</string>

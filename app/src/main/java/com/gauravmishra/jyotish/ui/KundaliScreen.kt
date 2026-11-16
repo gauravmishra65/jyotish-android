@@ -43,6 +43,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import kotlinx.coroutines.launch
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -109,11 +113,36 @@ fun KundaliScreen(
                     StyleButton(stringResource(R.string.south_indian), style == "south", Modifier.weight(1f)) { onStyle("south") }
                     StyleButton(stringResource(R.string.east_indian), style == "east", Modifier.weight(1f)) { onStyle("east") }
                 }
+                val chartLayer = androidx.compose.ui.graphics.rememberGraphicsLayer()
+                val chartBg = MaterialTheme.colorScheme.background
+                val shareScope = androidx.compose.runtime.rememberCoroutineScope()
+                val shareCtx = androidx.compose.ui.platform.LocalContext.current
                 KundliChart(
                     m, style, lang,
                     chartDescription(m, lang, stringResource(R.string.house_word), stringResource(R.string.empty_word)),
-                    Modifier.padding(horizontal = 4.dp).testTag("chart"),
+                    Modifier.padding(horizontal = 4.dp).testTag("chart").drawWithContent {
+                        chartLayer.record { drawRect(chartBg); this@drawWithContent.drawContent() }   // kept as a picture for sharing
+                        drawLayer(chartLayer)
+                    },
                 )
+                OutlinedButton(
+                    onClick = {
+                        shareScope.launch {
+                            try {
+                                val bmp = chartLayer.toImageBitmap().asAndroidBitmap().copy(android.graphics.Bitmap.Config.ARGB_8888, false)
+                                val dir = java.io.File(shareCtx.cacheDir, "reports").apply { mkdirs() }
+                                val f = java.io.File(dir, "Kundali_chart.png")
+                                f.outputStream().use { bmp.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it) }
+                                val uri = androidx.core.content.FileProvider.getUriForFile(shareCtx, shareCtx.packageName + ".reports", f)
+                                shareCtx.startActivity(android.content.Intent.createChooser(
+                                    android.content.Intent(android.content.Intent.ACTION_SEND).setType("image/png")
+                                        .putExtra(android.content.Intent.EXTRA_STREAM, uri)
+                                        .addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION), null))
+                            } catch (_: Throwable) {}
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("chart_share"),
+                ) { Text(stringResource(R.string.chart_share)) }
                 (chart as? ChartState.Ready)?.json?.let { j -> timeLine(j)?.let { (local, tz, offset, utc) ->
                     Text(stringResource(R.string.chart_time_line, local, tz, offset, utc, ayanamsaName(m.ayanamsa, lang)),
                         style = MaterialTheme.typography.bodySmall, color = Palette.Muted, modifier = Modifier.testTag("chart_time_line"))

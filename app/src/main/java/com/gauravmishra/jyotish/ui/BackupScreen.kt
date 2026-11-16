@@ -147,11 +147,11 @@ fun BackupScreen(profiles: List<Profile>, onRestore: (List<Profile>) -> Pair<Int
 /** Saved people as a spreadsheet (UTF-8 CSV with a BOM so Excel shows Hindi correctly); not encrypted, so it says so. */
 fun peopleCsv(profiles: List<Profile>, chartFacts: (Profile) -> List<String>?): String {
     fun q(s: String) = "\"" + s.replace("\"", "\"\"") + "\""
-    val head = listOf("Name", "Gender", "Birth date", "Birth time", "Time confidence", "Birthplace", "Latitude", "Longitude", "Time zone",
+    val head = listOf("Name", "Gender", "Birth date", "Birth time", "Time confidence", "Time source", "Birthplace", "Latitude", "Longitude", "Time zone",
         "Lives in", "Group", "Lagna", "Moon sign", "Moon nakshatra", "Life events", "Notes")
     val rows = profiles.map { p ->
         val f = chartFacts(p) ?: listOf("", "", "")
-        listOf(p.name, p.gender, p.date, p.time, p.confidence, p.place, String.format(java.util.Locale.US, "%.4f", p.lat), String.format(java.util.Locale.US, "%.4f", p.lon), p.tz,
+        listOf(p.name, p.gender, p.date, p.time, p.confidence, p.timeSource, p.place, String.format(java.util.Locale.US, "%.4f", p.lat), String.format(java.util.Locale.US, "%.4f", p.lon), p.tz,
             p.residence, p.group, f.getOrElse(0) { "" }, f.getOrElse(1) { "" }, f.getOrElse(2) { "" }, p.events.joinToString("; "), p.notes)
     }
     return "\uFEFF" + (listOf(head) + rows).joinToString("\r\n") { r -> r.joinToString(",") { q(it) } } + "\r\n"

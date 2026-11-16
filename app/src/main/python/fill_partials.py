@@ -68,6 +68,10 @@ def _where_hi(s):
 
 
 # ------------------------------------------------------------------ time and versions
+TIME_SOURCE = {"certificate": ("Birth certificate", "जन्म प्रमाणपत्र"), "hospital": ("Hospital record", "अस्पताल का रिकॉर्ड"),
+               "family": ("Family memory", "परिवार की याद"), "horoscope": ("Old horoscope", "पुरानी जन्मपत्री"), "rectified": ("Rectified", "संशोधित समय")}
+
+
 def time_details(c):
     t = c["time_pipeline"]
     rows = [[bi("Clock time at birth", "जन्म का घड़ी समय"), bi(t["local_civil"][:16])],
@@ -77,6 +81,13 @@ def time_details(c):
             [bi("Local mean time", "स्थानीय माध्य समय"), bi(t["local_mean_time"][:19])],
             [bi("Equation of time", "समय समीकरण"), bi(f"{t['equation_of_time_min']:+.1f} min", f"{t['equation_of_time_min']:+.1f} मिनट")],
             [bi("True solar time", "वास्तविक सौर समय"), bi(t["true_solar_time"][:19])]]
+    conf = {"certificate": ("from a certificate", "प्रमाणपत्र से"), "reliable": ("reliable", "विश्वसनीय"), "approximate": ("approximate", "अनुमानित"),
+            "unknown": ("not known", "ज्ञात नहीं")}.get(c["meta"].get("birth_time_confidence"))
+    if conf:
+        rows.insert(0, [bi("How sure the time is", "समय कितना पक्का है"), bi(*conf)])
+    src = TIME_SOURCE.get(c["meta"].get("time_source"))
+    if src:
+        rows.insert(0, [bi("Source of the time", "समय का स्रोत"), bi(*src)])
     return {"key": "time_details", "title": bi("Birth time in detail", "जन्म समय का विवरण"),
             "blocks": [table([bi("Step", "चरण"), bi("Value", "मान")], rows)],
             "note": bi("Local mean time shifts the clock by the birthplace's longitude; true solar time adds the equation of time. BaZi can use either (Settings).",
@@ -88,7 +99,7 @@ def versions(c):
     e, v, b = a.get("engine") or {}, a.get("vedic_conventions") or {}, a.get("bazi_conventions") or {}
     rows = [[bi("Swiss Ephemeris", "स्विस एफेमेरिस"), bi(str(e.get("swiss_ephemeris", swe.version)))],
             [bi("Ephemeris data", "एफेमेरिस डेटा"), bi("Swiss Ephemeris data files (JPL-derived)", "स्विस एफेमेरिस डेटा फ़ाइलें (JPL आधारित)")],
-            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("8")]]
+            [bi("Chart contents version", "कुंडली सामग्री संस्करण"), bi("9")]]
     if v:
         rows += [[bi("Ayanamsa", "अयनांश"), bi(f"{str(v.get('ayanamsa', '')).title()} {v.get('ayanamsa_deg', 0):.4f}°", f"{HS_AYAN.get(str(v.get('ayanamsa')), 'चयनित')} {v.get('ayanamsa_deg', 0):.4f}°")],
                  [bi("Lunar node", "चंद्र नोड"), bi("Mean node", "माध्य नोड") if "mean" in str(v.get("rahu")) else bi("True node", "वास्तविक नोड")],

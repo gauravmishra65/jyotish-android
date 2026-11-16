@@ -57,6 +57,13 @@
     <string name="time_of_birth">समय</string>
     <string name="time_hint">घंटा:मिनट (24 घंटे)</string>
     <string name="pick_time">समय चुनें</string>
+    <string name="time_source">समय कहाँ से मिला? (वैकल्पिक)</string>
+    <string name="src_certificate">जन्म प्रमाणपत्र</string>
+    <string name="src_hospital">अस्पताल का रिकॉर्ड</string>
+    <string name="src_family">परिवार की याद</string>
+    <string name="src_horoscope">पुरानी जन्मपत्री</string>
+    <string name="src_rectified">संशोधित समय</string>
+    <string name="chart_share">कुंडली चित्र के रूप में साझा करें</string>
     <string name="how_sure">समय कितना पक्का है?</string>
     <string name="conf_certificate">प्रमाणपत्र</string>
     <string name="conf_reliable">विश्वसनीय</string>

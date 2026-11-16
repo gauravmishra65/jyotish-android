@@ -57,6 +57,8 @@ def chart_obj(r):
     c = chart_engine.build_chart(_chart_args(r))
     if r.get("current_lat") is not None and r.get("current_lon") is not None:      # for the relocated chart (fill_partials)
         c["meta"]["residence_place"] = {"lat": float(r["current_lat"]), "lon": float(r["current_lon"]), "label": r.get("residence") or ""}
+    if r.get("time_source"):
+        c["meta"]["time_source"] = str(r["time_source"])
     return c
 
 

@@ -78,6 +78,7 @@ fun AddProfileScreen(
     var dateText by rememberSaveable { mutableStateOf(existing?.date?.let { LocalDate.parse(it).format(DMY) } ?: "") }
     var timeText by rememberSaveable { mutableStateOf(existing?.time ?: "") }
     var confidence by rememberSaveable { mutableStateOf(existing?.confidence ?: "reliable") }
+    var timeSource by rememberSaveable { mutableStateOf(existing?.timeSource ?: "") }
     var query by rememberSaveable { mutableStateOf("") }
     var chosen by remember { mutableStateOf(existing?.let { Place(it.place, "", "", it.lat, it.lon, it.tz, 0, emptyList()) }) }
     var useCoords by rememberSaveable { mutableStateOf(false) }
@@ -121,7 +122,7 @@ fun AddProfileScreen(
                             name = name.trim(), gender = gender, date = date.toString(), time = time!!, confidence = confidence,
                             place = place!!.label, lat = place.lat, lon = place.lon, tz = place.tz,
                             residence = residence?.label ?: "", resLat = residence?.lat, resLon = residence?.lon, group = group,
-                            notes = existing?.notes ?: "", events = existing?.events ?: emptyList(),
+                            notes = existing?.notes ?: "", events = existing?.events ?: emptyList(), timeSource = timeSource,
                         ))
                     },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp).heightIn(min = 56.dp).testTag("save"),
@@ -171,6 +172,13 @@ fun AddProfileScreen(
                 listOf("certificate" to R.string.conf_certificate, "reliable" to R.string.conf_reliable,
                     "approximate" to R.string.conf_approximate, "unknown" to R.string.conf_unknown).forEach { (k, label) ->
                     Choice(stringResource(label), confidence == k) { confidence = k }
+                }
+            }
+            Text(stringResource(R.string.time_source), style = MaterialTheme.typography.titleMedium)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("time_source")) {
+                listOf("certificate" to R.string.src_certificate, "hospital" to R.string.src_hospital, "family" to R.string.src_family,
+                    "horoscope" to R.string.src_horoscope, "rectified" to R.string.src_rectified).forEach { (k, label) ->
+                    Choice(stringResource(label), timeSource == k) { timeSource = if (timeSource == k) "" else k }
                 }
             }
 

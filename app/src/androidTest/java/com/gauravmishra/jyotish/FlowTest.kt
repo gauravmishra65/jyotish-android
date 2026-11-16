@@ -91,6 +91,7 @@ class FlowTest {
             rule.onNodeWithTag("planet_Moon").performScrollTo().assertExists()
             rule.onNodeWithText("South Indian").performScrollTo().performClick()
             rule.onNodeWithTag("chart").performScrollTo().assertExists()
+            rule.onNodeWithTag("chart_share").performScrollTo().assertExists()
             rule.shot("kundali_south")
             rule.onNodeWithText("Dashas").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasText("Now"), timeoutMillis = 5_000)
