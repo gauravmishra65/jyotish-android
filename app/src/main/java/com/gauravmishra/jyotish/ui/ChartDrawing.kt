@@ -54,14 +54,15 @@ fun chartDescription(m: ChartModel, lang: String, houseWord: String, emptyWord: 
     }
 
 @Composable
-fun KundliChart(m: ChartModel, style: String, lang: String, description: String, modifier: Modifier = Modifier) {
+fun KundliChart(m: ChartModel, style: String, lang: String, description: String, modifier: Modifier = Modifier,
+                overlay: ChartModel? = null) {
     val measurer = rememberTextMeasurer()
     val ink = Palette.Ink
     Canvas(modifier.fillMaxWidth().aspectRatio(1f).semantics { contentDescription = description }) {
         when (style) {
-            "south" -> drawSouth(m, lang, measurer)
-            "east" -> drawEast(m, lang, measurer)
-            else -> drawNorth(m, lang, measurer)
+            "south" -> drawSouth(m, lang, measurer, overlay)
+            "east" -> drawEast(m, lang, measurer, overlay)
+            else -> drawNorth(m, lang, measurer, overlay)
         }
         drawRect(ink, style = Stroke(width = px(1.5)), size = Size(size.width, size.height))
     }
@@ -72,7 +73,7 @@ private fun DrawScope.px(v: Double) = (v * density).toFloat()
 /** Text size that scales with the chart, not with the phone's font setting (the chart has a fixed layout). */
 private fun DrawScope.chartSp(designPx: Float) = (size.width / 300f * designPx / (density * fontScale)).sp
 
-private fun DrawScope.drawNorth(m: ChartModel, lang: String, tm: TextMeasurer) {
+private fun DrawScope.drawNorth(m: ChartModel, lang: String, tm: TextMeasurer, overlay: ChartModel? = null) {
     val s = size.width
     fun p(x: Double, y: Double) = Offset((x * s).toFloat(), (y * s).toFloat())
     // House 1 kite tinted, as in the design.
@@ -90,14 +91,19 @@ private fun DrawScope.drawNorth(m: ChartModel, lang: String, tm: TextMeasurer) {
         val lines = m.planetsInHouse(h).map { Abbrev.of(it, lang) }.chunked(2).map { it.joinToString(" ") }
         val top = if (h == 1) 1 else 0   // house 1 also carries the lagna label above its planets
         if (h == 1) centred(tm, if (lang == "hi") "लग्न" else "Asc", big.copy(color = Palette.AccentDeep), p(px0, py0 - (lines.size) * 0.0275))
+        val over = overlay?.planetsInHouse(h)?.map { Abbrev.of(it, lang) }?.chunked(2)?.map { it.joinToString(" ") } ?: emptyList()
         lines.forEachIndexed { i, text ->
-            val dy = (i + top - (lines.size + top - 1) / 2.0) * 0.055
+            val dy = (i + top - (lines.size + top + over.size - 1) / 2.0) * 0.055
             centred(tm, text, big, p(px0, py0 + dy))
+        }
+        over.forEachIndexed { i, text ->
+            val dy = (i + lines.size + top - (lines.size + top + over.size - 1) / 2.0) * 0.055
+            centred(tm, text, big.copy(color = Palette.AccentDeep), p(px0, py0 + dy))
         }
     }
 }
 
-private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer) {
+private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer, overlay: ChartModel? = null) {
     val s = size.width
     val c = s / 4f
     val line = px(1.2)
@@ -124,7 +130,12 @@ private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer) {
             m.planets.filter { it.signIndex == sign }.forEach { add(Abbrev.of(it, lang)) }
         }
         labels.chunked(2).forEachIndexed { i, pair ->
-            centred(tm, pair.joinToString(" "), big, Offset(x0 + c / 2, y0 + c * (0.52f + 0.2f * i)))
+            centred(tm, pair.joinToString(" "), big, Offset(x0 + c / 2, y0 + c * (0.44f + 0.18f * i)))
+        }
+        val over = overlay?.planets?.filter { it.signIndex == sign }?.map { Abbrev.of(it, lang) } ?: emptyList()
+        over.chunked(2).forEachIndexed { i, pair ->
+            centred(tm, pair.joinToString(" "), big.copy(color = Palette.AccentDeep),
+                Offset(x0 + c / 2, y0 + c * (0.44f + 0.18f * (i + labels.chunked(2).size))))
         }
     }
 }
@@ -134,7 +145,7 @@ private fun DrawScope.drawSouth(m: ChartModel, lang: String, tm: TextMeasurer) {
  * diagonal into two signs (Taurus/Gemini top left, Leo/Virgo bottom left, Scorpio/Sagittarius bottom right,
  * Aquarius/Pisces top right). The centre is empty.
  */
-private fun DrawScope.drawEast(m: ChartModel, lang: String, tm: TextMeasurer) {
+private fun DrawScope.drawEast(m: ChartModel, lang: String, tm: TextMeasurer, overlay: ChartModel? = null) {
     val s = size.width
     val c = s / 3f
     val line = px(1.2)
@@ -182,8 +193,14 @@ private fun DrawScope.drawEast(m: ChartModel, lang: String, tm: TextMeasurer) {
             if (sign == lag) add(if (lang == "hi") "लग्न" else "Asc")
             m.planets.filter { it.signIndex == sign }.forEach { add(Abbrev.of(it, lang)) }
         }
-        labels.chunked(if (tri) 2 else 3).forEachIndexed { i, row ->
+        val rows0 = labels.chunked(if (tri) 2 else 3)
+        rows0.forEachIndexed { i, row ->
             centred(tm, row.joinToString(" "), big, Offset(cx, cy + c * (if (tri) 0.04f else -0.04f) + c * 0.15f * i))
+        }
+        val over = overlay?.planets?.filter { it.signIndex == sign }?.map { Abbrev.of(it, lang) } ?: emptyList()
+        over.chunked(if (tri) 2 else 3).forEachIndexed { i, row ->
+            centred(tm, row.joinToString(" "), big.copy(color = Palette.AccentDeep),
+                Offset(cx, cy + c * (if (tri) 0.04f else -0.04f) + c * 0.15f * (i + rows0.size)))
         }
     }
 }

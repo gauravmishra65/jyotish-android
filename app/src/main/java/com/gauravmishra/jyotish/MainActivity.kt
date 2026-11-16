@@ -236,6 +236,16 @@ fun App(vm: AppViewModel = viewModel()) {
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
                     FengShuiScreen(vm.placeFor(p)?.tz ?: java.time.ZoneId.systemDefault().id, onBack = { nav.popBackStack() })
                 }
+                composable(Routes.TIME_TRAVEL) {
+                    val selected by vm.selected.collectAsStateWithLifecycle()
+                    val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()
+                    TimeTravelScreen(profiles, p, style = vm.settings.chartStyle, ayanamsa = vm.settings.ayanamsa, node = vm.settings.node,
+                        onSelect = { vm.select(it.id) }, onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
+                }
+                composable(Routes.GROUP) {
+                    GroupScreen(profiles, ayanamsa = vm.settings.ayanamsa, node = vm.settings.node,
+                        onAdd = { nav.navigate(Routes.add(ret = "back")) }, onBack = { nav.popBackStack() })
+                }
                 composable(Routes.CHINESE) {
                     val selected by vm.selected.collectAsStateWithLifecycle()
                     val p = profiles.firstOrNull { it.id == selected } ?: profiles.firstOrNull()

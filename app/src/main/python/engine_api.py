@@ -262,6 +262,12 @@ def chinese_more(request_json):
     return CM.sections_json(request_json)
 
 
+def group(request_json):
+    """Group comparison (group_compare): {"people": [chart request, ...]} -> {"sections": [...]}."""
+    import group_compare
+    return group_compare.compare(request_json)
+
+
 def predict(request_json):
     """Predictions page (app_predict): chart request plus period day|week|month|year|three and the Today place."""
     import app_predict

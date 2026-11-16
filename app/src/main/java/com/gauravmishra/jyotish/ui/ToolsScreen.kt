@@ -33,6 +33,8 @@ val TOOLS = listOf(
     Tool("kp", R.string.kp_title, R.string.kp_sub, Routes.KP_HORARY),
     Tool("chinese", R.string.cn_title, R.string.cn_sub, Routes.CHINESE),
     Tool("fengshui", R.string.fs_title, R.string.fs_sub, Routes.FENG_SHUI),
+    Tool("timetravel", R.string.tt_title, R.string.tt_sub, Routes.TIME_TRAVEL),
+    Tool("group", R.string.grp_title, R.string.grp_sub, Routes.GROUP),
     Tool("numbers", R.string.nt_title, R.string.nt_sub, Routes.NUMBER_TOOLS),
     Tool("backup", R.string.bk_title, R.string.bk_sub, Routes.BACKUP),
 )

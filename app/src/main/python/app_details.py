@@ -382,6 +382,11 @@ def build(c):
     except Exception:
         pass
     try:
+        import western_adv
+        wm += western_adv.build(c) if c.get("western") else []
+    except Exception:
+        pass
+    try:
         import maya
         wm.append(maya.section(c["time_pipeline"]["local_civil"][:10]))
     except Exception:

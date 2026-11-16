@@ -124,3 +124,9 @@ object Abbrev {
         return if (p.retrograde && p.name != "Rahu" && p.name != "Ketu") base + (if (lang == "hi") "(व)" else "(R)") else base
     }
 }
+
+/** The planets of one moment placed in another chart's houses, for a transit ring over the natal chart. */
+fun ChartModel.gocharOn(natal: ChartModel): ChartModel = copy(
+    lagna = natal.lagna,
+    planets = planets.map { it.copy(house = (it.signIndex - natal.lagna.signIndex + 12) % 12 + 1, combust = false, vargottama = false) },
+)

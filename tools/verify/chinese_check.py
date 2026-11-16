@@ -110,6 +110,27 @@ if _p["western"]["house_system"] != "Placidus" or _k["western"]["house_system"] 
     problems.append("house systems")
 if len(_k["western"]["natal_aspects"]) >= len(_p["western"]["natal_aspects"]):
     problems.append("orb scale does not tighten the aspect list")
+# v26 astronomy: the compass direction of the Sun at sunrise, topocentric vs geocentric Moon, and the Uranian points
+import western_adv as _WA
+_sky = _WA.sky_view(_p)["blocks"][0]["rows"]
+if _sky[0][3]["en"] != "E" or float(_sky[0][1]["en"].rstrip("\u00b0")) <= 0:
+    problems.append(f"sky at birth: Sun {_sky[0][1]['en']} {_sky[0][3]['en']} (born just after sunrise, so the Sun must be low in the east)")
+if _sky[1][3]["en"] != "S":
+    problems.append(f"sky at birth: Moon {_sky[1][3]['en']}")
+_pe = _WA.perspectives(_p)["blocks"][0]["rows"]
+if float(_pe[1][3]["en"].rstrip("'")) < 1.0 or float(_pe[0][3]["en"].rstrip("'")) > 0.5:
+    problems.append("topocentric shift: the Moon should move by minutes and the Sun barely at all")
+if len(_WA.hypothetical(_p)["blocks"][1]["rows"]) != 8:
+    problems.append("uranian points")
+# v26 group comparison: two people side by side, every row filled
+import group_compare as _GC
+import json as _json
+_g = _json.loads(_GC.compare(_json.dumps({"people": [
+    {"name": "Ravi Shankar Tiwari", "date": "1985-03-14", "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M", "now": "2026-11-16"},
+    {"name": "Neha Agarwal", "date": "1988-11-02", "time": "14:20", "lat": 28.61, "lon": 77.21, "tz": "Asia/Kolkata", "gender": "F", "now": "2026-11-16"}]})))
+_rows = _g["sections"][0]["blocks"][0]["rows"]
+if len(_rows) != 12 or any(cell["en"] in ("", "-", "\u2013") for r in _rows for cell in r[1:]):
+    problems.append("group comparison has empty cells: " + str([r[0]["en"] for r in _rows if any(c["en"] == "\u2013" for c in r[1:])]))
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

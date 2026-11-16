@@ -81,6 +81,9 @@ object Engine {
     /** Chinese astrology sections (see engine_api.chinese_more): {"sections": [...], "activities": {...}}. */
     suspend fun chineseMore(request: JSONObject): String = call { it.callAttr("chinese_more", request.toString()).toString() }
 
+    /** Several people side by side (see engine_api.group). */
+    suspend fun group(request: JSONObject): String = call { it.callAttr("group", request.toString()).toString() }
+
     /** Predictions for one period by life area (see engine_api.predict). */
     suspend fun predict(request: JSONObject): String = call { it.callAttr("predict", request.toString()).toString() }
 
