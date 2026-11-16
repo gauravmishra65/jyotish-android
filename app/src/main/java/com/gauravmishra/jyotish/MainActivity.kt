@@ -30,6 +30,8 @@ import com.gauravmishra.jyotish.ui.BirthTimeScreen
 import com.gauravmishra.jyotish.ui.BackupScreen
 import com.gauravmishra.jyotish.ui.QuestionScreen
 import com.gauravmishra.jyotish.ui.ChineseScreen
+import com.gauravmishra.jyotish.ui.GroupScreen
+import com.gauravmishra.jyotish.ui.TimeTravelScreen
 import com.gauravmishra.jyotish.ui.FengShuiScreen
 import com.gauravmishra.jyotish.ui.NotesScreen
 import com.gauravmishra.jyotish.ui.PredictionScreen
