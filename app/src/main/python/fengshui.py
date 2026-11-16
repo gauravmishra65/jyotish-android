@@ -64,17 +64,30 @@ def _forward(star, pos, period):
     return yang
 
 
-def house_chart(facing_deg, built_year):
+# 起星訣: the replacement star of each of the 24 mountains, used when the facing sits off the middle of its mountain.
+REPLACEMENT = {}
+for _ms, _n in ((("子", "癸", "甲", "申"), 1), (("壬", "卯", "乙", "未", "坤"), 2), (("乾", "亥", "辰", "巽", "巳", "戌"), 6),
+                (("酉", "辛", "丑", "艮", "丙"), 7), (("寅", "午", "庚", "丁"), 9)):
+    for _m in _ms:
+        REPLACEMENT[_m] = _n
+
+
+def house_chart(facing_deg, built_year, replacement=False):
     period = period_of(built_year)
     base = fly(period)
     fi, fsec, fpos, edge = mountain(facing_deg)
     si, ssec, spos, _ = mountain((facing_deg + 180) % 360)
     water_c, mount_c = base[fsec], base[ssec]
+    if replacement:
+        water_c, mount_c = REPLACEMENT[MOUNTAINS[fi]], REPLACEMENT[MOUNTAINS[si]]
     water = fly(water_c, _forward(water_c, fpos, period))
     mount = fly(mount_c, _forward(mount_c, spos, period))
+    # each 15-degree mountain is read in three 5-degree parts; off the middle part the replacement stars are the ones used
+    middle = min(abs(((facing_deg - (j * 15 - 7.5 + 7.5)) + 180) % 360 - 180) for j in range(24)) <= 2.5
     return {"period": period, "facing": {"sector": fsec, "mountain": MOUNTAINS[fi], "degrees": round(facing_deg % 360, 1)},
             "sitting": {"sector": ssec, "mountain": MOUNTAINS[si]}, "base": base, "water": water, "mountain": mount,
-            "near_boundary": edge < 3}
+            "near_boundary": edge < 3, "replacement_used": bool(replacement), "in_middle_of_mountain": middle,
+            "replacement_suggested": not middle}
 
 
 def year_month(on_date, tz_hours=8.0):
@@ -124,14 +137,32 @@ def sections(on_iso, facing_deg=None, built_year=None, tz_hours=8.0):
             special = [bi("Both period stars meet at the sitting side (双星会坐): the back of the home matters most.", "दोनों अवधि तारे पीछे मिलते हैं (双星会坐): घर का पिछला भाग सबसे महत्वपूर्ण है।")]
         blocks = [table([bi("Sector", "दिशा"), bi("Mountain–water (base)", "पर्वत–जल (आधार)"), bi("Use", "उपयोग")], rows)] + [para(x) for x in special]
         if h["near_boundary"]:
-            blocks.append(para(bi("The facing direction is within 3° of a mountain boundary; a replacement chart may apply, so check the compass reading.",
-                                  "सामने की दिशा पर्वत सीमा से 3° के भीतर है; प्रतिस्थापन चार्ट लागू हो सकता है, इसलिए कंपास दोबारा देखें।")))
+            blocks.append(para(bi("The facing direction is within 3° of a mountain boundary, so check the compass reading before relying on this chart.",
+                                  "सामने की दिशा पर्वत सीमा से 3° के भीतर है, इसलिए इस चार्ट पर भरोसा करने से पहले कंपास दोबारा देखें।")))
         out.append({"key": "fs_house", "title": bi(f"Your home's star chart (Period {p})", f"आपके घर का तारा चार्ट (अवधि {p})"),
                     "intro": bi(f"Facing {fs[0]} ({h['facing']['mountain']}, {h['facing']['degrees']}°), sitting {ss[0]} ({h['sitting']['mountain']}).",
                                 f"सामने {fs[1]} ({h['facing']['mountain']}, {h['facing']['degrees']}°), पीछे {ss[1]} ({h['sitting']['mountain']})।"),
                     "blocks": blocks,
                     "note": bi("Each cell gives mountain star, water star and the period base star. A practitioner also weighs the real layout and landforms.",
                                "हर पंक्ति में पर्वत तारा, जल तारा और अवधि का आधार तारा। जानकार वास्तविक नक्शा और आसपास का परिवेश भी देखते हैं।")})
+        r = house_chart(float(facing_deg), int(built_year), replacement=True)
+        rrows = [[bi(*SECTOR[sec]), bi(f"{h['mountain'][sec]}–{h['water'][sec]}"), bi(f"{r['mountain'][sec]}–{r['water'][sec]}"),
+                  bi("same", "समान") if (h["mountain"][sec], h["water"][sec]) == (r["mountain"][sec], r["water"][sec]) else bi("differs", "भिन्न")]
+                 for sec in ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "C"]]
+        lead = (("The facing is off the middle of its mountain, so most schools would read the replacement chart here.",
+                 "सामने की दिशा अपने पर्वत के मध्य से हटकर है, इसलिए अधिकतर परंपराएँ यहाँ प्रतिस्थापन चार्ट पढ़ेंगी।")
+                if h["replacement_suggested"] else
+                ("The facing sits in the middle of its mountain, so the ordinary chart above is the one to read.",
+                 "सामने की दिशा अपने पर्वत के मध्य में है, इसलिए ऊपर वाला सामान्य चार्ट ही पढ़ा जाता है।"))
+        out.append({"key": "fs_replacement", "title": bi("Replacement chart (替卦)", "प्रतिस्थापन चार्ट (替卦)"),
+                    "intro": bi(*lead),
+                    "blocks": [table([bi("Sector", "दिशा"), bi("Ordinary", "सामान्य"), bi("Replacement", "प्रतिस्थापन"), bi("", "")], rrows)],
+                    "note": bi("The replacement stars come from the classical 起星訣: 子癸甲申 give 1, 壬卯乙未坤 give 2, 乾亥辰巽巳戌 give 6, "
+                               "酉辛丑艮丙 give 7, and 寅午庚丁 give 9. Each mountain is read in three parts of five degrees and the middle part needs no "
+                               "replacement; schools draw that line differently, so both charts are shown.",
+                               "प्रतिस्थापन तारे शास्त्रीय 起星訣 से हैं: 子癸甲申 से 1, 壬卯乙未坤 से 2, 乾亥辰巽巳戌 से 6, "
+                               "酉辛丑艮丙 से 7, और 寅午庚丁 से 9। हर पर्वत पाँच-पाँच अंश के तीन भागों में पढ़ा जाता है और मध्य भाग में प्रतिस्थापन नहीं चाहिए; "
+                               "परंपराएँ यह रेखा अलग-अलग खींचती हैं, इसलिए दोनों चार्ट दिए गए हैं।")})
     return out
 
 

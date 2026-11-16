@@ -387,6 +387,11 @@ def build(c):
     except Exception:
         pass
     try:
+        import regional_more
+        wm += regional_more.build(c)
+    except Exception:
+        pass
+    try:
         import regional
         wm += regional.build(c)
     except Exception:

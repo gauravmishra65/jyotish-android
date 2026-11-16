@@ -149,6 +149,27 @@ for _d, _want in (("1985-03-14", ["Raktakshi (1984\u201385)", "Maasi", "ME 1160"
         problems.append(f"regional eras {_d}: {_got}")
 if _RG.katapayadi("\u0930\u0935\u093f")["total"] != 6:
     problems.append("katapayadi")
+# v28 regional traditions, checked against known values
+import regional_more as _RM
+_th = {d: [r[1]["en"] for r in _RM.thai(EA.chart_obj({"name": "X", "date": d, "time": "06:45", "lat": 25.32, "lon": 82.97,
+                                                      "tz": "Asia/Kolkata", "gender": "M"}))["blocks"][0]["rows"]]
+       for d in ("1985-03-14", "2026-11-16")}
+if _th["1985-03-14"][:1] != ["BE 2528"] or _th["1985-03-14"][2] != "Thursday" or _th["2026-11-16"][2] != "Monday":
+    problems.append(f"thai almanac: {_th}")
+for _d, _want in (("2026-07-26", "Moon 1 of 13, day 1 of 28"), ("2026-07-25", "Day Out of Time"), ("2026-11-16", "Moon 5 of 13, day 2 of 28")):
+    _c = EA.chart_obj({"name": "X", "date": _d, "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M"})
+    if _want not in _RM.thirteen_moon(_c)["intro"]["en"]:
+        problems.append(f"13 moon {_d}: {_RM.thirteen_moon(_c)['intro']['en']}")
+if _RM.sanmeigaku(_p["bazi"])["blocks"][0]["rows"][2][2]["en"] != "mizunoe-ne":
+    problems.append("sanmeigaku readings")
+# v28 Flying Stars replacement chart: the 24 mountains all have a replacement star, and 180 degrees needs none
+if sorted(set(F.REPLACEMENT.values())) != [1, 2, 6, 7, 9] or len(F.REPLACEMENT) != 24:
+    problems.append("replacement star table")
+if not F.house_chart(180, 2010)["in_middle_of_mountain"] or F.house_chart(187, 2010)["in_middle_of_mountain"]:
+    problems.append("replacement needed test")
+_rep = F.house_chart(180, 2010, replacement=True)
+if (_rep["mountain"]["C"], _rep["water"]["C"]) != (1, 9):
+    problems.append(f"replacement chart centre: {_rep['mountain']['C']}-{_rep['water']['C']}")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

@@ -40,6 +40,7 @@ class FengShuiTest {
             rule.onNodeWithTag("fs_built").performScrollTo().performTextInput("2010")
             rule.onNodeWithTag("fs_run").performScrollTo().performClick()
             rule.waitUntilAtLeastOneExists(hasTestTag("section_fs_house"), timeoutMillis = 60_000)
+            rule.onNodeWithTag("section_fs_replacement").performScrollTo().assertExists()
             rule.shot("feng_shui")
         }
     }

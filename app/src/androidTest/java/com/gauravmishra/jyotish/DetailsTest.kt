@@ -67,7 +67,8 @@ class DetailsTest {
                     "bazi_elements", "bazi_relations", "bazi_cycles", "num_working", "calc_versions",
                     "w_election", "settings_compare", "sources",
                     "w_perspectives", "w_hypothetical", "w_dial", "w_huber", "w_sky", "w_local_space", "w_heliacal",
-                    "bazi_useful", "bazi_structure", "bazi_days", "regional_eras", "num_schools")) {
+                    "bazi_useful", "bazi_structure", "bazi_days", "regional_eras", "num_schools",
+                    "sanmeigaku", "saju", "thai", "thirteen_moon")) {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
             }
             rule.onNodeWithTag("details_share").performScrollTo().assertExists()
