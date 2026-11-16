@@ -75,6 +75,25 @@ for d, want in ((dt.date(2012, 12, 21), ("13.0.0.0.0", 4, 19, 3, 13)), (dt.date(
     m = MY.maya(d)
     if (m["long_count"], m["tz_num"], m["tz_sign"], m["haab_day"], m["haab_month"]) != want:
         problems.append(f"maya {d}: {m}")
+# v22 fills: month stems (five tigers), hour stems (five rats), 24 solar terms inside the year, syzygy and age
+import fill_partials as FP
+import engine_api as EA
+_c = EA.chart_obj({"name": "Ravi Shankar Tiwari", "date": "1985-03-14", "time": "06:45", "lat": 25.32, "lon": 82.97, "tz": "Asia/Kolkata", "gender": "M", "now": "2026-11-16"})
+_m = FP.bazi_cycles(_c["bazi"], _c)["blocks"][0]["rows"]
+if [_m[0][1]["en"], _m[11][1]["en"]] != ["庚寅", "辛丑"]:
+    problems.append(f"2026 month pillars: {_m[0][1]['en']} {_m[11][1]['en']}")
+_h = FP.bazi_hours(_c["bazi"])["blocks"][0]["rows"]
+if _h[0][1]["en"] != "庚子" or _h[3][1]["en"] != _c["bazi"]["pillars"]["hour"]["text"]:
+    problems.append("hour pillar options do not contain the chart's own hour pillar")
+_t = FP.chinese_sections("1985-03-14", "2026-11-16", 8.0)
+_rows = _t[0]["blocks"][0]["rows"]
+if len(_rows) != 24 or not all(r[2]["en"].endswith("2026") for r in _rows) or _rows[2][2]["en"] != "04 Feb 2026" or _rows[23][2]["en"] != "22 Dec 2026":
+    problems.append("solar terms 2026")
+if [r[1]["en"] for r in _t[2]["blocks"][0]["rows"]] != ["41", "42"]:
+    problems.append("age conventions")
+_l = FP.lunations(_c)["blocks"][0]["rows"]
+if _l[1][1]["en"] != "24 Nov 2026" or _l[5][1]["en"] != "06 Feb 2027":
+    problems.append(f"lunations: {_l[1][1]['en']} {_l[5][1]['en']}")
 for p in problems:
     print("ISSUE", p)
 print(f"chinese checks: {len(problems)} problems")

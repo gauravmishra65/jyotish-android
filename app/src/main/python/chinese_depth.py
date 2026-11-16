@@ -133,7 +133,7 @@ def ziwei_depth(z, today_iso):
     def stars(p):
         return [s["zh"] for s in p["major"]]
     rows = []
-    for idx in (0, 8, 4):        # Life, Career, Wealth
+    for idx in range(12):
         p = z["palaces"][idx]
         b = p["branch"]
         group = [by_branch[(b + k) % 12] for k in (0, 6, 4, 8)]
@@ -150,7 +150,7 @@ def ziwei_depth(z, today_iso):
         for s in p["major"] + p["minor"]:
             if s["zh"] in sihua:
                 where.append(bi(f"{sihua[s['zh']]}: {s['en']} in {p['en']}", f"{sihua[s['zh']]}: {s['hi']}, {p['hi']} में"))
-    return {"key": "zwds_depth", "title": bi("Zi Wei: key palaces and this year", "ज़ी वेई: मुख्य भाव और यह वर्ष"),
+    return {"key": "zwds_depth", "title": bi("Zi Wei: palace relationships and this year", "ज़ी वेई: भावों के संबंध और यह वर्ष"),
             "intro": bi(f"This lunar year ({ly['stem_branch']}) falls on your {annual['en']} palace ({annual['zh']}), the year's Life palace.",
                         f"यह चंद्र वर्ष ({ly['stem_branch']}) आपके {annual['hi']} भाव ({annual['zh']}) पर पड़ता है, जो वर्ष का जीवन भाव है।"),
             "blocks": [table([bi("Palace", "भाव"), bi("Three directions (三方四正)", "तीन दिशाएँ (三方四正)"), bi("Main stars that support it", "सहायक मुख्य तारे")], rows),

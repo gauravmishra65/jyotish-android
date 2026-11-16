@@ -377,6 +377,11 @@ def build(c):
     except Exception:
         pass
     try:
+        import fill_partials as FP
+        wm += FP.build(c)
+    except Exception:
+        pass
+    try:
         import maya
         wm.append(maya.section(c["time_pipeline"]["local_civil"][:10]))
     except Exception:

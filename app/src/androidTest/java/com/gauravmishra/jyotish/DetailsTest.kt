@@ -62,7 +62,9 @@ class DetailsTest {
             for (k in listOf("panchang", "doshas", "avakahada", "pratyantar", "sensitivity", "chara", "narayana", "arudhas", "bhava_chalit",
                     "ashtakavarga", "yogini", "jaimini", "varshaphal", "lalkitab", "kp", "western_timing",
                     "functional", "avasthas", "upagrahas", "more_dashas", "western_extra", "ayanamsa_compare", "tithi_pravesha",
-                    "w_patterns", "w_dignities", "w_lots", "w_derived", "w_ingress", "w_acg", "w_progressions", "bazi_nayin", "bazi_stars", "maya")) {
+                    "w_patterns", "w_dignities", "w_lots", "w_derived", "w_ingress", "w_acg", "w_progressions", "bazi_nayin", "bazi_stars", "maya",
+                    "time_details", "w_elements", "w_sect", "w_midpoints", "w_harmonics", "w_sidereal", "w_houses", "w_lunations", "w_ingresses",
+                    "bazi_elements", "bazi_relations", "bazi_cycles", "num_working", "calc_versions")) {
                 rule.onNodeWithTag("section_$k").performScrollTo().assertExists()
             }
             rule.onNodeWithText("Pratipada (Shukla paksha, tithi 1 of 30)").performScrollTo().assertExists()   // panchang opens by default

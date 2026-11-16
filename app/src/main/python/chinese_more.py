@@ -162,6 +162,11 @@ def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours,
                      [bi("Month star (character)", "माह तारा (स्वभाव)"), _star(birth["month_star"]), _star(now["month_star"])]])],
                  "note": bi("The star year starts at Li Chun (about 4 February) and each star month at the solar term.",
                             "तारा वर्ष ली चुन (लगभग 4 फ़रवरी) से और हर तारा माह सौर पद से शुरू होता है।")})
+    try:
+        import fill_partials as FP
+        extra = FP.chinese_sections(date_iso, today_iso, today_tz_hours)
+    except Exception:
+        extra = []
     days = find_days(today_iso, 30, activity, lunar["branch_index"], today_tz_hours)
     good = [x for x in days if x["rating"] == "good"][:10]
     a_en, a_hi = ACTIVITY[activity]
@@ -173,7 +178,7 @@ def person_sections(name, date_iso, time_hhmm, gender, tz_hours, today_tz_hours,
                             para(bi("No suitable day in the next 30 days.", "अगले 30 दिनों में कोई उपयुक्त दिन नहीं।"))],
                  "note": bi("From the twelve day officers of the Chinese almanac. For a wedding or a large move, also check the Vedic Muhurta and ask a practitioner.",
                             "चीनी पंचांग के बारह दिवस अधिकारियों से। विवाह या बड़े स्थानांतरण के लिए वैदिक मुहूर्त भी देखें और किसी जानकार से पूछें।")})
-    return secs
+    return secs + extra
 
 
 def _offset(tz, on):

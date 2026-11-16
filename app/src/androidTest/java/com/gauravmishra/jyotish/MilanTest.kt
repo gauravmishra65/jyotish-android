@@ -59,6 +59,7 @@ class MilanTest {
             rule.onNodeWithTag("section_synastry").performScrollTo().performClick()
             rule.onNodeWithTag("section_composite").performScrollTo().assertExists()
             rule.onNodeWithTag("section_bazi_match").performScrollTo().assertExists()
+            rule.onNodeWithTag("section_bazi_cross").performScrollTo().assertExists()
         }
     }
 }
