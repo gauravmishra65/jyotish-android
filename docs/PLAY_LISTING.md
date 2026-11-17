@@ -11,46 +11,44 @@ app's source, or Astrodienst's professional licence), and create the upload key.
 
 **Store icon:** `docs/store/icon-512.png` (512 x 512, made from the same vector as the launcher icon)
 
-**Short description (80 characters max, 79 used):** Kundli, Kundli Milan, forecasts, Muhurat & numerology. Vedic astrology, offline
+**Short description (80 characters max, 77 used):** Kundli, Kundli Milan, Muhurat, numerology — Swiss Ephemeris accuracy, offline
 
-**Full description (v13 draft).** The version saved in Play Console on 7 Nov 2026 is the source of truth: it keeps the earlier live text (Lal Kitab, BaZi, in-depth sections) with these keywords, ★ headings and an "Easy to start" section added.
+**Full description (v14).** Rewritten for the production listing: it leads with what no competitor can copy (nothing leaves the phone), then names the methods and the rules each one follows. 3140 of the 4000 characters Play allows.
 
-Gaurav Jyotish makes your Kundli (Janam Kundali, the Vedic birth horoscope), checks Kundli Milan, finds a good Muhurat and reads your numerology, all on your phone, in English or Hindi. No account and no internet needed.
+Most astrology apps want your birth details on their server. This one keeps them on your phone. Gaurav Jyotish makes your Kundli, checks Kundli Milan, finds a good Muhurat and reads your numerology — in English or Hindi, fully offline.
 
-★ KUNDLI (BIRTH CHART)
-• North Indian or South Indian chart, with planets, nakshatra and pada
-• Vimshottari dasha with the current period marked
-• Yogas, with how common each one is, and Shadbala strength
-• Navamsa (D9) and Dashamsa (D10) charts
+★ WHAT IT CALCULATES, AND BY WHOSE RULES
 
-★ KUNDLI MILAN (GUNA MILAN)
-• Ashtakoota matching out of 36 gunas, with each koota explained
-• The ten Porutham of South Indian practice
-• Mangal (Manglik) check from the Lagna, Moon and Venus, with cancellations stated
+• Vedic (Parashari): 16 divisional charts, D1 to D60. Six dasha systems — Vimshottari, Ashtottari, Yogini, Chara, Kalachakra, Narayana. Shadbala strength, yogas with how rare each one is, upagrahas and chara karakas.
+• Your choice of ayanamsa: Lahiri, Raman, KP (Krishnamurti), True Chitra, Fagan-Bradley or De Luce. Most apps pick one and never tell you.
+• Kundli Milan: Ashtakoota out of 36 gunas, the ten Porutham of South Indian practice, and Mangal Dosha checked from Lagna, Moon and Venus — with cancellations stated, not hidden.
+• Lal Kitab: its own chart and remedies, read by Lal Kitab's rules rather than Parashari's.
+• Varshaphal (Tajika): the annual chart with the year's own dasha.
+• Prashna: the chart of the question, for when the birth time is unknown.
+• Western: seven house systems — Placidus, Koch, Whole Sign, Equal, Regiomontanus, Campanus, Porphyry. Transits, midpoints, harmonics, draconic charts, and a Hellenistic layer with sect and Firdaria.
+• Chinese: BaZi four pillars with Na Yin, the twelve growth phases, favourable elements and structure. Zi Wei Dou Shu in two schools. Feng Shui flying stars, including replacement charts.
+• Numerology: Pythagorean, Chaldean and Kabbalah schools, Mulank and Bhagyank, the Lo Shu grid and your Kua number.
+• Muhurat: checked against tithi, nakshatra, yoga, karana, weekday, lagna and Rahu Kaal, plus Tarabala and Chandrabala for the people involved.
+• Also: birth-time rectification, and Tamil, Kollam, Bengali, Nepali and Thai calendars.
 
-★ 3-YEAR FORECAST AND FULL READING
-• Year-by-year outlook for marriage, work, family and energy
-• A full reading with remedies and a summary, to save as a PDF or share
-• Daily, monthly and annual reports, plus Mahadasha, Mangal Dosh, Kaal Sarp, Sade Sati and Chandra Rashi reports (v15)
+★ WHY THIS APP IS DIFFERENT
 
-★ MUHURAT
-• Good times for a wedding, griha pravesh, a new venture and more
-• Checked against tithi, nakshatra, yoga, karana, weekday, lagna and Rahu Kaal
-• Tarabala and Chandrabala for the people involved
+• Every reading names its source. Each section says which tradition's rules produced it. When Vedic and Western disagree, you see both and know why, instead of one blended answer from nowhere.
+• One engine, many traditions. All of it computed from the Swiss Ephemeris on your phone — not a mix of lookup tables and approximations.
+• It won't pretend to know. No predictions of death, illness or divorce. Readings describe tendencies, and say so.
+• It says when it isn't sure. If the birth time is approximate or unknown, the reading tells you which parts to trust less.
+• Hindi that reads like Hindi, not machine-translated English. Switch language at any time.
 
-★ NUMEROLOGY (ANK JYOTISH)
-• Mulank, Bhagyank and the Chaldean name number
-• Life Path and the Pythagorean numbers, Loshu grid and Kua number
-• Name spelling options that keep the sound of the name
+★ EVERYDAY USE
 
-★ PRIVATE AND OFFLINE
-• All calculations happen on your phone, and birth details stay on it
 • Save Kundlis for the whole family and switch person on any screen
-• English and Hindi, switch at any time; a short tour and Help section get you started
+• A full reading with remedies and a summary, to save as a PDF or share
+• Daily, monthly and annual reports, plus Mahadasha, Mangal Dosh, Kaal Sarp, Sade Sati and Chandra Rashi
+• Works on a plane, in a basement, on a dead signal — there is nothing to connect to
 
-Calculations use the Swiss Ephemeris with Lahiri ayanamsa by default (Raman, KP and True Chitra are in Settings). Readings describe tendencies from classical Jyotish: they are guidance, not guarantees, and the app never predicts death, illness or divorce. Confirm important dates with your family astrologer or panchang.
+Readings describe tendencies from classical Jyotish: they are guidance, not guarantees. The app never predicts death, illness or divorce. Confirm important dates with your family astrologer or panchang.
 
-Free to try with one Kundli. Unlock the full version with a single in-app purchase, with no subscription.
+Start free with one Kundli. One payment opens everything, forever — no subscription, no ads, nothing collected.
 
 **Category:** Lifestyle. **Content rating:** Everyone. **Ads:** none. **In-app purchases:** yes (one-time full version, Play edition).
 
@@ -58,46 +56,44 @@ Free to try with one Kundli. Unlock the full version with a single in-app purcha
 
 **ऐप का नाम:** गौरव ज्योतिष, AuthorGaurav द्वारा
 
-**संक्षिप्त विवरण (80 अक्षर तक):** कुंडली, कुंडली मिलान, भविष्यफल, मुहूर्त और अंक ज्योतिष – वैदिक ज्योतिष, ऑफ़लाइन
+**संक्षिप्त विवरण (80 अक्षर तक, 72 प्रयुक्त):** कुंडली, कुंडली मिलान, मुहूर्त, अंक ज्योतिष — बिना इंटरनेट, पूरी तरह निजी
 
-**पूरा विवरण (v13):**
+**पूरा विवरण (v14):** अंग्रेज़ी संस्करण के अनुरूप, 4000 में से 2886 अक्षर।
 
-गौरव ज्योतिष आपकी जन्म कुंडली बनाता है, कुंडली मिलान करता है, शुभ मुहूर्त खोजता है और अंक ज्योतिष बताता है, सब कुछ आपके फ़ोन पर, हिंदी या अंग्रेज़ी में। न खाता बनाना पड़ता है, न इंटरनेट चाहिए।
+ज़्यादातर ज्योतिष ऐप आपका जन्म विवरण अपने सर्वर पर माँगते हैं। यह ऐप उसे आपके फ़ोन पर ही रखता है। गौरव ज्योतिष आपकी कुंडली बनाता है, कुंडली मिलान करता है, शुभ मुहूर्त खोजता है और अंक ज्योतिष बताता है — हिंदी या अंग्रेज़ी में, पूरी तरह ऑफ़लाइन।
 
-★ जन्म कुंडली
-• उत्तर या दक्षिण भारतीय चार्ट, नक्षत्र और पद के साथ ग्रह
-• विंशोत्तरी दशा, चालू अवधि के साथ
-• योग (हर योग कितना सामान्य है, यह भी) और षड्बल
-• नवांश (D9) और दशमांश (D10) चार्ट
+★ कौन-सी गणना, किस परंपरा के नियमों से
 
-★ कुंडली मिलान (गुण मिलान)
-• 36 गुणों में से अष्टकूट मिलान, हर कूट का अर्थ
-• दक्षिण भारतीय परंपरा के दस पोरुत्तम
-• लग्न, चंद्र और शुक्र से मंगल दोष (मांगलिक) की जाँच, परिहार के साथ
+• वैदिक (पराशरी): D1 से D60 तक सोलह वर्ग कुंडलियाँ। छह दशा पद्धतियाँ — विंशोत्तरी, अष्टोत्तरी, योगिनी, चर, कालचक्र, नारायण। षड्बल, योग (हर योग कितना दुर्लभ है, यह भी), उपग्रह और चर कारक।
+• अयनांश आपकी पसंद का: लाहिड़ी, रमन, केपी (कृष्णमूर्ति), ट्रू चित्रा, फ़ेगन-ब्रैडली या डी लूस। ज़्यादातर ऐप एक ही चुनते हैं और बताते भी नहीं।
+• कुंडली मिलान: 36 गुणों में से अष्टकूट, दक्षिण भारतीय परंपरा के दस पोरुत्तम, और लग्न, चंद्र व शुक्र से मंगल दोष की जाँच — परिहार छिपाए नहीं, बताए जाते हैं।
+• लाल किताब: उसकी अपनी कुंडली और उपाय, लाल किताब के नियमों से, पराशरी से नहीं।
+• वर्षफल (ताजिक): वर्ष कुंडली, उस वर्ष की अपनी दशा के साथ।
+• प्रश्न: प्रश्न के क्षण की कुंडली, जब जन्म समय ज्ञात न हो।
+• पाश्चात्य: सात भाव पद्धतियाँ — प्लैसिडस, कोच, पूर्ण राशि, समान, रेजियोमोंटेनस, कैम्पेनस, पोर्फ़िरी। गोचर, मध्यबिंदु, हार्मोनिक, ड्रैकोनिक, और सेक्ट व फ़िरदारिया सहित हेलेनिस्टिक परत।
+• चीनी: बाज़ी चार स्तंभ — ना यिन, बारह वृद्धि अवस्थाएँ, अनुकूल तत्व और संरचना। ज़ी वेई दोउ शू, दो परंपराओं में। फ़ेंग शुई उड़ते तारे, प्रतिस्थापन कुंडली सहित।
+• अंक ज्योतिष: पाइथागोरियन, कैल्डियन और कबाला पद्धतियाँ, मूलांक और भाग्यांक, लोशु ग्रिड और कुआ अंक।
+• मुहूर्त: तिथि, नक्षत्र, योग, करण, वार, लग्न और राहु काल की जाँच, साथ में संबंधित लोगों का तारा बल और चंद्र बल।
+• और भी: जन्म समय संशोधन, तथा तमिल, कोल्लम, बंगाली, नेपाली और थाई पंचांग।
 
-★ 3 वर्ष का भविष्यफल और संपूर्ण विश्लेषण
-• विवाह, काम, परिवार और ऊर्जा का साल-दर-साल भविष्यफल
-• उपाय और सारांश के साथ संपूर्ण विश्लेषण, PDF में सहेजें या भेजें
-• दैनिक, मासिक और वार्षिक रिपोर्ट, साथ में महादशा, मंगल दोष, काल सर्प, साढ़े साती और चंद्र राशि रिपोर्ट (v15)
+★ यह ऐप अलग क्यों है
 
-★ शुभ मुहूर्त
-• विवाह, गृह प्रवेश, नए काम आदि के लिए शुभ समय
-• तिथि, नक्षत्र, योग, करण, वार, लग्न और राहु काल की जाँच
-• संबंधित लोगों का तारा बल और चंद्र बल
+• हर फल अपना स्रोत बताता है। हर अनुभाग कहता है कि वह किस परंपरा के नियमों से बना है। जहाँ वैदिक और पाश्चात्य अलग कहते हैं, वहाँ दोनों दिखते हैं और कारण भी — एक मिला-जुला उत्तर नहीं।
+• एक ही गणना इंजन, कई परंपराएँ। सब कुछ आपके फ़ोन पर स्विस एफ़ेमेरिस से — सारणियों और अनुमानों का मिश्रण नहीं।
+• जो पता नहीं, उसका दावा नहीं। मृत्यु, रोग या तलाक़ की कोई भविष्यवाणी नहीं। फल झुकाव बताते हैं, और यह कहते भी हैं।
+• अनिश्चितता छिपाई नहीं जाती। जन्म समय अनुमानित या अज्ञात हो, तो फल बताता है कि किन हिस्सों पर कम भरोसा करें।
+• हिंदी जो हिंदी जैसी पढ़ी जाए, अंग्रेज़ी का मशीनी अनुवाद नहीं। भाषा कभी भी बदलें।
 
-★ अंक ज्योतिष
-• मूलांक, भाग्यांक और कैल्डियन नामांक
-• जीवन पथ और अन्य पाइथागोरियन अंक, लोशु ग्रिड और कुआ अंक
-• ऐसे नाम विकल्प जिनसे नाम की ध्वनि न बदले
+★ रोज़मर्रा का उपयोग
 
-★ निजी और ऑफ़लाइन
-• सारी गणना आपके फ़ोन पर होती है, जन्म का विवरण उसी पर रहता है
 • पूरे परिवार की कुंडलियाँ सहेजें और हर स्क्रीन पर व्यक्ति बदलें
-• हिंदी और अंग्रेज़ी, कभी भी बदलें; छोटा परिचय और सहायता अनुभाग से शुरुआत आसान
+• उपाय और सारांश सहित संपूर्ण विश्लेषण, PDF में सहेजें या भेजें
+• दैनिक, मासिक और वार्षिक रिपोर्ट, साथ में महादशा, मंगल दोष, काल सर्प, साढ़े साती और चंद्र राशि
+• हवाई जहाज़ में, तहख़ाने में, बिना नेटवर्क — जुड़ने को कुछ है ही नहीं
 
-गणना स्विस एफ़ेमेरिस से होती है, सामान्यतः लाहिड़ी अयनांश के साथ (रमन, केपी और ट्रू चित्रा सेटिंग्स में)। फल शास्त्रीय ज्योतिष के झुकाव बताते हैं: ये मार्गदर्शन हैं, गारंटी नहीं, और ऐप कभी मृत्यु, रोग या तलाक़ की भविष्यवाणी नहीं करता। महत्वपूर्ण तिथियाँ अपने पारिवारिक ज्योतिषी या पंचांग से अवश्य मिला लें।
+फल शास्त्रीय ज्योतिष के झुकाव बताते हैं: ये मार्गदर्शन हैं, गारंटी नहीं। ऐप कभी मृत्यु, रोग या तलाक़ की भविष्यवाणी नहीं करता। महत्वपूर्ण तिथियाँ अपने पारिवारिक ज्योतिषी या पंचांग से अवश्य मिला लें।
 
-एक कुंडली के साथ मुफ़्त आज़माएँ। पूर्ण संस्करण एक बार की इन-ऐप ख़रीद से खुलता है, कोई सदस्यता नहीं।
+एक कुंडली के साथ मुफ़्त शुरू करें। एक बार के भुगतान से सब कुछ हमेशा के लिए खुल जाता है — कोई सदस्यता नहीं, कोई विज्ञापन नहीं, कुछ भी एकत्र नहीं।
 
 ## Editions and selling
 
