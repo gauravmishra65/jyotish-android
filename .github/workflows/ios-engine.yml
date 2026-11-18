@@ -1,0 +1,84 @@
+name: ios-engine
+
+# Can the astrology engine run on an iPhone?
+#
+# The Python layer has no Android dependencies, so the only real unknown in an iOS port is pyswisseph: its C
+# extension has no iOS wheels, and Apple requires every binary to live inside a signed framework. This job
+# cross-compiles it for the device and the simulator, then runs our own reference values inside a simulator.
+# A green run means the engine's foundation works on Apple's runtime; it says nothing about the UI.
+#
+# Run by hand (macOS runners bill at ten times the Linux rate, so this is not on every push).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ios-engine.yml'
+      - 'tools/ios/**'
+
+permissions:
+  contents: read
+
+env:
+  PYSWISSEPH: "2.10.3.2"      # the version the Android build already ships, so both platforms agree
+  CIBUILDWHEEL: "4.3.1"
+
+jobs:
+  ios-wheels:
+    name: Build pyswisseph for iOS and check it in a simulator
+    runs-on: macos-latest      # Apple Silicon: the simulator slice is arm64_iphonesimulator
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"   # iOS support starts at CPython 3.13 (PEP 730)
+
+      - name: Show the toolchain
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+          xcrun simctl list runtimes | head -20
+
+      - name: Fetch the pyswisseph source and use its bundled libraries
+        run: |
+          pip install "cibuildwheel==${CIBUILDWHEEL}"
+          pip download --no-binary :all: --no-deps "pyswisseph==${PYSWISSEPH}" -d sdist
+          tar xzf "sdist/pyswisseph-${PYSWISSEPH}.tar.gz" -C sdist
+          # Same reason as the Android build: do not let setup.py link against the build machine's libswe or
+          # sqlite3 through pkg-config. The bundled Swiss Ephemeris sources must be compiled into the wheel.
+          sed -i '' 's/^swe_detection = True/swe_detection = False/; s/^sqlite3_detection = True/sqlite3_detection = False/' "sdist/pyswisseph-${PYSWISSEPH}/setup.py"
+          grep -n "_detection = " "sdist/pyswisseph-${PYSWISSEPH}/setup.py"
+
+      - name: Build wheels, and run our reference values in a simulator
+        run: cibuildwheel --platform ios "sdist/pyswisseph-${PYSWISSEPH}" --output-dir wheelhouse
+        env:
+          CIBW_BUILD: "cp313-*"
+          CIBW_ARCHS: "arm64_iphoneos arm64_iphonesimulator"
+          CIBW_BUILD_FRONTEND: build
+          # cibuildwheel runs iOS tests on a simulator matching the build machine, and the command must be a
+          # python -m invocation: shell scripts cannot run there.
+          CIBW_TEST_SOURCES: "tools/ios"
+          CIBW_TEST_COMMAND: "python -m tools.ios.swisseph_check"
+
+      - name: Prove the device slice really targets iOS
+        run: |
+          set -e
+          ls -la wheelhouse
+          for whl in wheelhouse/*.whl; do
+            echo "=== $whl"
+            rm -rf unpack && mkdir unpack && unzip -q "$whl" -d unpack
+            find unpack -name '*.so' -print0 | while IFS= read -r -d '' so; do
+              echo "--- $so"
+              # A macOS build would say LC_BUILD_VERSION platform MACOS; iOS slices must say IOS or IOSSIMULATOR.
+              vtool -show-build "$so" || otool -l "$so" | grep -A4 LC_BUILD_VERSION
+            done
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-wheels
+          retention-days: 14
+          path: wheelhouse/*.whl
