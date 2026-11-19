@@ -119,6 +119,25 @@ class Engine:
     def feng_shui(self, request: dict) -> dict:
         return self._call("feng_shui", request)
 
+    def glossary(self) -> dict:
+        """The engine's own Hindi names for the things a table prints: signs, planets, nakshatras and
+        the weekdays. Taken from the module the reports use, so the desktop says what the reports say."""
+        with self._lock:
+            import hindi_shell
+            import app_details
+            return {
+                "signs": dict(hindi_shell.SIGN),
+                "planets": dict(hindi_shell.PLANET),
+                "nakshatras": dict(hindi_shell.NAK),
+                # The weekdays live with the details builder rather than in hindi_shell's own tables.
+                "weekdays": dict(app_details.WEEKDAY_HI),
+                "karanas": dict(app_details.KARANA_HI),
+                "yogas": dict(app_details.YOGA_HI),
+                # Fifteen names, used twice: a chart gives the tithi as a number and its paksha.
+                "tithis": list(app_details.TITHI_HI),
+                "paksha": {"Shukla": "शुक्ल", "Krishna": "कृष्ण"},
+            }
+
     def names(self, name: str, dob: str, gender: str = "M") -> dict:
         """Alone among these the engine takes three arguments rather than one JSON string."""
         with self._lock:

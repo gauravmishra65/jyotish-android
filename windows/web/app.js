@@ -19,6 +19,31 @@ let people = [];
 let selectedId = null;
 let screen = { name: "chart" };      // what to redraw when the language changes
 let edition = { edition: "full", free_profiles: 1 };
+let glossary = {};        // the engine's Hindi names for signs, planets, nakshatras and weekdays
+
+/* The engine answers a chart in English names - Scorpio, Thursday, Pushya - whatever the language is
+   set to, because those are the keys the rest of the engine counts on. The readings and the reports are
+   translated inside the engine; the tables this page draws itself are not, so they are translated here.
+   In English this returns what it was given, which is why it is safe to wrap everything in it. */
+function hi(value, table) {
+  if (lang() !== "hi" || value === null || value === undefined) return value ?? "—";
+  const words = glossary[table] || {};
+  return String(value).split(/([^A-Za-z]+)/)
+    .map((part) => words[part] ?? part)
+    .join("");
+}
+
+/* A chart gives the tithi as a number and its paksha as a word; the fifteen names belong to both
+   halves of the month, so the number is read modulo fifteen. In English the number is what people
+   recognise, so it is kept beside the name rather than replaced by it. */
+function tithi(paksha, number) {
+  if (!number) return "—";
+  const half = lang() === "hi" ? (glossary.paksha || {})[paksha] ?? paksha : paksha;
+  const names = glossary.tithis || [];
+  const name = names[(Number(number) - 1) % 15];
+  if (lang() === "hi" && name) return `${half} ${name}`.trim();
+  return `${half ?? ""} ${number}`.trim();
+}
 
 /* --- the list of people ------------------------------------------------------------------- */
 
@@ -239,7 +264,7 @@ function degrees(value) {
 }
 
 function period(p) {
-  return p.lord ? t("period", p.lord, p.start ?? "—", p.end ?? "—") : "—";
+  return p.lord ? t("period", hi(p.lord, "planets"), p.start ?? "—", p.end ?? "—") : "—";
 }
 
 /* The sixteen divisional charts, one at a time.
@@ -472,7 +497,8 @@ function drawTimeCheck(into, out) {
       const score = byFrom[seg.from] || {};
       return el("tr", { className: seg.contains_recorded ? "recorded" : "" },
         el("th", {}, `${seg.from} – ${seg.to}${seg.contains_recorded ? ` · ${t("as_recorded")}` : ""}`),
-        el("td", {}, [seg.lagna, seg.d9, seg.d10].filter(Boolean).join(" · ")),
+        el("td", {}, [seg.lagna, seg.d9, seg.d10].filter(Boolean)
+          .map((sign) => hi(sign, "signs")).join(" · ")),
         el("td", {}, String(score.hits ?? "—")),
         el("td", { className: "muted-cell" },
           score.p === undefined ? "—" : `${Math.round(score.p * 100)}%`));
@@ -516,8 +542,8 @@ function namesPanel(id) {
       const n = await api().name_numbers(id);
       const suggestions = Array.isArray(n.suggestions) ? n.suggestions : [];
       result.replaceChildren(
-        rows([[t("mulank"), `${n.mulank} · ${n.mulank_planet ?? ""}`.trim()],
-              [t("bhagyank"), `${n.bhagyank} · ${n.bhagyank_planet ?? ""}`.trim()]]),
+        rows([[t("mulank"), `${n.mulank} · ${hi(n.mulank_planet, "planets")}`],
+              [t("bhagyank"), `${n.bhagyank} · ${hi(n.bhagyank_planet, "planets")}`]]),
         n.original_already_fits || !suggestions.length
           ? el("p", { className: "note" }, t("already_fits"))
           : el("div", {},
@@ -614,7 +640,8 @@ async function showChart(id) {
   // The engine already formats degrees-minutes-seconds and the degree within the sign, so neither is
   // recomputed here: a second implementation is a second thing to get wrong.
   const planetRows = Object.entries(v.planets).map(([name, p]) =>
-    el("tr", {}, el("th", {}, name), el("td", {}, `${p.sign} ${p.dms ?? degrees(p.deg_in_sign)}${p.retrograde ? " ℞" : ""}`)));
+    el("tr", {}, el("th", {}, hi(name, "planets")),
+      el("td", {}, `${hi(p.sign, "signs")} ${p.dms ?? degrees(p.deg_in_sign)}${p.retrograde ? " ℞" : ""}`)));
 
   const settings = await api().settings();
   const style = settings.chart_style === "south" ? "south" : "north";
@@ -637,13 +664,13 @@ async function showChart(id) {
     el("div", { className: "card" },
       el("h3", {}, t("the_chart")),
       rows([
-        [t("lagna"), `${v.lagna.sign} ${v.lagna.dms ?? degrees(v.lagna.lon % 30)}`],
-        [t("moon_sign"), moon.sign ?? "—"],
+        [t("lagna"), `${hi(v.lagna.sign, "signs")} ${v.lagna.dms ?? degrees(v.lagna.lon % 30)}`],
+        [t("moon_sign"), hi(moon.sign, "signs")],
         [t("nakshatra"), moon.nakshatra
-          ? `${moon.nakshatra}${moon.pada ? ", " + t("pada", moon.pada) : ""}` : "—"],
+          ? `${hi(moon.nakshatra, "nakshatras")}${moon.pada ? ", " + t("pada", moon.pada) : ""}` : "—"],
         [t("sunrise"), pan.sunrise_local ?? "—"],
-        [t("tithi"), pan.tithi ? `${pan.paksha ?? ""} ${pan.tithi}`.trim() : "—"],
-        [t("vara"), pan.vara ?? "—"],
+        [t("tithi"), tithi(pan.paksha, pan.tithi)],
+        [t("vara"), hi(pan.vara, "weekdays")],
       ])),
 
     el("div", { className: "card" },
@@ -694,6 +721,7 @@ async function removePerson(id) {
   people = await api().people();
   edition = await api().edition();
   drawEdition();
+  glossary = await api().glossary();
   selectedId = null;
   people.length ? showChart(people[0].id) : showAddPerson();
 }
@@ -900,7 +928,8 @@ function drawMuhurta(into, found) {
           el("th", {}, t("supports")), el("th", {}, t("weaknesses")))),
         el("tbody", {}, ...windows.map((w) => el("tr", {},
           el("th", {}, `${w.start_local} – ${w.end_local.slice(11)} · ${t("minutes_n", w.minutes)}`),
-          el("td", {}, `${pick(w, "weekday")} · ${pick(w, "nakshatra")} · ${pick(w, "lagna")}`),
+          el("td", {}, [hi(pick(w, "weekday"), "weekdays"), hi(pick(w, "nakshatra"), "nakshatras"),
+                        hi(pick(w, "lagna"), "signs")].join(" · ")),
           el("td", { className: "muted-cell" }, list(pick(w, "supports") || [])),
           el("td", { className: "muted-cell" }, list(pick(w, "weaknesses") || []))))))),
     found.disclaimer ? el("p", { className: "note" }, found.disclaimer) : "",
@@ -1234,8 +1263,9 @@ function drawPrashna(into, answer) {
     el("div", { className: "card" },
       el("h3", {}, t("the_chart")),
       rows([
-        [t("lagna"), `${answer.lagna ?? "—"}${answer.lagna_lord ? " · " + answer.lagna_lord : ""}`],
-        [t("moon_sign"), answer.moon_sign ?? "—"],
+        [t("lagna"), `${hi(answer.lagna, "signs")}`
+          + (answer.lagna_lord ? " · " + hi(answer.lagna_lord, "planets") : "")],
+        [t("moon_sign"), hi(answer.moon_sign, "signs")],
         ["", answer.asked_at ?? ""],
       ])),
     (answer.checks || []).length
@@ -1501,6 +1531,7 @@ async function start() {
   // double-click should do.
   edition = await api().edition();
   drawEdition();
+  glossary = await api().glossary();
 
   const opened = await api().pending_restore();
   if (opened) return showSettings(opened);

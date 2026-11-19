@@ -595,6 +595,16 @@ class Api:
             raise ValidationError("That person is not saved on this computer.")
         return self.engine.names(who["name"], who["date"], who.get("gender", "M"))
 
+    def glossary(self) -> dict:
+        """What the interface needs to print a chart in Hindi.
+
+        The engine answers a chart in English names - Scorpio, Thursday, Pushya - whatever the language,
+        because those are the keys the rest of the engine counts on. The readings and the reports are
+        translated inside the engine; the tables the desktop draws itself are not, and a Hindi screen
+        saying "Scorpio" is exactly the half-translated screen the string table exists to prevent.
+        """
+        return self.engine.glossary()
+
     def notes(self, person_id: str) -> str:
         who = self.person(person_id)
         return str(who.get("notes", "")) if who else ""

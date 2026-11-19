@@ -142,6 +142,48 @@ class ChartContractTest(unittest.TestCase):
                 self.assertIn(sign, signs, f"{key} puts {body} in {sign!r}")
 
 
+    # --- the Hindi names -------------------------------------------------------------------------
+
+    def test_the_glossary_covers_every_name_a_chart_prints(self):
+        """The engine answers a chart in English names whatever the language, because those are the keys
+        the rest of it counts on. The tables the desktop draws itself translate through this glossary, so
+        a name missing from it would silently print in English on a Hindi screen."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from jyotish_win.bridge import Engine as _Engine
+
+        engine = _Engine()
+        words = engine.glossary()
+        chart = engine.chart(FIXTURE)
+        vedic = chart["vedic"]
+
+        self.assertIn(vedic["lagna"]["sign"], words["signs"])
+        for name, planet in vedic["planets"].items():
+            self.assertIn(name, words["planets"], f"{name} has no Hindi name")
+            self.assertIn(planet["sign"], words["signs"])
+        self.assertIn(vedic["planets"]["Moon"]["nakshatra"], words["nakshatras"])
+        self.assertIn(vedic["panchang"]["vara"], words["weekdays"])
+        self.assertIn(vedic["panchang"]["paksha"], words["paksha"])
+        self.assertEqual(len(words["tithis"]), 15)
+        self.assertEqual(len(words["signs"]), 12)
+        self.assertEqual(len(words["nakshatras"]), 27)
+
+        for table in ("signs", "planets", "nakshatras", "weekdays"):
+            for english, hindi in words[table].items():
+                self.assertTrue(any("\u0900" <= c <= "\u097f" for c in hindi),
+                                f"{table}[{english}] is not in Devanagari: {hindi!r}")
+
+    def test_a_dasha_lord_is_a_planet_the_glossary_knows(self):
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from jyotish_win.bridge import Engine as _Engine
+
+        engine = _Engine()
+        words = engine.glossary()["planets"]
+        current = engine.chart(FIXTURE)["vedic"]["dashas"]["vimshottari"]["current"]
+        for period in ("mahadasha", "antardasha"):
+            self.assertIn(current[period]["lord"], words)
+
     # --- today ------------------------------------------------------------------------------------
 
     def test_the_panchang_limbs_keep_the_two_shapes_the_screen_reads(self):
