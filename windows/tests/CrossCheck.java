@@ -55,8 +55,10 @@ public class CrossCheck {
         Files.write(dir.resolve("opened_by_java.json"), opened.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         System.out.println("PHONE READ THE DESKTOP FILE");
 
+        // The Devanagari name is written as \\u escapes rather than as itself: javac reads a source file
+        // in the platform encoding unless told otherwise, and on a Windows runner that is not UTF-8.
         String body = "{\"app\":\"gaurav-jyotish\",\"format\":1,\"count\":1,\"profiles\":[{\"id\":\"j1\","
-            + "\"name\":\"मेई लिन टैन\",\"gender\":\"F\",\"date\":\"1995-11-02\",\"time\":\"06:10\","
+            + "\"name\":\"\u092e\u0947\u0908\u0020\u0932\u093f\u0928\u0020\u091f\u0948\u0928\",\"gender\":\"F\",\"date\":\"1995-11-02\",\"time\":\"06:10\","
             + "\"lat\":1.3521,\"lon\":103.8198,\"tz\":\"Asia/Singapore\",\"place\":\"Singapore\","
             + "\"confidence\":\"reliable\"}]}";
         Files.write(dir.resolve("from_java.gjb"), encode(body, pw));

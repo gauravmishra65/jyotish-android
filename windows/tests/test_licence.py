@@ -111,7 +111,7 @@ class PhoneCompatibilityTest(unittest.TestCase):
             (work / "private.key").write_text(self.private)
             (work / "from_python.code").write_text(_sign(self.key, EMAIL))
 
-            subprocess.run(["javac", "-d", str(work), str(source)], check=True, capture_output=True)
+            subprocess.run(["javac", "-encoding", "UTF-8", "-d", str(work), str(source)], check=True, capture_output=True)
             done = subprocess.run(["java", "-cp", str(work), "LicenceCheck", str(work), EMAIL],
                                   check=True, capture_output=True, text=True)
 

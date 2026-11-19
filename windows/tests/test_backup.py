@@ -124,7 +124,7 @@ class PhoneCompatibilityTest(unittest.TestCase):
         with TemporaryDirectory() as tmp:
             work = Path(tmp)
             (work / "from_python.gjb").write_bytes(backup.encode(PEOPLE, PASSWORD))
-            subprocess.run(["javac", "-d", str(work), str(source)], check=True, capture_output=True)
+            subprocess.run(["javac", "-encoding", "UTF-8", "-d", str(work), str(source)], check=True, capture_output=True)
             done = subprocess.run(["java", "-cp", str(work), "CrossCheck", str(work), PASSWORD],
                                   check=True, capture_output=True, text=True)
 
