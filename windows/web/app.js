@@ -1257,8 +1257,14 @@ function showPrashna() {
   question.focus();
 }
 
+/* The engine's three words for which way a prashna leans, and nothing else. It says "against", not
+   "unfavourable" - and a map that guessed the wrong word did not fail, it quietly showed an
+   unfavourable answer as "mixed", which is a wrong answer to a yes-or-no question rather than a
+   cosmetic slip. LEANS is checked against the engine's own vocabulary by a test. */
+const LEANS = { favourable: "lean_favourable", against: "lean_against", mixed: "lean_mixed" };
+
 function drawPrashna(into, answer) {
-  const lean = { favourable: "lean_favourable", unfavourable: "lean_unfavourable" }[answer.lean] || "lean_mixed";
+  const lean = LEANS[answer.lean] || "lean_mixed";
   into.replaceChildren(
     el("div", { className: "card score-card" },
       el("div", { className: "score-band" }, t(lean)),

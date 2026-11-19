@@ -17,6 +17,21 @@ from jyotish_win.storage import Store                        # noqa: E402
 NEHA = {"name": "Neha Agarwal", "gender": "F", "date": "1992-06-03", "time": "17:45",
         "lat": 26.8467, "lon": 80.9462, "tz": "Asia/Kolkata", "place": "Lucknow"}
 
+#: The three words the engine uses for which way a question leans. Read from its source rather than
+#: written down here, because writing them down is how the interface came to show an unfavourable
+#: answer as "mixed": the guessed word never appeared, so nothing ever failed.
+def _engine_leans() -> set:
+    import re
+    from jyotish_win.bridge import engine_path
+    found = set()
+    for line in (engine_path() / "app_prashna.py").read_text(encoding="utf-8").splitlines():
+        if re.search(r"\blean\b\s*=", line):      # only the lines that decide a lean
+            found.update(re.findall(r'"(\w+)"', line))
+    return found
+
+
+LEANS = _engine_leans()
+
 RAVI = {"name": "Ravi Shankar Tiwari", "gender": "M", "date": "1988-07-14", "time": "14:35",
         "lat": 25.3176, "lon": 82.9739, "tz": "Asia/Kolkata", "place": "Varanasi, India"}
 
@@ -327,7 +342,7 @@ class ApiTest(unittest.TestCase):
     def test_a_prashna_is_read_for_the_moment_not_for_a_saved_person(self):
         self.api.add_person(RAVI)
         answer = self.api.ask_question({"method": "prashna", "question": "Will the work go through?"})
-        self.assertIn(answer["lean"], ("favourable", "unfavourable", "mixed"))
+        self.assertIn(answer["lean"], LEANS)
         self.assertTrue(answer["checks"])
         self.assertNotIn(RAVI["name"], str(answer), "a prashna should know nothing of the saved people")
 
@@ -338,6 +353,21 @@ class ApiTest(unittest.TestCase):
                 self.api.ask_question({"method": "kp", "question": "Will it sell?", "number": number})
         self.assertTrue(self.api.ask_question(
             {"method": "kp", "question": "Will it sell?", "number": 77})["lean"])
+
+    def test_the_interface_has_a_word_for_every_way_a_question_can_lean(self):
+        """The engine says "against"; the first draft of the screen looked for "unfavourable". Nothing
+        failed - an unfavourable answer simply came out as "mixed", which is a wrong answer to a
+        yes-or-no question. So the mapping is checked against the engine's own vocabulary."""
+        self.assertEqual(LEANS, {"favourable", "against", "mixed"},
+                         "the engine's vocabulary changed; the screen needs a word for the new one")
+        web = Path(__file__).resolve().parent.parent / "web"
+        js = (web / "app.js").read_text(encoding="utf-8")
+        table = js[js.index("const LEANS = {"):js.index("\n", js.index("const LEANS = {"))]
+        strings = (web / "strings.js").read_text(encoding="utf-8")
+        for lean in LEANS:
+            self.assertIn(f"{lean}:", table, f"the screen has no word for a {lean!r} answer")
+            key = table.split(f"{lean}:")[1].split('"')[1]
+            self.assertIn(f"  {key}:", strings, f"{key} is not in the string table")
 
     def test_an_empty_question_is_refused(self):
         self.api.add_person(RAVI)

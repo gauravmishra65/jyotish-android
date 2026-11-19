@@ -273,9 +273,9 @@ const STRINGS = {
   method_kp:       { en: "KP number (1 to 249)",           hi: "केपी संख्या (1 से 249)" },
   kp_number:       { en: "Number",                         hi: "संख्या" },
   ask_now:         { en: "Ask",                            hi: "पूछें" },
-  lean_favourable: { en: "Leans favourable",               hi: "अनुकूल लगता है" },
-  lean_unfavourable: { en: "Leans unfavourable",           hi: "प्रतिकूल लगता है" },
-  lean_mixed:      { en: "Mixed",                          hi: "मिश्रित" },
+  lean_favourable: { en: "The signs lean favourable",      hi: "संकेत अनुकूल हैं" },
+  lean_against:    { en: "The signs ask for patience",      hi: "संकेत धैर्य माँगते हैं" },
+  lean_mixed:      { en: "The signs are mixed",             hi: "संकेत मिश्रित हैं" },
   checks_passed:   { en: "%1 of %2 checks favour it",      hi: "%2 में से %1 जाँच अनुकूल" },
   prashna_note:    { en: "A prashna answers the moment it was asked in, not the future. Read it as one "
                        + "view among several.",
