@@ -116,6 +116,47 @@ const STRINGS = {
                      hi: "36 में से अंक केवल चंद्र आधारित गणना है। यह कई दृष्टियों में से एक है, "
                        + "विवाह पर कोई निर्णय नहीं।" },
 
+  // Muhurta
+  muhurta:         { en: "Muhurta",                        hi: "मुहूर्त" },
+  muhurta_sub:     { en: "Find a good time",               hi: "शुभ समय खोजें" },
+  what_for:        { en: "What for",                       hi: "किसके लिए" },
+  from_date:       { en: "From",                           hi: "से" },
+  to_date:         { en: "To",                             hi: "तक" },
+  where:           { en: "Where",                          hi: "कहाँ" },
+  who_involved:    { en: "Checked against",                hi: "किनके लिए जाँचा जाए" },
+  who_involved_note: { en: "Tarabala and Chandrabala are counted from each person's own Moon, so "
+                         + "choosing the people narrows the windows considerably.",
+                       hi: "तारा बल और चंद्र बल हर व्यक्ति के अपने चंद्र से गिने जाते हैं, इसलिए "
+                         + "व्यक्ति चुनने पर शुभ समय काफ़ी कम हो जाते हैं।" },
+  find_times:      { en: "Find the times",                 hi: "शुभ समय खोजें" },
+  searching:       { en: "Searching. A few months can take a moment.",
+                     hi: "खोज चल रही है। कुछ महीनों में थोड़ा समय लग सकता है।" },
+  no_windows:      { en: "Nothing in this range passes the rules for %1. Try a wider range, or fewer "
+                       + "people to check against.",
+                     hi: "इस अवधि में %1 के लिए कोई शुभ समय नियमों पर खरा नहीं उतरा। अवधि बढ़ाएँ, "
+                       + "या कम लोगों के लिए जाँचें।" },
+  windows_found:   { en: "%1 windows",                     hi: "%1 शुभ समय" },
+  window_when:     { en: "When",                           hi: "कब" },
+  window_detail:   { en: "Chart at that time",             hi: "उस समय की स्थिति" },
+  supports:        { en: "In favour",                      hi: "पक्ष में" },
+  weaknesses:      { en: "Against",                        hi: "विपक्ष में" },
+  minutes_n:       { en: "%1 min",                         hi: "%1 मिनट" },
+
+  // numerology
+  numbers:         { en: "Numerology",                     hi: "अंक ज्योतिष" },
+  numbers_sub:     { en: "Numbers for a person, a name or a number",
+                     hi: "व्यक्ति, नाम या संख्या के अंक" },
+  person:          { en: "Person",                         hi: "व्यक्ति" },
+  second_person:   { en: "And",                            hi: "और" },
+  tool:            { en: "Tool",                           hi: "साधन" },
+  the_text:        { en: "Name or number",                 hi: "नाम या संख्या" },
+  look:            { en: "Work it out",                    hi: "गणना करें" },
+
+  // the Chinese side
+  chinese:         { en: "Chinese",                        hi: "चीनी" },
+  chinese_sub:     { en: "Lunar date, Zi Wei, Nine Star Ki",
+                     hi: "चंद्र तिथि, ज़ी वेई, नौ तारा की" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

@@ -200,8 +200,11 @@ class WebAssetsTest(unittest.TestCase):
         """The whole point of the place search is that nobody looks up coordinates by hand."""
         js = (WEB / "app.js").read_text(encoding="utf-8")
         picker = js[js.index("function placeField("):js.index("/* One form for both jobs.")]
-        for field in ('$("#f-lat").value', '$("#f-lon").value', '$("#f-tz").value'):
-            self.assertIn(field, picker, f"picking a place does not set {field}")
+        for field in ("-lat`).value", "-lon`).value", "-tz`).value"):
+            self.assertIn(field, picker, f"picking a place does not set the {field.split('`')[0]} field")
+        # The same picker serves the birth form and the muhurta form, which is why it takes a prefix.
+        self.assertIn('function placeField(existing, prefix = "f")', js)
+        self.assertIn('placeField(null, "mu")', js)
 
     # --- both languages -------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ side of this boundary is JavaScript, and anything clever would have to survive a
 """
 import re
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
 from pathlib import Path
@@ -206,6 +206,94 @@ class Api:
                 raise ValidationError("That person is not saved on this computer.")
             validate(who)
         return self.engine.match(self.chart(groom_id), self.chart(bride_id), bride="B")
+
+    # --- the tools that are not one chart ---------------------------------------------------------
+
+    #: What muhurta can be asked for. The engine knows these four; the labels are the app's.
+    EVENTS = (
+        ("marriage", {"en": "Marriage", "hi": "विवाह"}),
+        ("griha_pravesh", {"en": "Entering a new home", "hi": "गृह प्रवेश"}),
+        ("vehicle", {"en": "A new vehicle", "hi": "नया वाहन"}),
+        ("business", {"en": "Opening a business", "hi": "व्यापार आरंभ"}),
+    )
+
+    def muhurta_events(self) -> list[dict]:
+        return [{"event": k, "name": name} for k, name in self.EVENTS]
+
+    def muhurta(self, request: dict) -> dict:
+        """Good windows for an event in a date range, optionally checked against the people involved.
+
+        Passing the people matters: Tarabala and Chandrabala are counted from each person's own Moon, so
+        a window that suits the couple is not the same as a window that is merely well aspected. The
+        search walks the range in ten-minute steps, so a long range is slow - the screen says so.
+        """
+        if request.get("event") not in dict(self.EVENTS):
+            raise ValidationError("Choose what the muhurta is for.")
+        for field in ("from", "to", "lat", "lon", "tz"):
+            if str(request.get(field, "")).strip() == "":
+                raise ValidationError("A place and a date range are both needed.")
+        for field in ("from", "to"):
+            if not DATE.match(str(request[field])):
+                raise ValidationError("The dates should look like 2026-12-01.")
+        if request["from"] > request["to"]:
+            raise ValidationError("The range ends before it starts.")
+        if (date.fromisoformat(request["to"]) - date.fromisoformat(request["from"])).days > 120:
+            raise ValidationError("Search four months or less at a time; a longer range takes too long.")
+
+        charts = [self.chart(pid) for pid in request.get("people", []) if self.person(pid)]
+        ask = {k: request[k] for k in ("event", "from", "to", "lat", "lon", "tz")}
+        ask["lat"], ask["lon"] = float(ask["lat"]), float(ask["lon"])
+        ask["top"] = int(request.get("top", 12))
+        ask["lang"] = self.settings().get("language", "en")
+        return self.engine.muhurta(ask, charts)
+
+    #: The numerology tools, and which fields each one asks for.
+    NUMBER_TOOLS = (
+        ("personal", {"en": "Personal year, month and day", "hi": "व्यक्तिगत वर्ष, माह और दिन"}, ()),
+        ("pair", {"en": "Two people together", "hi": "दो व्यक्ति साथ"}, ()),
+        ("business", {"en": "A business name", "hi": "व्यापार का नाम"}, ("text",)),
+        ("phone", {"en": "A mobile number", "hi": "मोबाइल नंबर"}, ("text",)),
+        ("vehicle", {"en": "A vehicle number", "hi": "वाहन नंबर"}, ("text",)),
+        ("house", {"en": "A house number", "hi": "मकान नंबर"}, ("text",)),
+    )
+
+    def number_tools(self) -> list[dict]:
+        return [{"kind": k, "name": name, "needs": list(needs)} for k, name, needs in self.NUMBER_TOOLS]
+
+    def numbers(self, request: dict) -> dict:
+        """One of the numerology tools, answered for a saved person (or two, for the pair tool)."""
+        kind = request.get("kind", "personal")
+        if kind not in dict((k, n) for k, n, _ in self.NUMBER_TOOLS):
+            raise ValidationError(f"There is no {kind!r} tool.")
+        who = self.person(request.get("person_id", ""))
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+
+        ask = {"kind": kind, "dob": who["date"]}
+        if kind == "pair":
+            other = self.person(request.get("other_id", ""))
+            if other is None or other["id"] == who["id"]:
+                raise ValidationError("Choose two different people.")
+            ask.update({"a_name": who["name"], "a_dob": who["date"],
+                        "b_name": other["name"], "b_dob": other["date"]})
+        elif kind != "personal":
+            text = str(request.get("text", "")).strip()
+            if not text:
+                raise ValidationError("Type the name or number to look at.")
+            ask["text"] = text
+        else:
+            ask["on"] = request.get("on") or date.today().isoformat()
+        return self.engine.number_tools(ask)
+
+    def chinese(self, person_id: str) -> dict:
+        """The Chinese side of a saved person: lunar birth date, Zi Wei Dou Shu, Nine Star Ki, Tong Shu."""
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+        ask = {k: who[k] for k in ("date", "time", "lat", "lon", "tz")}
+        ask["gender"] = who.get("gender", "M")
+        return self.engine.chinese_more(ask)
 
     # --- readings as files ------------------------------------------------------------------------
 

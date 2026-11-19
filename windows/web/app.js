@@ -47,6 +47,9 @@ function drawPeople() {
    itself when the language changes - so this list is the one place a new tool has to be registered. */
 const TOOLS = [
   { name: "milan", label: "milan", sub: "milan_sub", open: () => showMilan() },
+  { name: "muhurta", label: "muhurta", sub: "muhurta_sub", open: () => showMuhurta() },
+  { name: "numbers", label: "numbers", sub: "numbers_sub", open: () => showNumbers() },
+  { name: "chinese", label: "chinese", sub: "chinese_sub", open: () => showChinese() },
 ];
 
 function drawTools() {
@@ -102,12 +105,12 @@ async function timeZoneList() {
  * certificate sometimes names a village the list does not have, and because showing the numbers is how
  * someone checks the right place was chosen.
  */
-function placeField(existing) {
+function placeField(existing, prefix = "f", label = t("birthplace")) {
   const input = el("input", {
-    id: "f-place", name: "place", autocomplete: "off",
+    id: `${prefix}-place`, name: "place", autocomplete: "off",
     placeholder: t("place_hint"), value: existing?.place ?? "",
   });
-  const results = el("div", { className: "results", id: "place-results" });
+  const results = el("div", { className: "results" });
 
   let token = 0;
   const run = async () => {
@@ -121,9 +124,9 @@ function placeField(existing) {
         className: "result", type: "button",
         onclick: () => {
           input.value = place.label;
-          $("#f-lat").value = place.lat;
-          $("#f-lon").value = place.lon;
-          $("#f-tz").value = place.tz;
+          $(`#${prefix}-lat`).value = place.lat;
+          $(`#${prefix}-lon`).value = place.lon;
+          $(`#${prefix}-tz`).value = place.tz;
           results.replaceChildren();
         },
       },
@@ -136,7 +139,7 @@ function placeField(existing) {
   input.addEventListener("blur", () => setTimeout(() => results.replaceChildren(), 200));
 
   return el("div", { className: "field wide place-field" },
-    el("label", { htmlFor: "f-place" }, t("birthplace")),
+    el("label", { htmlFor: `${prefix}-place` }, label),
     input, results);
 }
 
@@ -508,6 +511,220 @@ function drawMatch(into, m) {
     into.append(el("h3", { className: "panel-heading" }, t("readings", m.sections.length)),
       sectionsPanel(m.sections, lang()));
   }
+}
+
+/* --- Muhurta ------------------------------------------------------------------------------ */
+
+/* A screen with four questions and one answer. The people are optional and the note says why they
+   matter: Tarabala and Chandrabala are counted from each person's own Moon, so naming the couple can
+   take a fortnight of windows down to none - which is a true answer, not a broken screen, and the
+   empty state says so rather than showing nothing. */
+function showMuhurta() {
+  screen = { name: "muhurta", redraw: () => showMuhurta() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const today = new Date();
+  const iso = (d) => d.toISOString().slice(0, 10);
+  const later = new Date(today.getTime() + 30 * 86400000);
+
+  const events = el("select", { id: "mu-event" });
+  api().muhurta_events().then((list) => events.append(
+    ...list.map((e) => el("option", { value: e.event, textContent: e.name[lang()] ?? e.name.en }))));
+
+  const chosen = new Set();
+  const peopleBoxes = el("div", { className: "checks" }, ...people.map((p) => {
+    const box = el("input", { type: "checkbox", id: `mu-p-${p.id}` });
+    box.onchange = () => (box.checked ? chosen.add(p.id) : chosen.delete(p.id));
+    return el("label", { className: "check", htmlFor: `mu-p-${p.id}` }, box, el("span", {}, p.name));
+  }));
+
+  const result = el("div", { id: "muhurta-result" });
+  const go = el("button", { className: "primary" }, t("find_times"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("searching")));
+    try {
+      const found = await api().muhurta({
+        event: $("#mu-event").value,
+        from: $("#mu-from").value.trim(),
+        to: $("#mu-to").value.trim(),
+        lat: $("#mu-lat").value.trim(),
+        lon: $("#mu-lon").value.trim(),
+        tz: $("#mu-tz").value.trim(),
+        people: [...chosen],
+      });
+      drawMuhurta(result, found);
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  $("#main").replaceChildren(
+    el("h2", {}, t("muhurta")),
+    el("p", { className: "lede" }, t("muhurta_sub")),
+    el("div", { className: "fields" },
+      el("div", { className: "field" }, el("label", { htmlFor: "mu-event" }, t("what_for")), events),
+      el("div", { className: "field" }),
+      field(t("from_date"), "from", { value: iso(today) }),
+      field(t("to_date"), "to", { value: iso(later) }),
+      placeField(null, "mu", t("where")),
+      field(t("latitude"), "lat", { placeholder: "25.3176" }),
+      field(t("longitude"), "lon", { placeholder: "82.9739" }),
+      field(t("time_zone"), "tz", { placeholder: "Asia/Kolkata", list: "zones" })),
+    people.length
+      ? el("div", { className: "card" },
+          el("h3", {}, t("who_involved")), peopleBoxes,
+          el("p", { className: "note" }, t("who_involved_note")))
+      : "",
+    el("div", { className: "row" }, go),
+    result,
+  );
+  // The muhurta form uses the same ids with its own prefix, so its fields are mu-from, mu-lat and so on.
+  for (const name of ["from", "to", "lat", "lon", "tz"]) {
+    const input = $(`#f-${name}`);
+    input.id = `mu-${name}`;
+    input.previousElementSibling.htmlFor = `mu-${name}`;
+  }
+  timeZoneList().then((list) => {
+    document.getElementById("zones")?.remove();
+    document.body.append(list);
+  });
+}
+
+function drawMuhurta(into, found) {
+  const windows = found.all_windows || [];
+  if (!windows.length) {
+    into.replaceChildren(el("p", { className: "note" }, t("no_windows", found.event_label || "")));
+    return;
+  }
+  const pick = (w, key) => (lang() === "hi" && w[`${key}_hi`]) || w[key];
+  const list = (items) => items.join("; ");
+
+  into.replaceChildren(
+    el("h3", { className: "panel-heading" }, t("windows_found", windows.length)),
+    el("div", { className: "card" },
+      el("table", { className: "section-table wide" },
+        el("thead", {}, el("tr", {},
+          el("th", {}, t("window_when")), el("th", {}, t("window_detail")),
+          el("th", {}, t("supports")), el("th", {}, t("weaknesses")))),
+        el("tbody", {}, ...windows.map((w) => el("tr", {},
+          el("th", {}, `${w.start_local} – ${w.end_local.slice(11)} · ${t("minutes_n", w.minutes)}`),
+          el("td", {}, `${pick(w, "weekday")} · ${pick(w, "nakshatra")} · ${pick(w, "lagna")}`),
+          el("td", { className: "muted-cell" }, list(pick(w, "supports") || [])),
+          el("td", { className: "muted-cell" }, list(pick(w, "weaknesses") || []))))))),
+    found.disclaimer ? el("p", { className: "note" }, found.disclaimer) : "",
+  );
+}
+
+/* --- numerology --------------------------------------------------------------------------- */
+
+function showNumbers() {
+  screen = { name: "numbers", redraw: () => showNumbers() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("numbers")), el("p", { className: "lede" }, t("numbers_sub")));
+  if (!people.length) {
+    main.append(el("p", { className: "note" }, t("nobody_yet")),
+      el("div", { className: "row" },
+        el("button", { className: "primary", onclick: () => showAddPerson() }, t("add_person"))));
+    return;
+  }
+
+  const result = el("div", { id: "numbers-result" });
+  const tools = el("select", { id: "n-kind" });
+  const person = el("select", { id: "n-person" });
+  person.append(...people.map((p) => el("option", { value: p.id, textContent: p.name })));
+  const other = el("select", { id: "n-other" });
+  other.append(...people.map((p) => el("option", { value: p.id, textContent: p.name })));
+  if (people.length > 1) other.value = people[1].id;
+
+  const otherField = el("div", { className: "field" }, el("label", { htmlFor: "n-other" }, t("second_person")), other);
+  const textField = field(t("the_text"), "n-text", { placeholder: "9876543210" });
+
+  // Each tool asks for different things, so the form shows only what the chosen one needs.
+  const fit = (needs, kind) => {
+    otherField.style.display = kind === "pair" ? "" : "none";
+    textField.style.display = needs.includes("text") ? "" : "none";
+  };
+
+  api().number_tools().then((list) => {
+    tools.append(...list.map((k) => el("option", { value: k.kind, textContent: k.name[lang()] ?? k.name.en })));
+    const byKind = Object.fromEntries(list.map((k) => [k.kind, k.needs]));
+    fit(byKind[tools.value] || [], tools.value);
+    tools.onchange = () => fit(byKind[tools.value] || [], tools.value);
+  });
+
+  const go = el("button", { className: "primary" }, t("look"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("matching")));
+    try {
+      const out = await api().numbers({
+        kind: tools.value, person_id: person.value,
+        other_id: other.value, text: $("#f-n-text").value.trim(),
+      });
+      result.replaceChildren(sectionsPanel(out.sections || [], lang()));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  main.append(
+    el("div", { className: "fields" },
+      el("div", { className: "field" }, el("label", { htmlFor: "n-kind" }, t("tool")), tools),
+      el("div", { className: "field" }, el("label", { htmlFor: "n-person" }, t("person")), person),
+      otherField, textField),
+    el("div", { className: "row" }, go),
+    result,
+  );
+}
+
+/* --- the Chinese side --------------------------------------------------------------------- */
+
+/* Eleven sections, all of them already written by the engine in both languages, so this screen is a
+   person chooser and nothing else. */
+function showChinese() {
+  screen = { name: "chinese", redraw: () => showChinese() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("chinese")), el("p", { className: "lede" }, t("chinese_sub")));
+  if (!people.length) {
+    main.append(el("p", { className: "note" }, t("nobody_yet")),
+      el("div", { className: "row" },
+        el("button", { className: "primary", onclick: () => showAddPerson() }, t("add_person"))));
+    return;
+  }
+
+  const result = el("div", { id: "chinese-result" });
+  const person = el("select", { id: "c-person" });
+  person.append(...people.map((p) => el("option", { value: p.id, textContent: p.name })));
+
+  const run = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      const out = await api().chinese(person.value);
+      result.replaceChildren(sectionsPanel(out.sections || [], lang()));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+  person.onchange = run;
+
+  main.append(
+    el("div", { className: "fields" },
+      el("div", { className: "field" }, el("label", { htmlFor: "c-person" }, t("person")), person)),
+    result,
+  );
+  run();
 }
 
 /* --- start -------------------------------------------------------------------------------- */

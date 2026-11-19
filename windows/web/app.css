@@ -356,3 +356,12 @@ nav#tools { padding: 8px; border-top: 1px solid var(--line); }
 .muted-cell { color: var(--muted); font-size: 13px; }
 #milan-result table th { width: auto; }
 #milan-result thead th { color: var(--muted); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* --- choosing several people ------------------------------------------------------------------ */
+
+.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.check { display: flex; align-items: center; gap: 7px; color: var(--ink); font-size: 14px; cursor: pointer; }
+.check input { min-height: 0; width: 16px; height: 16px; accent-color: var(--accent); }
+
+#muhurta-result .section-table th { font-weight: 500; }
+#muhurta-result .section-table tbody th { white-space: normal; font-variant-numeric: tabular-nums; }
