@@ -11,7 +11,7 @@ import os
 import sys
 from pathlib import Path
 
-from .api import Api
+from .api import WINDOW, Api
 
 TITLE = "Gaurav Jyotish"
 
@@ -33,7 +33,7 @@ def main() -> int:
 
     api = Api()
     index = web_dir() / "index.html"
-    webview.create_window(
+    window = webview.create_window(
         TITLE,
         url=index.as_uri(),
         js_api=api,
@@ -41,6 +41,8 @@ def main() -> int:
         height=820,
         min_size=(900, 640),
     )
+    # The file picker is the one thing the API cannot do without the window itself.
+    WINDOW.append(window)
     # JYOTISH_DEBUG opens the WebView2 developer tools, which is the only way to see a JavaScript error.
     webview.start(debug=bool(os.environ.get("JYOTISH_DEBUG")))
     return 0

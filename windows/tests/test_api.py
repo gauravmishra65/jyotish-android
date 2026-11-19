@@ -272,6 +272,83 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(_safe_filename("नेहा अग्रवाल"), "नेहा अग्रवाल")   # left as it is: NTFS is fine with it
         self.assertEqual(_safe_filename("///"), "Report")
 
+    # --- backup through the API -------------------------------------------------------------------
+
+    def test_backup_and_restore_through_the_api(self):
+        import os
+        os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            self.api.add_person(RAVI)
+            self.api.add_person(dict(NEHA))
+            written = self.api.backup("a good password")
+            self.assertEqual(written["count"], 2)
+
+            empty = Api(store=Store(Path(self._tmp.name) / "other"), engine=self.engine)
+            done = empty.restore(written["path"], "a good password")
+            self.assertEqual((done["added"], done["updated"], done["skipped"]), (2, 0, 0))
+            self.assertEqual(sorted(p["name"] for p in empty.people()),
+                             sorted([RAVI["name"], NEHA["name"]]))
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_a_restore_adds_rather_than_replacing(self):
+        """Somebody restoring an old phone backup onto a desktop they have been using must not lose the
+        desktop's work to do it."""
+        import os
+        os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            self.api.add_person(RAVI)
+            written = self.api.backup("a good password")
+
+            other = Api(store=Store(Path(self._tmp.name) / "other"), engine=self.engine)
+            kept = other.add_person(dict(NEHA))
+            done = other.restore(written["path"], "a good password")
+            self.assertEqual(done["added"], 1)
+            self.assertIn(kept["name"], [p["name"] for p in other.people()])
+            self.assertEqual(len(other.people()), 2)
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_backing_up_nobody(self):
+        with self.assertRaises(ValidationError):
+            self.api.backup("a good password")
+
+    def test_restoring_from_a_file_that_is_not_there(self):
+        with self.assertRaises(ValidationError):
+            self.api.restore(str(Path(self._tmp.name) / "nothing.gjb"), "a good password")
+
+    # --- settings -------------------------------------------------------------------------------
+
+    def test_a_setting_the_engine_would_reject_is_refused(self):
+        """A bad ayanamsa saved to settings.json would break every chart from then on, including after
+        a restart, with nothing on screen to say why."""
+        for key, value in (("ayanamsa", "nonsense"), ("house_system", "vehlow"),
+                           ("node", "neither"), ("language", "fr"), ("theme", "neon")):
+            with self.assertRaises(ValidationError, msg=f"{key}={value} was accepted"):
+                self.api.set_setting(key, value)
+
+    def test_every_offered_setting_value_is_one_the_engine_takes(self):
+        """The screen offers what this list holds, so the list has to be right."""
+        saved = self.api.add_person(RAVI)
+        for key in ("ayanamsa", "house_system", "node"):
+            for value, _ in Api.CHOICES[key]:
+                self.api.set_setting(key, value)
+                self.assertTrue(self.api.chart(saved["id"])["vedic"]["lagna"]["sign"],
+                                f"{key}={value} did not produce a chart")
+
+    def test_the_report_credits_reach_the_report(self):
+        import os
+        os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            saved = self.api.add_person(RAVI)
+            self.api.set_setting("report_by", "Pandit Someone")
+            self.api.set_setting("report_site", "example.test")
+            html = Path(self.api.make_report(saved["id"], "chandra")["path"]).read_text(encoding="utf-8")
+            self.assertIn("Pandit Someone", html)
+            self.assertIn("example.test", html)
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
     def test_about(self):
         about = self.api.about()
         self.assertTrue(about["engine"])

@@ -50,6 +50,7 @@ const TOOLS = [
   { name: "muhurta", label: "muhurta", sub: "muhurta_sub", open: () => showMuhurta() },
   { name: "numbers", label: "numbers", sub: "numbers_sub", open: () => showNumbers() },
   { name: "chinese", label: "chinese", sub: "chinese_sub", open: () => showChinese() },
+  { name: "settings", label: "settings", sub: "settings_sub", open: () => showSettings() },
 ];
 
 function drawTools() {
@@ -727,14 +728,154 @@ function showChinese() {
   run();
 }
 
+/* --- settings ----------------------------------------------------------------------------- */
+
+/* Which values a setting may take is Python's business, not this screen's: an ayanamsa the engine does
+   not know would break every chart from then on, including after a restart, with nothing on screen to
+   say why. So the options are fetched and the save is checked at the other end. */
+async function showSettings() {
+  screen = { name: "settings", redraw: () => showSettings() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("settings")), el("p", { className: "lede" }, t("settings_sub")));
+
+  const [choices, settings, about] = await Promise.all([
+    api().setting_choices(), api().settings(), api().about(),
+  ]);
+  const byKey = Object.fromEntries(choices.map((c) => [c.key, c.options]));
+
+  const note = el("span", { className: "saved-note" });
+  const chooser = (key) => {
+    const select = el("select", { id: `s-${key}` });
+    select.append(...byKey[key].map((o) =>
+      el("option", { value: o.value, textContent: o.name[lang()] ?? o.name.en })));
+    select.value = settings[key];
+    select.onchange = async () => {
+      try {
+        await api().set_setting(key, select.value);
+        note.textContent = t("saved");
+        setTimeout(() => (note.textContent = ""), 1500);
+        if (key === "theme") applyTheme(select.value);
+      } catch (e) {
+        select.value = settings[key];
+        note.textContent = String(e.message || e).replace(/^.*Error:\s*/s, "");
+      }
+    };
+    return el("div", { className: "field" }, el("label", { htmlFor: `s-${key}` }, t(key)), select);
+  };
+
+  const credit = (key) => {
+    const input = el("input", { id: `s-${key}`, value: settings[key] ?? "" });
+    input.onchange = async () => {
+      await api().set_setting(key, input.value);
+      note.textContent = t("saved");
+      setTimeout(() => (note.textContent = ""), 1500);
+    };
+    return el("div", { className: "field" }, el("label", { htmlFor: `s-${key}` }, t(key)), input);
+  };
+
+  main.append(
+    el("div", { className: "card" },
+      el("h3", {}, t("calculation")),
+      el("div", { className: "fields" },
+        chooser("ayanamsa"), chooser("house_system"), chooser("node"), chooser("orb_scale")),
+      el("p", { className: "note" }, t("calc_note"))),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("appearance")),
+      el("div", { className: "fields" }, chooser("theme"), chooser("chart_style"))),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("credits")),
+      el("div", { className: "fields" }, credit("report_by"), credit("report_site"))),
+
+    el("p", { className: "note" }, note),
+    backupCard(),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("about")),
+      rows([
+        [t("engine_version"), about.engine],
+        ["Python", about.python],
+        [t("where_data"), about.data_dir],
+        [t("where_reports"), about.reports_dir],
+      ]),
+      el("p", { className: "note" }, about.licences)),
+  );
+}
+
+function applyTheme(theme) {
+  if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+  else delete document.documentElement.dataset.theme;
+}
+
+/* Backup and restore.
+ *
+ * The file is the Android app's format, so one taken on the phone opens here and the other way round -
+ * which is the only reason most people want a backup at all. The password is never stored, and the
+ * note says what that means before the box is typed in rather than after the file cannot be opened.
+ */
+function backupCard() {
+  const status = el("p", { className: "note", id: "backup-status" });
+  const password = el("input", { type: "password", id: "b-password", autocomplete: "new-password" });
+  let chosenFile = null;
+
+  const say = (text, bad = false) => {
+    status.className = bad ? "problem" : "note";
+    status.textContent = text;
+  };
+
+  const write = el("button", { className: "primary" }, t("make_backup"));
+  write.onclick = async () => {
+    try {
+      const done = await api().backup(password.value);
+      say(t("backup_done", done.count, done.file));
+    } catch (e) {
+      say(String(e.message || e).replace(/^.*Error:\s*/s, ""), true);
+    }
+  };
+
+  const chosenName = el("span", { className: "chosen" });
+  const choose = el("button", {}, t("choose_file"));
+  const restore = el("button", {}, t("restore_now"));
+  restore.disabled = true;
+
+  choose.onclick = async () => {
+    chosenFile = await api().pick_backup();
+    chosenName.textContent = chosenFile ? chosenFile.split(/[\\/]/).pop() : "";
+    restore.disabled = !chosenFile;
+  };
+  restore.onclick = async () => {
+    try {
+      const done = await api().restore(chosenFile, password.value);
+      say(t("restore_done", done.added, done.updated, done.skipped));
+      people = await api().people();
+      drawPeople();
+    } catch (e) {
+      say(String(e.message || e).replace(/^.*Error:\s*/s, ""), true);
+    }
+  };
+
+  return el("div", { className: "card" },
+    el("h3", {}, t("backup")),
+    el("p", { className: "note" }, t("backup_note")),
+    el("div", { className: "fields" },
+      el("div", { className: "field wide" },
+        el("label", { htmlFor: "b-password" }, t("password")), password)),
+    el("div", { className: "row" }, write, choose, chosenName, restore),
+    el("p", { className: "note" }, t("restore_note")),
+    status);
+}
+
 /* --- start -------------------------------------------------------------------------------- */
 
 async function start() {
   const settings = await api().settings();
   setLang(settings.language);
-  if (settings.theme === "dark" || settings.theme === "light") {
-    document.documentElement.dataset.theme = settings.theme;
-  }
+  applyTheme(settings.theme);
   people = await api().people();
   drawPeople();
   drawTools();

@@ -365,3 +365,10 @@ nav#tools { padding: 8px; border-top: 1px solid var(--line); }
 
 #muhurta-result .section-table th { font-weight: 500; }
 #muhurta-result .section-table tbody th { white-space: normal; font-variant-numeric: tabular-nums; }
+
+/* --- settings --------------------------------------------------------------------------------- */
+
+.saved-note { color: var(--good); }
+.chosen { color: var(--muted); font-size: 13px; }
+.card .fields { max-width: none; }
+.card > .row:last-of-type { margin-top: 14px; }

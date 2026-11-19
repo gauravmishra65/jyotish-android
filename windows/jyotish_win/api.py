@@ -19,6 +19,9 @@ from .bridge import Engine, chart_key
 from .places import places
 from .storage import Store, _write_atomic, reports_dir
 
+#: The window, once there is one. Only the file picker needs it, and only when running for real.
+WINDOW: list = []
+
 #: What a saved person must have before a chart can be built from them.
 REQUIRED = ("name", "date", "time", "lat", "lon", "tz")
 
@@ -330,7 +333,10 @@ class Api:
 
         request = self.chart_request(who)
         request["kind"] = kind
-        request["lang"] = self.settings().get("language", "en")
+        settings = self.settings()
+        request["lang"] = settings.get("language", "en")
+        request["by"] = settings.get("report_by") or "Gaurav Mishra"
+        request["site"] = settings.get("report_site") or "authorgaurav.com"
         built = self.engine.special_report(request)
         html = built.get("html")
         if not html:
@@ -366,7 +372,134 @@ class Api:
         files = sorted(folder.glob("*.html"), key=lambda f: f.stat().st_mtime, reverse=True)
         return [{"file": f.name, "path": str(f), "when": int(f.stat().st_mtime)} for f in files[:40]]
 
-    # --- settings -------------------------------------------------------------------------------
+    # --- backup and restore -------------------------------------------------------------------
+
+    def backup(self, password: str) -> dict:
+        """Write every saved person to an encrypted file in the reports folder.
+
+        The format is the phone's, so a file written here restores on the Android app and the other way
+        round. The password is never stored: a forgotten one means a lost file, and the screen says so
+        before it asks.
+        """
+        from . import backup as fmt
+        people = self.store.profiles()
+        if not people:
+            raise ValidationError("There is nobody saved to back up.")
+        blob = fmt.encode(people, password)
+        path = reports_dir() / f"Gaurav Jyotish backup {date.today().isoformat()}.gjb"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "wb") as f:
+            f.write(blob)
+        return {"path": str(path), "file": path.name, "count": len(people)}
+
+    def restore(self, path: str, password: str) -> dict:
+        """Read a backup and add what it holds to this computer.
+
+        People already here are kept: a restore adds and updates rather than replacing, because somebody
+        restoring an old phone backup onto a desktop they have been using should not lose the desktop's
+        work to do it. Matching is by id, which both apps generate and neither reuses.
+        """
+        from . import backup as fmt
+        target = Path(path)
+        if not target.is_file():
+            raise ValidationError("There is no file there.")
+        if target.stat().st_size > 8 * 1024 * 1024:
+            raise ValidationError("That file is far too large to be a backup.")
+        incoming = fmt.decode(target.read_bytes(), password)
+
+        existing = {p.get("id"): p for p in self.store.profiles()}
+        added = updated = skipped = 0
+        for person in incoming:
+            try:
+                clean = validate(person)
+            except ValidationError:
+                skipped += 1                 # a row the engine could not use; the rest still restore
+                continue
+            clean.setdefault("id", uuid.uuid4().hex[:12])
+            if clean["id"] in existing:
+                updated += 1
+            else:
+                added += 1
+            existing[clean["id"]] = clean
+        self.store.save_profiles(list(existing.values()))
+        return {"added": added, "updated": updated, "skipped": skipped, "total": len(existing)}
+
+    def pick_backup(self) -> str | None:
+        """The system file picker, so a backup can be restored from wherever the person keeps it."""
+        window = WINDOW[0] if WINDOW else None
+        if window is None:
+            return None
+        import webview
+        chosen = window.create_file_dialog(
+            webview.OPEN_DIALOG, allow_multiple=False,
+            file_types=("Gaurav Jyotish backup (*.gjb)", "All files (*.*)"))
+        return chosen[0] if chosen else None
+
+    # --- settings ---------------------------------------------------------------------------------
+
+    #: Every setting the screen offers, with the values the engine actually accepts. Keeping the list
+    #: here rather than in JavaScript means a value the engine would reject cannot reach it from a form.
+    CHOICES = {
+        "ayanamsa": (("lahiri", {"en": "Lahiri", "hi": "लाहिड़ी"}),
+                     ("true_chitra", {"en": "True Chitra", "hi": "ट्रू चित्रा"}),
+                     ("krishnamurti", {"en": "KP (Krishnamurti)", "hi": "केपी (कृष्णमूर्ति)"}),
+                     ("raman", {"en": "Raman", "hi": "रमन"})),
+        "house_system": (("placidus", {"en": "Placidus", "hi": "प्लेसिडस"}),
+                         ("whole", {"en": "Whole sign", "hi": "पूर्ण राशि"}),
+                         ("koch", {"en": "Koch", "hi": "कोख"}),
+                         ("equal", {"en": "Equal", "hi": "समान"}),
+                         ("regiomontanus", {"en": "Regiomontanus", "hi": "रेजियोमोंटेनस"}),
+                         ("campanus", {"en": "Campanus", "hi": "कैम्पेनस"}),
+                         ("porphyry", {"en": "Porphyry", "hi": "पोर्फिरी"})),
+        "node": (("mean", {"en": "Mean node", "hi": "मध्यम राहु"}),
+                 ("true", {"en": "True node", "hi": "स्पष्ट राहु"})),
+        "orb_scale": (("0.75", {"en": "Tight", "hi": "संकीर्ण"}),
+                      ("1.0", {"en": "Standard", "hi": "सामान्य"}),
+                      ("1.25", {"en": "Wide", "hi": "विस्तृत"})),
+        "chart_style": (("north", {"en": "North Indian", "hi": "उत्तर भारतीय"}),
+                        ("south", {"en": "South Indian", "hi": "दक्षिण भारतीय"})),
+        "theme": (("system", {"en": "Follow Windows", "hi": "विंडोज़ के अनुसार"}),
+                  ("light", {"en": "Light", "hi": "उजला"}),
+                  ("dark", {"en": "Dark", "hi": "गहरा"})),
+    }
+
+    #: Where the first option is not the right default. Orb width reads tight-standard-wide, which is
+    #: the order to show it in, but standard is what the engine has always used.
+    DEFAULTS = {"orb_scale": "1.0", "theme": "system"}
+
+    #: Settings that are free text rather than a choice.
+    TEXT_SETTINGS = ("report_by", "report_site")
+
+    def setting_choices(self) -> list[dict]:
+        return [{"key": key, "options": [{"value": v, "name": n} for v, n in options]}
+                for key, options in self.CHOICES.items()]
+
+    def settings(self) -> dict:
+        s = self.store.settings()
+        s.setdefault("language", "en")
+        for key, options in self.CHOICES.items():
+            s.setdefault(key, self.DEFAULTS.get(key, options[0][0]))
+        s.setdefault("report_by", "Gaurav Mishra")
+        s.setdefault("report_site", "authorgaurav.com")
+        return s
+
+    def set_setting(self, key: str, value) -> dict:
+        """Refuse a value the engine would reject rather than storing it and failing on the next chart.
+
+        A bad ayanamsa saved into settings.json would break every chart from then on, including after a
+        restart, and the person would have no way to see why. Checking here keeps that impossible.
+        """
+        if key in self.CHOICES:
+            allowed = [v for v, _ in self.CHOICES[key]]
+            if value not in allowed:
+                raise ValidationError(f"{value!r} is not one of: {', '.join(allowed)}")
+        elif key == "language":
+            if value not in ("en", "hi"):
+                raise ValidationError("The language is either 'en' or 'hi'.")
+        elif key in self.TEXT_SETTINGS:
+            value = str(value).strip()[:120]
+        self.store.set_setting(key, value)
+        return self.settings()
 
     # --- places ---------------------------------------------------------------------------------
 
@@ -392,17 +525,6 @@ class Api:
         """Offered by the form so a half-typed zone cannot reach the engine."""
         return time_zones()
 
-    def settings(self) -> dict:
-        s = self.store.settings()
-        s.setdefault("language", "en")
-        s.setdefault("chart_style", "north")
-        s.setdefault("theme", "light")
-        return s
-
-    def set_setting(self, key: str, value) -> dict:
-        self.store.set_setting(key, value)
-        return self.settings()
-
     # --- about ----------------------------------------------------------------------------------
 
     def about(self) -> dict:
@@ -411,7 +533,12 @@ class Api:
             "engine": self.engine.version(),
             "python": sys.version.split()[0],
             "data_dir": str(self.store.root),
+            "reports_dir": str(reports_dir()),
             "people": len(self.store.profiles()),
+            "licences": (
+                "Planetary positions: Swiss Ephemeris by Astrodienst AG. "
+                "Place names and time zones: GeoNames (CC BY 4.0). "
+                "The window: pywebview, on Microsoft WebView2."),
         }
 
     # --- plumbing -------------------------------------------------------------------------------

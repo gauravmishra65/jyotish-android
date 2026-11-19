@@ -157,6 +157,47 @@ const STRINGS = {
   chinese_sub:     { en: "Lunar date, Zi Wei, Nine Star Ki",
                      hi: "चंद्र तिथि, ज़ी वेई, नौ तारा की" },
 
+  // settings
+  settings:        { en: "Settings",                       hi: "सेटिंग्स" },
+  settings_sub:    { en: "Calculation, appearance and your data",
+                     hi: "गणना, रूप-रंग और आपका विवरण" },
+  calculation:     { en: "Calculation",                    hi: "गणना" },
+  ayanamsa:        { en: "Ayanamsa",                       hi: "अयनांश" },
+  house_system:    { en: "House system",                   hi: "भाव पद्धति" },
+  node:            { en: "Rahu and Ketu",                  hi: "राहु और केतु" },
+  orb_scale:       { en: "Aspect orbs",                    hi: "दृष्टि की सीमा" },
+  calc_note:       { en: "Changing these works out every chart again. Nothing already saved is lost.",
+                     hi: "ये बदलने पर हर कुंडली फिर से बनती है। सहेजा हुआ कुछ भी नहीं जाता।" },
+  appearance:      { en: "Appearance",                     hi: "रूप-रंग" },
+  theme:           { en: "Theme",                          hi: "रंग-रूप" },
+  chart_style:     { en: "Chart style",                    hi: "कुंडली शैली" },
+  credits:         { en: "On every report",                hi: "हर रिपोर्ट पर" },
+  report_by:       { en: "Prepared by",                    hi: "द्वारा तैयार" },
+  report_site:     { en: "Website",                        hi: "वेबसाइट" },
+  saved:           { en: "Saved",                          hi: "सहेजा गया" },
+
+  // backup
+  backup:          { en: "Backup",                         hi: "बैकअप" },
+  backup_note:     { en: "Everyone saved here, in one encrypted file. The same file opens on the "
+                       + "Android app. The password is not stored anywhere: if it is lost, so is the file.",
+                     hi: "यहाँ सहेजे सभी लोग, एक एन्क्रिप्टेड फ़ाइल में। यही फ़ाइल एंड्रॉइड ऐप में भी खुलती है। "
+                       + "पासवर्ड कहीं नहीं रखा जाता: खो गया तो फ़ाइल भी गई।" },
+  password:        { en: "Password (at least 6 characters)", hi: "पासवर्ड (कम से कम 6 अक्षर)" },
+  make_backup:     { en: "Write the backup",               hi: "बैकअप बनाएँ" },
+  backup_done:     { en: "%1 people saved as %2",          hi: "%1 लोग %2 में सहेजे गए" },
+  restore:         { en: "Restore",                        hi: "पुनर्स्थापित करें" },
+  restore_note:    { en: "A restore adds to what is already here and never removes anyone.",
+                     hi: "पुनर्स्थापना पहले से मौजूद विवरण में जोड़ती है, किसी को हटाती नहीं।" },
+  choose_file:     { en: "Choose a backup file",           hi: "बैकअप फ़ाइल चुनें" },
+  restore_now:     { en: "Restore from this file",         hi: "इस फ़ाइल से पुनर्स्थापित करें" },
+  restore_done:    { en: "%1 added, %2 updated, %3 skipped", hi: "%1 जोड़े, %2 बदले, %3 छोड़े" },
+
+  // about
+  about:           { en: "About",                          hi: "जानकारी" },
+  engine_version:  { en: "Engine",                         hi: "इंजन" },
+  where_data:      { en: "Your details are in",            hi: "आपका विवरण यहाँ है" },
+  where_reports:   { en: "Reports are written to",         hi: "रिपोर्ट यहाँ बनती हैं" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

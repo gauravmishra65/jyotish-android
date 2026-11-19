@@ -39,13 +39,15 @@ jobs:
         # If pyswisseph ever drops its wheel this step fails loudly rather than quietly building from source.
         run: |
           python -m pip install --upgrade pip
-          python -m pip install --only-binary=:all: pyswisseph==2.10.3.2 tzdata
+          python -m pip install --only-binary=:all: pyswisseph==2.10.3.2 tzdata cryptography
           python -c "import swisseph; print('swisseph', swisseph.version)"
 
       - name: The engine answers as it does on Linux
         run: python windows/check_engine.py
 
-      - name: The bridge and the storage layer
+      - name: The bridge, the storage layer and the interface's contract with the engine
+        # windows-latest ships a JDK, so the backup test's phone-compatibility check runs here too:
+        # the Android app's own crypto, opening a file this build wrote.
         run: python -m unittest discover -s windows/tests -v
 
       - name: The full verification suite, on Windows
