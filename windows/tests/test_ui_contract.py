@@ -203,8 +203,8 @@ class WebAssetsTest(unittest.TestCase):
         for field in ("-lat`).value", "-lon`).value", "-tz`).value"):
             self.assertIn(field, picker, f"picking a place does not set the {field.split('`')[0]} field")
         # The same picker serves the birth form and the muhurta form, which is why it takes a prefix.
-        self.assertIn('function placeField(existing, prefix = "f")', js)
-        self.assertIn('placeField(null, "mu")', js)
+        self.assertIn('function placeField(existing, prefix = "f"', js)
+        self.assertIn('placeField(null, "mu"', js)
 
     # --- both languages -------------------------------------------------------------------------
 
