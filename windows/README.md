@@ -23,11 +23,11 @@ remain correct. CI tests the engine on both, which is what keeps that true.
 | `jyotish_win/places.py` | 70,000 birthplaces offline, ranked as `Places.kt` ranks them. |
 | `jyotish_win/backup.py` | The Android app's backup format, byte for byte. |
 | `jyotish_win/licence.py` | Unlock codes, verified against a public key. It cannot make one. |
-| `jyotish_win/api.py` | Everything the interface is allowed to do. |
+| `jyotish_win/api.py` | Everything the interface is allowed to do - 50 methods, all tested. |
 | `jyotish_win/main.py` | The window. Deliberately tiny, because it is the one untestable file. |
 | `web/` | The interface: one page, a stylesheet and four scripts, no framework. |
 | `packaging/` | The icon, the PyInstaller spec and the Inno Setup installer script. |
-| `tests/` | 129 tests, none of which need a window. |
+| `tests/` | 158 tests, none of which need a window. |
 | `places.tsv` | The same file the Android app ships. |
 
 The engine itself is not copied here. `bridge.py` finds it in the Android tree, because there is one
@@ -36,14 +36,19 @@ engine and two copies would drift apart within a week. The packaged build takes 
 ## What the app does
 
 Add people and see their chart, drawn North or South Indian. All 66 reading sections and all 16
-divisional charts, in English or Hindi. Kundali Milan. Muhurta, optionally checked against the people
-involved. Numerology and the Chinese side. Nine reports, each saved as one self-contained HTML page in
-`Documents\Gaurav Jyotish`, which is where Windows prints to PDF from. Settings for ayanamsa, house
-system, node and orb width. An encrypted backup that opens on the phone.
+divisional charts, plus one for any division by either counting rule. Today's panchang with the
+choghadiya and the periods to avoid, read from where you are rather than where you were born. The
+three-year outlook and the predictions by area of life. Kundali Milan, and several people side by side.
+Muhurta, optionally checked against the people involved. Prashna, KP number horary and Western horary.
+Numerology, the name's numbers, and the Chinese side with the Flying Stars. Life events and a birth-time
+check against them. Notes. Nine reports, each saved as one self-contained HTML page in `Documents\Gaurav
+Jyotish`, which is where Windows prints to PDF from. Settings for ayanamsa, house system, node and orb
+width. An encrypted backup that opens on the phone.
 
-Both languages everywhere, not only in the readings: every word the interface says of its own is in
+Both languages everywhere, not only in the readings. Every word the interface says of its own is in
 `web/strings.js`, in English and Hindi, taking the Android app's wording wherever the same label exists
-there.
+there - and the values are translated too, through the engine's own Hindi names, so a Hindi screen says
+वृश्चिक rather than Scorpio in the table under a chart that already says वृश्चिक in the drawing.
 
 ## Running it from a checkout
 
@@ -88,7 +93,7 @@ runner, so everything that could be wrong in a way worth catching was pushed dow
 `bridge.py`, `storage.py`, `places.py`, `backup.py` and `licence.py`, which are tested. `main.py` opens a
 window and hands over the API.
 
-Three test files are worth knowing about:
+Four test files are worth knowing about:
 
 - `test_ui_contract.py` pins the chart fields the JavaScript reads, and that every word the interface
   says exists in both languages. A key the interface expects and the engine does not have fails silently
@@ -100,7 +105,13 @@ Three test files are worth knowing about:
 - `test_licence.py` does the same for unlock codes, with a throwaway key pair. No private key and no real
   code appears in any test.
 
-Both of those skip where there is no JDK and run where there is one, including on `windows-latest`.
+- `test_wording.py` walks every surface the app can show - all 66 sections, the outlook, the
+  predictions, the matching, the muhurta, the prashna, the group comparison, the birth-time check and
+  all nine reports in both languages - and fails on death, disease, divorce or a guarantee. Its last
+  test feeds the checker sentences that must be caught and sentences that must not, because a test that
+  can only pass is not a test.
+
+The two Java ones skip where there is no JDK and run where there is one, including on `windows-latest`.
 
 ## The demo
 
