@@ -410,6 +410,61 @@ class ApiTest(unittest.TestCase):
             for lang in ("en", "hi"):
                 self.assertTrue(name.get(lang), f"{key} has no {lang} name")
 
+    # --- the last few tools -----------------------------------------------------------------------
+
+    def test_western_horary_answers_for_the_moment_it_was_asked(self):
+        self.api.add_person(RAVI)
+        out = self.api.horary("Will the house sell?")
+        self.assertTrue(out["sections"])
+        self.assertEqual(len(out["houses"]), 12)
+        with self.assertRaises(ValidationError):
+            self.api.horary("   ")
+
+    def test_a_custom_varga_says_it_is_not_the_classical_one(self):
+        """The whole value of the tool is knowing which chart you are looking at, so the engine's note
+        has to come through rather than being tidied away."""
+        saved = self.api.add_person(RAVI)
+        out = self.api.custom_varga(saved["id"], 7, "cyclic")
+        self.assertIn("Lagna", out["signs"])
+        self.assertEqual(len(out["signs"]), 10)
+        said = str(out["sections"]).lower()
+        self.assertIn("will not match", said)
+
+    def test_a_division_outside_what_the_engine_takes_is_refused(self):
+        saved = self.api.add_person(RAVI)
+        for n in (1, 0, -9, 500, "nine"):
+            with self.assertRaises(ValidationError, msg=f"{n!r} was accepted"):
+                self.api.custom_varga(saved["id"], n)
+        with self.assertRaises(ValidationError):
+            self.api.custom_varga(saved["id"], 9, "my own way")
+
+    def test_the_name_numbers_come_with_their_disclaimer(self):
+        """Suggestions, not instructions. Nobody should change their name because an app said so."""
+        saved = self.api.add_person(RAVI)
+        out = self.api.name_numbers(saved["id"])
+        self.assertTrue(1 <= out["mulank"] <= 9)
+        self.assertTrue(out["disclaimer"])
+        self.assertIn("not been shown", out["disclaimer"])
+        for suggestion in out["suggestions"]:
+            self.assertTrue(suggestion["spelling"])
+
+    def test_notes_are_kept_with_the_person(self):
+        saved = self.api.add_person(RAVI)
+        self.assertEqual(self.api.notes(saved["id"]), "")
+        self.api.set_notes(saved["id"], "Asked about the house in March.")
+        again = Api(store=Store(self.api.store.root), engine=self.engine)
+        self.assertEqual(again.notes(saved["id"]), "Asked about the house in March.")
+
+    def test_notes_do_not_disturb_the_chart(self):
+        """Everything saved about a person goes into the chart request unless it is deliberately left
+        out, and a note would change the cache key and quietly rebuild every chart on every keystroke."""
+        saved = self.api.add_person(RAVI)
+        before = self.api.chart_request(self.api.person(saved["id"]))
+        self.api.set_notes(saved["id"], "a long note " * 50)
+        self.api.set_events(saved["id"], [{"kind": "marriage", "date": "2014-02-09"}])
+        after = self.api.chart_request(self.api.person(saved["id"]))
+        self.assertEqual(before, after)
+
     # --- backup through the API -------------------------------------------------------------------
 
     def test_backup_and_restore_through_the_api(self):

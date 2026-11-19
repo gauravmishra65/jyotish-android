@@ -487,6 +487,96 @@ function drawTimeCheck(into, out) {
     out.note ? el("p", { className: "note" }, bi(out.note, lang())) : "");
 }
 
+/* Notes: a box that saves itself. There is no Save button because there is nothing to decide - the
+   text is the person's own and nobody wants to be asked whether they meant it. */
+function notesPanel(id) {
+  const box = el("textarea", { id: "notes", rows: 4, placeholder: "" });
+  const saved = el("span", { className: "saved-note" });
+  let pending;
+  box.addEventListener("input", () => {
+    clearTimeout(pending);
+    pending = setTimeout(async () => {
+      await api().set_notes(id, box.value);
+      saved.textContent = t("saved");
+      setTimeout(() => (saved.textContent = ""), 1500);
+    }, 600);
+  });
+  api().notes(id).then((text) => (box.value = text || ""));
+  return el("div", { className: "card" },
+    el("h3", {}, t("notes")), box,
+    el("p", { className: "note" }, t("notes_hint"), " ", saved));
+}
+
+function namesPanel(id) {
+  const result = el("div", { className: "outlook-result" });
+  const go = el("button", { className: "primary" }, t("show_names"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      const n = await api().name_numbers(id);
+      const suggestions = Array.isArray(n.suggestions) ? n.suggestions : [];
+      result.replaceChildren(
+        rows([[t("mulank"), `${n.mulank} · ${n.mulank_planet ?? ""}`.trim()],
+              [t("bhagyank"), `${n.bhagyank} · ${n.bhagyank_planet ?? ""}`.trim()]]),
+        n.original_already_fits || !suggestions.length
+          ? el("p", { className: "note" }, t("already_fits"))
+          : el("div", {},
+              el("h4", { className: "panel-heading" }, t("spellings")),
+              // The spelling and what it would cost to use it: a suggestion nobody can act on without
+              // knowing how many letters change is not much of a suggestion.
+              el("table", { className: "section-table wide" },
+                el("thead", {}, el("tr", {},
+                  el("th", {}, t("spelling")), el("th", {}, t("compound")),
+                  el("th", {}, t("what_changes")))),
+                el("tbody", {}, ...suggestions.slice(0, 8).map((sug) => el("tr", {},
+                  el("th", {}, sug.spelling ?? ""),
+                  el("td", {}, `${sug.chaldean_compound ?? ""} · ${sug.compound_class ?? ""}`.trim()),
+                  el("td", { className: "muted-cell" }, (sug.changes || []).join(", "))))))),
+        n.disclaimer ? el("p", { className: "note" }, bi(n.disclaimer, lang())) : "");
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+  return el("div", { className: "card" },
+    el("h3", {}, t("name_numbers")), el("div", { className: "row" }, go), result);
+}
+
+/* A divisional chart for any division, by either counting rule. The engine's own note says on the chart
+   that a D7 counted this way is not the classical D7, and that note is shown rather than tidied away:
+   the whole value of the tool is in knowing which one you are looking at. */
+function customVargaPanel(id) {
+  const result = el("div", { className: "outlook-result" });
+  const n = el("input", { type: "number", min: "2", max: "300", value: "7", id: "cv-n" });
+  const rule = el("select", { id: "cv-rule" });
+  api().varga_rules().then((list) => rule.append(...list.map((r) =>
+    el("option", { value: r.rule, textContent: r.name[lang()] ?? r.name.en }))));
+
+  const go = el("button", { className: "primary" }, t("draw_varga"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      const out = await api().custom_varga(id, Number(n.value), rule.value);
+      const settings = await api().settings();
+      result.replaceChildren(
+        el("div", { className: "chart-holder" },
+          vargaSvg(out.signs, { style: settings.chart_style === "south" ? "south" : "north",
+                                lang: lang(), size: 300 })),
+        sectionsPanel(out.sections || [], lang()));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  return el("div", { className: "card" },
+    el("h3", {}, t("custom_varga")),
+    el("div", { className: "fields" },
+      el("div", { className: "field" }, el("label", { htmlFor: "cv-n" }, t("division")), n),
+      el("div", { className: "field" }, el("label", { htmlFor: "cv-rule" }, t("counting")), rule)),
+    el("div", { className: "row" }, go), result);
+}
+
 async function showChart(id) {
   selectedId = id;
   screen = { name: "chart", redraw: () => showChart(id) };
@@ -566,7 +656,8 @@ async function showChart(id) {
   // The sixteen divisional charts, then the readings, then the way out. The buttons go last so that
   // scrolling to the end of a chart lands on them rather than on the middle of the readings.
   const main = $("#main");
-  main.append(predictionPanel(id), outlookPanel(id), timeCheckPanel(id), reportPanel(id));
+  main.append(predictionPanel(id), outlookPanel(id), timeCheckPanel(id),
+    namesPanel(id), customVargaPanel(id), notesPanel(id), reportPanel(id));
   if (details.varga_meta?.length) {
     main.append(el("h3", { className: "panel-heading" }, t("vargas")), vargaPanel(details, style));
   }
@@ -1091,7 +1182,8 @@ function showPrashna() {
   const question = el("input", { id: "q-text", placeholder: "…" });
   const method = el("select", { id: "q-method" });
   method.append(el("option", { value: "prashna", textContent: t("method_prashna") }),
-                el("option", { value: "kp", textContent: t("method_kp") }));
+                el("option", { value: "kp", textContent: t("method_kp") }),
+                el("option", { value: "horary", textContent: t("method_horary") }));
   const number = el("input", { id: "q-number", type: "number", min: "1", max: "249", value: "" });
   const numberField = el("div", { className: "field" },
     el("label", { htmlFor: "q-number" }, t("kp_number")), number);
@@ -1103,6 +1195,13 @@ function showPrashna() {
   go.onclick = async () => {
     result.replaceChildren(el("p", { className: "working" }, t("building")));
     try {
+      // Western horary answers in the same bilingual blocks as everything else, so it needs no drawing
+      // of its own - only a different question of the engine.
+      if (method.value === "horary") {
+        const answer = await api().horary(question.value);
+        result.replaceChildren(sectionsPanel(answer.sections || [], lang()));
+        return;
+      }
       drawPrashna(result, await api().ask_question({
         method: method.value, question: question.value, number: number.value,
       }));

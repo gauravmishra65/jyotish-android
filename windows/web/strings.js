@@ -316,6 +316,26 @@ const STRINGS = {
   by_chance:       { en: "By chance",                      hi: "संयोग से" },
   as_recorded:     { en: "as recorded",                    hi: "दर्ज समय" },
 
+  // the last few tools
+  method_horary:   { en: "Western horary",                 hi: "पाश्चात्य होररी" },
+  custom_varga:    { en: "A divisional chart of your own", hi: "अपनी वर्ग कुंडली" },
+  division:        { en: "Divide each sign into",          hi: "हर राशि के भाग" },
+  counting:        { en: "Counting",                       hi: "गणना" },
+  draw_varga:      { en: "Draw it",                        hi: "बनाएँ" },
+  name_numbers:    { en: "The name's numbers",             hi: "नाम के अंक" },
+  show_names:      { en: "Work out the name",              hi: "नाम की गणना करें" },
+  mulank:          { en: "Mulank",                         hi: "मूलांक" },
+  bhagyank:        { en: "Bhagyank",                       hi: "भाग्यांक" },
+  spellings:       { en: "Spellings that fit better",      hi: "बेहतर मेल खाती वर्तनी" },
+  spelling:        { en: "Spelling",                       hi: "वर्तनी" },
+  compound:        { en: "Compound",                       hi: "संयुक्त अंक" },
+  what_changes:    { en: "What changes",                   hi: "क्या बदलता है" },
+  already_fits:    { en: "The name as written already fits the birth numbers.",
+                     hi: "नाम जैसा लिखा है, वह जन्म अंकों से पहले ही मेल खाता है।" },
+  notes:           { en: "Notes",                          hi: "टिप्पणियाँ" },
+  notes_hint:      { en: "Anything you want to remember about this person. It stays on this computer.",
+                     hi: "इस व्यक्ति के बारे में जो याद रखना हो। यह इसी कंप्यूटर पर रहता है।" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

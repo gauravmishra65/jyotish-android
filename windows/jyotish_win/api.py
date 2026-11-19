@@ -536,6 +536,79 @@ class Api:
             ask["ayanamsa"] = settings["ayanamsa"]
         return self.engine.rectify(ask)
 
+    # --- the last few tools -----------------------------------------------------------------------
+
+    def horary(self, question: str) -> dict:
+        """A Western horary chart for the moment the question is asked.
+
+        The same idea as prashna from the other tradition, so it lives beside it rather than on a screen
+        of its own: the question, the moment, the place, and what the houses say.
+        """
+        text = str(question or "").strip()
+        if not text:
+            raise ValidationError("Type the question first.")
+        where = self.today_place()
+        if not where:
+            raise ValidationError("Choose where you are before asking.")
+        now = datetime.now(ZoneInfo(where["tz"]))
+        return self.engine.horary(dict(where, question=text,
+                                       date=now.strftime("%Y-%m-%d"), time=now.strftime("%H:%M")))
+
+    #: How a custom divisional chart counts its parts. The engine knows these two.
+    VARGA_RULES = (
+        ("cyclic", {"en": "Count from Aries", "hi": "मेष से गिनें"}),
+        ("from_sign", {"en": "Count from the sign itself", "hi": "उसी राशि से गिनें"}),
+    )
+
+    def varga_rules(self) -> list[dict]:
+        return [{"rule": k, "name": name} for k, name in self.VARGA_RULES]
+
+    def custom_varga(self, person_id: str, n: int, rule: str = "cyclic") -> dict:
+        """A divisional chart for any division, by either counting rule.
+
+        Nothing here is interpreted and the engine says so on the chart itself: a D7 counted your own
+        way is not the classical D7, and a screen that let the two be confused would be worse than no
+        screen at all.
+        """
+        if rule not in dict(self.VARGA_RULES):
+            raise ValidationError("Choose how the parts are counted.")
+        try:
+            division = int(n)
+        except (TypeError, ValueError) as e:
+            raise ValidationError("The division is a whole number.") from e
+        if not 2 <= division <= 300:
+            raise ValidationError("The division runs from 2 to 300.")
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+        return self.engine.custom_varga(dict(self.chart_request(who), n=division, rule=rule))
+
+    def name_numbers(self, person_id: str) -> dict:
+        """What a name adds up to, and the spellings that fit the birth numbers better.
+
+        Suggestions, not instructions. Nobody should change their name because an app said so, and the
+        engine's own disclaimer comes through with the answer.
+        """
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        return self.engine.names(who["name"], who["date"], who.get("gender", "M"))
+
+    def notes(self, person_id: str) -> str:
+        who = self.person(person_id)
+        return str(who.get("notes", "")) if who else ""
+
+    def set_notes(self, person_id: str, text: str) -> str:
+        """Whatever somebody wants to remember about a person, kept with them and nowhere else."""
+        if self.person(person_id) is None:
+            raise ValidationError("That person is not saved on this computer.")
+        kept = str(text or "")[:20000]
+        people = [dict(p, notes=kept) if p.get("id") == person_id else p
+                  for p in self.store.profiles()]
+        self.store.save_profiles(people)
+        return kept
+
     # --- readings as files ------------------------------------------------------------------------
 
     #: What report() will build, in the order the buttons appear. "life" is the whole reading; the rest

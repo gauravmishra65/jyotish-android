@@ -113,6 +113,9 @@ class WordingTest(unittest.TestCase):
             "the group comparison": self.api.compare_group([self.ravi, self.neha, self.mei]),
             "the Flying Stars": self.api.flying_stars(),
             "the birth-time check": self.api.rectify(self.ravi, 30),
+            "Western horary": self.api.horary("Will the house sell?"),
+            "a custom varga": self.api.custom_varga(self.ravi, 7, "cyclic"),
+            "the name's numbers": self.api.name_numbers(self.ravi),
         }
         for label, blob in surfaces.items():
             self.check(label, blob)

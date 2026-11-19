@@ -119,6 +119,11 @@ class Engine:
     def feng_shui(self, request: dict) -> dict:
         return self._call("feng_shui", request)
 
+    def names(self, name: str, dob: str, gender: str = "M") -> dict:
+        """Alone among these the engine takes three arguments rather than one JSON string."""
+        with self._lock:
+            return self._json(self._api.names(name, dob, gender))
+
     def match(self, chart_a: dict, chart_b: dict, bride: str = "B") -> dict:
         with self._lock:
             return self._json(self._api.match(json.dumps(chart_a), json.dumps(chart_b), bride))

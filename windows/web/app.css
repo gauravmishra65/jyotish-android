@@ -396,3 +396,18 @@ nav#tools { padding: 8px; border-top: 1px solid var(--line); }
 .event-row select { flex: 1 1 auto; max-width: 320px; }
 .event-row input { width: 150px; font-variant-numeric: tabular-nums; }
 tr.recorded th, tr.recorded td { background: var(--accent-soft); }
+
+/* --- notes ------------------------------------------------------------------------------------ */
+
+textarea {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  resize: vertical;
+}
+
+textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
