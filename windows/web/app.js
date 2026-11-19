@@ -57,27 +57,33 @@ async function timeZoneList() {
   return el("datalist", { id: "zones" }, ...zones.map((z) => el("option", { value: z })));
 }
 
-function showAddPerson() {
-  selectedId = null;
+/* One form for both jobs. Passing an existing person fills it in and keeps their id, so saving edits
+   them in place rather than making a second copy - which is what you want when a chart will not build
+   because one field is wrong. */
+function showAddPerson(existing = null) {
+  const editing = Boolean(existing);
+  selectedId = editing ? existing.id : null;
   drawPeople();
   $("#main").replaceChildren(
-    el("h2", {}, "Add a person"),
+    el("h2", {}, editing ? `Edit ${existing.name}` : "Add a person"),
     el("p", { className: "lede" }, "Birth details stay on this computer. Nothing is sent anywhere."),
     el(
       "div",
       { className: "fields" },
-      field("Name", "name", { wide: true, placeholder: "Ravi Shankar Tiwari" }),
-      field("Date of birth", "date", { placeholder: "1988-07-14" }),
-      field("Time of birth", "time", { placeholder: "14:35" }),
-      field("Latitude", "lat", { placeholder: "25.3176" }),
-      field("Longitude", "lon", { placeholder: "82.9739" }),
-      field("Time zone", "tz", { placeholder: "Asia/Kolkata", list: "zones" }),
-      field("Place (optional)", "place", { placeholder: "Varanasi, India" }),
+      field("Name", "name", { wide: true, placeholder: "Ravi Shankar Tiwari", value: existing?.name ?? "" }),
+      field("Date of birth", "date", { placeholder: "1988-07-14", value: existing?.date ?? "" }),
+      field("Time of birth", "time", { placeholder: "14:35", value: existing?.time ?? "" }),
+      field("Latitude", "lat", { placeholder: "25.3176", value: existing?.lat ?? "" }),
+      field("Longitude", "lon", { placeholder: "82.9739", value: existing?.lon ?? "" }),
+      field("Time zone", "tz", { placeholder: "Asia/Kolkata", list: "zones", value: existing?.tz ?? "" }),
+      field("Place (optional)", "place", { placeholder: "Varanasi, India", value: existing?.place ?? "" }),
     ),
     el(
       "div",
       { className: "row" },
-      el("button", { className: "primary", onclick: savePerson }, "Save and build the chart"),
+      el("button", { className: "primary", onclick: () => savePerson(existing) },
+        editing ? "Save and rebuild the chart" : "Save and build the chart"),
+      editing ? deleteButton(existing.id) : "",
       el("span", { id: "problem", className: "problem" }),
     ),
     el("p", { className: "note" },
@@ -88,8 +94,8 @@ function showAddPerson() {
   $("#f-name").focus();
 }
 
-async function savePerson() {
-  const person = {};
+async function savePerson(existing = null) {
+  const person = existing ? { id: existing.id } : {};
   for (const name of ["name", "date", "time", "lat", "lon", "tz", "place"]) {
     person[name] = $(`#f-${name}`).value.trim();
   }
@@ -127,9 +133,14 @@ async function showChart(id) {
   try {
     chart = await api().chart(id);
   } catch (e) {
+    // A chart that will not build is exactly when someone needs to fix or remove the person, so this
+    // branch must offer both. Without them a bad entry is stuck on screen with no way out.
     $("#main").replaceChildren(
       el("h2", {}, who ? who.name : "Chart"),
-      el("p", { className: "problem" }, String(e.message || e)),
+      el("p", { className: "problem" }, String(e.message || e).replace(/^.*ValidationError:\s*/s, "")),
+      el("div", { className: "row" },
+        who ? el("button", { className: "primary", onclick: () => showAddPerson(who) }, "Fix these details") : "",
+        who ? deleteButton(id) : ""),
     );
     return;
   }
@@ -170,7 +181,8 @@ async function showChart(id) {
     el("div", { className: "card" }, el("h3", {}, "Planets"), el("table", {}, ...planetRows)),
 
     el("div", { className: "row" },
-      el("button", { className: "quiet", onclick: () => removePerson(id) }, "Delete this person")),
+      el("button", { onclick: () => showAddPerson(who) }, "Edit details"),
+      deleteButton(id)),
 
     el("p", { className: "note" },
       "The drawn kundli chart, the readings and the reports are not in this build yet. " +
@@ -178,8 +190,25 @@ async function showChart(id) {
   );
 }
 
+/* Deleting asks first, but in the page rather than through window.confirm: a native dialog depends on
+   what the embedded browser allows, and a confirmation that silently answers "no" would look exactly
+   like a delete button that does nothing. The button becomes its own confirmation instead. */
+function deleteButton(id, label = "Delete this person") {
+  const button = el("button", { className: "quiet" }, label);
+  button.onclick = () => {
+    if (button.dataset.armed) return removePerson(id);
+    button.dataset.armed = "1";
+    button.textContent = "Click again to delete — this cannot be undone";
+    setTimeout(() => {
+      if (!button.isConnected) return;
+      delete button.dataset.armed;
+      button.textContent = label;
+    }, 5000);
+  };
+  return button;
+}
+
 async function removePerson(id) {
-  if (!window.confirm("Delete this person and their saved charts? This cannot be undone.")) return;
   await api().delete_person(id);
   people = await api().people();
   selectedId = null;
@@ -198,7 +227,7 @@ async function start() {
   people.length ? showChart(people[0].id) : showAddPerson();
 }
 
-$("#new-person").addEventListener("click", showAddPerson);
+$("#new-person").addEventListener("click", () => showAddPerson());
 
 // pywebview injects its bridge after the page loads, and announces it with this event.
 window.addEventListener("pywebviewready", start);

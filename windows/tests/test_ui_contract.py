@@ -79,6 +79,29 @@ class WebAssetsTest(unittest.TestCase):
         for name in sorted(called):
             self.assertTrue(hasattr(Api, name), f"app.js calls api().{name}(), which Api does not have")
 
+    def test_every_screen_offers_a_way_out(self):
+        """A person whose chart will not build must still be fixable or removable. The first build put
+        delete only on the chart screen, so a profile with a bad time zone was stuck on screen with no
+        way to edit or delete it - the one case where you most need both."""
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        error_branch = js[js.index("chart = await api().chart(id);"):js.index("const v = chart.vedic;")]
+        self.assertIn("deleteButton(", error_branch, "the failed-chart screen offers no delete")
+        self.assertIn("showAddPerson(who)", error_branch, "the failed-chart screen offers no way to edit")
+
+    def test_deleting_does_not_depend_on_a_native_dialog(self):
+        """window.confirm is at the embedded browser's discretion; if it silently answers no, the delete
+        button looks broken. The confirmation is in the page instead."""
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        self.assertNotIn("window.confirm(", js)   # the call, not the comment explaining its absence
+        self.assertIn("Click again to delete", js)
+
+    def test_the_add_button_does_not_hand_its_click_event_to_the_form(self):
+        """showAddPerson takes an optional person to edit. Wiring it straight to addEventListener would
+        pass the click Event as that person, and the Add screen would think it was editing one."""
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        self.assertNotIn('addEventListener("click", showAddPerson)', js)
+        self.assertIn('() => showAddPerson()', js)
+
     def test_the_element_ids_the_script_needs_are_in_the_page(self):
         html = (WEB / "index.html").read_text(encoding="utf-8")
         for element_id in ("people", "count", "main", "new-person"):
