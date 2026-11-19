@@ -291,6 +291,31 @@ const STRINGS = {
   // flying stars
   flying_stars:    { en: "Flying Stars",                   hi: "उड़ते तारे" },
 
+  // life events and the birth-time check
+  life_events:     { en: "Life events",                    hi: "जीवन की घटनाएँ" },
+  events_note:     { en: "Dated events are what a birth time can be checked against. They stay on this "
+                       + "computer with everything else.",
+                     hi: "तिथि सहित घटनाएँ ही वह आधार हैं जिनसे जन्म समय जाँचा जा सकता है। ये बाकी सब की "
+                       + "तरह इसी कंप्यूटर पर रहती हैं।" },
+  add_event:       { en: "Add an event",                   hi: "घटना जोड़ें" },
+  remove:          { en: "Remove",                         hi: "हटाएँ" },
+  what_happened:   { en: "What happened",                  hi: "क्या हुआ" },
+  when_happened:   { en: "When",                           hi: "कब" },
+  time_check:      { en: "Birth time check",               hi: "जन्म समय जाँच" },
+  search_window:   { en: "Search either side",             hi: "दोनों ओर खोजें" },
+  minutes_either:  { en: "%1 minutes",                     hi: "%1 मिनट" },
+  check_time:      { en: "Check the birth time",           hi: "जन्म समय जाँचें" },
+  checking:        { en: "Checking. This takes a few seconds.",
+                     hi: "जाँच हो रही है। इसमें कुछ सेकंड लगते हैं।" },
+  need_events:     { en: "Add at least one dated event first; without one there is nothing to check "
+                       + "a time against.",
+                     hi: "पहले कम से कम एक तिथि सहित घटना जोड़ें; उसके बिना समय की जाँच किस आधार पर हो।" },
+  span:            { en: "Birth time",                     hi: "जन्म समय" },
+  lagna_d9_d10:    { en: "Lagna · D9 · D10",               hi: "लग्न · D9 · D10" },
+  events_fit:      { en: "Events fitting",                 hi: "मेल खाती घटनाएँ" },
+  by_chance:       { en: "By chance",                      hi: "संयोग से" },
+  as_recorded:     { en: "as recorded",                    hi: "दर्ज समय" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

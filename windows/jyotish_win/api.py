@@ -474,6 +474,68 @@ class Api:
         """The annual and monthly Flying Stars for a date."""
         return self.engine.feng_shui({"today": when or date.today().isoformat()})
 
+    # --- life events, and checking a birth time against them --------------------------------------
+
+    def event_kinds(self) -> dict:
+        """The dated events a birth time can be checked against, named by the engine in both languages."""
+        return self.engine.rectify({"date": "2000-01-01", "time": "12:00", "lat": 0.0, "lon": 0.0,
+                                    "tz": "UTC", "window_min": 1, "events": []}).get("kinds", {})
+
+    def set_events(self, person_id: str, events: list[dict]) -> list[dict]:
+        """Dated events in somebody's life, kept with them.
+
+        They are what a birth time is checked against, and they stay on this computer like everything
+        else. Anything without both a kind and a date is dropped rather than stored half-written.
+        """
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        kept = []
+        for event in events or []:
+            kind, when = str(event.get("kind", "")).strip(), str(event.get("date", "")).strip()
+            if not kind or not DATE.match(when):
+                continue
+            try:
+                datetime.strptime(when, "%Y-%m-%d")
+            except ValueError:
+                continue
+            kept.append({"kind": kind, "date": when})
+        people = [dict(p, events=kept) if p.get("id") == person_id else p
+                  for p in self.store.profiles()]
+        self.store.save_profiles(people)
+        return kept
+
+    def events(self, person_id: str) -> list[dict]:
+        who = self.person(person_id)
+        return list(who.get("events", [])) if who else []
+
+    def rectify(self, person_id: str, window_min: int = 60) -> dict:
+        """Which spans of birth time fit the recorded events better than chance would.
+
+        This answers with spans and probabilities, never with a corrected time. A birth time is a fact
+        about somebody's life, and the honest output is "these minutes explain your events better than
+        the others", which a person can weigh against what they were told.
+        """
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+        try:
+            window = int(window_min)
+        except (TypeError, ValueError) as e:
+            raise ValidationError("The window is a number of minutes.") from e
+        if not 5 <= window <= 240:
+            raise ValidationError("Search between 5 and 240 minutes either side.")
+
+        ask = {k: who[k] for k in ("date", "time", "lat", "lon", "tz")}
+        ask["gender"] = who.get("gender", "M")
+        ask["window_min"] = window
+        ask["events"] = self.events(person_id)
+        settings = self.store.settings()
+        if settings.get("ayanamsa"):
+            ask["ayanamsa"] = settings["ayanamsa"]
+        return self.engine.rectify(ask)
+
     # --- readings as files ------------------------------------------------------------------------
 
     #: What report() will build, in the order the buttons appear. "life" is the whole reading; the rest

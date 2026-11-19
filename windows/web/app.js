@@ -389,6 +389,104 @@ function stars(n) {
   return "★".repeat(filled) + "☆".repeat(5 - filled);
 }
 
+/* Life events, and checking a birth time against them.
+ *
+ * The answer is spans and probabilities, never a corrected time. A birth time is a fact about somebody's
+ * life; the honest output is "these minutes explain your events better than the others", which a person
+ * can weigh against what they were told. A screen that announced a new birth time would be claiming to
+ * know something it does not.
+ */
+function timeCheckPanel(id) {
+  const list = el("div", { className: "events" });
+  const result = el("div", { className: "outlook-result" });
+  let kinds = {};
+  let events = [];
+
+  const save = () => api().set_events(id, events);
+
+  const draw = () => {
+    list.replaceChildren(...events.map((event, i) => {
+      const kind = el("select", {});
+      kind.append(...Object.entries(kinds).map(([key, name]) =>
+        el("option", { value: key, textContent: name[lang()] ?? name.en })));
+      kind.value = event.kind || Object.keys(kinds)[0] || "";
+      kind.onchange = () => { events[i].kind = kind.value; save(); };
+
+      const when = el("input", { type: "text", placeholder: "2014-02-09", value: event.date || "" });
+      when.onchange = () => { events[i].date = when.value.trim(); save(); };
+
+      const drop = el("button", { className: "quiet" }, t("remove"));
+      drop.onclick = () => { events.splice(i, 1); save(); draw(); };
+
+      return el("div", { className: "event-row" }, kind, when, drop);
+    }));
+  };
+
+  const add = el("button", {}, t("add_event"));
+  add.onclick = () => { events.push({ kind: Object.keys(kinds)[0] || "", date: "" }); draw(); };
+
+  const window_ = el("select", {});
+  window_.append(...[30, 60, 120, 240].map((m) =>
+    el("option", { value: String(m), textContent: t("minutes_either", m) })));
+  window_.value = "60";
+
+  const go = el("button", { className: "primary" }, t("check_time"));
+  go.onclick = async () => {
+    if (!events.some((e) => e.kind && e.date)) {
+      result.replaceChildren(el("p", { className: "note" }, t("need_events")));
+      return;
+    }
+    result.replaceChildren(el("p", { className: "working" }, t("checking")));
+    try {
+      await save();
+      drawTimeCheck(result, await api().rectify(id, Number(window_.value)));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  Promise.all([api().event_kinds(), api().events(id)]).then(([k, saved]) => {
+    kinds = k;
+    events = saved.length ? saved : [];
+    draw();
+  });
+
+  return el("div", { className: "card" },
+    el("h3", {}, t("time_check")),
+    el("p", { className: "note" }, t("events_note")),
+    list,
+    el("div", { className: "row" }, add),
+    el("div", { className: "fields" },
+      el("div", { className: "field" }, el("label", {}, t("search_window")), window_)),
+    el("div", { className: "row" }, go),
+    result);
+}
+
+function drawTimeCheck(into, out) {
+  const byFrom = Object.fromEntries((out.scored || []).map((s) => [s.from, s]));
+  // Lowest chance first: the spans that explain the events least like a coincidence.
+  const rows = [...(out.segments || [])]
+    .sort((a, b) => (byFrom[a.from]?.p ?? 1) - (byFrom[b.from]?.p ?? 1))
+    .map((seg) => {
+      const score = byFrom[seg.from] || {};
+      return el("tr", { className: seg.contains_recorded ? "recorded" : "" },
+        el("th", {}, `${seg.from} – ${seg.to}${seg.contains_recorded ? ` · ${t("as_recorded")}` : ""}`),
+        el("td", {}, [seg.lagna, seg.d9, seg.d10].filter(Boolean).join(" · ")),
+        el("td", {}, String(score.hits ?? "—")),
+        el("td", { className: "muted-cell" },
+          score.p === undefined ? "—" : `${Math.round(score.p * 100)}%`));
+    });
+
+  into.replaceChildren(
+    el("table", { className: "section-table wide" },
+      el("thead", {}, el("tr", {},
+        el("th", {}, t("span")), el("th", {}, t("lagna_d9_d10")),
+        el("th", {}, t("events_fit")), el("th", {}, t("by_chance")))),
+      el("tbody", {}, ...rows)),
+    out.note ? el("p", { className: "note" }, bi(out.note, lang())) : "");
+}
+
 async function showChart(id) {
   selectedId = id;
   screen = { name: "chart", redraw: () => showChart(id) };
@@ -468,7 +566,7 @@ async function showChart(id) {
   // The sixteen divisional charts, then the readings, then the way out. The buttons go last so that
   // scrolling to the end of a chart lands on them rather than on the middle of the readings.
   const main = $("#main");
-  main.append(predictionPanel(id), outlookPanel(id), reportPanel(id));
+  main.append(predictionPanel(id), outlookPanel(id), timeCheckPanel(id), reportPanel(id));
   if (details.varga_meta?.length) {
     main.append(el("h3", { className: "panel-heading" }, t("vargas")), vargaPanel(details, style));
   }

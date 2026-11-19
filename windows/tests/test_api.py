@@ -354,6 +354,62 @@ class ApiTest(unittest.TestCase):
     def test_the_flying_stars(self):
         self.assertTrue(self.api.flying_stars("2026-11-20")["sections"])
 
+    # --- life events and the birth-time check -----------------------------------------------------
+
+    def test_events_are_kept_with_the_person(self):
+        saved = self.api.add_person(RAVI)
+        kept = self.api.set_events(saved["id"], [{"kind": "marriage", "date": "2014-02-09"},
+                                                 {"kind": "job", "date": "2011-06-01"}])
+        self.assertEqual(len(kept), 2)
+        self.assertEqual(self.api.events(saved["id"]), kept)
+        # and they survive being read back from disk
+        again = Api(store=Store(self.api.store.root), engine=self.engine)
+        self.assertEqual(again.events(saved["id"]), kept)
+
+    def test_a_half_written_event_is_not_stored(self):
+        """A row with no date or no kind is in the middle of being typed, not a fact about a life."""
+        saved = self.api.add_person(RAVI)
+        kept = self.api.set_events(saved["id"], [
+            {"kind": "marriage", "date": "2014-02-09"},
+            {"kind": "", "date": "2010-01-01"},
+            {"kind": "child", "date": ""},
+            {"kind": "child", "date": "not a date"},
+            {"kind": "child", "date": "2014-02-30"},      # a date that does not exist
+        ])
+        self.assertEqual(kept, [{"kind": "marriage", "date": "2014-02-09"}])
+
+    def test_the_birth_time_check_answers_with_spans_and_never_with_a_time(self):
+        """A birth time is a fact about somebody's life. The honest answer is which minutes explain the
+        recorded events better than chance, not a new time presented as the truth."""
+        saved = self.api.add_person(RAVI)
+        self.api.set_events(saved["id"], [{"kind": "marriage", "date": "2014-02-09"},
+                                          {"kind": "job", "date": "2011-06-01"}])
+        out = self.api.rectify(saved["id"], 60)
+        self.assertTrue(out["segments"])
+        self.assertEqual(len(out["segments"]), len(out["scored"]))
+        self.assertNotIn("corrected", out)
+        self.assertNotIn("best_time", out)
+        self.assertEqual(out["recorded"], RAVI["time"])
+        for segment in out["segments"]:
+            for field in ("from", "to", "lagna", "d9", "d10"):
+                self.assertIn(field, segment)
+        self.assertEqual(sum(1 for s in out["segments"] if s["contains_recorded"]), 1)
+        for score in out["scored"]:
+            self.assertTrue(0 <= score["p"] <= 1, f"a chance of {score['p']}")
+
+    def test_an_impossible_search_window_is_refused(self):
+        saved = self.api.add_person(RAVI)
+        for window in (1, 0, -30, 600, "nonsense"):
+            with self.assertRaises(ValidationError, msg=f"{window!r} was accepted"):
+                self.api.rectify(saved["id"], window)
+
+    def test_the_event_kinds_are_named_in_both_languages(self):
+        kinds = self.api.event_kinds()
+        self.assertIn("marriage", kinds)
+        for key, name in kinds.items():
+            for lang in ("en", "hi"):
+                self.assertTrue(name.get(lang), f"{key} has no {lang} name")
+
     # --- backup through the API -------------------------------------------------------------------
 
     def test_backup_and_restore_through_the_api(self):
