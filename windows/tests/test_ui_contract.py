@@ -121,6 +121,13 @@ class WebAssetsTest(unittest.TestCase):
         self.assertIn("kundli.js", html)
         self.assertLess(html.index("kundli.js"), html.index("app.js"))
 
+    def test_choosing_a_place_fills_the_three_fields_it_should(self):
+        """The whole point of the place search is that nobody looks up coordinates by hand."""
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        picker = js[js.index("function placeField("):js.index("/* One form for both jobs.")]
+        for field in ('$("#f-lat").value', '$("#f-lon").value', '$("#f-tz").value'):
+            self.assertIn(field, picker, f"picking a place does not set {field}")
+
     def test_the_element_ids_the_script_needs_are_in_the_page(self):
         html = (WEB / "index.html").read_text(encoding="utf-8")
         for element_id in ("people", "count", "main", "new-person"):

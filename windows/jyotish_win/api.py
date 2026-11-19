@@ -14,6 +14,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
 from .bridge import Engine, chart_key
+from .places import places
 from .storage import Store
 
 #: What a saved person must have before a chart can be built from them.
@@ -175,6 +176,26 @@ class Api:
         return request
 
     # --- settings -------------------------------------------------------------------------------
+
+    # --- places ---------------------------------------------------------------------------------
+
+    def search_places(self, query: str, limit: int = 8) -> list[dict]:
+        """Birthplaces matching what has been typed so far, best first.
+
+        The coordinates and the time zone come with each result, so choosing a place fills in the three
+        fields nobody should have to look up.
+        """
+        try:
+            return places().search(query, limit)
+        except FileNotFoundError:
+            return []
+
+    def nearest_place(self, lat: float, lon: float) -> dict | None:
+        """The nearest listed place to a point, for naming the time zone when coordinates are typed."""
+        try:
+            return places().nearest(float(lat), float(lon))
+        except (FileNotFoundError, TypeError, ValueError):
+            return None
 
     def time_zones(self) -> list[str]:
         """Offered by the form so a half-typed zone cannot reach the engine."""

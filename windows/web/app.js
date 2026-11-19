@@ -57,6 +57,52 @@ async function timeZoneList() {
   return el("datalist", { id: "zones" }, ...zones.map((z) => el("option", { value: z })));
 }
 
+
+/* Birthplace.
+ *
+ * Typing a place searches about 70,000 settlements offline and fills in the three fields nobody should
+ * have to look up: latitude, longitude and time zone. Those stay visible and editable, because a birth
+ * certificate sometimes names a village the list does not have, and because showing the numbers is how
+ * someone checks the right place was chosen.
+ */
+function placeField(existing) {
+  const input = el("input", {
+    id: "f-place", name: "place", autocomplete: "off",
+    placeholder: "Varanasi, or Sitapur UP, or वाराणसी", value: existing?.place ?? "",
+  });
+  const results = el("div", { className: "results", id: "place-results" });
+
+  let token = 0;
+  const run = async () => {
+    const query = input.value.trim();
+    const mine = ++token;
+    if (query.length < 2) return results.replaceChildren();
+    const found = await api().search_places(query, 8);
+    if (mine !== token) return;                 // a later keystroke already answered
+    results.replaceChildren(...found.map((place) =>
+      el("button", {
+        className: "result", type: "button",
+        onclick: () => {
+          input.value = place.label;
+          $("#f-lat").value = place.lat;
+          $("#f-lon").value = place.lon;
+          $("#f-tz").value = place.tz;
+          results.replaceChildren();
+        },
+      },
+      el("span", { className: "result-name" }, place.label),
+      el("span", { className: "result-where" }, `${place.lat.toFixed(3)}, ${place.lon.toFixed(3)} · ${place.tz}`))));
+  };
+
+  let typing;
+  input.addEventListener("input", () => { clearTimeout(typing); typing = setTimeout(run, 120); });
+  input.addEventListener("blur", () => setTimeout(() => results.replaceChildren(), 200));
+
+  return el("div", { className: "field wide place-field" },
+    el("label", { htmlFor: "f-place" }, "Birthplace"),
+    input, results);
+}
+
 /* One form for both jobs. Passing an existing person fills it in and keeps their id, so saving edits
    them in place rather than making a second copy - which is what you want when a chart will not build
    because one field is wrong. */
@@ -73,10 +119,10 @@ function showAddPerson(existing = null) {
       field("Name", "name", { wide: true, placeholder: "Ravi Shankar Tiwari", value: existing?.name ?? "" }),
       field("Date of birth", "date", { placeholder: "1988-07-14", value: existing?.date ?? "" }),
       field("Time of birth", "time", { placeholder: "14:35", value: existing?.time ?? "" }),
+      placeField(existing),
       field("Latitude", "lat", { placeholder: "25.3176", value: existing?.lat ?? "" }),
       field("Longitude", "lon", { placeholder: "82.9739", value: existing?.lon ?? "" }),
       field("Time zone", "tz", { placeholder: "Asia/Kolkata", list: "zones", value: existing?.tz ?? "" }),
-      field("Place (optional)", "place", { placeholder: "Varanasi, India", value: existing?.place ?? "" }),
     ),
     el(
       "div",
@@ -87,8 +133,8 @@ function showAddPerson(existing = null) {
       el("span", { id: "problem", className: "problem" }),
     ),
     el("p", { className: "note" },
-      "Place lookup is not here yet, so coordinates are typed in for now. " +
-      "The time zone offers the full list as you type: start with Asia, Europe or America."),
+      "Choosing a birthplace fills in the coordinates and the time zone. " +
+      "They stay editable for a village the list does not carry."),
   );
   timeZoneList().then((list) => document.body.append(list));
   $("#f-name").focus();

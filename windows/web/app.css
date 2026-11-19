@@ -183,3 +183,42 @@ button.quiet:hover { color: var(--bad); }
 /* The kundli is one drawing: its own lines are enough, so it takes no card border of its own. */
 .kundli { max-width: 100%; height: auto; }
 .chart-card .row { margin-top: 0; }
+
+/* --- birthplace search ----------------------------------------------------------------------- */
+
+.place-field { position: relative; }
+
+.results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 10px;
+  margin-top: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+.results:empty { display: none; }
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  background: none;
+  text-align: left;
+  padding: 9px 12px;
+  min-height: 0;
+  font-weight: 400;
+}
+
+.result:hover { background: var(--accent-soft); }
+.result-name { font-weight: 600; }
+.result-where { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
