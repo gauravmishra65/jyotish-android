@@ -18,6 +18,7 @@ const el = (tag, props = {}, ...kids) => {
 let people = [];
 let selectedId = null;
 let screen = { name: "chart" };      // what to redraw when the language changes
+let edition = { edition: "full", free_profiles: 1 };
 
 /* --- the list of people ------------------------------------------------------------------- */
 
@@ -65,6 +66,22 @@ function drawTools() {
 
 /* The language switch lives in the sidebar rather than behind a settings screen: it changes every word
    on the page, so it should be visible while you read them. The choice is remembered by Python. */
+/* The sidebar says which edition this is, because a demo that does not say so is a trap: somebody
+   would get as far as a second birth chart before finding out. */
+function drawEdition() {
+  const holder = $("#edition");
+  if (edition.edition !== "demo") {
+    holder.replaceChildren(edition.unlocked_to
+      ? el("span", { className: "switch-label" }, t("unlocked_to", edition.unlocked_to))
+      : "");
+    return;
+  }
+  const n = edition.free_profiles;
+  holder.replaceChildren(
+    el("span", { className: "switch-label" }, n === 1 ? t("demo_one", n) : t("demo_many", n)),
+    el("button", { className: "quiet unlock-link", onclick: () => showUnlock() }, t("unlock")));
+}
+
 function drawLanguageSwitch() {
   const holder = $("#language");
   const choose = async (which) => {
@@ -193,10 +210,17 @@ async function savePerson(existing = null) {
   try {
     const saved = await api().add_person(person);
     people = await api().people();
+    edition = await api().edition();
+    drawEdition();
     await showChart(saved.id);
   } catch (e) {
     // Python exceptions arrive as a rejected promise; the message is written for a person to read.
-    $("#problem").textContent = String(e.message || e).replace(/^.*ValidationError:\s*/s, "");
+    const said = String(e.message || e);
+    $("#problem").textContent = said.replace(/^.*(?:ValidationError|DemoLimit):\s*/s, "");
+    // A demo limit is not a mistake to correct but a thing to buy, so the way out goes beside it.
+    if (said.includes("DemoLimit")) {
+      $("#problem").after(el("button", { className: "primary", onclick: () => showUnlock() }, t("unlock")));
+    }
   }
 }
 
@@ -406,6 +430,8 @@ function deleteButton(id, label = t("delete_person")) {
 async function removePerson(id) {
   await api().delete_person(id);
   people = await api().people();
+  edition = await api().edition();
+  drawEdition();
   selectedId = null;
   people.length ? showChart(people[0].id) : showAddPerson();
 }
@@ -852,8 +878,11 @@ function backupCard(openWith = null) {
   restore.onclick = async () => {
     try {
       const done = await api().restore(chosenFile, password.value);
-      say(t("restore_done", done.added, done.updated, done.skipped));
+      say(t("restore_done", done.added, done.updated, done.skipped)
+          + (done.waiting ? " " + t("waiting_people", done.waiting) : ""));
       people = await api().people();
+      edition = await api().edition();
+      drawEdition();
       drawPeople();
     } catch (e) {
       say(String(e.message || e).replace(/^.*Error:\s*/s, ""), true);
@@ -871,6 +900,51 @@ function backupCard(openWith = null) {
     status);
 }
 
+/* --- the full version --------------------------------------------------------------------- */
+
+/* The code is checked here, on this computer, against a public key the app carries. It can check a code
+   and never make one, and nothing is sent anywhere to do it - which is what lets the whole app keep
+   working with no internet at all. */
+function showUnlock() {
+  screen = { name: "unlock", redraw: () => showUnlock() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const status = el("p", { className: "note" });
+  const email = el("input", { id: "u-email", type: "email", autocomplete: "email" });
+  const code = el("input", { id: "u-code", placeholder: "GJ1-XXXXX-XXXXX-…", autocapitalize: "characters" });
+
+  const go = el("button", { className: "primary" }, t("unlock_now"));
+  go.onclick = async () => {
+    try {
+      edition = await api().unlock(email.value, code.value);
+      status.className = "note";
+      status.textContent = t("unlock_done");
+      drawEdition();
+      drawPeople();
+    } catch (e) {
+      status.className = "problem";
+      status.textContent = String(e.message || e).replace(/^.*Error:\s*/s, "");
+    }
+  };
+
+  $("#main").replaceChildren(
+    el("h2", {}, t("unlock_title")),
+    el("p", { className: "lede" }, t("unlock_sub")),
+    el("div", { className: "card" }, el("p", {}, t("unlock_what"))),
+    el("div", { className: "card" },
+      el("p", { className: "note" }, t("unlock_where")),
+      el("div", { className: "fields" },
+        el("div", { className: "field wide" }, el("label", { htmlFor: "u-email" }, t("your_email")), email),
+        el("div", { className: "field wide" }, el("label", { htmlFor: "u-code" }, t("your_code")), code)),
+      el("div", { className: "row" }, go),
+      status,
+      el("p", { className: "note" }, t("unlock_offline"))),
+  );
+  email.focus();
+}
+
 /* --- start -------------------------------------------------------------------------------- */
 
 async function start() {
@@ -885,6 +959,9 @@ async function start() {
   // Double-clicking a .gjb backup starts the app with that file. It opens the settings screen with the
   // file chosen and stops there: restoring somebody's saved people without being asked is not what a
   // double-click should do.
+  edition = await api().edition();
+  drawEdition();
+
   const opened = await api().pending_restore();
   if (opened) return showSettings(opened);
   people.length ? showChart(people[0].id) : showAddPerson();

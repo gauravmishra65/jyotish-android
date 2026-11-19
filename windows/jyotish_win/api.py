@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
 from pathlib import Path
 
+from . import licence
 from .bridge import Engine, chart_key
 from .places import places
 from .storage import Store, _write_atomic, reports_dir
@@ -43,6 +44,29 @@ def _safe_filename(stem: str) -> str:
 
 class ValidationError(ValueError):
     """Something the person typed is wrong, and the message is meant for them to read."""
+
+
+class DemoLimit(ValidationError):
+    """The demo will not save another person. A kind of ValidationError so that every screen already
+    shows it, but its own class so the interface can offer the unlock screen beside the message."""
+
+
+def _born_edition() -> str:
+    """"demo" unless this build was made as the full one.
+
+    A file beside the package rather than a constant, so the same code can be packaged either way
+    without a second branch to keep in step.
+    """
+    import os
+    from pathlib import Path as _Path
+    marked = os.environ.get("JYOTISH_EDITION")
+    if marked:
+        return marked.strip().lower()
+    for root in (_Path(__file__).resolve().parent, _Path(__file__).resolve().parent.parent):
+        marker = root / "edition.txt"
+        if marker.exists():
+            return marker.read_text(encoding="utf-8").strip().lower() or "demo"
+    return "demo"
 
 
 def validate(person: dict) -> dict:
@@ -138,6 +162,11 @@ class Api:
         clean = validate(person)
         clean.setdefault("id", uuid.uuid4().hex[:12])
         people = [p for p in self.store.profiles() if p.get("id") != clean["id"]]
+        # Editing somebody already saved is always allowed; it is adding a new one that the demo limits.
+        if len(people) == len(self.store.profiles()) and self.edition()["edition"] == "demo" \
+                and len(people) >= licence.FREE_PROFILES:
+            raise DemoLimit(
+                f"The demo saves {licence.FREE_PROFILES} chart. Unlock the full version to add more.")
         people.append(clean)
         self.store.save_profiles(people)
         return clean
@@ -153,6 +182,35 @@ class Api:
 
     def person(self, person_id: str) -> dict | None:
         return next((p for p in self.store.profiles() if p.get("id") == person_id), None)
+
+    # --- which edition this is ----------------------------------------------------------------
+
+    def edition(self) -> dict:
+        """Demo or full, and why.
+
+        The demo saves one person. That is not a trial period and nothing expires: everything the engine
+        can do works on that one chart, which is the honest way to let somebody see whether the readings
+        are any good before paying for more.
+
+        A build can be born full - that is the directly sold edition - or be unlocked by a code. The code
+        is the same one the Android app takes, so a person who bought once does not buy again.
+        """
+        unlocked = bool(self.store.setting("unlock_code"))
+        born = _born_edition()
+        return {
+            "edition": "full" if (born == "full" or unlocked) else "demo",
+            "unlocked_to": self.store.setting("unlock_email") if unlocked else None,
+            "free_profiles": licence.FREE_PROFILES,
+            "people": len(self.store.profiles()),
+        }
+
+    def unlock(self, email: str, code: str) -> dict:
+        """Check an unlock code and remember it. Nothing is sent anywhere to do this."""
+        if not licence.verify(email, code):
+            raise ValidationError("That code is not right for that email address.")
+        self.store.set_setting("unlock_email", licence.normalize(email))
+        self.store.set_setting("unlock_code", (code or "").strip())
+        return self.edition()
 
     # --- charts ---------------------------------------------------------------------------------
 
@@ -410,7 +468,8 @@ class Api:
         incoming = fmt.decode(target.read_bytes(), password)
 
         existing = {p.get("id"): p for p in self.store.profiles()}
-        added = updated = skipped = 0
+        demo = self.edition()["edition"] == "demo"
+        added = updated = skipped = waiting = 0
         for person in incoming:
             try:
                 clean = validate(person)
@@ -420,11 +479,17 @@ class Api:
             clean.setdefault("id", uuid.uuid4().hex[:12])
             if clean["id"] in existing:
                 updated += 1
+            elif demo and len(existing) >= licence.FREE_PROFILES:
+                # A backup of twenty people must not become a way round the demo limit. What fits is
+                # restored and the rest is counted, so the screen can say how many are waiting.
+                waiting += 1
+                continue
             else:
                 added += 1
             existing[clean["id"]] = clean
         self.store.save_profiles(list(existing.values()))
-        return {"added": added, "updated": updated, "skipped": skipped, "total": len(existing)}
+        return {"added": added, "updated": updated, "skipped": skipped,
+                "waiting": waiting, "total": len(existing)}
 
     def pending_restore(self) -> str | None:
         """A backup file the app was started with, because the person double-clicked it.

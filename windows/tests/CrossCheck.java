@@ -50,7 +50,10 @@ public class CrossCheck {
         char[] pw = a[1].toCharArray();
 
         String opened = decode(Files.readAllBytes(dir.resolve("from_python.gjb")), pw);
-        System.out.println("PHONE READ THE DESKTOP FILE: " + opened);
+        // Written as a UTF-8 file rather than printed: on a Windows console System.out uses the code
+        // page, which turns Devanagari into question marks and makes a working backup look broken.
+        Files.write(dir.resolve("opened_by_java.json"), opened.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        System.out.println("PHONE READ THE DESKTOP FILE");
 
         String body = "{\"app\":\"gaurav-jyotish\",\"format\":1,\"count\":1,\"profiles\":[{\"id\":\"j1\","
             + "\"name\":\"मेई लिन टैन\",\"gender\":\"F\",\"date\":\"1995-11-02\",\"time\":\"06:10\","

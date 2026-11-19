@@ -3,6 +3,7 @@
 This is the layer where a mistake becomes a bug someone sees, so it carries the most tests. None of them
 need a window, which is the point of putting the behaviour here instead of in the shell.
 """
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -99,9 +100,13 @@ class ApiTest(unittest.TestCase):
 
     def setUp(self):
         self._tmp = TemporaryDirectory()
+        # These tests are about what the app does, not about what the demo withholds; the demo has its
+        # own class below. Without this every test that saves a second person would hit the limit.
+        os.environ["JYOTISH_EDITION"] = "full"
         self.api = Api(store=Store(Path(self._tmp.name)), engine=self.engine)
 
     def tearDown(self):
+        os.environ.pop("JYOTISH_EDITION", None)
         self._tmp.cleanup()
 
     def test_starts_with_nobody(self):
@@ -285,7 +290,7 @@ class ApiTest(unittest.TestCase):
 
             empty = Api(store=Store(Path(self._tmp.name) / "other"), engine=self.engine)
             done = empty.restore(written["path"], "a good password")
-            self.assertEqual((done["added"], done["updated"], done["skipped"]), (2, 0, 0))
+            self.assertEqual((done["added"], done["updated"], done["skipped"], done["waiting"]), (2, 0, 0, 0))
             self.assertEqual(sorted(p["name"] for p in empty.people()),
                              sorted([RAVI["name"], NEHA["name"]]))
         finally:
@@ -354,6 +359,94 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(about["engine"])
         self.assertTrue(about["python"])
         self.assertEqual(about["people"], 0)
+
+
+class DemoTest(unittest.TestCase):
+    """What the demo withholds, and what it must not.
+
+    The demo saves one chart. Everything else - every reading, every report, the matching, the muhurta -
+    works on that one chart, because a demo that cripples the thing being judged tells nobody whether
+    the readings are any good.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from jyotish_win.bridge import Engine
+        cls.engine = Engine()
+
+    def setUp(self):
+        self._tmp = TemporaryDirectory()
+        os.environ["JYOTISH_EDITION"] = "demo"
+        self.api = Api(store=Store(Path(self._tmp.name)), engine=self.engine)
+
+    def tearDown(self):
+        os.environ.pop("JYOTISH_EDITION", None)
+        self._tmp.cleanup()
+
+    def test_the_first_person_saves(self):
+        self.assertTrue(self.api.add_person(RAVI)["id"])
+        self.assertEqual(self.api.edition()["edition"], "demo")
+
+    def test_the_second_does_not(self):
+        from jyotish_win.api import DemoLimit
+        self.api.add_person(RAVI)
+        with self.assertRaises(DemoLimit):
+            self.api.add_person(dict(NEHA))
+
+    def test_editing_the_one_saved_person_still_works(self):
+        """The limit is on adding, not on changing. Somebody who typed the birth time wrong must be able
+        to fix it, and in the demo that is the only chart they have."""
+        saved = self.api.add_person(RAVI)
+        again = self.api.add_person(dict(saved, time="14:40"))
+        self.assertEqual(again["time"], "14:40")
+        self.assertEqual(len(self.api.people()), 1)
+
+    def test_everything_else_works_on_that_one_chart(self):
+        import os as _os
+        _os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            saved = self.api.add_person(RAVI)
+            chart = self.api.chart(saved["id"])
+            self.assertGreaterEqual(len(chart["details"]["sections"]), 60)
+            self.assertEqual(len(chart["details"]["vargas"]), 16)
+            self.assertTrue(Path(self.api.make_report(saved["id"], "life")["path"]).is_file())
+            self.assertTrue(self.api.chinese(saved["id"])["sections"])
+            self.assertTrue(self.api.numbers({"kind": "personal", "person_id": saved["id"]})["sections"])
+        finally:
+            _os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_a_restore_cannot_be_used_to_get_round_the_limit(self):
+        """A backup of twenty people would otherwise be a way in. What fits is restored and the rest is
+        counted, so the screen can say how many are waiting rather than losing them silently."""
+        os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            os.environ["JYOTISH_EDITION"] = "full"
+            full = Api(store=Store(Path(self._tmp.name) / "full"), engine=self.engine)
+            full.add_person(RAVI)
+            full.add_person(dict(NEHA))
+            written = full.backup("a good password")
+
+            os.environ["JYOTISH_EDITION"] = "demo"
+            done = self.api.restore(written["path"], "a good password")
+            self.assertEqual(done["added"], 1)
+            self.assertEqual(done["waiting"], 1)
+            self.assertEqual(len(self.api.people()), 1)
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_a_bad_unlock_code_changes_nothing(self):
+        with self.assertRaises(ValidationError):
+            self.api.unlock("buyer@example.test", "GJ1-NOT-A-REAL-CODE")
+        self.assertEqual(self.api.edition()["edition"], "demo")
+        self.assertIsNone(self.api.edition()["unlocked_to"])
+
+    def test_a_build_born_full_has_no_limit(self):
+        os.environ["JYOTISH_EDITION"] = "full"
+        api = Api(store=Store(Path(self._tmp.name) / "sold"), engine=self.engine)
+        api.add_person(RAVI)
+        api.add_person(dict(NEHA))
+        self.assertEqual(api.edition()["edition"], "full")
+        self.assertEqual(len(api.people()), 2)
 
 
 if __name__ == "__main__":

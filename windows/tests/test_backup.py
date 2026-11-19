@@ -128,10 +128,10 @@ class PhoneCompatibilityTest(unittest.TestCase):
             done = subprocess.run(["java", "-cp", str(work), "CrossCheck", str(work), PASSWORD],
                                   check=True, capture_output=True, text=True)
 
-            # the phone opened ours
-            said = [line for line in done.stdout.splitlines() if line.startswith("PHONE READ")]
-            self.assertTrue(said, f"the Java side printed nothing useful: {done.stdout}")
-            body = json.loads(said[0].split(": ", 1)[1])
+            # the phone opened ours. What it read comes back as a UTF-8 file rather than on stdout,
+            # because a Windows console prints in the code page and would turn Devanagari into "????".
+            self.assertIn("PHONE READ THE DESKTOP FILE", done.stdout, done.stdout)
+            body = json.loads((work / "opened_by_java.json").read_text(encoding="utf-8"))
             self.assertEqual(body["app"], "gaurav-jyotish")
             self.assertEqual([p["name"] for p in body["profiles"]], [p["name"] for p in PEOPLE])
 

@@ -372,3 +372,9 @@ nav#tools { padding: 8px; border-top: 1px solid var(--line); }
 .chosen { color: var(--muted); font-size: 13px; }
 .card .fields { max-width: none; }
 .card > .row:last-of-type { margin-top: 14px; }
+
+/* --- the demo line in the sidebar ------------------------------------------------------------- */
+
+#edition:empty { display: none; }
+.unlock-link { color: var(--accent); font-weight: 600; padding: 4px 8px; }
+.unlock-link:hover { color: var(--accent-deep); }

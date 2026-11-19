@@ -198,6 +198,36 @@ const STRINGS = {
   where_data:      { en: "Your details are in",            hi: "आपका विवरण यहाँ है" },
   where_reports:   { en: "Reports are written to",         hi: "रिपोर्ट यहाँ बनती हैं" },
 
+  // the demo and unlocking it
+  demo:            { en: "Demo",                           hi: "डेमो" },
+  demo_one:        { en: "Demo · saves %1 chart",          hi: "डेमो · %1 कुंडली सहेजता है" },
+  demo_many:       { en: "Demo · saves %1 charts",         hi: "डेमो · %1 कुंडलियाँ सहेजता है" },
+  full_version:    { en: "Full version",                   hi: "पूर्ण संस्करण" },
+  unlocked_to:     { en: "Unlocked for %1",                hi: "%1 के लिए खुला" },
+  unlock:          { en: "Unlock",                         hi: "खोलें" },
+  unlock_title:    { en: "The full version",               hi: "पूर्ण संस्करण" },
+  unlock_sub:      { en: "One payment. Everything keeps working without the internet.",
+                     hi: "एक बार भुगतान। सब कुछ बिना इंटरनेट के चलता रहता है।" },
+  unlock_what:     { en: "As many charts as you like, with the place lookup and every reading; "
+                       + "Kundali Milan for any two people; Muhurta checked against the people involved; "
+                       + "all nine reports saved as files; backup and restore.",
+                     hi: "जितनी चाहें उतनी कुंडलियाँ, स्थान खोज और हर विश्लेषण के साथ; किन्हीं दो लोगों का "
+                       + "कुंडली मिलान; संबंधित लोगों के अनुसार जाँचा गया मुहूर्त; सभी नौ रिपोर्ट फ़ाइल के रूप में; "
+                       + "बैकअप और पुनर्स्थापना।" },
+  unlock_where:    { en: "A code comes with the purchase and is tied to the email address it was bought "
+                       + "with. The same code works on the Android app.",
+                     hi: "कोड खरीद के साथ मिलता है और उसी ईमेल पते से जुड़ा होता है जिससे खरीदा गया। "
+                       + "यही कोड एंड्रॉइड ऐप पर भी चलता है।" },
+  your_email:      { en: "The email you bought with",      hi: "जिस ईमेल से खरीदा" },
+  your_code:       { en: "Unlock code",                    hi: "अनलॉक कोड" },
+  unlock_now:      { en: "Unlock",                         hi: "खोलें" },
+  unlock_done:     { en: "Unlocked. There is no limit now.",
+                     hi: "खुल गया। अब कोई सीमा नहीं।" },
+  unlock_offline:  { en: "This is checked on this computer. Nothing is sent anywhere.",
+                     hi: "यह जाँच इसी कंप्यूटर पर होती है। कुछ भी कहीं नहीं भेजा जाता।" },
+  waiting_people:  { en: "%1 more are in the file and will be restored once this is unlocked.",
+                     hi: "फ़ाइल में %1 और हैं, जो पूर्ण संस्करण खुलने पर आ जाएँगे।" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },
