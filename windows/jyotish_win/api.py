@@ -189,6 +189,24 @@ class Api:
                 request[field] = s[setting]
         return request
 
+    # --- two charts together ----------------------------------------------------------------------
+
+    def match(self, groom_id: str, bride_id: str) -> dict:
+        """Kundli Milan between two saved people.
+
+        Which of the two is the bride matters: several of the kootas are counted from the bride's Moon
+        to the groom's and not the other way round, so a screen that let the pair be entered in either
+        order without saying which is which would quietly give a different answer.
+        """
+        if groom_id == bride_id:
+            raise ValidationError("Choose two different people.")
+        groom, bride = self.person(groom_id), self.person(bride_id)
+        for who in (groom, bride):
+            if who is None:
+                raise ValidationError("That person is not saved on this computer.")
+            validate(who)
+        return self.engine.match(self.chart(groom_id), self.chart(bride_id), bride="B")
+
     # --- readings as files ------------------------------------------------------------------------
 
     #: What report() will build, in the order the buttons appear. "life" is the whole reading; the rest

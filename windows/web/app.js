@@ -17,6 +17,7 @@ const el = (tag, props = {}, ...kids) => {
 
 let people = [];
 let selectedId = null;
+let screen = { name: "chart" };      // what to redraw when the language changes
 
 /* --- the list of people ------------------------------------------------------------------- */
 
@@ -42,6 +43,22 @@ function drawPeople() {
   }
 }
 
+/* The tools that are not about one person. Each is a screen of its own, and each knows how to redraw
+   itself when the language changes - so this list is the one place a new tool has to be registered. */
+const TOOLS = [
+  { name: "milan", label: "milan", sub: "milan_sub", open: () => showMilan() },
+];
+
+function drawTools() {
+  $("#tools").replaceChildren(...TOOLS.map((tool) => {
+    const button = el("button", { className: "person tool", onclick: tool.open },
+      el("div", { className: "who" }, t(tool.label)),
+      el("div", { className: "when" }, t(tool.sub)));
+    if (screen.name === tool.name) button.setAttribute("aria-current", "true");
+    return button;
+  }));
+}
+
 /* The language switch lives in the sidebar rather than behind a settings screen: it changes every word
    on the page, so it should be visible while you read them. The choice is remembered by Python. */
 function drawLanguageSwitch() {
@@ -50,8 +67,9 @@ function drawLanguageSwitch() {
     if (which === lang()) return;
     setLang(await api().set_setting("language", which).then((s) => s.language));
     drawPeople();
+    drawTools();
     drawLanguageSwitch();
-    selectedId ? showChart(selectedId) : showAddPerson();
+    screen.redraw ? screen.redraw() : (selectedId ? showChart(selectedId) : showAddPerson());
   };
   holder.replaceChildren(
     el("span", { className: "switch-label" }, t("language")),
@@ -128,7 +146,9 @@ function placeField(existing) {
 function showAddPerson(existing = null) {
   const editing = Boolean(existing);
   selectedId = editing ? existing.id : null;
+  screen = { name: "person", redraw: () => showAddPerson(existing) };
   drawPeople();
+  drawTools();
   $("#main").replaceChildren(
     el("h2", {}, editing ? t("edit_person", existing.name) : t("add_person")),
     el("p", { className: "lede" }, t("data_note")),
@@ -270,7 +290,9 @@ function reportPanel(id) {
 
 async function showChart(id) {
   selectedId = id;
+  screen = { name: "chart", redraw: () => showChart(id) };
   drawPeople();
+  drawTools();
   const who = people.find((p) => p.id === id);
   $("#main").replaceChildren(
     el("h2", {}, who ? who.name : t("chart")),
@@ -384,6 +406,110 @@ async function removePerson(id) {
   people.length ? showChart(people[0].id) : showAddPerson();
 }
 
+/* --- Kundli Milan ------------------------------------------------------------------------- */
+
+const KOOTAS = ["varna", "vashya", "tara", "yoni", "graha_maitri", "gana", "bhakoot", "nadi"];
+
+/* Which of the two is the bride is not a detail: several kootas are counted from the bride's Moon to
+   the groom's and not the other way round. So the two fields are labelled, not merely first and second,
+   and swapping them is a visible act rather than something the screen decides. */
+function showMilan() {
+  screen = { name: "milan", redraw: () => showMilan() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("milan")), el("p", { className: "lede" }, t("milan_sub")));
+
+  if (people.length < 2) {
+    main.append(el("p", { className: "note" }, t("need_two")),
+      el("div", { className: "row" },
+        el("button", { className: "primary", onclick: () => showAddPerson() }, t("add_person"))));
+    return;
+  }
+
+  const chooser = (id, label, preferred) => {
+    const select = el("select", { id });
+    select.append(...people.map((p) => el("option", { value: p.id, textContent: p.name })));
+    select.value = preferred;
+    return el("div", { className: "field" }, el("label", { htmlFor: id }, label), select);
+  };
+
+  const result = el("div", { id: "milan-result" });
+  const go = el("button", { className: "primary" }, t("match_now"));
+  go.onclick = async () => {
+    const groom = $("#m-groom").value;
+    const bride = $("#m-bride").value;
+    if (groom === bride) {
+      result.replaceChildren(el("p", { className: "problem" }, t("same_person")));
+      return;
+    }
+    result.replaceChildren(el("p", { className: "working" }, t("matching")));
+    try {
+      drawMatch(result, await api().match(groom, bride));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        t("match_failed", String(e.message || e).replace(/^.*Error:\s*/s, ""))));
+    }
+  };
+
+  main.append(
+    el("div", { className: "fields" },
+      chooser("m-groom", t("groom"), people[0].id),
+      chooser("m-bride", t("bride"), people[1].id)),
+    el("div", { className: "row" }, go),
+    result,
+  );
+}
+
+function drawMatch(into, m) {
+  const ak = m.ashtakoota || {};
+  const total = ak.total_36 || {};
+  const kootas = ak.kootas || {};
+  const names = m.people || [];
+
+  const kootaRows = KOOTAS.filter((k) => kootas[k]).map((k) => {
+    const koota = kootas[k];
+    const detail = [koota.groom, koota.bride].filter(Boolean).join(" · ") || koota.status || "";
+    return el("tr", {},
+      el("th", {}, t(`koota_${k}`)),
+      el("td", {}, t("score_of", koota.score, koota.max)),
+      el("td", { className: "muted-cell" }, detail));
+  });
+
+  const mangal = m.mangal_comparison || {};
+  const mangalRows = names.filter((n) => mangal[n]).map((n) => el("tr", {},
+    el("th", {}, n),
+    el("td", {}, [["from_lagna", mangal[n].from_lagna], ["from_moon", mangal[n].from_moon],
+                  ["from_venus", mangal[n].from_venus]]
+      .map(([key, house]) => `${t(key)}: ${t("house_n", house)}`).join(" · "))));
+
+  into.replaceChildren(
+    el("div", { className: "card score-card" },
+      el("div", { className: "score" }, `${total.score ?? "—"} / ${total.out_of ?? 36}`),
+      el("div", { className: "score-band" }, total.band ?? ""),
+      el("div", { className: "score-who" }, names.join("  ·  "))),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("eight_kootas")),
+      el("table", {},
+        el("thead", {}, el("tr", {}, el("th", {}, t("koota")), el("th", {}, t("points")), el("th", {}, ""))),
+        el("tbody", {}, ...kootaRows))),
+
+    mangalRows.length
+      ? el("div", { className: "card" }, el("h3", {}, t("mangal_compare")), el("table", {}, ...mangalRows))
+      : "",
+
+    el("p", { className: "note" }, t("milan_note")),
+  );
+
+  if (Array.isArray(m.sections) && m.sections.length) {
+    into.append(el("h3", { className: "panel-heading" }, t("readings", m.sections.length)),
+      sectionsPanel(m.sections, lang()));
+  }
+}
+
 /* --- start -------------------------------------------------------------------------------- */
 
 async function start() {
@@ -394,6 +520,7 @@ async function start() {
   }
   people = await api().people();
   drawPeople();
+  drawTools();
   drawLanguageSwitch();
   people.length ? showChart(people[0].id) : showAddPerson();
 }

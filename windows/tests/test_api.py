@@ -13,6 +13,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from jyotish_win.api import Api, ValidationError, validate   # noqa: E402
 from jyotish_win.storage import Store                        # noqa: E402
 
+NEHA = {"name": "Neha Agarwal", "gender": "F", "date": "1992-06-03", "time": "17:45",
+        "lat": 26.8467, "lon": 80.9462, "tz": "Asia/Kolkata", "place": "Lucknow"}
+
 RAVI = {"name": "Ravi Shankar Tiwari", "gender": "M", "date": "1988-07-14", "time": "14:35",
         "lat": 25.3176, "lon": 82.9739, "tz": "Asia/Kolkata", "place": "Varanasi, India"}
 
@@ -175,6 +178,39 @@ class ApiTest(unittest.TestCase):
         self.assertIsNone(fresh._engine)
         self.assertEqual(fresh.people(), [])
         self.assertIsNone(fresh._engine)
+
+    # --- matching -------------------------------------------------------------------------------
+
+    def test_matching_two_people(self):
+        groom = self.api.add_person(RAVI)
+        bride = self.api.add_person(dict(NEHA))
+        m = self.api.match(groom["id"], bride["id"])
+        total = m["ashtakoota"]["total_36"]
+        self.assertEqual(total["out_of"], 36)
+        self.assertTrue(0 <= total["score"] <= 36)
+        self.assertEqual(m["people"], [groom["name"], bride["name"]])
+        self.assertEqual(m["ashtakoota"]["bride_is"], "B")
+
+    def test_the_bride_is_the_second_person_not_whichever_way_round(self):
+        """Several kootas are counted from the bride's Moon to the groom's and not the other way round,
+        so swapping the two has to be able to change the answer. If this ever comes out symmetrical,
+        the bride flag has stopped reaching the engine."""
+        groom = self.api.add_person(RAVI)
+        bride = self.api.add_person(dict(NEHA))
+        one = self.api.match(groom["id"], bride["id"])["ashtakoota"]
+        other = self.api.match(bride["id"], groom["id"])["ashtakoota"]
+        self.assertEqual(other["bride_is"], "B")
+        self.assertNotEqual(one["kootas"]["tara"], other["kootas"]["tara"])
+
+    def test_a_person_cannot_be_matched_with_themselves(self):
+        saved = self.api.add_person(RAVI)
+        with self.assertRaises(ValidationError):
+            self.api.match(saved["id"], saved["id"])
+
+    def test_matching_someone_who_is_not_saved(self):
+        saved = self.api.add_person(RAVI)
+        with self.assertRaises(ValidationError):
+            self.api.match(saved["id"], "nobody")
 
     # --- reports --------------------------------------------------------------------------------
 

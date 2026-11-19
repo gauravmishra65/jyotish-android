@@ -243,9 +243,17 @@ class WebAssetsTest(unittest.TestCase):
         self.assertIn("SIGNS.indexOf(varga.Lagna)", kundli)
         self.assertIn("vargaSvg(", (WEB / "app.js").read_text(encoding="utf-8"))
 
+    def test_matching_names_the_bride_rather_than_asking_for_two_people(self):
+        """Who is the bride changes the answer, so the screen must label the two fields rather than
+        taking them in whatever order they were chosen."""
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        self.assertIn('t("groom")', js)
+        self.assertIn('t("bride")', js)
+        self.assertIn("api().match(groom, bride)", js)
+
     def test_the_element_ids_the_script_needs_are_in_the_page(self):
         html = (WEB / "index.html").read_text(encoding="utf-8")
-        for element_id in ("people", "count", "main", "new-person", "language"):
+        for element_id in ("people", "count", "main", "new-person", "language", "tools"):
             self.assertIn(f'id="{element_id}"', html)
 
 

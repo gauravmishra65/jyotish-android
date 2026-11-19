@@ -341,3 +341,18 @@ button.quiet:hover { color: var(--bad); }
 
 button.link { text-decoration: underline; padding: 0 2px; min-height: 0; color: var(--accent); }
 button.link:hover { color: var(--accent-deep); }
+
+/* --- the tools in the sidebar ----------------------------------------------------------------- */
+
+nav#tools { padding: 8px; border-top: 1px solid var(--line); }
+.person.tool .who { font-weight: 600; }
+
+/* --- Kundli Milan ----------------------------------------------------------------------------- */
+
+.score-card { text-align: center; }
+.score { font-size: 38px; font-weight: 600; letter-spacing: -0.02em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.score-band { color: var(--ink); margin-top: 2px; }
+.score-who { color: var(--muted); font-size: 13px; margin-top: 8px; }
+.muted-cell { color: var(--muted); font-size: 13px; }
+#milan-result table th { width: auto; }
+#milan-result thead th { color: var(--muted); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; }
