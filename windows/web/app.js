@@ -47,9 +47,12 @@ function drawPeople() {
 /* The tools that are not about one person. Each is a screen of its own, and each knows how to redraw
    itself when the language changes - so this list is the one place a new tool has to be registered. */
 const TOOLS = [
+  { name: "today", label: "today", sub: "today_sub", open: () => showToday() },
   { name: "milan", label: "milan", sub: "milan_sub", open: () => showMilan() },
+  { name: "compare", label: "compare", sub: "compare_sub", open: () => showCompare() },
   { name: "muhurta", label: "muhurta", sub: "muhurta_sub", open: () => showMuhurta() },
   { name: "numbers", label: "numbers", sub: "numbers_sub", open: () => showNumbers() },
+  { name: "prashna", label: "prashna", sub: "prashna_sub", open: () => showPrashna() },
   { name: "chinese", label: "chinese", sub: "chinese_sub", open: () => showChinese() },
   { name: "settings", label: "settings", sub: "settings_sub", open: () => showSettings() },
 ];
@@ -317,6 +320,75 @@ function reportPanel(id) {
     el("h3", {}, t("reports")), buttons, status, el("p", { className: "note" }, t("report_note")));
 }
 
+/* The outlook and the predictions, on the person they are about.
+ *
+ * Both are slow enough to be worth asking for rather than computing with every chart - three years of
+ * timing windows takes a second and a half - so each is a button that fills its own card.
+ */
+function outlookPanel(id) {
+  const result = el("div", { className: "outlook-result" });
+  const go = el("button", { className: "primary" }, t("show_forecast"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      const f = await api().forecast(id);
+      result.replaceChildren(...(f.areas || []).map((area) => el("div", { className: "area" },
+        el("h4", {}, bi(area.title, lang())),
+        el("p", { className: "area-outlook" }, bi(area.outlook, lang())),
+        el("p", { className: "note" }, bi(area.subtitle, lang())),
+        el("table", { className: "section-table wide" }, el("tbody", {},
+          ...(area.years || []).map((y) => el("tr", {},
+            el("th", {}, `${y.from} – ${y.to}`),
+            el("td", {}, bi(y.summary, lang())))))),
+        ...(area.windows || []).map((w) => el("p", { className: "note" }, bi(w, lang()))))));
+      if (f.method) result.append(el("p", { className: "note" }, bi(f.method, lang())));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+  return el("div", { className: "card" },
+    el("h3", {}, t("forecast")), el("div", { className: "row" }, go), result);
+}
+
+function predictionPanel(id) {
+  const result = el("div", { className: "outlook-result" });
+  const buttons = el("div", { className: "row report-row" });
+
+  const run = async (period, button) => {
+    for (const b of buttons.children) b.className = b === button ? "primary" : "";
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      const out = await api().predict(id, period);
+      const dasha = out.dasha ? t("dasha_now", out.dasha.maha, out.dasha.antar) : "";
+      result.replaceChildren(
+        el("p", { className: "note" }, [bi(out.title, lang()), dasha].filter(Boolean).join(" · ")),
+        ...(out.areas || []).map((area) => el("div", { className: "area" },
+          el("h4", {}, `${bi(area.title, lang())} ${stars(area.stars)}`),
+          el("p", {}, bi(area.reading, lang())))),
+        out.note ? el("p", { className: "note" }, bi(out.note, lang())) : "");
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  api().periods().then((list) => buttons.replaceChildren(...list.map((k) => {
+    const button = el("button", {}, k.name[lang()] ?? k.name.en);
+    button.onclick = () => run(k.period, button);
+    return button;
+  })));
+
+  return el("div", { className: "card" }, el("h3", {}, t("predictions")), buttons, result);
+}
+
+/* Out of five, as the Android app shows them. A filled star reads faster than "4/5" and does not
+   pretend to a precision the reading does not have. */
+function stars(n) {
+  const filled = Math.max(0, Math.min(5, Number(n) || 0));
+  return "★".repeat(filled) + "☆".repeat(5 - filled);
+}
+
 async function showChart(id) {
   selectedId = id;
   screen = { name: "chart", redraw: () => showChart(id) };
@@ -396,7 +468,7 @@ async function showChart(id) {
   // The sixteen divisional charts, then the readings, then the way out. The buttons go last so that
   // scrolling to the end of a chart lands on them rather than on the middle of the readings.
   const main = $("#main");
-  main.append(reportPanel(id));
+  main.append(predictionPanel(id), outlookPanel(id), reportPanel(id));
   if (details.varga_meta?.length) {
     main.append(el("h3", { className: "panel-heading" }, t("vargas")), vargaPanel(details, style));
   }
@@ -738,8 +810,16 @@ function showChinese() {
   const run = async () => {
     result.replaceChildren(el("p", { className: "working" }, t("building")));
     try {
-      const out = await api().chinese(person.value);
-      result.replaceChildren(sectionsPanel(out.sections || [], lang()));
+      // The Flying Stars are not about a birth chart at all - they are about the year and the month -
+      // but they belong to the same tradition, and a screen of their own for one section would be a
+      // menu entry that nobody would ever look for.
+      const [out, stars] = await Promise.all([api().chinese(person.value), api().flying_stars()]);
+      result.replaceChildren(
+        sectionsPanel(out.sections || [], lang()),
+        (stars.sections || []).length
+          ? el("div", {}, el("h3", { className: "panel-heading" }, t("flying_stars")),
+              sectionsPanel(stars.sections, lang()))
+          : "");
     } catch (e) {
       result.replaceChildren(el("p", { className: "problem" },
         String(e.message || e).replace(/^.*Error:\s*/s, "")));
@@ -753,6 +833,268 @@ function showChinese() {
     result,
   );
   run();
+}
+
+/* --- today -------------------------------------------------------------------------------- */
+
+/* The panchang is read from where somebody is now, not from where they were born - sunrise, the
+   choghadiya and rahu kalam are all local to the morning they are standing in. The place is remembered
+   once, and until it is chosen the first saved person's birthplace stands in, so the screen shows
+   something true rather than an empty form. */
+async function showToday() {
+  screen = { name: "today", redraw: () => showToday() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("today")), el("p", { className: "lede" }, t("today_sub")));
+
+  const where = await api().today_place();
+  if (!where || !where.tz) return main.append(todayPlaceForm(null));
+
+  let day;
+  try {
+    day = await api().today();
+  } catch (e) {
+    return main.append(el("p", { className: "problem" },
+      String(e.message || e).replace(/^.*Error:\s*/s, "")), todayPlaceForm(where));
+  }
+
+  const p = day.panchang || {};
+  const periods = day.periods || {};
+  const span = (x) => (x && x.from ? `${x.from} – ${x.to}` : "—");
+
+  /* Some panchang limbs arrive as {en, hi} and others as {name: {en, hi}, ends}, because the ones that
+     change during the day carry the time they change at. One reader for both, with the time when there
+     is one - "until 06:40" is the part anybody planning a day actually needs. */
+  const limb = (x) => {
+    if (!x) return "—";
+    const name = bi(x.name ?? x, lang());
+    return name ? (x.ends ? `${name} (→ ${x.ends})` : name) : "—";
+  };
+
+  main.append(
+    el("p", { className: "note" }, t("today_where", `${where.place || day.place || ""} · ${day.date}`.trim()),
+      " ", el("button", { className: "quiet link", onclick: () => showTodayPlace(where) }, t("change_place"))),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("panchang")),
+      rows([
+        [t("weekday"), `${bi(p.weekday, lang())}${p.weekday_lord ? " · " + bi(p.weekday_lord, lang()) : ""}`],
+        [t("tithi"), p.tithi ? `${bi(p.tithi.paksha, lang())} ${limb(p.tithi)}`.trim() : "—"],
+        [t("nakshatra"), limb(p.nakshatra)],
+        [t("yoga"), limb(p.yoga)],
+        [t("karana"), limb(p.karana)],
+        [t("moon_sign"), bi(p.moon_sign, lang()) || "—"],
+        [t("sun_sign"), bi(p.sun_sign, lang()) || "—"],
+        [t("lunar_month"), [bi(p.month_amanta, lang()), bi(p.month_purnimanta, lang())]
+          .filter(Boolean).filter((v, i, all) => all.indexOf(v) === i).join(" · ") || "—"],
+        [t("samvat"), [p.vikram_samvat, p.shaka_samvat].filter(Boolean).join(" · ") || "—"],
+      ])),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("sun_moon")),
+      rows([
+        [t("sunrise_set"), `${day.sun?.rise ?? "—"} · ${day.sun?.set ?? "—"}`],
+        [t("moonrise_set"), `${day.moon?.rise ?? "—"} · ${day.moon?.set ?? "—"}`],
+      ])),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("periods_good")),
+      rows([[t("abhijit"), span(periods.abhijit)], [t("brahma_muhurta"), span(periods.brahma_muhurta)]])),
+
+    el("div", { className: "card" },
+      el("h3", {}, t("periods_avoid")),
+      rows([[t("rahu_kalam"), span(periods.rahu_kalam)], [t("yamaganda"), span(periods.yamaganda)],
+            [t("gulika_kalam"), span(periods.gulika_kalam)]])),
+
+    choghadiyaCard(periods),
+
+    (day.festivals || []).length
+      ? el("div", { className: "card" }, el("h3", {}, t("festivals")),
+          el("table", {}, ...day.festivals.slice(0, 10).map((f) =>
+            el("tr", {}, el("th", {}, f.date), el("td", {}, bi(f.name, lang()))))))
+      : "",
+
+    day.conventions ? el("p", { className: "note" }, bi(day.conventions, lang())) : "",
+  );
+}
+
+/* Sixteen slots, day and night. A table rather than a list: what anybody wants from the choghadiya is
+   "which of these am I in now", and that is a question you answer by scanning a column. */
+function choghadiyaCard(periods) {
+  const slots = (list, label) => (list || []).map((c) => el("tr", {},
+    el("th", {}, `${c.from} – ${c.to}`),
+    el("td", {}, c.name),
+    el("td", { className: "muted-cell" }, `${label} · ${c.kind ?? ""}`.trim())));
+
+  const day = slots(periods.choghadiya_day, t("by_day"));
+  const night = slots(periods.choghadiya_night, t("by_night"));
+  if (!day.length && !night.length) return "";
+  return el("div", { className: "card" },
+    el("h3", {}, t("choghadiya")),
+    el("table", { className: "section-table wide" }, el("tbody", {}, ...day, ...night)));
+}
+
+function todayPlaceForm(where) {
+  const card = el("div", { className: "card" },
+    el("p", { className: "note" }, t("set_place_first")),
+    el("div", { className: "fields" },
+      placeField(where, "td", t("where")),
+      field(t("latitude"), "lat", { value: where?.lat ?? "" }),
+      field(t("longitude"), "lon", { value: where?.lon ?? "" }),
+      field(t("time_zone"), "tz", { list: "zones", value: where?.tz ?? "" })));
+
+  const go = el("button", { className: "primary" }, t("saved").length ? t("change_place") : "");
+  go.textContent = t("change_place");
+  go.onclick = async () => {
+    try {
+      await api().set_today_place({
+        place: $("#td-place").value.trim(), lat: $("#td-lat").value.trim(),
+        lon: $("#td-lon").value.trim(), tz: $("#td-tz").value.trim(),
+      });
+      showToday();
+    } catch (e) {
+      card.append(el("p", { className: "problem" }, String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+  card.append(el("div", { className: "row" }, go));
+  // The three fields share their ids with the birth form, so they are renamed once in place.
+  queueMicrotask(() => {
+    for (const name of ["lat", "lon", "tz"]) {
+      const input = card.querySelector(`#f-${name}`);
+      if (!input) continue;
+      input.id = `td-${name}`;
+      input.previousElementSibling.htmlFor = `td-${name}`;
+    }
+  });
+  timeZoneList().then((list) => {
+    document.getElementById("zones")?.remove();
+    document.body.append(list);
+  });
+  return card;
+}
+
+function showTodayPlace(where) {
+  screen = { name: "today", redraw: () => showTodayPlace(where) };
+  $("#main").replaceChildren(
+    el("h2", {}, t("today")), el("p", { className: "lede" }, t("today_sub")), todayPlaceForm(where));
+}
+
+/* --- Prashna ------------------------------------------------------------------------------ */
+
+function showPrashna() {
+  screen = { name: "prashna", redraw: () => showPrashna() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const question = el("input", { id: "q-text", placeholder: "…" });
+  const method = el("select", { id: "q-method" });
+  method.append(el("option", { value: "prashna", textContent: t("method_prashna") }),
+                el("option", { value: "kp", textContent: t("method_kp") }));
+  const number = el("input", { id: "q-number", type: "number", min: "1", max: "249", value: "" });
+  const numberField = el("div", { className: "field" },
+    el("label", { htmlFor: "q-number" }, t("kp_number")), number);
+  numberField.style.display = "none";
+  method.onchange = () => (numberField.style.display = method.value === "kp" ? "" : "none");
+
+  const result = el("div", { id: "prashna-result" });
+  const go = el("button", { className: "primary" }, t("ask_now"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("building")));
+    try {
+      drawPrashna(result, await api().ask_question({
+        method: method.value, question: question.value, number: number.value,
+      }));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  $("#main").replaceChildren(
+    el("h2", {}, t("prashna")),
+    el("p", { className: "lede" }, t("prashna_sub")),
+    el("div", { className: "fields" },
+      el("div", { className: "field wide" }, el("label", { htmlFor: "q-text" }, t("the_question")), question),
+      el("div", { className: "field" }, el("label", { htmlFor: "q-method" }, t("method")), method),
+      numberField),
+    el("div", { className: "row" }, go),
+    result,
+  );
+  question.focus();
+}
+
+function drawPrashna(into, answer) {
+  const lean = { favourable: "lean_favourable", unfavourable: "lean_unfavourable" }[answer.lean] || "lean_mixed";
+  into.replaceChildren(
+    el("div", { className: "card score-card" },
+      el("div", { className: "score-band" }, t(lean)),
+      el("div", { className: "score-who" },
+        t("checks_passed", answer.favourable ?? 0, answer.out_of ?? (answer.checks || []).length))),
+    el("div", { className: "card" },
+      el("h3", {}, t("the_chart")),
+      rows([
+        [t("lagna"), `${answer.lagna ?? "—"}${answer.lagna_lord ? " · " + answer.lagna_lord : ""}`],
+        [t("moon_sign"), answer.moon_sign ?? "—"],
+        ["", answer.asked_at ?? ""],
+      ])),
+    (answer.checks || []).length
+      ? el("div", { className: "card" },
+          el("table", { className: "section-table wide" }, el("tbody", {},
+            ...answer.checks.map((c) => el("tr", {},
+              el("th", {}, c.ok ? "✓" : "·"),
+              el("td", {}, bi(c.text, lang())))))))
+      : "",
+    el("p", { className: "note" }, t("prashna_note")),
+    answer.note ? el("p", { className: "note" }, bi(answer.note, lang())) : "",
+  );
+}
+
+/* --- comparing several people ------------------------------------------------------------- */
+
+function showCompare() {
+  screen = { name: "compare", redraw: () => showCompare() };
+  selectedId = null;
+  drawPeople();
+  drawTools();
+
+  const main = $("#main");
+  main.replaceChildren(el("h2", {}, t("compare")), el("p", { className: "lede" }, t("compare_sub")));
+  if (people.length < 2) {
+    main.append(el("p", { className: "note" }, t("need_two")),
+      el("div", { className: "row" },
+        el("button", { className: "primary", onclick: () => showAddPerson() }, t("add_person"))));
+    return;
+  }
+
+  const chosen = new Set(people.slice(0, 2).map((p) => p.id));
+  const boxes = el("div", { className: "checks" }, ...people.map((p) => {
+    const box = el("input", { type: "checkbox", id: `cmp-${p.id}`, checked: chosen.has(p.id) });
+    box.onchange = () => (box.checked ? chosen.add(p.id) : chosen.delete(p.id));
+    return el("label", { className: "check", htmlFor: `cmp-${p.id}` }, box, el("span", {}, p.name));
+  }));
+
+  const result = el("div", { id: "compare-result" });
+  const go = el("button", { className: "primary" }, t("compare_now"));
+  go.onclick = async () => {
+    result.replaceChildren(el("p", { className: "working" }, t("matching")));
+    try {
+      const out = await api().compare_group([...chosen]);
+      result.replaceChildren(sectionsPanel(out.sections || [], lang()));
+    } catch (e) {
+      result.replaceChildren(el("p", { className: "problem" },
+        String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    }
+  };
+
+  main.append(
+    el("div", { className: "card" }, el("h3", {}, t("choose_people")), boxes),
+    el("div", { className: "row" }, go),
+    result,
+  );
 }
 
 /* --- settings ----------------------------------------------------------------------------- */

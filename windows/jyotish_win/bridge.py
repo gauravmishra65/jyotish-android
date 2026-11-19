@@ -110,6 +110,15 @@ class Engine:
     def custom_rule(self, request: dict) -> dict:
         return self._call("custom_rule", request)
 
+    def today(self, request: dict) -> dict:
+        return self._call("today", request)
+
+    def predict(self, request: dict) -> dict:
+        return self._call("predict", request)
+
+    def feng_shui(self, request: dict) -> dict:
+        return self._call("feng_shui", request)
+
     def match(self, chart_a: dict, chart_b: dict, bride: str = "B") -> dict:
         with self._lock:
             return self._json(self._api.match(json.dumps(chart_a), json.dumps(chart_b), bride))

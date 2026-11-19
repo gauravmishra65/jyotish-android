@@ -142,6 +142,38 @@ class ChartContractTest(unittest.TestCase):
                 self.assertIn(sign, signs, f"{key} puts {body} in {sign!r}")
 
 
+    # --- today ------------------------------------------------------------------------------------
+
+    def test_the_panchang_limbs_keep_the_two_shapes_the_screen_reads(self):
+        """Some limbs are {en, hi} and the ones that change during the day are {name: {en, hi}, ends}.
+        The screen reads both. When it read only the first, Yoga and Karana silently showed a dash -
+        which is what this test exists to catch next time."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from jyotish_win.bridge import Engine as _Engine
+        day = _Engine().today({"date": "2026-11-20", "lat": 25.3176, "lon": 82.9739,
+                               "tz": "Asia/Kolkata", "place": "Varanasi"})
+        panchang = day["panchang"]
+
+        for key in ("weekday", "weekday_lord", "moon_sign", "sun_sign", "month_amanta"):
+            self.assertIn("en", panchang[key], f"{key} is no longer a plain bilingual pair")
+            self.assertIn("hi", panchang[key])
+
+        for key in ("tithi", "nakshatra", "yoga", "karana"):
+            self.assertIn("name", panchang[key], f"{key} no longer carries a name")
+            self.assertIn("en", panchang[key]["name"], f"{key}'s name is not bilingual")
+            self.assertIn("hi", panchang[key]["name"])
+
+        for key in ("rahu_kalam", "yamaganda", "gulika_kalam", "abhijit", "brahma_muhurta"):
+            for edge in ("from", "to"):
+                self.assertIn(edge, day["periods"][key], f"{key} has no {edge}")
+
+        for which in ("choghadiya_day", "choghadiya_night"):
+            self.assertEqual(len(day["periods"][which]), 8, f"{which} is not eight slots")
+            for slot in day["periods"][which]:
+                for field in ("from", "to", "name"):
+                    self.assertIn(field, slot)
+
 
 class WebAssetsTest(unittest.TestCase):
     """The shell cannot be run in CI, so at least prove its pieces are present and refer to each other."""

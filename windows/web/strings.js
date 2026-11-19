@@ -228,6 +228,69 @@ const STRINGS = {
   waiting_people:  { en: "%1 more are in the file and will be restored once this is unlocked.",
                      hi: "फ़ाइल में %1 और हैं, जो पूर्ण संस्करण खुलने पर आ जाएँगे।" },
 
+  // today
+  today:           { en: "Today",                          hi: "आज" },
+  today_sub:       { en: "Panchang and the day's periods", hi: "पंचांग और दिन के समय" },
+  today_where:     { en: "Read for %1",                    hi: "%1 के लिए" },
+  change_place:    { en: "Change the place",               hi: "स्थान बदलें" },
+  set_place_first: { en: "Choose where you are, so the panchang and the periods are for your own sunrise.",
+                     hi: "आप कहाँ हैं यह चुनें, ताकि पंचांग और समय आपके अपने सूर्योदय के अनुसार हों।" },
+  sun_moon:        { en: "Sun and Moon",                   hi: "सूर्य और चंद्र" },
+  sunrise_set:     { en: "Sunrise · sunset",               hi: "सूर्योदय · सूर्यास्त" },
+  moonrise_set:    { en: "Moonrise · moonset",             hi: "चंद्रोदय · चंद्रास्त" },
+  panchang:        { en: "Panchang",                       hi: "पंचांग" },
+  weekday:         { en: "Weekday",                        hi: "वार" },
+  yoga:            { en: "Yoga",                           hi: "योग" },
+  karana:          { en: "Karana",                         hi: "करण" },
+  sun_sign:        { en: "Sun sign",                       hi: "सूर्य राशि" },
+  lunar_month:     { en: "Lunar month",                    hi: "चंद्र मास" },
+  samvat:          { en: "Samvat",                         hi: "संवत" },
+  periods_good:    { en: "Times to use",                   hi: "शुभ समय" },
+  periods_avoid:   { en: "Times to avoid",                 hi: "त्याज्य समय" },
+  abhijit:         { en: "Abhijit",                        hi: "अभिजित" },
+  brahma_muhurta:  { en: "Brahma muhurta",                 hi: "ब्रह्म मुहूर्त" },
+  rahu_kalam:      { en: "Rahu kalam",                     hi: "राहु काल" },
+  yamaganda:       { en: "Yamaganda",                      hi: "यमगंड" },
+  gulika_kalam:    { en: "Gulika kalam",                   hi: "गुलिक काल" },
+  choghadiya:      { en: "Choghadiya",                     hi: "चौघड़िया" },
+  by_day:          { en: "Day",                            hi: "दिन" },
+  by_night:        { en: "Night",                          hi: "रात" },
+  festivals:       { en: "Coming up",                      hi: "आगे" },
+
+  // the outlook
+  forecast:        { en: "Three-year outlook",             hi: "तीन वर्ष का भविष्यफल" },
+  predictions:     { en: "Predictions",                    hi: "भविष्यफल" },
+  outlook_for:     { en: "Outlook",                        hi: "रुझान" },
+  show_forecast:   { en: "Work out the outlook",           hi: "रुझान निकालें" },
+  dasha_now:       { en: "%1 mahadasha, %2 antardasha",    hi: "%1 महादशा, %2 अंतर्दशा" },
+
+  // prashna
+  prashna:         { en: "Prashna",                        hi: "प्रश्न" },
+  prashna_sub:     { en: "A chart for the moment you ask", hi: "प्रश्न के क्षण की कुंडली" },
+  the_question:    { en: "The question",                   hi: "प्रश्न" },
+  method:          { en: "Method",                         hi: "पद्धति" },
+  method_prashna:  { en: "Prashna (the moment)",           hi: "प्रश्न (वर्तमान क्षण)" },
+  method_kp:       { en: "KP number (1 to 249)",           hi: "केपी संख्या (1 से 249)" },
+  kp_number:       { en: "Number",                         hi: "संख्या" },
+  ask_now:         { en: "Ask",                            hi: "पूछें" },
+  lean_favourable: { en: "Leans favourable",               hi: "अनुकूल लगता है" },
+  lean_unfavourable: { en: "Leans unfavourable",           hi: "प्रतिकूल लगता है" },
+  lean_mixed:      { en: "Mixed",                          hi: "मिश्रित" },
+  checks_passed:   { en: "%1 of %2 checks favour it",      hi: "%2 में से %1 जाँच अनुकूल" },
+  prashna_note:    { en: "A prashna answers the moment it was asked in, not the future. Read it as one "
+                       + "view among several.",
+                     hi: "प्रश्न उस क्षण का उत्तर देता है जिसमें पूछा गया, भविष्य का नहीं। इसे कई दृष्टियों "
+                       + "में से एक मानें।" },
+
+  // comparing several people
+  compare:         { en: "Compare",                        hi: "तुलना" },
+  compare_sub:     { en: "Several people side by side",    hi: "कई लोग साथ-साथ" },
+  choose_people:   { en: "Choose two or more",             hi: "दो या अधिक चुनें" },
+  compare_now:     { en: "Compare them",                   hi: "तुलना करें" },
+
+  // flying stars
+  flying_stars:    { en: "Flying Stars",                   hi: "उड़ते तारे" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

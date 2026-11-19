@@ -358,6 +358,122 @@ class Api:
         ask["gender"] = who.get("gender", "M")
         return self.engine.chinese_more(ask)
 
+    # --- today, and what is coming ----------------------------------------------------------------
+
+    def today_place(self) -> dict:
+        """Where "today" is being read from.
+
+        Not the birthplace: the panchang, the choghadiya and the transits are about where somebody is
+        now, and most people are not where they were born. It is remembered once chosen, and until then
+        it is taken from the first saved person so the screen has something true to show rather than an
+        empty form.
+        """
+        s = self.store.settings()
+        if s.get("today_lat") not in (None, "") and s.get("today_tz"):
+            return {"place": s.get("today_place", ""), "lat": float(s["today_lat"]),
+                    "lon": float(s["today_lon"]), "tz": s["today_tz"]}
+        people = self.store.profiles()
+        if people:
+            first = people[0]
+            return {"place": first.get("place", ""), "lat": float(first["lat"]),
+                    "lon": float(first["lon"]), "tz": first["tz"]}
+        return {}
+
+    def set_today_place(self, place: dict) -> dict:
+        for field in ("lat", "lon", "tz"):
+            if str(place.get(field, "")).strip() == "":
+                raise ValidationError("A place, with its coordinates and time zone, is needed.")
+        try:
+            ZoneInfo(str(place["tz"]).strip())
+        except (ZoneInfoNotFoundError, ValueError, OSError) as e:
+            raise ValidationError(f"{place['tz']!r} is not a time zone name.") from e
+        self.store.set_setting("today_place", str(place.get("place", "")).strip())
+        self.store.set_setting("today_lat", float(place["lat"]))
+        self.store.set_setting("today_lon", float(place["lon"]))
+        self.store.set_setting("today_tz", str(place["tz"]).strip())
+        return self.today_place()
+
+    def today(self, when: str | None = None) -> dict:
+        """The panchang for a day: tithi, nakshatra, the periods to use and the ones to avoid."""
+        where = self.today_place()
+        if not where:
+            raise ValidationError("Choose where you are before reading today's panchang.")
+        ask = dict(where)
+        ask["date"] = when or date.today().isoformat()
+        return self.engine.today(ask)
+
+    def forecast(self, person_id: str, years: int = 3) -> dict:
+        """The three-year outlook, by area of life. The same layers the full reading uses."""
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+        return self.engine.forecast(dict(self.chart_request(who), years=int(years)))
+
+    #: What predict() will answer for, in the order the buttons appear.
+    PERIODS = (
+        ("day", {"en": "Today", "hi": "आज"}),
+        ("week", {"en": "This week", "hi": "इस सप्ताह"}),
+        ("month", {"en": "This month", "hi": "इस माह"}),
+        ("year", {"en": "This year", "hi": "इस वर्ष"}),
+        ("three", {"en": "Three years", "hi": "तीन वर्ष"}),
+    )
+
+    def periods(self) -> list[dict]:
+        return [{"period": k, "name": name} for k, name in self.PERIODS]
+
+    def predict(self, person_id: str, period: str = "year") -> dict:
+        """What the period ahead looks like by area of life, with the reasons given."""
+        if period not in dict(self.PERIODS):
+            raise ValidationError("Choose a period.")
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+        ask = dict(self.chart_request(who), period=period)
+        where = self.today_place()
+        if where:
+            # Transits are read from where the person is now, not where they were born.
+            ask.update({"current_lat": where["lat"], "current_lon": where["lon"]})
+        return self.engine.predict(ask)
+
+    def ask_question(self, request: dict) -> dict:
+        """Prashna, or a KP number horary: a chart for the moment the question was asked.
+
+        The place and the moment are the question's, not anybody's birth - a prashna is read for whoever
+        is standing in front of you, and the saved people have nothing to do with it.
+        """
+        text = str(request.get("question", "")).strip()
+        if not text:
+            raise ValidationError("Type the question first.")
+        method = request.get("method", "prashna")
+        if method not in ("prashna", "kp"):
+            raise ValidationError("The method is either prashna or kp.")
+        where = self.today_place()
+        if not where:
+            raise ValidationError("Choose where you are before asking.")
+        ask = dict(where, method=method, question=text)
+        if method == "kp":
+            try:
+                number = int(str(request.get("number", "")).strip())
+            except ValueError as e:
+                raise ValidationError("A KP horary needs a number from 1 to 249.") from e
+            if not 1 <= number <= 249:
+                raise ValidationError("The number runs from 1 to 249.")
+            ask["number"] = number
+        return self.engine.question(ask)
+
+    def compare_group(self, person_ids: list[str]) -> dict:
+        """Several people side by side - a family, a team - rather than two at a time."""
+        people = [self.person(pid) for pid in person_ids]
+        if len([p for p in people if p]) < 2:
+            raise ValidationError("Choose at least two people.")
+        return self.engine.group({"people": [self.chart_request(validate(p)) for p in people if p]})
+
+    def flying_stars(self, when: str | None = None) -> dict:
+        """The annual and monthly Flying Stars for a date."""
+        return self.engine.feng_shui({"today": when or date.today().isoformat()})
+
     # --- readings as files ------------------------------------------------------------------------
 
     #: What report() will build, in the order the buttons appear. "life" is the whole reading; the rest

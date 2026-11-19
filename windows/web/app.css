@@ -378,3 +378,13 @@ nav#tools { padding: 8px; border-top: 1px solid var(--line); }
 #edition:empty { display: none; }
 .unlock-link { color: var(--accent); font-weight: 600; padding: 4px 8px; }
 .unlock-link:hover { color: var(--accent-deep); }
+
+/* --- the outlook and the predictions ---------------------------------------------------------- */
+
+.outlook-result:empty { display: none; }
+.outlook-result { margin-top: 14px; }
+.area { margin-bottom: 22px; }
+.area:last-child { margin-bottom: 0; }
+.area h4 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+.area-outlook { margin: 0 0 6px; color: var(--accent-deep); font-weight: 500; }
+.area p { margin: 0 0 6px; }

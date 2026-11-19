@@ -277,6 +277,83 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(_safe_filename("नेहा अग्रवाल"), "नेहा अग्रवाल")   # left as it is: NTFS is fine with it
         self.assertEqual(_safe_filename("///"), "Report")
 
+    # --- today, the outlook and the rest ----------------------------------------------------------
+
+    def test_today_is_read_from_where_you_are_not_where_you_were_born(self):
+        """Sunrise, the choghadiya and rahu kalam are local to the morning somebody is standing in."""
+        self.api.add_person(RAVI)
+        self.assertEqual(self.api.today_place()["tz"], "Asia/Kolkata")   # falls back to the first person
+
+        self.api.set_today_place({"place": "Singapore", "lat": 1.3521, "lon": 103.8198,
+                                  "tz": "Asia/Singapore"})
+        self.assertEqual(self.api.today_place()["place"], "Singapore")
+        day = self.api.today("2026-11-20")
+        self.assertEqual(day["date"], "2026-11-20")
+        self.assertTrue(day["sun"]["rise"])
+        self.assertEqual(len(day["periods"]["choghadiya_day"]), 8)
+
+    def test_a_today_place_with_a_half_typed_zone_is_refused(self):
+        with self.assertRaises(ValidationError):
+            self.api.set_today_place({"place": "x", "lat": 1, "lon": 1, "tz": "Asia"})
+        with self.assertRaises(ValidationError):
+            self.api.set_today_place({"place": "x", "lat": 1, "lon": 1, "tz": ""})
+
+    def test_today_says_so_when_it_has_nowhere_to_read_from(self):
+        with self.assertRaises(ValidationError):
+            self.api.today()
+
+    def test_the_outlook_covers_the_four_areas(self):
+        saved = self.api.add_person(RAVI)
+        out = self.api.forecast(saved["id"])
+        self.assertEqual(len(out["areas"]), 4)
+        for area in out["areas"]:
+            for lang in ("en", "hi"):
+                self.assertTrue(area["title"][lang])
+            self.assertTrue(area["years"], f"{area['key']} has no years")
+
+    def test_predictions_answer_for_every_period_offered(self):
+        saved = self.api.add_person(RAVI)
+        for period, _ in Api.PERIODS:
+            out = self.api.predict(saved["id"], period)
+            self.assertTrue(out["areas"], f"{period} produced no areas")
+            for area in out["areas"]:
+                self.assertTrue(0 <= area["stars"] <= 5, f"{area['key']} has {area['stars']} stars")
+
+    def test_an_unknown_period_is_refused(self):
+        saved = self.api.add_person(RAVI)
+        with self.assertRaises(ValidationError):
+            self.api.predict(saved["id"], "century")
+
+    def test_a_prashna_is_read_for_the_moment_not_for_a_saved_person(self):
+        self.api.add_person(RAVI)
+        answer = self.api.ask_question({"method": "prashna", "question": "Will the work go through?"})
+        self.assertIn(answer["lean"], ("favourable", "unfavourable", "mixed"))
+        self.assertTrue(answer["checks"])
+        self.assertNotIn(RAVI["name"], str(answer), "a prashna should know nothing of the saved people")
+
+    def test_a_kp_horary_needs_a_number_in_range(self):
+        self.api.add_person(RAVI)
+        for number in ("", "0", "250", "nonsense"):
+            with self.assertRaises(ValidationError, msg=f"{number!r} was accepted"):
+                self.api.ask_question({"method": "kp", "question": "Will it sell?", "number": number})
+        self.assertTrue(self.api.ask_question(
+            {"method": "kp", "question": "Will it sell?", "number": 77})["lean"])
+
+    def test_an_empty_question_is_refused(self):
+        self.api.add_person(RAVI)
+        with self.assertRaises(ValidationError):
+            self.api.ask_question({"method": "prashna", "question": "   "})
+
+    def test_comparing_a_group(self):
+        a = self.api.add_person(RAVI)
+        b = self.api.add_person(dict(NEHA))
+        self.assertTrue(self.api.compare_group([a["id"], b["id"]])["sections"])
+        with self.assertRaises(ValidationError):
+            self.api.compare_group([a["id"]])
+
+    def test_the_flying_stars(self):
+        self.assertTrue(self.api.flying_stars("2026-11-20")["sections"])
+
     # --- backup through the API -------------------------------------------------------------------
 
     def test_backup_and_restore_through_the_api(self):
