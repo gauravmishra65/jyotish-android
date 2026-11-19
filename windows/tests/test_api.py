@@ -140,6 +140,14 @@ class ApiTest(unittest.TestCase):
         after = self.api.chart(saved["id"])["vedic"]["lagna"]["lon"]
         self.assertNotAlmostEqual(before, after, places=3)
 
+    def test_a_profile_saved_by_an_older_build_still_fails_readably(self):
+        """Profiles written before the time zone was checked are already on disk. Asking for their chart
+        must give the same sentence, not the raw error that prompted the check."""
+        self.api.store.save_profiles([dict(RAVI, id="old", tz="Asia")])
+        with self.assertRaises(ValidationError) as e:
+            self.api.chart("old")
+        self.assertIn("Asia/Kolkata", str(e.exception))
+
     def test_a_chart_for_nobody(self):
         with self.assertRaises(ValidationError):
             self.api.chart("not-a-real-id")

@@ -146,6 +146,10 @@ class Api:
         who = self.person(person_id)
         if who is None:
             raise ValidationError("That person is not saved on this computer.")
+        # Checked again here, not only when saving: a profile written by an older build, restored from a
+        # backup or edited by hand can hold something the engine cannot use, and the person reading the
+        # screen deserves the same sentence either way.
+        validate(who)
         request = self.chart_request(who)
         key = chart_key(request)
         cached = self.store.cached_chart(key)
