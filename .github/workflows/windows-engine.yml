@@ -1,0 +1,54 @@
+name: windows-engine
+
+# Does the astrology engine behave on Windows as it does everywhere else?
+#
+# Phase 0 of the Windows plan. Unlike Android and iOS there is nothing to cross-compile: pyswisseph
+# publishes a win_amd64 wheel, so the whole engine installs with pip. What this proves is that it gives
+# the same answers - same chart, same dasha, same cache key - and that the storage layer behaves on NTFS,
+# where replacing an existing file has rules Linux does not have.
+#
+# Python is pinned to 3.11 because that is the newest CPython with a prebuilt pyswisseph wheel. The engine
+# itself needs only 3.9 or newer, so Android can stay on 3.13 while Windows sits here.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/windows-engine.yml'
+      - 'windows/**'
+      - 'app/src/main/python/**'
+
+permissions:
+  contents: read
+
+jobs:
+  engine:
+    name: Run the engine and its storage layer on Windows
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install the engine's dependencies from wheels only
+        # --only-binary enforces the claim this phase exists to test: no compiler is needed on Windows.
+        # If pyswisseph ever drops its wheel this step fails loudly rather than quietly building from source.
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --only-binary=:all: pyswisseph==2.10.3.2 tzdata
+          python -c "import swisseph; print('swisseph', swisseph.version)"
+
+      - name: The engine answers as it does on Linux
+        run: python windows/check_engine.py
+
+      - name: The bridge and the storage layer
+        run: python -m unittest discover -s windows/tests -v
+
+      - name: The full verification suite, on Windows
+        # The same 926 checks the Linux build runs. This is the real proof: not that the engine imports,
+        # but that every anchor - the calendars, the flying stars, the Katapayadi values - still holds.
+        run: python tools/verify/run_all.py

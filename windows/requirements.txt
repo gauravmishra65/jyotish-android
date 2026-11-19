@@ -1,0 +1,5 @@
+# Windows edition. Python 3.11, because that is the newest CPython with a prebuilt pyswisseph
+# wheel on PyPI - pinning it means the engine installs with no compiler on the machine.
+pyswisseph==2.10.3.2
+tzdata                 # Windows has no system zoneinfo database; the engine needs one
+pywebview==5.3.2       # the window. Uses WebView2, present on Windows 10 and 11
