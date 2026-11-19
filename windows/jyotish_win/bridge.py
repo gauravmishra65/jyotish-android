@@ -133,8 +133,10 @@ class Engine:
                 "weekdays": dict(app_details.WEEKDAY_HI),
                 "karanas": dict(app_details.KARANA_HI),
                 "yogas": dict(app_details.YOGA_HI),
-                # Fifteen names, used twice: a chart gives the tithi as a number and its paksha.
+                # Fourteen names, used twice over: a chart gives the tithi as a number with its paksha,
+                # and the fifteenth is Purnima in the bright half and Amavasya in the dark one.
                 "tithis": list(app_details.TITHI_HI),
+                "full_moon": {"Shukla": "पूर्णिमा", "Krishna": "अमावस्या"},
                 "paksha": {"Shukla": "शुक्ल", "Krishna": "कृष्ण"},
             }
 

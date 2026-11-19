@@ -39,10 +39,14 @@ function hi(value, table) {
 function tithi(paksha, number) {
   if (!number) return "—";
   const half = lang() === "hi" ? (glossary.paksha || {})[paksha] ?? paksha : paksha;
-  const names = glossary.tithis || [];
-  const name = names[(Number(number) - 1) % 15];
-  if (lang() === "hi" && name) return `${half} ${name}`.trim();
-  return `${half ?? ""} ${number}`.trim();
+  if (lang() !== "hi") return `${half ?? ""} ${number}`.trim();
+  // Fourteen names serve both halves of the month; the fifteenth is the full moon in the bright half
+  // and the new moon in the dark one, so it is named rather than numbered.
+  const within = (Number(number) - 1) % 15;
+  const name = within === 14
+    ? (glossary.full_moon || {})[paksha]
+    : (glossary.tithis || [])[within];
+  return name ? (within === 14 ? name : `${half} ${name}`.trim()) : `${half ?? ""} ${number}`.trim();
 }
 
 /* --- the list of people ------------------------------------------------------------------- */

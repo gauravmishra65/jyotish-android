@@ -164,7 +164,9 @@ class ChartContractTest(unittest.TestCase):
         self.assertIn(vedic["planets"]["Moon"]["nakshatra"], words["nakshatras"])
         self.assertIn(vedic["panchang"]["vara"], words["weekdays"])
         self.assertIn(vedic["panchang"]["paksha"], words["paksha"])
-        self.assertEqual(len(words["tithis"]), 15)
+        # Fourteen names for both halves; the fifteenth is named for the moon, not numbered.
+        self.assertEqual(len(words["tithis"]), 14)
+        self.assertEqual(set(words["full_moon"]), {"Shukla", "Krishna"})
         self.assertEqual(len(words["signs"]), 12)
         self.assertEqual(len(words["nakshatras"]), 27)
 
