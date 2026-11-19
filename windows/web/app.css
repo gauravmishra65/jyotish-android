@@ -174,3 +174,12 @@ button.quiet:hover { color: var(--bad); }
 .empty { color: var(--muted); padding: 24px 12px; text-align: center; font-size: 13.5px; }
 
 .note { color: var(--muted); font-size: 12.5px; margin-top: 18px; max-width: 760px; }
+
+/* --- the drawn chart ------------------------------------------------------------------------ */
+
+.chart-card { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.chart-holder { width: 100%; display: flex; justify-content: center; }
+
+/* The kundli is one drawing: its own lines are enough, so it takes no card border of its own. */
+.kundli { max-width: 100%; height: auto; }
+.chart-card .row { margin-top: 0; }

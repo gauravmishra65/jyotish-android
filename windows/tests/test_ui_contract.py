@@ -43,6 +43,20 @@ class ChartContractTest(unittest.TestCase):
         self.assertIn("nakshatra", moon)
         self.assertIn("pada", moon)
 
+    def test_the_lagna_carries_what_the_drawing_needs_to_place_it(self):
+        """The drawing needs the lagna's sign as a number. The engine gives planets a sign_index but gives
+        the lagna only a name and a longitude, so the drawing works it out - and must keep being able to."""
+        lagna = self.chart["vedic"]["lagna"]
+        self.assertNotIn("sign_index", lagna)       # if this ever appears, kundli.js will prefer it
+        self.assertIsInstance(lagna["lon"], (int, float))
+        self.assertEqual(int(lagna["lon"] // 30), 7)   # Scorpio, for the fixture
+
+    def test_every_planet_carries_what_the_drawing_needs(self):
+        for name, p in self.chart["vedic"]["planets"].items():
+            self.assertIsInstance(p["house"], int, f"{name} has no house number")
+            self.assertTrue(1 <= p["house"] <= 12, f"{name} is in house {p['house']}")
+            self.assertTrue(0 <= p["sign_index"] <= 11, f"{name} has sign_index {p['sign_index']}")
+
     def test_panchang_fields_shown_on_the_chart_card(self):
         pan = self.chart["vedic"]["panchang"]
         for key in ("sunrise_local", "tithi", "paksha", "vara"):
@@ -101,6 +115,11 @@ class WebAssetsTest(unittest.TestCase):
         js = (WEB / "app.js").read_text(encoding="utf-8")
         self.assertNotIn('addEventListener("click", showAddPerson)', js)
         self.assertIn('() => showAddPerson()', js)
+
+    def test_the_drawing_is_loaded_before_the_script_that_uses_it(self):
+        html = (WEB / "index.html").read_text(encoding="utf-8")
+        self.assertIn("kundli.js", html)
+        self.assertLess(html.index("kundli.js"), html.index("app.js"))
 
     def test_the_element_ids_the_script_needs_are_in_the_page(self):
         html = (WEB / "index.html").read_text(encoding="utf-8")

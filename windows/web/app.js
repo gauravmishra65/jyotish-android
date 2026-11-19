@@ -156,9 +156,23 @@ async function showChart(id) {
   const planetRows = Object.entries(v.planets).map(([name, p]) =>
     el("tr", {}, el("th", {}, name), el("td", {}, `${p.sign} ${p.dms ?? degrees(p.deg_in_sign)}${p.retrograde ? " ℞" : ""}`)));
 
+  const settings = await api().settings();
+  const style = settings.chart_style === "south" ? "south" : "north";
+  const lang = settings.language === "hi" ? "hi" : "en";
+
+  const styleButton = (which, label) => {
+    const button = el("button", { className: which === style ? "primary" : "" }, label);
+    button.onclick = async () => { await api().set_setting("chart_style", which); showChart(id); };
+    return button;
+  };
+
   $("#main").replaceChildren(
     el("h2", {}, who.name),
     el("p", { className: "lede" }, `${who.date} · ${who.time}${who.place ? " · " + who.place : ""}`),
+
+    el("div", { className: "card chart-card" },
+      el("div", { className: "chart-holder" }, kundliSvg(chart, { style, lang, size: 340 })),
+      el("div", { className: "row" }, styleButton("north", "North Indian"), styleButton("south", "South Indian"))),
 
     el("div", { className: "card" },
       el("h3", {}, "The chart"),
