@@ -89,6 +89,7 @@ function drawLanguageSwitch() {
     setLang(await api().set_setting("language", which).then((s) => s.language));
     drawPeople();
     drawTools();
+    drawEdition();
     drawLanguageSwitch();
     screen.redraw ? screen.redraw() : (selectedId ? showChart(selectedId) : showAddPerson());
   };
