@@ -31,7 +31,10 @@ def main() -> int:
         print("pywebview is not installed. Run: pip install -r windows/requirements.txt", file=sys.stderr)
         return 1
 
-    api = Api()
+    # Windows hands a double-clicked .gjb file over as the first argument, because the installer
+    # associates the extension with this app.
+    opened_with = next((a for a in sys.argv[1:] if a.lower().endswith(".gjb")), None)
+    api = Api(opened_with=opened_with)
     index = web_dir() / "index.html"
     window = webview.create_window(
         TITLE,

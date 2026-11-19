@@ -1,0 +1,19 @@
+# The properties Windows shows under right-click, Properties, Details. Without this the app appears
+# there as nameless, which is exactly how unsigned software is supposed to look suspicious.
+VSVersionInfo(
+  ffi=FixedFileInfo(filevers=(1, 0, 0, 0), prodvers=(1, 0, 0, 0), mask=0x3f, flags=0x0, OS=0x40004,
+                    fileType=0x1, subtype=0x0, date=(0, 0)),
+  kids=[
+    StringFileInfo([StringTable("040904B0", [
+        StringStruct("CompanyName", "Gaurav Mishra"),
+        StringStruct("FileDescription", "Gaurav Jyotish - Vedic astrology, offline"),
+        StringStruct("FileVersion", "1.0.0.0"),
+        StringStruct("InternalName", "GauravJyotish"),
+        StringStruct("LegalCopyright", "Copyright Gaurav Mishra"),
+        StringStruct("OriginalFilename", "GauravJyotish.exe"),
+        StringStruct("ProductName", "Gaurav Jyotish"),
+        StringStruct("ProductVersion", "1.0.0"),
+    ])]),
+    VarFileInfo([VarStruct("Translation", [1033, 1200])]),
+  ],
+)

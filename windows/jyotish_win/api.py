@@ -106,10 +106,12 @@ def time_zones() -> list[str]:
 class Api:
     """The object handed to the window. One instance per running app."""
 
-    def __init__(self, store: Store | None = None, engine: Engine | None = None):
+    def __init__(self, store: Store | None = None, engine: Engine | None = None,
+                 opened_with: str | None = None):
         self.store = store or Store()
         self._engine = engine
         self._engine_ready = engine is not None
+        self._pending = opened_with if opened_with and Path(opened_with).is_file() else None
 
     @property
     def engine(self) -> Engine:
@@ -423,6 +425,16 @@ class Api:
             existing[clean["id"]] = clean
         self.store.save_profiles(list(existing.values()))
         return {"added": added, "updated": updated, "skipped": skipped, "total": len(existing)}
+
+    def pending_restore(self) -> str | None:
+        """A backup file the app was started with, because the person double-clicked it.
+
+        The installer associates .gjb with this app, so opening one has to lead somewhere. It leads to
+        the settings screen with the file already chosen - and no further, because restoring without
+        being asked would be a surprising thing for a double-click to do.
+        """
+        waiting, self._pending = self._pending, None
+        return waiting
 
     def pick_backup(self) -> str | None:
         """The system file picker, so a backup can be restored from wherever the person keeps it."""

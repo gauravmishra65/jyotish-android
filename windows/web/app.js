@@ -733,7 +733,7 @@ function showChinese() {
 /* Which values a setting may take is Python's business, not this screen's: an ayanamsa the engine does
    not know would break every chart from then on, including after a restart, with nothing on screen to
    say why. So the options are fetched and the save is checked at the other end. */
-async function showSettings() {
+async function showSettings(openWith = null) {
   screen = { name: "settings", redraw: () => showSettings() };
   selectedId = null;
   drawPeople();
@@ -793,7 +793,7 @@ async function showSettings() {
       el("div", { className: "fields" }, credit("report_by"), credit("report_site"))),
 
     el("p", { className: "note" }, note),
-    backupCard(),
+    backupCard(openWith),
 
     el("div", { className: "card" },
       el("h3", {}, t("about")),
@@ -818,10 +818,10 @@ function applyTheme(theme) {
  * which is the only reason most people want a backup at all. The password is never stored, and the
  * note says what that means before the box is typed in rather than after the file cannot be opened.
  */
-function backupCard() {
+function backupCard(openWith = null) {
   const status = el("p", { className: "note", id: "backup-status" });
   const password = el("input", { type: "password", id: "b-password", autocomplete: "new-password" });
-  let chosenFile = null;
+  let chosenFile = openWith;
 
   const say = (text, bad = false) => {
     status.className = bad ? "problem" : "note";
@@ -838,10 +838,11 @@ function backupCard() {
     }
   };
 
-  const chosenName = el("span", { className: "chosen" });
+  const chosenName = el("span", { className: "chosen" },
+    chosenFile ? chosenFile.split(/[\\/]/).pop() : "");
   const choose = el("button", {}, t("choose_file"));
   const restore = el("button", {}, t("restore_now"));
-  restore.disabled = true;
+  restore.disabled = !chosenFile;
 
   choose.onclick = async () => {
     chosenFile = await api().pick_backup();
@@ -880,6 +881,12 @@ async function start() {
   drawPeople();
   drawTools();
   drawLanguageSwitch();
+
+  // Double-clicking a .gjb backup starts the app with that file. It opens the settings screen with the
+  // file chosen and stops there: restoring somebody's saved people without being asked is not what a
+  // double-click should do.
+  const opened = await api().pending_restore();
+  if (opened) return showSettings(opened);
   people.length ? showChart(people[0].id) : showAddPerson();
 }
 

@@ -30,8 +30,19 @@ def engine_path() -> Path:
     if override:
         return Path(override)
     here = Path(__file__).resolve().parent
-    for candidate in (here / "engine",                                   # packaged
-                      here.parent.parent / "app" / "src" / "main" / "python"):   # checkout
+    roots = [here, here.parent]
+    frozen = getattr(sys, "_MEIPASS", None)
+    if frozen:
+        # A PyInstaller build. The engine ships as plain .py files rather than frozen modules, because
+        # engine_api imports two dozen of them by name at call time and a frozen build would have to be
+        # told about every one. _MEIPASS is where those files are unpacked; the folder beside the .exe is
+        # where a one-folder build keeps them.
+        roots = [Path(frozen), Path(sys.executable).resolve().parent, *roots]
+    for root in roots:
+        for candidate in (root / "engine", root / "_internal" / "engine"):
+            if (candidate / "engine_api.py").exists():
+                return candidate
+    for candidate in (here.parent.parent / "app" / "src" / "main" / "python",):   # a checkout
         if (candidate / "engine_api.py").exists():
             return candidate
     raise RuntimeError(
