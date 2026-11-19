@@ -1,0 +1,176 @@
+/* The Windows edition's look, taken from the Android app's Palette so the two are recognisably the same
+   product. Light and dark are both here; the app follows the system unless a setting overrides it. */
+
+:root {
+  --ground: #FBFAF7;
+  --surface: #FFFFFF;
+  --ink: #1C1B19;
+  --muted: #5E5A52;
+  --line: #E6E2DA;
+  --outline: #CFC9BE;
+  --accent: #B4530A;
+  --accent-deep: #8A3F07;
+  --accent-soft: #FCEFE3;
+  --good: #2F6B3A;
+  --bad: #9A3B1B;
+  --radius: 12px;
+  --gap: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #141210;
+    --surface: #1F1C19;
+    --ink: #F2EDE4;
+    --muted: #B3AA9A;
+    --line: #3A352E;
+    --outline: #5A534A;
+    --accent: #F0A45A;
+    --accent-deep: #F6C48F;
+    --accent-soft: #3A2A1C;
+    --good: #8FD19E;
+    --bad: #F2A68F;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #141210;
+  --surface: #1F1C19;
+  --ink: #F2EDE4;
+  --muted: #B3AA9A;
+  --line: #3A352E;
+  --outline: #5A534A;
+  --accent: #F0A45A;
+  --accent-deep: #F6C48F;
+  --accent-soft: #3A2A1C;
+  --good: #8FD19E;
+  --bad: #F2A68F;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.55 "Segoe UI Variable Text", "Segoe UI", system-ui, "Noto Sans Devanagari", sans-serif;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+}
+
+/* --- the list of people down the side ----------------------------------------------------- */
+
+aside {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+aside header {
+  padding: 18px 18px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+aside h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+aside .sub { color: var(--muted); font-size: 12px; }
+
+#people { overflow-y: auto; flex: 1; padding: 8px; min-height: 0; }
+
+.person {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+}
+
+.person:hover { background: var(--accent-soft); }
+.person[aria-current="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.person .who { font-weight: 600; }
+.person .when { color: var(--muted); font-size: 12.5px; }
+
+aside footer { padding: 12px; border-top: 1px solid var(--line); }
+
+/* --- the main panel ------------------------------------------------------------------------ */
+
+main { overflow-y: auto; padding: 28px 32px 48px; min-height: 0; }
+
+h2 { margin: 0 0 4px; font-size: 24px; font-weight: 600; letter-spacing: -0.015em; }
+.lede { color: var(--muted); margin: 0 0 24px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: var(--gap);
+  max-width: 760px;
+}
+
+.card h3 { margin: 0 0 14px; font-size: 15px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+th { color: var(--muted); font-weight: 500; width: 40%; }
+tr:last-child th, tr:last-child td { border-bottom: none; }
+
+/* --- the form ------------------------------------------------------------------------------ */
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 760px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field.wide { grid-column: 1 / -1; }
+label { font-size: 12.5px; color: var(--muted); }
+
+input, select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  padding: 9px 11px;
+  min-height: 38px;
+}
+
+input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+
+button {
+  font: inherit;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 9px 18px;
+  min-height: 40px;
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+button.quiet { border: none; background: none; color: var(--muted); padding: 6px 10px; }
+button.quiet:hover { color: var(--bad); }
+
+.row { display: flex; gap: 10px; align-items: center; margin-top: 18px; }
+
+.problem { color: var(--bad); margin: 14px 0 0; max-width: 760px; }
+.working { color: var(--muted); }
+
+.empty { color: var(--muted); padding: 24px 12px; text-align: center; font-size: 13.5px; }
+
+.note { color: var(--muted); font-size: 12.5px; margin-top: 18px; max-width: 760px; }

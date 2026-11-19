@@ -19,7 +19,10 @@ remain correct. CI tests the engine on both, which is what keeps that true.
 | `check_engine.py` | Phase 0. Builds a real chart through `engine_api` and compares it to Linux. |
 | `jyotish_win/bridge.py` | The only way the app talks to the engine. The desktop counterpart of `Engine.kt`. |
 | `jyotish_win/storage.py` | Profiles, settings and the chart cache in `%LOCALAPPDATA%\GauravJyotish`. |
-| `tests/` | Everything above, tested without a window. |
+| `jyotish_win/api.py` | What the interface is allowed to do: people, charts, settings. |
+| `jyotish_win/main.py` | The window. Deliberately tiny, because it is the one untestable file. |
+| `web/` | The interface: one page, one stylesheet, one script, no framework. |
+| `tests/` | 49 tests, none of which need a window. |
 | `requirements.txt` | Three packages. |
 
 The engine itself is not copied here. `bridge.py` finds it in the Android tree, because there is one
@@ -36,12 +39,22 @@ python -m unittest discover -s windows/tests
 `JYOTISH_ENGINE_PATH` overrides where the engine is found, and `JYOTISH_DATA_DIR` overrides where data is
 written - both exist so tests and packaged builds can point somewhere other than the defaults.
 
-## Why the window is not here yet
+## How it is put together
 
-Everything in this folder can be proven in CI. A window cannot: a GUI needs a desktop session, and a
-headless runner has none. So the design keeps the untestable part as small as possible - the shell opens a
-WebView, hands it the bridge, and does nothing else. The decision that is still open is what runs inside
-that WebView, and that is the UI-stack question in the plan.
+A WebView2 window, a page of plain HTML and JavaScript inside it, and `api.py` behind the glass. The
+interface calls Python methods directly through pywebview; there is no server, no port and no JSON
+protocol to keep in step, because both sides are the same process.
+
+The window itself does almost nothing, and that is the design. A GUI cannot be exercised on a headless CI
+runner, so everything that could be wrong in a way worth catching was pushed down into `api.py`,
+`bridge.py` and `storage.py`, which are tested. `main.py` opens a window and hands over the API.
+
+`tests/test_ui_contract.py` is worth knowing about: it pins the chart fields the JavaScript reads. A key
+the interface expects and the engine does not have fails silently in a browser - a dash where a date
+should be - so that contract is asserted in Python instead.
+
+Phase 1 is done: the window opens, a person can be added and saved, and their chart is computed and
+cached. The drawn kundli, the readings and the reports are phases 3 and 4.
 
 ## What this does not decide
 
