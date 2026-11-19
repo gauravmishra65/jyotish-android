@@ -142,6 +142,45 @@ class ChartContractTest(unittest.TestCase):
                 self.assertIn(sign, signs, f"{key} puts {body} in {sign!r}")
 
 
+    # --- the lists the interface keeps of its own ------------------------------------------------
+
+    def test_every_koota_and_porutham_the_engine_scores_has_a_label(self):
+        """The screen keeps its own list of the eight kootas and the ten poruthams, and renders only
+        what is on that list. An extra one from the engine would not fail - it would silently not be
+        shown, which is how a missing Rajju would quietly disappear from a matching screen."""
+        import re
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from jyotish_win.bridge import Engine as _Engine
+
+        engine = _Engine()
+        bride = dict(FIXTURE, name="Neha Agarwal", gender="F", date="1992-06-03", time="17:45",
+                     lat=26.8467, lon=80.9462)
+        ashtakoota = engine.match(engine.chart(FIXTURE), engine.chart(bride))["ashtakoota"]
+
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        listed = set(re.search(r"const KOOTAS = \[(.*?)\]", js, re.S).group(1).replace('"', "").split(", "))
+        listed = {k.strip() for k in listed if k.strip()}
+        self.assertEqual(set(ashtakoota["kootas"]), listed,
+                         "the engine's kootas and the screen's list have drifted apart")
+
+        strings = (WEB / "strings.js").read_text(encoding="utf-8")
+        for koota in ashtakoota["kootas"]:
+            self.assertIn(f"  koota_{koota}:", strings, f"{koota} has no label")
+        for name in ashtakoota["porutham"]["items"]:
+            self.assertIn(f"  p_{name}:", strings, f"the {name} porutham has no label")
+
+    def test_every_body_a_chart_draws_has_an_abbreviation(self):
+        """The kundli draws two-letter abbreviations. A body without one would be drawn under its full
+        English name, across the lines of a house."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from jyotish_win.bridge import Engine as _Engine
+
+        kundli = (WEB / "kundli.js").read_text(encoding="utf-8")
+        for name in _Engine().chart(FIXTURE)["vedic"]["planets"]:
+            self.assertIn(f"{name}:", kundli, f"{name} has no abbreviation to draw with")
+
     # --- the Hindi names -------------------------------------------------------------------------
 
     def test_the_glossary_covers_every_name_a_chart_prints(self):

@@ -787,6 +787,32 @@ function showMilan() {
   );
 }
 
+/* The South Indian side of the same question. It is not a score out of anything: each porutham either
+   agrees or it does not, six of them are the ones Tamil practice treats as essential, and the engine's
+   own note is shown because it says the important part - a missing Rajju is not a prediction about
+   anybody's life. */
+function poruthamCard(porutham) {
+  const items = porutham?.items;
+  if (!items) return "";
+  const essential = porutham.essential || {};
+
+  const rows = Object.entries(items).map(([key, item]) => el("tr", {},
+    el("th", {}, `${t(`p_${key}`)}${key in essential ? ` · ${t("essential")}` : ""}`),
+    el("td", {}, item.ok ? "✓" : "·"),
+    el("td", { className: "muted-cell" }, item.rule ?? "")));
+
+  const allEssential = Object.keys(essential).length > 0
+    && Object.values(essential).every(Boolean);
+
+  return el("div", { className: "card" },
+    el("h3", {}, t("porutham")),
+    el("p", {}, t("porutham_agree", porutham.agree ?? 0, porutham.out_of ?? rows.length)),
+    el("p", { className: "note" },
+      allEssential ? t("porutham_essential") : t("porutham_essential_not")),
+    el("table", { className: "section-table wide" }, el("tbody", {}, ...rows)),
+    porutham.note ? el("p", { className: "note" }, porutham.note) : "");
+}
+
 function drawMatch(into, m) {
   const ak = m.ashtakoota || {};
   const total = ak.total_36 || {};
@@ -802,6 +828,7 @@ function drawMatch(into, m) {
       el("td", { className: "muted-cell" }, detail));
   });
 
+  const porutham = poruthamCard(ak.porutham);
   const mangal = m.mangal_comparison || {};
   const mangalRows = names.filter((n) => mangal[n]).map((n) => el("tr", {},
     el("th", {}, n),
@@ -820,6 +847,8 @@ function drawMatch(into, m) {
       el("table", {},
         el("thead", {}, el("tr", {}, el("th", {}, t("koota")), el("th", {}, t("points")), el("th", {}, ""))),
         el("tbody", {}, ...kootaRows))),
+
+    porutham,
 
     mangalRows.length
       ? el("div", { className: "card" }, el("h3", {}, t("mangal_compare")), el("table", {}, ...mangalRows))
