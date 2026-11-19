@@ -210,3 +210,36 @@ function kundliSvg(chart, { style = "north", lang = "en", size = 320 } = {}) {
   (style === "south" ? drawSouth : drawNorth)(svg, vedic, lang);
   return svg;
 }
+
+/* --- divisional charts -------------------------------------------------------------------------
+ *
+ * A varga arrives as nothing but names - {Lagna: "Scorpio", Sun: "Gemini", ...} - because that is all a
+ * divisional chart is: which sign each body falls into once the sign is divided. There are no degrees to
+ * carry, so the drawing's shape has to be built here rather than read off the engine.
+ *
+ * The house number is the only thing worth working out: counted from the varga's own Lagna, not the
+ * birth chart's, which is the whole point of looking at a varga at all.
+ */
+function vargaVedic(varga) {
+  const lagnaSign = SIGNS.indexOf(varga.Lagna);
+  if (lagnaSign < 0) {
+    throw new Error(`This divisional chart has no Lagna sign to count from: ${JSON.stringify(varga.Lagna)}`);
+  }
+  const planets = {};
+  for (const [name, sign] of Object.entries(varga)) {
+    if (name === "Lagna") continue;
+    const signIndex = SIGNS.indexOf(sign);
+    if (signIndex < 0) continue;
+    planets[name] = {
+      sign,
+      sign_index: signIndex,
+      house: ((signIndex - lagnaSign + 12) % 12) + 1,
+    };
+  }
+  return { lagna: { sign: varga.Lagna, sign_index: lagnaSign }, planets };
+}
+
+/** The same drawing as the birth chart, fed from a varga's sign names. */
+function vargaSvg(varga, { style = "north", lang = "en", size = 300 } = {}) {
+  return kundliSvg({ vedic: vargaVedic(varga) }, { style, lang, size });
+}
