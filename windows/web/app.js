@@ -224,6 +224,50 @@ function vargaPanel(details, style) {
   return card;
 }
 
+/* Reports.
+ *
+ * The readings on screen are for looking something up; a report is for keeping. The engine writes the
+ * whole thing as one self-contained HTML page, so it is saved to Documents and opened in the browser,
+ * where Windows already knows how to print it to PDF. There is no viewer to build and no format to
+ * invent - and the file still opens in ten years on a computer that has never heard of this app.
+ */
+function reportPanel(id) {
+  const status = el("p", { className: "note report-status" });
+  const buttons = el("div", { className: "row report-row" });
+  let busy = false;
+
+  const build = async (kind, name, button) => {
+    if (busy) return;
+    busy = true;
+    button.classList.add("primary");
+    status.replaceChildren(t("report_working", name));
+    try {
+      const saved = await api().make_report(id, kind);
+      status.replaceChildren(
+        el("span", {}, t("report_saved", saved.file) + " "),
+        el("button", { className: "quiet link", onclick: () => api().open_path(saved.path) }, t("open_report")),
+      );
+    } catch (e) {
+      status.replaceChildren(t("report_failed", String(e.message || e).replace(/^.*Error:\s*/s, "")));
+    } finally {
+      busy = false;
+      button.classList.remove("primary");
+    }
+  };
+
+  api().report_kinds().then((kinds) => {
+    buttons.replaceChildren(...kinds.map((k) => {
+      const name = k.name[lang()] ?? k.name.en;
+      const button = el("button", {}, name);
+      button.onclick = () => build(k.kind, name, button);
+      return button;
+    }));
+  });
+
+  return el("div", { className: "card report-card" },
+    el("h3", {}, t("reports")), buttons, status, el("p", { className: "note" }, t("report_note")));
+}
+
 async function showChart(id) {
   selectedId = id;
   drawPeople();
@@ -301,6 +345,7 @@ async function showChart(id) {
   // The sixteen divisional charts, then the readings, then the way out. The buttons go last so that
   // scrolling to the end of a chart lands on them rather than on the middle of the readings.
   const main = $("#main");
+  main.append(reportPanel(id));
   if (details.varga_meta?.length) {
     main.append(el("h3", { className: "panel-heading" }, t("vargas")), vargaPanel(details, style));
   }

@@ -13,15 +13,29 @@ import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
+from pathlib import Path
+
 from .bridge import Engine, chart_key
 from .places import places
-from .storage import Store
+from .storage import Store, _write_atomic, reports_dir
 
 #: What a saved person must have before a chart can be built from them.
 REQUIRED = ("name", "date", "time", "lat", "lon", "tz")
 
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 TIME = re.compile(r"^\d{2}:\d{2}$")
+
+
+def _safe_filename(stem: str) -> str:
+    """A file name Windows will accept, built from a person's name without mangling it beyond recognition.
+
+    Devanagari is left alone - NTFS stores it perfectly well, and a Hindi speaker's report should be
+    findable under their own name - but the nine characters Windows reserves are replaced, and a trailing
+    dot or space is removed because Windows silently drops those and then cannot find the file again.
+    """
+    cleaned = "".join("-" if c in '<>:"/\\|?*' else c for c in stem)
+    cleaned = "".join(c for c in cleaned if c.isprintable() and ord(c) > 31)
+    return cleaned[:120].strip(" .-") or "Report"
 
 
 class ValidationError(ValueError):
@@ -174,6 +188,77 @@ class Api:
             if s.get(setting):
                 request[field] = s[setting]
         return request
+
+    # --- readings as files ------------------------------------------------------------------------
+
+    #: What report() will build, in the order the buttons appear. "life" is the whole reading; the rest
+    #: are the single-subject reports the Android app offers under the same names.
+    REPORTS = (
+        ("life", {"en": "Full reading", "hi": "संपूर्ण विश्लेषण"}),
+        ("daily", {"en": "Daily", "hi": "दैनिक"}),
+        ("monthly", {"en": "Monthly", "hi": "मासिक"}),
+        ("annual", {"en": "Annual", "hi": "वार्षिक"}),
+        ("mahadasha", {"en": "Mahadasha", "hi": "महादशा"}),
+        ("mangal", {"en": "Mangal Dosh", "hi": "मंगल दोष"}),
+        ("kaal_sarp", {"en": "Kaal Sarp Dosh", "hi": "काल सर्प दोष"}),
+        ("sade_sati", {"en": "Sade Sati", "hi": "साढ़े साती"}),
+        ("chandra", {"en": "Chandra Rashi", "hi": "चंद्र राशि"}),
+    )
+
+    def report_kinds(self) -> list[dict]:
+        return [{"kind": k, "name": name} for k, name in self.REPORTS]
+
+    def make_report(self, person_id: str, kind: str = "life") -> dict:
+        """Build a reading and save it as an HTML page in the reports folder.
+
+        A file rather than another screen, because this is the output somebody prints, emails to a client
+        or opens again in five years. It is one self-contained page: no stylesheet beside it, nothing
+        fetched when it opens, so it still reads correctly on a computer that has never heard of this app.
+        """
+        if kind not in dict(self.REPORTS):
+            raise ValidationError(f"There is no {kind!r} report.")
+        who = self.person(person_id)
+        if who is None:
+            raise ValidationError("That person is not saved on this computer.")
+        validate(who)
+
+        request = self.chart_request(who)
+        request["kind"] = kind
+        request["lang"] = self.settings().get("language", "en")
+        built = self.engine.special_report(request)
+        html = built.get("html")
+        if not html:
+            raise ValidationError("The engine returned no report.")
+
+        name = dict(self.REPORTS)[kind][request["lang"]] if kind in dict(self.REPORTS) else kind
+        stem = _safe_filename(f"{who['name']} - {dict(self.REPORTS)[kind]['en']}")
+        path = reports_dir() / f"{stem}.html"
+        _write_atomic(path, html)
+        return {"path": str(path), "folder": str(path.parent), "name": name, "file": path.name}
+
+    def open_path(self, path: str) -> bool:
+        """Open a saved report in whatever the computer uses for HTML - normally the browser, where it
+        can be read and printed to PDF. Only files this app wrote are opened, so a path arriving from
+        anywhere unexpected cannot turn this into a way to launch something else."""
+        import os
+        import subprocess
+        target = Path(path).resolve()
+        folder = reports_dir().resolve()
+        if folder not in target.parents or not target.is_file():
+            raise ValidationError("That file is not one of the saved reports.")
+        if hasattr(os, "startfile"):
+            os.startfile(str(target))                      # Windows
+        else:
+            subprocess.Popen(["xdg-open", str(target)])    # so the same button works while developing
+        return True
+
+    def reports(self) -> list[dict]:
+        """Everything saved so far, newest first, so the panel can offer them again without rebuilding."""
+        folder = reports_dir()
+        if not folder.is_dir():
+            return []
+        files = sorted(folder.glob("*.html"), key=lambda f: f.stat().st_mtime, reverse=True)
+        return [{"file": f.name, "path": str(f), "when": int(f.stat().st_mtime)} for f in files[:40]]
 
     # --- settings -------------------------------------------------------------------------------
 

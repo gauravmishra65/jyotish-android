@@ -176,6 +176,66 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(fresh.people(), [])
         self.assertIsNone(fresh._engine)
 
+    # --- reports --------------------------------------------------------------------------------
+
+    def test_a_report_is_written_as_one_self_contained_page(self):
+        """The file has to still work when it is emailed to somebody who does not have this app: one
+        page, with nothing beside it to load."""
+        import os
+        folder = Path(self._tmp.name) / "reports"
+        os.environ["JYOTISH_REPORTS_DIR"] = str(folder)
+        try:
+            saved = self.api.add_person(RAVI)
+            made = self.api.make_report(saved["id"], "mangal")
+            written = Path(made["path"])
+            self.assertTrue(written.is_file())
+            html = written.read_text(encoding="utf-8")
+            self.assertIn("<html", html.lower())
+            self.assertNotIn("<link", html.lower())        # no stylesheet beside it
+            self.assertNotIn("<script src", html.lower())  # nothing fetched when it opens
+            self.assertIn(made["file"], [r["file"] for r in self.api.reports()])
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_a_report_is_written_in_the_chosen_language(self):
+        import os
+        os.environ["JYOTISH_REPORTS_DIR"] = str(Path(self._tmp.name) / "reports")
+        try:
+            saved = self.api.add_person(RAVI)
+            self.api.set_setting("language", "hi")
+            html = Path(self.api.make_report(saved["id"], "chandra")["path"]).read_text(encoding="utf-8")
+            self.assertTrue(any("\u0900" <= c <= "\u097f" for c in html),
+                            "the Hindi report came out with no Devanagari in it")
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_an_unknown_report_is_refused(self):
+        saved = self.api.add_person(RAVI)
+        with self.assertRaises(ValidationError):
+            self.api.make_report(saved["id"], "whatever")
+
+    def test_only_saved_reports_can_be_opened(self):
+        """open_path hands a file to the operating system. It must refuse anything this app did not
+        write, so that a path arriving from somewhere unexpected cannot become a way to launch it."""
+        import os
+        folder = Path(self._tmp.name) / "reports"
+        os.environ["JYOTISH_REPORTS_DIR"] = str(folder)
+        try:
+            outsider = Path(self._tmp.name) / "elsewhere.html"
+            outsider.write_text("<html></html>", encoding="utf-8")
+            for path in (str(outsider), str(folder / ".." / "elsewhere.html"), str(folder / "nothing.html")):
+                with self.assertRaises(ValidationError, msg=f"{path} was not refused"):
+                    self.api.open_path(path)
+        finally:
+            os.environ.pop("JYOTISH_REPORTS_DIR", None)
+
+    def test_a_name_that_windows_would_reject_still_makes_a_file(self):
+        from jyotish_win.api import _safe_filename
+        self.assertEqual(_safe_filename('a/b:c*d?'), "a-b-c-d")
+        self.assertEqual(_safe_filename("trailing. "), "trailing")
+        self.assertEqual(_safe_filename("नेहा अग्रवाल"), "नेहा अग्रवाल")   # left as it is: NTFS is fine with it
+        self.assertEqual(_safe_filename("///"), "Report")
+
     def test_about(self):
         about = self.api.about()
         self.assertTrue(about["engine"])

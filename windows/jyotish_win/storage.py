@@ -26,6 +26,22 @@ def data_dir() -> Path:
     return Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share")) / APP_FOLDER
 
 
+def reports_dir() -> Path:
+    """Where a saved reading goes: the user's Documents folder, not AppData.
+
+    A report is a document the person made and will want again - to print, to email, to open next year.
+    Hiding it in AppData beside the cache would be filing their work where applications keep their
+    rubbish. Documents is where Windows users look, and the folder is made only when the first report
+    is written.
+    """
+    override = os.environ.get("JYOTISH_REPORTS_DIR")
+    if override:
+        return Path(override)
+    profile = os.environ.get("USERPROFILE")
+    documents = (Path(profile) / "Documents") if profile else (Path.home() / "Documents")
+    return (documents if documents.is_dir() else data_dir()) / "Gaurav Jyotish"
+
+
 def _write_atomic(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=path.name + ".", suffix=".tmp")

@@ -69,6 +69,20 @@ const STRINGS = {
   vargas:          { en: "Divisional charts",              hi: "वर्ग कुंडलियाँ" },
   varga_use:       { en: "Read for %1.",                   hi: "%1 के लिए पढ़ा जाता है।" },
 
+  // reports saved as files
+  reports:         { en: "Reports",                        hi: "रिपोर्ट" },
+  report_note:     { en: "Each report is saved as one page you can open, print or send. "
+                       + "Nothing leaves this computer.",
+                     hi: "हर रिपोर्ट एक पृष्ठ के रूप में सहेजी जाती है, जिसे खोला, छापा या भेजा जा सकता है। "
+                       + "कुछ भी इस कंप्यूटर से बाहर नहीं जाता।" },
+  report_working:  { en: "Writing the %1 report. This takes a few seconds.",
+                     hi: "%1 रिपोर्ट तैयार हो रही है। इसमें कुछ सेकंड लगते हैं।" },
+  report_saved:    { en: "Saved as %1",                    hi: "%1 के रूप में सहेजी गई" },
+  report_failed:   { en: "The report could not be written: %1",
+                     hi: "रिपोर्ट तैयार नहीं हो सकी: %1" },
+  open_report:     { en: "Open",                           hi: "खोलें" },
+  open_folder:     { en: "Open the folder",                hi: "फ़ोल्डर खोलें" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

@@ -330,3 +330,14 @@ button.quiet:hover { color: var(--bad); }
   font-size: 12.5px;
   font-variant-numeric: tabular-nums;
 }
+
+/* --- reports ---------------------------------------------------------------------------------- */
+
+.report-card .row { margin-top: 0; }
+.report-row { flex-wrap: wrap; gap: 6px; }
+.report-row button { padding: 6px 14px; min-height: 0; font-size: 13px; }
+.report-status { min-height: 20px; margin-top: 12px; }
+.report-status:empty { display: none; }
+
+button.link { text-decoration: underline; padding: 0 2px; min-height: 0; color: var(--accent); }
+button.link:hover { color: var(--accent-deep); }
