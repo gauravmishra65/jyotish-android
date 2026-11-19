@@ -11,6 +11,7 @@ side of this boundary is JavaScript, and anything clever would have to survive a
 import re
 import uuid
 from datetime import datetime
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
 from .bridge import Engine, chart_key
 from .storage import Store
@@ -54,12 +55,34 @@ def validate(person: dict) -> dict:
     if not -180 <= lon <= 180:
         raise ValidationError("Longitude runs from -180 to 180.")
 
+    tz = str(person["tz"]).strip()
+    try:
+        ZoneInfo(tz)
+    except (ZoneInfoNotFoundError, ValueError, OSError) as e:
+        # Without this check an unknown zone reaches zoneinfo, which on Windows tries to open a folder
+        # as a file and raises a bare PermissionError with a path in it. "Asia" alone does exactly that:
+        # the key needs the city too. OSError is caught for that reason, not for tidiness.
+        raise ValidationError(
+            f"{tz!r} is not a time zone name. It needs the region and the city, "
+            f"as in Asia/Kolkata, Asia/Singapore or Europe/London." ) from e
+
     clean = dict(person)
     clean["lat"], clean["lon"] = lat, lon
+    clean["tz"] = tz
     clean["name"] = person["name"].strip()
     clean.setdefault("gender", "M")
     clean.setdefault("time_confidence", "reliable")
     return clean
+
+
+def time_zones() -> list[str]:
+    """Every zone this machine knows, for the form to offer. Sorted, with the common ones first so the
+    list is useful before a single letter is typed."""
+    common = ["Asia/Kolkata", "Asia/Singapore", "Asia/Dubai", "Europe/London", "America/New_York",
+              "America/Los_Angeles", "Australia/Sydney", "UTC"]
+    known = available_timezones()
+    rest = sorted(z for z in known if z not in common)
+    return [z for z in common if z in known] + rest
 
 
 class Api:
@@ -148,6 +171,10 @@ class Api:
         return request
 
     # --- settings -------------------------------------------------------------------------------
+
+    def time_zones(self) -> list[str]:
+        """Offered by the form so a half-typed zone cannot reach the engine."""
+        return time_zones()
 
     def settings(self) -> dict:
         s = self.store.settings()

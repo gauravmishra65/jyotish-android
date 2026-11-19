@@ -57,6 +57,33 @@ class ValidateTest(unittest.TestCase):
     def test_a_leap_day_is_a_real_birthday(self):
         validate(dict(RAVI, date="1992-02-29"))
 
+    def test_a_region_without_a_city_is_refused(self):
+        """Found on a real machine: "Asia" reached zoneinfo, which on Windows tried to open a folder as
+        a file and put a raw PermissionError with a Windows path in front of the user."""
+        with self.assertRaises(ValidationError) as e:
+            validate(dict(RAVI, tz="Asia"))
+        self.assertIn("Asia/Kolkata", str(e.exception))
+
+    def test_a_nonsense_time_zone_is_refused(self):
+        for bad in ("Mars/Olympus", "IST", "GMT+5:30", "", "   "):
+            with self.assertRaises(ValidationError):
+                validate(dict(RAVI, tz=bad))
+
+    def test_real_time_zones_pass(self):
+        for good in ("Asia/Kolkata", "Asia/Singapore", "Europe/London", "UTC"):
+            validate(dict(RAVI, tz=good))
+
+    def test_the_time_zone_is_trimmed(self):
+        self.assertEqual(validate(dict(RAVI, tz="  Asia/Kolkata  "))["tz"], "Asia/Kolkata")
+
+    def test_the_offered_list_is_real_and_useful(self):
+        from jyotish_win.api import time_zones
+        zones = time_zones()
+        self.assertGreater(len(zones), 300)
+        self.assertEqual(zones[0], "Asia/Kolkata")      # the common ones lead
+        self.assertIn("Asia/Singapore", zones)
+        self.assertNotIn("Asia", zones)                 # the trap that caused this test
+
     def test_whitespace_around_a_name_is_trimmed(self):
         self.assertEqual(validate(dict(RAVI, name="  Ravi  "))["name"], "Ravi")
 

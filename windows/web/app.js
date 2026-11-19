@@ -44,8 +44,17 @@ function drawPeople() {
 /* --- adding someone ----------------------------------------------------------------------- */
 
 function field(label, name, attrs = {}) {
-  const input = el("input", Object.assign({ id: `f-${name}`, name }, attrs));
-  return el("div", { className: attrs.wide ? "field wide" : "field" }, el("label", { htmlFor: `f-${name}` }, label), input);
+  const { wide, list, ...rest } = attrs;
+  const input = el("input", Object.assign({ id: `f-${name}`, name }, rest));
+  if (list) input.setAttribute("list", list);
+  return el("div", { className: wide ? "field wide" : "field" }, el("label", { htmlFor: `f-${name}` }, label), input);
+}
+
+/* The time zone is the one field where a plausible-looking answer can be wrong: "Asia" is not a zone,
+   "Asia/Kolkata" is. Offering the real list turns a typing problem into a picking one. */
+async function timeZoneList() {
+  const zones = await api().time_zones();
+  return el("datalist", { id: "zones" }, ...zones.map((z) => el("option", { value: z })));
 }
 
 function showAddPerson() {
@@ -62,7 +71,7 @@ function showAddPerson() {
       field("Time of birth", "time", { placeholder: "14:35" }),
       field("Latitude", "lat", { placeholder: "25.3176" }),
       field("Longitude", "lon", { placeholder: "82.9739" }),
-      field("Time zone", "tz", { placeholder: "Asia/Kolkata" }),
+      field("Time zone", "tz", { placeholder: "Asia/Kolkata", list: "zones" }),
       field("Place (optional)", "place", { placeholder: "Varanasi, India" }),
     ),
     el(
@@ -72,9 +81,10 @@ function showAddPerson() {
       el("span", { id: "problem", className: "problem" }),
     ),
     el("p", { className: "note" },
-      "Place lookup is not here yet, so coordinates and the time zone are typed in for now. " +
-      "The time zone is an IANA name, as in Asia/Kolkata or Europe/London."),
+      "Place lookup is not here yet, so coordinates are typed in for now. " +
+      "The time zone offers the full list as you type: start with Asia, Europe or America."),
   );
+  timeZoneList().then((list) => document.body.append(list));
   $("#f-name").focus();
 }
 
