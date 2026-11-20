@@ -10,8 +10,16 @@ from common import (SIGNS, SIGN_LORD, NAK_SPAN, VIM_ORDER, WEEKDAY_LORD, n360,
                     sign_of, deg_in_sign, wrap180, dms, fmt_pos, nak_info,
                     jd_to_dt, dt_to_jd)
 
+#: Which ayanamsa a chart may be worked out under. The first four are what the app has always offered;
+#: the rest are schools people actually ask for - Yukteshwar for the Kriya Yoga line, Surya Siddhanta
+#: for the classical value, True Pushya and JN Bhasin for the schools that use them, and Fagan-Bradley
+#: because it is the Western sidereal standard and makes the comparison table worth reading.
+#: Adding one here is enough: the comparison section and the settings screens read this.
 AYAN = {"lahiri": swe.SIDM_LAHIRI, "true_chitra": swe.SIDM_TRUE_CITRA,
-        "krishnamurti": swe.SIDM_KRISHNAMURTI, "raman": swe.SIDM_RAMAN}
+        "krishnamurti": swe.SIDM_KRISHNAMURTI, "raman": swe.SIDM_RAMAN,
+        "yukteshwar": swe.SIDM_YUKTESHWAR, "suryasiddhanta": swe.SIDM_SURYASIDDHANTA,
+        "true_pushya": swe.SIDM_TRUE_PUSHYA, "jn_bhasin": swe.SIDM_JN_BHASIN,
+        "fagan_bradley": swe.SIDM_FAGAN_BRADLEY}
 PLANETS7 = [("Sun", swe.SUN), ("Moon", swe.MOON), ("Mars", swe.MARS),
             ("Mercury", swe.MERCURY), ("Jupiter", swe.JUPITER),
             ("Venus", swe.VENUS), ("Saturn", swe.SATURN)]

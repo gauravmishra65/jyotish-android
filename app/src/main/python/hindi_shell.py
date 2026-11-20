@@ -342,7 +342,9 @@ NOT_COMPUTED_HI = {
 }
 
 
-AYAN_HI = {"lahiri": "लाहिरी", "true_chitra": "ट्रू चित्रा", "true chitra": "ट्रू चित्रा", "krishnamurti": "कृष्णमूर्ति", "raman": "रमन"}
+AYAN_HI = {"lahiri": "लाहिरी", "true_chitra": "ट्रू चित्रा", "true chitra": "ट्रू चित्रा", "krishnamurti": "कृष्णमूर्ति", "raman": "रमन",
+           "yukteshwar": "युक्तेश्वर", "suryasiddhanta": "सूर्य सिद्धांत", "true_pushya": "ट्रू पुष्य",
+           "jn_bhasin": "जेएन भसीन", "fagan_bradley": "फेगन-ब्रैडली"}
 
 
 # ------------------------------------------------- five-year forecast (Section 9)

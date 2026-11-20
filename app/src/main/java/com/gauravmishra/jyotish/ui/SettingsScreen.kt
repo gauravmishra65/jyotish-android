@@ -141,7 +141,13 @@ fun SettingsScreen(
             SectionLabel(stringResource(R.string.calculation))
             Group {
                 Setting(stringResource(R.string.ayanamsa)) {
-                    listOf("lahiri" to "Lahiri", "raman" to "Raman", "krishnamurti" to "KP", "true_chitra" to "True Chitra").forEach { (k, label) ->
+                    // Every ayanamsa vedic.AYAN knows. The first four are the long-standing ones; the
+                    // rest are schools people ask for by name, and Fagan-Bradley makes the comparison
+                    // section in the More tab worth reading.
+                    listOf("lahiri" to "Lahiri", "raman" to "Raman", "krishnamurti" to "KP",
+                        "true_chitra" to "True Chitra", "yukteshwar" to "Yukteshwar",
+                        "suryasiddhanta" to "Surya Siddhanta", "true_pushya" to "True Pushya",
+                        "jn_bhasin" to "JN Bhasin", "fagan_bradley" to "Fagan-Bradley").forEach { (k, label) ->
                         Pick(label, ayanamsa == k) { if (ayanamsa != k) { ayanamsa = k; settings.ayanamsa = k; onCalculationChanged() } }
                     }
                 }

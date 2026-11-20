@@ -559,6 +559,15 @@ class ApiTest(unittest.TestCase):
             with self.assertRaises(ValidationError, msg=f"{key}={value} was accepted"):
                 self.api.set_setting(key, value)
 
+    def test_the_ayanamsas_offered_are_exactly_the_ones_the_engine_knows(self):
+        """Offering one the engine does not know breaks every chart; knowing one nobody is offered
+        means it may as well not exist. Both are silent, so both are checked."""
+        import sys as _sys
+        from jyotish_win.bridge import engine_path
+        _sys.path.insert(0, str(engine_path()))
+        import vedic
+        self.assertEqual({v for v, _ in Api.CHOICES["ayanamsa"]}, set(vedic.AYAN))
+
     def test_every_offered_setting_value_is_one_the_engine_takes(self):
         """The screen offers what this list holds, so the list has to be right."""
         saved = self.api.add_person(RAVI)

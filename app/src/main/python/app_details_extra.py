@@ -210,7 +210,11 @@ def western_extra(c):
 
 
 # ------------------------------------------------------------------ ayanamsa comparison (v20)
-AYAN_NAMES = {"lahiri": ("Lahiri", "लाहिरी"), "raman": ("Raman", "रमन"), "krishnamurti": ("KP", "केपी"), "true_chitra": ("True Chitra", "ट्रू चित्रा")}
+AYAN_NAMES = {"lahiri": ("Lahiri", "लाहिरी"), "raman": ("Raman", "रमन"), "krishnamurti": ("KP", "केपी"),
+              "true_chitra": ("True Chitra", "ट्रू चित्रा"), "yukteshwar": ("Yukteshwar", "युक्तेश्वर"),
+              "suryasiddhanta": ("Surya Siddhanta", "सूर्य सिद्धांत"),
+              "true_pushya": ("True Pushya", "ट्रू पुष्य"), "jn_bhasin": ("JN Bhasin", "जेएन भसीन"),
+              "fagan_bradley": ("Fagan-Bradley", "फेगन-ब्रैडली")}
 
 
 def ayanamsa_table(c):
@@ -233,8 +237,12 @@ def ayanamsa_table(c):
                      bi(f"{ms}, {nk['name']} {nk['pada']}", f"{SIGN_HI.get(ms, ms)}, {HS.NAK.get(nk['name'], nk['name'])} {nk['pada']}")])
     used = (c["vedic"].get("conventions") or {}).get("ayanamsa", "lahiri")
     return {"key": "ayanamsa_compare", "title": bi("Ayanamsa comparison", "अयनांश तुलना"),
-            "intro": bi(f"The same birth under the four ayanamsas the app offers. This chart uses {AYAN_NAMES.get(used, (used, used))[0]}.",
-                        f"ऐप में उपलब्ध चारों अयनांशों में यही जन्म। यह कुंडली {AYAN_NAMES.get(used, (used, used))[1]} का उपयोग करती है।"),
+            # Counted, not written down: the list grew from four once already, and a sentence that says
+            # "four" under a table of nine is the kind of wrongness nobody notices for a year.
+            "intro": bi(f"The same birth under all {len(rows)} ayanamsas the app offers. "
+                        f"This chart uses {AYAN_NAMES.get(used, (used, used))[0]}.",
+                        f"ऐप में उपलब्ध सभी {len(rows)} अयनांशों में यही जन्म। "
+                        f"यह कुंडली {AYAN_NAMES.get(used, (used, used))[1]} का उपयोग करती है।"),
             "blocks": [table([bi("Ayanamsa", "अयनांश"), bi("Value", "मान"), bi("Lagna", "लग्न"), bi("Moon and nakshatra", "चंद्र और नक्षत्र")], rows)],
             "note": bi("If the Lagna or the Moon's nakshatra changes between rows, readings that depend on it differ by school; Settings switches the ayanamsa.",
                        "अगर पंक्तियों के बीच लग्न या चंद्र का नक्षत्र बदलता है, तो उस पर निर्भर फल परंपरा के अनुसार अलग होंगे; सेटिंग्स में अयनांश बदल सकते हैं।")}
