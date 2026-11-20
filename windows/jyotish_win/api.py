@@ -130,20 +130,28 @@ def time_zones() -> list[str]:
 class Api:
     """The object handed to the window. One instance per running app."""
 
+    #: Everything this object holds is private, with a leading underscore, because pywebview publishes
+    #: every public attribute to the page and recurses into any that is not callable. With the store
+    #: public it walked pathlib and handed JavaScript chmod, unlink and hardlink_to; the bridge carried
+    #: a thousand functions where it should carry the fifty this class defines.
     def __init__(self, store: Store | None = None, engine: Engine | None = None,
                  opened_with: str | None = None):
-        self.store = store or Store()
+        self._store = store or Store()
         self._engine = engine
         self._engine_ready = engine is not None
         self._pending = opened_with if opened_with and Path(opened_with).is_file() else None
 
-    @property
-    def engine(self) -> Engine:
-        """Loaded on first use, not at start.
+    def _ready_engine(self) -> Engine:
+        """The engine, loaded on first use rather than at start.
 
-        Importing the engine pulls in Swiss Ephemeris and 55 modules, which takes a second or two. Doing
-        that before the window appears would make the app look slow to open for no reason: nothing on the
-        first screen needs a chart until someone asks for one.
+        A method with a leading underscore, not a property, and that is not tidiness. pywebview builds
+        the bridge by walking dir() on this object and calling getattr on every public name; a property
+        would be evaluated during that walk - loading Swiss Ephemeris and 55 modules before the window
+        had opened - and then, because what it returns is an object, pywebview would recurse into the
+        engine and publish its methods to the page as well.
+
+        Loading it lazily also keeps the window quick to open: nothing on the first screen needs a chart
+        until somebody asks for one.
         """
         if self._engine is None:
             self._engine = Engine()
@@ -155,33 +163,33 @@ class Api:
     # --- people ---------------------------------------------------------------------------------
 
     def people(self) -> list[dict]:
-        return self.store.profiles()
+        return self._store.profiles()
 
     def add_person(self, person: dict) -> dict:
         """Save a person and hand back the stored copy, including the id it was given."""
         clean = validate(person)
         clean.setdefault("id", uuid.uuid4().hex[:12])
-        people = [p for p in self.store.profiles() if p.get("id") != clean["id"]]
+        people = [p for p in self._store.profiles() if p.get("id") != clean["id"]]
         # Editing somebody already saved is always allowed; it is adding a new one that the demo limits.
-        if len(people) == len(self.store.profiles()) and self.edition()["edition"] == "demo" \
+        if len(people) == len(self._store.profiles()) and self.edition()["edition"] == "demo" \
                 and len(people) >= licence.FREE_PROFILES:
             raise DemoLimit(
                 f"The demo saves {licence.FREE_PROFILES} chart. Unlock the full version to add more.")
         people.append(clean)
-        self.store.save_profiles(people)
+        self._store.save_profiles(people)
         return clean
 
     def delete_person(self, person_id: str) -> bool:
         """Forget a person and every chart cached for them. There is no undo, and no copy elsewhere."""
-        people = self.store.profiles()
+        people = self._store.profiles()
         remaining = [p for p in people if p.get("id") != person_id]
         if len(remaining) == len(people):
             return False
-        self.store.save_profiles(remaining)
+        self._store.save_profiles(remaining)
         return True
 
     def person(self, person_id: str) -> dict | None:
-        return next((p for p in self.store.profiles() if p.get("id") == person_id), None)
+        return next((p for p in self._store.profiles() if p.get("id") == person_id), None)
 
     # --- which edition this is ----------------------------------------------------------------
 
@@ -195,21 +203,21 @@ class Api:
         A build can be born full - that is the directly sold edition - or be unlocked by a code. The code
         is the same one the Android app takes, so a person who bought once does not buy again.
         """
-        unlocked = bool(self.store.setting("unlock_code"))
+        unlocked = bool(self._store.setting("unlock_code"))
         born = _born_edition()
         return {
             "edition": "full" if (born == "full" or unlocked) else "demo",
-            "unlocked_to": self.store.setting("unlock_email") if unlocked else None,
+            "unlocked_to": self._store.setting("unlock_email") if unlocked else None,
             "free_profiles": licence.FREE_PROFILES,
-            "people": len(self.store.profiles()),
+            "people": len(self._store.profiles()),
         }
 
     def unlock(self, email: str, code: str) -> dict:
         """Check an unlock code and remember it. Nothing is sent anywhere to do this."""
         if not licence.verify(email, code):
             raise ValidationError("That code is not right for that email address.")
-        self.store.set_setting("unlock_email", licence.normalize(email))
-        self.store.set_setting("unlock_code", (code or "").strip())
+        self._store.set_setting("unlock_email", licence.normalize(email))
+        self._store.set_setting("unlock_code", (code or "").strip())
         return self.edition()
 
     # --- charts ---------------------------------------------------------------------------------
@@ -230,18 +238,18 @@ class Api:
         validate(who)
         request = self.chart_request(who)
         key = chart_key(request)
-        cached = self.store.cached_chart(key)
+        cached = self._store.cached_chart(key)
         if cached:
             import json
             return json.loads(cached)
-        chart = self.engine.chart(request)
+        chart = self._ready_engine().chart(request)
         import json
-        self.store.cache_chart(key, json.dumps(chart, ensure_ascii=False))
+        self._store.cache_chart(key, json.dumps(chart, ensure_ascii=False))
         return chart
 
     def chart_request(self, person: dict) -> dict:
         """Turn a saved person into the request the engine expects, applying the current settings."""
-        s = self.store.settings()
+        s = self._store.settings()
         request = {k: person[k] for k in REQUIRED if k in person}
         for optional in ("gender", "place", "time_confidence", "name_in_use", "calendar", "fold"):
             if person.get(optional):
@@ -268,7 +276,7 @@ class Api:
             if who is None:
                 raise ValidationError("That person is not saved on this computer.")
             validate(who)
-        return self.engine.match(self.chart(groom_id), self.chart(bride_id), bride="B")
+        return self._ready_engine().match(self.chart(groom_id), self.chart(bride_id), bride="B")
 
     # --- the tools that are not one chart ---------------------------------------------------------
 
@@ -308,7 +316,7 @@ class Api:
         ask["lat"], ask["lon"] = float(ask["lat"]), float(ask["lon"])
         ask["top"] = int(request.get("top", 12))
         ask["lang"] = self.settings().get("language", "en")
-        return self.engine.muhurta(ask, charts)
+        return self._ready_engine().muhurta(ask, charts)
 
     #: The numerology tools, and which fields each one asks for.
     NUMBER_TOOLS = (
@@ -346,7 +354,7 @@ class Api:
             ask["text"] = text
         else:
             ask["on"] = request.get("on") or date.today().isoformat()
-        return self.engine.number_tools(ask)
+        return self._ready_engine().number_tools(ask)
 
     def chinese(self, person_id: str) -> dict:
         """The Chinese side of a saved person: lunar birth date, Zi Wei Dou Shu, Nine Star Ki, Tong Shu."""
@@ -356,7 +364,7 @@ class Api:
         validate(who)
         ask = {k: who[k] for k in ("date", "time", "lat", "lon", "tz")}
         ask["gender"] = who.get("gender", "M")
-        return self.engine.chinese_more(ask)
+        return self._ready_engine().chinese_more(ask)
 
     # --- today, and what is coming ----------------------------------------------------------------
 
@@ -368,11 +376,11 @@ class Api:
         it is taken from the first saved person so the screen has something true to show rather than an
         empty form.
         """
-        s = self.store.settings()
+        s = self._store.settings()
         if s.get("today_lat") not in (None, "") and s.get("today_tz"):
             return {"place": s.get("today_place", ""), "lat": float(s["today_lat"]),
                     "lon": float(s["today_lon"]), "tz": s["today_tz"]}
-        people = self.store.profiles()
+        people = self._store.profiles()
         if people:
             first = people[0]
             return {"place": first.get("place", ""), "lat": float(first["lat"]),
@@ -387,10 +395,10 @@ class Api:
             ZoneInfo(str(place["tz"]).strip())
         except (ZoneInfoNotFoundError, ValueError, OSError) as e:
             raise ValidationError(f"{place['tz']!r} is not a time zone name.") from e
-        self.store.set_setting("today_place", str(place.get("place", "")).strip())
-        self.store.set_setting("today_lat", float(place["lat"]))
-        self.store.set_setting("today_lon", float(place["lon"]))
-        self.store.set_setting("today_tz", str(place["tz"]).strip())
+        self._store.set_setting("today_place", str(place.get("place", "")).strip())
+        self._store.set_setting("today_lat", float(place["lat"]))
+        self._store.set_setting("today_lon", float(place["lon"]))
+        self._store.set_setting("today_tz", str(place["tz"]).strip())
         return self.today_place()
 
     def today(self, when: str | None = None) -> dict:
@@ -400,7 +408,7 @@ class Api:
             raise ValidationError("Choose where you are before reading today's panchang.")
         ask = dict(where)
         ask["date"] = when or date.today().isoformat()
-        return self.engine.today(ask)
+        return self._ready_engine().today(ask)
 
     def forecast(self, person_id: str, years: int = 3) -> dict:
         """The three-year outlook, by area of life. The same layers the full reading uses."""
@@ -408,7 +416,7 @@ class Api:
         if who is None:
             raise ValidationError("That person is not saved on this computer.")
         validate(who)
-        return self.engine.forecast(dict(self.chart_request(who), years=int(years)))
+        return self._ready_engine().forecast(dict(self.chart_request(who), years=int(years)))
 
     #: What predict() will answer for, in the order the buttons appear.
     PERIODS = (
@@ -435,7 +443,7 @@ class Api:
         if where:
             # Transits are read from where the person is now, not where they were born.
             ask.update({"current_lat": where["lat"], "current_lon": where["lon"]})
-        return self.engine.predict(ask)
+        return self._ready_engine().predict(ask)
 
     def ask_question(self, request: dict) -> dict:
         """Prashna, or a KP number horary: a chart for the moment the question was asked.
@@ -461,24 +469,24 @@ class Api:
             if not 1 <= number <= 249:
                 raise ValidationError("The number runs from 1 to 249.")
             ask["number"] = number
-        return self.engine.question(ask)
+        return self._ready_engine().question(ask)
 
     def compare_group(self, person_ids: list[str]) -> dict:
         """Several people side by side - a family, a team - rather than two at a time."""
         people = [self.person(pid) for pid in person_ids]
         if len([p for p in people if p]) < 2:
             raise ValidationError("Choose at least two people.")
-        return self.engine.group({"people": [self.chart_request(validate(p)) for p in people if p]})
+        return self._ready_engine().group({"people": [self.chart_request(validate(p)) for p in people if p]})
 
     def flying_stars(self, when: str | None = None) -> dict:
         """The annual and monthly Flying Stars for a date."""
-        return self.engine.feng_shui({"today": when or date.today().isoformat()})
+        return self._ready_engine().feng_shui({"today": when or date.today().isoformat()})
 
     # --- life events, and checking a birth time against them --------------------------------------
 
     def event_kinds(self) -> dict:
         """The dated events a birth time can be checked against, named by the engine in both languages."""
-        return self.engine.rectify({"date": "2000-01-01", "time": "12:00", "lat": 0.0, "lon": 0.0,
+        return self._ready_engine().rectify({"date": "2000-01-01", "time": "12:00", "lat": 0.0, "lon": 0.0,
                                     "tz": "UTC", "window_min": 1, "events": []}).get("kinds", {})
 
     def set_events(self, person_id: str, events: list[dict]) -> list[dict]:
@@ -501,8 +509,8 @@ class Api:
                 continue
             kept.append({"kind": kind, "date": when})
         people = [dict(p, events=kept) if p.get("id") == person_id else p
-                  for p in self.store.profiles()]
-        self.store.save_profiles(people)
+                  for p in self._store.profiles()]
+        self._store.save_profiles(people)
         return kept
 
     def events(self, person_id: str) -> list[dict]:
@@ -531,10 +539,10 @@ class Api:
         ask["gender"] = who.get("gender", "M")
         ask["window_min"] = window
         ask["events"] = self.events(person_id)
-        settings = self.store.settings()
+        settings = self._store.settings()
         if settings.get("ayanamsa"):
             ask["ayanamsa"] = settings["ayanamsa"]
-        return self.engine.rectify(ask)
+        return self._ready_engine().rectify(ask)
 
     # --- the last few tools -----------------------------------------------------------------------
 
@@ -551,7 +559,7 @@ class Api:
         if not where:
             raise ValidationError("Choose where you are before asking.")
         now = datetime.now(ZoneInfo(where["tz"]))
-        return self.engine.horary(dict(where, question=text,
+        return self._ready_engine().horary(dict(where, question=text,
                                        date=now.strftime("%Y-%m-%d"), time=now.strftime("%H:%M")))
 
     #: How a custom divisional chart counts its parts. The engine knows these two.
@@ -582,7 +590,7 @@ class Api:
         if who is None:
             raise ValidationError("That person is not saved on this computer.")
         validate(who)
-        return self.engine.custom_varga(dict(self.chart_request(who), n=division, rule=rule))
+        return self._ready_engine().custom_varga(dict(self.chart_request(who), n=division, rule=rule))
 
     def name_numbers(self, person_id: str) -> dict:
         """What a name adds up to, and the spellings that fit the birth numbers better.
@@ -593,7 +601,7 @@ class Api:
         who = self.person(person_id)
         if who is None:
             raise ValidationError("That person is not saved on this computer.")
-        return self.engine.names(who["name"], who["date"], who.get("gender", "M"))
+        return self._ready_engine().names(who["name"], who["date"], who.get("gender", "M"))
 
     def glossary(self) -> dict:
         """What the interface needs to print a chart in Hindi.
@@ -603,7 +611,7 @@ class Api:
         translated inside the engine; the tables the desktop draws itself are not, and a Hindi screen
         saying "Scorpio" is exactly the half-translated screen the string table exists to prevent.
         """
-        return self.engine.glossary()
+        return self._ready_engine().glossary()
 
     def notes(self, person_id: str) -> str:
         who = self.person(person_id)
@@ -615,8 +623,8 @@ class Api:
             raise ValidationError("That person is not saved on this computer.")
         kept = str(text or "")[:20000]
         people = [dict(p, notes=kept) if p.get("id") == person_id else p
-                  for p in self.store.profiles()]
-        self.store.save_profiles(people)
+                  for p in self._store.profiles()]
+        self._store.save_profiles(people)
         return kept
 
     # --- readings as files ------------------------------------------------------------------------
@@ -658,7 +666,7 @@ class Api:
         request["lang"] = settings.get("language", "en")
         request["by"] = settings.get("report_by") or "Gaurav Mishra"
         request["site"] = settings.get("report_site") or "authorgaurav.com"
-        built = self.engine.special_report(request)
+        built = self._ready_engine().special_report(request)
         html = built.get("html")
         if not html:
             raise ValidationError("The engine returned no report.")
@@ -703,7 +711,7 @@ class Api:
         before it asks.
         """
         from . import backup as fmt
-        people = self.store.profiles()
+        people = self._store.profiles()
         if not people:
             raise ValidationError("There is nobody saved to back up.")
         blob = fmt.encode(people, password)
@@ -728,7 +736,7 @@ class Api:
             raise ValidationError("That file is far too large to be a backup.")
         incoming = fmt.decode(target.read_bytes(), password)
 
-        existing = {p.get("id"): p for p in self.store.profiles()}
+        existing = {p.get("id"): p for p in self._store.profiles()}
         demo = self.edition()["edition"] == "demo"
         added = updated = skipped = waiting = 0
         for person in incoming:
@@ -748,7 +756,7 @@ class Api:
             else:
                 added += 1
             existing[clean["id"]] = clean
-        self.store.save_profiles(list(existing.values()))
+        self._store.save_profiles(list(existing.values()))
         return {"added": added, "updated": updated, "skipped": skipped,
                 "waiting": waiting, "total": len(existing)}
 
@@ -818,7 +826,7 @@ class Api:
                 for key, options in self.CHOICES.items()]
 
     def settings(self) -> dict:
-        s = self.store.settings()
+        s = self._store.settings()
         s.setdefault("language", "en")
         for key, options in self.CHOICES.items():
             s.setdefault(key, self.DEFAULTS.get(key, options[0][0]))
@@ -841,7 +849,7 @@ class Api:
                 raise ValidationError("The language is either 'en' or 'hi'.")
         elif key in self.TEXT_SETTINGS:
             value = str(value).strip()[:120]
-        self.store.set_setting(key, value)
+        self._store.set_setting(key, value)
         return self.settings()
 
     # --- places ---------------------------------------------------------------------------------
@@ -873,11 +881,11 @@ class Api:
     def about(self) -> dict:
         import sys
         return {
-            "engine": self.engine.version(),
+            "engine": self._ready_engine().version(),
             "python": sys.version.split()[0],
-            "data_dir": str(self.store.root),
+            "data_dir": str(self._store.root),
             "reports_dir": str(reports_dir()),
-            "people": len(self.store.profiles()),
+            "people": len(self._store.profiles()),
             "licences": (
                 "Planetary positions: Swiss Ephemeris by Astrodienst AG. "
                 "Place names and time zones: GeoNames (CC BY 4.0). "
@@ -892,8 +900,8 @@ class Api:
         The cache key already includes the chart version, so stale entries would never be served - but
         they would sit on disk for ever. This is housekeeping, not correctness.
         """
-        seen = self.store.setting("engine_version")
-        now = self.engine.version()
+        seen = self._store.setting("engine_version")
+        now = self._ready_engine().version()
         if seen != now:
-            self.store.clear_charts()
-            self.store.set_setting("engine_version", now)
+            self._store.clear_charts()
+            self._store.set_setting("engine_version", now)

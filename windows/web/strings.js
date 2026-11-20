@@ -358,6 +358,11 @@ const STRINGS = {
                         hi: "इस विश्लेषण के कुछ भाग नहीं बन सके (%1), इसलिए यह सामान्य से छोटा है। "
                           + "जो दिखाया गया है वह सही है।" },
 
+  bridge_broken:   { en: "This copy of the app cannot reach part of itself (%1). Reinstalling should "
+                       + "fix it; nothing you have saved is affected.",
+                     hi: "ऐप अपने ही एक हिस्से तक नहीं पहुँच पा रहा (%1)। दोबारा इंस्टॉल करने से ठीक हो "
+                       + "जाना चाहिए; आपका सहेजा हुआ विवरण सुरक्षित है।" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

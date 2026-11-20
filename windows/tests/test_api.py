@@ -152,7 +152,7 @@ class ApiTest(unittest.TestCase):
     def test_the_second_request_is_served_from_the_cache(self):
         saved = self.api.add_person(RAVI)
         self.api.chart(saved["id"])
-        cached = list(self.api.store.charts_dir.glob("*.json"))
+        cached = list(self.api._store.charts_dir.glob("*.json"))
         self.assertEqual(len(cached), 1)
         self.assertEqual(self.api.chart(saved["id"])["vedic"]["lagna"]["sign"], "Scorpio")
 
@@ -166,7 +166,7 @@ class ApiTest(unittest.TestCase):
     def test_a_profile_saved_by_an_older_build_still_fails_readably(self):
         """Profiles written before the time zone was checked are already on disk. Asking for their chart
         must give the same sentence, not the raw error that prompted the check."""
-        self.api.store.save_profiles([dict(RAVI, id="old", tz="Asia")])
+        self.api._store.save_profiles([dict(RAVI, id="old", tz="Asia")])
         with self.assertRaises(ValidationError) as e:
             self.api.chart("old")
         self.assertIn("Asia/Kolkata", str(e.exception))
@@ -402,7 +402,7 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(len(kept), 2)
         self.assertEqual(self.api.events(saved["id"]), kept)
         # and they survive being read back from disk
-        again = Api(store=Store(self.api.store.root), engine=self.engine)
+        again = Api(store=Store(self.api._store.root), engine=self.engine)
         self.assertEqual(again.events(saved["id"]), kept)
 
     def test_a_half_written_event_is_not_stored(self):
@@ -491,7 +491,7 @@ class ApiTest(unittest.TestCase):
         saved = self.api.add_person(RAVI)
         self.assertEqual(self.api.notes(saved["id"]), "")
         self.api.set_notes(saved["id"], "Asked about the house in March.")
-        again = Api(store=Store(self.api.store.root), engine=self.engine)
+        again = Api(store=Store(self.api._store.root), engine=self.engine)
         self.assertEqual(again.notes(saved["id"]), "Asked about the house in March.")
 
     def test_notes_do_not_disturb_the_chart(self):

@@ -1566,7 +1566,36 @@ function showUnlock() {
 
 /* --- start -------------------------------------------------------------------------------- */
 
+/* Everything the interface will ever ask Python for.
+ *
+ * The bridge is built by pywebview walking the Api object, and a method it fails to publish does not
+ * announce itself: the screen renders, and then a button says "api(...).add_person is not a function"
+ * when somebody presses it. Checking at the start turns that into one sentence on the first screen,
+ * naming what is missing, before anybody types a birth date into a form that cannot save it.
+ */
+const NEEDED = [
+  "about", "add_person", "ask_question", "backup", "chart", "chinese", "compare_group", "custom_varga",
+  "delete_person", "edition", "event_kinds", "events", "flying_stars", "forecast", "glossary", "horary",
+  "make_report", "match", "muhurta", "muhurta_events", "name_numbers", "notes", "number_tools",
+  "numbers", "open_path", "pending_restore", "people", "periods", "person", "pick_backup", "predict",
+  "rectify", "report_kinds", "restore", "search_places", "set_events", "set_notes", "set_setting",
+  "set_today_place", "setting_choices", "settings", "time_zones", "today", "today_place", "unlock",
+  "varga_rules",
+];
+
+function bridgeComplete() {
+  const bridge = window.pywebview && window.pywebview.api;
+  if (!bridge) return NEEDED.slice();
+  return NEEDED.filter((name) => typeof bridge[name] !== "function");
+}
+
 async function start() {
+  const missing = bridgeComplete();
+  if (missing.length) {
+    $("#main").replaceChildren(el("p", { className: "problem" },
+      t("bridge_broken", missing.join(", "))));
+    return;
+  }
   const settings = await api().settings();
   setLang(settings.language);
   applyTheme(settings.theme);
