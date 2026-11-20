@@ -156,6 +156,14 @@ def generic_dasha(order, total, start_idx, elapsed_frac, birth, now, year_days, 
     n = len(order)
     virt = birth - dt.timedelta(days=order[start_idx][1] * elapsed_frac * year_days)
     limit = birth + dt.timedelta(days=horizon * year_days)
+    # One cycle from birth is enough for anybody born within living memory, and for them this changes
+    # nothing. But the cycle repeats, and somebody born more than a full cycle ago - a great-grandparent,
+    # a historical figure - fell off the end of the table: no period contained "now", so the chart had no
+    # current mahadasha and every reader of it raised KeyError. So keep laying cycles down until the
+    # table reaches the present. (How far past it the table then runs is whatever the last cycle gives,
+    # which is the same arrangement a birth within one cycle has always had.)
+    while limit <= now:
+        limit += dt.timedelta(days=horizon * year_days)
     mahas, t, i = [], virt, start_idx
     while t < limit:
         lord, yrs = order[i % n]

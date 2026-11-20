@@ -366,50 +366,37 @@ def build(c):
             out.append(s)
     import app_details_more as M
     import app_details_extra as X
-    try:
-        import western_more as WM
-        wm = WM.build(c)
-    except Exception:
-        wm = []
-    try:
-        import chinese_depth as CD
-        wm += CD.bazi_sections(c["bazi"]) if c.get("bazi") else []
-    except Exception:
-        pass
-    try:
-        import fill_partials as FP
-        wm += FP.build(c)
-    except Exception:
-        pass
-    try:
-        import chinese_schools
-        wm += chinese_schools.build(c)
-    except Exception:
-        pass
-    try:
-        import regional_more
-        wm += regional_more.build(c)
-    except Exception:
-        pass
-    try:
-        import regional
-        wm += regional.build(c)
-    except Exception:
-        pass
-    try:
-        import western_adv
-        wm += western_adv.build(c) if c.get("western") else []
-    except Exception:
-        pass
-    try:
-        import maya
-        wm.append(maya.section(c["time_pipeline"]["local_civil"][:10]))
-    except Exception:
-        pass
+
+    # Each of these adds its own sections, and one of them failing must not cost a reader the other
+    # sixty. But swallowing the failure costs them something worse: a reading that is quietly short and
+    # looks complete. So every failure is recorded and handed back with the sections, where the screens
+    # can say so and the verification suite can refuse to let it pass unnoticed.
+    wm, missing = [], []
+
+    def add(name, make):
+        try:
+            got = make()
+        except Exception as e:                    # noqa: BLE001 - deliberately broad; recorded below
+            missing.append({"part": name, "error": f"{type(e).__name__}: {e}"})
+            return
+        if got:
+            wm.extend(got if isinstance(got, list) else [got])
+
+    add("western_more", lambda: __import__("western_more").build(c))
+    add("chinese_depth", lambda: __import__("chinese_depth").bazi_sections(c["bazi"]) if c.get("bazi") else [])
+    add("fill_partials", lambda: __import__("fill_partials").build(c))
+    add("chinese_schools", lambda: __import__("chinese_schools").build(c))
+    add("regional_more", lambda: __import__("regional_more").build(c))
+    add("regional", lambda: __import__("regional").build(c))
+    add("western_adv", lambda: __import__("western_adv").build(c) if c.get("western") else [])
+    add("maya", lambda: [__import__("maya").section(c["time_pipeline"]["local_civil"][:10])])
+
     out = out[:1] + M.build_more(c) + out[1:] + X.build_extra(c) + wm   # birth panchang, doshas and the v14 sections, the rest, then v16's
     _add_sources(out)
     vargas = {k: m for k, m in v.get("divisional_charts", {}).items()}
-    return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta()}
+    # "incomplete" is empty on a healthy chart. When it is not, the reading is genuinely short and
+    # whoever is looking at it deserves to know which part is missing rather than counting sections.
+    return {"sections": out, "vargas": vargas, "varga_meta": M.varga_meta(), "incomplete": missing}
 
 
 # Where each family of sections gets its rules from (v29), so every section can say what it is built on.
