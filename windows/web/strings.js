@@ -353,6 +353,11 @@ const STRINGS = {
   notes_hint:      { en: "Anything you want to remember about this person. It stays on this computer.",
                      hi: "इस व्यक्ति के बारे में जो याद रखना हो। यह इसी कंप्यूटर पर रहता है।" },
 
+  details_incomplete: { en: "Some parts of this reading could not be worked out (%1), so it is shorter "
+                          + "than usual. Everything shown is correct.",
+                        hi: "इस विश्लेषण के कुछ भाग नहीं बन सके (%1), इसलिए यह सामान्य से छोटा है। "
+                          + "जो दिखाया गया है वह सही है।" },
+
   // readings
   readings:        { en: "Readings (%1)",                  hi: "विश्लेषण (%1)" },
   search_readings: { en: "Search the readings…",           hi: "विश्लेषण में खोजें…" },

@@ -695,6 +695,12 @@ async function showChart(id) {
   if (Array.isArray(details.sections) && details.sections.length) {
     main.append(
       el("h3", { className: "panel-heading" }, t("readings", details.sections.length)),
+      // A reading is only ever short because a part of it failed to build. Saying so beats leaving
+      // somebody to notice that a section they remember is no longer there.
+      details.incomplete?.length
+        ? el("p", { className: "note" },
+            t("details_incomplete", details.incomplete.map((m) => m.part).join(", ")))
+        : "",
       sectionsPanel(details.sections, lang()));
   }
   main.append(el("div", { className: "row" },

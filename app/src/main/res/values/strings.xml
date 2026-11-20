@@ -790,4 +790,5 @@
     <string name="bk_export_note">A CSV file of everyone saved, with the Lagna, Moon sign, life events and notes, for Excel or Google Sheets. It is not encrypted.</string>
     <string name="bk_export">Export spreadsheet (CSV)</string>
     <string name="bk_exported">Spreadsheet saved with %1$d people.</string>
+    <string name="details_incomplete">Some parts of this reading could not be worked out (%1$s), so it is shorter than usual. Everything shown is correct.</string>
 </resources>

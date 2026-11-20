@@ -781,4 +781,5 @@
     <string name="bk_export_note">सभी सहेजे गए लोगों की CSV फ़ाइल, लग्न, चंद्र राशि, घटनाओं और नोट्स के साथ, एक्सेल या गूगल शीट्स के लिए। यह एन्क्रिप्टेड नहीं है।</string>
     <string name="bk_export">स्प्रेडशीट निर्यात करें (CSV)</string>
     <string name="bk_exported">%1$d लोगों के साथ स्प्रेडशीट सहेजी गई।</string>
+    <string name="details_incomplete">इस विश्लेषण के कुछ भाग नहीं बन सके (%1$s), इसलिए यह सामान्य से छोटा है। जो दिखाया गया है वह सही है।</string>
 </resources>

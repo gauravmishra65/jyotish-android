@@ -16,7 +16,15 @@ data class DetailSection(val key: String, val title: Bi, val intro: Bi?, val blo
 /** A divisional chart's name and what it is read for. */
 data class VargaMeta(val key: String, val name: Bi, val use: Bi)
 
-data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<String, Map<String, String>>, val vargaMeta: List<VargaMeta> = emptyList()) {
+/**
+ * A part of the reading that did not build. Empty on a healthy chart; when it is not, the reading really
+ * is short and the screen says so rather than letting the reader believe they have the whole of it.
+ */
+data class MissingPart(val part: String, val error: String)
+
+data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<String, Map<String, String>>,
+                        val vargaMeta: List<VargaMeta> = emptyList(),
+                        val incomplete: List<MissingPart> = emptyList()) {
     companion object {
 
         /** Null when the chart was computed before the details existed (an old cache entry). */
@@ -31,7 +39,10 @@ data class DetailsModel(val sections: List<DetailSection>, val vargas: Map<Strin
             val vm = d.optJSONArray("varga_meta") ?: JSONArray()
             val meta = (0 until vm.length()).map { vm.getJSONObject(it) }
                 .map { VargaMeta(it.getString("key"), Bi.parse(it.getJSONObject("name")), Bi.parse(it.getJSONObject("use"))) }
-            return DetailsModel(sections, vargas, meta)
+            val inc = d.optJSONArray("incomplete") ?: JSONArray()
+            val missing = (0 until inc.length()).map { inc.getJSONObject(it) }
+                .map { MissingPart(it.optString("part"), it.optString("error")) }
+            return DetailsModel(sections, vargas, meta, missing)
         }
     }
 }

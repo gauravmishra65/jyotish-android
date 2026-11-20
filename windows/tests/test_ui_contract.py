@@ -82,6 +82,14 @@ class ChartContractTest(unittest.TestCase):
                 self.assertTrue(str(s["title"].get(lang, "")).strip(),
                                 f"section {s.get('key')} has no {lang} title")
 
+    def test_a_healthy_chart_reports_nothing_missing(self):
+        """app_details guards each builder so one failure cannot cost a reader the other sixty, and
+        records what failed rather than swallowing it. On a working chart that record must be empty -
+        and the screen must be reading the same field the engine writes."""
+        self.assertEqual(self.chart["details"]["incomplete"], [])
+        js = (WEB / "app.js").read_text(encoding="utf-8")
+        self.assertIn("details.incomplete", js, "the screen never looks at what went missing")
+
     def test_a_reading_is_made_of_only_the_three_shapes_the_page_can_draw(self):
         """sections.js draws a table, a list or a paragraph. A fourth shape would render as nothing."""
         for s in self.chart["details"]["sections"]:

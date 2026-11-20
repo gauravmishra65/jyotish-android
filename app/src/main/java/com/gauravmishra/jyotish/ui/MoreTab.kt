@@ -53,6 +53,13 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
             Text(stringResource(R.string.calculating), style = MaterialTheme.typography.bodyMedium)
             return@Column
         }
+        // A reading is only ever short because a part of it failed, and a reader counting on it deserves
+        // to be told rather than left to count sections. Empty on every healthy chart.
+        if (details.incomplete.isNotEmpty()) {
+            Text(stringResource(R.string.details_incomplete, details.incomplete.joinToString(", ") { it.part }),
+                style = MaterialTheme.typography.bodyMedium, color = Palette.Muted,
+                modifier = Modifier.testTag("details_incomplete"))
+        }
         if (details.vargas.isNotEmpty()) {
             var which by rememberSaveable { mutableStateOf("D9") }
             Text(stringResource(R.string.vargas_title), style = MaterialTheme.typography.titleMedium)
