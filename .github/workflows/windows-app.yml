@@ -11,11 +11,20 @@ name: windows-app
 
 on:
   workflow_dispatch:
+    inputs:
+      release:
+        description: "Also attach the installer to a draft release"
+        type: boolean
+        default: false
+      version:
+        description: "Version for that release, e.g. 1.0.0"
+        type: string
+        default: "1.0.0"
   push:
     tags: ['windows-v*']
 
 permissions:
-  contents: read
+  contents: write        # only so the draft release below can be written
 
 jobs:
   build:
@@ -72,3 +81,24 @@ jobs:
           name: GauravJyotish-windows-folder
           path: dist/GauravJyotish
           if-no-files-found: error
+
+      # A DRAFT release, deliberately. A draft is visible only to people with push access, so the
+      # installer has somewhere durable to live without being published to anyone - and publishing is
+      # distribution, which is the thing the Swiss Ephemeris licence still governs. Whoever presses
+      # "Publish release" is making that decision knowingly, which is where it belongs.
+      - name: Put the installer in a draft release
+        if: inputs.release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="windows-v${{ inputs.version }}"
+          # Replace any earlier draft for this version rather than piling up near-identical ones.
+          gh release delete "$tag" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$tag" dist/GauravJyotish-Setup-*.exe \
+            --draft \
+            --title "Gaurav Jyotish for Windows ${{ inputs.version }}" \
+            --notes-file windows/packaging/RELEASE_NOTES.md
+          gh release view "$tag" --json isDraft,tagName,assets \
+            --jq '"draft=\(.isDraft)  tag=\(.tagName)  assets=\(.assets | map(.name) | join(", "))"'
