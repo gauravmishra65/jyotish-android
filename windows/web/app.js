@@ -863,6 +863,10 @@ function drawMatch(into, m) {
     el("p", { className: "note" }, t("milan_note")),
   );
 
+  if (m.incomplete?.length) {
+    into.append(el("p", { className: "note" },
+      t("details_incomplete", m.incomplete.map((x) => x.part).join(", "))));
+  }
   if (Array.isArray(m.sections) && m.sections.length) {
     into.append(el("h3", { className: "panel-heading" }, t("readings", m.sections.length)),
       sectionsPanel(m.sections, lang()));

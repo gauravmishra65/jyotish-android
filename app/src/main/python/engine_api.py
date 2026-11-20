@@ -86,6 +86,9 @@ def chart(request_json):
 def match(chart_a_json, chart_b_json, bride="B"):
     fa, fb = json.loads(chart_a_json), json.loads(chart_b_json)
     m = chart_engine.match_charts(fa, fb, bride)
+    # The Western and BaZi comparisons. One failure here used to empty the lot and say nothing, so a
+    # Milan screen could show the kootas alone and look perfectly normal; "incomplete" says otherwise.
+    m["incomplete"] = []
     try:
         import app_match_more
         ia, ib = fa.get("match_inputs") or {}, fb.get("match_inputs") or {}
@@ -93,8 +96,9 @@ def match(chart_a_json, chart_b_json, bride="B"):
             m["_bazi_a"], m["_bazi_b"] = ia, ib
         m["sections"] = app_match_more.build(m)
         m.pop("_bazi_a", None); m.pop("_bazi_b", None)      # the Western side, worded for the Milan screen
-    except Exception:
+    except Exception as e:                                  # noqa: BLE001 - deliberately broad; recorded
         m["sections"] = []
+        m["incomplete"] = [{"part": "match_sections", "error": f"{type(e).__name__}: {e}"}]
     return json.dumps(m, ensure_ascii=False)
 
 

@@ -102,6 +102,10 @@ def build(m):
             s = None
         if s:
             out.append(s)
+    # The BaZi side of the comparison. It needs both charts to carry BaZi inputs, which a chart built
+    # without that module does not - so a failure here is often "nothing to compare" rather than a
+    # fault, and it must not take the Western sections with it. Either way the loss is recorded by the
+    # caller rather than vanishing.
     try:
         import chinese_depth as CD
         if m.get("_bazi_a") and m.get("_bazi_b"):
@@ -110,6 +114,7 @@ def build(m):
         x = FP.bazi_cross(m)
         if x:
             out.append(x)
-    except (KeyError, TypeError, ValueError, IndexError):
-        pass
+    except (KeyError, TypeError, ValueError, IndexError) as e:
+        m.setdefault("incomplete", []).append(
+            {"part": "bazi_comparison", "error": f"{type(e).__name__}: {e}"})
     return out

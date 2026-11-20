@@ -222,6 +222,15 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(other["bride_is"], "B")
         self.assertNotEqual(one["kootas"]["tara"], other["kootas"]["tara"])
 
+    def test_a_match_reports_nothing_missing(self):
+        """One failure in the Western or BaZi comparison used to empty all of them and say nothing, so
+        a Milan screen could show the kootas alone and look perfectly normal."""
+        groom = self.api.add_person(RAVI)
+        bride = self.api.add_person(dict(NEHA))
+        m = self.api.match(groom["id"], bride["id"])
+        self.assertEqual(m["incomplete"], [])
+        self.assertTrue(m["sections"], "the comparison came back with no sections at all")
+
     def test_a_person_cannot_be_matched_with_themselves(self):
         saved = self.api.add_person(RAVI)
         with self.assertRaises(ValidationError):
