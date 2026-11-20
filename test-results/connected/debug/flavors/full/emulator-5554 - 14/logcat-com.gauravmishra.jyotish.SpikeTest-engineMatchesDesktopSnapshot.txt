@@ -1,0 +1,47 @@
+11-20 01:33:23.482  3978  4235 I TestRunner: started: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)
+11-20 01:33:23.589   847   856 I ndroid.systemui: NativeAlloc concurrent copying GC freed 171341(7244KB) AllocSpace objects, 4(80KB) LOS objects, 49% free, 18MB/36MB, paused 139us,26us total 459.488ms
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:23.687  1109  1126 W System  : A resource failed to call release.
+11-20 01:33:24.006  4985  4985 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@5a78829
+11-20 01:33:24.009   525   930 W InputManager-JNI: Input channel object 'cb75ea8 com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-20 01:33:24.072  3978  3986 W vmishra.jyotish: Suspending all threads took: 18.779ms
+11-20 01:33:24.181  3978  3986 I vmishra.jyotish: Background concurrent copying GC freed 1333050(37MB) AllocSpace objects, 19(3496KB) LOS objects, 22% free, 81MB/105MB, paused 3.770ms,18.854ms total 2.719s
+11-20 01:33:24.297  3978  3988 W System  : A resource failed to call release.
+11-20 01:33:25.330   847   847 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+11-20 01:33:25.458  3978  3978 E FrameTracker: force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.gauravmishra.jyotish>
+11-20 01:33:26.301  3978  3978 E FrameTracker: force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.gauravmishra.jyotish>
+11-20 01:33:29.046  3978  4235 W python.stderr: /data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/engine_api.py:339: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/ENGINE_VERSION.txt' mode='r' encoding='utf-8'>
+11-20 01:33:29.046  3978  4235 W python.stderr: ResourceWarning: Enable tracemalloc to get the object allocation traceback
+11-20 01:33:29.048  3978  4235 I SPIKE   : {
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "ok": true,
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "mismatches": [],
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "timings_s": {
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "chart_0": 1.178,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "chart_1": 0.361,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "chart_2": 0.33,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "chart_3": 0.398,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "chart_4": 0.396,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "match": 0.001,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "muhurta_3_months": 1.043,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "names": 0.001,
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "forecast_3_years": 1.777
+11-20 01:33:29.048  3978  4235 I SPIKE   :  },
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "import_s": 0.897,
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "python": "3.13.16",
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "engine_version": "astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2",
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "ephe_files": [
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "seas_18.se1",
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "sefstars.txt",
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "semo_18.se1",
+11-20 01:33:29.048  3978  4235 I SPIKE   :   "sepl_18.se1"
+11-20 01:33:29.048  3978  4235 I SPIKE   :  ],
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "base_rates_present": true,
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "tempdir": "\/data\/user\/0\/com.gauravmishra.jyotish\/cache\/chaquopy\/tmp",
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "python_start_ms": 4083,
+11-20 01:33:29.048  3978  4235 I SPIKE   :  "waited_for_engine_ms": 0
+11-20 01:33:29.048  3978  4235 I SPIKE   : }
+11-20 01:33:29.048  3978  4235 I TestRunner: finished: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)

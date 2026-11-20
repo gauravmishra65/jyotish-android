@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.KundaliModelTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-20T01:21:57.212Z" hostname="runnervm0hi8g" time="0.038">
+  <properties/>
+  <testcase name="yogasAreReportableOnesRarestFirst" classname="com.gauravmishra.jyotish.KundaliModelTest" time="0.007"/>
+  <testcase name="parsesTheEngineChart" classname="com.gauravmishra.jyotish.KundaliModelTest" time="0.008"/>
+  <testcase name="chartLabelsAndDescription" classname="com.gauravmishra.jyotish.KundaliModelTest" time="0.021"/>
+  <testcase name="layoutsCoverTwelvePlaces" classname="com.gauravmishra.jyotish.KundaliModelTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.NumerologyModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-20T01:21:57.376Z" hostname="runnervm0hi8g" time="0.019">
+  <properties/>
+  <testcase name="loshuGridInLayoutOrder" classname="com.gauravmishra.jyotish.NumerologyModelTest" time="0.01"/>
+  <testcase name="nameOptions" classname="com.gauravmishra.jyotish.NumerologyModelTest" time="0.003"/>
+  <testcase name="coreNumbers" classname="com.gauravmishra.jyotish.NumerologyModelTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

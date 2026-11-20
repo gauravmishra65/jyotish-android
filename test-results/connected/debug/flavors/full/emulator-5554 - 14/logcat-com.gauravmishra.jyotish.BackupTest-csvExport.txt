@@ -1,0 +1,63 @@
+11-20 01:29:25.031  3978  4235 I TestRunner: started: csvExport(com.gauravmishra.jyotish.BackupTest)
+11-20 01:29:25.033  4275  4462 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of bdxy@1cd29ab
+11-20 01:29:25.045   847   931 D StylusManager: Stylus InputDevice changed: 9 virtio_input_multi_touch_6
+11-20 01:29:25.046   847   931 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+11-20 01:29:25.046   847   931 D StylusManager: Stylus InputDevice changed: 4 virtio_input_multi_touch_1
+11-20 01:29:25.046   847   931 D StylusManager: Stylus InputDevice changed: 6 virtio_input_multi_touch_3
+11-20 01:29:25.047   847   931 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+11-20 01:29:25.047   847   931 D StylusManager: Stylus InputDevice changed: 5 virtio_input_multi_touch_2
+11-20 01:29:25.048   847   931 D StylusManager: Stylus InputDevice changed: 10 virtio_input_multi_touch_7
+11-20 01:29:25.053  1802  2583 W LocationOracle: No location returned by GMS core getLastLocation()
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missed App frame:UNKNOWN: 74, 7267, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missed SF frame:UNKNOWN: 74, 7267, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missing HWUI jank callback for vsyncId: 7267, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missed App frame:UNKNOWN: 74, 7290, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missed SF frame:UNKNOWN: 74, 7290, 0, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.101  1109  1109 W FrameTracker: Missing HWUI jank callback for vsyncId: 7290, CUJ=J<LAUNCHER_APP_CLOSE_TO_HOME>
+11-20 01:29:25.119  1036  1036 D BluetoothPbapService:  onChange on contact uri
+11-20 01:29:25.129   847   847 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-20 01:29:25.134   847   847 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-20 01:29:25.160   525   811 W system_server: Long monitor contention with owner android.bg (557) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:600) waiters=0 in android.os.Message android.os.MessageQueue.next() for 436ms
+11-20 01:29:25.191  1597  1691 W AutoDndManagerImpl: <DWB> Auto DND support connectionless gcore call timed out
+11-20 01:29:25.191  1597  1691 W AutoDndManagerImpl: lnc: Timed out: lkh@a7cd4ca[status=PENDING, info=[inputFuture=[iiu@e38563b[status=PENDING, info=[hun@4e4e158]]], function=[propagating=[chv@42cf2b1]]]]
+11-20 01:29:25.193  1597  1726 W cwh     : <DWB> Can't determine if this device supports Auto DND
+11-20 01:29:25.193  1597  1726 W cwh     : <DWB> Schedule a retry to determine if this device supports Auto DND
+11-20 01:29:25.200  1597  1691 I WM-WorkerWrapper: Worker result RETRY for Work [ id=21febf85-5ec8-4c40-a439-89e5e41a17d6, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.wellbeing.autodnd.SettingsInjectionWorker } ]
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: [WrappingKeyManager] InternalRecoveryServiceException during wrapping key generation [CONTEXT service_id=172 ]
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: android.security.keystore.recovery.InternalRecoveryServiceException: Failed to import secret key.
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.security.keystore.recovery.RecoveryController.wrapUnexpectedServiceSpecificException(RecoveryController.java:783)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.security.keystore.recovery.RecoveryController.generateKey(RecoveryController.java:569)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at qiw.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at qiw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):15)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at qfw.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):68)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at com.google.android.gms.auth.folsom.operation.GserviceChangeIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at java.lang.Thread.run(Thread.java:1012)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: Caused by: android.os.ServiceSpecificException: Failed to import secret key. (code 22)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3071)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.os.Parcel.createException(Parcel.java:3041)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.os.Parcel.readException(Parcel.java:3024)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.os.Parcel.readException(Parcel.java:2966)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at com.android.internal.widget.ILockSettings$Stub$Proxy.generateKey(ILockSettings.java:1679)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	at android.security.keystore.recovery.RecoveryController.generateKey(RecoveryController.java:556)
+11-20 01:29:25.200  1500  4718 W RecoverableKeyStoreGms: 	... 12 more
+11-20 01:29:25.216  3481  4679 I GCoreUlr: WorldUpdater:com.google.gservices.intent.action.GSERVICES_CHANGED: Ensuring that reporting is stopped because of reasons: (no Google accounts)
+11-20 01:29:25.259  3481  4564 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-20 01:29:25.270  3978  4235 W vmishra.jyotish: Verification of kotlin.Unit com.gauravmishra.jyotish.ui.BackupScreenKt.BackupScreen$lambda$34(java.util.List, androidx.activity.compose.ManagedActivityResultLauncher, androidx.activity.compose.ManagedActivityResultLauncher, kotlinx.coroutines.CoroutineScope, kotlin.jvm.functions.Function1, java.lang.String, android.content.Context, androidx.activity.compose.ManagedActivityResultLauncher, kotlin.jvm.functions.Function1, java.lang.String, java.lang.String, androidx.activity.compose.ManagedActivityResultLauncher, java.lang.String, java.lang.String, java.lang.String, java.lang.String, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.foundation.layout.PaddingValues, androidx.compose.runtime.Composer, int) took 122.472ms (26397.84 bytecodes/s) (60784B approximate peak alloc)
+11-20 01:29:25.270  1500  5026 I GmsDebugLogger: [53] +vision.ocr:-1
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: com.google.apps.tiktok.concurrent.AndroidFutures.lambda$logOnFailure$3:411 Failed updating experiments for package com.google.android.dialer.directboot#com.google.android.dialer
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: sya: Timed out (timeout delayed by 49 ms after scheduled time): swz@88057a7[status=PENDING, info=[delegate=[svd@b846454[status=PENDING, info=[inputFuture=[suj@ae87ffd[status=PENDING, info=[inputFuture=[syb@6abc4f2[status=FAILURE, cause=[sya: Timed out (timeout delayed by 54 ms after scheduled time): swz@250c743[status=PENDING, info=[delegate=[suj@9ed71c0[status=PENDING, info=[inputFuture=[ogj@d421ef9[status=PENDING, info=[nxt@82d3e3e]]], exceptionType=[class nkq], fallback=[qax@62e949f]]]]]]]]], exceptionType=[class java.util.concurrent.TimeoutException], fallback=[rtb@cfcb1b5]]]], function=[propagating=[rjj@cbb004a]]]]]]]
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 	at tk_trace.Updating experiments(Unknown Source:0)
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 	at tk_trace.handleBroadcast(Unknown Source:0)
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 	at tk_trace.Broadcast to com.google.apps.tiktok.experiments.phenotype.ConfigurationUpdatedReceiver_Receiver com.google.android.gms.phenotype.UPDATE(Unknown Source:0)
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 	Suppressed: rtc:
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 		at tk_trace.PhenotypeApi.getConfigurationSnapshot(unfinished)(Unknown Source:0)
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 		at tk_trace.Fetching experiments for device(unfinished)(Unknown Source:0)
+11-20 01:29:25.275  2246  2489 E DialerAndroidFutures: 		at tk_trace.Updating experiments 2 ms(Unknown Source:0)
+11-20 01:29:25.281  3978  4235 I TestRunner: finished: csvExport(com.gauravmishra.jyotish.BackupTest)

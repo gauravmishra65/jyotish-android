@@ -1,0 +1,23 @@
+--------- beginning of system
+11-20 01:34:36.525   525  3426 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-20 01:34:37.165   525  1902 E ActivityManager: Unable to freeze binder for 7141: -11
+--------- beginning of main
+11-20 01:34:37.502   525   558 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+11-20 01:34:37.503   525   558 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+11-20 01:34:37.623   525  3426 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-20 01:34:37.712  3028  7286 E IPCThreadState: Binder transaction failure: 888741/29202/0
+11-20 01:34:37.712  3028  7286 E JavaBinder: !!! FAILED BINDER TRANSACTION !!!  (parcel size = 332)
+11-20 01:34:37.719   525  1902 E IPCThreadState: Binder transaction failure: 888745/29202/0
+11-20 01:34:37.740   525  3426 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-20 01:34:37.786   525   558 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+11-20 01:34:37.789   525   780 E AppOps  : attributionTag VCN not declared in manifest of android
+11-20 01:34:37.804   525   558 E libprocessgroup: No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+11-20 01:34:37.813  1717  1736 E native  : E0000 00:00:1795138477.812057    1736 mmap.cc:233] Error during Unmap / munmap: Invalid argument
+11-20 01:34:37.816   403   403 E BpTransactionCompletedListener: Failed to transact (-32)
+11-20 01:34:37.816   403   403 E BpTransactionCompletedListener: Failed to transact (-32)
+11-20 01:34:37.950   862  6912 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+11-20 01:34:37.954   862  6912 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+11-20 01:34:37.993   525  3426 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-20 01:34:38.016   525  3426 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-20 01:34:38.249   525   780 E AppOps  : attributionTag VCN not declared in manifest of android
+11-20 01:34:38.327   525  1208 E AtomicFile: Failed to rename /data/system/cachequota.xml.new to /data/system/cachequota.xml
