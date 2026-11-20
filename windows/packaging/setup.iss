@@ -8,7 +8,12 @@
 ; it is unsigned software. Buying a certificate is the only fix and it is the author's decision.
 
 #define AppName "Gaurav Jyotish"
-#define AppVersion "1.0.0"
+; The build passes this in with ISCC /DAppVersion=x.y.z. Without it the filename and the version shown
+; in Windows would say 1.0.0 whatever the release was tagged - which is how you end up testing a build
+; you did not mean to, because two files called Setup-1.0.0.exe look identical in a Downloads folder.
+#ifndef AppVersion
+  #define AppVersion "0.0.0-dev"
+#endif
 #define AppPublisher "Gaurav Mishra"
 #define AppURL "https://authorgaurav.com"
 #define AppExe "GauravJyotish.exe"
