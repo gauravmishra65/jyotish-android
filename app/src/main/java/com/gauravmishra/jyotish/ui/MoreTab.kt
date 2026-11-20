@@ -107,7 +107,12 @@ fun MoreTab(m: ChartModel, details: DetailsModel?, style: String, lang: String, 
                     if (text.length > 180_000) text = text.substring(0, text.lastIndexOf("\n## ", 180_000).coerceAtLeast(0))
                     val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain")
                         .putExtra(android.content.Intent.EXTRA_SUBJECT, shareTitle).putExtra(android.content.Intent.EXTRA_TEXT, text)
-                    try { ctx.startActivity(android.content.Intent.createChooser(send, shareTitle)) } catch (_: android.content.ActivityNotFoundException) {}
+                    try {
+                        ctx.startActivity(android.content.Intent.createChooser(send, shareTitle))
+                    } catch (_: android.content.ActivityNotFoundException) {
+                        android.widget.Toast.makeText(ctx, R.string.no_share_app,
+                            android.widget.Toast.LENGTH_LONG).show()
+                    }
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("details_share")) { Text(stringResource(R.string.details_share)) }
         }

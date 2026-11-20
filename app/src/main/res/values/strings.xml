@@ -791,4 +791,6 @@
     <string name="bk_export">Export spreadsheet (CSV)</string>
     <string name="bk_exported">Spreadsheet saved with %1$d people.</string>
     <string name="details_incomplete">Some parts of this reading could not be worked out (%1$s), so it is shorter than usual. Everything shown is correct.</string>
+    <string name="no_share_app">No app on this phone can share text.</string>
+    <string name="no_mail_app">No email app is set up on this phone. Write to %1$s.</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import com.gauravmishra.jyotish.BuildConfig
 import com.gauravmishra.jyotish.R
 
@@ -15,14 +16,28 @@ fun shareApp(ctx: Context) {
     val send = Intent(Intent.ACTION_SEND).setType("text/plain")
         .putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.share_subject))
         .putExtra(Intent.EXTRA_TEXT, ctx.getString(R.string.share_message, PLAY_URL))
-    try { ctx.startActivity(Intent.createChooser(send, ctx.getString(R.string.share_app))) } catch (_: ActivityNotFoundException) {}
+    // A phone with nothing that can share text is unusual but not impossible (a locked-down work
+    // profile, a stripped ROM). Say so: a Share button that does nothing at all looks like a broken app.
+    try {
+        ctx.startActivity(Intent.createChooser(send, ctx.getString(R.string.share_app)))
+    } catch (_: ActivityNotFoundException) {
+        Toast.makeText(ctx, R.string.no_share_app, Toast.LENGTH_LONG).show()
+    }
 }
 
 /** Opens the app's page in the Play Store app (or the browser when Play is missing), where the user can rate it. */
 fun openPlayPage(ctx: Context) {
     val market = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}"))
-    try { ctx.startActivity(market) } catch (_: ActivityNotFoundException) {
-        try { ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_URL))) } catch (_: ActivityNotFoundException) {}
+    try {
+        ctx.startActivity(market)
+    } catch (_: ActivityNotFoundException) {
+        // No Play app: the browser knows the same page. If there is no browser either, say so rather
+        // than leaving the button looking dead.
+        try {
+            ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_URL)))
+        } catch (_: ActivityNotFoundException) {
+            Toast.makeText(ctx, R.string.no_share_app, Toast.LENGTH_LONG).show()
+        }
     }
 }
 

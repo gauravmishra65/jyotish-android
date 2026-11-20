@@ -73,7 +73,13 @@ fun HelpScreen(onTour: () -> Unit, onBack: () -> Unit) {
                 try {
                     ctx.startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$CONTACT_EMAIL"))
                         .putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.contact_subject, BuildConfig.VERSION_NAME)))
-                } catch (_: ActivityNotFoundException) {}
+                } catch (_: ActivityNotFoundException) {
+                    // No mail app set up. The address is the useful part, so the message carries it -
+                    // otherwise "Write to us" is a button that silently does nothing.
+                    android.widget.Toast.makeText(
+                        ctx, ctx.getString(R.string.no_mail_app, CONTACT_EMAIL),
+                        android.widget.Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

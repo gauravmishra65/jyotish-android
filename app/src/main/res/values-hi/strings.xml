@@ -782,4 +782,6 @@
     <string name="bk_export">स्प्रेडशीट निर्यात करें (CSV)</string>
     <string name="bk_exported">%1$d लोगों के साथ स्प्रेडशीट सहेजी गई।</string>
     <string name="details_incomplete">इस विश्लेषण के कुछ भाग नहीं बन सके (%1$s), इसलिए यह सामान्य से छोटा है। जो दिखाया गया है वह सही है।</string>
+    <string name="no_share_app">इस फ़ोन में टेक्स्ट साझा करने वाला कोई ऐप नहीं है।</string>
+    <string name="no_mail_app">इस फ़ोन में कोई ईमेल ऐप सेट नहीं है। %1$s पर लिखें।</string>
 </resources>
