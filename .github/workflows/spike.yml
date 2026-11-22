@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      release:
+        description: "Also attach the signed Play bundle to a draft release"
+        type: boolean
+        default: false
+      version:
+        description: "Version for that release, e.g. 1.0.0"
+        type: string
+        default: "1.0.0"
 
 permissions:
   contents: write   # to publish logs and screenshots to the ci-results branch
@@ -150,6 +159,30 @@ jobs:
             app/build/outputs/bundle/playRelease/app-play-release.aab
             app/build/outputs/apk/play/release/app-play-release.apk
             app/build/outputs/mapping/playRelease/mapping.txt
+      # A DRAFT release, so the signed bundle has somewhere reachable to live. Artifact storage is not
+      # reachable from every environment that needs this file; a release asset is. Draft means it is
+      # visible only to people with push access, and the bundle is not published to anyone by sitting
+      # here - uploading it to Play Console is a separate, deliberate act.
+      - name: Put the signed Play bundle in a draft release
+        if: inputs.release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="android-v${{ inputs.version }}"
+          gh release delete "$tag" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$tag" \
+            app/build/outputs/bundle/playRelease/app-play-release.aab \
+            app/build/outputs/apk/full/release/app-full-release.apk \
+            --draft \
+            --title "Gaurav Jyotish ${{ inputs.version }} (Android)" \
+            --notes "Signed Play bundle and the direct-download APK, built from this commit.
+
+          **Draft.** Nothing here is published. The bundle still has to be uploaded to Play Console and
+          rolled out there, which is a separate decision."
+          gh release view "$tag" --json isDraft,assets \
+            --jq '"draft=\(.isDraft)  assets=\(.assets | map(.name) | join(\", \"))"'
+
       - uses: actions/upload-artifact@v4
         with:
           name: debug-apk
