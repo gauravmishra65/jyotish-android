@@ -103,6 +103,12 @@ jobs:
             echo "$KEY_B64" | base64 -d > "$RUNNER_TEMP/upload.jks"
             echo "JYOTISH_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
             echo "::notice title=Play signing::The Play edition is signed with the private upload key."
+          elif [ "${{ inputs.release }}" = "true" ]; then
+            # A release bundle signed with the committed test key is not a release bundle: Play checks the
+            # upload certificate and rejects anything else. Fail here, in the first minute, rather than
+            # after a full build and an emulator run.
+            echo "::error title=Play signing::This run asked for a release bundle, but JYOTISH_UPLOAD_KEYSTORE_B64 is not set, so the bundle would be signed with the test key and Play would reject it. Set the secret, or build and sign on the machine that holds the upload key."
+            exit 1
           else
             echo "::warning title=Play signing::No upload key secret; the Play edition is signed with the test key."
           fi
@@ -180,8 +186,12 @@ jobs:
 
           **Draft.** Nothing here is published. The bundle still has to be uploaded to Play Console and
           rolled out there, which is a separate decision."
-          gh release view "$tag" --json isDraft,assets \
-            --jq '"draft=\(.isDraft)  assets=\(.assets | map(.name) | join(\", \"))"'
+          gh release view "$tag" --json isDraft,assets --jq '[.isDraft, (.assets | map(.name))] | @json'
+          # The bundle Play accepts has to carry the upload certificate. If this build fell back to the
+          # test key, say so here rather than letting somebody discover it at the Play Console door.
+          unzip -p app/build/outputs/bundle/playRelease/app-play-release.aab 'META-INF/*.RSA' \
+            | openssl pkcs7 -inform DER -print_certs \
+            | openssl x509 -noout -subject -fingerprint -sha256
 
       - uses: actions/upload-artifact@v4
         with:
