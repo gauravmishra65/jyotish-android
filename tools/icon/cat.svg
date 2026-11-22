@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Gaurav Jyotish mark, redrawn from Gaurav Mishra's own cat so it survives being an icon.
+     108x108 is the Android adaptive-icon viewport; the mask crops to a circle or squircle, so every
+     part of the cat is kept inside the central safe area and the thin lines of the original drawing -
+     whiskers, eye glints, the hanging scarf tail - are dropped rather than smeared into grey at 48px.
+     Colours sampled from the drawing: black, salmon #FF9F93, gold #FFB94A. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+  <defs>
+    <radialGradient id="warm" cx="54" cy="44" r="72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF6E8"/><stop offset="1" stop-color="#F6DEC2"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="108" height="108" fill="url(#warm)"/>
+
+  <!-- Scaled into the safe zone about the centre. The launcher mask keeps only the middle 72dp of
+       these 108, and a circle mask takes bites out of the corners on top of that, so the cat has to
+       live inside a circle of about 66dp or it loses its ear tips on half the phones in the world. -->
+  <g transform="translate(54,54) scale(0.82) translate(-54,-54)">
+    <!-- ears and head as one silhouette, the way the drawing reads: one black shape -->
+    <path fill="#000000" d="
+      M33.5,21 C38,30 41.5,37 43.5,41.5
+      C47,40.5 50.5,40 54,40 C57.5,40 61,40.5 64.5,41.5
+      C66.5,37 70,30 74.5,21
+      C79,30 81.5,38.5 82,46.5
+      C85.5,51 87,56.5 87,61.5
+      C87,74 72.5,84 54,84
+      C35.5,84 21,74 21,61.5
+      C21,56.5 22.5,51 26,46.5
+      C26.5,38.5 29,30 33.5,21 Z"/>
+
+    <!-- The glasses: two rings, thickened so they stay rings at 48px instead of closing up.
+         Every shape carries its own paint rather than inheriting it from a group - build_icons.py
+         reads one attribute set per element, and a stroke left on a parent is a stroke that silently
+         does not reach the Android drawable. -->
+    <circle cx="42" cy="57" r="9.6" fill="none" stroke="#FFB94A" stroke-width="3.4"/>
+    <circle cx="66" cy="57" r="9.6" fill="none" stroke="#FFB94A" stroke-width="3.4"/>
+    <path d="M51.6,57 C53,56.2 55,56.2 56.4,57" fill="none" stroke="#FFB94A"
+          stroke-width="2.6" stroke-linecap="round"/>
+
+    <!-- nose and smile -->
+    <path fill="#FF9F93" d="M54,63.5 C57.2,63.5 58.8,64.6 58.8,66.2 C58.8,68 56.6,69.6 54,69.6
+                             C51.4,69.6 49.2,68 49.2,66.2 C49.2,64.6 50.8,63.5 54,63.5 Z"/>
+    <path fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"
+          d="M54,69.6 C54,73.6 50.6,76.4 46.6,76.4 C43.6,76.4 41.2,74.8 40.2,72.6
+             M54,69.6 C54,73.6 57.4,76.4 61.4,76.4 C64.4,76.4 66.8,74.8 67.8,72.6"/>
+
+    <!-- the scarf, kept as a band: at icon size it is a block of colour, not a drape -->
+    <path fill="#FF9F93" d="M25.5,72 C33.5,79.5 43.4,83.4 54,83.4 C64.6,83.4 74.5,79.5 82.5,72
+                            C84.4,74.6 85.4,77.4 85.3,80.2 C75.2,87.4 64.8,91 54,91
+                            C43.2,91 32.8,87.4 22.7,80.2 C22.6,77.4 23.6,74.6 25.5,72 Z"/>
+  </g>
+</svg>
