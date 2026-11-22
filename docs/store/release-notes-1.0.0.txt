@@ -1,0 +1,22 @@
+<en-US>
+First full release.
+
+• Charts now work for birth dates before 1905. Earlier builds could not draw them.
+• A reading tells you plainly if a section could not be calculated, instead of quietly coming back short.
+• Kundali Milan now shows the full comparison, including the South Indian Porutham scores.
+• Nine ayanamsas to choose from, up from four.
+• A new app icon.
+
+Everything still runs on your phone. No birth details leave the device.
+</en-US>
+<hi-IN>
+पहला पूरा संस्करण।
+
+• 1905 से पहले के जन्म की कुंडली अब बनती है। पहले के संस्करण इसे नहीं बना पाते थे।
+• यदि कोई भाग गणना नहीं हो सका तो फलादेश साफ़ बता देता है, चुपचाप छोटा नहीं आता।
+• कुंडली मिलान अब पूरी तुलना दिखाता है, दक्षिण भारतीय पोरुथम अंकों सहित।
+• चार की जगह नौ अयनांश विकल्प।
+• नया ऐप आइकन।
+
+सब कुछ आपके फ़ोन पर ही चलता है। जन्म विवरण डिवाइस से बाहर नहीं जाता।
+</hi-IN>
