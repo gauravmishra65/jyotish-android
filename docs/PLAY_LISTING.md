@@ -125,6 +125,19 @@ Permissions requested: none in the demo and full editions. The Play edition adds
    `JYOTISH_UPLOAD_KEYSTORE_B64`, `JYOTISH_UPLOAD_KEYSTORE_PASSWORD` and `JYOTISH_UPLOAD_KEY_ALIAS` are set (the CI log
    says "signed with the private upload key"). Without them it falls back to the committed test key. The demo and
    full APKs always use the test key so they install over earlier copies. Raise `versionCode` for every upload.
+
+   **As of 1.0.0 those secrets are not set on this repository.** A `workflow_dispatch` run with `release=true`
+   now refuses to build rather than hand over a bundle Play will reject, and the release step prints the
+   certificate the bundle carries. Two ways out:
+
+   - Set the three secrets once, at Settings → Secrets and variables → Actions. `JYOTISH_UPLOAD_KEYSTORE_B64`
+     is the keystore run through `base64 -w0`. After that every release run produces an uploadable bundle.
+   - Or sign on the machine that holds the keystore: `tools/release/sign-aab-with-upload-key.ps1` strips the
+     test signature from a built bundle and re-signs it, prompting for the password locally. Nothing about the
+     keystore leaves that machine.
+
+   Either way, confirm the certificate against **App integrity → App signing → Upload key certificate** in Play
+   Console before uploading. A mismatch is refused at upload with no useful explanation.
 2. Enrol in Play App Signing.
 3. Upload `mapping.txt` from the same build, so crash reports are readable.
 4. Screenshots: the CI run's `ci-results` branch has current ones (Home, Kundali, Milan, Muhurta, Numerology in
