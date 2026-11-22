@@ -29,7 +29,15 @@ android {
     // Release signing comes from the environment (a CI secret or the developer's machine), never from the repository:
     //   JYOTISH_KEYSTORE (path), JYOTISH_KEYSTORE_PASSWORD, JYOTISH_KEY_ALIAS, JYOTISH_KEY_PASSWORD.
     // Without them, debug and release builds are signed with the committed test key (keystore/README.md), so every CI
-    // build installs over the last one on a test phone. A test-signed build must never be uploaded to Play.
+    // build installs over the last one on a test phone.
+    //
+    // That key is also, for better or worse, the upload certificate Play holds for com.gauravmishra.jyotish: the
+    // first bundle ever uploaded was signed with it, and Play locks the first one in. So a test-signed bundle is
+    // what Play accepts today - 1.0.0 (31) went to production that way - and setting JYOTISH_UPLOAD_KEYSTORE_B64 to
+    // some other key would produce a bundle Play refuses. What should happen instead is an upload key reset in Play
+    // Console, to a key that is not sitting in a public repository; after that, set the secrets and this comment
+    // stops being true. Until then the workflow checks the certificate against Play's fingerprint, not against
+    // which secret is set.
     val keystore = System.getenv("JYOTISH_KEYSTORE")?.let { file(it) }?.takeIf { it.exists() }
     signingConfigs {
         create("test") {

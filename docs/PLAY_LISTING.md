@@ -126,18 +126,26 @@ Permissions requested: none in the demo and full editions. The Play edition adds
    says "signed with the private upload key"). Without them it falls back to the committed test key. The demo and
    full APKs always use the test key so they install over earlier copies. Raise `versionCode` for every upload.
 
-   **As of 1.0.0 those secrets are not set on this repository.** A `workflow_dispatch` run with `release=true`
-   now refuses to build rather than hand over a bundle Play will reject, and the release step prints the
-   certificate the bundle carries. Two ways out:
+   **Those secrets are not set, and for now that is correct.** Play's upload certificate for this app is the
+   committed test key - the first bundle ever uploaded carried it, and Play locks the first one in - so the
+   ordinary CI build already produces an uploadable bundle. 1.0.0 (31) went to production that way:
 
-   - Set the three secrets once, at Settings → Secrets and variables → Actions. `JYOTISH_UPLOAD_KEYSTORE_B64`
-     is the keystore run through `base64 -w0`. After that every release run produces an uploadable bundle.
-   - Or sign on the machine that holds the keystore: `tools/release/sign-aab-with-upload-key.ps1` strips the
-     test signature from a built bundle and re-signs it, prompting for the password locally. Nothing about the
-     keystore leaves that machine.
+   ```
+   Play Console → App integrity → App signing → Upload key certificate
+   SHA-256  25:9F:37:94:36:2A:97:D3:FC:3B:EB:D7:99:2D:25:73:0A:63:9D:4C:36:3A:57:F1:43:23:08:6F:16:F4:61:B1
+   SHA-1    35:B3:F6:E9:04:27:5A:59:DB:5F:6B:4B:DC:07:E5:1A:0B:82:07:8F
+   ```
 
-   Either way, confirm the certificate against **App integrity → App signing → Upload key certificate** in Play
-   Console before uploading. A mismatch is refused at upload with no useful explanation.
+   The release step checks every bundle against that SHA-256 and fails the run on a mismatch, because Play's own
+   refusal does not say which key it wanted.
+
+   This is not a good resting place: an upload key is meant to be the one thing only the developer holds, and
+   this one is in a public repository. The fix is **Request upload key reset** on the App signing page, which
+   takes a new key you generate and keep off the repo. After that reset: set `JYOTISH_UPLOAD_KEYSTORE_B64`
+   (the keystore through `base64 -w0`), `JYOTISH_UPLOAD_KEYSTORE_PASSWORD` and `JYOTISH_UPLOAD_KEY_ALIAS` at
+   Settings → Secrets and variables → Actions, and update the fingerprint in the workflow. Or sign on the
+   machine holding the keystore with `tools/release/sign-aab-with-upload-key.ps1`, which strips the old
+   signature and re-signs, prompting for the password locally.
 2. Enrol in Play App Signing.
 3. Upload `mapping.txt` from the same build, so crash reports are readable.
 

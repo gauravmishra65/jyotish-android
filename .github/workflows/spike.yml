@@ -103,14 +103,8 @@ jobs:
             echo "$KEY_B64" | base64 -d > "$RUNNER_TEMP/upload.jks"
             echo "JYOTISH_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
             echo "::notice title=Play signing::The Play edition is signed with the private upload key."
-          elif [ "${{ inputs.release }}" = "true" ]; then
-            # A release bundle signed with the committed test key is not a release bundle: Play checks the
-            # upload certificate and rejects anything else. Fail here, in the first minute, rather than
-            # after a full build and an emulator run.
-            echo "::error title=Play signing::This run asked for a release bundle, but JYOTISH_UPLOAD_KEYSTORE_B64 is not set, so the bundle would be signed with the test key and Play would reject it. Set the secret, or build and sign on the machine that holds the upload key."
-            exit 1
           else
-            echo "::warning title=Play signing::No upload key secret; the Play edition is signed with the test key."
+            echo "::notice title=Play signing::No upload key secret; signing with the repository key, which is what Play expects for this app."
           fi
       - name: Build debug APK and test APK
         env:
@@ -187,11 +181,18 @@ jobs:
           **Draft.** Nothing here is published. The bundle still has to be uploaded to Play Console and
           rolled out there, which is a separate decision."
           gh release view "$tag" --json isDraft,assets --jq '[.isDraft, (.assets | map(.name))] | @json'
-          # The bundle Play accepts has to carry the upload certificate. If this build fell back to the
-          # test key, say so here rather than letting somebody discover it at the Play Console door.
-          unzip -p app/build/outputs/bundle/playRelease/app-play-release.aab 'META-INF/*.RSA' \
-            | openssl pkcs7 -inform DER -print_certs \
-            | openssl x509 -noout -subject -fingerprint -sha256
+          # Play accepts exactly one upload certificate and rejects every other, with an error that does not
+          # say which key it wanted. Check it here, against the fingerprint Play Console actually reports,
+          # rather than against which secret happens to be set - those are different questions.
+          want="25:9F:37:94:36:2A:97:D3:FC:3B:EB:D7:99:2D:25:73:0A:63:9D:4C:36:3A:57:F1:43:23:08:6F:16:F4:61:B1"
+          got=$(unzip -p app/build/outputs/bundle/playRelease/app-play-release.aab 'META-INF/*.RSA' \
+                | openssl pkcs7 -inform DER -print_certs \
+                | openssl x509 -noout -fingerprint -sha256 | cut -d= -f2)
+          echo "upload certificate: $got"
+          if [ "$got" != "$want" ]; then
+            echo "::error title=Play signing::This bundle is signed with $got, but Play expects $want for com.gauravmishra.jyotish. It would be refused at upload. Check App integrity -> App signing in Play Console if the upload key has been reset since."
+            exit 1
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
