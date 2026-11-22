@@ -140,6 +140,15 @@ Permissions requested: none in the demo and full editions. The Play edition adds
    Console before uploading. A mismatch is refused at upload with no useful explanation.
 2. Enrol in Play App Signing.
 3. Upload `mapping.txt` from the same build, so crash reports are readable.
+
+   Play also warns, on every upload, that the bundle "contains native code, and you've not uploaded debug
+   symbols". That one has no fix here and should be left alone. All 44 native libraries in the bundle are
+   third-party prebuilts - 20 from Chaquopy's Python runtime under `lib/`, 24 from wheels under
+   `assets/chaquopy/` - and every one arrives already stripped (`readelf -S` shows no `.symtab` and no
+   `.debug_*` in any of them). Gradle's `ndk { debugSymbolLevel }` collects symbols from unstripped copies
+   of libraries the project itself builds; this project builds none, so setting it would change nothing
+   while looking like a fix. The symbols don't exist anywhere in the build to upload. Java and Kotlin
+   crashes are unaffected: `mapping.txt` above covers those, and that is where app crashes actually happen.
 4. Screenshots: the CI run's `ci-results` branch has current ones (Home, Kundali, Milan, Muhurta, Numerology in
    English and Hindi).
 5. Privacy policy URL: Play requires one even when nothing is collected; the data-safety table above is the
