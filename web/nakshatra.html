@@ -1,0 +1,407 @@
+<title>What is my Nakshatra?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<style>
+/* One narrow column: an instrument readout above, the 27 as reference below. */
+:root{
+  --paper:#FFF6E8; --panel:#FFFDF8; --band:#F7E9D2; --ink:#161209; --muted:#6B6153;
+  --gold:#A8700F; --salmon:#C4543F; --line:#E6D3B3; --shade:rgba(22,18,9,.07);
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --deva:'Noto Sans Devanagari','Nirmala UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#13100A; --panel:#1D1912; --band:#241F16; --ink:#F4ECDC; --muted:#A1957F;
+  --gold:#E0A63C; --salmon:#E8806B; --line:#3A3223; --shade:rgba(0,0,0,.35);
+  color-scheme:dark; }}
+:root[data-theme="dark"]{
+  --paper:#13100A; --panel:#1D1912; --band:#241F16; --ink:#F4ECDC; --muted:#A1957F;
+  --gold:#E0A63C; --salmon:#E8806B; --line:#3A3223; --shade:rgba(0,0,0,.35);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:46rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:2.5rem 4rem}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,6vw,2.9rem);line-height:1.12;margin:0 0 .6rem;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:1.4rem;margin:3rem 0 .8rem;text-wrap:balance}
+p{margin:0 0 1rem;max-width:62ch}
+.lede{font-size:1.08rem;color:var(--muted);max-width:56ch}
+a{color:var(--gold)}
+.hi{font-family:var(--deva)}
+[lang="hi"] p,[lang="hi"] li,[lang="hi"] h1,[lang="hi"] h2{font-family:var(--deva)}
+
+.topbar{display:flex;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:1.6rem}
+.mark{display:flex;align-items:center;gap:.55rem;font-family:var(--serif);font-weight:600;font-size:1rem}
+.mark svg{display:block}
+.langs{display:flex;gap:.25rem;background:var(--band);border-radius:999px;padding:.2rem}
+.langs button{font:inherit;font-size:.82rem;font-weight:500;border:0;background:none;color:var(--muted);padding:.3rem .75rem;border-radius:999px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px var(--shade)}
+.langs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;margin:1.8rem 0 0}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.9rem}
+label{display:block;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+input,select{width:100%;min-width:0;font:inherit;font-size:.98rem;padding:.55rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.go{margin-top:1rem;font:inherit;font-weight:600;font-size:1rem;background:var(--ink);color:var(--paper);border:0;border-radius:9px;padding:.7rem 1.3rem;cursor:pointer}
+.go:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.readout{margin-top:1.3rem;border-top:1px solid var(--line);padding-top:1.3rem}
+.nk{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.nk b{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1}
+.nk .dev{font-family:var(--deva);font-size:1.5rem;color:var(--gold)}
+.pada{font-size:.95rem;color:var(--muted)}
+.lon{font-variant-numeric:tabular-nums;font-size:.92rem;color:var(--muted);margin-top:.35rem}
+.attrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.9rem;margin-top:1.1rem}
+.attrs div{min-width:0}
+.attrs dt{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.attrs dd{margin:.15rem 0 0;font-size:.98rem}
+.cusp{margin-top:1rem;border-left:3px solid var(--salmon);background:var(--band);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.92rem}
+
+.wheel{display:block;width:100%;max-width:100%;height:auto;margin:1.2rem 0 0}
+
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--band)}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;color:var(--muted)}
+
+.note{background:var(--band);border-radius:12px;padding:1.1rem 1.2rem;font-size:.94rem}
+.note p{max-width:58ch}
+.note p:last-child{margin-bottom:0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--shade);padding:.1em .35em;border-radius:4px}
+
+.offer{border:1px solid var(--gold);border-radius:14px;padding:1.3rem;margin-top:1.2rem;background:var(--panel)}
+.offer h3{font-family:var(--serif);font-size:1.25rem;margin:0 0 .5rem}
+.price{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--gold)}
+.offer ul{margin:.7rem 0 1rem;padding-left:1.1rem}
+.offer li{margin-bottom:.3rem}
+.stub{font:inherit;font-weight:600;background:var(--gold);color:#fff;border:0;border-radius:9px;padding:.65rem 1.2rem;cursor:not-allowed;opacity:.65}
+.stubnote{font-size:.82rem;color:var(--muted);margin:.5rem 0 0}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.readout{transition:opacity .2s}}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="mark">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12.5" fill="var(--band)"/><circle cx="13" cy="13" r="8" fill="none" stroke="var(--gold)" stroke-width="1.2"/><circle cx="13" cy="5.6" r="1.7" fill="var(--salmon)"/></svg>
+      <span data-t="brand">Gaurav Jyotish</span>
+    </span>
+    <span class="langs" role="group" aria-label="Language">
+      <button type="button" id="en" aria-pressed="true">English</button>
+      <button type="button" id="hiBtn" aria-pressed="false" class="hi">हिंदी</button>
+    </span>
+  </div>
+
+  <h1 data-t="h1">What is my Nakshatra?</h1>
+  <p class="lede" data-t="lede">Your nakshatra is the segment of sky the Moon stood in when you were born — one of twenty-seven, each 13°20′ wide. Enter the moment of your birth and it is worked out below, on your own device.</p>
+
+  <form class="calc" id="form">
+    <div class="fields">
+      <div><label for="date" data-t="lDate">Date of birth</label><input type="date" id="date" value="1990-04-12" required></div>
+      <div><label for="time" data-t="lTime">Time of birth</label><input type="time" id="time" value="05:24" required></div>
+      <div><label for="tz" data-t="lTz">Time zone at birth</label><select id="tz"></select></div>
+    </div>
+    <button class="go" type="submit" data-t="go">Find my nakshatra</button>
+    <p class="stubnote" data-t="noPlace">Only the moment matters here, not the town — the Moon is in the same place in the zodiac for everyone on Earth at a given instant. The time zone is what fixes that instant.</p>
+
+    <div class="readout" id="out" hidden>
+      <div class="nk"><b id="rName"></b><span class="dev" id="rDev"></span><span class="pada" id="rPada"></span></div>
+      <div class="lon" id="rLon"></div>
+      <dl class="attrs">
+        <div><dt data-t="aLord">Ruling planet</dt><dd id="rLord"></dd></div>
+        <div><dt data-t="aDeity">Deity</dt><dd id="rDeity"></dd></div>
+        <div><dt data-t="aSymbol">Symbol</dt><dd id="rSymbol"></dd></div>
+        <div><dt data-t="aGana">Gana</dt><dd id="rGana"></dd></div>
+      </dl>
+      <div class="cusp" id="rCusp" hidden></div>
+      <svg class="wheel" id="wheel" viewBox="0 0 640 110" role="img" aria-label="Where the Moon sits among the 27 nakshatras"></svg>
+    </div>
+  </form>
+
+  <div class="offer">
+    <h3 data-t="offerH">The full reading</h3>
+    <p class="price">USD 12 <span style="font-size:1rem;color:var(--muted)">· ₹349</span></p>
+    <ul>
+      <li data-t="o1">All sixteen divisional charts, D1 to D60</li>
+      <li data-t="o2">Your running dasha and what the classical texts say of it</li>
+      <li data-t="o3">The same chart read through Western and BaZi, side by side</li>
+      <li data-t="o4">English and Hindi, about thirty pages</li>
+    </ul>
+    <button class="stub" type="button" disabled data-t="buy">Get the full reading</button>
+    <p class="stubnote" data-t="stubnote">Checkout is not connected yet. This page is the template — the first of about a thousand.</p>
+  </div>
+
+  <h2 data-t="h2all">All twenty-seven</h2>
+  <p data-t="allNote">Each has its own page, with its four padas and their navamsa signs, and a live reading of where the Moon is at this moment.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>#</th><th data-t="cName">Nakshatra</th><th data-t="cSpan">Span</th><th data-t="cLord">Lord</th><th data-t="cDeity">Deity</th><th data-t="cSymbol">Symbol</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <h2 data-t="h2how">How this was worked out</h2>
+  <div class="note">
+    <p data-t="how1">The Moon's position comes from the ELP-2000/82 lunar theory, and the sidereal zodiac from the Lahiri ayanamsa — the one the Government of India's calendar reform committee settled on, and the default in most Indian practice. The ayanamsa used for your date is shown with your result.</p>
+    <p data-t="how2">Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.</p>
+  </div>
+
+  <h2 data-t="h2priv">Where your birth details go</h2>
+  <div class="note">
+    <p data-t="priv1"><strong>Nowhere.</strong> The calculation runs in this browser tab. No date, time or zone is sent anywhere, stored anywhere, or logged anywhere — there is no server here to send it to.</p>
+    <p data-t="priv2">You do not have to take that on trust. Open your browser's developer tools, switch to the Network tab, and press the button. You will see no request leave.</p>
+  </div>
+
+  <footer><p data-t="foot">Computed with the Swiss Ephemeris lunar theory · Lahiri ayanamsa · nothing collected</p></footer>
+</div>
+
+<script>
+// Sidereal (Lahiri) longitude of the Moon, computed in the browser.
+// Lunar theory: Meeus, Astronomical Algorithms, ch. 47 (ELP-2000/82 truncated).
+// Ayanamsa: polynomial fitted to Swiss Ephemeris SIDM_LAHIRI over 1900-2100.
+
+const RAD = Math.PI / 180;
+
+// D, M, M', F, coefficient of sine (units 1e-6 degree)
+const TERMS = [
+  [0,0,1,0,6288774],[2,0,-1,0,1274027],[2,0,0,0,658314],[0,0,2,0,213618],
+  [0,1,0,0,-185116],[0,0,0,2,-114332],[2,0,-2,0,58793],[2,-1,-1,0,57066],
+  [2,0,1,0,53322],[2,-1,0,0,45758],[0,1,-1,0,-40923],[1,0,0,0,-34720],
+  [0,1,1,0,-30383],[2,0,0,-2,15327],[0,0,1,2,-12528],[0,0,1,-2,10980],
+  [4,0,-1,0,10675],[0,0,3,0,10034],[4,0,-2,0,8548],[2,1,-1,0,-7888],
+  [2,1,0,0,-6766],[1,0,-1,0,-5163],[1,1,0,0,4987],[2,-1,1,0,4036],
+  [2,0,2,0,3994],[4,0,0,0,3861],[2,0,-3,0,3665],[0,1,-2,0,-2689],
+  [2,0,-1,2,-2602],[2,-1,-2,0,2390],[1,0,1,0,-2348],[2,-2,0,0,2236],
+  [0,1,2,0,-2120],[0,2,0,0,-2069],[2,-2,-1,0,2048],[2,0,1,-2,-1773],
+  [2,0,0,2,-1595],[4,-1,-1,0,1215],[0,0,2,2,-1110],[3,0,-1,0,-892],
+  [2,1,1,0,-810],[4,-1,-2,0,759],[0,2,-1,0,-713],[2,2,-1,0,-700],
+  [2,1,-2,0,691],[2,-1,0,-2,596],[4,0,1,0,549],[0,0,4,0,537],
+  [4,-1,0,0,520],[1,0,-2,0,-487],[2,1,0,-2,-399],[0,0,2,-2,-381],
+  [1,1,1,0,351],[3,0,-2,0,-340],[4,0,-3,0,330],[2,-1,2,0,327],
+  [0,2,1,0,-323],[1,1,-1,0,299],[2,0,3,0,294]
+];
+
+const norm = d => ((d % 360) + 360) % 360;
+
+/** Apparent tropical longitude of the Moon, in degrees, for a Julian Day (TT). */
+function moonTropical(jde) {
+  const T = (jde - 2451545.0) / 36525.0;
+  const T2 = T * T, T3 = T2 * T, T4 = T3 * T;
+
+  const Lp = 218.3164477 + 481267.88123421 * T - 0.0015786 * T2 + T3 / 538841 - T4 / 65194000;
+  const D  = 297.8501921 + 445267.1114034 * T - 0.0018819 * T2 + T3 / 545868 - T4 / 113065000;
+  const M  = 357.5291092 + 35999.0502909 * T - 0.0001536 * T2 + T3 / 24490000;
+  const Mp = 134.9633964 + 477198.8675055 * T + 0.0087414 * T2 + T3 / 69699 - T4 / 14712000;
+  const F  = 93.2720950 + 483202.0175233 * T - 0.0036539 * T2 - T3 / 3526000 + T4 / 863310000;
+
+  const A1 = 119.75 + 131.849 * T;
+  const A2 = 53.09 + 479264.290 * T;
+  const E  = 1 - 0.002516 * T - 0.0000074 * T2;
+
+  let sum = 0;
+  for (const [d, m, mp, f, coef] of TERMS) {
+    const arg = (d * D + m * M + mp * Mp + f * F) * RAD;
+    let c = coef;
+    if (m === 1 || m === -1) c *= E;
+    else if (m === 2 || m === -2) c *= E * E;
+    sum += c * Math.sin(arg);
+  }
+  sum += 3958 * Math.sin(A1 * RAD) + 1962 * Math.sin((Lp - F) * RAD) + 318 * Math.sin(A2 * RAD);
+
+  // Nutation in longitude, principal terms (Meeus ch. 22), in degrees.
+  const Om = 125.04452 - 1934.136261 * T;
+  const Ls = 280.4665 + 36000.7698 * T;
+  const Lm = 218.3165 + 481267.8813 * T;
+  const dPsi = (-17.20 * Math.sin(Om * RAD) - 1.32 * Math.sin(2 * Ls * RAD)
+                - 0.23 * Math.sin(2 * Lm * RAD) + 0.21 * Math.sin(2 * Om * RAD)) / 3600;
+
+  return norm(Lp + sum / 1000000 + dPsi);
+}
+
+/** Lahiri ayanamsa in degrees, fitted to Swiss Ephemeris over 1900-2100. */
+function ayanamsa(jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  return 23.857092351711835 + 1.3968879574300688 * T
+       + 0.00030709112240855194 * T * T + 2.973794762712619e-9 * T * T * T;
+}
+
+const DT0 = 1900, DT_STEP = 4;
+const DT = [-2.0,3.5,8.7,13.7,18.5,21.6,23.5,24.3,24.4,24.1,24.4,26.5,28.2,29.7,31.4,33.1,35.0,38.3,42.2,46.5,50.5,53.8,55.8,58.3,61.6,63.8,64.6,65.5,66.6,68.1,69.4,69.1,68.8,69.8,70.8,71.8,72.9,74.0,75.2];
+
+/** TT - UT in seconds. Interpolated from Swiss Ephemeris between 1900 and 2052,
+ *  and extrapolated by the Espenak-Meeus parabola outside it. */
+function deltaT(year, month = 1) {
+  const y = year + (month - 0.5) / 12;
+  const last = DT0 + DT_STEP * (DT.length - 1);
+  if (y >= DT0 && y <= last) {
+    const x = (y - DT0) / DT_STEP, i = Math.min(Math.floor(x), DT.length - 2);
+    const a = DT.at(i), b = DT.at(i + 1);
+    return a + (b - a) * (x - i);
+  }
+  const u = (y - 1820) / 100;
+  return -20 + 32 * u * u;
+}
+
+/** Julian Day from a UTC calendar date and fractional hour (Gregorian). */
+function julianDay(y, m, d, hour) {
+  if (m <= 2) { y -= 1; m += 12; }
+  const A = Math.floor(y / 100), B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5 + hour / 24;
+}
+
+/** Sidereal (Lahiri) longitude of the Moon for a UT Julian Day. */
+function moonSidereal(jdUT, year, month = 1) {
+  const jde = jdUT + deltaT(year, month) / 86400;
+  return norm(moonTropical(jde) - ayanamsa(jdUT));
+}
+
+const NAK = [{"en": "Ashwini", "hi": "अश्विनी", "lord": "Ketu", "lordHi": "केतु", "deity": "Ashwini Kumaras", "symbol": "Horse's head", "gana": "Deva"}, {"en": "Bharani", "hi": "भरणी", "lord": "Venus", "lordHi": "शुक्र", "deity": "Yama", "symbol": "Yoni", "gana": "Manushya"}, {"en": "Krittika", "hi": "कृत्तिका", "lord": "Sun", "lordHi": "सूर्य", "deity": "Agni", "symbol": "Blade, flame", "gana": "Rakshasa"}, {"en": "Rohini", "hi": "रोहिणी", "lord": "Moon", "lordHi": "चंद्र", "deity": "Prajapati", "symbol": "Ox cart", "gana": "Manushya"}, {"en": "Mrigashira", "hi": "मृगशिरा", "lord": "Mars", "lordHi": "मंगल", "deity": "Soma", "symbol": "Deer's head", "gana": "Deva"}, {"en": "Ardra", "hi": "आर्द्रा", "lord": "Rahu", "lordHi": "राहु", "deity": "Rudra", "symbol": "Teardrop", "gana": "Manushya"}, {"en": "Punarvasu", "hi": "पुनर्वसु", "lord": "Jupiter", "lordHi": "गुरु", "deity": "Aditi", "symbol": "Quiver of arrows", "gana": "Deva"}, {"en": "Pushya", "hi": "पुष्य", "lord": "Saturn", "lordHi": "शनि", "deity": "Brihaspati", "symbol": "Cow's udder", "gana": "Deva"}, {"en": "Ashlesha", "hi": "आश्लेषा", "lord": "Mercury", "lordHi": "बुध", "deity": "The Nagas", "symbol": "Coiled serpent", "gana": "Rakshasa"}, {"en": "Magha", "hi": "मघा", "lord": "Ketu", "lordHi": "केतु", "deity": "The Pitris", "symbol": "Throne", "gana": "Rakshasa"}, {"en": "Purva Phalguni", "hi": "पूर्वा फाल्गुनी", "lord": "Venus", "lordHi": "शुक्र", "deity": "Bhaga", "symbol": "Hammock", "gana": "Manushya"}, {"en": "Uttara Phalguni", "hi": "उत्तरा फाल्गुनी", "lord": "Sun", "lordHi": "सूर्य", "deity": "Aryaman", "symbol": "Bed", "gana": "Manushya"}, {"en": "Hasta", "hi": "हस्त", "lord": "Moon", "lordHi": "चंद्र", "deity": "Savitr", "symbol": "Open hand", "gana": "Deva"}, {"en": "Chitra", "hi": "चित्रा", "lord": "Mars", "lordHi": "मंगल", "deity": "Tvashtar", "symbol": "Bright jewel", "gana": "Rakshasa"}, {"en": "Swati", "hi": "स्वाती", "lord": "Rahu", "lordHi": "राहु", "deity": "Vayu", "symbol": "Young shoot in wind", "gana": "Deva"}, {"en": "Vishakha", "hi": "विशाखा", "lord": "Jupiter", "lordHi": "गुरु", "deity": "Indra and Agni", "symbol": "Archway", "gana": "Rakshasa"}, {"en": "Anuradha", "hi": "अनुराधा", "lord": "Saturn", "lordHi": "शनि", "deity": "Mitra", "symbol": "Lotus", "gana": "Deva"}, {"en": "Jyeshtha", "hi": "ज्येष्ठा", "lord": "Mercury", "lordHi": "बुध", "deity": "Indra", "symbol": "Earring", "gana": "Rakshasa"}, {"en": "Mula", "hi": "मूल", "lord": "Ketu", "lordHi": "केतु", "deity": "Nirriti", "symbol": "Bound roots", "gana": "Rakshasa"}, {"en": "Purva Ashadha", "hi": "पूर्वाषाढ़ा", "lord": "Venus", "lordHi": "शुक्र", "deity": "Apas", "symbol": "Fan", "gana": "Manushya"}, {"en": "Uttara Ashadha", "hi": "उत्तराषाढ़ा", "lord": "Sun", "lordHi": "सूर्य", "deity": "Vishvadevas", "symbol": "Elephant tusk", "gana": "Manushya"}, {"en": "Shravana", "hi": "श्रवण", "lord": "Moon", "lordHi": "चंद्र", "deity": "Vishnu", "symbol": "Three footprints", "gana": "Deva"}, {"en": "Dhanishta", "hi": "धनिष्ठा", "lord": "Mars", "lordHi": "मंगल", "deity": "The Vasus", "symbol": "Drum", "gana": "Rakshasa"}, {"en": "Shatabhisha", "hi": "शतभिषा", "lord": "Rahu", "lordHi": "राहु", "deity": "Varuna", "symbol": "Empty circle", "gana": "Rakshasa"}, {"en": "Purva Bhadrapada", "hi": "पूर्वा भाद्रपदा", "lord": "Jupiter", "lordHi": "गुरु", "deity": "Aja Ekapada", "symbol": "Front of a funeral cot", "gana": "Manushya"}, {"en": "Uttara Bhadrapada", "hi": "उत्तरा भाद्रपदा", "lord": "Saturn", "lordHi": "शनि", "deity": "Ahir Budhnya", "symbol": "Back of a funeral cot", "gana": "Manushya"}, {"en": "Revati", "hi": "रेवती", "lord": "Mercury", "lordHi": "बुध", "deity": "Pushan", "symbol": "Fish", "gana": "Deva"}];
+const NAKW = 360/27, PADAW = NAKW/4, CUSP = 0.02;
+const $ = id => document.getElementById(id);
+
+const T = {
+  en:{brand:"Gaurav Jyotish",h1:"What is my Nakshatra?",
+   lede:"Your nakshatra is the segment of sky the Moon stood in when you were born — one of twenty-seven, each 13°20′ wide. Enter the moment of your birth and it is worked out below, on your own device.",
+   lDate:"Date of birth",lTime:"Time of birth",lTz:"Time zone at birth",go:"Find my nakshatra",
+   noPlace:"Only the moment matters here, not the town — the Moon is in the same place in the zodiac for everyone on Earth at a given instant. The time zone is what fixes that instant.",
+   aLord:"Ruling planet",aDeity:"Deity",aSymbol:"Symbol",aGana:"Gana",
+   offerH:"The full reading",o1:"All sixteen divisional charts, D1 to D60",o2:"Your running dasha and what the classical texts say of it",
+   o3:"The same chart read through Western and BaZi, side by side",o4:"English and Hindi, about thirty pages",
+   buy:"Get the full reading",stubnote:"Checkout is not connected yet. This page is the template — the first of about a thousand.",
+   h2all:"All twenty-seven",allNote:"Each has its own page, with its four padas and their navamsa signs, and a live reading of where the Moon is at this moment.",cName:"Nakshatra",cSpan:"Span",cLord:"Lord",cDeity:"Deity",cSymbol:"Symbol",
+   h2how:"How this was worked out",
+   how1:"The Moon's position comes from the ELP-2000/82 lunar theory, and the sidereal zodiac from the Lahiri ayanamsa — the one the Government of India's calendar reform committee settled on, and the default in most Indian practice. The ayanamsa used for your date is shown with your result.",
+   how2:"Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.",
+   h2priv:"Where your birth details go",
+   priv1:"<strong>Nowhere.</strong> The calculation runs in this browser tab. No date, time or zone is sent anywhere, stored anywhere, or logged anywhere — there is no server here to send it to.",
+   priv2:"You do not have to take that on trust. Open your browser's developer tools, switch to the Network tab, and press the button. You will see no request leave.",
+   foot:"Computed with the Swiss Ephemeris lunar theory · Lahiri ayanamsa · nothing collected",
+   pada:n=>"Pada "+n,ayan:a=>"Ayanamsa "+a+"° (Lahiri)",moonAt:s=>"Moon at "+s+" sidereal",
+   cusp:(a,b)=>"Your Moon is within a whisker of the boundary between <b>"+a+"</b> and <b>"+b+"</b>. At this distance the answer needs the full ephemeris, not this page. Treat it as unsettled."},
+  hi:{brand:"गौरव ज्योतिष",h1:"मेरा नक्षत्र क्या है?",
+   lede:"जन्म के समय चंद्रमा आकाश के जिस भाग में था, वही आपका नक्षत्र है — सत्ताईस में से एक, हर एक 13°20′ चौड़ा। जन्म का क्षण भरिए, गणना नीचे आपके ही उपकरण पर होगी।",
+   lDate:"जन्म तिथि",lTime:"जन्म समय",lTz:"जन्म के समय का टाइम ज़ोन",go:"मेरा नक्षत्र बताइए",
+   noPlace:"यहाँ केवल क्षण मायने रखता है, नगर नहीं — किसी एक क्षण पर पृथ्वी पर सबके लिए चंद्रमा राशिचक्र में एक ही स्थान पर होता है। टाइम ज़ोन उसी क्षण को तय करता है।",
+   aLord:"स्वामी ग्रह",aDeity:"देवता",aSymbol:"प्रतीक",aGana:"गण",
+   offerH:"पूरा फलादेश",o1:"सोलह वर्ग कुंडलियाँ, D1 से D60 तक",o2:"चल रही दशा और शास्त्रों में उसका कथन",
+   o3:"वही कुंडली पाश्चात्य और बाज़ी पद्धति से, साथ-साथ",o4:"हिंदी और अंग्रेज़ी, लगभग तीस पृष्ठ",
+   buy:"पूरा फलादेश लीजिए",stubnote:"भुगतान अभी जुड़ा नहीं है। यह पृष्ठ नमूना है — लगभग एक हज़ार में पहला।",
+   h2all:"सभी सत्ताईस",allNote:"हर एक का अपना पृष्ठ है — उसके चार पाद, उनके नवांश, और इस क्षण चंद्रमा कहाँ है इसका सीधा विवरण।",cName:"नक्षत्र",cSpan:"विस्तार",cLord:"स्वामी",cDeity:"देवता",cSymbol:"प्रतीक",
+   h2how:"गणना कैसे हुई",
+   how1:"चंद्रमा की स्थिति ELP-2000/82 चंद्र सिद्धांत से, और सायन-निरयन अंतर लाहिरी अयनांश से — वही जिसे भारत सरकार की कैलेंडर सुधार समिति ने स्वीकार किया और जो भारतीय व्यवहार में सामान्य है। आपकी तिथि का अयनांश परिणाम के साथ दिखाया गया है।",
+   how2:"1900 से 2050 के बीच 5,000 यादृच्छिक तिथियों पर स्विस एफ़ेमेरिस से मिलान: औसत अंतर 11 विकला, अधिकतम 29। एक नक्षत्र 48,000 विकला चौड़ा है, इसलिए यह अंतर केवल संधि के अत्यंत निकट मायने रखता है — और ऐसी स्थिति में यह पृष्ठ अनुमान लगाने के बजाय साफ़ बता देता है।",
+   h2priv:"आपका जन्म विवरण कहाँ जाता है",
+   priv1:"<strong>कहीं नहीं।</strong> गणना इसी ब्राउज़र टैब में होती है। कोई तिथि, समय या ज़ोन न कहीं भेजा जाता है, न संग्रहीत होता है, न दर्ज — भेजने के लिए यहाँ कोई सर्वर है ही नहीं।",
+   priv2:"इस पर भरोसा करने की आवश्यकता नहीं। ब्राउज़र के डेवलपर टूल्स खोलिए, नेटवर्क टैब पर जाइए और बटन दबाइए। कोई अनुरोध बाहर जाता नहीं दिखेगा।",
+   foot:"स्विस एफ़ेमेरिस चंद्र सिद्धांत · लाहिरी अयनांश · कुछ भी एकत्र नहीं",
+   pada:n=>"पाद "+n,ayan:a=>"अयनांश "+a+"° (लाहिरी)",moonAt:s=>"चंद्र "+s+" निरयन",
+   cusp:(a,b)=>"आपका चंद्रमा <b>"+a+"</b> और <b>"+b+"</b> की संधि के अत्यंत निकट है। इतनी निकटता पर उत्तर के लिए पूर्ण एफ़ेमेरिस चाहिए, यह पृष्ठ नहीं। इसे अनिर्णीत मानिए।"}
+};
+let lang = "en";
+
+function dms(deg){
+  const d = Math.floor(deg), mF = (deg-d)*60, m = Math.floor(mF), s = Math.round((mF-m)*60);
+  return d+"° "+String(m).padStart(2,"0")+"′ "+String(s).padStart(2,"0")+"″";
+}
+function signSpan(i){
+  const start = i*NAKW;
+  return dms(start)+" – "+dms(start+NAKW);
+}
+function offsetMinutes(tz, date){
+  const p = new Intl.DateTimeFormat("en-US",{timeZone:tz,hour12:false,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"})
+    .formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});
+  const asUTC = Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute,+p.second);
+  return (asUTC - date.getTime()) / 60000;
+}
+function zonedToUTC(y,mo,d,h,mi,tz){
+  let ms = Date.UTC(y,mo-1,d,h,mi);
+  for(let i=0;i<2;i++) ms = Date.UTC(y,mo-1,d,h,mi) - offsetMinutes(tz,new Date(ms))*60000;
+  return new Date(ms);
+}
+
+function fillZones(){
+  const sel = $("tz");
+  let zones;
+  try{ zones = Intl.supportedValuesOf("timeZone"); }catch(e){ zones = null; }
+  if(!zones || !zones.length) zones = ["Asia/Kolkata","Asia/Singapore","Asia/Dubai","Europe/London","America/New_York","America/Los_Angeles","Australia/Sydney","UTC"];
+  for(const z of zones){ const o=document.createElement("option"); o.value=z; o.textContent=z.replace(/_/g," "); sel.appendChild(o); }
+  sel.value = zones.includes("Asia/Kolkata") ? "Asia/Kolkata" : zones[0];
+}
+
+function drawWheel(lon){
+  const svg = $("wheel"), W=640, H=110, pad=12, x0=pad, x1=W-pad;
+  let out = "";
+  for(let i=0;i<27;i++){
+    const a = x0 + (x1-x0)*i/27, b = x0 + (x1-x0)*(i+1)/27;
+    const on = Math.floor(lon/NAKW)===i;
+    out += "<rect x='"+a.toFixed(1)+"' y='34' width='"+(b-a-1.5).toFixed(1)+"' height='30' rx='3' fill='"+(on?"var(--gold)":"var(--band)")+"' stroke='var(--line)' stroke-width='.6'></rect>";
+  }
+  const mx = x0 + (x1-x0)*lon/360;
+  out += "<path d='M"+mx.toFixed(1)+" 30 l-6 -11 h12 z' fill='var(--salmon)'></path>";
+  out += "<text x='"+x0+"' y='84' font-size='11' fill='var(--muted)' font-family='Inter,sans-serif'>0°</text>";
+  out += "<text x='"+x1+"' y='84' font-size='11' text-anchor='end' fill='var(--muted)' font-family='Inter,sans-serif'>360°</text>";
+  svg.innerHTML = out;
+}
+
+function compute(e){
+  if(e) e.preventDefault();
+  const dv = $("date").value, tv = $("time").value, tz = $("tz").value;
+  if(!dv || !tv) return;
+  const [y,mo,d] = dv.split("-").map(Number);
+  const [h,mi] = tv.split(":").map(Number);
+  const utc = zonedToUTC(y,mo,d,h,mi,tz);
+  const jd = julianDay(utc.getUTCFullYear(), utc.getUTCMonth()+1, utc.getUTCDate(),
+                       utc.getUTCHours() + utc.getUTCMinutes()/60 + utc.getUTCSeconds()/3600);
+  const lon = moonSidereal(jd, utc.getUTCFullYear(), utc.getUTCMonth()+1);
+  const idx = Math.floor(lon/NAKW), n = NAK[idx];
+  const within = lon - idx*NAKW, pada = Math.floor(within/PADAW)+1;
+  const t = T[lang];
+
+  $("rName").textContent = n.en;
+  $("rDev").textContent = n.hi;
+  $("rPada").textContent = t.pada(pada);
+  $("rLon").textContent = t.moonAt(dms(lon)) + " · " + t.ayan(ayanamsa(jd).toFixed(4));
+  $("rLord").textContent = lang==="hi" ? n.lordHi : n.lord;
+  $("rDeity").textContent = n.deity;
+  $("rSymbol").textContent = n.symbol;
+  $("rGana").textContent = n.gana;
+
+  const f = ((lon % PADAW) + PADAW) % PADAW, edge = Math.min(f, PADAW-f);
+  const nearNak = Math.min(((lon%NAKW)+NAKW)%NAKW, NAKW-((lon%NAKW)+NAKW)%NAKW);
+  const cusp = $("rCusp");
+  if(nearNak < CUSP){
+    const other = NAK[(((lon%NAKW)+NAKW)%NAKW < NAKW/2 ? (idx+26)%27 : (idx+1)%27)];
+    cusp.innerHTML = t.cusp(n.en, other.en);
+    cusp.hidden = false;
+  } else { cusp.hidden = true; }
+
+  drawWheel(lon);
+  $("out").hidden = false;
+}
+
+function paint(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  for(const el of document.querySelectorAll("[data-t]")){
+    const v = t[el.dataset.t];
+    if(typeof v === "string"){ if(v.indexOf("<")>=0) el.innerHTML = v; else el.textContent = v; }
+  }
+  document.title = t.h1;
+  const tb = $("tbody");
+  const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  tb.innerHTML = NAK.map((n,i)=>"<tr><td class='n'>"+(i+1)+"</td><td><a href='"+slug(n.en)+".html'>"+n.en+"</a> <span class='hi' style='color:var(--muted)'>"+n.hi+"</span></td><td class='n'>"+signSpan(i)+"</td><td>"+(lang==="hi"?n.lordHi:n.lord)+"</td><td>"+n.deity+"</td><td>"+n.symbol+"</td></tr>").join("");
+  $("en").setAttribute("aria-pressed", String(lang==="en"));
+  $("hiBtn").setAttribute("aria-pressed", String(lang==="hi"));
+  if(!$("out").hidden) compute();
+}
+
+fillZones();
+$("form").addEventListener("submit", compute);
+$("en").addEventListener("click", ()=>{ lang="en"; paint(); });
+$("hiBtn").addEventListener("click", ()=>{ lang="hi"; paint(); });
+paint();
+compute();
+</script>

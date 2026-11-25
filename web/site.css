@@ -1,0 +1,77 @@
+
+/* Shared across the nakshatra family. One narrow column, instrument readouts. */
+:root{
+  --paper:#FFF6E8; --panel:#FFFDF8; --band:#F7E9D2; --ink:#161209; --muted:#6B6153;
+  --gold:#A8700F; --salmon:#C4543F; --line:#E6D3B3; --shade:rgba(22,18,9,.07);
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --deva:'Noto Sans Devanagari','Nirmala UI',system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#13100A; --panel:#1D1912; --band:#241F16; --ink:#F4ECDC; --muted:#A1957F;
+  --gold:#E0A63C; --salmon:#E8806B; --line:#3A3223; --shade:rgba(0,0,0,.35); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#13100A; --panel:#1D1912; --band:#241F16; --ink:#F4ECDC; --muted:#A1957F;
+  --gold:#E0A63C; --salmon:#E8806B; --line:#3A3223; --shade:rgba(0,0,0,.35); color-scheme:dark;}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:46rem;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:2rem 4rem}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,5.5vw,2.7rem);line-height:1.14;
+  margin:.4rem 0 .6rem;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:2.6rem 0 .7rem;text-wrap:balance}
+p{margin:0 0 1rem;max-width:62ch}
+.lede{font-size:1.06rem;color:var(--muted);max-width:58ch}
+.dim{color:var(--muted)}
+a{color:var(--gold)}
+.hi,.dev{font-family:var(--deva)}
+h1 .dev{font-size:.62em;color:var(--gold);font-weight:400}
+
+.crumbs{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.85rem;padding-bottom:.9rem;border-bottom:1px solid var(--line)}
+
+.attrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:1rem;
+  margin:1.4rem 0 0;padding:0}
+.attrs div{min-width:0}
+.attrs dt{font-size:.71rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.attrs dd{margin:.15rem 0 0;font-size:1rem}
+.n{font-variant-numeric:tabular-nums}
+
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.71rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--band)}
+tbody tr:last-child td{border-bottom:0}
+
+.note{background:var(--band);border-radius:12px;padding:1rem 1.15rem}
+.note p{max-width:58ch}
+.note p:last-child{margin-bottom:0}
+.note.small{font-size:.9rem;margin-top:1.4rem}
+
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem;margin-top:.4rem}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.85rem}
+label{display:block;font-size:.73rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.3rem}
+input,select{width:100%;min-width:0;font:inherit;font-size:.97rem;padding:.55rem .6rem;
+  border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.go{margin-top:.95rem;font:inherit;font-weight:600;background:var(--ink);color:var(--paper);
+  border:0;border-radius:9px;padding:.65rem 1.25rem;cursor:pointer}
+.go:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.readout{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:1.1rem}
+.nk{display:flex;align-items:baseline;gap:.65rem;flex-wrap:wrap}
+.nk b{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,4.5vw,2.1rem);line-height:1.1}
+.nk .dev{font-family:var(--deva);font-size:1.35rem;color:var(--gold)}
+.pada{font-size:.92rem;color:var(--muted)}
+.lon{font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--muted);margin-top:.3rem}
+.cusp{margin-top:.9rem;border-left:3px solid var(--salmon);background:var(--band);
+  padding:.65rem .85rem;border-radius:0 8px 8px 0;font-size:.9rem}
+.hit{border-left:3px solid var(--gold)}
+
+footer{margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
