@@ -392,7 +392,8 @@ function paint(){
   document.title = t.h1;
   const tb = $("tbody");
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-  tb.innerHTML = NAK.map((n,i)=>"<tr><td class='n'>"+(i+1)+"</td><td><a href='"+slug(n.en)+".html'>"+n.en+"</a> <span class='hi' style='color:var(--muted)'>"+n.hi+"</span></td><td class='n'>"+signSpan(i)+"</td><td>"+(lang==="hi"?n.lordHi:n.lord)+"</td><td>"+n.deity+"</td><td>"+n.symbol+"</td></tr>").join("");
+  const dir = lang === "hi" ? "hi/" : "";
+  tb.innerHTML = NAK.map((n,i)=>"<tr><td class='n'>"+(i+1)+"</td><td><a href='"+dir+slug(n.en)+".html'>"+(lang==="hi"?n.hi:n.en)+"</a> <span class='hi' style='color:var(--muted)'>"+(lang==="hi"?n.en:n.hi)+"</span></td><td class='n'>"+signSpan(i)+"</td><td>"+(lang==="hi"?n.lordHi:n.lord)+"</td><td>"+n.deity+"</td><td>"+n.symbol+"</td></tr>").join("");
   $("en").setAttribute("aria-pressed", String(lang==="en"));
   $("hiBtn").setAttribute("aria-pressed", String(lang==="hi"));
   if(!$("out").hidden) compute();
