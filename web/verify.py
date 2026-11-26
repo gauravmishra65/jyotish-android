@@ -14,7 +14,9 @@ It checks three things:
      the pages use to flag an uncertain answer - the number that must be zero;
   3. the navamsa rule the pada tables are built on, against the app's own
      engine, so the site and the app can never contradict each other;
-  4. how far the Vimshottari table shifts because of that Moon difference. The
+  4. the eight Ashtakoota scores against ashtakoota.py, over random pairs, so a
+     guna milan on the site and in the app can never differ;
+  5. how far the Vimshottari table shifts because of that Moon difference. The
      whole table hangs off the balance of the first period, so ten arcseconds of
      Moon becomes a day or so of date. The dasha page states this figure, so it
      has to be measured rather than assumed - if this number moves, the page's
@@ -106,6 +108,48 @@ def dasha_shift(rows, mine):
     return {"mean": total / n, "worst": worst}
 
 
+def check_kootas(n=1500):
+    """Every koota and the /36 total, JS against ashtakoota.py, over random Moon pairs."""
+    sys.path.insert(0, str(HERE.parent / "app/src/main/python"))
+    import ashtakoota as ak
+    random.seed(41)
+    pairs = [(random.random() * 360, random.random() * 360) for _ in range(n)]
+
+    script = ((HERE / "koota.js").read_text() + """
+const pairs = JSON.parse(require('fs').readFileSync(process.argv[2], 'utf8'));
+console.log(JSON.stringify(pairs.map(([g, b]) => {
+  const v = gunaMilan(g, b);
+  const out = {total: v.total};
+  for (const k of Object.keys(v.kootas)) out[k] = v.kootas[k].score;
+  return out;
+})));
+""")
+    tmp = HERE / ".verify_tmp"
+    tmp.mkdir(exist_ok=True)
+    (tmp / "k.js").write_text(script)
+    (tmp / "k.json").write_text(json.dumps(pairs))
+    r = subprocess.run(["node", str(tmp / "k.js"), str(tmp / "k.json")], capture_output=True, text=True)
+    for f in tmp.iterdir():
+        f.unlink()
+    tmp.rmdir()
+    if r.returncode:
+        sys.exit("node failed in the koota check:\n" + r.stderr.strip())
+    got = json.loads(r.stdout)
+
+    bad = 0
+    for (g, b), mine in zip(pairs, got):
+        want = ak.match({"moon_lon": g, "moon_sign_index": int(g // 30)},
+                        {"moon_lon": b, "moon_sign_index": int(b // 30)})
+        if abs(mine["total"] - want["total_36"]["score"]) > 1e-9:
+            bad += 1
+            continue
+        for k, v in want["kootas"].items():
+            if abs(mine[k] - v["score"]) > 1e-9:
+                bad += 1
+                break
+    return bad, len(pairs)
+
+
 def main():
     rows, mine = truth(), None
     mine = ours(rows)
@@ -136,6 +180,10 @@ def main():
     print(f"dasha table shift, mean       {shift['mean']:.2f} days")
     print(f"dasha table shift, worst      {shift['worst']:.2f} days")
     print(f"  (the dasha page says: mean 1.1 days, worst 3.8)")
+
+    kbad, kn = check_kootas()
+    print(f"ashtakoota vs app engine     {'all 8 kootas and the total agree' if not kbad else f'{kbad} MISMATCH'}"
+          f"  ({kn} pairs)")
 
     bad = check_navamsa()
     print(f"navamsa padas vs app engine {'all 108 agree' if not bad else f'{len(bad)} MISMATCH'}")

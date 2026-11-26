@@ -312,6 +312,115 @@ def dasha_page(lang, base):
 <script>initDashaPage();</script></body></html>
 """
 
+
+M = {
+ "en": dict(code="en", up="", switch="हिंदी", other="hi/milan.html",
+   title="Kundli Milan: the 36 gunas",
+   desc="Compare two charts on the eight kootas of Ashtakoota guna milan — Varna, Vashya, Tara, Yoni, "
+        "Graha Maitri, Gana, Bhakoot and Nadi — computed in your own browser, with the places the "
+        "published tables disagree shown rather than hidden.",
+   h1="Kundli Milan: the 36 gunas",
+   lede="Ashtakoota compares two Moons on eight counts and adds up to 36. It is the first thing anyone asks "
+        "for and the most often misread, so this page shows the working: every koota, what it compared, and "
+        "where the published tables disagree with each other.",
+   groomH="First person", brideH="Second person",
+   lDate="Date of birth", lTime="Time of birth", lTz="Time zone at birth", go="Compare the charts",
+   noPlace="Guna milan rests on the two Moons alone, so the towns do not enter into it — only the two "
+           "moments, which the time zones fix.",
+   resH="The eight kootas", allLink="All twenty-seven nakshatras",
+   cols=("Koota","What it compares","First person","Second person","Score"),
+   foot="Lahiri ayanamsa · nothing collected",
+   privH="Where the two birth details go",
+   priv="<strong>Nowhere.</strong> Both charts are worked out in this browser tab. Nothing is sent, stored or "
+        "logged — there is no server here to send two birth dates to. Open your Network tab and check."),
+ "hi": dict(code="hi", up="../", switch="English", other="../milan.html",
+   title="कुंडली मिलान: 36 गुण",
+   desc="अष्टकूट गुण मिलान के आठ कूटों पर दो कुंडलियों की तुलना — वर्ण, वश्य, तारा, योनि, ग्रह मैत्री, गण, "
+        "भकूट और नाड़ी — आपके अपने ब्राउज़र में, और जहाँ प्रकाशित सारणियाँ असहमत हैं वह छिपाया नहीं, दिखाया गया।",
+   h1="कुंडली मिलान: 36 गुण",
+   lede="अष्टकूट दो चंद्रमाओं की आठ बातों पर तुलना करता है, कुल 36। यही सबसे पहले पूछा जाता है और सबसे अधिक "
+        "ग़लत पढ़ा जाता है, इसलिए यह पृष्ठ गणना दिखाता है: हर कूट, उसने किसकी तुलना की, और कहाँ प्रकाशित "
+        "सारणियाँ आपस में असहमत हैं।",
+   groomH="पहला व्यक्ति", brideH="दूसरा व्यक्ति",
+   lDate="जन्म तिथि", lTime="जन्म समय", lTz="जन्म के समय का टाइम ज़ोन", go="कुंडली मिलाइए",
+   noPlace="गुण मिलान केवल दो चंद्रमाओं पर टिका है, इसलिए नगर का इसमें कोई स्थान नहीं — केवल दो क्षण, "
+           "जिन्हें टाइम ज़ोन तय करते हैं।",
+   resH="आठ कूट", allLink="सभी सत्ताईस नक्षत्र",
+   cols=("कूट","किसकी तुलना","पहला व्यक्ति","दूसरा व्यक्ति","अंक"),
+   foot="लाहिरी अयनांश · कुछ भी एकत्र नहीं",
+   privH="दोनों जन्म विवरण कहाँ जाते हैं",
+   priv="<strong>कहीं नहीं।</strong> दोनों कुंडलियाँ इसी ब्राउज़र टैब में बनती हैं। कुछ भी भेजा, संग्रहीत या दर्ज "
+        "नहीं होता — दो जन्म तिथियाँ भेजने के लिए यहाँ कोई सर्वर है ही नहीं। नेटवर्क टैब खोलकर देख लीजिए।"),
+}
+
+def milan_page(lang, base):
+    t = M[lang]; up = t["up"]
+    canon = f"{base}/{'hi/' if lang=='hi' else ''}milan.html" if base else ""
+    alt_en = f"{base}/milan.html" if base else (up + "milan.html" if lang=="hi" else "milan.html")
+    alt_hi = f"{base}/hi/milan.html" if base else ("hi/milan.html" if lang=="en" else "milan.html")
+    ld = json.dumps({"@context":"https://schema.org","@type":"WebApplication","name":t["title"],
+        "description":t["desc"],"applicationCategory":"ReferenceApplication","inLanguage":t["code"],
+        "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+        **({"url":canon} if canon else {})}, ensure_ascii=False)
+    def person(who, label, dflt):
+        return f"""<fieldset style="border:1px solid var(--line);border-radius:12px;padding:1rem;margin:0 0 1rem;min-width:0">
+      <legend style="font-size:.73rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 .4rem">{label}</legend>
+      <div class="fields">
+        <div><label for="date_{who}">{t['lDate']}</label><input type="date" id="date_{who}" value="{dflt}" required></div>
+        <div><label for="time_{who}">{t['lTime']}</label><input type="time" id="time_{who}" value="05:24" required></div>
+        <div><label for="tz_{who}">{t['lTz']}</label><select id="tz_{who}"></select></div>
+      </div></fieldset>"""
+    return f"""<!doctype html>
+<html lang="{t['code']}"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{t['title']}</title>
+<meta name="description" content="{t['desc']}">
+{f'<link rel="canonical" href="{canon}">' if canon else ''}
+<link rel="alternate" hreflang="en" href="{alt_en}">
+<link rel="alternate" hreflang="hi" href="{alt_hi}">
+<meta property="og:title" content="{t['title']}">
+<meta property="og:description" content="{t['desc']}">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<link rel="stylesheet" href="{up}site.css">
+<script type="application/ld+json">{ld}</script>
+</head><body class="{t['code']}"><div class="wrap">
+<nav class="crumbs"><a href="{up}nakshatra.html">&larr; {t['allLink']}</a>
+<span><a href="{alt_hi if lang=='en' else alt_en}">{t['switch']}</a></span></nav>
+
+<h1>{t['h1']}</h1>
+<p class="lede">{t['lede']}</p>
+
+<form class="calc" id="form" data-lang="{t['code']}">
+  {person('g', t['groomH'], '1990-04-12')}
+  {person('b', t['brideH'], '1992-08-30')}
+  <button class="go" type="submit">{t['go']}</button>
+  <p class="stubnote dim" style="font-size:.85rem;margin:.7rem 0 0">{t['noPlace']}</p>
+
+  <div class="readout" id="out" hidden>
+    <div id="rMoons" class="dim" style="font-size:.92rem;margin-bottom:.8rem"></div>
+    <div id="rTotal" style="margin-bottom:.2rem"></div>
+    <p id="rBand" class="dim" style="margin:0 0 .3rem"></p>
+    <p id="rRange" class="dim" style="font-size:.86rem;margin:0 0 1rem" hidden></p>
+    <div class="scroll"><table><thead><tr>
+      <th>{t['cols'][0]}</th><th>{t['cols'][1]}</th><th>{t['cols'][2]}</th><th>{t['cols'][3]}</th><th>{t['cols'][4]}</th>
+    </tr></thead><tbody id="rRows"></tbody></table></div>
+  </div>
+</form>
+
+<div class="cusp" style="margin-top:1.4rem;border-radius:0 8px 8px 0"><p style="margin:0" id="caveats"></p></div>
+
+<h2>{t['privH']}</h2>
+<div class="note"><p>{t['priv']}</p></div>
+
+<footer><p><a href="{up}nakshatra.html">{t['allLink']}</a> · {t['foot']}</p></footer>
+</div>
+<script src="{up}engine.js"></script><script src="{up}koota.js"></script><script src="{up}milan.js"></script>
+<script>document.getElementById("caveats").innerHTML = MUI["{t['code']}"].caveats; initMilanPage();</script>
+</body></html>
+"""
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="", help="site root, e.g. https://example.com (for canonical and sitemap)")
@@ -325,8 +434,10 @@ if __name__ == "__main__":
         urls += [f"{slug(n['en'])}.html", f"hi/{slug(n['en'])}.html"]
     (OUT/"dasha.html").write_text(dasha_page("en", base), encoding="utf-8")
     (OUT/"hi"/"dasha.html").write_text(dasha_page("hi", base), encoding="utf-8")
-    urls += ["dasha.html", "hi/dasha.html"]
-    print(f"{len(NAK)*2 + 2} pages written (English and Hindi)")
+    (OUT/"milan.html").write_text(milan_page("en", base), encoding="utf-8")
+    (OUT/"hi"/"milan.html").write_text(milan_page("hi", base), encoding="utf-8")
+    urls += ["dasha.html", "hi/dasha.html", "milan.html", "hi/milan.html"]
+    print(f"{len(NAK)*2 + 4} pages written (English and Hindi)")
 
     if base:
         body = "".join(
