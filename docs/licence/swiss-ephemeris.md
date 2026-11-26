@@ -117,3 +117,32 @@ A closed-source app is live on Google Play with an active in-app purchase, built
 public repository with no LICENSE file. That is not the free option and not the paid one.
 The question is not whether to pick one, but which — and the free one removes the thing
 being sold.
+
+## "Can it wait until there are a few customers?"
+
+No clause makes the licence conditional on revenue, customers or scale. Clause 2 attaches it
+to **distributed apps and server software**, so the trigger was publication, not the first
+sale — and publication happened on 22 November 2026, to 178 countries.
+
+That means there is no compliant wait-and-see state. The three lawful positions are:
+
+1. professional licence, code stays closed;
+2. AGPL, whole project open, source to every recipient;
+3. not distributing.
+
+"Published, closed-source, unlicensed" is none of them, and taking the in-app purchase down
+does not cure it — the AGPL's obligation is triggered by distribution, paid or free.
+
+Two things worth being honest about. First, the practical risk today is low: nobody audits a
+seven-install app, and Astrodienst are not scanning Google Play. Second, that stops being
+true exactly when the plan works. Astrodienst sell natal reports at USD 26.90 and are in
+this market; a site ranking on nakshatra queries is the thing they would notice, clause 7
+lets them request a free copy of any distributed app, and the consequence is not a fine but
+a takedown or a demand to open-source everything — arriving at the moment the business is
+finally earning. The exposure is small now and grows in step with the thing it would destroy.
+
+The arithmetic also does not work the way the question assumes. Five customers at USD 12 is
+about USD 60. The licence is on the order of sixty reports, depending on the rate on the
+day. So waiting for five customers does not fund it; waiting for sixty would. This is a
+decision about risk, not affordability — and at roughly CHF 117 a year it is the cheapest
+risk reduction available anywhere in this project.
