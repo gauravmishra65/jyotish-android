@@ -45,6 +45,11 @@ h1 .dev{font-size:.62em;color:var(--gold);font-weight:400}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 table{width:100%;border-collapse:collapse;font-size:.9rem}
 th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--line);white-space:nowrap}
+/* A description column may wrap; the figures beside it may not. Without this the last
+   column of a wide table sits outside the viewport on desktop. */
+td.wrap,th.wrap{white-space:normal;min-width:11rem}
+td br + span{white-space:normal}
+td:has(br){white-space:normal;min-width:9rem}
 th{font-size:.71rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--band)}
 tbody tr:last-child td{border-bottom:0}
 

@@ -86,15 +86,19 @@ function initMilanPage(){
     const cell = (k, side) => {
       const x = K[k];
       if(k === "tara") return side === "groom" ? String(x.brideToGroom) : String(x.groomToBride);
-      if(k === "bhakoot") return x.moonSigns[side === "groom" ? 0 : 1] + " (" + x.positions.join("/") + ")";
+      if(k === "bhakoot"){
+        const si = side === "groom" ? v.groom.sign : v.bride.sign;
+        const nm = lang === "hi" ? KOOTA.SIGNS_HI[si] : KOOTA.SIGNS[si];
+        return nm + " (" + x.positions.join("/") + ")";
+      }
       if(k === "graha_maitri") return side === "groom" ? x.groomLord : x.brideLord;
       return x[side] !== undefined ? String(x[side]) : "—";
     };
     document.getElementById("rRows").innerHTML = ORDER.map(k => {
       const x = K[k], flag = x.dosha ? " <span class='dim'>(" + t.dosha + ")</span>" : "";
-      return "<tr><td><b>" + t.names[k] + "</b></td><td class='dim'>" + t.what[k] + "</td><td>"
-        + cell(k,"groom") + "</td><td>" + cell(k,"bride") + "</td><td class='n'><b>"
-        + x.score + "</b> / " + x.max + flag + "</td></tr>";
+      return "<tr><td><b>" + t.names[k] + "</b><br><span class='dim' style='font-size:.82rem'>"
+        + t.what[k] + "</span></td><td class='n'><b>" + x.score + "</b> / " + x.max + flag
+        + "</td><td>" + cell(k,"groom") + "</td><td>" + cell(k,"bride") + "</td></tr>";
     }).join("");
 
     document.getElementById("rTotal").innerHTML =
@@ -104,9 +108,11 @@ function initMilanPage(){
     if(v.range[0] !== v.range[1]){ rn.textContent = t.rangeNote(v.range); rn.hidden = false; }
     else rn.hidden = true;
 
+    const nakName = i => lang === "hi" ? (NAK[i] || {}).hi || KOOTA.NAKSHATRAS[i] : KOOTA.NAKSHATRAS[i];
+    const signName = i => lang === "hi" ? KOOTA.SIGNS_HI[i] : KOOTA.SIGNS[i];
     document.getElementById("rMoons").innerHTML =
-      "<span>" + t.groomH + ": <b>" + t.moonLine(v.groom.nak, KOOTA.SIGNS[v.groom.sign]) + "</b></span>"
-      + " &nbsp;·&nbsp; <span>" + t.brideH + ": <b>" + t.moonLine(v.bride.nak, KOOTA.SIGNS[v.bride.sign]) + "</b></span>";
+      "<span>" + t.groomH + ": <b>" + t.moonLine(nakName(v.groom.nakI), signName(v.groom.sign)) + "</b></span>"
+      + " &nbsp;·&nbsp; <span>" + t.brideH + ": <b>" + t.moonLine(nakName(v.bride.nakI), signName(v.bride.sign)) + "</b></span>";
 
     document.getElementById("out").hidden = false;
   });

@@ -139,7 +139,7 @@ def page(i, n, lang, base):
 
 <h2>{t['padaH']}</h2>
 <p>{t['padaP']}</p>
-<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th>{t['cols'][1]}</th><th>{t['cols'][2]}</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrap">{t['cols'][1]}</th><th>{t['cols'][2]}</th></tr></thead>
 <tbody>{rows}</tbody></table></div>
 
 <h2>{t['nowH']}</h2>
@@ -298,7 +298,7 @@ def dasha_page(lang, base):
 
 <h2>{t['refH']}</h2>
 <p>{t['refP']}</p>
-<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th>{t['cols'][1]}</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrap">{t['cols'][1]}</th></tr></thead>
 <tbody>{ref}</tbody></table></div>
 
 <h2>{"How this was worked out" if lang=="en" else "गणना कैसे हुई"}</h2>
@@ -401,7 +401,7 @@ def milan_page(lang, base):
     <p id="rBand" class="dim" style="margin:0 0 .3rem"></p>
     <p id="rRange" class="dim" style="font-size:.86rem;margin:0 0 1rem" hidden></p>
     <div class="scroll"><table><thead><tr>
-      <th>{t['cols'][0]}</th><th>{t['cols'][1]}</th><th>{t['cols'][2]}</th><th>{t['cols'][3]}</th><th>{t['cols'][4]}</th>
+      <th>{t['cols'][0]}</th><th>{t['cols'][4]}</th><th>{t['cols'][2]}</th><th>{t['cols'][3]}</th>
     </tr></thead><tbody id="rRows"></tbody></table></div>
   </div>
 </form>
@@ -594,7 +594,7 @@ def index_page(lang, base):
 <p><a href="{up}privacy.html"><b>{t['privLink']} &rarr;</b></a></p>
 
 <h2>{t['toolsH']}</h2>
-<div style="display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))">{tools}</div>
+<div style="display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))">{tools}</div>
 
 <h2>{t['methodH']}</h2>
 <div class="note"><p>{t['method']}</p></div>
