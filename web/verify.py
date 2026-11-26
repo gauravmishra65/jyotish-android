@@ -13,7 +13,12 @@ It checks three things:
   2. that no disagreement about a nakshatra or pada ever escapes the cusp band
      the pages use to flag an uncertain answer - the number that must be zero;
   3. the navamsa rule the pada tables are built on, against the app's own
-     engine, so the site and the app can never contradict each other.
+     engine, so the site and the app can never contradict each other;
+  4. how far the Vimshottari table shifts because of that Moon difference. The
+     whole table hangs off the balance of the first period, so ten arcseconds of
+     Moon becomes a day or so of date. The dasha page states this figure, so it
+     has to be measured rather than assumed - if this number moves, the page's
+     wording is wrong and has to move with it.
 
 Needs: pip install pyswisseph, and node on the PATH.
 """
@@ -70,6 +75,26 @@ def check_navamsa():
     return bad
 
 
+VIM_YEARS = [7, 20, 6, 10, 7, 18, 16, 19, 17]   # Ketu..Mercury, as in common.VIM_ORDER
+
+
+def dasha_shift(rows, mine):
+    """Days by which the whole Vimshottari table moves, given the Moon difference."""
+    worst = total = 0.0
+    n = 0
+    for (y, jd, lon), got in zip(rows, mine):
+        it, im = int(lon // (NAKW)) % 9, int(got // (NAKW)) % 9
+        if it != im:
+            continue                      # a boundary case; the cusp rule already covers it
+        ft = (lon % NAKW) / NAKW
+        fm = (got % NAKW) / NAKW
+        d = abs(VIM_YEARS[it] * (ft - fm) * 365.25)
+        total += d
+        worst = max(worst, d)
+        n += 1
+    return {"mean": total / n, "worst": worst}
+
+
 def main():
     rows, mine = truth(), None
     mine = ours(rows)
@@ -95,6 +120,11 @@ def main():
     print(f"worst difference            {worst * 3600:.1f} arcsec")
     print(f"nakshatra or pada differs   {disagree}")
     print(f"NOT flagged as on the cusp  {escaped}")
+
+    shift = dasha_shift(rows, mine)
+    print(f"dasha table shift, mean       {shift['mean']:.2f} days")
+    print(f"dasha table shift, worst      {shift['worst']:.2f} days")
+    print(f"  (the dasha page says: mean 1.1 days, worst 3.75)")
 
     bad = check_navamsa()
     print(f"navamsa padas vs app engine {'all 108 agree' if not bad else f'{len(bad)} MISMATCH'}")
