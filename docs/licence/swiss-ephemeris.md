@@ -65,3 +65,55 @@ it. These two qualify; the rest of the above does not, and should not be sent.
 
 Both bear on decisions that cannot be made without an answer, which is the test their reply
 set.
+
+## "Can we just use the public data instead?"
+
+Not without choosing a licence. The public GitHub repository is where **both** kinds of
+licensee download from — clause 1 says so explicitly. Public availability says nothing
+about what you may then do with it. There are exactly two options, and the free one is
+real but has a price.
+
+### The free option: AGPL-3.0
+
+It permits everything the professional licence permits, and adds three obligations:
+
+* the **entire** work that links Swiss Ephemeris goes under AGPL or a compatible licence
+  — the Android app, the Windows edition and the web pages alike;
+* complete corresponding source to everyone you distribute to;
+* the network clause: people who use it over a network must be offered the source too,
+  which reaches every visitor to the web calculators.
+
+Selling is still allowed. The AGPL has never forbidden charging money. What it forbids is
+stopping the recipient from passing it on. So anyone who buys the full version may legally
+rebuild it and publish it for nothing, and `full_unlock` is a conditional in source code
+that anybody may fork out. **That, not the open-sourcing, is what the free option costs.**
+
+Note also that a public repository is not the same as an AGPL one. This repository has no
+LICENSE file, which makes it all-rights-reserved by default and satisfies neither option.
+
+### The paid option: CHF 700 for six years
+
+Buys one thing that matters: the code stays closed, so the unlock stays meaningful. Also
+unlimited projects, so Android, Windows and web are covered by the single purchase, and the
+clause 6 labels.
+
+CHF 700 over six years is about CHF 117 a year, which at USD 12 a report is roughly ten
+sales a year. Against the revenue plan it is not a real number.
+
+### The third option: stop using Swiss Ephemeris
+
+Genuinely available, and worth stating so the choice is informed. `astronomy-engine` and
+`astronomia` are both MIT, and `web/moon.js` in this repository is Meeus' published method
+rather than Astrodienst's code or data, so it carries no obligation at all.
+
+The cost is everything built on the current engine: the nine grahas, the ascendant, houses,
+the sixteen divisional charts, Shadbala, Ashtakavarga, transits, and the 926-check
+verification suite that is anchored to Swiss Ephemeris as its reference. Replacing that to
+save CHF 117 a year is months of work and a worse product.
+
+### Where this project actually stands
+
+A closed-source app is live on Google Play with an active in-app purchase, built from a
+public repository with no LICENSE file. That is not the free option and not the paid one.
+The question is not whether to pick one, but which — and the free one removes the thing
+being sold.
