@@ -148,7 +148,7 @@ footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);font-
   <h2 data-t="h2how">How this was worked out</h2>
   <div class="note">
     <p data-t="how1">The Moon's position comes from the ELP-2000/82 lunar theory, and the sidereal zodiac from the Lahiri ayanamsa — the one the Government of India's calendar reform committee settled on, and the default in most Indian practice. The ayanamsa used for your date is shown with your result.</p>
-    <p data-t="how2">Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.</p>
+    <p data-t="how2">Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. The reference is Swiss Ephemeris in its built-in Moshier mode, which is the same model the Android app uses — so the two agree with each other, not merely each with a textbook. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.</p>
   </div>
 
   <h2 data-t="h2priv">Where your birth details go</h2>
@@ -276,7 +276,7 @@ const T = {
    dashaLink:"<a href=\"dasha.html\">Work out your Vimshottari dasha &rarr;</a>",h2all:"All twenty-seven",allNote:"Each has its own page, with its four padas and their navamsa signs, and a live reading of where the Moon is at this moment.",cName:"Nakshatra",cSpan:"Span",cLord:"Lord",cDeity:"Deity",cSymbol:"Symbol",
    h2how:"How this was worked out",
    how1:"The Moon's position comes from the ELP-2000/82 lunar theory, and the sidereal zodiac from the Lahiri ayanamsa — the one the Government of India's calendar reform committee settled on, and the default in most Indian practice. The ayanamsa used for your date is shown with your result.",
-   how2:"Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.",
+   how2:"Checked against Swiss Ephemeris over 5,000 random dates between 1900 and 2050: mean difference 11 arcseconds, worst case 29. The reference is Swiss Ephemeris in its built-in Moshier mode, which is the same model the Android app uses — so the two agree with each other, not merely each with a textbook. A nakshatra is 48,000 arcseconds wide, so that margin only matters within a hair of a boundary — and when your Moon falls that close, this page says so instead of guessing.",
    h2priv:"Where your birth details go",
    priv1:"<strong>Nowhere.</strong> The calculation runs in this browser tab. No date, time or zone is sent anywhere, stored anywhere, or logged anywhere — there is no server here to send it to.",
    priv2:"You do not have to take that on trust. Open your browser's developer tools, switch to the Network tab, and press the button. You will see no request leave.",
@@ -294,7 +294,7 @@ const T = {
    dashaLink:"<a href=\"hi/dasha.html\">अपनी विंशोत्तरी दशा निकालिए &rarr;</a>",h2all:"सभी सत्ताईस",allNote:"हर एक का अपना पृष्ठ है — उसके चार पाद, उनके नवांश, और इस क्षण चंद्रमा कहाँ है इसका सीधा विवरण।",cName:"नक्षत्र",cSpan:"विस्तार",cLord:"स्वामी",cDeity:"देवता",cSymbol:"प्रतीक",
    h2how:"गणना कैसे हुई",
    how1:"चंद्रमा की स्थिति ELP-2000/82 चंद्र सिद्धांत से, और सायन-निरयन अंतर लाहिरी अयनांश से — वही जिसे भारत सरकार की कैलेंडर सुधार समिति ने स्वीकार किया और जो भारतीय व्यवहार में सामान्य है। आपकी तिथि का अयनांश परिणाम के साथ दिखाया गया है।",
-   how2:"1900 से 2050 के बीच 5,000 यादृच्छिक तिथियों पर स्विस एफ़ेमेरिस से मिलान: औसत अंतर 11 विकला, अधिकतम 29। एक नक्षत्र 48,000 विकला चौड़ा है, इसलिए यह अंतर केवल संधि के अत्यंत निकट मायने रखता है — और ऐसी स्थिति में यह पृष्ठ अनुमान लगाने के बजाय साफ़ बता देता है।",
+   how2:"1900 से 2050 के बीच 5,000 यादृच्छिक तिथियों पर स्विस एफ़ेमेरिस से मिलान: औसत अंतर 11 विकला, अधिकतम 29। तुलना स्विस एफ़ेमेरिस के अपने मोशिए मॉडल से है, वही जो एंड्रॉइड ऐप भी उपयोग करता है — इसलिए दोनों आपस में सहमत हैं। एक नक्षत्र 48,000 विकला चौड़ा है, इसलिए यह अंतर केवल संधि के अत्यंत निकट मायने रखता है — और ऐसी स्थिति में यह पृष्ठ अनुमान लगाने के बजाय साफ़ बता देता है।",
    h2priv:"आपका जन्म विवरण कहाँ जाता है",
    priv1:"<strong>कहीं नहीं।</strong> गणना इसी ब्राउज़र टैब में होती है। कोई तिथि, समय या ज़ोन न कहीं भेजा जाता है, न संग्रहीत होता है, न दर्ज — भेजने के लिए यहाँ कोई सर्वर है ही नहीं।",
    priv2:"इस पर भरोसा करने की आवश्यकता नहीं। ब्राउज़र के डेवलपर टूल्स खोलिए, नेटवर्क टैब पर जाइए और बटन दबाइए। कोई अनुरोध बाहर जाता नहीं दिखेगा।",

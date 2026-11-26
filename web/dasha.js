@@ -98,7 +98,7 @@ function initDashaPage(){
     const [y,mo,d] = dv.split("-").map(Number), [h,mi] = tv.split(":").map(Number);
     birthTz = document.getElementById("tz").value;
     const utc = zonedToUTC(y,mo,d,h,mi,birthTz);
-    const v = vimshottari(lonAt(utc), utc.getTime(), Date.now());
+    const v = vimshottari(Engine.moonSidereal(utc), utc.getTime(), Date.now());
 
     document.getElementById("rBalance").textContent =
       t.balance(lordOf(v.startLord), yearsText(v.balanceYears));
