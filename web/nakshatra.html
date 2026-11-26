@@ -1,14 +1,13 @@
 <title>What is my Nakshatra?</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
 <style>
 /* One narrow column: an instrument readout above, the 27 as reference below. */
 :root{
   --paper:#FFF6E8; --panel:#FFFDF8; --band:#F7E9D2; --ink:#161209; --muted:#6B6153;
   --gold:#A8700F; --salmon:#C4543F; --line:#E6D3B3; --shade:rgba(22,18,9,.07);
-  --serif:'Spectral',Georgia,'Times New Roman',serif;
-  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --deva:'Noto Sans Devanagari','Nirmala UI',system-ui,sans-serif;
+  --serif:Georgia,'Iowan Old Style','Palatino Linotype','Times New Roman',serif;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --deva:'Nirmala UI','Noto Sans Devanagari','Kohinoor Devanagari','Devanagari MT',system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#13100A; --panel:#1D1912; --band:#241F16; --ink:#F4ECDC; --muted:#A1957F;
@@ -95,6 +94,7 @@ footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);font-
     </span>
   </div>
 
+  <p style="margin:0 0 .8rem;font-size:.9rem"><a href="home.html" data-t="homeLink">← Gaurav Jyotish</a></p>
   <h1 data-t="h1">What is my Nakshatra?</h1>
   <p class="lede" data-t="lede">Your nakshatra is the segment of sky the Moon stood in when you were born — one of twenty-seven, each 13°20′ wide. Enter the moment of your birth and it is worked out below, on your own device.</p>
 
@@ -266,7 +266,7 @@ const NAKW = 360/27, PADAW = NAKW/4, CUSP = 0.02;
 const $ = id => document.getElementById(id);
 
 const T = {
-  en:{brand:"Gaurav Jyotish",h1:"What is my Nakshatra?",
+  en:{brand:"Gaurav Jyotish",homeLink:"← Gaurav Jyotish",h1:"What is my Nakshatra?",
    lede:"Your nakshatra is the segment of sky the Moon stood in when you were born — one of twenty-seven, each 13°20′ wide. Enter the moment of your birth and it is worked out below, on your own device.",
    lDate:"Date of birth",lTime:"Time of birth",lTz:"Time zone at birth",go:"Find my nakshatra",
    noPlace:"Only the moment matters here, not the town — the Moon is in the same place in the zodiac for everyone on Earth at a given instant. The time zone is what fixes that instant.",
@@ -284,7 +284,7 @@ const T = {
    foot:"Computed with the Swiss Ephemeris lunar theory · Lahiri ayanamsa · nothing collected",
    pada:n=>"Pada "+n,ayan:a=>"Ayanamsa "+a+"° (Lahiri)",moonAt:s=>"Moon at "+s+" sidereal",
    cusp:(a,b)=>"Your Moon is within a whisker of the boundary between <b>"+a+"</b> and <b>"+b+"</b>. At this distance the answer needs the full ephemeris, not this page. Treat it as unsettled."},
-  hi:{brand:"गौरव ज्योतिष",h1:"मेरा नक्षत्र क्या है?",
+  hi:{brand:"गौरव ज्योतिष",homeLink:"← गौरव ज्योतिष",h1:"मेरा नक्षत्र क्या है?",
    lede:"जन्म के समय चंद्रमा आकाश के जिस भाग में था, वही आपका नक्षत्र है — सत्ताईस में से एक, हर एक 13°20′ चौड़ा। जन्म का क्षण भरिए, गणना नीचे आपके ही उपकरण पर होगी।",
    lDate:"जन्म तिथि",lTime:"जन्म समय",lTz:"जन्म के समय का टाइम ज़ोन",go:"मेरा नक्षत्र बताइए",
    noPlace:"यहाँ केवल क्षण मायने रखता है, नगर नहीं — किसी एक क्षण पर पृथ्वी पर सबके लिए चंद्रमा राशिचक्र में एक ही स्थान पर होता है। टाइम ज़ोन उसी क्षण को तय करता है।",
@@ -344,8 +344,8 @@ function drawWheel(lon){
   }
   const mx = x0 + (x1-x0)*lon/360;
   out += "<path d='M"+mx.toFixed(1)+" 30 l-6 -11 h12 z' fill='var(--salmon)'></path>";
-  out += "<text x='"+x0+"' y='84' font-size='11' fill='var(--muted)' font-family='Inter,sans-serif'>0°</text>";
-  out += "<text x='"+x1+"' y='84' font-size='11' text-anchor='end' fill='var(--muted)' font-family='Inter,sans-serif'>360°</text>";
+  out += "<text x='"+x0+"' y='84' font-size='11' fill='var(--muted)' font-family='system-ui,sans-serif'>0°</text>";
+  out += "<text x='"+x1+"' y='84' font-size='11' text-anchor='end' fill='var(--muted)' font-family='system-ui,sans-serif'>360°</text>";
   svg.innerHTML = out;
 }
 

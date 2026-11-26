@@ -125,7 +125,6 @@ def page(i, n, lang, base):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="article">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
 <link rel="stylesheet" href="{up}site.css">
 <script type="application/ld+json">{ld}</script>
 </head><body class="{t['code']}"><div class="wrap">
@@ -263,7 +262,6 @@ def dasha_page(lang, base):
 <meta property="og:title" content="{t['title']}">
 <meta property="og:description" content="{t['desc']}">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
 <link rel="stylesheet" href="{up}site.css">
 <script type="application/ld+json">{ld}</script>
 </head><body class="{t['code']}"><div class="wrap">
@@ -382,7 +380,6 @@ def milan_page(lang, base):
 <meta property="og:title" content="{t['title']}">
 <meta property="og:description" content="{t['desc']}">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
 <link rel="stylesheet" href="{up}site.css">
 <script type="application/ld+json">{ld}</script>
 </head><body class="{t['code']}"><div class="wrap">
@@ -421,6 +418,226 @@ def milan_page(lang, base):
 </body></html>
 """
 
+
+I18N = {
+ "en": dict(code="en", up="", switch="हिंदी", oth="hi/",
+   site="Gaurav Jyotish",
+   title="Gaurav Jyotish", 
+   desc="Vedic astrology calculators that run in your own browser. Your birth details are never sent "
+        "anywhere, because there is no server here to send them to. Nakshatra, Vimshottari dasha and "
+        "the 36 gunas, in English and Hindi.",
+   tagline="Your birth details never leave this page.",
+   lede="Most astrology sites ask for your date, time and place of birth and send them to a server. This "
+        "one does the arithmetic in your own browser. Nothing is transmitted, nothing is stored, nothing "
+        "is logged — not because we promise it, but because there is no server here to send it to, and "
+        "you can confirm that yourself in about fifteen seconds.",
+   toolsH="The calculators",
+   tools=[("nakshatra.html","What is my Nakshatra?",
+           "The segment of sky the Moon stood in when you were born, with its pada, lord, deity and gana. "
+           "Each of the twenty-seven has its own page."),
+          ("dasha.html","Vimshottari dasha",
+           "The nine periods that divide a life into 120 years, which one you were born into, how much of "
+           "it remained, and the whole sequence with dates."),
+          ("milan.html","Kundli Milan, the 36 gunas",
+           "Two charts compared on the eight Ashtakoota kootas — and, unusually, the places where the "
+           "published tables disagree with each other.")],
+   methodH="How the numbers are made",
+   method="Positions come from the ELP-2000/82 lunar theory with the Lahiri ayanamsa, the one India's "
+          "calendar reform committee settled on. Every figure on this site is checked against Swiss "
+          "Ephemeris over five thousand dates between 1900 and 2050 before it is published: eleven "
+          "arcseconds apart on average, twenty-eight at worst. Where that margin could change an answer "
+          "— a Moon sitting within a hair of a nakshatra boundary — the page says the question is "
+          "unsettled rather than guessing. Where a tradition disagrees with itself, the page shows the "
+          "range instead of picking one and sounding certain.",
+   noH="What you will not find here",
+   no=["No predictions about death, disease or divorce.",
+       "No guarantees, and no claim that a calculation decides anything.",
+       "No account, no sign-up, no cookie banner, because there is nothing to consent to.",
+       "No advertising, and nothing sold to anyone."],
+   privLink="How to check the privacy claim yourself",
+   allH="All twenty-seven nakshatras",
+   foot="Lahiri ayanamsa · nothing collected"),
+ "hi": dict(code="hi", up="../", switch="English", oth="../",
+   site="गौरव ज्योतिष",
+   title="गौरव ज्योतिष",
+   desc="वैदिक ज्योतिष के कैलकुलेटर जो आपके अपने ब्राउज़र में चलते हैं। जन्म विवरण कहीं नहीं भेजा जाता, क्योंकि "
+        "भेजने के लिए यहाँ कोई सर्वर है ही नहीं। नक्षत्र, विंशोत्तरी दशा और 36 गुण, हिंदी और अंग्रेज़ी में।",
+   tagline="आपका जन्म विवरण इस पृष्ठ से बाहर नहीं जाता।",
+   lede="अधिकांश ज्योतिष साइटें आपकी तिथि, समय और स्थान माँगकर किसी सर्वर पर भेज देती हैं। यह साइट गणना "
+        "आपके अपने ब्राउज़र में करती है। कुछ भी भेजा नहीं जाता, संग्रहीत नहीं होता, दर्ज नहीं होता — "
+        "वादे के कारण नहीं, बल्कि इसलिए कि भेजने के लिए यहाँ कोई सर्वर है ही नहीं, और आप इसे लगभग पंद्रह "
+        "सेकंड में स्वयं जाँच सकते हैं।",
+   toolsH="कैलकुलेटर",
+   tools=[("nakshatra.html","मेरा नक्षत्र क्या है?",
+           "जन्म के समय चंद्रमा आकाश के जिस भाग में था, उसके पाद, स्वामी, देवता और गण सहित। सत्ताईस में "
+           "से हर एक का अपना पृष्ठ।"),
+          ("dasha.html","विंशोत्तरी दशा",
+           "नौ अवधियाँ जो जीवन को 120 वर्षों में बाँटती हैं — आप किसमें जन्मे, कितना शेष था, और "
+           "पूरा क्रम तिथियों सहित।"),
+          ("milan.html","कुंडली मिलान, 36 गुण",
+           "आठ अष्टकूटों पर दो कुंडलियों की तुलना — और, जो कहीं नहीं मिलता, वे स्थान जहाँ प्रकाशित "
+           "सारणियाँ आपस में असहमत हैं।")],
+   methodH="अंक कैसे बनते हैं",
+   method="स्थितियाँ ELP-2000/82 चंद्र सिद्धांत और लाहिरी अयनांश से, वही जिसे भारत की कैलेंडर सुधार समिति ने "
+          "स्वीकार किया। इस साइट का हर अंक प्रकाशित होने से पहले 1900 से 2050 के बीच पाँच हज़ार तिथियों पर "
+          "स्विस एफ़ेमेरिस से जाँचा जाता है: औसतन ग्यारह विकला का अंतर, अधिकतम अट्ठाईस। जहाँ यह अंतर उत्तर "
+          "बदल सकता है — चंद्रमा किसी नक्षत्र संधि के अत्यंत निकट — वहाँ पृष्ठ अनुमान लगाने के बजाय "
+          "कहता है कि प्रश्न अनिर्णीत है। जहाँ परंपरा स्वयं से असहमत है, वहाँ एक चुनकर निश्चित दिखने के बजाय "
+          "पूरी सीमा दिखाई जाती है।",
+   noH="यहाँ क्या नहीं मिलेगा",
+   no=["मृत्यु, रोग या तलाक़ की कोई भविष्यवाणी नहीं।",
+       "कोई गारंटी नहीं, और यह दावा भी नहीं कि कोई गणना कुछ तय करती है।",
+       "कोई खाता नहीं, पंजीकरण नहीं, कुकी बैनर नहीं — क्योंकि सहमति देने को कुछ है ही नहीं।",
+       "कोई विज्ञापन नहीं, और किसी को कुछ बेचा नहीं जाता।"],
+   privLink="गोपनीयता के दावे को स्वयं कैसे जाँचें",
+   allH="सभी सत्ताईस नक्षत्र",
+   foot="लाहिरी अयनांश · कुछ भी एकत्र नहीं"),
+}
+
+PRIV = {
+ "en": dict(h1="Where your birth details go",
+   lede="Nowhere. That is not a policy, it is an architecture, and the difference matters — a policy is a "
+        "promise you have to take on trust, and this is a fact you can verify.",
+   checkH="Check it in fifteen seconds",
+   steps=["Open any calculator on this site.",
+          "Press F12, or right-click and choose Inspect, to open your browser's developer tools.",
+          "Go to the Network tab and clear it.",
+          "Enter a birth date and press the button.",
+          "Watch what is sent. You will see this site\u2019s own files and nothing else \u2014 no birth date, and no request to anybody else\u2019s server."],
+   howH="Why there is nothing to send",
+   how="The Moon's position is computed by about four hundred lines of JavaScript that your browser "
+       "downloaded along with the page. The arithmetic happens on your own processor. There is no API "
+       "behind these pages, no database, and no account system — the site is a handful of static "
+       "files on a content host, which is why it also costs almost nothing to run.",
+   conseqH="What follows from that",
+   conseq=["There is no breach to suffer, because there is no store of birth data to breach.",
+           "There is nothing to hand over if anyone demands it.",
+           "There is no deletion request to make, and nothing to retain or expire.",
+           "Most of GDPR and India's DPDP Act concern data that is collected. None is."],
+   cookieH="Cookies and tracking",
+   cookie="None. No analytics, no advertising pixels, no embedded fonts from a third party that would see "
+          "your address, no cookie banner — a banner exists to collect consent, and there is nothing "
+          "here to consent to.",
+   limitH="Being precise about the limits",
+   limit="Two honest qualifications. Your browser requests the page itself from whoever hosts it, and that "
+         "host sees the request, as it does for every website on the internet — what it cannot see is "
+         "any birth detail, because none is sent. And if a paid report is ever added, the payment itself "
+         "will involve a payment provider; that transaction will be described plainly here before it exists, "
+         "and the report will still be built on your machine from details the server never receives.",
+   backH="Back to the calculators", foot="Lahiri ayanamsa · nothing collected"),
+ "hi": dict(h1="आपका जन्म विवरण कहाँ जाता है",
+   lede="कहीं नहीं। यह कोई नीति नहीं, रचना है — और यह अंतर महत्वपूर्ण है। नीति एक वादा है जिस पर भरोसा "
+        "करना पड़ता है; यह एक तथ्य है जिसे आप जाँच सकते हैं।",
+   checkH="पंद्रह सेकंड में जाँचिए",
+   steps=["इस साइट का कोई भी कैलकुलेटर खोलिए।",
+          "F12 दबाइए, या राइट-क्लिक करके Inspect चुनिए, जिससे ब्राउज़र के डेवलपर टूल्स खुलें।",
+          "Network टैब पर जाकर उसे ख़ाली कीजिए।",
+          "कोई जन्म तिथि भरकर बटन दबाइए।",
+          "देखिए क्या भेजा गया। केवल इसी साइट की अपनी फ़ाइलें दिखेंगी \u2014 न कोई जन्म तिथि, न किसी और के सर्वर को कोई अनुरोध।"],
+   howH="भेजने को कुछ है ही क्यों नहीं",
+   how="चंद्रमा की स्थिति लगभग चार सौ पंक्तियों के जावास्क्रिप्ट से निकलती है, जो पृष्ठ के साथ ही आपके ब्राउज़र "
+       "में आ गया। गणना आपके अपने प्रोसेसर पर होती है। इन पृष्ठों के पीछे कोई API नहीं, कोई डेटाबेस नहीं, कोई "
+       "खाता व्यवस्था नहीं — यह साइट किसी होस्ट पर रखी कुछ स्थिर फ़ाइलें हैं, और इसीलिए इसे चलाने में "
+       "लगभग कुछ ख़र्च भी नहीं होता।",
+   conseqH="इससे क्या निकलता है",
+   conseq=["कोई सेंध लगने को नहीं, क्योंकि जन्म-विवरण का कोई भंडार ही नहीं।",
+           "कोई माँगे तो सौंपने को कुछ नहीं।",
+           "मिटाने का अनुरोध करने की आवश्यकता नहीं, और रखने या समाप्त करने को कुछ नहीं।",
+           "GDPR और भारत के DPDP अधिनियम का अधिकांश भाग एकत्र किए गए डेटा से संबंधित है। यहाँ कुछ एकत्र नहीं होता।"],
+   cookieH="कुकी और ट्रैकिंग",
+   cookie="कोई नहीं। न एनालिटिक्स, न विज्ञापन पिक्सेल, न किसी तीसरे पक्ष से आने वाले फ़ॉन्ट जो आपका पता देख "
+          "सकें, न कुकी बैनर — बैनर सहमति लेने के लिए होता है, और यहाँ सहमति देने को कुछ है ही नहीं।",
+   limitH="सीमाओं के विषय में स्पष्टता",
+   limit="दो ईमानदार स्पष्टीकरण। आपका ब्राउज़र पृष्ठ स्वयं उस होस्ट से माँगता है जहाँ वह रखा है, और होस्ट उस "
+         "अनुरोध को देखता है — जैसा इंटरनेट की हर साइट पर होता है। वह जो नहीं देख सकता वह है कोई भी जन्म "
+         "विवरण, क्योंकि कुछ भेजा ही नहीं जाता। और यदि कभी सशुल्क फलादेश जोड़ा गया, तो भुगतान में एक भुगतान "
+         "प्रदाता आएगा; वह लेनदेन यहाँ पहले ही साफ़ लिखा जाएगा, और फलादेश फिर भी आपकी मशीन पर उन विवरणों से "
+         "बनेगा जो सर्वर तक कभी नहीं पहुँचते।",
+   backH="कैलकुलेटर पर लौटिए", foot="लाहिरी अयनांश · कुछ भी एकत्र नहीं"),
+}
+
+def _head(t, title, desc, up, canon, alt_en, alt_hi, ldtype="WebSite"):
+    ld = json.dumps({"@context":"https://schema.org","@type":ldtype,"name":title,
+        "description":desc,"inLanguage":t["code"], **({"url":canon} if canon else {})}, ensure_ascii=False)
+    return f"""<!doctype html>
+<html lang="{t['code']}"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+{f'<link rel="canonical" href="{canon}">' if canon else ''}
+<link rel="alternate" hreflang="en" href="{alt_en}">
+<link rel="alternate" hreflang="hi" href="{alt_hi}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="{up}site.css">
+<script type="application/ld+json">{ld}</script>
+</head><body class="{t['code']}"><div class="wrap">
+"""
+
+def index_page(lang, base):
+    t = I18N[lang]; up = t["up"]
+    canon = f"{base}/{'hi/' if lang=='hi' else ''}index.html" if base else ""
+    alt_en = f"{base}/" if base else (up + "index.html" if lang=="hi" else "index.html")
+    alt_hi = f"{base}/hi/" if base else ("hi/index.html" if lang=="en" else "index.html")
+    tools = "".join(
+      f"""<div style="border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;min-width:0">
+        <h3 style="font-family:var(--serif);font-size:1.15rem;margin:0 0 .35rem"><a href="{up}{href}">{name}</a></h3>
+        <p style="margin:0;font-size:.94rem" class="dim">{blurb}</p></div>""" for href, name, blurb in t["tools"])
+    nos = "".join(f"<li>{x}</li>" for x in t["no"])
+    return _head(t, t["title"], t["desc"], up, canon, alt_en, alt_hi) + f"""<nav class="crumbs"><span><b>{t['site']}</b></span>
+<span><a href="{alt_hi if lang=='en' else alt_en}">{t['switch']}</a></span></nav>
+
+<h1>{t['tagline']}</h1>
+<p class="lede">{t['lede']}</p>
+<p><a href="{up}privacy.html"><b>{t['privLink']} &rarr;</b></a></p>
+
+<h2>{t['toolsH']}</h2>
+<div style="display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))">{tools}</div>
+
+<h2>{t['methodH']}</h2>
+<div class="note"><p>{t['method']}</p></div>
+
+<h2>{t['noH']}</h2>
+<ul>{nos}</ul>
+
+<footer><p><a href="{up}nakshatra.html">{t['allH']}</a> · {t['foot']}</p></footer>
+</div></body></html>
+"""
+
+def privacy_page(lang, base):
+    t = PRIV[lang]; i = I18N[lang]; up = i["up"]
+    canon = f"{base}/{'hi/' if lang=='hi' else ''}privacy.html" if base else ""
+    alt_en = f"{base}/privacy.html" if base else (up + "privacy.html" if lang=="hi" else "privacy.html")
+    alt_hi = f"{base}/hi/privacy.html" if base else ("hi/privacy.html" if lang=="en" else "privacy.html")
+    steps = "".join(f"<li>{s}</li>" for s in t["steps"])
+    conseq = "".join(f"<li>{s}</li>" for s in t["conseq"])
+    return _head(i, t["h1"], i["desc"], up, canon, alt_en, alt_hi) + f"""<nav class="crumbs"><a href="{up}index.html">&larr; {i['site']}</a>
+<span><a href="{alt_hi if lang=='en' else alt_en}">{i['switch']}</a></span></nav>
+
+<h1>{t['h1']}</h1>
+<p class="lede">{t['lede']}</p>
+
+<h2>{t['checkH']}</h2>
+<div class="note"><ol style="margin:0;padding-left:1.2rem">{steps}</ol></div>
+
+<h2>{t['howH']}</h2>
+<p>{t['how']}</p>
+
+<h2>{t['conseqH']}</h2>
+<ul>{conseq}</ul>
+
+<h2>{t['cookieH']}</h2>
+<p>{t['cookie']}</p>
+
+<h2>{t['limitH']}</h2>
+<div class="cusp" style="border-radius:0 8px 8px 0"><p style="margin:0">{t['limit']}</p></div>
+
+<footer><p><a href="{up}index.html">{t['backH']}</a> · {t['foot']}</p></footer>
+</div></body></html>
+"""
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="", help="site root, e.g. https://example.com (for canonical and sitemap)")
@@ -436,8 +653,13 @@ if __name__ == "__main__":
     (OUT/"hi"/"dasha.html").write_text(dasha_page("hi", base), encoding="utf-8")
     (OUT/"milan.html").write_text(milan_page("en", base), encoding="utf-8")
     (OUT/"hi"/"milan.html").write_text(milan_page("hi", base), encoding="utf-8")
-    urls += ["dasha.html", "hi/dasha.html", "milan.html", "hi/milan.html"]
-    print(f"{len(NAK)*2 + 4} pages written (English and Hindi)")
+    for lang, sub in (("en", ""), ("hi", "hi/")):
+        d = OUT / sub if sub else OUT
+        (d / "index.html").write_text(index_page(lang, base), encoding="utf-8")
+        (d / "privacy.html").write_text(privacy_page(lang, base), encoding="utf-8")
+    urls += ["dasha.html", "hi/dasha.html", "milan.html", "hi/milan.html",
+             "index.html", "hi/index.html", "privacy.html", "hi/privacy.html"]
+    print(f"{len(NAK)*2 + 8} pages written (English and Hindi)")
 
     if base:
         body = "".join(
