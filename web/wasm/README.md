@@ -33,16 +33,28 @@ Engine.use({
 Build from Astrodienst's own sources instead. Then the professional licence covers it
 directly and there is no third-party claim anywhere in the chain.
 
-## The data files are not needed
+## Which data files to ship
 
-The shipped Android bundle contains **zero** `.se1` files. The Python asks for
-`FLG_SWIEPH` everywhere and Swiss Ephemeris, finding no data files, falls back to its
-built-in Moshier model - silently, which is worth knowing. So the app already runs
-Moshier, and a WASM build that matches the app needs only the library, not the
-ephemeris data: roughly 1 MB rather than 106 MB.
+The app ships four, inside `assets/chaquopy/app.imy`, and `chart_engine.py` points
+`swe_set_ephe_path` at them:
 
-If the data files are ever added to the app, the site has to follow or the two drift
-apart, and `verify.py` is where that will show up first.
+| File | Size | What it covers |
+| --- | --- | --- |
+| `semo_18.se1` | 1.3 MB | Moon, from 1800 |
+| `sepl_18.se1` | 473 KB | planets, from 1800 |
+| `seas_18.se1` | 218 KB | main asteroids, from 1800 |
+| `sefstars.txt` | 133 KB | fixed stars |
+
+A WASM build should carry the same ones, which is about 2 MB - fetched once and
+cached, not per calculation. That is a real cost on a first visit and worth measuring
+against the alternative: without them Swiss Ephemeris silently falls back to Moshier,
+which for the Moon is 0.56 arcseconds from the data files on average and 2.58 at
+worst. Either is far inside the cusp band, so Moshier alone would be defensible for
+the free pages; the data files matter for the paid report, where exact dates are the
+product.
+
+The 105 MB that `sweph-wasm` carries is 150 files covering every century and every
+asteroid. Four files is what this project actually uses.
 
 ## Build recipe
 

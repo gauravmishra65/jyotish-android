@@ -204,7 +204,7 @@ D = {
    tolerance="<strong>About the dates.</strong> The whole table hangs off one number: how far the Moon had "
              "travelled through its nakshatra at birth. This page gets that to within about ten arcseconds of "
              "Swiss Ephemeris, which moves every boundary in the table by a day on average and by up to four. "
-             "Measured over 1,500 births between 1930 and 2020: mean 1.1 days, worst 3.75, and 45% off by more "
+             "Measured over 1,500 births between 1930 and 2020: mean 1.1 days, worst 3.8, and 45% off by more "
              "than a day. So read these as the right periods in the right order with dates good to a few days, "
              "not as exact. The app carries the full ephemeris and computes them to the minute.",
    allLink="All twenty-seven nakshatras", foot="Lahiri ayanamsa · nothing collected"),
@@ -234,7 +234,7 @@ D = {
    tolerance="<strong>तिथियों के विषय में।</strong> पूरी सारणी एक ही संख्या पर टिकी है: जन्म के समय चंद्रमा अपने "
              "नक्षत्र में कितना चल चुका था। यह पृष्ठ उसे स्विस एफ़ेमेरिस के लगभग दस विकला के भीतर निकालता है, और "
              "इतने से ही सारणी की हर संधि औसतन एक दिन, और अधिकतम चार दिन तक खिसक जाती है। 1930 से 2020 के बीच "
-             "1,500 जन्मों पर मापा गया: औसत 1.1 दिन, अधिकतम 3.75, और 45% एक दिन से अधिक। इसलिए इन्हें सही क्रम "
+             "1,500 जन्मों पर मापा गया: औसत 1.1 दिन, अधिकतम 3.8, और 45% एक दिन से अधिक। इसलिए इन्हें सही क्रम "
              "में सही अवधियाँ मानिए जिनकी तिथियाँ कुछ दिनों तक सही हैं, पूर्णतः नहीं। ऐप में पूर्ण एफ़ेमेरिस है और "
              "वह इन्हें मिनट तक निकालता है।",
    allLink="सभी सत्ताईस नक्षत्र", foot="लाहिरी अयनांश · कुछ भी एकत्र नहीं"),

@@ -35,7 +35,18 @@ except ImportError:
 
 
 def truth():
+    # Point Swiss Ephemeris at the same data files the app ships. Without this it
+    # silently falls back to its built-in Moshier model and the whole comparison is
+    # against a different reference than the app computes with - which is exactly the
+    # mistake this line exists to prevent, so the fallback is made fatal below.
+    swe.set_ephe_path(str(HERE.parent / "app/src/main/python/ephe"))
     swe.set_sid_mode(swe.SIDM_LAHIRI, 0, 0)
+    probe, ret = swe.calc_ut(swe.julday(2000, 1, 1, 12.0), swe.MOON,
+                             swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
+    if not ret & swe.FLG_SWIEPH:
+        sys.exit("Swiss Ephemeris fell back to Moshier: the .se1 data files were not found at "
+                 + str(HERE.parent / "app/src/main/python/ephe")
+                 + ". Refusing to verify against a different reference than the app uses.")
     random.seed(7)
     rows = []
     for _ in range(SAMPLES):
@@ -124,7 +135,7 @@ def main():
     shift = dasha_shift(rows, mine)
     print(f"dasha table shift, mean       {shift['mean']:.2f} days")
     print(f"dasha table shift, worst      {shift['worst']:.2f} days")
-    print(f"  (the dasha page says: mean 1.1 days, worst 3.75)")
+    print(f"  (the dasha page says: mean 1.1 days, worst 3.8)")
 
     bad = check_navamsa()
     print(f"navamsa padas vs app engine {'all 108 agree' if not bad else f'{len(bad)} MISMATCH'}")
