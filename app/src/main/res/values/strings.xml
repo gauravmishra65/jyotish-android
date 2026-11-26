@@ -189,7 +189,7 @@
     <string name="engine_version">Engine: %1$s</string>
     <string name="engine_starting">Engine: starting…</string>
     <string name="licences">Licences</string>
-    <string name="licences_body">Planetary positions: Swiss Ephemeris by Astrodienst AG. Place names and time zones: GeoNames (CC BY 4.0), packaged by geonamescache (MIT). Python on Android: Chaquopy (MIT).</string>
+    <string name="licences_body">Planetary positions: Swiss Ephemeris. Place names and time zones: GeoNames (CC BY 4.0), packaged by geonamescache (MIT). Python on Android: Chaquopy (MIT).</string>
 
     <!-- Placeholders for later milestones -->
     <string name="coming_title">%1$s</string>

@@ -185,7 +185,7 @@
     <string name="engine_version">इंजन: %1$s</string>
     <string name="engine_starting">इंजन: शुरू हो रहा है…</string>
     <string name="licences">लाइसेंस</string>
-    <string name="licences_body">ग्रह-स्थिति: Astrodienst AG का Swiss Ephemeris। स्थान और समय क्षेत्र: GeoNames (CC BY 4.0), geonamescache (MIT) द्वारा। Android पर Python: Chaquopy (MIT)।</string>
+    <string name="licences_body">ग्रह-स्थिति: Swiss Ephemeris। स्थान और समय क्षेत्र: GeoNames (CC BY 4.0), geonamescache (MIT) द्वारा। Android पर Python: Chaquopy (MIT)।</string>
 
     <string name="coming_title">%1$s</string>
     <string name="coming_body">यह स्क्रीन अगले चरण में आएगी। गणना अभी से इसी फ़ोन पर चलती है:</string>
