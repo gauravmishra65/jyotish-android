@@ -22,7 +22,7 @@ python3 web/build.py --base https://yourdomain.com
 
 Without `--base` you get the pages but no `sitemap.xml`, no `robots.txt` and no canonical
 tags — deliberately, since a canonical pointing at a domain that does not exist is worse
-than none. With it you get 62 pages, the sitemap listing every one, and `robots.txt`
+than none. With it you get 90 pages, the sitemap listing every one, and `robots.txt`
 pointing at the sitemap.
 
 ## 3. Serve it
@@ -38,8 +38,13 @@ Any of these, in rough order of how little there is to go wrong:
   one to avoid until Astrodienst answer.
 
 Point the apex domain and `www` at whichever you pick, and let the host issue the
-certificate. `index.html` is the front door; the hub at `nakshatra.html` is the nakshatra
-calculator, which is the page most search traffic will land on directly.
+certificate. `index.html` is the front door; `nakshatra.html` and `rashi.html` are the two
+hubs most search traffic will land on directly, and `method.html` is where the accuracy
+figures live so the other pages can link to one copy of them.
+
+For an artifact preview rather than a domain, `python3 web/stage.py <dir>` makes the one
+adjustment that needs: an artifact reserves `index.html` for its own entry page, so the home
+page is staged as `home.html` with every link to it rewritten. A real host needs none of it.
 
 ## 4. Tell Google it exists
 
