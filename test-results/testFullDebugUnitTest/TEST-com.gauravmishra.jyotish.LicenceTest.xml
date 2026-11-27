@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gauravmishra.jyotish.LicenceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:47:53.268Z" hostname="runnervm0hi8g" time="0.07">
+  <properties/>
+  <testcase name="realCodeUnlocks" classname="com.gauravmishra.jyotish.LicenceTest" time="0.054"/>
+  <testcase name="wrongEmailOrChangedCodeDoesNot" classname="com.gauravmishra.jyotish.LicenceTest" time="0.014"/>
+  <testcase name="base32RoundTrip" classname="com.gauravmishra.jyotish.LicenceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

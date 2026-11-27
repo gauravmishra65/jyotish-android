@@ -1,0 +1,29 @@
+11-27 10:55:46.159  3902  4133 I TestRunner: started: csvExport(com.gauravmishra.jyotish.BackupTest)
+11-27 10:55:46.189  1862  2609 I A       : Using proto config with mendel
+11-27 10:55:46.191  1862  2434 I A       : group apa_head_suggest not present without account in *
+11-27 10:55:46.197  1862  2443 I A       : incrementApaDataDownloadStoreStatus(latency = PT0.186S, appVersion = 13.17.16.23, status = NOT_FOUND, locale = *, fileGroupnames = apa_head_suggest, accountScoped = false, localGroupsAvailable = false, timeSinceSearchBoot = Optional[PT1M13.792S] (ONE_TO_FIVE_MINUTES), timeSinceDataDownloadInit = PT0S (ZERO_TO_TWO_SECONDS))
+11-27 10:55:46.200  1862  2443 I A       : incrementApaDataDownloadStoreStatusNotFound(appVersion = 13.17.16.23, locale = *, groupName = apa_head_suggest, accountScoped = false, foundGroups = 0, status = 0, localGroupsAvailable = false)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: Error while stopping RCS engine.
+11-27 10:55:46.211  4187  4296 W RcsClientLib: java.lang.IllegalStateException: JibeService Not Initialized
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3065)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at android.os.Parcel.createException(Parcel.java:3041)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at android.os.Parcel.readException(Parcel.java:3024)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at android.os.Parcel.readException(Parcel.java:2966)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at com.google.android.aidl.BaseProxy.transactAndReadExceptionReturnVoid(PG:3)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at com.google.android.ims.rcs.engine.IRcsEngineTemporaryController$Stub$Proxy.triggerStopRcsStack(PG:3)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at com.google.android.rcs.client.lifecycle.RcsEngineLifecycleService.triggerStopRcsStack(PG:2)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at awzl.call(PG:1)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at cnsg.a(PG:1)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at cnpm.a(PG:3)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at ctfv.a(PG:1)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at ctet.run(PG:4)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at ctfx.run(PG:1)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at bxfd.run(PG:1)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at bxef.run(PG:2)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:1012)
+11-27 10:55:46.211  4187  4296 W RcsClientLib: 	at bxfj.run(PG:5)
+11-27 10:55:46.223  4664  4723 I BugleRcsEngine: [65] bptx.run: SystemBindingService: Starting JibeService
+11-27 10:55:46.296  3902  4133 W vmishra.jyotish: Verification of kotlin.Unit com.gauravmishra.jyotish.ui.BackupScreenKt.BackupScreen$lambda$34$0$5$0(android.content.Context) took 109.877ms (427.75 bytecodes/s) (2320B approximate peak alloc)
+11-27 10:55:46.300  3902  4133 I TestRunner: finished: csvExport(com.gauravmishra.jyotish.BackupTest)

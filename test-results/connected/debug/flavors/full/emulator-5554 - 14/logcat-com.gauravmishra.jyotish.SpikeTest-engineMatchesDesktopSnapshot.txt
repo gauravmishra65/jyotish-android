@@ -1,0 +1,49 @@
+11-27 10:59:46.500  3902  4133 I TestRunner: started: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)
+11-27 10:59:46.567   522  1398 I ImeTracker: com.google.android.apps.nexuslauncher:d99edadc: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+11-27 10:59:46.571   522  1398 I ImeTracker: com.google.android.apps.nexuslauncher:d99edadc: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 10:59:46.599  1570  1570 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3227
+11-27 10:59:46.663  1570  1570 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+11-27 10:59:46.663  1570  1570 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=0 fieldName=null extras=null}, false)
+11-27 10:59:46.663  1570  1570 I GoogleInputMethodService: GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+11-27 10:59:46.670  1570  1570 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+11-27 10:59:46.868   842   928 D EGL_emulation: app_time_stats: avg=1148.09ms min=289.99ms max=2006.19ms count=2
+11-27 10:59:47.014   842   928 D EGL_emulation: app_time_stats: avg=542.07ms min=492.65ms max=591.50ms count=2
+11-27 10:59:47.206  4795  4795 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@6b0b88f
+11-27 10:59:47.217   522  2024 W InputManager-JNI: Input channel object '1f7e215 com.gauravmishra.jyotish.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-27 10:59:47.376   522   531 I system_server: NativeAlloc concurrent copying GC freed 243822(7664KB) AllocSpace objects, 9(180KB) LOS objects, 47% free, 26MB/50MB, paused 51us,65us total 1.248s
+11-27 10:59:49.263  3902  3902 E FrameTracker: force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.gauravmishra.jyotish>
+11-27 10:59:49.492   842   842 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+11-27 10:59:49.822  3902  3902 E FrameTracker: force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.gauravmishra.jyotish>
+11-27 10:59:50.627   522  1398 D WifiNl80211Manager: Scan result ready event
+11-27 10:59:50.627   522  1398 D WifiNative: Scan result ready event
+11-27 10:59:52.459  3902  4133 W python.stderr: /data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/engine_api.py:339: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.gauravmishra.jyotish/files/chaquopy/AssetFinder/app/ENGINE_VERSION.txt' mode='r' encoding='utf-8'>
+11-27 10:59:52.459  3902  4133 W python.stderr: ResourceWarning: Enable tracemalloc to get the object allocation traceback
+11-27 10:59:52.462  3902  4133 I SPIKE   : {
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "ok": true,
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "mismatches": [],
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "timings_s": {
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "chart_0": 1.273,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "chart_1": 0.488,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "chart_2": 0.332,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "chart_3": 0.406,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "chart_4": 0.41,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "match": 0.001,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "muhurta_3_months": 1.077,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "names": 0.001,
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "forecast_3_years": 1.784
+11-27 10:59:52.462  3902  4133 I SPIKE   :  },
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "import_s": 0.086,
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "python": "3.13.16",
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "engine_version": "astrology-numerology-reading 0ea0655 2026-10-20 Changelog v3.2",
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "ephe_files": [
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "seas_18.se1",
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "sefstars.txt",
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "semo_18.se1",
+11-27 10:59:52.462  3902  4133 I SPIKE   :   "sepl_18.se1"
+11-27 10:59:52.462  3902  4133 I SPIKE   :  ],
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "base_rates_present": true,
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "tempdir": "\/data\/user\/0\/com.gauravmishra.jyotish\/cache\/chaquopy\/tmp",
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "python_start_ms": 2426,
+11-27 10:59:52.462  3902  4133 I SPIKE   :  "waited_for_engine_ms": 1
+11-27 10:59:52.462  3902  4133 I SPIKE   : }
+11-27 10:59:52.463  3902  4133 I TestRunner: finished: engineMatchesDesktopSnapshot(com.gauravmishra.jyotish.SpikeTest)
