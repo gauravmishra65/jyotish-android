@@ -1,7 +1,11 @@
-# Play Store listing and data safety (draft for 1.0)
+# Play Store listing and data safety
 
-The app is not published yet. Before it is: choose the Swiss Ephemeris licence (AGPL, which means publishing this
-app's source, or Astrodienst's professional licence), and create the upload key.
+1.0.0 (31) has been on the production track since 22 November 2026, in 178 countries. Two things
+that were meant to happen before that still have not: the Swiss Ephemeris licence is undecided
+(see `docs/licence/swiss-ephemeris.md` - the recommendation is the professional licence, and there
+is no compliant wait-and-see state now that the app is distributed), and the upload key is still
+the committed test key rather than one only the developer holds. Both are tracked in
+`docs/OPEN_ITEMS.md`.
 
 ## Listing (English)
 
@@ -9,7 +13,10 @@ app's source, or Astrodienst's professional licence), and create the upload key.
 
 **Launcher label:** Gaurav Jyotish (long labels are cut off under the icon)
 
-**Store icon:** `docs/store/icon-512.png` (512 x 512, made from the same vector as the launcher icon)
+**Store icon:** `docs/store/play-icon-512.png` (512 x 512, the cat, made from the same vector as
+the launcher icon). `docs/store/icon-512.png` is the gold yantra the app used before 1.0.0 and is
+kept only for reference - **the live listing still shows it**, and replacing it is one of the open
+items.
 
 **Short description (80 characters max, 77 used):** Kundli, Kundli Milan, Muhurat, numerology — Swiss Ephemeris accuracy, offline
 
