@@ -152,7 +152,7 @@ def page(i, n, lang, base):
 
 <h2>{t['padaH']}</h2>
 <p>{t['padaP']}</p>
-<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrap">{t['cols'][1]}</th><th>{t['cols'][2]}</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrapcol">{t['cols'][1]}</th><th>{t['cols'][2]}</th></tr></thead>
 <tbody>{rows}</tbody></table></div>
 
 <h2>{t['nowH']}</h2>
@@ -311,7 +311,7 @@ def dasha_page(lang, base):
 
 <h2>{t['refH']}</h2>
 <p>{t['refP']}</p>
-<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrap">{t['cols'][1]}</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>{t['cols'][0]}</th><th class="wrapcol">{t['cols'][1]}</th></tr></thead>
 <tbody>{ref}</tbody></table></div>
 
 <h2>{"How this was worked out" if lang=="en" else "गणना कैसे हुई"}</h2>
@@ -931,7 +931,7 @@ def rashi_page(i, lang, base):
 
 <h2>{t['padH']}</h2>
 <p>{t['padP']}</p>
-<div class="scroll"><table><thead><tr><th>{t['padCols'][0]}</th><th>{t['padCols'][1]}</th><th class="wrap">{t['padCols'][2]}</th><th>{t['padCols'][3]}</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>{t['padCols'][0]}</th><th>{t['padCols'][1]}</th><th class="wrapcol">{t['padCols'][2]}</th><th>{t['padCols'][3]}</th></tr></thead>
 <tbody>{rows}</tbody></table></div>
 
 <h2>{t['navH']}</h2>
@@ -958,7 +958,7 @@ def rashi_hub(lang, base):
         f"<td>{mode(i) if lang=='en' else MODE_HI[mode(i)]}</td>"
         f"<td>{SIGNS[nav_start(i)] if lang=='en' else SIGNS_HI[nav_start(i)]}</td></tr>"
         for i in range(12))
-    cols = "".join(f"<th{' class=\"wrap\"' if k==1 else ''}>{c}</th>" for k, c in enumerate(t["cols"]))
+    cols = "".join(f"<th{' class=\"wrapcol\"' if k==1 else ''}>{c}</th>" for k, c in enumerate(t["cols"]))
     return _head(t, t["hubTitle"], t["hubDesc"], up, canon, alt_en, alt_hi) + f"""<nav class="crumbs"><a href="{up}index.html">&larr; {t['site']}</a>
 <span><a href="{alt_hi if lang=='en' else alt_en}">{t['switch']}</a></span></nav>
 
