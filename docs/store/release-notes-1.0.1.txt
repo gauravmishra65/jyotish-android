@@ -1,0 +1,10 @@
+<en-US>
+A correction to how the Swiss Ephemeris is credited on the Licences screen. Nothing else changed.
+
+Everything still runs on your phone. No birth details leave the device.
+</en-US>
+<hi-IN>
+लाइसेंस स्क्रीन पर Swiss Ephemeris का उल्लेख किस रूप में हो, इसमें सुधार। इसके अतिरिक्त कुछ नहीं बदला।
+
+सब कुछ आपके फ़ोन पर ही चलता है। जन्म विवरण डिवाइस से बाहर नहीं जाता।
+</hi-IN>
